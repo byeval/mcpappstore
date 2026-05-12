@@ -1515,7 +1515,7 @@ const localizedFaqs: Record<ContentLocale, LearnFaq[]> = {
     { question: "Werden alle Listings geprüft?", answer: "Einreichungen werden vor Veröffentlichung moderiert, aber prüfe vor dem Verbinden selbst Rechte, Datenschutz und Publisher." },
     { question: "Was gehört in ein gutes Listing?", answer: "Klares Tagline, einfache Beschreibung, Plattformen, Fähigkeiten, Auth, Datenschutz-/Support-URLs und Beispielprompts." },
   ],
-  zh: [
+  "zh-hans": [
     { question: "MCP App Store 是什么？", answer: "MCP App Store 是用于发现 MCP 应用、ChatGPT 应用、Claude 连接器以及相关平台入口的目录。" },
     { question: "ChatGPT 应用和 Claude 连接器有什么区别？", answer: "两者都可以基于 MCP 服务器，但出现的宿主不同。ChatGPT 应用面向 ChatGPT，Claude 连接器面向 Claude 或 Claude API 工作流。" },
     { question: "可以提交自己的 MCP 应用吗？", answer: "可以。在提交页面提供名称、描述、平台入口、MCP 详情、链接、工具和预览示例后即可进入审核。" },
@@ -1618,7 +1618,7 @@ function localizedLinkLabel(href: string, fallback: string, locale: Locale): str
     return fallback;
   }
 
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     if (href === "/" || href === "/apps" || href === "/store") return "浏览应用";
     if (href === "/submit") return "提交 MCP";
     if (href === "/faq") return "阅读 FAQ";
@@ -1746,7 +1746,7 @@ function genericArticleSections(article: LearnArticle, patch: LocalizedArticle, 
     ];
   }
 
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return [
       {
         id: "overview",
@@ -1876,7 +1876,7 @@ function genericArticleFaqs(article: LearnArticle, patch: LocalizedArticle, loca
       { question: copy.q2, answer: copy.a2 },
     ];
   }
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return [
       {
         question: `${title} 应该重点检查什么？`,
@@ -1939,7 +1939,7 @@ function articlePatch(locale: Locale, slug: string): LocalizedArticle | undefine
   if (locale === "de") {
     return deArticleSummaries[slug];
   }
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return zhArticleSummaries[slug];
   }
   if (locale === "ja") {
@@ -1955,7 +1955,7 @@ function collectionPatch(locale: Locale, slug: string): LocalizedCollection | un
   if (locale === "es") return esCollections[slug];
   if (locale === "fr") return frCollections[slug];
   if (locale === "de") return deCollections[slug];
-  if (locale === "zh") return zhCollections[slug];
+  if (locale === "zh-hans") return zhCollections[slug];
   if (locale === "ja") return jaCollections[slug];
   if (locale === "ko") return koCollections[slug];
   return undefined;
@@ -1983,7 +1983,7 @@ function genericCollectionCheckpoints(locale: Locale): string[] | undefined {
       "Prüfe Publisher, Auth, Datenschutz und Support vor dem Verbinden.",
     ];
   }
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return [
       "确认候选应用是否匹配你的平台和工作流。",
       "分开比较只读操作，以及可写或交互式操作。",
@@ -2026,7 +2026,7 @@ function genericCollectionFaqs(collectionTitle: string, locale: Locale): LearnFa
       { question: "Was vor dem Verbinden prüfen?", answer: "Lese-/Schreibumfang, Support, Datenschutz und Konto-Grenzen des Teams." },
     ];
   }
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return [
       {
         question: `${collectionTitle} 应该如何选择？`,
@@ -2119,7 +2119,7 @@ export function localizedCategoryName(slug: string, fallback: string, locale: Lo
   if (locale === "de") {
     return deCategoryNames[slug] ?? fallback;
   }
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return zhCategoryNames[slug] ?? fallback;
   }
   if (locale === "ja") {
@@ -2193,7 +2193,7 @@ function localizedGenericCategoryContent(slug: string, name: string, count: numb
     };
   }
 
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return {
       eyebrow: "分类指南",
       title: `按平台、工具和可信信号比较${name} MCP 应用。`,
@@ -2277,7 +2277,7 @@ function localizedGenericCategoryContent(slug: string, name: string, count: numb
 export function localizedCategoryContent(slug: string, name: string, count: number, locale: Locale): CategoryContent | undefined {
   const base = categoryContentBySlug[slug];
   const patch =
-    locale === "zh"
+    locale === "zh-hans"
       ? zhCategoryGuides[slug]
       : locale === "ja"
         ? jaCategoryGuides[slug]
@@ -2289,9 +2289,9 @@ export function localizedCategoryContent(slug: string, name: string, count: numb
       return localizedGenericCategoryContent(slug, name, count, locale);
     }
 
-    if (locale === "zh" || locale === "ja" || locale === "ko") {
+    if (locale === "zh-hans" || locale === "ja" || locale === "ko") {
       const defaultFaqs =
-        locale === "zh"
+        locale === "zh-hans"
           ? [
               {
                 question: `${name} MCP 应用应该如何选择？`,

@@ -107,7 +107,7 @@ function readableList(items: string[], locale: Locale = "en"): string {
     return items.join("、");
   }
 
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return items.join("、");
   }
 
@@ -147,7 +147,7 @@ function authLabel(authType: SurfaceResolvedDetails["authType"], locale: Locale 
     return "없음";
   }
 
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return "无";
   }
 
@@ -197,7 +197,7 @@ function localizedAppKind(app: Pick<CatalogApp, "surfaces">, locale: Locale): st
     return hasClaude ? "MCP 커넥터" : "MCP 앱";
   }
 
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     const hasChatGpt = app.surfaces.some((surface) => surface.platform === "chatgpt");
     const hasClaude = app.surfaces.some((surface) => surface.platform === "claude");
 
@@ -231,7 +231,7 @@ function localizedPlatformText(app: Pick<CatalogApp, "surfaces">, locale: Locale
     return `(${platforms}용)`;
   }
 
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return `（适用于 ${platforms}）`;
   }
 
@@ -262,7 +262,7 @@ function fallbackScope(
     if (locale === "ko") {
       return `등록된 기능은 ${details.capabilities.length}개입니다. 연결 전에 읽기 전용, 인터랙티브, 쓰기 가능 범위를 확인하세요.`;
     }
-    if (locale === "zh") {
+    if (locale === "zh-hans") {
       return `列表中包含 ${details.capabilities.length} 项能力。连接前请确认只读、交互式和可写范围。`;
     }
 
@@ -278,7 +278,7 @@ function fallbackScope(
     if (locale === "ko") {
       return `이 목록은 ${categories} 워크플로로 분류되어 있습니다.`;
     }
-    if (locale === "zh") {
+    if (locale === "zh-hans") {
       return `此列表被归类为${categories}工作流。`;
     }
     return `The listing is categorized for ${categories} workflows.`;
@@ -292,7 +292,7 @@ function fallbackScope(
     return "이 목록에는 검토를 위한 게시자, 인증, 전송 방식, 플랫폼 세부 정보가 포함되어 있습니다.";
   }
 
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return "此列表包含发布者、认证、传输方式和平台详情，可用于连接前审查。";
   }
 
@@ -313,7 +313,7 @@ function appFaqItems(
   const platformText = platforms ? ` for ${platforms}` : "";
   const surfaceText = primaryListing
     ? surfaceLabelFor(primaryListing, surfaceCopy)
-    : platforms || (locale === "ja" ? "MCP ホスト" : locale === "ko" ? "MCP 호스트" : locale === "zh" ? "MCP 宿主" : "an MCP host");
+    : platforms || (locale === "ja" ? "MCP ホスト" : locale === "ko" ? "MCP 호스트" : locale === "zh-hans" ? "MCP 宿主" : "an MCP host");
   const summary = trimSentence(details.tagline || app.tagline || app.description);
   const toolNames = details.tools.slice(0, 5).map((tool) => tool.name);
 
@@ -359,7 +359,7 @@ function appFaqItems(
     ];
   }
 
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return [
       {
         question: `${mcpName} 是什么？`,
@@ -487,7 +487,7 @@ function appUseCaseItems(
     return items.slice(0, 4);
   }
 
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     items.push({
       title: "工作流匹配",
       body: `${app.name} 适合在 ${platforms || "MCP 宿主"} 中处理${categoryText || "已连接"}工作流，尤其是需要实时上下文而不是静态聊天回答时。`,
@@ -573,14 +573,14 @@ function appConnectionChecklist(
 ): Array<{ title: string; body: string }> {
   const surfaceText = primaryListing
     ? surfaceLabelFor(primaryListing, surfaceCopy)
-    : localizedAppPlatformPhrase(app, locale) || (locale === "ja" ? "MCP ホスト" : locale === "ko" ? "MCP 호스트" : locale === "zh" ? "MCP 宿主" : "MCP host");
+    : localizedAppPlatformPhrase(app, locale) || (locale === "ja" ? "MCP ホスト" : locale === "ko" ? "MCP 호스트" : locale === "zh-hans" ? "MCP 宿主" : "MCP host");
   const publisherText = app.publisher && app.publisher !== "Unknown"
     ? app.publisher
     : locale === "ja"
       ? "掲載されている公開者"
       : locale === "ko"
         ? "등록된 게시자"
-        : locale === "zh"
+        : locale === "zh-hans"
           ? "列表中的发布者"
           : "the listed publisher";
   const privacyText = app.privacyUrl
@@ -588,14 +588,14 @@ function appConnectionChecklist(
       ? "プライバシーポリシーあり"
       : locale === "ko"
         ? "개인정보 처리방침 링크 있음"
-        : locale === "zh"
+        : locale === "zh-hans"
           ? "已提供隐私政策"
           : "a privacy policy is linked"
     : locale === "ja"
       ? "プライバシーポリシーなし"
       : locale === "ko"
         ? "개인정보 처리방침 없음"
-        : locale === "zh"
+        : locale === "zh-hans"
           ? "未列出隐私政策"
           : "no privacy policy is listed";
   const supportText = app.supportUrl
@@ -603,14 +603,14 @@ function appConnectionChecklist(
       ? "サポート情報あり"
       : locale === "ko"
         ? "지원 정보 링크 있음"
-        : locale === "zh"
+        : locale === "zh-hans"
           ? "已提供支持信息"
           : "support details are linked"
     : locale === "ja"
       ? "サポート情報なし"
       : locale === "ko"
         ? "지원 정보 없음"
-        : locale === "zh"
+        : locale === "zh-hans"
           ? "未列出支持信息"
           : "support details are not listed";
 
@@ -648,7 +648,7 @@ function appConnectionChecklist(
     ];
   }
 
-  if (locale === "zh") {
+  if (locale === "zh-hans") {
     return [
       {
         title: "平台入口",
@@ -875,7 +875,7 @@ export default async function AppDetailPage({
       ? `掲載されている MCP ツールには ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name), locale)} などがあります。`
       : locale === "ko"
         ? `등록된 MCP 도구에는 ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name), locale)} 등이 포함됩니다.`
-        : locale === "zh"
+        : locale === "zh-hans"
           ? `已列出的 MCP 工具包括 ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name), locale)} 等。`
           : `Listed MCP tools include ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name))}.`
     : fallbackScope(app, primaryDetails, categoryBySlug, locale);
@@ -1225,7 +1225,7 @@ export default async function AppDetailPage({
                     name: collection.title,
                     path: `/collections/${collection.slug}`,
                   })),
-                  locale === "zh"
+                  locale === "zh-hans"
                     ? `${app.name} 相关 MCP 应用集合`
                     : locale === "ja"
                       ? `${app.name} 関連 MCP アプリコレクション`
@@ -1242,7 +1242,7 @@ export default async function AppDetailPage({
                     name: guide.label,
                     path: guide.href,
                   })),
-                  locale === "zh"
+                  locale === "zh-hans"
                     ? `${app.name} 相关 MCP 学习指南`
                     : locale === "ja"
                       ? `${app.name} 関連 MCP ガイド`
@@ -1259,7 +1259,7 @@ export default async function AppDetailPage({
                     name: relatedApp.name,
                     path: `/app/${relatedApp.id}`,
                   })),
-                  locale === "zh"
+                  locale === "zh-hans"
                     ? `${app.name} 相关 MCP 应用`
                     : locale === "ja"
                       ? `${app.name} 関連 MCP アプリ`

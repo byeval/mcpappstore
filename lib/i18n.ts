@@ -1,6 +1,6 @@
 export const defaultLocale = "en";
 export const localeCookieName = "mcpapp_locale";
-export const supportedLocales = ["en", "es", "fr", "de", "zh", "ja", "ko"] as const;
+export const supportedLocales = ["en", "es", "fr", "de", "zh-hans", "ja", "ko"] as const;
 
 export type Locale = (typeof supportedLocales)[number];
 
@@ -42,11 +42,11 @@ export const localeDetails: Record<
     htmlLang: "de",
     dir: "ltr",
   },
-  zh: {
-    label: "Chinese",
+  "zh-hans": {
+    label: "Chinese (Simplified)",
     nativeLabel: "简体中文",
     shortLabel: "中文",
-    htmlLang: "zh-CN",
+    htmlLang: "zh-Hans",
     dir: "ltr",
   },
   ja: {
@@ -86,8 +86,8 @@ export function normalizeLocale(value: string | undefined | null): Locale | unde
     return base;
   }
 
-  if (normalized === "zh-cn" || normalized === "zh-hans") {
-    return "zh";
+  if (normalized === "zh" || normalized === "zh-cn" || normalized === "zh-sg" || normalized.startsWith("zh-hans")) {
+    return "zh-hans";
   }
 
   if (normalized === "jp" || normalized === "ja-jp") {
@@ -2461,7 +2461,7 @@ export const messages = {
   es: esMessages,
   fr: frMessages,
   de: deMessages,
-  zh: zhMessages,
+  "zh-hans": zhMessages,
   ja: jaMessages,
   ko: koMessages,
 } satisfies Record<Locale, I18nMessages>;

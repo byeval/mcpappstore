@@ -69,6 +69,14 @@ export async function proxy(request: NextRequest) {
 
   const pathLocale = localeFromPath(originalPathname);
   const internalPathname = stripLocaleFromPath(originalPathname);
+  const pathLocaleSegment = originalPathname.replace(/^\/+/, "").split("/")[0];
+
+  if (pathLocale && pathLocaleSegment !== pathLocale) {
+    const redirectUrl = new URL(request.url);
+    redirectUrl.pathname = internalPathname === "/" ? `/${pathLocale}` : `/${pathLocale}${internalPathname}`;
+    return NextResponse.redirect(redirectUrl, 308);
+  }
+
   const storeRedirectPath = mapAppsPathToStore(internalPathname);
 
   if (storeRedirectPath) {

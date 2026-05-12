@@ -22,7 +22,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const [{ locale, messages: t }, { page: pageParam }] = await Promise.all([getI18n(), searchParams]);
   const page = pageFromSearchParam(pageParam);
-  const pageSuffix = page > 1 ? (locale === "zh" ? ` - 第 ${page} 页` : ` - Page ${page}`) : "";
+  const pageSuffix = page > 1 ? (locale === "zh-hans" ? ` - 第 ${page} 页` : ` - Page ${page}`) : "";
 
   return pageMetadata({
     title: `${t.platformPages.chatgptTitle} - MCP${pageSuffix}`,
