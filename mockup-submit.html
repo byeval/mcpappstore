@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Submit your app — MCP Apps</title>
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#0a0a0a;
+      --ink-2:#2a2a2a;
+      --muted:#6b7280;
+      --muted-2:#8a8f98;
+      --line:rgba(10,10,10,.08);
+      --line-2:rgba(10,10,10,.06);
+      --chip:#f2f2f3;
+      --accent:#0a0a0a;
+      --danger:#c53030;
+      --success:#1f7a4a;
+      --shadow-sm:0 1px 2px rgba(10,10,10,.04);
+      --shadow-md:0 1px 3px rgba(10,10,10,.04), 0 8px 24px rgba(10,10,10,.05);
+      --radius:14px;
+      --radius-lg:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    @supports(font-variation-settings:normal){html,body{font-family:'InterVariable','Inter',system-ui,sans-serif}}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+    .page{max-width:1160px;margin:0 auto;padding:32px 24px 120px}
+
+    .topnav{display:flex;align-items:center;gap:16px;padding:8px 0 24px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.01em}
+    .brand-mark{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 210deg,#7c5cff,#22d3ee,#a3e635,#7c5cff);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+    .nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+    .nav-link{color:var(--muted);font-size:14px;padding:8px 10px;border-radius:10px}
+
+    .page-head{margin:12px 0 28px;max-width:720px}
+    .page-head h1{margin:0 0 8px;font-size:36px;letter-spacing:-.025em;font-weight:600;line-height:1.1}
+    .page-head p{margin:0;color:var(--muted);font-size:16px;line-height:1.45}
+
+    /* ---------- Quick import panel ---------- */
+    .import-card{
+      background:linear-gradient(135deg,#56a8ff 0%,#9fd5ff 50%,#ffe789 100%);
+      border-radius:24px;
+      padding:28px;
+      margin-bottom:20px;
+      box-shadow:var(--shadow-md);
+      position:relative;
+      overflow:hidden;
+    }
+    .import-card::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 100% 0%,#fff4b2 0%,transparent 55%),radial-gradient(90% 90% at 0% 100%,#9ed1ff 0%,transparent 60%);pointer-events:none}
+    .import-inner{position:relative}
+    .import-label{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.6);color:#0a1628;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;margin-bottom:12px;backdrop-filter:blur(6px)}
+    .import-card h2{margin:0 0 6px;font-size:22px;letter-spacing:-.015em;font-weight:600;color:#0a1628}
+    .import-card p{margin:0 0 18px;color:#1c3657;font-size:14.5px;line-height:1.45;max-width:560px}
+    .import-input{display:flex;align-items:center;gap:8px;background:#fff;border-radius:14px;padding:6px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+    .import-input .url{flex:1;border:0;outline:0;font:inherit;font-size:14.5px;padding:10px 14px;background:transparent;color:var(--ink)}
+    .import-input .url::placeholder{color:var(--muted-2)}
+    .import-btn{background:#0a0a0a;color:#fff;padding:10px 20px;border-radius:10px;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:8px}
+    .import-btn:hover{background:#1a1a1a}
+    .import-hints{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .hint-chip{font-size:11.5px;color:#1c3657;background:rgba(255,255,255,.55);padding:4px 10px;border-radius:999px;backdrop-filter:blur(6px)}
+
+    /* Import status row — shown after paste */
+    .import-status{display:flex;align-items:center;gap:12px;background:#fff;border-radius:12px;padding:12px 14px;margin-top:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .status-dot{width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 0 4px rgba(31,122,74,.18)}
+    .status-text{font-size:13.5px;color:var(--ink-2);flex:1}
+    .status-text b{font-weight:600}
+    .status-link{font-size:12.5px;color:var(--muted);display:inline-flex;align-items:center;gap:4px}
+
+    /* Divider between import and manual form */
+    .or-divider{display:flex;align-items:center;gap:14px;margin:24px 0;color:var(--muted-2);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+    .or-divider::before,.or-divider::after{content:"";flex:1;height:1px;background:var(--line)}
+
+    /* Two-column layout */
+    .layout{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:flex-start}
+    .form{display:flex;flex-direction:column;gap:8px}
+
+    /* Section card */
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:20px}
+    .card h2{margin:0 0 4px;font-size:16px;font-weight:600;letter-spacing:-.005em}
+    .card .card-sub{margin:0 0 20px;color:var(--muted);font-size:13.5px}
+    .step{display:inline-flex;align-items:center;gap:8px;color:var(--muted-2);font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+    .step-dot{width:6px;height:6px;background:var(--ink);border-radius:50%}
+    .autofilled{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:var(--success);background:rgba(31,122,74,.08);padding:2px 8px;border-radius:999px;margin-left:8px;letter-spacing:.02em}
+
+    /* Form controls */
+    .field{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+    .field:last-child{margin-bottom:0}
+    .field label{font-size:13.5px;font-weight:500;color:var(--ink-2);display:flex;align-items:center}
+    .field .req{color:var(--danger);margin-left:2px}
+    .field .hint{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4}
+    .input,.textarea{width:100%;font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;transition:border-color .15s, box-shadow .15s}
+    .input:focus,.textarea:focus{outline:0;border-color:rgba(10,10,10,.3);box-shadow:0 0 0 3px rgba(10,10,10,.06)}
+    .textarea{resize:vertical;min-height:96px;line-height:1.5}
+    .input::placeholder,.textarea::placeholder{color:var(--muted-2)}
+    .row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+
+    /* Avatar upload with scraped-preview state */
+    .avatar-upload{display:flex;align-items:center;gap:16px;padding:16px;border:1px dashed rgba(10,10,10,.16);border-radius:12px;background:#fafafa;cursor:pointer;transition:border-color .15s, background .15s}
+    .avatar-upload:hover{border-color:rgba(10,10,10,.3);background:#f5f5f6}
+    .avatar-upload.filled{border-style:solid;background:#fff}
+    .avatar-preview{width:64px;height:64px;border-radius:16px;background:#eef0ff;display:flex;align-items:center;justify-content:center;color:var(--muted);flex:0 0 auto;font-size:30px;font-weight:600;font-family:'Instrument Serif',ui-serif,serif}
+    .avatar-preview.canva{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff}
+    .avatar-copy{display:flex;flex-direction:column;gap:2px}
+    .avatar-copy strong{font-size:14px;font-weight:500}
+    .avatar-copy span{font-size:12.5px;color:var(--muted)}
+    .replace-link{font-size:12.5px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+
+    /* Chip selects */
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+    .chip-opt{padding:7px 12px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--ink-2);background:#fff;cursor:pointer;transition:all .15s}
+    .chip-opt:hover{border-color:rgba(10,10,10,.2)}
+    .chip-opt.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+    /* Preview bubble repeater */
+    .preview-rep{display:flex;flex-direction:column;gap:16px}
+    .pv-rep-card{border:1px solid var(--line-2);border-radius:14px;padding:16px;background:#fafafa;display:grid;grid-template-columns:140px 1fr 32px;gap:14px;align-items:flex-start}
+    .pv-rep-card.filled{background:#fff;border-color:var(--line)}
+    .pv-image-drop{aspect-ratio:4/3;border-radius:10px;border:1px dashed rgba(10,10,10,.18);background:#fff;display:flex;align-items:center;justify-content:center;color:var(--muted-2);font-size:12.5px;text-align:center;padding:8px;cursor:pointer;overflow:hidden;position:relative}
+    .pv-image-drop:hover{border-color:rgba(10,10,10,.3);color:var(--muted)}
+    .pv-image-drop.filled{border-style:solid;border-color:var(--line);padding:0;background:#ffd9c2}
+    .pv-image-drop .thumb-content{width:100%;height:100%;padding:10px;display:flex;gap:6px}
+    .pv-image-drop .thumb-burger{flex:1;border-radius:6px;display:flex;flex-direction:column;justify-content:space-between;padding:8px;font-family:'Instrument Serif',ui-serif,serif;font-weight:700;font-size:9px;line-height:1}
+    .pv-image-drop .b1{background:linear-gradient(135deg,#ffeedd,#ffcbb3);color:#b32121}
+    .pv-image-drop .b2{background:#e9292f;color:#fff}
+    .pv-rep-fields{display:flex;flex-direction:column;gap:8px}
+    .pv-rep-del{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted-2);cursor:pointer;align-self:flex-start;margin-top:2px;background:transparent}
+    .pv-rep-del:hover{color:var(--danger);background:#fff}
+    .rep-add{align-self:flex-start;font-size:13px;color:var(--muted);padding:8px 12px;border:1px dashed rgba(10,10,10,.14);border-radius:10px;display:inline-flex;align-items:center;gap:6px;margin-top:4px}
+    .rep-add:hover{color:var(--ink);border-color:rgba(10,10,10,.3)}
+
+    .repeater{display:flex;flex-direction:column;gap:10px}
+
+    /* Sidebar preview */
+    .sidebar{position:sticky;top:24px;display:flex;flex-direction:column;gap:16px}
+    .preview-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow-sm)}
+    .preview-head{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+    .preview-avatar{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#22d3ee);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:22px;font-family:'Instrument Serif',ui-serif,serif}
+    .preview-name{font-size:15px;font-weight:600;margin:0 0 2px}
+    .preview-tag{font-size:13.5px;color:var(--muted);margin:0}
+    .preview-label{font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px}
+    .checklist{display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted)}
+    .chk-item{display:flex;align-items:center;gap:8px}
+    .chk-dot{width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(10,10,10,.18);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+    .chk-item.done .chk-dot{background:#1f7a4a;border-color:#1f7a4a}
+    .chk-item.done .chk-dot::after{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+    .chk-item.done{color:var(--ink-2)}
+
+    /* Submit bar */
+    .submit-bar{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);margin-top:8px;gap:16px}
+    .submit-bar .meta{font-size:13px;color:var(--muted)}
+    .submit-bar .actions{display:flex;gap:10px}
+    .btn-ghost{border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-size:14px;color:var(--ink-2);background:#fff}
+    .btn-ghost:hover{border-color:rgba(0,0,0,.2)}
+    .btn-primary{background:var(--ink);color:#fff;padding:10px 22px;border-radius:999px;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:8px}
+    .btn-primary:hover{background:#1a1a1a}
+
+    .turnstile{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#f6f6f7;border:1px solid var(--line);border-radius:10px;font-size:13px;color:var(--muted)}
+    .turnstile .tick{width:18px;height:18px;border-radius:4px;background:#fff;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center}
+
+    @media (max-width: 960px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{position:static}
+      .pv-rep-card{grid-template-columns:1fr;gap:10px}
+      .row-2,.row-3{grid-template-columns:1fr}
+      .import-input{flex-direction:column;align-items:stretch}
+      .import-btn{width:100%;justify-content:center}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <nav class="topnav">
+      <a class="brand" href="#"><span class="brand-mark"></span><span>mcpapp</span></a>
+      <div class="nav-right">
+        <a class="nav-link" href="#">Browse</a>
+        <a class="nav-link" href="#">Docs</a>
+      </div>
+    </nav>
+
+    <header class="page-head">
+      <h1>Submit your app</h1>
+      <p>Paste a ChatGPT app store URL and we'll fill out the form for you — or enter the details by hand. Submissions are reviewed within 48 hours.</p>
+    </header>
+
+    <!-- Quick URL import -->
+    <section class="import-card">
+      <div class="import-inner">
+        <span class="import-label">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-3 9h5l-3 11"/></svg>
+          Quick import
+        </span>
+        <h2>Import from a ChatGPT app page</h2>
+        <p>Paste the URL — we fetch the avatar, previews, description, prompts, and Information table automatically.</p>
+        <div class="import-input">
+          <input class="url" type="url" value="https://chatgpt.com/apps/canva" placeholder="https://chatgpt.com/apps/…" />
+          <button class="import-btn">
+            Import
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <div class="import-hints">
+          <span class="hint-chip">chatgpt.com/apps/{slug}</span>
+          <span class="hint-chip">Also works with app detail URLs</span>
+        </div>
+
+        <!-- Status row (shown after successful import) -->
+        <div class="import-status">
+          <span class="status-dot"></span>
+          <div class="status-text">Imported <b>Canva</b> · 3 previews · 8 info fields · avatar fetched</div>
+          <a href="#" class="status-link">Undo
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="or-divider">or review &amp; edit the details</div>
+
+    <div class="layout">
+
+      <form class="form" id="submit-form">
+
+        <!-- 1 · Basics -->
+        <section class="card">
+          <div class="step"><span class="step-dot"></span>Step 1 · Basics <span class="autofilled">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Auto-filled
+          </span></div>
+          <h2>The essentials</h2>
+          <p class="card-sub">Name, tagline, long description, and the app avatar.</p>
+
+          <div class="field">
+            <label>App name<span class="req">*</span></label>
+            <input class="input" value="Canva" />
+          </div>
+
+          <div class="field">
+            <label>Tagline<span class="req">*</span></label>
+            <input class="input" value="Search, create, edit designs" />
+            <span class="hint">Shown on cards. Under 80 characters.</span>
+          </div>
+
+          <div class="field">
+            <label>Long description<span class="req">*</span></label>
+            <textarea class="textarea">Ask Canva to create on-brand social posts, presentations, marketing materials, or other visual assets based on your current conversation, then continue editing together in the chat.</textarea>
+            <span class="hint">Markdown supported.</span>
+          </div>
+
+          <div class="field">
+            <label>Avatar<span class="req">*</span></label>
+            <label class="avatar-upload filled">
+              <div class="avatar-preview canva">C</div>
+              <div class="avatar-copy">
+                <strong>canva-avatar.png</strong>
+                <span>Fetched from chatgpt.com · 512×512</span>
+              </div>
+              <a class="replace-link" style="margin-left:auto" href="#">Replace</a>
+            </label>
+          </div>
+        </section>
+
+        <!-- 2 · Information -->
+        <section class="card">
+          <div class="step"><span class="step-dot"></span>Step 2 · Information <span class="autofilled">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Auto-filled
+          </span></div>
+          <h2>Publisher &amp; links</h2>
+          <p class="card-sub">Appears in the Information table on your listing.</p>
+
+          <div class="row-2">
+            <div class="field">
+              <label>Developer<span class="req">*</span></label>
+              <input class="input" value="Canva Pty Ltd" />
+            </div>
+            <div class="field">
+              <label>Version</label>
+              <input class="input" value="2.8.1" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Website<span class="req">*</span></label>
+            <input class="input" value="https://canva.com" />
+          </div>
+
+          <div class="row-2">
+            <div class="field">
+              <label>Privacy Policy URL</label>
+              <input class="input" value="https://canva.com/privacy-policy" />
+            </div>
+            <div class="field">
+              <label>Terms of Service URL</label>
+              <input class="input" value="https://canva.com/terms" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Customer support</label>
+            <input class="input" value="https://canva.com/help" placeholder="Email or URL" />
+          </div>
+
+          <div class="field">
+            <label>Category<span class="req">*</span></label>
+            <div class="chips">
+              <button type="button" class="chip-opt">Featured</button>
+              <button type="button" class="chip-opt">Productivity</button>
+              <button type="button" class="chip-opt active">Design</button>
+              <button type="button" class="chip-opt">Developer Tools</button>
+              <button type="button" class="chip-opt">Data &amp; Analytics</button>
+              <button type="button" class="chip-opt">Communication</button>
+              <button type="button" class="chip-opt">Finance</button>
+              <button type="button" class="chip-opt">Lifestyle</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Capabilities</label>
+            <div class="chips">
+              <button type="button" class="chip-opt">Reads</button>
+              <button type="button" class="chip-opt active">Writes</button>
+              <button type="button" class="chip-opt active">Interactive</button>
+              <button type="button" class="chip-opt">Background</button>
+            </div>
+            <span class="hint">Multi-select. What the app does on behalf of the user.</span>
+          </div>
+        </section>
+
+        <!-- 3 · Previews -->
+        <section class="card">
+          <div class="step"><span class="step-dot"></span>Step 3 · Previews <span class="autofilled">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            3 imported
+          </span></div>
+          <h2>Show it in action</h2>
+          <p class="card-sub">Up to 3 chat-bubble mockups shown at the top of your listing. Each needs a prompt and an image.</p>
+
+          <div class="preview-rep">
+
+            <div class="pv-rep-card filled">
+              <label class="pv-image-drop filled">
+                <div class="thumb-content">
+                  <div class="thumb-burger b1"><span>CHOPIFY</span><span>BURGER</span></div>
+                  <div class="thumb-burger b2"><span>CHOPIFY</span><span>BIG&nbsp;CHOP</span></div>
+                </div>
+              </label>
+              <div class="pv-rep-fields">
+                <input class="input" value="@Canva create some social media posts based on our October campaign brief" />
+                <div class="row-2">
+                  <input class="input" value="" placeholder="CTA label (optional)" />
+                  <input class="input" value="" placeholder="CTA URL" />
+                </div>
+                <span class="hint">Image fetched from the ChatGPT listing · <a href="#" class="replace-link">replace</a></span>
+              </div>
+              <button type="button" class="pv-rep-del" aria-label="Remove">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+              </button>
+            </div>
+
+            <div class="pv-rep-card filled">
+              <label class="pv-image-drop filled">
+                <div class="thumb-content">
+                  <div class="thumb-burger b2" style="flex:1">
+                    <span>Q1 2026</span>
+                    <span style="font-size:13px;line-height:1.1">GO&mdash;TO&mdash;<br/>MARKET<br/>PLAN</span>
+                  </div>
+                </div>
+              </label>
+              <div class="pv-rep-fields">
+                <input class="input" value="@Canva use these latest investor meeting notes to make a Q1 2026 pitch deck" />
+                <div class="row-2">
+                  <input class="input" value="" placeholder="CTA label (optional)" />
+                  <input class="input" value="" placeholder="CTA URL" />
+                </div>
+                <span class="hint">Image fetched from the ChatGPT listing · <a href="#" class="replace-link">replace</a></span>
+              </div>
+              <button type="button" class="pv-rep-del" aria-label="Remove">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+              </button>
+            </div>
+
+            <div class="pv-rep-card filled">
+              <label class="pv-image-drop filled">
+                <div class="thumb-content" style="align-items:center;justify-content:center">
+                  <div class="thumb-burger b1" style="max-width:55%">
+                    <span>CHOPIFY</span>
+                    <span>DOUBLE<br/>PATTY</span>
+                  </div>
+                </div>
+              </label>
+              <div class="pv-rep-fields">
+                <input class="input" value="@Canva can you resize this poster as an Instagram post for my online store?" />
+                <div class="row-2">
+                  <input class="input" value="" placeholder="CTA label (optional)" />
+                  <input class="input" value="" placeholder="CTA URL" />
+                </div>
+                <span class="hint">Image fetched from the ChatGPT listing · <a href="#" class="replace-link">replace</a></span>
+              </div>
+              <button type="button" class="pv-rep-del" aria-label="Remove">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+              </button>
+            </div>
+
+            <button type="button" class="rep-add">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              Add preview
+            </button>
+          </div>
+        </section>
+
+        <!-- 4 · Example prompts -->
+        <section class="card">
+          <div class="step"><span class="step-dot"></span>Step 4 · Example prompts <span class="autofilled">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Auto-filled
+          </span></div>
+          <h2>Try prompts like this</h2>
+          <p class="card-sub">Shown as a bulleted list on your listing. Up to 8 entries.</p>
+
+          <div class="repeater">
+            <input class="input" value="Can you turn this image into a fully editable design, @Canva?" />
+            <input class="input" value="@Canva, create some social posts based on our recent campaign brief — remember to add our Brand Kit!" />
+            <input class="input" value="Turn these meeting notes into a 12-slide investor pitch deck." />
+            <input class="input" value="Design a set of Instagram story templates for our spring menu drop." />
+            <button type="button" class="rep-add">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              Add prompt
+            </button>
+          </div>
+        </section>
+
+        <!-- 5 · Contact -->
+        <section class="card">
+          <div class="step"><span class="step-dot"></span>Step 5 · Contact</div>
+          <h2>How should we reach you?</h2>
+          <p class="card-sub">Optional. We only use this to email you when the submission is reviewed.</p>
+
+          <div class="field">
+            <label>Your email</label>
+            <input class="input" type="email" placeholder="you@company.com" />
+          </div>
+
+          <div class="field">
+            <div class="turnstile">
+              <span class="tick">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1f7a4a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>Verified — human, not a bot</span>
+              <span style="margin-left:auto;font-size:11px;color:var(--muted-2)">Cloudflare Turnstile</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Submit bar -->
+        <div class="submit-bar">
+          <span class="meta">By submitting you agree to our <a href="#" style="color:var(--ink-2);text-decoration:underline;text-underline-offset:3px">listing guidelines</a>.</span>
+          <div class="actions">
+            <button type="button" class="btn-ghost">Save draft</button>
+            <button type="submit" class="btn-primary">
+              Submit for review
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="preview-card">
+          <p class="preview-label">Live preview</p>
+          <div class="preview-head">
+            <div class="preview-avatar">C</div>
+            <div>
+              <p class="preview-name">Canva</p>
+              <p class="preview-tag">Search, create, edit designs</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-card">
+          <p class="preview-label">Completion</p>
+          <div class="checklist">
+            <div class="chk-item done"><span class="chk-dot"></span>Name, tagline, description</div>
+            <div class="chk-item done"><span class="chk-dot"></span>Avatar uploaded</div>
+            <div class="chk-item done"><span class="chk-dot"></span>Publisher &amp; links</div>
+            <div class="chk-item done"><span class="chk-dot"></span>Category &amp; capabilities</div>
+            <div class="chk-item done"><span class="chk-dot"></span>At least 1 preview with image</div>
+            <div class="chk-item done"><span class="chk-dot"></span>Example prompts</div>
+            <div class="chk-item"><span class="chk-dot"></span>Cloudflare Turnstile check</div>
+          </div>
+        </div>
+
+        <div class="preview-card" style="background:#fafafa">
+          <p class="preview-label">Review timeline</p>
+          <p style="margin:0 0 8px;font-size:14px;color:var(--ink-2);font-weight:500">~48 hours</p>
+          <p style="margin:0;font-size:13px;color:var(--muted);line-height:1.5">We review every submission manually. You'll get an email when your listing is approved.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.chips').forEach(group => {
+      group.addEventListener('click', e => {
+        const btn = e.target.closest('.chip-opt');
+        if (!btn) return;
+        btn.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

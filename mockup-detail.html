@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Canva — MCP Apps</title>
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#0a0a0a;
+      --ink-2:#2a2a2a;
+      --muted:#6b7280;
+      --muted-2:#8a8f98;
+      --line:rgba(10,10,10,.08);
+      --line-2:rgba(10,10,10,.06);
+      --chip:#f2f2f3;
+      --shadow-sm:0 1px 2px rgba(10,10,10,.04);
+      --shadow-md:0 1px 3px rgba(10,10,10,.04), 0 8px 24px rgba(10,10,10,.05);
+      --radius:16px;
+      --radius-lg:24px;
+      --radius-xl:28px;
+      --hero-grad: radial-gradient(120% 120% at 100% 0%,#fff4b2 0%,transparent 55%),
+                   radial-gradient(90% 90% at 0% 100%,#9ed1ff 0%,transparent 60%),
+                   linear-gradient(135deg,#56a8ff 0%,#9fd5ff 50%,#ffe789 100%);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    @supports(font-variation-settings:normal){html,body{font-family:'InterVariable','Inter',system-ui,sans-serif}}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+    .page{max-width:1040px;margin:0 auto;padding:32px 24px 120px}
+
+    .topnav{display:flex;align-items:center;gap:16px;padding:8px 0 24px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.01em}
+    .brand-mark{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 210deg,#7c5cff,#22d3ee,#a3e635,#7c5cff);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+    .nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+    .nav-link{color:var(--muted);font-size:14px;padding:8px 10px;border-radius:10px}
+    .nav-link:hover{color:var(--ink);background:var(--chip)}
+    .btn-primary{background:var(--ink);color:#fff;padding:9px 16px;border-radius:999px;font-size:14px;font-weight:500}
+
+    .crumbs{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;margin:4px 0 24px}
+    .crumbs a:hover{color:var(--ink)}
+    .crumbs svg{opacity:.5}
+
+    /* Header strip */
+    .app-head{display:flex;align-items:center;gap:20px;margin-bottom:24px}
+    .app-avatar{width:72px;height:72px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:36px;flex:0 0 auto;box-shadow:var(--shadow-sm);background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;font-family:'Instrument Serif',ui-serif,serif}
+    .app-head-text{flex:1;min-width:0}
+    .app-head-text h1{margin:0 0 4px;font-size:28px;letter-spacing:-.02em;font-weight:600;line-height:1.1}
+    .app-head-text p{margin:0;color:var(--muted);font-size:15px}
+    .app-head-cta{display:flex;gap:8px}
+    .btn-connect{background:var(--ink);color:#fff;border-radius:999px;padding:10px 22px;font-size:14px;font-weight:500}
+    .btn-connect:hover{background:#1a1a1a}
+    .btn-ghost{border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:14px;color:var(--ink-2);background:#fff;display:inline-flex;align-items:center;gap:6px}
+    .btn-ghost:hover{border-color:rgba(0,0,0,.18)}
+
+    /* Preview gallery (3-up bubbles on a gradient card) */
+    .preview-gallery{
+      margin:8px 0 36px;
+      border-radius:var(--radius-xl);
+      overflow:hidden;
+      padding:28px;
+      background:var(--hero-grad);
+      box-shadow:var(--shadow-md);
+    }
+    .preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .pv{display:flex;flex-direction:column;gap:12px}
+    .pv-prompt{background:#d6eaff;color:#0a1628;font-size:13px;padding:10px 14px;border-radius:16px 16px 6px 16px;box-shadow:0 2px 6px rgba(0,0,0,.06);line-height:1.35;align-self:flex-start;max-width:92%}
+    .pv-prompt b{font-weight:600}
+    .pv-card{background:#fff;border-radius:16px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.08);display:flex;flex-direction:column;gap:10px}
+    .pv-mockup{aspect-ratio:4/3;border-radius:12px;overflow:hidden;position:relative;background:#ffeedd;display:flex;flex-direction:column;padding:14px;gap:8px}
+    .pv-caption{font-size:12.5px;color:#2a2a2a;padding:2px 4px 4px;line-height:1.4}
+    .pv-cta{background:#7c3aed;color:#fff;font-size:12.5px;font-weight:500;text-align:center;padding:8px 10px;border-radius:999px;align-self:stretch}
+
+    /* Canva-style burger posters */
+    .poster-a{background:linear-gradient(135deg,#ffeedd,#ffcbb3);padding:14px;flex:1;border-radius:10px;display:flex;flex-direction:column;justify-content:space-between}
+    .poster-b{background:#e9292f;padding:14px;flex:1;border-radius:10px;display:flex;flex-direction:column;justify-content:space-between;color:#fff}
+    .poster-brand{font-family:'Instrument Serif',ui-serif,serif;font-weight:800;font-size:9px;letter-spacing:.04em;line-height:1;color:#b32121}
+    .poster-brand.white{color:#fff}
+    .poster-title{font-family:'Instrument Serif',ui-serif,serif;font-weight:700;font-size:14px;line-height:1;color:#b32121;margin-top:4px}
+    .poster-title.white{color:#fff;font-size:18px}
+    .check-bar{height:8px;background-image:linear-gradient(45deg,#b32121 25%,transparent 25%,transparent 75%,#b32121 75%,#b32121),linear-gradient(45deg,#b32121 25%,#fff 25%,#fff 75%,#b32121 75%);background-size:8px 8px;background-position:0 0,4px 4px;margin:6px -14px 0;border-radius:0 0 10px 10px}
+    .check-bar.white{background-image:linear-gradient(45deg,#fff 25%,transparent 25%,transparent 75%,#fff 75%,#fff),linear-gradient(45deg,#fff 25%,#e9292f 25%,#e9292f 75%,#fff 75%)}
+
+    /* Phone mockup (for Instagram resize preview) */
+    .phone{width:100px;height:140px;border-radius:12px;background:#fff;border:1px solid rgba(0,0,0,.08);margin:auto;padding:8px;display:flex;flex-direction:column;justify-content:space-between}
+    .phone .poster-a{padding:8px;border-radius:6px}
+    .phone .poster-title{font-size:10px}
+    .badge-pink{background:#ff6bb5;color:#fff;font-family:'Instrument Serif',ui-serif,serif;font-weight:700;font-size:10px;padding:3px 8px;border-radius:999px;align-self:flex-end;transform:rotate(4deg);margin-top:-8px}
+
+    /* Description */
+    .section-title{font-size:20px;letter-spacing:-.01em;font-weight:600;margin:48px 0 16px}
+    .prose{font-size:16px;line-height:1.55;color:var(--ink-2);max-width:780px}
+    .prose p{margin:0 0 14px}
+
+    /* Try prompts */
+    .prompts{display:flex;flex-direction:column;gap:8px;max-width:780px;padding:0;margin:0}
+    .prompts li{list-style:none}
+    .prompt-row{display:flex;align-items:center;gap:10px;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink-2);font-size:14.5px;transition:border-color .15s, background .15s}
+    .prompt-row:hover{border-color:rgba(0,0,0,.14);background:#fafafa}
+    .prompt-row .dot{width:4px;height:4px;border-radius:50%;background:var(--muted-2)}
+    .prompt-copy{margin-left:auto;opacity:0;transition:opacity .15s;color:var(--muted);font-size:12px;display:inline-flex;align-items:center;gap:4px}
+    .prompt-row:hover .prompt-copy{opacity:1}
+
+    /* Information table */
+    .info-table{border:1px solid var(--line);border-radius:var(--radius);background:#fff;max-width:780px;overflow:hidden}
+    .info-row{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:14px 20px;border-top:1px solid var(--line-2);font-size:14px;align-items:center}
+    .info-row:first-child{border-top:0}
+    .info-key{color:var(--muted)}
+    .info-val{color:var(--ink-2);display:inline-flex;align-items:center;gap:6px}
+    .info-val a{display:inline-flex;align-items:center;gap:6px;color:var(--ink-2)}
+    .info-val a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+    .ext{color:var(--muted-2)}
+
+    .report{display:flex;justify-content:center;margin-top:56px}
+    .report-btn{font-size:13px;color:var(--muted);padding:8px 14px;border-radius:999px}
+    .report-btn:hover{color:var(--ink);background:var(--chip)}
+
+    @media (max-width: 760px){
+      .preview-grid{grid-template-columns:1fr;gap:20px}
+      .app-head{flex-wrap:wrap}
+      .app-head-cta{width:100%}
+      .info-row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <nav class="topnav">
+      <a class="brand" href="#"><span class="brand-mark"></span><span>mcpapp</span></a>
+      <div class="nav-right">
+        <a class="nav-link" href="#">Browse</a>
+        <a class="nav-link" href="#">Docs</a>
+        <a class="btn-primary" href="#">Submit your app</a>
+      </div>
+    </nav>
+
+    <div class="crumbs">
+      <a href="#">Apps</a>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+      <a href="#">Design</a>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+      <span style="color:var(--ink-2)">Canva</span>
+    </div>
+
+    <!-- Header strip -->
+    <header class="app-head">
+      <div class="app-avatar">C</div>
+      <div class="app-head-text">
+        <h1>Canva</h1>
+        <p>Search, create, edit designs.</p>
+      </div>
+      <div class="app-head-cta">
+        <button class="btn-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          Save
+        </button>
+        <button class="btn-connect">Connect</button>
+      </div>
+    </header>
+
+    <!-- Preview gallery -->
+    <section class="preview-gallery" aria-label="Previews">
+      <div class="preview-grid">
+
+        <div class="pv">
+          <div class="pv-prompt"><b>@Canva</b> create some social media posts based on our October campaign brief</div>
+          <div class="pv-card">
+            <div class="pv-mockup" style="background:#ffd9c2;flex-direction:row;padding:10px;gap:6px">
+              <div class="poster-a">
+                <div>
+                  <div class="poster-brand">CHOPIFY<br/>BURGER</div>
+                  <div class="poster-title">FLIPPIN'<br/>DELICIOUS<br/>BURGERS</div>
+                </div>
+                <div class="check-bar"></div>
+              </div>
+              <div class="poster-b">
+                <div>
+                  <div class="poster-brand white">CHOPIFY<br/>BURGER</div>
+                  <div class="poster-title white">THE BIG<br/>CHOPPER</div>
+                </div>
+                <div class="check-bar white"></div>
+              </div>
+            </div>
+            <div class="pv-caption">Coming right up! Here are some social media posts with the Chopify Burgers' look and feel. Need me to resize them for different social channels?</div>
+          </div>
+        </div>
+
+        <div class="pv">
+          <div class="pv-prompt"><b>@Canva</b> use these latest investor meeting notes to make a Q1 2026 pitch deck</div>
+          <div class="pv-card">
+            <div class="pv-mockup" style="background:#ffd9c2;padding:10px">
+              <div class="poster-b" style="background:#e9292f;justify-content:flex-start;gap:6px">
+                <div class="poster-brand white">Q1 2026</div>
+                <div class="poster-title white" style="font-size:20px;line-height:1">GO&mdash;TO&mdash;<br/>MARKET<br/>PLAN</div>
+                <div class="check-bar white" style="margin-top:auto"></div>
+              </div>
+            </div>
+            <div class="pv-caption">Here you go! Let me know which version you prefer, then we can open, edit, restyle, or expand on it in Canva.</div>
+          </div>
+        </div>
+
+        <div class="pv">
+          <div class="pv-prompt"><b>@Canva</b> can you resize this poster as an Instagram post for my online store?</div>
+          <div class="pv-card">
+            <div class="pv-mockup" style="background:#ffd9c2;padding:12px;align-items:center">
+              <div class="phone">
+                <div class="poster-a" style="flex:1">
+                  <div>
+                    <div class="poster-brand">CHOPIFY<br/>BURGER</div>
+                    <div class="poster-title">DOUBLE PATTY<br/>DOUBLE FUN</div>
+                  </div>
+                  <div class="check-bar"></div>
+                </div>
+              </div>
+              <div class="badge-pink">100%</div>
+            </div>
+            <div class="pv-caption">Done! Here's the Instagram post version of your Chopify poster.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Description -->
+    <section>
+      <div class="prose">
+        <p>Ask Canva to create on-brand social posts, presentations, marketing materials, or other visual assets based on your current conversation, then continue editing together in the chat.</p>
+        <p>Turn rough ideas into polished designs in seconds — describe what you want and Canva drafts, restyles, or resizes it for any channel, while keeping your brand fonts and colors consistent.</p>
+      </div>
+    </section>
+
+    <!-- Try prompts -->
+    <h2 class="section-title">Try prompts like this</h2>
+    <ul class="prompts">
+      <li><a class="prompt-row" href="#"><span class="dot"></span>Can you turn this image into a fully editable design, @Canva?<span class="prompt-copy">Copy <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></span></a></li>
+      <li><a class="prompt-row" href="#"><span class="dot"></span>@Canva, create some social posts based on our recent campaign brief — remember to add our Brand Kit!<span class="prompt-copy">Copy <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></span></a></li>
+      <li><a class="prompt-row" href="#"><span class="dot"></span>Turn these meeting notes into a 12-slide investor pitch deck.<span class="prompt-copy">Copy <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></span></a></li>
+      <li><a class="prompt-row" href="#"><span class="dot"></span>Design a set of Instagram story templates for our spring menu drop.<span class="prompt-copy">Copy <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></span></a></li>
+    </ul>
+
+    <!-- Information table -->
+    <h2 class="section-title">Information</h2>
+    <div class="info-table">
+      <div class="info-row"><div class="info-key">Category</div><div class="info-val">Design</div></div>
+      <div class="info-row"><div class="info-key">Capabilities</div><div class="info-val">Interactive, Writes</div></div>
+      <div class="info-row"><div class="info-key">Developer</div><div class="info-val">Canva Pty Ltd</div></div>
+      <div class="info-row"><div class="info-key">Website</div><div class="info-val"><a href="https://canva.com">canva.com <svg class="ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></div></div>
+      <div class="info-row"><div class="info-key">Version</div><div class="info-val">2.8.1</div></div>
+      <div class="info-row"><div class="info-key">Privacy Policy</div><div class="info-val"><a href="#">canva.com/privacy-policy <svg class="ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></div></div>
+      <div class="info-row"><div class="info-key">Terms of Service</div><div class="info-val"><a href="#">canva.com/terms <svg class="ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></div></div>
+      <div class="info-row"><div class="info-key">Customer support</div><div class="info-val"><a href="#">canva.com/help <svg class="ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></div></div>
+    </div>
+
+    <div class="report">
+      <a class="report-btn" href="#">Report this listing</a>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "mcpapp",
+  "main": "worker/index.ts",
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "cdn.mcpapp.net/",
+      "zone_name": "mcpapp.net"
+    }
+  ],
+  "compatibility_date": "2026-04-23",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "mcpapp",
+      "database_id": "5274f5ec-43c2-435f-8867-66f72f1a10a6"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "mcpapp-assets"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "a6a40150b1a440cfba54f51768f44287"
+    }
+  ],
+  "vars": {
+    "SITE_URL": "https://mcpapp.net",
+    "ASSET_CDN_URL": "https://cdn.mcpapp.net",
+    "TURNSTILE_SITE_KEY": "",
+    "CLOUDFLARE_ANALYTICS_TOKEN": ""
+  },
+  "env": {
+    "preview": {
+      "name": "mcpapp-preview",
+      "workers_dev": true,
+      "vars": {
+        "SITE_URL": "https://mcpapp-preview.byeval.workers.dev",
+        "ASSET_CDN_URL": "https://cdn.mcpapp.net",
+        "TURNSTILE_SITE_KEY": "",
+        "CLOUDFLARE_ANALYTICS_TOKEN": ""
+      }
+    }
+  }
+}

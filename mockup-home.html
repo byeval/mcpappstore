@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MCP Apps</title>
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <style>
+    :root{
+      --bg:#ffffff;
+      --surface:#ffffff;
+      --ink:#0a0a0a;
+      --ink-2:#2a2a2a;
+      --muted:#6b7280;
+      --muted-2:#8a8f98;
+      --line:rgba(10,10,10,.08);
+      --line-2:rgba(10,10,10,.05);
+      --chip:#f2f2f3;
+      --chip-ink:#111;
+      --hero-1:#6bb8ff;
+      --hero-2:#b9e3ff;
+      --hero-3:#ffe98a;
+      --shadow-sm:0 1px 2px rgba(10,10,10,.04);
+      --shadow-md:0 1px 3px rgba(10,10,10,.04), 0 8px 24px rgba(10,10,10,.05);
+      --shadow-lg:0 4px 12px rgba(10,10,10,.06), 0 24px 48px rgba(10,10,10,.06);
+      --radius-sm:10px;
+      --radius:16px;
+      --radius-lg:24px;
+      --radius-xl:28px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-feature-settings:"cv11","ss01";-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    @supports(font-variation-settings:normal){
+      html,body{font-family:'InterVariable','Inter',system-ui,sans-serif}
+    }
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+    .page{max-width:1160px;margin:0 auto;padding:40px 24px 120px}
+
+    /* ---------- Top nav ---------- */
+    .topnav{display:flex;align-items:center;gap:16px;padding:8px 0 32px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.01em}
+    .brand-mark{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 210deg,#7c5cff,#22d3ee,#a3e635,#7c5cff);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+    .nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+    .nav-link{color:var(--muted);font-size:14px;padding:8px 10px;border-radius:10px}
+    .nav-link:hover{color:var(--ink);background:var(--chip)}
+    .btn-primary{background:var(--ink);color:#fff;padding:9px 16px;border-radius:999px;font-size:14px;font-weight:500}
+    .btn-primary:hover{background:#1a1a1a}
+
+    /* ---------- Header ---------- */
+    .header{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:24px}
+    .title-group h1{font-size:44px;line-height:1.02;letter-spacing:-.03em;font-weight:600;margin:0;display:flex;align-items:center;gap:12px}
+    .chip{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#555;background:#ececee;padding:5px 9px;border-radius:999px;border:1px solid rgba(0,0,0,.04);position:relative;top:-6px}
+    .subtitle{color:var(--muted);font-size:16px;margin-top:8px;max-width:560px}
+    .search{display:flex;align-items:center;gap:10px;min-width:340px;max-width:380px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 16px;box-shadow:var(--shadow-sm)}
+    .search svg{flex:0 0 auto;opacity:.5}
+    .search input{flex:1;border:0;outline:0;background:transparent;font-size:14px;color:var(--ink)}
+    .search input::placeholder{color:var(--muted-2)}
+
+    /* ---------- Hero carousel ---------- */
+    .hero{
+      position:relative;
+      margin:16px 0 36px;
+      border-radius:var(--radius-xl);
+      overflow:hidden;
+      min-height:360px;
+      background:
+        radial-gradient(120% 120% at 100% 0%,#fff4b2 0%,transparent 55%),
+        radial-gradient(90% 90% at 0% 100%,#9ed1ff 0%,transparent 60%),
+        linear-gradient(135deg,#56a8ff 0%,#9fd5ff 50%,#ffe789 100%);
+      box-shadow:var(--shadow-md);
+    }
+    .hero-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;padding:40px 44px;min-height:360px;align-items:center}
+    .hero-left{display:flex;flex-direction:column;gap:18px;color:#0c2033}
+    .hero-icon{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#4aa8ff,#7c5cff);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:30px;box-shadow:0 8px 22px rgba(40,60,120,.25);font-family:'Instrument Serif',ui-serif,serif}
+    .hero-title{font-size:36px;letter-spacing:-.02em;font-weight:600;line-height:1.05;color:#0a1628}
+    .hero-sub{color:#1c3657;font-size:17px;max-width:380px;line-height:1.4}
+    .hero-cta{align-self:flex-start;background:#0a0a0a;color:#fff;padding:11px 22px;border-radius:999px;font-weight:500;font-size:14px;margin-top:6px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+    .hero-right{position:relative;height:100%;min-height:320px}
+
+    /* Chat bubble stack (preview on the right of hero) */
+    .bubble-stack{position:absolute;top:18px;right:-20px;display:flex;flex-direction:column;gap:10px;align-items:flex-end;max-width:380px}
+    .bubble-prompt{background:#d6eaff;color:#0a1628;font-size:13px;padding:10px 14px;border-radius:18px 18px 6px 18px;box-shadow:0 2px 6px rgba(0,0,0,.06);max-width:280px;line-height:1.35}
+    .bubble-prompt b{font-weight:600;color:#0a1628}
+    .bubble-card{background:#fff;border-radius:18px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,.08);max-width:360px;display:flex;flex-direction:column;gap:10px}
+    .bubble-gallery{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .bubble-thumb{aspect-ratio:1/1;border-radius:12px;overflow:hidden;position:relative;background:#fff1e6}
+    .bubble-thumb.t1{background:linear-gradient(135deg,#ffeedd,#ffcbb3)}
+    .bubble-thumb.t2{background:linear-gradient(135deg,#ff4d4d,#ff8a3d)}
+    .bubble-thumb svg{position:absolute;inset:0;width:100%;height:100%}
+    .bubble-text{font-size:12.5px;color:#2a2a2a;padding:4px 6px 6px;line-height:1.4}
+
+    /* Faux poster graphic inside thumbs */
+    .poster{padding:10px;display:flex;flex-direction:column;justify-content:space-between;height:100%}
+    .poster-head{font-family:'Instrument Serif',ui-serif,serif;font-weight:800;font-size:13px;line-height:1;color:#b32121;letter-spacing:.02em}
+    .poster-title{font-family:'Instrument Serif',ui-serif,serif;font-weight:700;font-size:15px;line-height:1;color:#b32121}
+    .poster-title.white{color:#fff;font-size:22px}
+    .poster-check{height:10px;background-image:linear-gradient(45deg,#b32121 25%,transparent 25%,transparent 75%,#b32121 75%,#b32121),linear-gradient(45deg,#b32121 25%,#fff 25%,#fff 75%,#b32121 75%);background-size:10px 10px;background-position:0 0,5px 5px;margin:4px -10px 0;border-radius:0 0 10px 10px}
+
+    /* Carousel dots */
+    .hero-dots{position:absolute;left:44px;bottom:28px;display:flex;gap:6px;align-items:center}
+    .hero-dots .dot{width:6px;height:6px;border-radius:50%;background:rgba(10,10,10,.18)}
+    .hero-dots .dot.active{background:rgba(10,10,10,.55);width:18px;border-radius:3px}
+    .hero-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.1);color:#1a1a1a}
+    .hero-arrow.prev{left:16px}
+    .hero-arrow.next{right:16px}
+
+    /* ---------- Category tabs ---------- */
+    .tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:8px 0 28px;padding:4px 0}
+    .tabs::-webkit-scrollbar{display:none}
+    .tab{padding:9px 16px;border-radius:999px;font-size:14px;color:var(--muted);white-space:nowrap;transition:background .15s, color .15s}
+    .tab:hover{background:#f3f3f4;color:var(--ink-2)}
+    .tab.active{background:#111;color:#fff}
+
+    /* ---------- App grid ---------- */
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 48px}
+    .app-row{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line-2);cursor:pointer;transition:background .15s}
+    .app-row:hover{background:rgba(10,10,10,.02);border-radius:12px;padding-left:8px;padding-right:8px}
+    .app-icon{width:48px;height:48px;flex:0 0 auto;border-radius:12px;background:#f2f2f3;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:#333;overflow:hidden}
+    .app-meta{flex:1;min-width:0}
+    .app-name{font-size:15px;font-weight:600;letter-spacing:-.005em;color:var(--ink);margin:0 0 2px}
+    .app-tag{font-size:14px;color:var(--muted);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .app-chev{color:var(--muted-2);flex:0 0 auto}
+
+    /* Icon variants (faux brand icons using CSS gradients) */
+    .ic-photoshop{background:linear-gradient(135deg,#001e36,#31a8ff);color:#fff}
+    .ic-airtable{background:#000;color:#fff}
+    .ic-apple{background:linear-gradient(135deg,#ff5b6b,#ff2d55);color:#fff}
+    .ic-booking{background:#003b95;color:#fff}
+    .ic-canva{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;font-family:'Instrument Serif',serif;font-weight:600}
+    .ic-figma{background:#fff;color:#0a0a0a;position:relative}
+    .ic-lovable{background:linear-gradient(135deg,#ff7a8a,#ff4d6d);color:#fff}
+    .ic-replit{background:#fff;color:#f26207}
+    .ic-linear{background:#5e6ad2;color:#fff}
+    .ic-notion{background:#fff;color:#0a0a0a;border:1px solid rgba(0,0,0,.06)}
+    .ic-github{background:#0a0a0a;color:#fff}
+    .ic-slack{background:#fff;color:#0a0a0a;border:1px solid rgba(0,0,0,.06)}
+    .ic-stripe{background:#635bff;color:#fff}
+    .ic-supabase{background:#1a1a1a;color:#3ecf8e}
+    .ic-vercel{background:#0a0a0a;color:#fff}
+    .ic-anthropic{background:#d97757;color:#fff}
+
+    /* ---------- Footer ---------- */
+    .footer{display:flex;justify-content:center;margin-top:64px}
+    .submit-cta{border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-size:14px;color:var(--ink-2);display:inline-flex;align-items:center;gap:8px;background:#fff;box-shadow:var(--shadow-sm)}
+    .submit-cta:hover{border-color:rgba(0,0,0,.18)}
+    .submit-cta svg{color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 880px){
+      .hero-inner{grid-template-columns:1fr;gap:8px}
+      .hero-right{display:none}
+      .grid{grid-template-columns:1fr;gap:0}
+      .header{flex-direction:column}
+      .search{min-width:0;width:100%}
+      .title-group h1{font-size:34px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Top nav -->
+    <nav class="topnav">
+      <a class="brand" href="#">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>mcpapp</span>
+      </a>
+      <div class="nav-right">
+        <a class="nav-link" href="#">Browse</a>
+        <a class="nav-link" href="#">Docs</a>
+        <a class="btn-primary" href="#submit">Submit your MCP</a>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="title-group">
+        <h1>Apps <span class="chip">Beta</span></h1>
+        <p class="subtitle">Browse MCP servers you can connect to Claude, ChatGPT, and other AI clients.</p>
+      </div>
+      <label class="search" aria-label="Search apps">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" placeholder="Search apps" />
+      </label>
+    </header>
+
+    <!-- Hero carousel -->
+    <section class="hero" aria-label="Featured apps">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-icon" style="background:linear-gradient(135deg,#7c3aed,#22d3ee);font-family:'Instrument Serif',ui-serif,serif;font-weight:600">C</div>
+          <h2 class="hero-title">Create with Canva</h2>
+          <p class="hero-sub">Make designs and flyers without opening the editor.</p>
+          <a class="hero-cta" href="#">View</a>
+        </div>
+        <div class="hero-right">
+          <div class="bubble-stack">
+            <div class="bubble-prompt"><b>@Canva</b> create social posts</div>
+            <div class="bubble-card">
+              <div class="bubble-gallery">
+                <div class="bubble-thumb t1">
+                  <div class="poster">
+                    <div>
+                      <div class="poster-head">CHOPIFY</div>
+                      <div class="poster-title">FLIPPIN'<br/>DELICIOUS<br/>BURGERS</div>
+                    </div>
+                    <div class="poster-check"></div>
+                  </div>
+                </div>
+                <div class="bubble-thumb t2">
+                  <div class="poster">
+                    <div>
+                      <div class="poster-head" style="color:#fff">CHOPIFY</div>
+                      <div class="poster-title white">THE BIG<br/>CHOPPER</div>
+                    </div>
+                    <div class="poster-check" style="background-image:linear-gradient(45deg,#fff 25%,transparent 25%,transparent 75%,#fff 75%,#fff),linear-gradient(45deg,#fff 25%,#b32121 25%,#b32121 75%,#fff 75%)"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="bubble-text">Coming right up! Here are some social media posts with the Chopify Burgers' look and feel. Need me to resize them?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-dots">
+        <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <button class="hero-arrow next" aria-label="Next">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </section>
+
+    <!-- Category tabs -->
+    <nav class="tabs" aria-label="Categories">
+      <button class="tab active">Featured</button>
+      <button class="tab">Productivity</button>
+      <button class="tab">Design</button>
+      <button class="tab">Developer Tools</button>
+      <button class="tab">Data &amp; Analytics</button>
+      <button class="tab">Communication</button>
+      <button class="tab">Finance</button>
+      <button class="tab">Lifestyle</button>
+    </nav>
+
+    <!-- App grid -->
+    <section class="grid" aria-label="Apps">
+
+      <a class="app-row" href="#">
+        <div class="app-icon ic-linear">L</div>
+        <div class="app-meta">
+          <p class="app-name">Linear</p>
+          <p class="app-tag">Triage issues, manage sprints</p>
+        </div>
+        <svg class="app-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+      <a class="app-row" href="#">
+        <div class="app-icon ic-notion">N</div>
+        <div class="app-meta">
+          <p class="app-name">Notion</p>
+          <p class="app-tag">Read and edit your workspace</p>
+        </div>
+        <svg class="app-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+      <a class="app-row" href="#">
+        <div class="app-icon ic-figma">F</div>
+        <div class="app-meta">
+          <p class="app-name">Figma</p>
+          <p class="app-tag">Make diagrams, slides, assets</p>
+        </div>
+        <svg class="app-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+      <a class="app-row" href="#">
+        <div class="app-icon ic-github">G</div>
+        <div class="app-meta">
+          <p class="app-name">GitHub</p>
+          <p class="app-tag">Search repos, review PRs, open issues</p>
+        </div>
+        <svg class="app-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+      <a class="app-row" href="#">
+        <div class="app-icon ic-slack">S</div>
+        <div class="app-meta">
+          <p class="app-name">Slack</p>
+          <p class="app-tag">Send messages and read channels</p>
+        </div>
+        <svg class="app-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+      <a class="app-row" href="#">
+        <div class="app-icon ic-stripe">S</div>
+        <div class="app-meta">
+          <p class="app-name">Stripe</p>
+          <p class="app-tag">Look up customers, payments, invoices</p>
+        </div>
+        <svg class="app-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+      <a class="app-row" href="#">
+        <div class="app-icon ic-booking">B.</div>
+        <div class="app-meta">
+          <p class="app-name">Booking.com</p>
+          <p class="app-tag">Find hotels, homes and more</p>
+        </div>
+        <svg class="app-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+      <a class="app-row" href="#">
+        <div class="app-icon ic-apple">♪</div>
+        <div class="app-meta">
+          <p class="app-name">Apple Music</p>
+          <p class="app-tag">Build playlists and find music</p>
+        </div>
+        <svg class="app-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+      <a class="app-row" href="#">
+        <div class="app-icon ic-lovable">♥</div>
+        <div class="app-meta">
+          <p class="app-name">Lovable</p>
+          <p class="app-tag">Build apps and websites</p>
+        </div>
+        <svg class="app-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+      <a class="app-row" href="#">
+        <div class="app-icon ic-airtable">▰</div>
+        <div class="app-meta">
+          <p class="app-name">Airtable</p>
+          <p class="app-tag">Add structured data to chat</p>
+        </div>
+        <svg class="app-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+      <a class="app-row" href="#">
+        <div class="app-icon ic-photoshop">Ps</div>
+        <div class="app-meta">
+          <p class="app-name">Adobe Photoshop</p>
+          <p class="app-tag">Edit &amp; transform your images</p>
+        </div>
+        <svg class="app-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+      <a class="app-row" href="#">
+        <div class="app-icon ic-canva">C</div>
+        <div class="app-meta">
+          <p class="app-name">Canva</p>
+          <p class="app-tag">Search, create, edit designs</p>
+        </div>
+        <svg class="app-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+    </section>
+
+    <!-- Submit CTA footer -->
+    <div class="footer">
+      <a class="submit-cta" href="#submit">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        Submit your MCP server
+      </a>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+name: Skills refresh
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: skills-refresh
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    name: Refresh skills candidates
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Refresh skills.sh report
+        run: npm run skills:refresh -- --skip-seed --threshold 120
+
+      - name: Upload candidate report
+        uses: actions/upload-artifact@v4
+        with:
+          name: skill-association-candidates
+          path: |
+            reports/skill-association-candidates.json
+            reports/skill-association-candidates.md

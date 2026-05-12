@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+.npm/
+.npm-cache/
+
+# Build output
+.next/
+.vinext/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Cloudflare / local runtime state
+.wrangler/
+.wrangler-home/
+.wrangler-logs/
+.dev.vars
+.dev.vars.*
+
+# Secrets and local env
+.env*
+!.env.example
+*.local
+.crawl-webhook-secret.local
+
+# Private data, crawls, generated reports, and exports
+seed/*
+!seed/.gitkeep
+!seed/app-skill-associations.json
+!seed/chatgpt-apps.json
+!seed/rejected-skill-associations.json
+!seed/skills.json
+reports/
+data/
+exports/
+tmp-*
+*.network-response
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+*.dump
+*.sql
+!migrations/**/*.sql
+migrations/0002_seed.sql
+*.csv
+*.tsv
+*.ndjson
+*.jsonl
+
+# OS / editor noise
+.DS_Store

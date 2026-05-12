@@ -1,0 +1,50 @@
+{
+  "name": "mcpapp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vinext dev",
+    "build": "vinext build",
+    "start": "vinext start",
+    "deploy": "vinext deploy",
+    "check": "tsc --noEmit",
+    "cf-types": "wrangler types",
+    "crawl:daily": "bash scripts/daily-crawl.sh",
+    "crawl:webhook": "tsx scripts/crawl-webhook.ts",
+    "seed": "tsx scripts/seed.ts",
+    "media:webp": "tsx scripts/convert-seed-media-to-webp.ts",
+    "media:thumbs": "tsx scripts/generate-preview-thumbnails.ts",
+    "scrape": "tsx scripts/scrape-chatgpt.ts",
+    "scrape:claude": "tsx scripts/scrape-claude.ts",
+    "skills:refresh": "tsx scripts/refresh-skills.ts",
+    "skills:import:skills-sh": "tsx scripts/import-skills-sh.ts",
+    "skills:review": "tsx scripts/review-skill-associations.ts",
+    "skills:suggest": "tsx scripts/suggest-skill-associations.ts",
+    "dev:vinext": "vinext dev --port 3001",
+    "build:vinext": "vinext build",
+    "start:vinext": "vinext start"
+  },
+  "dependencies": {
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "1.33.1",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.4",
+    "@vitejs/plugin-rsc": "^0.5.24",
+    "react-server-dom-webpack": "19.2.5",
+    "sharp": "^0.34.5",
+    "tsx": "^4.20.6",
+    "typescript": "6.0.3",
+    "vinext": "0.0.43",
+    "vite": "^8.0.2",
+    "wrangler": "^4.43.0"
+  }
+}

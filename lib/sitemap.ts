@@ -1,0 +1,237 @@
+import { activeAppIndexKeys, appIndexPath } from "@/lib/app-index";
+import { appCollections } from "@/lib/collections";
+import {
+  CATEGORY_APP_PAGE_SIZE,
+  PLATFORM_APP_PAGE_SIZE,
+  countAppsByPlatform,
+  getCategorySummaries,
+  listSitemapAppEntries,
+  listSitemapSkillEntries,
+} from "@/lib/data";
+import { learnArticles } from "@/lib/learn";
+import { paginatedPath } from "@/lib/pagination";
+import { isIndexableCategory } from "@/lib/seo-indexing";
+import { absoluteUrl } from "@/lib/utils";
+import { localizedPath, supportedLocales } from "@/lib/i18n";
+import { skillPath } from "@/lib/skill-routes";
+
+type ChangeFrequency = "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
+
+export interface SitemapEntry {
+  url: string;
+  lastModified?: Date | string;
+  changeFrequency?: ChangeFrequency;
+  priority?: number;
+}
+
+const sitemapPaths = [
+  "/sitemaps/static.xml",
+  "/sitemaps/apps.xml",
+  "/sitemaps/skills.xml",
+  "/sitemaps/categories.xml",
+  "/sitemaps/collections.xml",
+  "/sitemaps/learn.xml",
+];
+
+function escapeXml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function xmlDate(value: Date | string): string {
+  return value instanceof Date ? value.toISOString() : new Date(value).toISOString();
+}
+
+function paginatedEntries({
+  basePath,
+  totalCount,
+  pageSize,
+  changeFrequency,
+  priority,
+}: {
+  basePath: string;
+  totalCount: number;
+  pageSize: number;
+  changeFrequency: ChangeFrequency;
+  priority: number;
+}): SitemapEntry[] {
+  const totalPages = Math.ceil(totalCount / pageSize);
+  if (totalPages <= 1) {
+    return [];
+  }
+
+  return Array.from({ length: totalPages - 1 }, (_, index) => ({
+    url: absoluteUrl(paginatedPath(basePath, index + 2)),
+    changeFrequency,
+    priority,
+  }));
+}
+
+function localizedEntries(path: string, entry: Omit<SitemapEntry, "url">): SitemapEntry[] {
+  return supportedLocales.map((locale) => ({
+    ...entry,
+    url: absoluteUrl(localizedPath(path, locale)),
+  }));
+}
+
+function localizedPaginatedEntries({
+  basePath,
+  totalCount,
+  pageSize,
+  changeFrequency,
+  priority,
+}: {
+  basePath: string;
+  totalCount: number;
+  pageSize: number;
+  changeFrequency: ChangeFrequency;
+  priority: number;
+}): SitemapEntry[] {
+  return paginatedEntries({ basePath, totalCount, pageSize, changeFrequency, priority }).flatMap((entry) => {
+    const pathname = new URL(entry.url).pathname + new URL(entry.url).search;
+    return localizedEntries(pathname, {
+      changeFrequency: entry.changeFrequency,
+      priority: entry.priority,
+    });
+  });
+}
+
+export function sitemapXmlResponse(xml: string): Response {
+  return new Response(xml, {
+    headers: {
+      "content-type": "application/xml; charset=utf-8",
+      "cache-control": "public, max-age=3600, s-maxage=86400",
+    },
+  });
+}
+
+export function sitemapIndexXml(): string {
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapPaths.map((path) => `  <sitemap><loc>${escapeXml(absoluteUrl(path))}</loc></sitemap>`).join("\n")}
+</sitemapindex>
+`;
+}
+
+export function urlsetXml(entries: SitemapEntry[]): string {
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${entries
+  .map((entry) => {
+    const parts = ["  <url>", `    <loc>${escapeXml(entry.url)}</loc>`];
+    if (entry.lastModified) {
+      parts.push(`    <lastmod>${xmlDate(entry.lastModified)}</lastmod>`);
+    }
+    if (entry.changeFrequency) {
+      parts.push(`    <changefreq>${entry.changeFrequency}</changefreq>`);
+    }
+    if (entry.priority !== undefined) {
+      parts.push(`    <priority>${entry.priority}</priority>`);
+    }
+    parts.push("  </url>");
+    return parts.join("\n");
+  })
+  .join("\n")}
+</urlset>
+`;
+}
+
+export async function buildStaticSitemapEntries(): Promise<SitemapEntry[]> {
+  const [apps, chatGptCount, claudeCount] = await Promise.all([
+    listSitemapAppEntries(),
+    countAppsByPlatform("chatgpt"),
+    countAppsByPlatform("claude"),
+  ]);
+  const appIndexPages = activeAppIndexKeys(apps);
+
+  return [
+    ...localizedEntries("/", { changeFrequency: "daily", priority: 1 }),
+    ...localizedEntries("/store", { changeFrequency: "daily", priority: 0.9 }),
+    ...localizedEntries("/skills", { changeFrequency: "daily", priority: 0.82 }),
+    ...appIndexPages.flatMap((key) => localizedEntries(appIndexPath(key), {
+      changeFrequency: "daily" as const,
+      priority: 0.82,
+    })),
+    ...localizedEntries("/chatgpt-apps", { changeFrequency: "daily", priority: 0.9 }),
+    ...localizedPaginatedEntries({
+      basePath: "/chatgpt-apps",
+      totalCount: chatGptCount,
+      pageSize: PLATFORM_APP_PAGE_SIZE,
+      changeFrequency: "daily",
+      priority: 0.74,
+    }),
+    ...localizedEntries("/claude-connectors", { changeFrequency: "daily", priority: 0.9 }),
+    ...localizedPaginatedEntries({
+      basePath: "/claude-connectors",
+      totalCount: claudeCount,
+      pageSize: PLATFORM_APP_PAGE_SIZE,
+      changeFrequency: "daily",
+      priority: 0.74,
+    }),
+    ...localizedEntries("/docs", { changeFrequency: "monthly", priority: 0.55 }),
+    ...localizedEntries("/faq", { changeFrequency: "monthly", priority: 0.55 }),
+    ...localizedEntries("/submit", { changeFrequency: "monthly", priority: 0.45 }),
+    ...localizedEntries("/terms", { changeFrequency: "yearly", priority: 0.2 }),
+    ...localizedEntries("/privacy", { changeFrequency: "yearly", priority: 0.2 }),
+  ];
+}
+
+export async function buildAppsSitemapEntries(): Promise<SitemapEntry[]> {
+  const apps = await listSitemapAppEntries();
+  return apps.flatMap((app) => localizedEntries(`/app/${app.id}`, {
+    changeFrequency: "weekly",
+    priority: 0.64,
+  }));
+}
+
+export async function buildSkillsSitemapEntries(): Promise<SitemapEntry[]> {
+  const skills = await listSitemapSkillEntries();
+  return skills.flatMap((skill) => localizedEntries(skillPath(skill.id), {
+    lastModified: new Date(skill.updatedAt),
+    changeFrequency: "weekly",
+    priority: 0.54,
+  }));
+}
+
+export async function buildCategoriesSitemapEntries(): Promise<SitemapEntry[]> {
+  const categories = await getCategorySummaries();
+  return categories.filter(isIndexableCategory).flatMap((category) => [
+    ...localizedEntries(`/category/${category.slug}`, {
+      changeFrequency: "weekly" as const,
+      priority: category.count >= 10 ? 0.72 : 0.62,
+    }),
+    ...localizedPaginatedEntries({
+      basePath: `/category/${category.slug}`,
+      totalCount: category.count,
+      pageSize: CATEGORY_APP_PAGE_SIZE,
+      changeFrequency: "weekly",
+      priority: 0.54,
+    }),
+  ]);
+}
+
+export function buildCollectionsSitemapEntries(): SitemapEntry[] {
+  return [
+    ...localizedEntries("/collections", { changeFrequency: "weekly", priority: 0.84 }),
+    ...appCollections.flatMap((collection) => localizedEntries(`/collections/${collection.slug}`, {
+      lastModified: new Date(collection.updatedAt),
+      changeFrequency: "weekly" as const,
+      priority: 0.76,
+    })),
+  ];
+}
+
+export function buildLearnSitemapEntries(): SitemapEntry[] {
+  return [
+    ...localizedEntries("/learn", { changeFrequency: "weekly", priority: 0.84 }),
+    ...learnArticles.flatMap((article) => localizedEntries(`/learn/${article.slug}`, {
+      lastModified: new Date(article.updatedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.78,
+    })),
+  ];
+}
