@@ -1,6 +1,10 @@
 import { getAppById } from "@/lib/data";
 import { ogImageResponse } from "@/lib/og-image";
 
+function appIdFromParam(id: string): string {
+  return id.replace(/\.png$/i, "");
+}
+
 export async function GET(
   request: Request,
   context: {
@@ -8,7 +12,18 @@ export async function GET(
   },
 ) {
   const { id } = await context.params;
-  const app = await getAppById(id);
+  const normalizedId = appIdFromParam(id);
+
+  if (normalizedId === "default" || normalizedId === "mcpapp") {
+    const url = new URL(request.url);
+    return ogImageResponse({
+      title: "MCP App Store",
+      description: "Discover MCP apps, ChatGPT apps, Claude connectors, and MCP servers.",
+      footer: url.host,
+    });
+  }
+
+  const app = await getAppById(normalizedId);
   if (!app) {
     return new Response("Not found", { status: 404 });
   }

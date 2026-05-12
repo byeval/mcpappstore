@@ -49,7 +49,7 @@ export async function generateMetadata({
     description: appDescription(app),
     path: `/app/${app.id}`,
     locale,
-    imagePath: `/api/og/${app.id}`,
+    imagePath: `/api/og/${app.id}.png`,
   });
 }
 

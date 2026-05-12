@@ -13,11 +13,7 @@ import "./globals.css";
 
 const defaultDescription =
   "Browse ChatGPT apps and Claude interactive connectors backed by MCP, with tools, previews, categories, and platform-specific capabilities.";
-const defaultOgImage = defaultOgImagePath({
-  title: "MCP App Store",
-  description: defaultDescription,
-  path: "/",
-});
+const defaultOgImage = defaultOgImagePath();
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
@@ -35,11 +31,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "MCP App Store",
-    images: [defaultOgImage],
+    images: [
+      {
+        url: defaultOgImage,
+        width: 1200,
+        height: 630,
+        alt: "MCP App Store",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    images: [defaultOgImage],
+    images: [
+      {
+        url: defaultOgImage,
+        alt: "MCP App Store",
+      },
+    ],
   },
 };
 

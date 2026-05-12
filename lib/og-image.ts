@@ -15,22 +15,8 @@ function cleanText(value: string | undefined, fallback: string, maxLength: numbe
   return normalized.length > maxLength ? `${normalized.slice(0, maxLength - 1).trimEnd()}...` : normalized;
 }
 
-export function defaultOgImagePath({
-  title,
-  description,
-  path,
-}: {
-  title: string;
-  description: string;
-  path: string;
-}): string {
-  const params = new URLSearchParams({
-    title: cleanText(title, "MCP App Store", 90),
-    description: cleanText(description, "Discover MCP apps, ChatGPT apps, Claude connectors, and MCP servers.", 180),
-    path,
-  });
-
-  return `/api/og?${params.toString()}`;
+export function defaultOgImagePath(): string {
+  return "/api/og/default.png";
 }
 
 export function ogImageResponse({

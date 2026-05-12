@@ -50,7 +50,8 @@ export function pageMetadata({
   const canonicalPath = locale ? localizedPath(path, locale) : path;
   const canonical = absoluteUrl(canonicalPath);
   const metaDescription = truncateMeta(description);
-  const images = [absoluteUrl(imagePath ?? defaultOgImagePath({ title, description: metaDescription, path: canonicalPath }))];
+  const imageUrl = absoluteUrl(imagePath ?? defaultOgImagePath());
+  const imageAlt = `${title} on ${siteName}`;
 
   return {
     title,
@@ -68,13 +69,25 @@ export function pageMetadata({
       url: canonical,
       siteName,
       type: "website",
-      images,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: imageAlt,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: metaDescription,
-      images,
+      images: [
+        {
+          url: imageUrl,
+          alt: imageAlt,
+        },
+      ],
     },
     robots,
   };
