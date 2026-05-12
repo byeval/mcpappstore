@@ -6,9 +6,18 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 import { getEnvValue } from "@/lib/cloudflare";
 import { localeDetails, localizedPath, supportedLocales } from "@/lib/i18n";
 import { getI18n, getRequestPathname } from "@/lib/i18n-server";
+import { defaultOgImagePath } from "@/lib/og-image";
 import { absoluteUrl } from "@/lib/utils";
 
 import "./globals.css";
+
+const defaultDescription =
+  "Browse ChatGPT apps and Claude interactive connectors backed by MCP, with tools, previews, categories, and platform-specific capabilities.";
+const defaultOgImage = defaultOgImagePath({
+  title: "MCP App Store",
+  description: defaultDescription,
+  path: "/",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
@@ -16,8 +25,7 @@ export const metadata: Metadata = {
     default: "MCP App Store",
     template: "%s | MCP App Store",
   },
-  description:
-    "Browse ChatGPT apps and Claude interactive connectors backed by MCP, with tools, previews, categories, and platform-specific capabilities.",
+  description: defaultDescription,
   alternates: {
     canonical: "/",
     types: {
@@ -27,6 +35,11 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "MCP App Store",
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [defaultOgImage],
   },
 };
 
@@ -127,6 +140,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
               <Link className="footer-link" href="/rss.xml" prefetch={false}>
                 {t.nav.rss}
               </Link>
+              <a className="footer-link" href="https://github.com/byeval/mcpappstore" rel="noreferrer" target="_blank">
+                GitHub
+              </a>
             </div>
           </footer>
         </div>

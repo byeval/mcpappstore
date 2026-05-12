@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { localeDetails, localizedPath, supportedLocales, type Locale } from "@/lib/i18n";
+import { defaultOgImagePath } from "@/lib/og-image";
 import type { CatalogApp, CategoryRecord } from "@/lib/types";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -49,7 +50,7 @@ export function pageMetadata({
   const canonicalPath = locale ? localizedPath(path, locale) : path;
   const canonical = absoluteUrl(canonicalPath);
   const metaDescription = truncateMeta(description);
-  const images = imagePath ? [absoluteUrl(imagePath)] : undefined;
+  const images = [absoluteUrl(imagePath ?? defaultOgImagePath({ title, description: metaDescription, path: canonicalPath }))];
 
   return {
     title,
@@ -70,7 +71,7 @@ export function pageMetadata({
       images,
     },
     twitter: {
-      card: images ? "summary_large_image" : "summary",
+      card: "summary_large_image",
       title,
       description: metaDescription,
       images,
