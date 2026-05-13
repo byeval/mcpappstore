@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "appId": "canva",
+    "skillId": "skills-sh:anthropics/skills/canvas-design",
+    "reason": "False positive from canvas/Canva token overlap; not a Canva-specific skill.",
+    "rejectedAt": "2026-05-05T19:17:32.425Z"
+  },
+  {
+    "appId": "clarify",
+    "skillId": "skills-sh:pbakaus/impeccable/clarify",
+    "reason": "Ambiguous non-platform match; not a curated MCP app companion skill.",
+    "rejectedAt": "2026-05-05T19:17:05.723Z"
+  },
+  {
+    "appId": "github",
+    "skillId": "skills-sh:xixu-me/skills/github-actions-docs",
+    "reason": "Existing curated GitHub plugin skills are more authoritative for the GitHub app.",
+    "rejectedAt": "2026-05-05T19:17:22.493Z"
+  },
+  {
+    "appId": "uber",
+    "skillId": "skills-sh:microsoft/azure-skills/azure-kubernetes",
+    "reason": "False positive from substring overlap; Azure Kubernetes is unrelated to the Uber app.",
+    "rejectedAt": "2026-05-05T19:17:37.638Z"
+  },
+  {
+    "appId": "vercel",
+    "skillId": "skills-sh:vercel-labs/agent-skills/vercel-react-best-practices",
+    "reason": "Duplicate of the local curated Vercel React best-practices skill.",
+    "rejectedAt": "2026-05-05T19:17:10.647Z"
+  },
+  {
+    "appId": "vercel",
+    "skillId": "skills-sh:vercel-labs/agent-skills/vercel-react-native-skills",
+    "reason": "Too broad for the Vercel MCP app; React Native guidance is not a direct app companion.",
+    "rejectedAt": "2026-05-05T19:17:15.989Z"
+  },
+  {
+    "appId": "zoom",
+    "skillId": "skills-sh:mattpocock/skills/zoom-out",
+    "reason": "False positive: zoom-out is not related to the Zoom MCP app.",
+    "rejectedAt": "2026-05-05T19:17:27.372Z"
+  }
+]

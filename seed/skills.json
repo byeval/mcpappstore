@@ -1,3 +1,5728 @@
 {
-  "skills": []
+  "skills": [
+    {
+      "id": "browser-use:browser",
+      "name": "browser-use:browser",
+      "displayName": "Browser Use",
+      "description": "Browser automation for opening, navigating, inspecting, testing, clicking, typing, and screenshotting local or web browser targets.",
+      "sourceType": "bundled",
+      "categories": [
+        "developer-tools",
+        "browser",
+        "automation"
+      ],
+      "tags": [
+        "browser",
+        "chrome",
+        "testing",
+        "screenshots",
+        "automation"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "cloudflare",
+      "name": "cloudflare",
+      "displayName": "Cloudflare",
+      "description": "Comprehensive Cloudflare platform guidance for Workers, Pages, storage, AI, networking, security, and infrastructure-as-code workflows.",
+      "sourceType": "bundled",
+      "categories": [
+        "developer-tools",
+        "cloud",
+        "code"
+      ],
+      "tags": [
+        "cloudflare",
+        "workers",
+        "pages",
+        "kv",
+        "d1",
+        "r2",
+        "ai",
+        "terraform"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "cloudflare-email-service",
+      "name": "cloudflare-email-service",
+      "displayName": "Cloudflare Email Service",
+      "description": "Send and receive transactional emails with Cloudflare Email Service, Email Sending, Email Routing, deliverability, and Workers integrations.",
+      "sourceType": "bundled",
+      "categories": [
+        "developer-tools",
+        "communication",
+        "cloud"
+      ],
+      "tags": [
+        "cloudflare",
+        "email",
+        "workers",
+        "dkim",
+        "dmarc",
+        "spf"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "documents:documents",
+      "name": "documents:documents",
+      "displayName": "Documents",
+      "description": "Create, edit, redline, comment on, render, and verify DOCX documents inside Codex.",
+      "sourceType": "bundled",
+      "categories": [
+        "documents",
+        "productivity"
+      ],
+      "tags": [
+        "docx",
+        "word",
+        "documents",
+        "redline",
+        "comments"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "durable-objects",
+      "name": "durable-objects",
+      "displayName": "Durable Objects",
+      "description": "Create and review Cloudflare Durable Objects for stateful coordination, RPC, SQLite storage, alarms, and WebSockets.",
+      "sourceType": "bundled",
+      "categories": [
+        "developer-tools",
+        "cloud",
+        "code"
+      ],
+      "tags": [
+        "cloudflare",
+        "durable objects",
+        "sqlite",
+        "websockets",
+        "workers"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "figma",
+      "name": "figma",
+      "displayName": "Figma",
+      "description": "Figma workflows for design implementation, Code Connect templates, and design system rule generation.",
+      "sourceType": "external",
+      "categories": [
+        "design",
+        "productivity"
+      ],
+      "tags": [
+        "figma",
+        "design",
+        "code connect",
+        "design system"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "frontend-design",
+      "name": "frontend-design",
+      "displayName": "Frontend Design",
+      "description": "Create distinctive, production-grade frontend interfaces with high design quality and strong UI craft.",
+      "sourceType": "bundled",
+      "categories": [
+        "design",
+        "developer-tools",
+        "code"
+      ],
+      "tags": [
+        "frontend",
+        "design",
+        "react",
+        "ui",
+        "ux"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "github:gh-address-comments",
+      "name": "github:gh-address-comments",
+      "displayName": "Address GitHub PR Comments",
+      "description": "Inspect unresolved GitHub pull request review threads and implement selected fixes.",
+      "sourceType": "bundled",
+      "categories": [
+        "developer-tools",
+        "code"
+      ],
+      "tags": [
+        "github",
+        "pull request",
+        "review",
+        "comments"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "github:gh-fix-ci",
+      "name": "github:gh-fix-ci",
+      "displayName": "Fix GitHub CI",
+      "description": "Debug and fix failing GitHub PR checks that run in GitHub Actions.",
+      "sourceType": "bundled",
+      "categories": [
+        "developer-tools",
+        "code"
+      ],
+      "tags": [
+        "github",
+        "ci",
+        "actions",
+        "checks",
+        "pull request"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "github:github",
+      "name": "github:github",
+      "displayName": "GitHub",
+      "description": "Triage and orient GitHub repository, pull request, and issue work through the connected GitHub app.",
+      "sourceType": "bundled",
+      "categories": [
+        "developer-tools",
+        "code"
+      ],
+      "tags": [
+        "github",
+        "repositories",
+        "issues",
+        "pull requests"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "github:yeet",
+      "name": "github:yeet",
+      "displayName": "Publish to GitHub",
+      "description": "Commit local changes, push a branch, and open a draft pull request through GitHub.",
+      "sourceType": "bundled",
+      "categories": [
+        "developer-tools",
+        "code"
+      ],
+      "tags": [
+        "github",
+        "commit",
+        "push",
+        "pull request"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "gmail",
+      "name": "gmail",
+      "displayName": "Gmail",
+      "description": "Work with Gmail using the configured Gmail app connector.",
+      "sourceType": "external",
+      "categories": [
+        "communication",
+        "productivity"
+      ],
+      "tags": [
+        "gmail",
+        "google",
+        "email"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "google-calendar",
+      "name": "google-calendar",
+      "displayName": "Google Calendar",
+      "description": "Connect Google Calendar for scheduling, availability, daily briefs, and event management.",
+      "sourceType": "external",
+      "categories": [
+        "productivity",
+        "calendar"
+      ],
+      "tags": [
+        "google",
+        "calendar",
+        "scheduling",
+        "availability"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "google-drive",
+      "name": "google-drive",
+      "displayName": "Google Drive",
+      "description": "Use Google Drive as the entrypoint for Drive, Docs, Sheets, and Slides work.",
+      "sourceType": "external",
+      "categories": [
+        "productivity",
+        "documents",
+        "data"
+      ],
+      "tags": [
+        "google",
+        "drive",
+        "docs",
+        "sheets",
+        "slides"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "linear",
+      "name": "linear",
+      "displayName": "Linear",
+      "description": "Find and reference Linear issues and projects.",
+      "sourceType": "external",
+      "categories": [
+        "productivity",
+        "developer-tools"
+      ],
+      "tags": [
+        "linear",
+        "issues",
+        "projects",
+        "planning"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "notion",
+      "name": "notion",
+      "displayName": "Notion",
+      "description": "Notion workflows for implementation planning, research synthesis, meeting preparation, and knowledge capture.",
+      "sourceType": "external",
+      "categories": [
+        "productivity",
+        "documents"
+      ],
+      "tags": [
+        "notion",
+        "docs",
+        "notes",
+        "wiki",
+        "planning"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "outlook-calendar",
+      "name": "outlook-calendar",
+      "displayName": "Outlook Calendar",
+      "description": "Connect Outlook Calendar for scheduling, daily briefs, event prep, and safe meeting changes.",
+      "sourceType": "external",
+      "categories": [
+        "productivity",
+        "calendar"
+      ],
+      "tags": [
+        "outlook",
+        "microsoft",
+        "calendar",
+        "scheduling"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "outlook-email",
+      "name": "outlook-email",
+      "displayName": "Outlook Email",
+      "description": "Work with Outlook Email using the configured Microsoft Outlook app connector.",
+      "sourceType": "external",
+      "categories": [
+        "communication",
+        "productivity"
+      ],
+      "tags": [
+        "outlook",
+        "microsoft",
+        "email"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "presentations:presentations",
+      "name": "presentations:Presentations",
+      "displayName": "Presentations",
+      "description": "Build, render, verify, and export high-quality PowerPoint and PPTX slide decks.",
+      "sourceType": "bundled",
+      "categories": [
+        "presentations",
+        "productivity"
+      ],
+      "tags": [
+        "slides",
+        "powerpoint",
+        "pptx",
+        "deck",
+        "presentation"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "sharepoint",
+      "name": "sharepoint",
+      "displayName": "SharePoint",
+      "description": "Work with SharePoint using the configured Microsoft SharePoint app connector.",
+      "sourceType": "external",
+      "categories": [
+        "productivity",
+        "documents"
+      ],
+      "tags": [
+        "sharepoint",
+        "microsoft",
+        "documents",
+        "files"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/claude-code/frontend-design",
+      "name": "frontend-design",
+      "displayName": "Frontend Design",
+      "description": "Imported from skills.sh. Published by anthropics/claude-code; 34,768 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/claude-code/frontend-design",
+      "categories": [
+        "design",
+        "developer-tools"
+      ],
+      "tags": [
+        "anthropics",
+        "claude",
+        "code",
+        "frontend",
+        "design",
+        "skills.sh",
+        "installs-34768"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/algorithmic-art",
+      "name": "algorithmic-art",
+      "displayName": "Algorithmic Art",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 37,464 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/algorithmic-art",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "anthropics",
+        "algorithmic",
+        "art",
+        "skills.sh",
+        "installs-37464"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/brand-guidelines",
+      "name": "brand-guidelines",
+      "displayName": "Brand Guidelines",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 35,456 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/brand-guidelines",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "anthropics",
+        "brand",
+        "guidelines",
+        "skills.sh",
+        "installs-35456"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/canvas-design",
+      "name": "canvas-design",
+      "displayName": "Canvas Design",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 48,430 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/canvas-design",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "anthropics",
+        "canvas",
+        "design",
+        "skills.sh",
+        "installs-48430"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/doc-coauthoring",
+      "name": "doc-coauthoring",
+      "displayName": "Doc Coauthoring",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 36,702 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/doc-coauthoring",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "anthropics",
+        "doc",
+        "coauthoring",
+        "skills.sh",
+        "installs-36702"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/docx",
+      "name": "docx",
+      "displayName": "DOCX",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 76,624 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/docx",
+      "categories": [
+        "documents"
+      ],
+      "tags": [
+        "anthropics",
+        "docx",
+        "skills.sh",
+        "installs-76624"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/frontend-design",
+      "name": "frontend-design",
+      "displayName": "Frontend Design",
+      "description": "Distinctive, production-grade frontend interfaces that reject generic AI aesthetics. - Guides design thinking before coding: establish bold aesthetic direction (brutalist, maximalist, retro-futuristic, luxury, playful, etc.) with clear purpose, tone, and differentiation - Emphasizes typography, color theming, motion, spatial composition, and textural details as core design pillars; uses CSS variables, animations, and scroll-triggered effects - Generates working, functional code (HTML/CSS/JS, React, Vue) that matches implementation complexity to aesthetic vision: elaborate code for maximalist designs, restrained precision for minimalist ones - Explicitly avoids generic patterns: overused fonts (Inter, Roboto), clichéd color schemes (purple gradients), predictable layouts, and cookie-cutter component design <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/frontend-design",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "anthropics",
+        "frontend",
+        "design",
+        "skills.sh",
+        "installs-370965"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/mcp-builder",
+      "name": "mcp-builder",
+      "displayName": "MCP Builder",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 48,206 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/mcp-builder",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "anthropics",
+        "mcp",
+        "builder",
+        "skills.sh",
+        "installs-48206"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/pdf",
+      "name": "pdf",
+      "displayName": "PDF",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 93,892 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/pdf",
+      "categories": [
+        "documents"
+      ],
+      "tags": [
+        "anthropics",
+        "pdf",
+        "skills.sh",
+        "installs-93892"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/pptx",
+      "name": "pptx",
+      "displayName": "Pptx",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 88,752 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/pptx",
+      "categories": [
+        "documents"
+      ],
+      "tags": [
+        "anthropics",
+        "pptx",
+        "skills.sh",
+        "installs-88752"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/skill-creator",
+      "name": "skill-creator",
+      "displayName": "Skill Creator",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 184,506 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/skill-creator",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "anthropics",
+        "creator",
+        "skills.sh",
+        "installs-184506"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/theme-factory",
+      "name": "theme-factory",
+      "displayName": "Theme Factory",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 36,521 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/theme-factory",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "anthropics",
+        "theme",
+        "factory",
+        "skills.sh",
+        "installs-36521"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/web-artifacts-builder",
+      "name": "web-artifacts-builder",
+      "displayName": "Web Artifacts Builder",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 39,321 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/web-artifacts-builder",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "anthropics",
+        "web",
+        "artifacts",
+        "builder",
+        "skills.sh",
+        "installs-39321"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/webapp-testing",
+      "name": "webapp-testing",
+      "displayName": "Webapp Testing",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 61,153 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/webapp-testing",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "anthropics",
+        "webapp",
+        "testing",
+        "skills.sh",
+        "installs-61153"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:anthropics/skills/xlsx",
+      "name": "xlsx",
+      "displayName": "Xlsx",
+      "description": "Imported from skills.sh. Published by anthropics/skills; 68,361 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/anthropics/skills/xlsx",
+      "categories": [
+        "documents"
+      ],
+      "tags": [
+        "anthropics",
+        "xlsx",
+        "skills.sh",
+        "installs-68361"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:arvindrk/extract-design-system/extract-design-system",
+      "name": "extract-design-system",
+      "displayName": "Extract Design System",
+      "description": "Imported from skills.sh. Published by arvindrk/extract-design-system; 87,536 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/arvindrk/extract-design-system/extract-design-system",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "arvindrk",
+        "extract",
+        "design",
+        "system",
+        "skills.sh",
+        "installs-87536"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:better-auth/skills/better-auth-best-practices",
+      "name": "better-auth-best-practices",
+      "displayName": "Better Auth Best Practices",
+      "description": "Imported from skills.sh. Published by better-auth/skills; 46,050 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/better-auth/skills/better-auth-best-practices",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "better",
+        "auth",
+        "best",
+        "practices",
+        "skills.sh",
+        "installs-46050"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:browser-use/browser-use/browser-use",
+      "name": "browser-use",
+      "displayName": "Browser Use",
+      "description": "Imported from skills.sh. Published by browser-use/browser-use; 72,502 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/browser-use/browser-use/browser-use",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "browser",
+        "use",
+        "skills.sh",
+        "installs-72502"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/ab-test-setup",
+      "name": "ab-test-setup",
+      "displayName": "Ab Test Setup",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 46,863 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/ab-test-setup",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "ab",
+        "test",
+        "setup",
+        "skills.sh",
+        "installs-46863"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/ad-creative",
+      "name": "ad-creative",
+      "displayName": "Ad Creative",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 41,234 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/ad-creative",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "ad",
+        "creative",
+        "skills.sh",
+        "installs-41234"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/ai-seo",
+      "name": "ai-seo",
+      "displayName": "AI SEO",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 45,467 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/ai-seo",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "ai",
+        "seo",
+        "skills.sh",
+        "installs-45467"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/analytics-tracking",
+      "name": "analytics-tracking",
+      "displayName": "Analytics Tracking",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 52,032 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/analytics-tracking",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "analytics",
+        "tracking",
+        "skills.sh",
+        "installs-52032"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/churn-prevention",
+      "name": "churn-prevention",
+      "displayName": "Churn Prevention",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 39,075 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/churn-prevention",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "churn",
+        "prevention",
+        "skills.sh",
+        "installs-39075"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/cold-email",
+      "name": "cold-email",
+      "displayName": "Cold Email",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 41,114 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/cold-email",
+      "categories": [
+        "productivity",
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "cold",
+        "email",
+        "skills.sh",
+        "installs-41114"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/competitor-alternatives",
+      "name": "competitor-alternatives",
+      "displayName": "Competitor Alternatives",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 48,883 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/competitor-alternatives",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "competitor",
+        "alternatives",
+        "skills.sh",
+        "installs-48883"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/content-strategy",
+      "name": "content-strategy",
+      "displayName": "Content Strategy",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 59,809 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/content-strategy",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "content",
+        "strategy",
+        "skills.sh",
+        "installs-59809"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/copy-editing",
+      "name": "copy-editing",
+      "displayName": "Copy Editing",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 52,729 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/copy-editing",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "copy",
+        "editing",
+        "skills.sh",
+        "installs-52729"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/copywriting",
+      "name": "copywriting",
+      "displayName": "Copywriting",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 88,014 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/copywriting",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "copywriting",
+        "skills.sh",
+        "installs-88014"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/email-sequence",
+      "name": "email-sequence",
+      "displayName": "Email Sequence",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 49,525 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/email-sequence",
+      "categories": [
+        "productivity",
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "email",
+        "sequence",
+        "skills.sh",
+        "installs-49525"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/form-cro",
+      "name": "form-cro",
+      "displayName": "Form Cro",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 47,392 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/form-cro",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "form",
+        "cro",
+        "skills.sh",
+        "installs-47392"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/free-tool-strategy",
+      "name": "free-tool-strategy",
+      "displayName": "Free Tool Strategy",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 47,179 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/free-tool-strategy",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "free",
+        "tool",
+        "strategy",
+        "skills.sh",
+        "installs-47179"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/launch-strategy",
+      "name": "launch-strategy",
+      "displayName": "Launch Strategy",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 50,510 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/launch-strategy",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "launch",
+        "strategy",
+        "skills.sh",
+        "installs-50510"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/marketing-ideas",
+      "name": "marketing-ideas",
+      "displayName": "Marketing Ideas",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 56,289 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/marketing-ideas",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "marketing",
+        "ideas",
+        "skills.sh",
+        "installs-56289"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/marketing-psychology",
+      "name": "marketing-psychology",
+      "displayName": "Marketing Psychology",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 64,491 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/marketing-psychology",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "marketing",
+        "psychology",
+        "skills.sh",
+        "installs-64491"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/onboarding-cro",
+      "name": "onboarding-cro",
+      "displayName": "Onboarding Cro",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 48,370 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/onboarding-cro",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "onboarding",
+        "cro",
+        "skills.sh",
+        "installs-48370"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/page-cro",
+      "name": "page-cro",
+      "displayName": "Page Cro",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 51,803 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/page-cro",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "page",
+        "cro",
+        "skills.sh",
+        "installs-51803"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/paid-ads",
+      "name": "paid-ads",
+      "displayName": "Paid Ads",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 49,278 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/paid-ads",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "paid",
+        "ads",
+        "skills.sh",
+        "installs-49278"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/paywall-upgrade-cro",
+      "name": "paywall-upgrade-cro",
+      "displayName": "Paywall Upgrade Cro",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 46,308 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/paywall-upgrade-cro",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "paywall",
+        "upgrade",
+        "cro",
+        "skills.sh",
+        "installs-46308"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/popup-cro",
+      "name": "popup-cro",
+      "displayName": "Popup Cro",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 46,001 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/popup-cro",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "popup",
+        "cro",
+        "skills.sh",
+        "installs-46001"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/pricing-strategy",
+      "name": "pricing-strategy",
+      "displayName": "Pricing Strategy",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 55,727 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/pricing-strategy",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "pricing",
+        "strategy",
+        "skills.sh",
+        "installs-55727"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/product-marketing-context",
+      "name": "product-marketing-context",
+      "displayName": "Product Marketing Context",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 55,645 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/product-marketing-context",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "product",
+        "marketing",
+        "context",
+        "skills.sh",
+        "installs-55645"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/programmatic-seo",
+      "name": "programmatic-seo",
+      "displayName": "Programmatic SEO",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 58,669 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/programmatic-seo",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "programmatic",
+        "seo",
+        "skills.sh",
+        "installs-58669"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/referral-program",
+      "name": "referral-program",
+      "displayName": "Referral Program",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 47,161 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/referral-program",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "referral",
+        "program",
+        "skills.sh",
+        "installs-47161"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/revops",
+      "name": "revops",
+      "displayName": "Revops",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 36,718 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/revops",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "revops",
+        "skills.sh",
+        "installs-36718"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/sales-enablement",
+      "name": "sales-enablement",
+      "displayName": "Sales Enablement",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 37,911 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/sales-enablement",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "sales",
+        "enablement",
+        "skills.sh",
+        "installs-37911"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/schema-markup",
+      "name": "schema-markup",
+      "displayName": "Schema Markup",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 49,832 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/schema-markup",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "schema",
+        "markup",
+        "skills.sh",
+        "installs-49832"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/seo-audit",
+      "name": "seo-audit",
+      "displayName": "SEO Audit",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 98,334 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/seo-audit",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "seo",
+        "audit",
+        "skills.sh",
+        "installs-98334"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/signup-flow-cro",
+      "name": "signup-flow-cro",
+      "displayName": "Signup Flow Cro",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 46,686 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/signup-flow-cro",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "signup",
+        "flow",
+        "cro",
+        "skills.sh",
+        "installs-46686"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/site-architecture",
+      "name": "site-architecture",
+      "displayName": "Site Architecture",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 38,641 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/site-architecture",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "site",
+        "architecture",
+        "skills.sh",
+        "installs-38641"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:coreyhaines31/marketingskills/social-content",
+      "name": "social-content",
+      "displayName": "Social Content",
+      "description": "Imported from skills.sh. Published by coreyhaines31/marketingskills; 60,609 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/coreyhaines31/marketingskills/social-content",
+      "categories": [
+        "marketing"
+      ],
+      "tags": [
+        "coreyhaines31",
+        "marketingskills",
+        "social",
+        "content",
+        "skills.sh",
+        "installs-60609"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:currents-dev/playwright-best-practices-skill/playwright-best-practices",
+      "name": "playwright-best-practices",
+      "displayName": "Playwright Best Practices",
+      "description": "Imported from skills.sh. Published by currents-dev/playwright-best-practices-skill; 35,287 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/currents-dev/playwright-best-practices-skill/playwright-best-practices",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "currents",
+        "dev",
+        "playwright",
+        "best",
+        "practices",
+        "skills.sh",
+        "installs-35287"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:databricks/databricks-agent-skills/databricks",
+      "name": "databricks",
+      "displayName": "Databricks",
+      "description": "Official Databricks agent skill discovered through skills.sh for Databricks workspace and data engineering workflows.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/databricks/databricks-agent-skills/databricks",
+      "categories": [
+        "developer-tools",
+        "data"
+      ],
+      "tags": [
+        "databricks",
+        "agent",
+        "skills",
+        "skills.sh",
+        "installs-206"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:databricks/databricks-agent-skills/databricks-core",
+      "name": "databricks-core",
+      "displayName": "Databricks Core",
+      "description": "Official Databricks core workflow skill discovered through skills.sh for Databricks platform guidance and project context.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/databricks/databricks-agent-skills/databricks-core",
+      "categories": [
+        "developer-tools",
+        "data"
+      ],
+      "tags": [
+        "databricks",
+        "core",
+        "agent",
+        "skills.sh",
+        "installs-225"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:degausai/wonda/wonda-cli",
+      "name": "wonda-cli",
+      "displayName": "Wonda CLI",
+      "description": "Imported from skills.sh. Published by degausai/wonda; 87,663 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/degausai/wonda/wonda-cli",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "degausai",
+        "wonda",
+        "cli",
+        "skills.sh",
+        "installs-87663"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:emilkowalski/skill/emil-design-eng",
+      "name": "emil-design-eng",
+      "displayName": "Emil Design Eng",
+      "description": "Imported from skills.sh. Published by emilkowalski/skill; 33,672 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/emilkowalski/skill/emil-design-eng",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "emilkowalski",
+        "emil",
+        "design",
+        "eng",
+        "skills.sh",
+        "installs-33672"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:expo/skills/building-native-ui",
+      "name": "building-native-ui",
+      "displayName": "Building Native UI",
+      "description": "Imported from skills.sh. Published by expo/skills; 35,462 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/expo/skills/building-native-ui",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "expo",
+        "building",
+        "native",
+        "ui",
+        "skills.sh",
+        "installs-35462"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firebase/agent-skills/developing-genkit-dart",
+      "name": "developing-genkit-dart",
+      "displayName": "Developing Genkit Dart",
+      "description": "Imported from skills.sh. Published by firebase/agent-skills; 40,423 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firebase/agent-skills/developing-genkit-dart",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "firebase",
+        "developing",
+        "genkit",
+        "dart",
+        "skills.sh",
+        "installs-40423"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firebase/agent-skills/developing-genkit-js",
+      "name": "developing-genkit-js",
+      "displayName": "Developing Genkit Js",
+      "description": "Imported from skills.sh. Published by firebase/agent-skills; 40,588 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firebase/agent-skills/developing-genkit-js",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "firebase",
+        "developing",
+        "genkit",
+        "js",
+        "skills.sh",
+        "installs-40588"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firebase/agent-skills/firebase-ai-logic",
+      "name": "firebase-ai-logic",
+      "displayName": "Firebase AI Logic",
+      "description": "Imported from skills.sh. Published by firebase/agent-skills; 34,073 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firebase/agent-skills/firebase-ai-logic",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "firebase",
+        "ai",
+        "logic",
+        "skills.sh",
+        "installs-34073"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firebase/agent-skills/firebase-app-hosting-basics",
+      "name": "firebase-app-hosting-basics",
+      "displayName": "Firebase App Hosting Basics",
+      "description": "Imported from skills.sh. Published by firebase/agent-skills; 41,920 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firebase/agent-skills/firebase-app-hosting-basics",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "firebase",
+        "app",
+        "hosting",
+        "basics",
+        "skills.sh",
+        "installs-41920"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firebase/agent-skills/firebase-auth-basics",
+      "name": "firebase-auth-basics",
+      "displayName": "Firebase Auth Basics",
+      "description": "Imported from skills.sh. Published by firebase/agent-skills; 43,316 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firebase/agent-skills/firebase-auth-basics",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "firebase",
+        "auth",
+        "basics",
+        "skills.sh",
+        "installs-43316"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firebase/agent-skills/firebase-basics",
+      "name": "firebase-basics",
+      "displayName": "Firebase Basics",
+      "description": "Imported from skills.sh. Published by firebase/agent-skills; 43,666 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firebase/agent-skills/firebase-basics",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "firebase",
+        "basics",
+        "skills.sh",
+        "installs-43666"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firebase/agent-skills/firebase-data-connect",
+      "name": "firebase-data-connect",
+      "displayName": "Firebase Data Connect",
+      "description": "Imported from skills.sh. Published by firebase/agent-skills; 41,673 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firebase/agent-skills/firebase-data-connect",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "firebase",
+        "data",
+        "connect",
+        "skills.sh",
+        "installs-41673"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firebase/agent-skills/firebase-firestore-enterprise-native-mode",
+      "name": "firebase-firestore-enterprise-native-mode",
+      "displayName": "Firebase Firestore Enterprise Native Mode",
+      "description": "Imported from skills.sh. Published by firebase/agent-skills; 35,771 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firebase/agent-skills/firebase-firestore-enterprise-native-mode",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "firebase",
+        "firestore",
+        "enterprise",
+        "native",
+        "mode",
+        "skills.sh",
+        "installs-35771"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firebase/agent-skills/firebase-firestore-standard",
+      "name": "firebase-firestore-standard",
+      "displayName": "Firebase Firestore Standard",
+      "description": "Imported from skills.sh. Published by firebase/agent-skills; 36,700 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firebase/agent-skills/firebase-firestore-standard",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "firebase",
+        "firestore",
+        "standard",
+        "skills.sh",
+        "installs-36700"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firebase/agent-skills/firebase-hosting-basics",
+      "name": "firebase-hosting-basics",
+      "displayName": "Firebase Hosting Basics",
+      "description": "Imported from skills.sh. Published by firebase/agent-skills; 42,117 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firebase/agent-skills/firebase-hosting-basics",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "firebase",
+        "hosting",
+        "basics",
+        "skills.sh",
+        "installs-42117"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firecrawl/cli/firecrawl",
+      "name": "firecrawl",
+      "displayName": "Firecrawl",
+      "description": "Imported from skills.sh. Published by firecrawl/cli; 48,169 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firecrawl/cli/firecrawl",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "firecrawl",
+        "cli",
+        "skills.sh",
+        "installs-48169"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firecrawl/cli/firecrawl-agent",
+      "name": "firecrawl-agent",
+      "displayName": "Firecrawl Agent",
+      "description": "Imported from skills.sh. Published by firecrawl/cli; 34,045 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firecrawl/cli/firecrawl-agent",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "firecrawl",
+        "cli",
+        "skills.sh",
+        "installs-34045"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firecrawl/cli/firecrawl-crawl",
+      "name": "firecrawl-crawl",
+      "displayName": "Firecrawl Crawl",
+      "description": "Imported from skills.sh. Published by firecrawl/cli; 33,958 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firecrawl/cli/firecrawl-crawl",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "firecrawl",
+        "cli",
+        "crawl",
+        "skills.sh",
+        "installs-33958"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firecrawl/cli/firecrawl-download",
+      "name": "firecrawl-download",
+      "displayName": "Firecrawl Download",
+      "description": "Imported from skills.sh. Published by firecrawl/cli; 33,748 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firecrawl/cli/firecrawl-download",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "firecrawl",
+        "cli",
+        "download",
+        "skills.sh",
+        "installs-33748"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firecrawl/cli/firecrawl-map",
+      "name": "firecrawl-map",
+      "displayName": "Firecrawl Map",
+      "description": "Imported from skills.sh. Published by firecrawl/cli; 33,829 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firecrawl/cli/firecrawl-map",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "firecrawl",
+        "cli",
+        "map",
+        "skills.sh",
+        "installs-33829"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firecrawl/cli/firecrawl-scrape",
+      "name": "firecrawl-scrape",
+      "displayName": "Firecrawl Scrape",
+      "description": "Imported from skills.sh. Published by firecrawl/cli; 34,687 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firecrawl/cli/firecrawl-scrape",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "firecrawl",
+        "cli",
+        "scrape",
+        "skills.sh",
+        "installs-34687"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:firecrawl/cli/firecrawl-search",
+      "name": "firecrawl-search",
+      "displayName": "Firecrawl Search",
+      "description": "Imported from skills.sh. Published by firecrawl/cli; 34,413 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/firecrawl/cli/firecrawl-search",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "firecrawl",
+        "cli",
+        "search",
+        "skills.sh",
+        "installs-34413"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:get-convex/agent-skills/convex-create-component",
+      "name": "convex-create-component",
+      "displayName": "Convex Create Component",
+      "description": "Imported from skills.sh. Published by get-convex/agent-skills; 39,285 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/get-convex/agent-skills/convex-create-component",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "get",
+        "convex",
+        "create",
+        "component",
+        "skills.sh",
+        "installs-39285"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:get-convex/agent-skills/convex-migration-helper",
+      "name": "convex-migration-helper",
+      "displayName": "Convex Migration Helper",
+      "description": "Imported from skills.sh. Published by get-convex/agent-skills; 39,305 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/get-convex/agent-skills/convex-migration-helper",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "get",
+        "convex",
+        "migration",
+        "helper",
+        "skills.sh",
+        "installs-39305"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:get-convex/agent-skills/convex-performance-audit",
+      "name": "convex-performance-audit",
+      "displayName": "Convex Performance Audit",
+      "description": "Imported from skills.sh. Published by get-convex/agent-skills; 39,433 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/get-convex/agent-skills/convex-performance-audit",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "get",
+        "convex",
+        "performance",
+        "audit",
+        "skills.sh",
+        "installs-39433"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:get-convex/agent-skills/convex-quickstart",
+      "name": "convex-quickstart",
+      "displayName": "Convex Quickstart",
+      "description": "Imported from skills.sh. Published by get-convex/agent-skills; 39,950 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/get-convex/agent-skills/convex-quickstart",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "get",
+        "convex",
+        "quickstart",
+        "skills.sh",
+        "installs-39950"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:get-convex/agent-skills/convex-setup-auth",
+      "name": "convex-setup-auth",
+      "displayName": "Convex Setup Auth",
+      "description": "Imported from skills.sh. Published by get-convex/agent-skills; 39,364 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/get-convex/agent-skills/convex-setup-auth",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "get",
+        "convex",
+        "setup",
+        "auth",
+        "skills.sh",
+        "installs-39364"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:google-labs-code/stitch-skills/design-md",
+      "name": "design-md",
+      "displayName": "Design Md",
+      "description": "Imported from skills.sh. Published by google-labs-code/stitch-skills; 41,365 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/google-labs-code/stitch-skills/design-md",
+      "categories": [
+        "design",
+        "developer-tools"
+      ],
+      "tags": [
+        "google",
+        "labs",
+        "code",
+        "stitch",
+        "design",
+        "md",
+        "skills.sh",
+        "installs-41365"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:google-labs-code/stitch-skills/enhance-prompt",
+      "name": "enhance-prompt",
+      "displayName": "Enhance Prompt",
+      "description": "Imported from skills.sh. Published by google-labs-code/stitch-skills; 37,463 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/google-labs-code/stitch-skills/enhance-prompt",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "google",
+        "labs",
+        "code",
+        "stitch",
+        "enhance",
+        "prompt",
+        "skills.sh",
+        "installs-37463"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:google-labs-code/stitch-skills/react:components",
+      "name": "react:components",
+      "displayName": "React Components",
+      "description": "Imported from skills.sh. Published by google-labs-code/stitch-skills; 42,118 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/google-labs-code/stitch-skills/react:components",
+      "categories": [
+        "design",
+        "developer-tools"
+      ],
+      "tags": [
+        "google",
+        "labs",
+        "code",
+        "stitch",
+        "react",
+        "components",
+        "skills.sh",
+        "installs-42118"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:google-labs-code/stitch-skills/shadcn-ui",
+      "name": "shadcn-ui",
+      "displayName": "Shadcn UI",
+      "description": "Imported from skills.sh. Published by google-labs-code/stitch-skills; 33,795 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/google-labs-code/stitch-skills/shadcn-ui",
+      "categories": [
+        "design",
+        "developer-tools"
+      ],
+      "tags": [
+        "google",
+        "labs",
+        "code",
+        "stitch",
+        "shadcn",
+        "ui",
+        "skills.sh",
+        "installs-33795"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:google-labs-code/stitch-skills/stitch-loop",
+      "name": "stitch-loop",
+      "displayName": "Stitch Loop",
+      "description": "Imported from skills.sh. Published by google-labs-code/stitch-skills; 37,377 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/google-labs-code/stitch-skills/stitch-loop",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "google",
+        "labs",
+        "code",
+        "stitch",
+        "loop",
+        "skills.sh",
+        "installs-37377"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:hugmouse/skills/value",
+      "name": "value",
+      "displayName": "Value",
+      "description": "Imported from skills.sh. Published by hugmouse/skills; 35,435 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/hugmouse/skills/value",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "hugmouse",
+        "value",
+        "skills.sh",
+        "installs-35435"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:inference-skills/skills/agent-tools",
+      "name": "agent-tools",
+      "displayName": "Agent Tools",
+      "description": "Imported from skills.sh. Published by inference-skills/skills; 97,370 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/inference-skills/skills/agent-tools",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "inference",
+        "tools",
+        "skills.sh",
+        "installs-97370"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:inference-skills/skills/ai-avatar-video",
+      "name": "ai-avatar-video",
+      "displayName": "AI Avatar Video",
+      "description": "Imported from skills.sh. Published by inference-skills/skills; 97,383 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/inference-skills/skills/ai-avatar-video",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "inference",
+        "ai",
+        "avatar",
+        "video",
+        "skills.sh",
+        "installs-97383"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:inference-skills/skills/ai-image-generation",
+      "name": "ai-image-generation",
+      "displayName": "AI Image Generation",
+      "description": "Imported from skills.sh. Published by inference-skills/skills; 97,515 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/inference-skills/skills/ai-image-generation",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "inference",
+        "ai",
+        "image",
+        "generation",
+        "skills.sh",
+        "installs-97515"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:inference-skills/skills/ai-video-generation",
+      "name": "ai-video-generation",
+      "displayName": "AI Video Generation",
+      "description": "Imported from skills.sh. Published by inference-skills/skills; 97,604 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/inference-skills/skills/ai-video-generation",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "inference",
+        "ai",
+        "video",
+        "generation",
+        "skills.sh",
+        "installs-97604"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:inference-skills/skills/infsh-cli",
+      "name": "infsh-cli",
+      "displayName": "Infsh CLI",
+      "description": "Imported from skills.sh. Published by inference-skills/skills; 97,358 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/inference-skills/skills/infsh-cli",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "inference",
+        "infsh",
+        "cli",
+        "skills.sh",
+        "installs-97358"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:juliusbrussee/caveman/caveman",
+      "name": "caveman",
+      "displayName": "Caveman",
+      "description": "Imported from skills.sh. Published by juliusbrussee/caveman; 110,014 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/juliusbrussee/caveman/caveman",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "juliusbrussee",
+        "caveman",
+        "skills.sh",
+        "installs-110014"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:juliusbrussee/caveman/caveman-commit",
+      "name": "caveman-commit",
+      "displayName": "Caveman Commit",
+      "description": "Imported from skills.sh. Published by juliusbrussee/caveman; 55,461 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/juliusbrussee/caveman/caveman-commit",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "juliusbrussee",
+        "caveman",
+        "commit",
+        "skills.sh",
+        "installs-55461"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:juliusbrussee/caveman/caveman-compress",
+      "name": "caveman-compress",
+      "displayName": "Caveman Compress",
+      "description": "Imported from skills.sh. Published by juliusbrussee/caveman; 53,215 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/juliusbrussee/caveman/caveman-compress",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "juliusbrussee",
+        "caveman",
+        "compress",
+        "skills.sh",
+        "installs-53215"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:juliusbrussee/caveman/caveman-help",
+      "name": "caveman-help",
+      "displayName": "Caveman Help",
+      "description": "Imported from skills.sh. Published by juliusbrussee/caveman; 49,394 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/juliusbrussee/caveman/caveman-help",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "juliusbrussee",
+        "caveman",
+        "help",
+        "skills.sh",
+        "installs-49394"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:juliusbrussee/caveman/caveman-review",
+      "name": "caveman-review",
+      "displayName": "Caveman Review",
+      "description": "Imported from skills.sh. Published by juliusbrussee/caveman; 54,605 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/juliusbrussee/caveman/caveman-review",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "juliusbrussee",
+        "caveman",
+        "review",
+        "skills.sh",
+        "installs-54605"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:juliusbrussee/caveman/compress",
+      "name": "compress",
+      "displayName": "Compress",
+      "description": "Imported from skills.sh. Published by juliusbrussee/caveman; 38,966 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/juliusbrussee/caveman/compress",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "juliusbrussee",
+        "caveman",
+        "compress",
+        "skills.sh",
+        "installs-38966"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-approval",
+      "name": "lark-approval",
+      "displayName": "Lark Approval",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 62,409 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-approval",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "approval",
+        "skills.sh",
+        "installs-62409"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-attendance",
+      "name": "lark-attendance",
+      "displayName": "Lark Attendance",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 41,659 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-attendance",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "attendance",
+        "skills.sh",
+        "installs-41659"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-base",
+      "name": "lark-base",
+      "displayName": "Lark Base",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 89,595 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-base",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "base",
+        "skills.sh",
+        "installs-89595"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-calendar",
+      "name": "lark-calendar",
+      "displayName": "Lark Calendar",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 89,311 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-calendar",
+      "categories": [
+        "design",
+        "productivity"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "calendar",
+        "skills.sh",
+        "installs-89311"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-contact",
+      "name": "lark-contact",
+      "displayName": "Lark Contact",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 88,509 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-contact",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "contact",
+        "skills.sh",
+        "installs-88509"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-doc",
+      "name": "lark-doc",
+      "displayName": "Lark Doc",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 89,776 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-doc",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "doc",
+        "skills.sh",
+        "installs-89776"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-drive",
+      "name": "lark-drive",
+      "displayName": "Lark Drive",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 89,289 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-drive",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "drive",
+        "skills.sh",
+        "installs-89289"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-event",
+      "name": "lark-event",
+      "displayName": "Lark Event",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 88,702 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-event",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "event",
+        "skills.sh",
+        "installs-88702"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-im",
+      "name": "lark-im",
+      "displayName": "Lark Im",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 89,460 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-im",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "im",
+        "skills.sh",
+        "installs-89460"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-mail",
+      "name": "lark-mail",
+      "displayName": "Lark Mail",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 89,043 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-mail",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "mail",
+        "skills.sh",
+        "installs-89043"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-minutes",
+      "name": "lark-minutes",
+      "displayName": "Lark Minutes",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 88,814 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-minutes",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "minutes",
+        "skills.sh",
+        "installs-88814"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-openapi-explorer",
+      "name": "lark-openapi-explorer",
+      "displayName": "Lark Openapi Explorer",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 88,386 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-openapi-explorer",
+      "categories": [
+        "design",
+        "developer-tools"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "openapi",
+        "explorer",
+        "skills.sh",
+        "installs-88386"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-shared",
+      "name": "lark-shared",
+      "displayName": "Lark Shared",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 89,077 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-shared",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "shared",
+        "skills.sh",
+        "installs-89077"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-sheets",
+      "name": "lark-sheets",
+      "displayName": "Lark Sheets",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 88,985 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-sheets",
+      "categories": [
+        "design",
+        "documents"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "sheets",
+        "skills.sh",
+        "installs-88985"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-skill-maker",
+      "name": "lark-skill-maker",
+      "displayName": "Lark Skill Maker",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 88,358 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-skill-maker",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "maker",
+        "skills.sh",
+        "installs-88358"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-slides",
+      "name": "lark-slides",
+      "displayName": "Lark Slides",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 42,131 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-slides",
+      "categories": [
+        "design",
+        "documents"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "slides",
+        "skills.sh",
+        "installs-42131"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-task",
+      "name": "lark-task",
+      "displayName": "Lark Task",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 88,948 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-task",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "task",
+        "skills.sh",
+        "installs-88948"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-vc",
+      "name": "lark-vc",
+      "displayName": "Lark Vc",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 88,865 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-vc",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "vc",
+        "skills.sh",
+        "installs-88865"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-whiteboard",
+      "name": "lark-whiteboard",
+      "displayName": "Lark Whiteboard",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 88,911 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-whiteboard",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "whiteboard",
+        "skills.sh",
+        "installs-88911"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-wiki",
+      "name": "lark-wiki",
+      "displayName": "Lark Wiki",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 89,130 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-wiki",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "wiki",
+        "skills.sh",
+        "installs-89130"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-workflow-meeting-summary",
+      "name": "lark-workflow-meeting-summary",
+      "displayName": "Lark Workflow Meeting Summary",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 88,551 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-workflow-meeting-summary",
+      "categories": [
+        "design",
+        "productivity"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "workflow",
+        "meeting",
+        "summary",
+        "skills.sh",
+        "installs-88551"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:larksuite/cli/lark-workflow-standup-report",
+      "name": "lark-workflow-standup-report",
+      "displayName": "Lark Workflow Standup Report",
+      "description": "Imported from skills.sh. Published by larksuite/cli; 88,366 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/larksuite/cli/lark-workflow-standup-report",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "larksuite",
+        "cli",
+        "lark",
+        "workflow",
+        "standup",
+        "report",
+        "skills.sh",
+        "installs-88366"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:leonxlnx/taste-skill/design-taste-frontend",
+      "name": "design-taste-frontend",
+      "displayName": "Design Taste Frontend",
+      "description": "Imported from skills.sh. Published by leonxlnx/taste-skill; 42,901 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/leonxlnx/taste-skill/design-taste-frontend",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "leonxlnx",
+        "taste",
+        "design",
+        "frontend",
+        "skills.sh",
+        "installs-42901"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:leonxlnx/taste-skill/full-output-enforcement",
+      "name": "full-output-enforcement",
+      "displayName": "Full Output Enforcement",
+      "description": "Imported from skills.sh. Published by leonxlnx/taste-skill; 34,018 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/leonxlnx/taste-skill/full-output-enforcement",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "leonxlnx",
+        "taste",
+        "full",
+        "output",
+        "enforcement",
+        "skills.sh",
+        "installs-34018"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:leonxlnx/taste-skill/high-end-visual-design",
+      "name": "high-end-visual-design",
+      "displayName": "High End Visual Design",
+      "description": "Imported from skills.sh. Published by leonxlnx/taste-skill; 37,837 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/leonxlnx/taste-skill/high-end-visual-design",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "leonxlnx",
+        "taste",
+        "high",
+        "end",
+        "visual",
+        "design",
+        "skills.sh",
+        "installs-37837"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:leonxlnx/taste-skill/minimalist-ui",
+      "name": "minimalist-ui",
+      "displayName": "Minimalist UI",
+      "description": "Imported from skills.sh. Published by leonxlnx/taste-skill; 34,734 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/leonxlnx/taste-skill/minimalist-ui",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "leonxlnx",
+        "taste",
+        "minimalist",
+        "ui",
+        "skills.sh",
+        "installs-34734"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:leonxlnx/taste-skill/redesign-existing-projects",
+      "name": "redesign-existing-projects",
+      "displayName": "Redesign Existing Projects",
+      "description": "Imported from skills.sh. Published by leonxlnx/taste-skill; 37,218 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/leonxlnx/taste-skill/redesign-existing-projects",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "leonxlnx",
+        "taste",
+        "redesign",
+        "existing",
+        "projects",
+        "skills.sh",
+        "installs-37218"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:lllllllama/ai-paper-reproduction-skill/env-and-assets-bootstrap",
+      "name": "env-and-assets-bootstrap",
+      "displayName": "Env And Assets Bootstrap",
+      "description": "Imported from skills.sh. Published by lllllllama/ai-paper-reproduction-skill; 74,876 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/lllllllama/ai-paper-reproduction-skill/env-and-assets-bootstrap",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "lllllllama",
+        "ai",
+        "paper",
+        "reproduction",
+        "env",
+        "and",
+        "assets",
+        "bootstrap",
+        "skills.sh",
+        "installs-74876"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:lllllllama/ai-paper-reproduction-skill/minimal-run-and-audit",
+      "name": "minimal-run-and-audit",
+      "displayName": "Minimal Run And Audit",
+      "description": "Imported from skills.sh. Published by lllllllama/ai-paper-reproduction-skill; 74,860 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/lllllllama/ai-paper-reproduction-skill/minimal-run-and-audit",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "lllllllama",
+        "ai",
+        "paper",
+        "reproduction",
+        "minimal",
+        "run",
+        "and",
+        "audit",
+        "skills.sh",
+        "installs-74860"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:lllllllama/ai-paper-reproduction-skill/paper-context-resolver",
+      "name": "paper-context-resolver",
+      "displayName": "Paper Context Resolver",
+      "description": "Imported from skills.sh. Published by lllllllama/ai-paper-reproduction-skill; 74,964 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/lllllllama/ai-paper-reproduction-skill/paper-context-resolver",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "lllllllama",
+        "ai",
+        "paper",
+        "reproduction",
+        "context",
+        "resolver",
+        "skills.sh",
+        "installs-74964"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:lllllllama/ai-paper-reproduction-skill/repo-intake-and-plan",
+      "name": "repo-intake-and-plan",
+      "displayName": "Repo Intake And Plan",
+      "description": "Imported from skills.sh. Published by lllllllama/ai-paper-reproduction-skill; 74,863 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/lllllllama/ai-paper-reproduction-skill/repo-intake-and-plan",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "lllllllama",
+        "ai",
+        "paper",
+        "reproduction",
+        "repo",
+        "intake",
+        "and",
+        "plan",
+        "skills.sh",
+        "installs-74863"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:mattpocock/skills/diagnose",
+      "name": "diagnose",
+      "displayName": "Diagnose",
+      "description": "Imported from skills.sh. Published by mattpocock/skills; 34,089 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/mattpocock/skills/diagnose",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "mattpocock",
+        "diagnose",
+        "skills.sh",
+        "installs-34089"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:mattpocock/skills/grill-me",
+      "name": "grill-me",
+      "displayName": "Grill Me",
+      "description": "Imported from skills.sh. Published by mattpocock/skills; 83,783 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/mattpocock/skills/grill-me",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "mattpocock",
+        "grill",
+        "me",
+        "skills.sh",
+        "installs-83783"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:mattpocock/skills/grill-with-docs",
+      "name": "grill-with-docs",
+      "displayName": "Grill With Docs",
+      "description": "Imported from skills.sh. Published by mattpocock/skills; 37,378 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/mattpocock/skills/grill-with-docs",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "mattpocock",
+        "grill",
+        "with",
+        "docs",
+        "skills.sh",
+        "installs-37378"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:mattpocock/skills/improve-codebase-architecture",
+      "name": "improve-codebase-architecture",
+      "displayName": "Improve Codebase Architecture",
+      "description": "Imported from skills.sh. Published by mattpocock/skills; 55,275 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/mattpocock/skills/improve-codebase-architecture",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "mattpocock",
+        "improve",
+        "codebase",
+        "architecture",
+        "skills.sh",
+        "installs-55275"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:mattpocock/skills/tdd",
+      "name": "tdd",
+      "displayName": "Tdd",
+      "description": "Imported from skills.sh. Published by mattpocock/skills; 56,076 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/mattpocock/skills/tdd",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "mattpocock",
+        "tdd",
+        "skills.sh",
+        "installs-56076"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:mattpocock/skills/to-issues",
+      "name": "to-issues",
+      "displayName": "To Issues",
+      "description": "Imported from skills.sh. Published by mattpocock/skills; 37,386 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/mattpocock/skills/to-issues",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "mattpocock",
+        "to",
+        "issues",
+        "skills.sh",
+        "installs-37386"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:mattpocock/skills/to-prd",
+      "name": "to-prd",
+      "displayName": "To Prd",
+      "description": "Imported from skills.sh. Published by mattpocock/skills; 39,999 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/mattpocock/skills/to-prd",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "mattpocock",
+        "to",
+        "prd",
+        "skills.sh",
+        "installs-39999"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:mattpocock/skills/write-a-skill",
+      "name": "write-a-skill",
+      "displayName": "Write A Skill",
+      "description": "Imported from skills.sh. Published by mattpocock/skills; 38,249 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/mattpocock/skills/write-a-skill",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "mattpocock",
+        "write",
+        "skills.sh",
+        "installs-38249"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:mattpocock/skills/zoom-out",
+      "name": "zoom-out",
+      "displayName": "Zoom Out",
+      "description": "Imported from skills.sh. Published by mattpocock/skills; 34,553 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/mattpocock/skills/zoom-out",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "mattpocock",
+        "zoom",
+        "out",
+        "skills.sh",
+        "installs-34553"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/airunway-aks-setup",
+      "name": "airunway-aks-setup",
+      "displayName": "Airunway Aks Setup",
+      "description": "Imported from skills.sh. Published by microsoft/azure-skills; 67,837 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/airunway-aks-setup",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "airunway",
+        "aks",
+        "setup",
+        "skills.sh",
+        "installs-67837"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/appinsights-instrumentation",
+      "name": "appinsights-instrumentation",
+      "displayName": "Appinsights Instrumentation",
+      "description": "Guidance and reference material for instrumenting webapps with Azure Application Insights. - Covers SDK setup, telemetry patterns, and configuration for ASP.NET Core and Node.js applications hosted in Azure - Distinguishes between this skill (reference and guidance) and azure-prepare (actual implementation); invoke azure-prepare when the user wants to add instrumentation to their project - Provides auto-instrumentation guidance for C# ASP.NET Core apps in Azure App Service, plus manual instrumentation paths for creating App Insights resources via Bicep templates or Azure CLI - Includes language-specific code modification guides for ASP.NET Core, Node.js, and Python, plus quick references for OpenTelemetry SDKs and exporters <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/appinsights-instrumentation",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "appinsights",
+        "instrumentation",
+        "skills.sh",
+        "installs-289707"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-ai",
+      "name": "azure-ai",
+      "displayName": "Azure AI",
+      "description": "Access Azure AI Search, Speech, OpenAI, and Document Intelligence services through unified MCP tools. - AI Search supports full-text, vector, hybrid, and semantic search with built-in AI enrichment for entity extraction and OCR - Speech service handles real-time and batch speech-to-text transcription, text-to-speech synthesis with neural voices, and speaker diarization - MCP tools provide direct access: azure__search for index queries and azure__speech for transcription and synthesis - SDK references available for Python, TypeScript, .NET, and Java across all services; enable via /azure:setup or /mcp if MCP is not active <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-ai",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "ai",
+        "skills.sh",
+        "installs-290222"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-aigateway",
+      "name": "azure-aigateway",
+      "displayName": "Azure Aigateway",
+      "description": "Configure Azure API Management as an AI Gateway for models, MCP tools, and agents with built-in governance policies. - Supports semantic caching (60-80% cost savings), token rate limiting, content safety filtering, and jailbreak detection across AI backends - Add Azure OpenAI, AI Foundry models, or convert existing APIs to MCP tools as managed backends with load balancing - Includes five core policy categories: authentication, semantic cache lookup, token limits, content safety, and token metrics for observability - Requires Azure CLI for configuration and testing; integrates with managed identity for secure backend access <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-aigateway",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "aigateway",
+        "skills.sh",
+        "installs-289599"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-cloud-migrate",
+      "name": "azure-cloud-migrate",
+      "displayName": "Azure Cloud Migrate",
+      "description": "Assess and migrate cloud workloads from AWS, GCP, and other providers to Azure services. - Supports Lambda-to-Azure Functions migration with dedicated scenario reference and best practices - Generates assessment reports mapping source services to Azure equivalents before any code conversion - Converts source code to target Azure runtime models, with output isolated in a separate <source-folder>-azure/ directory - Requires sequential phase execution: assessment first, then migration, with user confirmation before destructive actions - Hands off to azure-prepare skill for infrastructure provisioning, local testing, and deployment workflows <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-cloud-migrate",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "cloud",
+        "migrate",
+        "skills.sh",
+        "installs-289826"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-compliance",
+      "name": "azure-compliance",
+      "displayName": "Azure Compliance",
+      "description": "Azure compliance scanning, Key Vault expiration auditing, and resource configuration validation. - Runs azqr (Azure Quick Review) for comprehensive compliance assessment against best practices across subscriptions and resource groups - Monitors Key Vault keys, secrets, and certificates for expiration dates and identifies items without expiration policies - Detects orphaned, misconfigured, and non-compliant resources using Resource Graph queries - Classifies findings by priority (Critical, High, Medium, Low) with remediation guidance for each issue <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-compliance",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "compliance",
+        "skills.sh",
+        "installs-289659"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-compute",
+      "name": "azure-compute",
+      "displayName": "Azure Compute",
+      "description": "Recommend Azure VM sizes, scale sets, and configurations based on workload requirements and budget. - Analyzes workload type, performance needs, scaling requirements, and cost to suggest 2–3 VM or VMSS options with trade-offs - Verifies recommendations against live Microsoft documentation; falls back to reference files if fetch fails - Queries the unauthenticated Azure Retail Prices API for current pricing without requiring an Azure subscription - Guides VM vs VMSS decision through a decision tree covering autoscaling, instance count, availability, and statefulness - Covers all VM families (general purpose, compute/memory optimized, GPU, confidential computing) and VMSS orchestration modes (Flexible vs Uniform) <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-compute",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "compute",
+        "skills.sh",
+        "installs-289826"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-cost",
+      "name": "azure-cost",
+      "displayName": "Azure Cost",
+      "description": "Imported from skills.sh. Published by microsoft/azure-skills; 157,855 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-cost",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "cost",
+        "skills.sh",
+        "installs-157855"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-cost-optimization",
+      "name": "azure-cost-optimization",
+      "displayName": "Azure Cost Optimization",
+      "description": "Imported from skills.sh. Published by microsoft/azure-skills; 157,295 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-cost-optimization",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "cost",
+        "optimization",
+        "skills.sh",
+        "installs-157295"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-deploy",
+      "name": "azure-deploy",
+      "displayName": "Azure Deploy",
+      "description": "Execute Azure deployments for prepared applications with built-in error recovery and validation. - Requires .azure/plan.md with Validated status from azure-validate and azure-prepare skills; will not proceed without both prerequisites - Executes azd up , azd deploy , terraform apply , and az deployment commands with error handling and post-deployment verification - Includes pre-deploy checklist, recipe-based deployment workflows, and post-deploy configuration for SQL managed identity and Entity Framework migrations - Supports applications with API Management gateway infrastructure created during preparation phase <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-deploy",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "deploy",
+        "skills.sh",
+        "installs-290197"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-diagnostics",
+      "name": "azure-diagnostics",
+      "displayName": "Azure Diagnostics",
+      "description": "Systematic diagnosis and remediation for Azure production issues using AppLens, Monitor, and resource health. - Covers Container Apps, Function Apps, and AKS troubleshooting with service-specific guides for image pulls, cold starts, health probes, invocation failures, and node/pod issues - Integrates AppLens (MCP) for AI-powered root cause analysis and Azure Monitor (MCP) for KQL-based log and metric queries - Provides a five-step diagnostic flow: identify symptoms, check resource health, review logs, analyze metrics, and investigate recent changes - Includes quick reference commands for activity logs, container logs, and App Insights queries, plus routing guidance for AKS-specific incidents <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-diagnostics",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "diagnostics",
+        "skills.sh",
+        "installs-290074"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-enterprise-infra-planner",
+      "name": "azure-enterprise-infra-planner",
+      "displayName": "Azure Enterprise Infra Planner",
+      "description": "Imported from skills.sh. Published by microsoft/azure-skills; 209,807 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-enterprise-infra-planner",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "enterprise",
+        "infra",
+        "planner",
+        "skills.sh",
+        "installs-209807"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-hosted-copilot-sdk",
+      "name": "azure-hosted-copilot-sdk",
+      "displayName": "Azure Hosted Copilot SDK",
+      "description": "Build and deploy GitHub Copilot SDK applications to Azure with flexible model configuration. - Three scaffolding paths: create new greenfield projects, add SDK services to existing repos, or deploy existing SDK apps with Azure infrastructure - Supports three model configurations: GitHub's default models, specific GitHub models via discovery, or bring-your-own-model (BYOM) on Azure with DefaultAzureCredential authentication - Includes complete templates with Express/TypeScript API, React/Vite frontend, Bicep infrastructure, Docker support, and token management scripts - Deploy workflow uses azure-prepare, azure-validate, and azure-deploy steps; requires Docker and respects existing AGENTS.md configuration in user repos <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-hosted-copilot-sdk",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "hosted",
+        "copilot",
+        "sdk",
+        "skills.sh",
+        "installs-289704"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-kubernetes",
+      "name": "azure-kubernetes",
+      "displayName": "Azure Kubernetes",
+      "description": "Imported from skills.sh. Published by microsoft/azure-skills; 197,706 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-kubernetes",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "kubernetes",
+        "skills.sh",
+        "installs-197706"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-kusto",
+      "name": "azure-kusto",
+      "displayName": "Azure Kusto",
+      "description": "Execute KQL queries and analyze data in Azure Data Explorer for log analytics, telemetry, and time series insights. - Execute KQL queries against massive datasets with sub-second performance, including filtering, aggregation, time series analysis, and cross-table joins - Discover and explore cluster resources, databases, and table schemas to understand your data model before querying - Supports five core query patterns: basic retrieval, aggregation analysis, time series analytics, join-based correlation, and schema discovery - Built-in fallback to Azure CLI commands when MCP tools timeout or encounter connection errors <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-kusto",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "kusto",
+        "skills.sh",
+        "installs-289551"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-messaging",
+      "name": "azure-messaging",
+      "displayName": "Azure Messaging",
+      "description": "Diagnose and resolve Azure Event Hubs and Service Bus SDK issues with structured troubleshooting workflows. - Covers connection failures, authentication errors, AMQP link issues, message lock timeouts, and event processor stalls across Python, Java, JavaScript, and .NET SDKs - Includes language-specific troubleshooting guides for Event Hubs and Service Bus, plus connectivity diagnostics for ports, WebSocket fallback, IP firewalls, and private endpoints - Provides MCP tools to query resource health, list namespaces/hubs/queues/topics, and search Microsoft Learn documentation for error resolution - Structured diagnosis workflow: identify SDK version, check resource health, match error messages, look up docs, verify configuration, and apply fixes <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-messaging",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "messaging",
+        "skills.sh",
+        "installs-289719"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-prepare",
+      "name": "azure-prepare",
+      "displayName": "Azure Prepare",
+      "description": "Prepare Azure applications for deployment with infrastructure-as-code, configuration, and containerization. - Generates Bicep or Terraform infrastructure code, azure.yaml configuration, and Dockerfiles based on application type and deployment target - Requires mandatory plan-first workflow: analyze workspace, gather requirements, select recipe (AZD, AZCLI, Bicep, or Terraform), design architecture, then execute only after user approval - Covers new app creation, modernization, and updates; routes specialized requests (copilot SDK, cloud migration, AI gateway) to dedicated skills before resuming preparation - Hands off to azure-validate for infrastructure validation and azure-deploy for deployment execution; plan status must be updated to \"Ready for Validation\" before validation begins <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-prepare",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "prepare",
+        "skills.sh",
+        "installs-290153"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-quotas",
+      "name": "azure-quotas",
+      "displayName": "Azure Quotas",
+      "description": "Check and manage Azure quotas and usage across regions for deployment planning and capacity validation. - Azure CLI ( az quota ) is the only reliable method for checking quotas; REST API and Portal are unreliable and may show misleading \"No Limit\" values that do not indicate unlimited capacity - Supports four core workflows: checking specific resource quotas, comparing capacity across regions, requesting quota increases, and listing all quotas for a provider - Quota resource names do not map 1:1 to ARM resource types; use az quota list to discover correct names by matching localizedValue descriptions - Covers Microsoft.Compute, Microsoft.Network, Microsoft.App, Microsoft.Storage, and Microsoft.MachineLearningServices; some providers like Cosmos DB are unsupported and require Portal or documentation <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-quotas",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "quotas",
+        "skills.sh",
+        "installs-264744"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-rbac",
+      "name": "azure-rbac",
+      "displayName": "Azure Rbac",
+      "description": "Find minimal Azure RBAC roles, generate assignment commands, and provide Bicep infrastructure code. - Identifies built-in roles matching desired permissions using Azure documentation, or creates custom role definitions when no built-in role fits - Generates Azure CLI commands and Bicep code snippets for assigning roles to identities, service principals, and managed identities - Clarifies prerequisites for granting roles, including which permissions ( Microsoft.Authorization/roleAssignments/write ) are required and recommends least-privilege options like User Access Administrator - Supports least-privilege access patterns by matching specific permission requirements rather than defaulting to broad roles <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-rbac",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "rbac",
+        "skills.sh",
+        "installs-289666"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-resource-lookup",
+      "name": "azure-resource-lookup",
+      "displayName": "Azure Resource Lookup",
+      "description": "Fast discovery and inventory of Azure resources across subscriptions using Resource Graph queries. - Queries any Azure resource type (VMs, storage accounts, web apps, container apps, Key Vaults, etc.) across subscriptions and resource groups in a single command - Supports cross-cutting searches for orphaned resources, missing tags, unhealthy states, and resource inventory counts - Routes single-resource-type queries to dedicated MCP tools when available; falls back to Azure Resource Graph for broader or unsupported resource types - Uses KQL (Kusto Query Language) for flexible filtering, with built-in error handling for authorization, syntax, and scope issues <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-resource-lookup",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "resource",
+        "lookup",
+        "skills.sh",
+        "installs-289646"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-resource-visualizer",
+      "name": "azure-resource-visualizer",
+      "displayName": "Azure Resource Visualizer",
+      "description": "Transform Azure resource groups into detailed architecture diagrams showing resource relationships and configurations. - Discovers all resources within a resource group and analyzes their configurations, dependencies, and interconnections - Generates Mermaid diagrams organized by logical layers (Network, Compute, Data, Security, Monitoring) with SKU details and connection labels - Maps relationships including network connections, data flows, identity bindings, and configuration dependencies across resources - Creates comprehensive markdown documentation with resource inventory tables, architecture diagrams, and relationship explanations <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-resource-visualizer",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "resource",
+        "visualizer",
+        "skills.sh",
+        "installs-289601"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-storage",
+      "name": "azure-storage",
+      "displayName": "Azure Storage",
+      "description": "Unified access to Azure blob storage, file shares, queues, tables, and data lake services. - Supports five storage service types: Blob Storage for objects and backups, File Shares for SMB access, Queue Storage for async messaging, Table Storage for NoSQL key-value data, and Data Lake for big data analytics - MCP server tools enable listing storage accounts, containers, and blobs, plus downloading and uploading blob content directly - Configurable access tiers (hot, cool, cold, archive) and redundancy options (LRS, ZRS, GRS, GZRS) for cost and durability optimization - CLI fallback available via az storage commands when MCP is not enabled; SDK references provided for Python, TypeScript, Java, Rust, and Go <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-storage",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "storage",
+        "skills.sh",
+        "installs-289784"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-upgrade",
+      "name": "azure-upgrade",
+      "displayName": "Azure Upgrade",
+      "description": "Imported from skills.sh. Published by microsoft/azure-skills; 252,491 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-upgrade",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "upgrade",
+        "skills.sh",
+        "installs-252491"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/azure-validate",
+      "name": "azure-validate",
+      "displayName": "Azure Validate",
+      "description": "Pre-deployment validation for Azure infrastructure, configuration, and permissions before deployment. - Requires .azure/plan.md from a prior azure-prepare run; stops immediately if the plan is missing - Executes recipe-specific validation commands (azd provision, bicep build, terraform validate) and records proof in the plan document - Performs build verification, configuration checks, and permission validation; blocks deployment if any check fails - Only authorized method to set plan status to Validated ; must be followed by azure-deploy skill to execute the actual deployment <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/azure-validate",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "validate",
+        "skills.sh",
+        "installs-289783"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/entra-app-registration",
+      "name": "entra-app-registration",
+      "displayName": "Entra App Registration",
+      "description": "Microsoft Entra ID app registration, OAuth 2.0 configuration, and MSAL integration for secure application authentication. - Covers app registration setup, authentication configuration, API permissions, and client credential management across web apps, SPAs, mobile apps, and daemon services - Includes step-by-step workflows for first-time registration, console application authentication, and service-to-service credential flows - Provides Azure CLI commands, MSAL library examples for .NET, JavaScript, Python, and Java, plus security best practices for secret rotation and token validation - Distinguishes scope clearly: handles identity and authentication setup but excludes Azure RBAC, Key Vault secrets management, and resource security <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/entra-app-registration",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "entra",
+        "app",
+        "registration",
+        "skills.sh",
+        "installs-289729"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/azure-skills/microsoft-foundry",
+      "name": "microsoft-foundry",
+      "displayName": "Microsoft Foundry",
+      "description": "End-to-end deployment, evaluation, and management of AI agents on Microsoft Foundry. - Covers the complete agent lifecycle: creation from starter samples, containerization and ACR push, hosted or prompt agent deployment, invocation, batch evaluation, and prompt optimization - Includes specialized sub-skills for deploy, invoke, observe (evaluation and prompt optimization), trace analysis, troubleshooting, and dataset curation from production traces - Supports project and resource provisioning, RBAC management, quota tracking, and model deployment with intelligent routing across regions and SKUs - Requires .foundry/agent-metadata.yaml as the source of truth for environment-specific configuration, datasets, and evaluation test cases <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/azure-skills/microsoft-foundry",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "azure",
+        "foundry",
+        "skills.sh",
+        "installs-300861"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/appinsights-instrumentation",
+      "name": "appinsights-instrumentation",
+      "displayName": "Appinsights Instrumentation",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 153,951 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/appinsights-instrumentation",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "appinsights",
+        "instrumentation",
+        "skills.sh",
+        "installs-153951"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-ai",
+      "name": "azure-ai",
+      "displayName": "Azure AI",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 154,584 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-ai",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "ai",
+        "skills.sh",
+        "installs-154584"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-aigateway",
+      "name": "azure-aigateway",
+      "displayName": "Azure Aigateway",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 153,925 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-aigateway",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "aigateway",
+        "skills.sh",
+        "installs-153925"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-cloud-migrate",
+      "name": "azure-cloud-migrate",
+      "displayName": "Azure Cloud Migrate",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 66,515 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-cloud-migrate",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "cloud",
+        "migrate",
+        "skills.sh",
+        "installs-66515"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-compliance",
+      "name": "azure-compliance",
+      "displayName": "Azure Compliance",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 153,947 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-compliance",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "compliance",
+        "skills.sh",
+        "installs-153947"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-compute",
+      "name": "azure-compute",
+      "displayName": "Azure Compute",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 79,629 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-compute",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "compute",
+        "skills.sh",
+        "installs-79629"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-cost-optimization",
+      "name": "azure-cost-optimization",
+      "displayName": "Azure Cost Optimization",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 147,977 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-cost-optimization",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "cost",
+        "optimization",
+        "skills.sh",
+        "installs-147977"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-deploy",
+      "name": "azure-deploy",
+      "displayName": "Azure Deploy",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 154,234 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "deploy",
+        "skills.sh",
+        "installs-154234"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-diagnostics",
+      "name": "azure-diagnostics",
+      "displayName": "Azure Diagnostics",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 154,121 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "diagnostics",
+        "skills.sh",
+        "installs-154121"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-hosted-copilot-sdk",
+      "name": "azure-hosted-copilot-sdk",
+      "displayName": "Azure Hosted Copilot SDK",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 118,515 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-hosted-copilot-sdk",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "hosted",
+        "sdk",
+        "skills.sh",
+        "installs-118515"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-kusto",
+      "name": "azure-kusto",
+      "displayName": "Azure Kusto",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 153,918 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-kusto",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "kusto",
+        "skills.sh",
+        "installs-153918"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-messaging",
+      "name": "azure-messaging",
+      "displayName": "Azure Messaging",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 140,425 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-messaging",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "messaging",
+        "skills.sh",
+        "installs-140425"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-observability",
+      "name": "azure-observability",
+      "displayName": "Azure Observability",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 115,492 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-observability",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "observability",
+        "skills.sh",
+        "installs-115492"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-postgres",
+      "name": "azure-postgres",
+      "displayName": "Azure Postgres",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 34,757 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-postgres",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "postgres",
+        "skills.sh",
+        "installs-34757"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-prepare",
+      "name": "azure-prepare",
+      "displayName": "Azure Prepare",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 153,964 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-prepare",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "prepare",
+        "skills.sh",
+        "installs-153964"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-rbac",
+      "name": "azure-rbac",
+      "displayName": "Azure Rbac",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 153,939 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-rbac",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "rbac",
+        "skills.sh",
+        "installs-153939"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-resource-lookup",
+      "name": "azure-resource-lookup",
+      "displayName": "Azure Resource Lookup",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 153,908 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-resource-lookup",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "resource",
+        "lookup",
+        "skills.sh",
+        "installs-153908"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-resource-visualizer",
+      "name": "azure-resource-visualizer",
+      "displayName": "Azure Resource Visualizer",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 153,931 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-resource-visualizer",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "resource",
+        "visualizer",
+        "skills.sh",
+        "installs-153931"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-storage",
+      "name": "azure-storage",
+      "displayName": "Azure Storage",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 154,161 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-storage",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "storage",
+        "skills.sh",
+        "installs-154161"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/azure-validate",
+      "name": "azure-validate",
+      "displayName": "Azure Validate",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 153,937 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/azure-validate",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "validate",
+        "skills.sh",
+        "installs-153937"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/entra-app-registration",
+      "name": "entra-app-registration",
+      "displayName": "Entra App Registration",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 153,970 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/entra-app-registration",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "entra",
+        "app",
+        "registration",
+        "skills.sh",
+        "installs-153970"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:microsoft/github-copilot-for-azure/microsoft-foundry",
+      "name": "microsoft-foundry",
+      "displayName": "Microsoft Foundry",
+      "description": "Imported from skills.sh. Published by microsoft/github-copilot-for-azure; 145,413 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "microsoft",
+        "github",
+        "copilot",
+        "for",
+        "azure",
+        "foundry",
+        "skills.sh",
+        "installs-145413"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:neondatabase/agent-skills/neon-postgres",
+      "name": "neon-postgres",
+      "displayName": "Neon Postgres",
+      "description": "Official Neon Postgres agent skill discovered through skills.sh for Neon database, branch, and Postgres workflows.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/neondatabase/agent-skills/neon-postgres",
+      "categories": [
+        "developer-tools",
+        "data"
+      ],
+      "tags": [
+        "neon",
+        "postgres",
+        "database",
+        "skills.sh",
+        "installs-31000"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:neondatabase/postgres-skills/postgres-best-practices",
+      "name": "postgres-best-practices",
+      "displayName": "Postgres Best Practices",
+      "description": "Neon Postgres best practices skill discovered through skills.sh for schema, SQL, and operational database guidance.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/neondatabase/postgres-skills/postgres-best-practices",
+      "categories": [
+        "developer-tools",
+        "data"
+      ],
+      "tags": [
+        "neon",
+        "postgres",
+        "best-practices",
+        "database",
+        "skills.sh",
+        "installs-223"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:nextlevelbuilder/ui-ux-pro-max-skill/ui-ux-pro-max",
+      "name": "ui-ux-pro-max",
+      "displayName": "UI UX Pro Max",
+      "description": "Imported from skills.sh. Published by nextlevelbuilder/ui-ux-pro-max-skill; 147,448 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/nextlevelbuilder/ui-ux-pro-max-skill/ui-ux-pro-max",
+      "categories": [
+        "design",
+        "developer-tools"
+      ],
+      "tags": [
+        "nextlevelbuilder",
+        "ui",
+        "ux",
+        "pro",
+        "max",
+        "skills.sh",
+        "installs-147448"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/brainstorming",
+      "name": "brainstorming",
+      "displayName": "Brainstorming",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 137,770 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/brainstorming",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "brainstorming",
+        "skills.sh",
+        "installs-137770"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/dispatching-parallel-agents",
+      "name": "dispatching-parallel-agents",
+      "displayName": "Dispatching Parallel Agents",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 54,209 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/dispatching-parallel-agents",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "dispatching",
+        "parallel",
+        "agents",
+        "skills.sh",
+        "installs-54209"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/executing-plans",
+      "name": "executing-plans",
+      "displayName": "Executing Plans",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 65,660 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/executing-plans",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "executing",
+        "plans",
+        "skills.sh",
+        "installs-65660"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/finishing-a-development-branch",
+      "name": "finishing-a-development-branch",
+      "displayName": "Finishing A Development Branch",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 51,828 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/finishing-a-development-branch",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "finishing",
+        "development",
+        "branch",
+        "skills.sh",
+        "installs-51828"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/receiving-code-review",
+      "name": "receiving-code-review",
+      "displayName": "Receiving Code Review",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 56,020 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/receiving-code-review",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "receiving",
+        "code",
+        "review",
+        "skills.sh",
+        "installs-56020"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/requesting-code-review",
+      "name": "requesting-code-review",
+      "displayName": "Requesting Code Review",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 70,565 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/requesting-code-review",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "requesting",
+        "code",
+        "review",
+        "skills.sh",
+        "installs-70565"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/subagent-driven-development",
+      "name": "subagent-driven-development",
+      "displayName": "Subagent Driven Development",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 60,029 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/subagent-driven-development",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "subagent",
+        "driven",
+        "development",
+        "skills.sh",
+        "installs-60029"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/systematic-debugging",
+      "name": "systematic-debugging",
+      "displayName": "Systematic Debugging",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 81,535 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/systematic-debugging",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "systematic",
+        "debugging",
+        "skills.sh",
+        "installs-81535"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/test-driven-development",
+      "name": "test-driven-development",
+      "displayName": "Test Driven Development",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 70,661 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/test-driven-development",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "test",
+        "driven",
+        "development",
+        "skills.sh",
+        "installs-70661"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/using-git-worktrees",
+      "name": "using-git-worktrees",
+      "displayName": "Using Git Worktrees",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 53,951 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/using-git-worktrees",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "using",
+        "git",
+        "worktrees",
+        "skills.sh",
+        "installs-53951"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/using-superpowers",
+      "name": "using-superpowers",
+      "displayName": "Using Superpowers",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 82,559 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/using-superpowers",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "using",
+        "skills.sh",
+        "installs-82559"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/verification-before-completion",
+      "name": "verification-before-completion",
+      "displayName": "Verification Before Completion",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 58,083 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/verification-before-completion",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "verification",
+        "before",
+        "completion",
+        "skills.sh",
+        "installs-58083"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/writing-plans",
+      "name": "writing-plans",
+      "displayName": "Writing Plans",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 80,888 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/writing-plans",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "writing",
+        "plans",
+        "skills.sh",
+        "installs-80888"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:obra/superpowers/writing-skills",
+      "name": "writing-skills",
+      "displayName": "Writing Skills",
+      "description": "Imported from skills.sh. Published by obra/superpowers; 55,992 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/obra/superpowers/writing-skills",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "obra",
+        "superpowers",
+        "writing",
+        "skills.sh",
+        "installs-55992"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/adapt",
+      "name": "adapt",
+      "displayName": "Adapt",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 82,013 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/adapt",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "adapt",
+        "skills.sh",
+        "installs-82013"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/animate",
+      "name": "animate",
+      "displayName": "Animate",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 82,029 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/animate",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "animate",
+        "skills.sh",
+        "installs-82029"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/arrange",
+      "name": "arrange",
+      "displayName": "Arrange",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 39,281 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/arrange",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "arrange",
+        "skills.sh",
+        "installs-39281"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/audit",
+      "name": "audit",
+      "displayName": "Audit",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 82,148 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/audit",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "audit",
+        "skills.sh",
+        "installs-82148"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/bolder",
+      "name": "bolder",
+      "displayName": "Bolder",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 80,299 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/bolder",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "bolder",
+        "skills.sh",
+        "installs-80299"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/clarify",
+      "name": "clarify",
+      "displayName": "Clarify",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 81,503 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/clarify",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "clarify",
+        "skills.sh",
+        "installs-81503"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/colorize",
+      "name": "colorize",
+      "displayName": "Colorize",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 81,169 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/colorize",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "colorize",
+        "skills.sh",
+        "installs-81169"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/critique",
+      "name": "critique",
+      "displayName": "Critique",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 82,939 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/critique",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "critique",
+        "skills.sh",
+        "installs-82939"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/delight",
+      "name": "delight",
+      "displayName": "Delight",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 80,139 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/delight",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "delight",
+        "skills.sh",
+        "installs-80139"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/distill",
+      "name": "distill",
+      "displayName": "Distill",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 79,751 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/distill",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "distill",
+        "skills.sh",
+        "installs-79751"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/extract",
+      "name": "extract",
+      "displayName": "Extract",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 53,487 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/extract",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "extract",
+        "skills.sh",
+        "installs-53487"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/frontend-design",
+      "name": "frontend-design",
+      "displayName": "Frontend Design",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 53,424 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/frontend-design",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "frontend",
+        "design",
+        "skills.sh",
+        "installs-53424"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/harden",
+      "name": "harden",
+      "displayName": "Harden",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 53,264 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/harden",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "harden",
+        "skills.sh",
+        "installs-53264"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/impeccable",
+      "name": "impeccable",
+      "displayName": "Impeccable",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 63,597 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/impeccable",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "skills.sh",
+        "installs-63597"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/normalize",
+      "name": "normalize",
+      "displayName": "Normalize",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 54,581 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/normalize",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "normalize",
+        "skills.sh",
+        "installs-54581"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/onboard",
+      "name": "onboard",
+      "displayName": "Onboard",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 53,346 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/onboard",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "onboard",
+        "skills.sh",
+        "installs-53346"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/optimize",
+      "name": "optimize",
+      "displayName": "Optimize",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 81,352 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/optimize",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "optimize",
+        "skills.sh",
+        "installs-81352"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/overdrive",
+      "name": "overdrive",
+      "displayName": "Overdrive",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 62,961 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/overdrive",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "overdrive",
+        "skills.sh",
+        "installs-62961"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/polish",
+      "name": "polish",
+      "displayName": "Polish",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 85,478 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/polish",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "polish",
+        "skills.sh",
+        "installs-85478"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/quieter",
+      "name": "quieter",
+      "displayName": "Quieter",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 78,944 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/quieter",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "quieter",
+        "skills.sh",
+        "installs-78944"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/teach-impeccable",
+      "name": "teach-impeccable",
+      "displayName": "Teach Impeccable",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 50,305 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/teach-impeccable",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "teach",
+        "skills.sh",
+        "installs-50305"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:pbakaus/impeccable/typeset",
+      "name": "typeset",
+      "displayName": "Typeset",
+      "description": "Imported from skills.sh. Published by pbakaus/impeccable; 64,869 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/pbakaus/impeccable/typeset",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "pbakaus",
+        "impeccable",
+        "typeset",
+        "skills.sh",
+        "installs-64869"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:planetscale/database-skills/mysql",
+      "name": "mysql",
+      "displayName": "MySQL",
+      "description": "PlanetScale database skill discovered through skills.sh for MySQL schema, query, and database engineering workflows.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/planetscale/database-skills/mysql",
+      "categories": [
+        "developer-tools",
+        "data"
+      ],
+      "tags": [
+        "planetscale",
+        "mysql",
+        "database",
+        "skills.sh",
+        "installs-3300"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:postman-devrel/agent-skills/postman",
+      "name": "postman",
+      "displayName": "Postman",
+      "description": "Postman DevRel agent skill discovered through skills.sh for API collection, request, and testing workflows.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/postman-devrel/agent-skills/postman",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "postman",
+        "api",
+        "testing",
+        "skills.sh",
+        "installs-85"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:postman-devrel/agent-skills/postman-api-readiness",
+      "name": "postman-api-readiness",
+      "displayName": "Postman API Readiness",
+      "description": "Postman DevRel API readiness skill discovered through skills.sh for reviewing API quality and readiness workflows.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/postman-devrel/agent-skills/postman-api-readiness",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "postman",
+        "api",
+        "readiness",
+        "testing",
+        "skills.sh",
+        "installs-32"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:remotion-dev/skills/remotion-best-practices",
+      "name": "remotion-best-practices",
+      "displayName": "Remotion Best Practices",
+      "description": "Domain-specific knowledge base for building videos with Remotion and React. - Covers 30+ rule files spanning animations, audio, assets, 3D content, charts, text, transitions, and composition management - Includes specialized guidance for captions, FFmpeg operations, audio visualization, and sound effects integration - Provides patterns for dynamic metadata calculation, media inspection (duration, dimensions, frame extraction), and parametrizable compositions - Supports advanced features like Lottie animations, light leak effects, Mapbox integration, TailwindCSS styling, and AI-generated voiceovers <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/remotion-dev/skills/remotion-best-practices",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "remotion",
+        "dev",
+        "best",
+        "practices",
+        "skills.sh",
+        "installs-288536"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:roin-orca/skills/simple",
+      "name": "simple",
+      "displayName": "Simple",
+      "description": "Imported from skills.sh. Published by roin-orca/skills; 110,899 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/roin-orca/skills/simple",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "roin",
+        "orca",
+        "simple",
+        "skills.sh",
+        "installs-110899"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:scrapegraphai/just-scrape/just-scrape",
+      "name": "just-scrape",
+      "displayName": "Just Scrape",
+      "description": "Imported from skills.sh. Published by scrapegraphai/just-scrape; 35,349 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/scrapegraphai/just-scrape/just-scrape",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "scrapegraphai",
+        "just",
+        "scrape",
+        "skills.sh",
+        "installs-35349"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:sentry/dev/sentry-cli",
+      "name": "sentry-cli",
+      "displayName": "Sentry CLI",
+      "description": "Imported from skills.sh. Published by sentry/dev; 35,316 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/sentry/dev/sentry-cli",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "sentry",
+        "dev",
+        "cli",
+        "skills.sh",
+        "installs-35316"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:shadcn/ui/shadcn",
+      "name": "shadcn",
+      "displayName": "Shadcn",
+      "description": "Imported from skills.sh. Published by shadcn/ui; 125,293 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/shadcn/ui/shadcn",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "shadcn",
+        "ui",
+        "skills.sh",
+        "installs-125293"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:sleekdotdesign/agent-skills/sleek-design-mobile-apps",
+      "name": "sleek-design-mobile-apps",
+      "displayName": "Sleek Design Mobile Apps",
+      "description": "Imported from skills.sh. Published by sleekdotdesign/agent-skills; 85,860 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/sleekdotdesign/agent-skills/sleek-design-mobile-apps",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "sleekdotdesign",
+        "sleek",
+        "design",
+        "mobile",
+        "apps",
+        "skills.sh",
+        "installs-85860"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:snowflake-labs/subagent-cortex-code/cortex-code",
+      "name": "cortex-code",
+      "displayName": "Cortex Code",
+      "description": "Snowflake Labs Cortex Code skill discovered through skills.sh for Snowflake Cortex development and data app workflows.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/snowflake-labs/subagent-cortex-code/cortex-code",
+      "categories": [
+        "developer-tools",
+        "data"
+      ],
+      "tags": [
+        "snowflake",
+        "cortex",
+        "code",
+        "skills.sh",
+        "installs-170"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:soultrace-ai/soultrace-skill/soultrace",
+      "name": "soultrace",
+      "displayName": "Soultrace",
+      "description": "Imported from skills.sh. Published by soultrace-ai/soultrace-skill; 48,866 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/soultrace-ai/soultrace-skill/soultrace",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "soultrace",
+        "ai",
+        "skills.sh",
+        "installs-48866"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:squirrelscan/skills/audit-website",
+      "name": "audit-website",
+      "displayName": "Audit Website",
+      "description": "Imported from skills.sh. Published by squirrelscan/skills; 48,577 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/squirrelscan/skills/audit-website",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "squirrelscan",
+        "audit",
+        "website",
+        "skills.sh",
+        "installs-48577"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:supabase/agent-skills/supabase",
+      "name": "supabase",
+      "displayName": "Supabase",
+      "description": "Imported from skills.sh. Published by supabase/agent-skills; 52,014 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/supabase/agent-skills/supabase",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "supabase",
+        "skills.sh",
+        "installs-52014"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:supabase/agent-skills/supabase-postgres-best-practices",
+      "name": "supabase-postgres-best-practices",
+      "displayName": "Supabase Postgres Best Practices",
+      "description": "Imported from skills.sh. Published by supabase/agent-skills; 144,254 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/supabase/agent-skills/supabase-postgres-best-practices",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "supabase",
+        "postgres",
+        "best",
+        "practices",
+        "skills.sh",
+        "installs-144254"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:vercel-labs/agent-browser/agent-browser",
+      "name": "agent-browser",
+      "displayName": "Agent Browser",
+      "description": "Imported from skills.sh. Published by vercel-labs/agent-browser; 238,879 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/vercel-labs/agent-browser/agent-browser",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "vercel",
+        "labs",
+        "browser",
+        "skills.sh",
+        "installs-238879"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:vercel-labs/agent-skills/deploy-to-vercel",
+      "name": "deploy-to-vercel",
+      "displayName": "Deploy To Vercel",
+      "description": "Imported from skills.sh. Published by vercel-labs/agent-skills; 43,244 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/vercel-labs/agent-skills/deploy-to-vercel",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "vercel",
+        "labs",
+        "deploy",
+        "to",
+        "skills.sh",
+        "installs-43244"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:vercel-labs/agent-skills/vercel-composition-patterns",
+      "name": "vercel-composition-patterns",
+      "displayName": "Vercel Composition Patterns",
+      "description": "Imported from skills.sh. Published by vercel-labs/agent-skills; 160,460 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/vercel-labs/agent-skills/vercel-composition-patterns",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "vercel",
+        "labs",
+        "composition",
+        "patterns",
+        "skills.sh",
+        "installs-160460"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:vercel-labs/agent-skills/vercel-react-best-practices",
+      "name": "vercel-react-best-practices",
+      "displayName": "Vercel React Best Practices",
+      "description": "React and Next.js performance optimization guide with 64 prioritized rules across 8 categories. - Organized by impact level, from critical waterfalls and bundle optimization down to advanced patterns, each rule includes incorrect/correct code examples and explanations - Covers eight domains: async patterns, bundle size, server-side caching, client-side data fetching, re-render optimization, rendering performance, JavaScript efficiency, and advanced patterns - Designed for use during component writing, code review, refactoring, and performance audits on React and Next.js applications - Each rule has a prefix code (e.g., async-parallel , bundle-barrel-imports ) for easy reference in automated tooling and documentation <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices",
+      "categories": [
+        "design",
+        "developer-tools"
+      ],
+      "tags": [
+        "vercel",
+        "labs",
+        "react",
+        "best",
+        "practices",
+        "skills.sh",
+        "installs-373235"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:vercel-labs/agent-skills/vercel-react-native-skills",
+      "name": "vercel-react-native-skills",
+      "displayName": "Vercel React Native Skills",
+      "description": "Imported from skills.sh. Published by vercel-labs/agent-skills; 107,856 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/vercel-labs/agent-skills/vercel-react-native-skills",
+      "categories": [
+        "design",
+        "developer-tools"
+      ],
+      "tags": [
+        "vercel",
+        "labs",
+        "react",
+        "native",
+        "skills.sh",
+        "installs-107856"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:vercel-labs/agent-skills/web-design-guidelines",
+      "name": "web-design-guidelines",
+      "displayName": "Web Design Guidelines",
+      "description": "Audit UI code against Vercel's Web Interface Guidelines for design and accessibility compliance. - Fetches the latest guidelines from a remote source before each review, ensuring rules stay current - Accepts file paths or patterns as arguments; prompts for files if none provided - Outputs findings in a terse file:line format for quick scanning and remediation - Covers design, accessibility, and UX best practices as defined in the guidelines repository <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/vercel-labs/agent-skills/web-design-guidelines",
+      "categories": [
+        "design",
+        "developer-tools"
+      ],
+      "tags": [
+        "vercel",
+        "labs",
+        "web",
+        "design",
+        "guidelines",
+        "skills.sh",
+        "installs-297400"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:vercel-labs/next-skills/next-best-practices",
+      "name": "next-best-practices",
+      "displayName": "Next Best Practices",
+      "description": "Imported from skills.sh. Published by vercel-labs/next-skills; 79,008 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/vercel-labs/next-skills/next-best-practices",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "vercel",
+        "labs",
+        "next",
+        "best",
+        "practices",
+        "skills.sh",
+        "installs-79008"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:vercel-labs/skills/find-skills",
+      "name": "find-skills",
+      "displayName": "Find Skills",
+      "description": "Discover and install specialized agent skills from the open ecosystem when users need extended capabilities. - Helps identify relevant skills by domain and task when users ask \"how do I do X\" or \"find a skill for X\" - Integrates with the Skills CLI ( npx skills find , npx skills add ) to search, verify, and install packages from the skills.sh directory - Recommends skills based on install count, source reputation, and GitHub stars to ensure quality before suggesting installation - Presents skill options with install commands and links to skills.sh for user review and one-click installation <span",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/vercel-labs/skills/find-skills",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "vercel",
+        "labs",
+        "find",
+        "skills.sh",
+        "installs-1353667"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:wshobson/agents/tailwind-design-system",
+      "name": "tailwind-design-system",
+      "displayName": "Tailwind Design System",
+      "description": "Imported from skills.sh. Published by wshobson/agents; 38,980 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/wshobson/agents/tailwind-design-system",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "wshobson",
+        "agents",
+        "tailwind",
+        "design",
+        "system",
+        "skills.sh",
+        "installs-38980"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:wshobson/agents/typescript-advanced-types",
+      "name": "typescript-advanced-types",
+      "displayName": "Typescript Advanced Types",
+      "description": "Imported from skills.sh. Published by wshobson/agents; 38,637 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/wshobson/agents/typescript-advanced-types",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "wshobson",
+        "agents",
+        "typescript",
+        "advanced",
+        "types",
+        "skills.sh",
+        "installs-38637"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:xixu-me/skills/develop-userscripts",
+      "name": "develop-userscripts",
+      "displayName": "Develop Userscripts",
+      "description": "Imported from skills.sh. Published by xixu-me/skills; 56,845 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/xixu-me/skills/develop-userscripts",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "xixu",
+        "me",
+        "develop",
+        "userscripts",
+        "skills.sh",
+        "installs-56845"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:xixu-me/skills/github-actions-docs",
+      "name": "github-actions-docs",
+      "displayName": "Github Actions Docs",
+      "description": "Imported from skills.sh. Published by xixu-me/skills; 104,072 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/xixu-me/skills/github-actions-docs",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "xixu",
+        "me",
+        "github",
+        "actions",
+        "docs",
+        "skills.sh",
+        "installs-104072"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:xixu-me/skills/openclaw-secure-linux-cloud",
+      "name": "openclaw-secure-linux-cloud",
+      "displayName": "Openclaw Secure Linux Cloud",
+      "description": "Imported from skills.sh. Published by xixu-me/skills; 103,052 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/xixu-me/skills/openclaw-secure-linux-cloud",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "xixu",
+        "me",
+        "openclaw",
+        "secure",
+        "linux",
+        "cloud",
+        "skills.sh",
+        "installs-103052"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:xixu-me/skills/opensource-guide-coach",
+      "name": "opensource-guide-coach",
+      "displayName": "Opensource Guide Coach",
+      "description": "Imported from skills.sh. Published by xixu-me/skills; 102,697 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/xixu-me/skills/opensource-guide-coach",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "xixu",
+        "me",
+        "opensource",
+        "guide",
+        "coach",
+        "skills.sh",
+        "installs-102697"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:xixu-me/skills/readme-i18n",
+      "name": "readme-i18n",
+      "displayName": "Readme I18n",
+      "description": "Imported from skills.sh. Published by xixu-me/skills; 102,268 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/xixu-me/skills/readme-i18n",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "xixu",
+        "me",
+        "readme",
+        "i18n",
+        "skills.sh",
+        "installs-102268"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:xixu-me/skills/running-claude-code-via-litellm-copilot",
+      "name": "running-claude-code-via-litellm-copilot",
+      "displayName": "Running Claude Code Via Litellm Copilot",
+      "description": "Imported from skills.sh. Published by xixu-me/skills; 102,785 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/xixu-me/skills/running-claude-code-via-litellm-copilot",
+      "categories": [
+        "developer-tools"
+      ],
+      "tags": [
+        "xixu",
+        "me",
+        "running",
+        "claude",
+        "code",
+        "via",
+        "litellm",
+        "copilot",
+        "skills.sh",
+        "installs-102785"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:xixu-me/skills/secure-linux-web-hosting",
+      "name": "secure-linux-web-hosting",
+      "displayName": "Secure Linux Web Hosting",
+      "description": "Imported from skills.sh. Published by xixu-me/skills; 102,832 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/xixu-me/skills/secure-linux-web-hosting",
+      "categories": [
+        "design"
+      ],
+      "tags": [
+        "xixu",
+        "me",
+        "secure",
+        "linux",
+        "web",
+        "hosting",
+        "skills.sh",
+        "installs-102832"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:xixu-me/skills/skills-cli",
+      "name": "skills-cli",
+      "displayName": "Skills CLI",
+      "description": "Imported from skills.sh. Published by xixu-me/skills; 102,867 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/xixu-me/skills/skills-cli",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "xixu",
+        "me",
+        "cli",
+        "skills.sh",
+        "installs-102867"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:xixu-me/skills/tzst",
+      "name": "tzst",
+      "displayName": "Tzst",
+      "description": "Imported from skills.sh. Published by xixu-me/skills; 99,866 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/xixu-me/skills/tzst",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "xixu",
+        "me",
+        "tzst",
+        "skills.sh",
+        "installs-99866"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:xixu-me/skills/use-my-browser",
+      "name": "use-my-browser",
+      "displayName": "Use My Browser",
+      "description": "Imported from skills.sh. Published by xixu-me/skills; 100,563 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/xixu-me/skills/use-my-browser",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "xixu",
+        "me",
+        "use",
+        "my",
+        "browser",
+        "skills.sh",
+        "installs-100563"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:xixu-me/skills/xdrop",
+      "name": "xdrop",
+      "displayName": "Xdrop",
+      "description": "Imported from skills.sh. Published by xixu-me/skills; 99,650 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/xixu-me/skills/xdrop",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "xixu",
+        "me",
+        "xdrop",
+        "skills.sh",
+        "installs-99650"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:xixu-me/skills/xget",
+      "name": "xget",
+      "displayName": "Xget",
+      "description": "Imported from skills.sh. Published by xixu-me/skills; 99,918 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/xixu-me/skills/xget",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "xixu",
+        "me",
+        "xget",
+        "skills.sh",
+        "installs-99918"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "slack",
+      "name": "slack",
+      "displayName": "Slack",
+      "description": "Work with Slack using the configured Slack integration.",
+      "sourceType": "external",
+      "categories": [
+        "communication",
+        "productivity"
+      ],
+      "tags": [
+        "slack",
+        "messages",
+        "channels",
+        "team"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "spreadsheets:spreadsheets",
+      "name": "spreadsheets:Spreadsheets",
+      "displayName": "Spreadsheets",
+      "description": "Create, modify, analyze, visualize, render, and export spreadsheet files with formulas, formatting, charts, and tables.",
+      "sourceType": "bundled",
+      "categories": [
+        "data",
+        "productivity"
+      ],
+      "tags": [
+        "xlsx",
+        "csv",
+        "sheets",
+        "spreadsheets",
+        "tables",
+        "charts"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "stripe-best-practices",
+      "name": "stripe-best-practices",
+      "displayName": "Stripe Best Practices",
+      "description": "Guide Stripe integration decisions for Checkout, PaymentIntents, Connect, billing, subscriptions, and webhooks.",
+      "sourceType": "bundled",
+      "categories": [
+        "finance",
+        "developer-tools"
+      ],
+      "tags": [
+        "stripe",
+        "payments",
+        "checkout",
+        "billing",
+        "webhooks"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "stripe-projects",
+      "name": "stripe-projects",
+      "displayName": "Stripe Projects",
+      "description": "Set up a new app or local repo with Stripe Projects and bootstrap the Projects CLI from a coding agent.",
+      "sourceType": "bundled",
+      "categories": [
+        "finance",
+        "developer-tools"
+      ],
+      "tags": [
+        "stripe",
+        "projects",
+        "cli",
+        "payments"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "teams",
+      "name": "teams",
+      "displayName": "Teams",
+      "description": "Work with Teams using the configured Microsoft Teams app connector.",
+      "sourceType": "external",
+      "categories": [
+        "communication",
+        "productivity"
+      ],
+      "tags": [
+        "teams",
+        "microsoft",
+        "messages",
+        "meetings"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "upgrade-stripe",
+      "name": "upgrade-stripe",
+      "displayName": "Upgrade Stripe",
+      "description": "Upgrade Stripe API versions and SDKs safely.",
+      "sourceType": "bundled",
+      "categories": [
+        "finance",
+        "developer-tools"
+      ],
+      "tags": [
+        "stripe",
+        "api versions",
+        "sdk",
+        "upgrade"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "vercel-react-best-practices",
+      "name": "vercel-react-best-practices",
+      "displayName": "Vercel React Best Practices",
+      "description": "React and Next.js performance optimization guidelines from Vercel Engineering.",
+      "sourceType": "bundled",
+      "categories": [
+        "developer-tools",
+        "code"
+      ],
+      "tags": [
+        "vercel",
+        "react",
+        "next.js",
+        "performance"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "workers-best-practices",
+      "name": "workers-best-practices",
+      "displayName": "Workers Best Practices",
+      "description": "Review and author Cloudflare Workers code against production best practices.",
+      "sourceType": "bundled",
+      "categories": [
+        "developer-tools",
+        "cloud",
+        "code"
+      ],
+      "tags": [
+        "cloudflare",
+        "workers",
+        "wrangler",
+        "bindings",
+        "observability"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "wrangler",
+      "name": "wrangler",
+      "displayName": "Wrangler",
+      "description": "Cloudflare Workers CLI guidance for deploying, developing, and managing Workers, KV, R2, D1, Vectorize, Queues, Workflows, and secrets.",
+      "sourceType": "bundled",
+      "categories": [
+        "developer-tools",
+        "cloud",
+        "code"
+      ],
+      "tags": [
+        "cloudflare",
+        "wrangler",
+        "workers",
+        "kv",
+        "r2",
+        "d1"
+      ],
+      "status": "available"
+    }
+  ]
 }

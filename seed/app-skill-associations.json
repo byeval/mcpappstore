@@ -1,1 +1,380 @@
-[]
+[
+  {
+    "appId": "ant-dir-gh-anthropic-pdf-server-mcp",
+    "skillId": "documents:documents",
+    "relationType": "related",
+    "confidence": 0.76,
+    "reason": "PDF viewer workflows often lead into document extraction, review, or redlining tasks."
+  },
+  {
+    "appId": "awesome-slides",
+    "skillId": "presentations:presentations",
+    "relationType": "recommended",
+    "confidence": 0.86,
+    "reason": "Slide generation workflows benefit from deck structure and render verification guidance."
+  },
+  {
+    "appId": "bigquery",
+    "skillId": "spreadsheets:spreadsheets",
+    "relationType": "related",
+    "confidence": 0.72,
+    "reason": "BigQuery results frequently need tabular analysis, spreadsheet exports, and charts."
+  },
+  {
+    "appId": "brave-applescript",
+    "skillId": "browser-use:browser",
+    "relationType": "related",
+    "confidence": 0.78,
+    "reason": "Brave AppleScript workflows overlap with browser navigation and automation tasks."
+  },
+  {
+    "appId": "cloudflare",
+    "skillId": "cloudflare",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "The Cloudflare Developer Platform app benefits from broad Cloudflare product guidance."
+  },
+  {
+    "appId": "cloudflare",
+    "skillId": "cloudflare-email-service",
+    "relationType": "related",
+    "confidence": 0.78,
+    "reason": "Email sending and routing are common Cloudflare app capabilities that need specific setup guidance."
+  },
+  {
+    "appId": "cloudflare",
+    "skillId": "durable-objects",
+    "relationType": "related",
+    "confidence": 0.82,
+    "reason": "Durable Objects guidance is useful when Cloudflare workflows include stateful coordination."
+  },
+  {
+    "appId": "cloudflare",
+    "skillId": "workers-best-practices",
+    "relationType": "recommended",
+    "confidence": 0.94,
+    "reason": "Workers authoring and review guidance improves Cloudflare development workflows."
+  },
+  {
+    "appId": "cloudflare",
+    "skillId": "wrangler",
+    "relationType": "recommended",
+    "confidence": 0.92,
+    "reason": "Wrangler is the primary CLI for Cloudflare Workers and platform resource operations."
+  },
+  {
+    "appId": "control-chrome",
+    "skillId": "browser-use:browser",
+    "relationType": "recommended",
+    "confidence": 0.94,
+    "reason": "Chrome control workflows pair directly with browser automation guidance."
+  },
+  {
+    "appId": "databricks",
+    "skillId": "skills-sh:databricks/databricks-agent-skills/databricks",
+    "relationType": "recommended",
+    "confidence": 0.86,
+    "reason": "The Databricks app benefits from the official Databricks agent skill for workspace and data workflows."
+  },
+  {
+    "appId": "databricks",
+    "skillId": "skills-sh:databricks/databricks-agent-skills/databricks-core",
+    "relationType": "recommended",
+    "confidence": 0.88,
+    "reason": "Databricks MCP workflows pair with official Databricks core guidance from skills.sh."
+  },
+  {
+    "appId": "docling-mcp",
+    "skillId": "documents:documents",
+    "relationType": "recommended",
+    "confidence": 0.84,
+    "reason": "Docling document workflows overlap with DOCX and document conversion handling."
+  },
+  {
+    "appId": "figma",
+    "skillId": "figma",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "The Figma app benefits from design implementation and Code Connect workflow guidance."
+  },
+  {
+    "appId": "figma",
+    "skillId": "frontend-design",
+    "relationType": "related",
+    "confidence": 0.76,
+    "reason": "Figma-to-code workflows often continue into frontend UI implementation."
+  },
+  {
+    "appId": "firefox-control",
+    "skillId": "browser-use:browser",
+    "relationType": "related",
+    "confidence": 0.82,
+    "reason": "Firefox control overlaps with browser automation workflows."
+  },
+  {
+    "appId": "github",
+    "skillId": "github:gh-address-comments",
+    "relationType": "recommended",
+    "confidence": 0.92,
+    "reason": "Pull request review comments need thread-aware GitHub workflow instructions."
+  },
+  {
+    "appId": "github",
+    "skillId": "github:gh-fix-ci",
+    "relationType": "recommended",
+    "confidence": 0.94,
+    "reason": "GitHub Actions checks and PR status context are most useful when paired with CI debugging guidance."
+  },
+  {
+    "appId": "github",
+    "skillId": "github:github",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "The GitHub MCP app pairs directly with repository, issue, and pull request triage workflows."
+  },
+  {
+    "appId": "github",
+    "skillId": "github:yeet",
+    "relationType": "related",
+    "confidence": 0.86,
+    "reason": "Publishing local changes to GitHub is a natural follow-up to repository work."
+  },
+  {
+    "appId": "gmail-gmailmcp",
+    "skillId": "gmail",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "The Gmail MCP server maps directly to Gmail email workflows."
+  },
+  {
+    "appId": "google-calendar-calendarmcp",
+    "skillId": "google-calendar",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "The Google Calendar MCP server maps directly to scheduling and availability workflows."
+  },
+  {
+    "appId": "google-drive",
+    "skillId": "google-drive",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "Google Drive is the direct workspace surface for Drive, Docs, Sheets, and Slides work."
+  },
+  {
+    "appId": "google-drive",
+    "skillId": "spreadsheets:spreadsheets",
+    "relationType": "related",
+    "confidence": 0.74,
+    "reason": "Google Drive often contains Sheets that need spreadsheet analysis or export workflows."
+  },
+  {
+    "appId": "kapture-browser-automation",
+    "skillId": "browser-use:browser",
+    "relationType": "recommended",
+    "confidence": 0.9,
+    "reason": "Browser automation workflows need reliable navigation, interaction, and screenshot guidance."
+  },
+  {
+    "appId": "linear",
+    "skillId": "linear",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "Linear issue and project context benefits from Linear-specific workflow instructions."
+  },
+  {
+    "appId": "neon-postgres",
+    "skillId": "skills-sh:neondatabase/agent-skills/neon-postgres",
+    "relationType": "recommended",
+    "confidence": 0.94,
+    "reason": "Neon Postgres has a direct official Neon agent skill on skills.sh."
+  },
+  {
+    "appId": "neon-postgres",
+    "skillId": "skills-sh:neondatabase/postgres-skills/postgres-best-practices",
+    "relationType": "recommended",
+    "confidence": 0.86,
+    "reason": "Neon Postgres workflows commonly need safe Postgres schema, SQL, and operational guidance."
+  },
+  {
+    "appId": "notion",
+    "skillId": "notion",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "Notion workspace context benefits from planning, research, and knowledge capture guidance."
+  },
+  {
+    "appId": "outlook-calendar",
+    "skillId": "outlook-calendar",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "Outlook Calendar workflows need scheduling and meeting-safety guidance."
+  },
+  {
+    "appId": "outlook-email",
+    "skillId": "outlook-email",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "Outlook Email maps directly to Microsoft email workflows."
+  },
+  {
+    "appId": "pdf-viewer",
+    "skillId": "documents:documents",
+    "relationType": "related",
+    "confidence": 0.74,
+    "reason": "PDF review workflows often need document handling and rendering checks."
+  },
+  {
+    "appId": "planetscale",
+    "skillId": "skills-sh:planetscale/database-skills/mysql",
+    "relationType": "recommended",
+    "confidence": 0.84,
+    "reason": "PlanetScale workflows map naturally to the PlanetScale MySQL database skill from skills.sh."
+  },
+  {
+    "appId": "postman",
+    "skillId": "skills-sh:postman-devrel/agent-skills/postman",
+    "relationType": "recommended",
+    "confidence": 0.82,
+    "reason": "Postman MCP workflows pair with Postman DevRel guidance for API request, collection, and testing work."
+  },
+  {
+    "appId": "postman",
+    "skillId": "skills-sh:postman-devrel/agent-skills/postman-api-readiness",
+    "relationType": "related",
+    "confidence": 0.74,
+    "reason": "API readiness review is an adjacent Postman workflow for teams using Postman through MCP."
+  },
+  {
+    "appId": "powerpoint-by-anthropic",
+    "skillId": "presentations:presentations",
+    "relationType": "recommended",
+    "confidence": 0.96,
+    "reason": "PowerPoint creation and editing should use presentation rendering and verification guidance."
+  },
+  {
+    "appId": "sentry",
+    "skillId": "skills-sh:sentry/dev/sentry-cli",
+    "relationType": "recommended",
+    "confidence": 0.9,
+    "reason": "Sentry MCP workflows pair with Sentry CLI guidance for projects, releases, issues, and incident context."
+  },
+  {
+    "appId": "shadcn-ui",
+    "skillId": "skills-sh:google-labs-code/stitch-skills/shadcn-ui",
+    "relationType": "related",
+    "confidence": 0.82,
+    "reason": "The Google Labs shadcn UI skill is a strong public-directory companion for UI component generation workflows."
+  },
+  {
+    "appId": "shadcn-ui",
+    "skillId": "skills-sh:shadcn/ui/shadcn",
+    "relationType": "recommended",
+    "confidence": 0.94,
+    "reason": "The shadcn/ui skill is the most direct skills.sh match for Shadcn UI component workflows."
+  },
+  {
+    "appId": "sharepoint",
+    "skillId": "sharepoint",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "SharePoint file and site workflows benefit from SharePoint-specific connector guidance."
+  },
+  {
+    "appId": "slack",
+    "skillId": "slack",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "Slack channels, messages, and team workflows pair directly with the Slack integration skill."
+  },
+  {
+    "appId": "snowflake",
+    "skillId": "skills-sh:snowflake-labs/subagent-cortex-code/cortex-code",
+    "relationType": "related",
+    "confidence": 0.74,
+    "reason": "Snowflake Cortex Code guidance is a related Snowflake Labs workflow for code and data app development."
+  },
+  {
+    "appId": "stripe",
+    "skillId": "stripe-best-practices",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "Stripe payment and billing workflows need API selection, webhook, and security guidance."
+  },
+  {
+    "appId": "stripe",
+    "skillId": "stripe-projects",
+    "relationType": "related",
+    "confidence": 0.86,
+    "reason": "Stripe Projects can bootstrap new payment-enabled app work after discovery."
+  },
+  {
+    "appId": "stripe",
+    "skillId": "upgrade-stripe",
+    "relationType": "related",
+    "confidence": 0.8,
+    "reason": "Stripe integrations often need API version and SDK upgrade checks."
+  },
+  {
+    "appId": "supabase",
+    "skillId": "skills-sh:supabase/agent-skills/supabase",
+    "relationType": "recommended",
+    "confidence": 0.94,
+    "reason": "Supabase's MCP workflows map directly to the official Supabase agent skill from skills.sh."
+  },
+  {
+    "appId": "supabase",
+    "skillId": "skills-sh:supabase/agent-skills/supabase-postgres-best-practices",
+    "relationType": "recommended",
+    "confidence": 0.9,
+    "reason": "Supabase app usage often touches Postgres schema, SQL, and database safety workflows."
+  },
+  {
+    "appId": "teams",
+    "skillId": "teams",
+    "relationType": "recommended",
+    "confidence": 0.98,
+    "reason": "Teams messages and meetings pair directly with the Teams connector skill."
+  },
+  {
+    "appId": "vercel",
+    "skillId": "skills-sh:vercel-labs/agent-skills/deploy-to-vercel",
+    "relationType": "recommended",
+    "confidence": 0.88,
+    "reason": "The Vercel app naturally pairs with deployment workflow guidance from Vercel Labs."
+  },
+  {
+    "appId": "vercel",
+    "skillId": "skills-sh:vercel-labs/agent-skills/vercel-composition-patterns",
+    "relationType": "related",
+    "confidence": 0.78,
+    "reason": "Vercel Labs composition guidance is a related companion for React and Next.js app architecture decisions around Vercel projects."
+  },
+  {
+    "appId": "vercel",
+    "skillId": "skills-sh:vercel-labs/next-skills/next-best-practices",
+    "relationType": "recommended",
+    "confidence": 0.86,
+    "reason": "Vercel app workflows commonly involve Next.js architecture, routing, and deployment choices."
+  },
+  {
+    "appId": "vercel",
+    "skillId": "skills-sh:vercel-labs/skills/find-skills",
+    "relationType": "related",
+    "confidence": 0.78,
+    "reason": "Vercel Labs' find-skills workflow helps discover installable skills for adjacent Vercel and agent workflows."
+  },
+  {
+    "appId": "vercel",
+    "skillId": "vercel-react-best-practices",
+    "relationType": "recommended",
+    "confidence": 0.9,
+    "reason": "Vercel app workflows commonly involve React and Next.js performance decisions."
+  },
+  {
+    "appId": "word-by-anthropic",
+    "skillId": "documents:documents",
+    "relationType": "recommended",
+    "confidence": 0.96,
+    "reason": "Word document editing, rendering, and verification need document-specific workflow guidance."
+  }
+]
