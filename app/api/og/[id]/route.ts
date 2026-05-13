@@ -49,7 +49,7 @@ export async function GET(
   return ogImageResponse({
     title: app.name,
     description: app.tagline,
-    eyebrow: "MCP App",
+    eyebrow: "App profile",
     footer: new URL(request.url).host,
     logoAlt: `${app.name} logo`,
     logoUrl: logoPath ? new URL(logoPath, request.url).toString() : undefined,
