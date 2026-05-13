@@ -25,12 +25,16 @@ export function ogImageResponse({
   eyebrow = "MCP App Store",
   footer = "mcpapp.net",
   metrics = [],
+  logoUrl,
+  logoAlt,
 }: {
   title: string;
   description: string;
   eyebrow?: string;
   footer?: string;
   metrics?: string[];
+  logoUrl?: string;
+  logoAlt?: string;
 }): ImageResponse {
   const safeTitle = cleanText(title, "MCP App Store", 92);
   const safeDescription = cleanText(description, "Discover MCP apps, ChatGPT apps, Claude connectors, and MCP servers.", 190);
@@ -115,33 +119,73 @@ export function ogImageResponse({
           {
             style: {
               display: "flex",
-              flexDirection: "column",
-              gap: 26,
+              alignItems: "center",
+              gap: 36,
             },
           },
+          logoUrl
+            ? React.createElement(
+                "div",
+                {
+                  style: {
+                    width: 190,
+                    height: 190,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    border: "2px solid #e1d4c1",
+                    borderRadius: 42,
+                    background: "#ffffff",
+                    boxShadow: "0 18px 44px rgba(47, 36, 25, 0.12)",
+                    overflow: "hidden",
+                  },
+                },
+                React.createElement("img", {
+                  alt: logoAlt ?? safeTitle,
+                  height: 148,
+                  src: logoUrl,
+                  style: {
+                    objectFit: "contain",
+                  },
+                  width: 148,
+                }),
+              )
+            : null,
           React.createElement(
             "div",
             {
               style: {
-                fontSize: safeTitle.length > 56 ? 66 : 78,
-                fontWeight: 800,
-                letterSpacing: 0,
-                lineHeight: 1.02,
+                display: "flex",
+                flexDirection: "column",
+                gap: 26,
+                minWidth: 0,
               },
             },
-            safeTitle,
-          ),
-          React.createElement(
-            "div",
-            {
-              style: {
-                color: "#5b4a39",
-                fontSize: 34,
-                lineHeight: 1.25,
-                maxWidth: 980,
+            React.createElement(
+              "div",
+              {
+                style: {
+                  fontSize: safeTitle.length > 56 ? 66 : 78,
+                  fontWeight: 800,
+                  letterSpacing: 0,
+                  lineHeight: 1.02,
+                },
               },
-            },
-            safeDescription,
+              safeTitle,
+            ),
+            React.createElement(
+              "div",
+              {
+                style: {
+                  color: "#5b4a39",
+                  fontSize: 34,
+                  lineHeight: 1.25,
+                  maxWidth: logoUrl ? 760 : 980,
+                },
+              },
+              safeDescription,
+            ),
           ),
         ),
         React.createElement(

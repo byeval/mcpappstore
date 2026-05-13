@@ -5,6 +5,22 @@ function appIdFromParam(id: string): string {
   return id.replace(/\.png$/i, "");
 }
 
+function isOgSupportedImageUrl(url: string | undefined): url is string {
+  return Boolean(url && /\.(png|jpe?g|svg)(?:[?#].*)?$/i.test(url));
+}
+
+function ogIconPath(app: { iconKey?: string; iconUrl?: string; id: string }): string | undefined {
+  const iconSlug = app.iconKey?.startsWith("icons/")
+    ? app.iconKey.split("/").at(-1)?.replace(/\.[^.]+$/, "")
+    : undefined;
+
+  if (iconSlug) {
+    return `/og-icons/${iconSlug}.png`;
+  }
+
+  return isOgSupportedImageUrl(app.iconUrl) ? app.iconUrl : undefined;
+}
+
 export async function GET(
   request: Request,
   context: {
@@ -28,11 +44,15 @@ export async function GET(
     return new Response("Not found", { status: 404 });
   }
 
+  const logoPath = ogIconPath(app);
+
   return ogImageResponse({
     title: app.name,
     description: app.tagline,
     eyebrow: "MCP App",
     footer: new URL(request.url).host,
+    logoAlt: `${app.name} logo`,
+    logoUrl: logoPath ? new URL(logoPath, request.url).toString() : undefined,
     metrics: [`Transport: ${app.mcpTransport}`, `Tools: ${app.tools.length}`, `Publisher: ${app.publisher}`],
   });
 }
