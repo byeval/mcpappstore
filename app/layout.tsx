@@ -79,9 +79,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html dir={localeDetail.dir} lang={localeDetail.htmlLang}>
       <head>
-        <link href="/favicon.ico" rel="icon" sizes="16x16 32x32 48x48" />
-        <link href="/icon.svg" rel="icon" type="image/svg+xml" />
-        <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
         {supportedLocales.map((item) => (
           <link href={absoluteUrl(localizedPath(pathname, item))} hrefLang={localeDetails[item].htmlLang} key={item} rel="alternate" />
         ))}

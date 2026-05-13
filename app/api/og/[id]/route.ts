@@ -21,6 +21,32 @@ function ogIconPath(app: { iconKey?: string; iconUrl?: string; id: string }): st
   return isOgSupportedImageUrl(app.iconUrl) ? app.iconUrl : undefined;
 }
 
+function bytesToBase64(bytes: Uint8Array): string {
+  let binary = "";
+  const chunkSize = 0x8000;
+
+  for (let index = 0; index < bytes.length; index += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(index, index + chunkSize));
+  }
+
+  return btoa(binary);
+}
+
+async function imageDataUri(url: string): Promise<string | undefined> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    return undefined;
+  }
+
+  const contentType = response.headers.get("content-type")?.split(";")[0] ?? "image/png";
+  if (!/^image\/(?:png|jpe?g|svg\+xml)$/i.test(contentType)) {
+    return undefined;
+  }
+
+  const bytes = new Uint8Array(await response.arrayBuffer());
+  return `data:${contentType};base64,${bytesToBase64(bytes)}`;
+}
+
 export async function GET(
   request: Request,
   context: {
@@ -45,6 +71,7 @@ export async function GET(
   }
 
   const logoPath = ogIconPath(app);
+  const logoUrl = logoPath ? new URL(logoPath, request.url).toString() : undefined;
 
   return ogImageResponse({
     title: app.name,
@@ -52,7 +79,7 @@ export async function GET(
     eyebrow: "App profile",
     footer: new URL(request.url).host,
     logoAlt: `${app.name} logo`,
-    logoUrl: logoPath ? new URL(logoPath, request.url).toString() : undefined,
+    logoUrl: logoUrl ? await imageDataUri(logoUrl) : undefined,
     metrics: [`Transport: ${app.mcpTransport}`, `Tools: ${app.tools.length}`, `Publisher: ${app.publisher}`],
   });
 }
