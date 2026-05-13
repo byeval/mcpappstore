@@ -1,6 +1,8 @@
 import { getAppById } from "@/lib/data";
 import { ogImageResponse } from "@/lib/og-image";
 
+const ogIconRawBaseUrl = "https://raw.githubusercontent.com/byeval/mcpappstore/main/public/og-icons";
+
 function appIdFromParam(id: string): string {
   return id.replace(/\.png$/i, "");
 }
@@ -15,7 +17,7 @@ function ogIconPath(app: { iconKey?: string; iconUrl?: string; id: string }): st
     : undefined;
 
   if (iconSlug) {
-    return `/og-icons/${iconSlug}.png`;
+    return `${ogIconRawBaseUrl}/${encodeURIComponent(iconSlug)}.png`;
   }
 
   return isOgSupportedImageUrl(app.iconUrl) ? app.iconUrl : undefined;
@@ -33,18 +35,22 @@ function bytesToBase64(bytes: Uint8Array): string {
 }
 
 async function imageDataUri(url: string): Promise<string | undefined> {
-  const response = await fetch(url);
-  if (!response.ok) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      return undefined;
+    }
+
+    const contentType = response.headers.get("content-type")?.split(";")[0] ?? "image/png";
+    if (!/^image\/(?:png|jpe?g|svg\+xml)$/i.test(contentType)) {
+      return undefined;
+    }
+
+    const bytes = new Uint8Array(await response.arrayBuffer());
+    return `data:${contentType};base64,${bytesToBase64(bytes)}`;
+  } catch {
     return undefined;
   }
-
-  const contentType = response.headers.get("content-type")?.split(";")[0] ?? "image/png";
-  if (!/^image\/(?:png|jpe?g|svg\+xml)$/i.test(contentType)) {
-    return undefined;
-  }
-
-  const bytes = new Uint8Array(await response.arrayBuffer());
-  return `data:${contentType};base64,${bytesToBase64(bytes)}`;
 }
 
 export async function GET(
