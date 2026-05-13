@@ -2059,6 +2059,29 @@ button.dot {
   max-width: 860px;
 }
 
+.home-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: -2px;
+}
+
+.home-quick-links a {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.home-quick-links a:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
 .home-learn-band {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);

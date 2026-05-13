@@ -12,9 +12,9 @@ import { absoluteUrl } from "@/lib/utils";
 import { itemListJsonLd, jsonLdScript, organizationJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "MCP App Store and server directory (mcpapp)",
+  title: "MCP Server Directory for ChatGPT Apps & Claude Connectors",
   description:
-    "mcpapp is an MCP app store and MCP server directory for ChatGPT apps and Claude connectors, with categories, previews, tools, and integration details.",
+    "mcpapp is an MCP app store and MCP server directory for model context protocol apps, ChatGPT apps, and Claude connectors, with categories, previews, tools, and integration details.",
   path: "/",
 });
 
@@ -48,6 +48,20 @@ export default async function HomePage() {
           <input name="q" placeholder={t.home.searchPlaceholder} type="search" />
         </form>
       </header>
+      <section className="home-quick-links" aria-label="MCP directory quick links">
+        <Link href={href("/store")} prefetch={false}>
+          MCP server directory A-Z
+        </Link>
+        <Link href={href("/chatgpt-apps")} prefetch={false}>
+          {t.nav.chatgpt}
+        </Link>
+        <Link href={href("/claude-connectors")} prefetch={false}>
+          {t.nav.claude}
+        </Link>
+        <Link href={href("/apps")} prefetch={false}>
+          {t.nav.apps}
+        </Link>
+      </section>
       <HeroCarousel apps={featuredApps} locale={locale} messages={t} />
       <CategoryTabs activeSlug={undefined} categories={categories} locale={locale} messages={t} />
       <section className="home-learn-band" aria-label={t.home.learnAria}>
