@@ -8,6 +8,7 @@ declare global {
     dataLayer: unknown[];
     gtag?: (...args: unknown[]) => void;
     googleAnalyticsInitialized?: boolean;
+    googleAnalyticsLastPageView?: string;
   }
 }
 
@@ -48,11 +49,18 @@ export function GoogleAnalyticsPageTracker({ measurementId }: { measurementId: s
 
     const query = searchParams.toString();
     const pagePath = query ? `${pathname}?${query}` : pathname;
+    const pageLocation = window.location.href;
 
-    window.gtag("config", measurementId, {
-      page_location: window.location.href,
+    if (window.googleAnalyticsLastPageView === pageLocation) {
+      return;
+    }
+
+    window.googleAnalyticsLastPageView = pageLocation;
+    window.gtag("event", "page_view", {
       page_path: pagePath,
+      page_location: pageLocation,
       page_title: document.title,
+      send_to: measurementId,
     });
   }, [measurementId, pathname, searchParams]);
 
