@@ -7,7 +7,7 @@ import { getEnvValue } from "@/lib/cloudflare";
 import { localeDetails, localizedPath, supportedLocales } from "@/lib/i18n";
 import { getI18n, getRequestPathname } from "@/lib/i18n-server";
 import { defaultOgImagePath } from "@/lib/og-image";
-import { absoluteUrl } from "@/lib/utils";
+import { absoluteUrl, siteOrigin } from "@/lib/utils";
 
 import "./globals.css";
 
@@ -16,7 +16,7 @@ const defaultDescription =
 const defaultOgImage = defaultOgImagePath();
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(siteOrigin()),
   title: {
     default: "MCP App Store",
     template: "%s | MCP App Store",

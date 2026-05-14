@@ -22,8 +22,20 @@ export function initials(name: string): string {
   return parts.map((part) => part[0]?.toUpperCase() ?? "").join("");
 }
 
+const defaultProductionSiteUrl = "https://mcpapp.net";
+const defaultDevelopmentSiteUrl = "http://localhost:3000";
+
+export function siteOrigin(siteUrl?: string): string {
+  const configured = (siteUrl ?? process.env.SITE_URL)?.trim();
+  if (configured) {
+    return configured.replace(/\/$/, "");
+  }
+
+  return process.env.NODE_ENV === "production" ? defaultProductionSiteUrl : defaultDevelopmentSiteUrl;
+}
+
 export function absoluteUrl(path: string, siteUrl?: string): string {
-  const base = (siteUrl ?? process.env.SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  const base = siteOrigin(siteUrl);
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
