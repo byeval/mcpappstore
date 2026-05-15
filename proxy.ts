@@ -48,10 +48,11 @@ function mapAppsPathToStore(pathname: string): string | null {
 
 export async function proxy(request: NextRequest) {
   const protocol = request.nextUrl.protocol;
+  const forwardedProto = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim().toLowerCase();
   const hostname = request.nextUrl.hostname.toLowerCase();
   const isPrimaryHost = hostname === "mcpapp.net" || hostname === "www.mcpapp.net";
   const shouldRedirectToCanonicalHost = hostname === "www.mcpapp.net";
-  const shouldRedirectToHttps = protocol === "http:";
+  const shouldRedirectToHttps = protocol === "http:" || forwardedProto === "http";
 
   if (isPrimaryHost && (shouldRedirectToHttps || shouldRedirectToCanonicalHost)) {
     const redirectUrl = new URL(request.url);
