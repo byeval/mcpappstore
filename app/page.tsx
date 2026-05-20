@@ -64,8 +64,8 @@ export default async function HomePage() {
         </form>
       </header>
       <section className="home-quick-links" aria-label="MCP directory quick links">
-        <Link href={href("/store")} prefetch={false}>
-          MCP apps directory & MCP servers A-Z
+        <Link href={href("/mcp-directory")} prefetch={false}>
+          MCP directory: compare MCP servers, ChatGPT apps, and Claude connectors
         </Link>
         <Link href={href("/chatgpt-apps")} prefetch={false}>
           {t.nav.chatgpt}
