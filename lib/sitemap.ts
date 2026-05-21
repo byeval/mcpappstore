@@ -158,6 +158,7 @@ export async function buildStaticSitemapEntries(): Promise<SitemapEntry[]> {
       priority: 0.82,
     })),
     ...localizedEntries("/chatgpt-apps", { changeFrequency: "daily", priority: 0.9 }),
+    ...localizedEntries("/chatgpt-connectors", { changeFrequency: "daily", priority: 0.82 }),
     ...localizedPaginatedEntries({
       basePath: "/chatgpt-apps",
       totalCount: chatGptCount,

@@ -81,6 +81,7 @@ export default async function McpDirectoryPage() {
             <div className="category-related-links">
               <Link href={href("/store")} prefetch={false}>Browse all MCP listings A-Z</Link>
               <Link href={href("/chatgpt-apps")} prefetch={false}>Browse ChatGPT apps</Link>
+              <Link href={href("/chatgpt-connectors")} prefetch={false}>ChatGPT connectors guide</Link>
               <Link href={href("/claude-connectors")} prefetch={false}>Browse Claude connectors</Link>
               <Link href={href("/category/productivity")} prefetch={false}>Browse productivity MCP apps</Link>
             </div>
@@ -113,6 +114,7 @@ export default async function McpDirectoryPage() {
             [
               { name: "MCP directory A-Z", path: "/store" },
               { name: "ChatGPT apps", path: "/chatgpt-apps" },
+              { name: "ChatGPT connectors", path: "/chatgpt-connectors" },
               { name: "Claude connectors", path: "/claude-connectors" },
               { name: "Productivity MCP apps", path: "/category/productivity" },
             ],
