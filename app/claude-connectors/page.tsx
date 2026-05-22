@@ -20,15 +20,29 @@ export async function generateMetadata({
 }: {
   searchParams: Promise<{ page?: string }>;
 }): Promise<Metadata> {
-  const [{ locale, messages: t }, { page: pageParam }] = await Promise.all([getI18n(), searchParams]);
+  const [{ locale, messages: t }, { page: pageParam }, totalCount] = await Promise.all([
+    getI18n(),
+    searchParams,
+    countAppsByPlatform("claude"),
+  ]);
   const page = pageFromSearchParam(pageParam);
   const pageSuffix = page > 1 ? (locale === "zh-hans" ? ` - 第 ${page} 页` : ` - Page ${page}`) : "";
+  const listingText = totalCount.toLocaleString("en-US");
 
   return pageMetadata({
-    title: `${t.platformPages.claudeTitle} - MCP${pageSuffix}`,
-    description: t.platformPages.claudeGuideBody1,
+    title: `Claude connectors directory: ${listingText} integrations and MCP apps${pageSuffix}`,
+    description:
+      `Browse ${listingText} Claude connectors and MCP apps with category coverage, auth details, and workflow fit guidance for production teams.`,
     path: paginatedPath("/claude-connectors", page),
     locale,
+    keywords: [
+      "Claude connectors",
+      "Claude integrations",
+      "MCP apps",
+      "MCP directory",
+      "Claude connectors directory",
+      "Model Context Protocol apps",
+    ],
   });
 }
 
@@ -79,6 +93,8 @@ export default async function ClaudeConnectorsPage({
             <p>{t.platformPages.claudeGuideBody1}</p>
             <p>{t.platformPages.claudeGuideBody2}</p>
             <div className="category-related-links">
+              <Link href={href("/mcp-directory")} prefetch={false}>Browse the full MCP directory</Link>
+              <Link href={href("/chatgpt-connectors")} prefetch={false}>Compare with ChatGPT connectors</Link>
               <Link href={href("/learn/chatgpt-apps-vs-claude-connectors")} prefetch={false}>{t.platformPages.claudeRelatedComparison}</Link>
               <Link href={href("/learn/claude-connectors-for-databases")} prefetch={false}>{t.platformPages.claudeRelatedDatabases}</Link>
               <Link href={href("/learn/best-claude-connectors-for-productivity")} prefetch={false}>{t.platformPages.claudeRelatedProductivity}</Link>
