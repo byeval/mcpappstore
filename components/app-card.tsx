@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { CatalogApp } from "@/lib/types";
 import { PlatformBadge } from "@/components/platform-badge";
 import { getMessages, localizedPath, surfaceLabelFor, type I18nMessages, type Locale } from "@/lib/i18n";
-import { optimizedImageSrcSet, optimizedImageUrl } from "@/lib/image-urls";
+import { optimizedImageUrl } from "@/lib/image-urls";
 import { primarySurface, surfaceDetails } from "@/lib/surfaces";
 import { initials } from "@/lib/utils";
 
@@ -43,8 +43,7 @@ export function AppCard({
               height={256}
               loading="lazy"
               sizes="48px"
-              src={optimizedImageUrl(app.iconUrl, 256)}
-              srcSet={optimizedImageSrcSet(app.iconUrl, [128, 256])}
+              src={optimizedImageUrl(app.iconUrl)}
               width={256}
             />
           ) : (
