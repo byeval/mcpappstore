@@ -27,7 +27,8 @@ interface ExecutionContext {
 // Image security config. SVG sources with .svg extension auto-skip the
 // optimization endpoint on the client side (served directly, no proxy).
 // Vinext does not read Next.js config files here, so keep image optimizer
-// security settings in this worker module.
+// security settings in this worker module, such as the
+// `dangerouslyAllowSVG` option passed to `handleImageOptimization` below.
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
