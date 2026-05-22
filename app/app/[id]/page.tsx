@@ -11,7 +11,7 @@ import { collectionMatchesApp, type AppCollection } from "@/lib/collections";
 import { localizedAppCollections, localizedCategoryName } from "@/lib/content-i18n";
 import { getAppById, getCategorySummaries, listPublishedApps } from "@/lib/data";
 import { formatMessage, localizedPath, surfaceLabelFor, type I18nMessages, type Locale } from "@/lib/i18n";
-import { optimizedImageSrcSet, optimizedImageUrl } from "@/lib/image-urls";
+import { optimizedImageUrl } from "@/lib/image-urls";
 import { getI18n } from "@/lib/i18n-server";
 import {
   appDescription,
@@ -911,8 +911,7 @@ export default async function AppDetailPage({
               height={256}
               loading="eager"
               sizes="96px"
-              src={optimizedImageUrl(app.iconUrl, 256)}
-              srcSet={optimizedImageSrcSet(app.iconUrl, [128, 256])}
+              src={optimizedImageUrl(app.iconUrl)}
               width={256}
             />
           ) : (

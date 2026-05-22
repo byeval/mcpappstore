@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { CatalogApp } from "@/lib/types";
 import { PlatformBadge } from "@/components/platform-badge";
 import { getMessages, localizedPath, surfaceLabelFor, type I18nMessages, type Locale } from "@/lib/i18n";
-import { optimizedImageSrcSet, optimizedImageUrl } from "@/lib/image-urls";
+import { optimizedImageUrl } from "@/lib/image-urls";
 import { primarySurface, surfaceDetails } from "@/lib/surfaces";
 import { initials } from "@/lib/utils";
 
@@ -77,8 +77,7 @@ export function HeroCarousel({
                 height={256}
                 loading="eager"
                 sizes="88px"
-                src={optimizedImageUrl(activeApp.iconUrl, 256)}
-                srcSet={optimizedImageSrcSet(activeApp.iconUrl, [128, 256])}
+                src={optimizedImageUrl(activeApp.iconUrl)}
                 width={256}
               />
             ) : (
@@ -120,8 +119,7 @@ export function HeroCarousel({
                       height={540}
                       loading="eager"
                       sizes="(max-width: 640px) 78vw, 360px"
-                      src={optimizedImageUrl(thumbnailUrl, 720)}
-                      srcSet={optimizedImageSrcSet(thumbnailUrl, [360, 720])}
+                      src={optimizedImageUrl(thumbnailUrl)}
                       width={720}
                     />
                   </div>
