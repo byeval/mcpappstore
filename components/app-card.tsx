@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CatalogApp } from "@/lib/types";
 import { PlatformBadge } from "@/components/platform-badge";
 import { getMessages, localizedPath, surfaceLabelFor, type I18nMessages, type Locale } from "@/lib/i18n";
+import { optimizedImageSrcSet, optimizedImageUrl } from "@/lib/image-urls";
 import { primarySurface, surfaceDetails } from "@/lib/surfaces";
 import { initials } from "@/lib/utils";
 
@@ -33,10 +34,19 @@ export function AppCard({
 
   return (
     <Link className="app-row" href={localizedPath(`/app/${app.id}`, locale)} prefetch={false}>
-      <div className="app-icon" aria-hidden="true">
+      <div className="app-icon">
         <div className="app-icon-inner">
           {app.iconUrl ? (
-            <img alt="" decoding="async" height={256} loading="lazy" src={app.iconUrl} width={256} />
+            <img
+              alt={`${app.name} icon`}
+              decoding="async"
+              height={256}
+              loading="lazy"
+              sizes="48px"
+              src={optimizedImageUrl(app.iconUrl, 256)}
+              srcSet={optimizedImageSrcSet(app.iconUrl, [128, 256])}
+              width={256}
+            />
           ) : (
             <span>{initials(app.name)}</span>
           )}

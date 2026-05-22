@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { localeDetails, localizedPath, supportedLocales, type Locale } from "@/lib/i18n";
+import { defaultLocale, localeDetails, localizedPath, supportedLocales, type Locale } from "@/lib/i18n";
 import { defaultOgImagePath } from "@/lib/og-image";
 import type { CatalogApp, CategoryRecord } from "@/lib/types";
 import { absoluteUrl } from "@/lib/utils";
@@ -21,7 +21,23 @@ const categoryAcronyms: Record<string, string> = {
 };
 const categoryMinorWords = new Set(["and", "as", "by", "for", "in", "of", "on", "or", "to", "with"]);
 
-export function truncateMeta(value: string, maxLength = 155): string {
+export function siteNameForLocale(locale?: Locale): string {
+  if (locale === "zh-hans") {
+    return "MCP 应用商店";
+  }
+
+  if (locale === "ja") {
+    return "MCP アプリストア";
+  }
+
+  if (locale === "ko") {
+    return "MCP 앱 스토어";
+  }
+
+  return siteName;
+}
+
+export function truncateMeta(value: string, maxLength = 160): string {
   const normalized = value.replace(/\s+/g, " ").trim();
   if (normalized.length <= maxLength) {
     return normalized;
@@ -38,6 +54,7 @@ export function pageMetadata({
   imagePath,
   keywords,
   robots,
+  openGraphType = "website",
 }: {
   title: string;
   description?: string;
@@ -46,12 +63,14 @@ export function pageMetadata({
   imagePath?: string;
   keywords?: Metadata["keywords"];
   robots?: Metadata["robots"];
+  openGraphType?: string;
 }): Metadata {
   const canonicalPath = locale ? localizedPath(path, locale) : path;
   const canonical = absoluteUrl(canonicalPath);
   const metaDescription = truncateMeta(description);
   const imageUrl = absoluteUrl(imagePath ?? defaultOgImagePath());
-  const imageAlt = `${title} on ${siteName}`;
+  const localizedSiteName = siteNameForLocale(locale);
+  const imageAlt = `${title} on ${localizedSiteName}`;
 
   return {
     title,
@@ -59,16 +78,19 @@ export function pageMetadata({
     keywords,
     alternates: {
       canonical,
-      languages: Object.fromEntries(
-        supportedLocales.map((locale) => [localeDetails[locale].htmlLang, absoluteUrl(localizedPath(path, locale))]),
-      ),
+      languages: {
+        ...Object.fromEntries(
+          supportedLocales.map((locale) => [localeDetails[locale].htmlLang, absoluteUrl(localizedPath(path, locale))]),
+        ),
+        "x-default": absoluteUrl(localizedPath(path, defaultLocale)),
+      },
     },
     openGraph: {
       title,
       description: metaDescription,
       url: canonical,
-      siteName,
-      type: "website",
+      siteName: localizedSiteName,
+      type: openGraphType,
       images: [
         {
           url: imageUrl,

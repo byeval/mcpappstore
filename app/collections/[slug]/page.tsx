@@ -34,6 +34,7 @@ export async function generateMetadata({
     title: collection.title,
     description: collection.description,
     path: `/collections/${collection.slug}`,
+    locale,
   });
 }
 

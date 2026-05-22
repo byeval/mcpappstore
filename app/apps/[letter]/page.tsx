@@ -17,7 +17,7 @@ import type { CatalogApp } from "@/lib/types";
 import { absoluteUrl } from "@/lib/utils";
 
 export async function generateMetadata({ params }: { params: Promise<{ letter: string }> }): Promise<Metadata> {
-  const { letter } = await params;
+  const [{ locale }, { letter }] = await Promise.all([getI18n(), params]);
   const key = normalizeAppIndexParam(letter);
 
   if (!key) {
@@ -29,6 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ letter: s
     title: `${title} MCP Servers | ChatGPT Apps & Claude Connectors`,
     description: `Browse ${title} MCP servers, ChatGPT apps, Claude connectors, and MCP tools. Compare publishers, categories, auth, prompts, and integration links.`,
     path: appIndexPath(key),
+    locale,
     keywords: [
       `MCP servers starting with ${title}`,
       `MCP apps starting with ${title}`,

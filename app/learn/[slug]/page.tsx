@@ -29,6 +29,8 @@ export async function generateMetadata({
     title: article.title,
     description: article.description,
     path: `/learn/${article.slug}`,
+    locale,
+    openGraphType: "article",
   });
 }
 

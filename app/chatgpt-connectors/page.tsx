@@ -8,7 +8,7 @@ import { breadcrumbJsonLd, faqJsonLd, jsonLdScript, pageMetadata } from "@/lib/s
 import { absoluteUrl } from "@/lib/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const chatgptCount = await countAppsByPlatform("chatgpt");
+  const [{ locale }, chatgptCount] = await Promise.all([getI18n(), countAppsByPlatform("chatgpt")]);
   const listingText = chatgptCount.toLocaleString("en-US");
 
   return pageMetadata({
@@ -16,6 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description:
       `Compare ${listingText} ChatGPT connectors and apps, with categories, tool coverage, auth patterns, and setup guidance for production workflows.`,
     path: "/chatgpt-connectors",
+    locale,
     keywords: [
       "ChatGPT connectors",
       "ChatGPT integrations",

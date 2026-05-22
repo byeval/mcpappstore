@@ -15,12 +15,13 @@ export async function generateMetadata({
 }: {
   searchParams: Promise<{ q?: string; source?: string; category?: string }>;
 }): Promise<Metadata> {
-  const { q = "", source = "", category = "" } = await searchParams;
+  const [{ locale }, { q = "", source = "", category = "" }] = await Promise.all([getI18n(), searchParams]);
   const filters = [q.trim(), source.trim(), category.trim()].filter(Boolean);
   return pageMetadata({
     title: filters.length > 0 ? `Agent skills matching ${truncateMeta(filters.join(" "), 64)}` : "Agent skills directory",
     description: "Browse agent skills that pair with MCP apps, ChatGPT apps, Claude connectors, and MCP servers.",
     path: "/skills",
+    locale,
   });
 }
 

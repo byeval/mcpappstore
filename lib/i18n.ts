@@ -53,14 +53,14 @@ export const localeDetails: Record<
     label: "Japanese",
     nativeLabel: "日本語",
     shortLabel: "日本語",
-    htmlLang: "ja",
+    htmlLang: "ja-JP",
     dir: "ltr",
   },
   ko: {
     label: "Korean",
     nativeLabel: "한국어",
     shortLabel: "한국어",
-    htmlLang: "ko",
+    htmlLang: "ko-KR",
     dir: "ltr",
   },
 };

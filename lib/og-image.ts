@@ -344,5 +344,6 @@ export function ogImageResponse({
   );
 
   response.headers.set("cache-control", "public, max-age=3600, s-maxage=86400");
+  response.headers.set("content-type", "image/png");
   return response;
 }

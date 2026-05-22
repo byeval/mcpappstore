@@ -7,12 +7,13 @@ import { getI18n } from "@/lib/i18n-server";
 import { breadcrumbJsonLd, faqJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { messages: t } = await getI18n();
+  const { locale, messages: t } = await getI18n();
 
   return pageMetadata({
     title: t.learnPage.faqCardTitle,
     description: t.faqPage.copy,
     path: "/faq",
+    locale,
   });
 }
 

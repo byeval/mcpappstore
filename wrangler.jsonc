@@ -28,6 +28,9 @@
       "bucket_name": "mcpapp-assets"
     }
   ],
+  "images": {
+    "binding": "IMAGES"
+  },
   "kv_namespaces": [
     {
       "binding": "KV",
@@ -44,6 +47,9 @@
     "preview": {
       "name": "mcpapp-preview",
       "workers_dev": true,
+      "images": {
+        "binding": "IMAGES"
+      },
       "vars": {
         "SITE_URL": "https://mcpapp-preview.byeval.workers.dev",
         "ASSET_CDN_URL": "https://cdn.mcpapp.net",

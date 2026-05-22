@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 
 import { GoogleAnalyticsPageTracker } from "@/components/google-analytics";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { getEnvValue } from "@/lib/cloudflare";
-import { localeDetails, localizedPath, supportedLocales } from "@/lib/i18n";
+import { localeDetails, localizedPath } from "@/lib/i18n";
 import { getI18n, getRequestPathname } from "@/lib/i18n-server";
 import { defaultOgImagePath } from "@/lib/og-image";
-import { absoluteUrl, siteOrigin } from "@/lib/utils";
+import { siteNameForLocale } from "@/lib/seo";
+import { siteOrigin } from "@/lib/utils";
 
 import "./globals.css";
 
@@ -15,48 +16,65 @@ const defaultDescription =
   "Browse ChatGPT apps and Claude interactive connectors backed by MCP, with tools, previews, categories, and platform-specific capabilities.";
 const defaultOgImage = defaultOgImagePath();
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteOrigin()),
-  title: {
-    default: "MCP App Store",
-    template: "%s | MCP App Store",
-  },
-  description: defaultDescription,
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
-  },
-  alternates: {
-    canonical: "/",
-    types: {
-      "application/rss+xml": "/rss.xml",
-    },
-  },
-  openGraph: {
-    type: "website",
-    siteName: "MCP App Store",
-    images: [
-      {
-        url: defaultOgImage,
-        width: 1200,
-        height: 630,
-        alt: "MCP App Store",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    images: [
-      {
-        url: defaultOgImage,
-        alt: "MCP App Store",
-      },
-    ],
-  },
+export const viewport: Viewport = {
+  themeColor: "#fffdf7",
+  colorScheme: "light",
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale } = await getI18n();
+  const siteName = siteNameForLocale(locale);
+
+  return {
+    metadataBase: new URL(siteOrigin()),
+    title: {
+      default: siteName,
+      template: `%s | ${siteName}`,
+    },
+    applicationName: siteName,
+    description: defaultDescription,
+    manifest: "/manifest.webmanifest",
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
+        { url: "/icon.svg", type: "image/svg+xml" },
+      ],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    },
+    alternates: {
+      canonical: "/",
+      types: {
+        "application/rss+xml": "/rss.xml",
+      },
+    },
+    appleWebApp: {
+      capable: true,
+      title: siteName,
+      statusBarStyle: "default",
+    },
+    openGraph: {
+      type: "website",
+      siteName,
+      images: [
+        {
+          url: defaultOgImage,
+          width: 1200,
+          height: 630,
+          alt: siteName,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [
+        {
+          url: defaultOgImage,
+          alt: siteName,
+        },
+      ],
+    },
+  };
+}
 
 function delayedAnalyticsScript(token: string): string {
   const beaconConfig = JSON.stringify({ token });
@@ -78,12 +96,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return (
     <html dir={localeDetail.dir} lang={localeDetail.htmlLang}>
-      <head>
-        {supportedLocales.map((item) => (
-          <link href={absoluteUrl(localizedPath(pathname, item))} hrefLang={localeDetails[item].htmlLang} key={item} rel="alternate" />
-        ))}
-        <link href={absoluteUrl(localizedPath(pathname, "en"))} hrefLang="x-default" rel="alternate" />
-      </head>
       <body>
         <div className="page-chrome">
           <header className="topnav">

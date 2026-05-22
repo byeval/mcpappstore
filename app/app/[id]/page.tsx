@@ -11,6 +11,7 @@ import { collectionMatchesApp, type AppCollection } from "@/lib/collections";
 import { localizedAppCollections, localizedCategoryName } from "@/lib/content-i18n";
 import { getAppById, getCategorySummaries, listPublishedApps } from "@/lib/data";
 import { formatMessage, localizedPath, surfaceLabelFor, type I18nMessages, type Locale } from "@/lib/i18n";
+import { optimizedImageSrcSet, optimizedImageUrl } from "@/lib/image-urls";
 import { getI18n } from "@/lib/i18n-server";
 import {
   appDescription,
@@ -50,6 +51,7 @@ export async function generateMetadata({
     path: `/app/${app.id}`,
     locale,
     imagePath: `/api/og/${app.id}.png`,
+    openGraphType: "article",
   });
 }
 
@@ -900,8 +902,22 @@ export default async function AppDetailPage({
       </nav>
 
       <header className="app-head">
-        <div className="app-avatar detail-avatar" aria-hidden="true">
-          {app.iconUrl ? <img alt="" height={256} src={app.iconUrl} width={256} /> : <span>{initials(app.name)}</span>}
+        <div className="app-avatar detail-avatar">
+          {app.iconUrl ? (
+            <img
+              alt={`${app.name} icon`}
+              decoding="async"
+              fetchPriority="high"
+              height={256}
+              loading="eager"
+              sizes="96px"
+              src={optimizedImageUrl(app.iconUrl, 256)}
+              srcSet={optimizedImageSrcSet(app.iconUrl, [128, 256])}
+              width={256}
+            />
+          ) : (
+            <span>{initials(app.name)}</span>
+          )}
         </div>
         <div className="app-head-text">
           <h1>{app.name}</h1>

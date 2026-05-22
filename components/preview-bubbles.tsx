@@ -1,4 +1,5 @@
 import type { AppPreview } from "@/lib/types";
+import { optimizedImageSrcSet, optimizedImageUrl } from "@/lib/image-urls";
 
 export function PreviewBubbles({ previews }: { previews: AppPreview[] }) {
   if (previews.length === 0) {
@@ -17,9 +18,12 @@ export function PreviewBubbles({ previews }: { previews: AppPreview[] }) {
                   <img
                     alt={preview.caption ?? preview.prompt}
                     className="preview-image"
+                    decoding="async"
                     height={540}
                     loading="lazy"
-                    src={preview.imageUrl}
+                    sizes="(max-width: 720px) 88vw, 360px"
+                    src={optimizedImageUrl(preview.imageUrl, 720)}
+                    srcSet={optimizedImageSrcSet(preview.imageUrl, [360, 720, 1080])}
                     width={720}
                   />
                 ) : (

@@ -33,6 +33,11 @@ has_cloudflare_auth() {
   return 0
 }
 
+verify_live_url() {
+  local url="$1"
+  curl --fail --silent --show-error --location --max-time 20 --output /dev/null "$url"
+}
+
 run_step() {
   local label="$1"
   shift
@@ -54,11 +59,16 @@ require_file "seed/raw-chatgpt-apps.json"
 require_file "tmp-claude-directory-servers.network-response"
 require_file "tmp-claude-interactive-connectors.json"
 
-REMOTE_MODE="${CF_REMOTE_MODE:-auto}"
+REMOTE_MODE="${CF_REMOTE_MODE:-force}"
 remote_enabled=false
 
 case "$REMOTE_MODE" in
   1|true|yes|on|force)
+    if ! has_cloudflare_auth; then
+      log "Cloudflare auth required for CF_REMOTE_MODE=$REMOTE_MODE."
+      log "Set CLOUDFLARE_API_TOKEN (and CLOUDFLARE_ACCOUNT_ID when Wrangler cannot infer it), or run with CF_REMOTE_MODE=false for a local-only dry run."
+      exit 1
+    fi
     remote_enabled=true
     ;;
   0|false|no|off)
@@ -78,7 +88,7 @@ esac
 if [[ "$remote_enabled" == true ]]; then
   log "Cloudflare remote mode enabled"
 else
-  log "Cloudflare remote mode disabled (missing auth or CF_REMOTE_MODE=false)"
+  log "Cloudflare remote mode disabled (CF_REMOTE_MODE=false or auto without auth)"
 fi
 
 log "Normalizing ChatGPT catalog"
@@ -106,6 +116,11 @@ if [[ "$remote_enabled" == true ]]; then
 
   log "Deploying site"
   run_step "deploy" npm run deploy
+
+  log "Verifying live site"
+  run_step "verify mcpapp.net" verify_live_url "https://mcpapp.net/"
+  run_step "verify sitemap" verify_live_url "https://mcpapp.net/sitemap.xml"
+  run_step "verify robots" verify_live_url "https://mcpapp.net/robots.txt"
 else
   log "Skipping remote D1 apply and deploy (no Cloudflare auth)"
 fi

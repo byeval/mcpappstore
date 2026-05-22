@@ -11,7 +11,7 @@ import handler from "vinext/server/app-router-entry";
 
 interface Env {
   ASSETS: Fetcher;
-  IMAGES: {
+  IMAGES?: {
     input(stream: ReadableStream): {
       transform(options: Record<string, unknown>): {
         output(options: { format: string; quality: number }): Promise<{ response(): Response }>;
@@ -47,12 +47,26 @@ export default {
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
       return handleImageOptimization(request, {
-        fetchAsset: (path) => env.ASSETS.fetch(new Request(new URL(path, request.url))),
-        transformImage: async (body, { width, format, quality }) => {
-          const result = await env.IMAGES.input(body).transform(width > 0 ? { width } : {}).output({ format, quality });
-          return result.response();
+        fetchAsset: async (path) => {
+          const assetUrl = new URL(path, request.url);
+          const assetResponse = await env.ASSETS.fetch(new Request(assetUrl, request));
+          if (assetResponse.ok || !assetUrl.pathname.startsWith("/api/")) {
+            return assetResponse;
+          }
+
+          return handler.fetch(new Request(assetUrl, request), env, ctx);
         },
-      }, allowedWidths);
+        ...(env.IMAGES
+          ? {
+              transformImage: async (body, { width, format, quality }) => {
+                const result = await env.IMAGES!.input(body).transform(width > 0 ? { width } : {}).output({ format, quality });
+                return result.response();
+              },
+            }
+          : {}),
+      }, allowedWidths, {
+        dangerouslyAllowSVG: true,
+      });
     }
 
     // Delegate everything else to vinext, forwarding ctx so that

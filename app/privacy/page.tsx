@@ -3,12 +3,17 @@ import type { Metadata } from "next";
 import { getI18n } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Privacy policy",
-  description:
-    "Privacy details for MCP App Store submissions, publisher metadata, optional submitter emails, rate limiting, and moderation data.",
-  path: "/privacy",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale } = await getI18n();
+
+  return pageMetadata({
+    title: "Privacy policy",
+    description:
+      "Privacy details for MCP App Store submissions, publisher metadata, optional submitter emails, rate limiting, and moderation data.",
+    path: "/privacy",
+    locale,
+  });
+}
 
 export default async function PrivacyPage() {
   const { messages: t } = await getI18n();

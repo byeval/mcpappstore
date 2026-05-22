@@ -4,15 +4,20 @@ import { formatMessage } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Submission received",
-  description: "Confirmation that an MCP app or connector submission was received for moderation.",
-  path: "/submit/success",
-  robots: {
-    index: false,
-    follow: false,
-  },
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale } = await getI18n();
+
+  return pageMetadata({
+    title: "Submission received",
+    description: "Confirmation that an MCP app or connector submission was received for moderation.",
+    path: "/submit/success",
+    locale,
+    robots: {
+      index: false,
+      follow: false,
+    },
+  });
+}
 
 export default async function SubmitSuccessPage({
   searchParams,

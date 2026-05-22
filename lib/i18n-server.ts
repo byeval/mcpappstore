@@ -11,9 +11,14 @@ import {
   type Locale,
 } from "@/lib/i18n";
 
+function cleanRequestPathname(value: string | null): string {
+  const pathname = value?.split(/[?#]/, 1)[0] || "/";
+  return pathname.startsWith("/") ? pathname : `/${pathname}`;
+}
+
 export async function getRequestPathname(): Promise<string> {
   const headerStore = await headers();
-  return headerStore.get("x-mcp-pathname") ?? "/";
+  return cleanRequestPathname(headerStore.get("x-mcp-pathname"));
 }
 
 export async function getRequestLocale(): Promise<Locale> {

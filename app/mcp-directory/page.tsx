@@ -9,7 +9,8 @@ import { itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const totalListings = (await listSitemapAppEntries()).length;
+  const [{ locale }, apps] = await Promise.all([getI18n(), listSitemapAppEntries()]);
+  const totalListings = apps.length;
   const listingText = totalListings.toLocaleString("en-US");
 
   return pageMetadata({
@@ -17,6 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description:
       `Browse ${listingText} MCP servers and MCP apps in one directory for ChatGPT apps and Claude connectors, with categories, tools, auth patterns, and integration details.`,
     path: "/mcp-directory",
+    locale,
     keywords: [
       "MCP directory",
       "MCP server directory",

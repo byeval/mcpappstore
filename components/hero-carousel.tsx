@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CatalogApp } from "@/lib/types";
 import { PlatformBadge } from "@/components/platform-badge";
 import { getMessages, localizedPath, surfaceLabelFor, type I18nMessages, type Locale } from "@/lib/i18n";
+import { optimizedImageSrcSet, optimizedImageUrl } from "@/lib/image-urls";
 import { primarySurface, surfaceDetails } from "@/lib/surfaces";
 import { initials } from "@/lib/utils";
 
@@ -69,7 +70,17 @@ export function HeroCarousel({
         <div className="hero-left">
           <div className="hero-icon">
             {activeApp.iconUrl ? (
-              <img alt="" decoding="async" height={256} loading="eager" src={activeApp.iconUrl} width={256} />
+              <img
+                alt={`${activeApp.name} icon`}
+                decoding="async"
+                fetchPriority="high"
+                height={256}
+                loading="eager"
+                sizes="88px"
+                src={optimizedImageUrl(activeApp.iconUrl, 256)}
+                srcSet={optimizedImageSrcSet(activeApp.iconUrl, [128, 256])}
+                width={256}
+              />
             ) : (
               <span>{initials(activeApp.name).slice(0, 1)}</span>
             )}
@@ -109,7 +120,8 @@ export function HeroCarousel({
                       height={540}
                       loading="eager"
                       sizes="(max-width: 640px) 78vw, 360px"
-                      src={thumbnailUrl}
+                      src={optimizedImageUrl(thumbnailUrl, 720)}
+                      srcSet={optimizedImageSrcSet(thumbnailUrl, [360, 720])}
                       width={720}
                     />
                   </div>

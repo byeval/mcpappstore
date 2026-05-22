@@ -42,6 +42,7 @@ export async function generateMetadata({
     title: `${formatMessage(t.categoryPage.title, { category: displayName })}${pageSuffix}`,
     description: content?.metaDescription ?? categoryDescription(category, category.count),
     path: paginatedPath(`/category/${slug}`, page),
+    locale,
     robots: isIndexableCategory(category)
       ? undefined
       : {

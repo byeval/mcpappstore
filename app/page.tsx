@@ -12,7 +12,8 @@ import { absoluteUrl } from "@/lib/utils";
 import { itemListJsonLd, jsonLdScript, organizationJsonLd, pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const totalListings = (await listSitemapAppEntries()).length;
+  const [{ locale }, apps] = await Promise.all([getI18n(), listSitemapAppEntries()]);
+  const totalListings = apps.length;
   const listingText = totalListings.toLocaleString("en-US");
 
   return pageMetadata({
@@ -20,6 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description:
       `mcpapp is an MCP apps directory and MCP server directory with ${listingText} listings for model context protocol apps, ChatGPT apps, and Claude connectors, including tools, categories, previews, and integration details.`,
     path: "/",
+    locale,
     keywords: [
       "MCP apps",
       "MCP apps directory",

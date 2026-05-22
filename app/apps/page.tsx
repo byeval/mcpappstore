@@ -9,12 +9,17 @@ import { itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
 import type { CatalogApp } from "@/lib/types";
 import { absoluteUrl } from "@/lib/utils";
 
-export const metadata: Metadata = pageMetadata({
-  title: "MCP directory A-Z | MCP servers, ChatGPT apps & Claude connectors",
-  description:
-    "Browse the mcpapp MCP directory A-Z, including MCP servers, ChatGPT apps, Claude connectors, categories, tools, and integration details.",
-  path: "/store",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale } = await getI18n();
+
+  return pageMetadata({
+    title: "MCP directory A-Z | MCP servers, ChatGPT apps & Claude connectors",
+    description:
+      "Browse the mcpapp MCP directory A-Z, including MCP servers, ChatGPT apps, Claude connectors, categories, tools, and integration details.",
+    path: "/store",
+    locale,
+  });
+}
 
 function appKindLabel(app: CatalogApp, copy: I18nMessages["appKind"]): string {
   const hasChatGpt = app.surfaces.some((surface) => surface.platform === "chatgpt");

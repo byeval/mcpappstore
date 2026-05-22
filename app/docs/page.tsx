@@ -5,12 +5,17 @@ import { localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = pageMetadata({
-  title: "MCP app listing guidance",
-  description:
-    "Submission guidance for MCP apps and connectors, including platform surfaces, metadata, previews, and review expectations.",
-  path: "/docs",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale } = await getI18n();
+
+  return pageMetadata({
+    title: "MCP app listing guidance",
+    description:
+      "Submission guidance for MCP apps and connectors, including platform surfaces, metadata, previews, and review expectations.",
+    path: "/docs",
+    locale,
+  });
+}
 
 export default async function DocsPage() {
   const { locale, messages: t } = await getI18n();

@@ -15,7 +15,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id?: string[] }>;
 }): Promise<Metadata> {
-  const skillId = skillIdFromSegments((await params).id);
+  const [{ locale }, { id }] = await Promise.all([getI18n(), params]);
+  const skillId = skillIdFromSegments(id);
   const [skill, apps] = await Promise.all([getSkillById(skillId), listAppsForSkill(skillId)]);
   if (!skill) {
     return {};
@@ -26,8 +27,9 @@ export async function generateMetadata({
 
   return pageMetadata({
     title: `${skill.displayName} agent skill`,
-    description: truncateMeta(`${skill.description}${appPhrase}`, 155),
+    description: truncateMeta(`${skill.description}${appPhrase}`),
     path: skillPath(skill.id),
+    locale,
   });
 }
 

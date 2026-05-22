@@ -11,12 +11,13 @@ import { getI18n } from "@/lib/i18n-server";
 import { itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { messages: t } = await getI18n();
+  const { locale, messages: t } = await getI18n();
 
   return pageMetadata({
     title: t.learnPage.title,
     description: t.learnPage.copy,
     path: "/learn",
+    locale,
   });
 }
 

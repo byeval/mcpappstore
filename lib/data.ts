@@ -849,20 +849,21 @@ async function listCategoriesFromDb(): Promise<CategorySummary[] | null> {
   try {
     const rows = await db
       .prepare(
-        `SELECT c.slug, c.name, c.sort, COUNT(a.id) AS count
+        `SELECT c.slug, c.name, c.sort, COUNT(a.id) AS count, MAX(COALESCE(a.published_at, a.updated_at)) AS latest_updated_at
          FROM categories c
          LEFT JOIN app_categories ac ON c.slug = ac.category_slug
          LEFT JOIN apps a ON a.id = ac.app_id AND a.status = 'published'
          GROUP BY c.slug, c.name, c.sort
          ORDER BY c.sort ASC, c.name ASC`,
       )
-      .all<{ slug: string; name: string; sort: number; count: number }>();
+      .all<{ slug: string; name: string; sort: number; count: number; latest_updated_at?: number }>();
 
     return rows.results.map((row) => ({
       slug: row.slug,
       name: row.name,
       sort: Number(row.sort ?? 0),
       count: Number(row.count ?? 0),
+      latestUpdatedAt: Number(row.latest_updated_at ?? 0) || undefined,
     }));
   } catch {
     return null;
@@ -1000,6 +1001,12 @@ export async function getCategorySummaries(): Promise<CategorySummary[]> {
       count: FALLBACK_CATALOG.apps.filter(
         (app) => app.status === "published" && app.categories.includes(category.slug),
       ).length,
+      latestUpdatedAt: FALLBACK_CATALOG.apps.reduce(
+        (max, app) => app.status === "published" && app.categories.includes(category.slug)
+          ? Math.max(max, app.publishedAt ?? 0, app.updatedAt)
+          : max,
+        0,
+      ) || undefined,
     }))
     .sort((left, right) => left.sort - right.sort);
   await writePublicCache("category-summaries", fallbackCategories);

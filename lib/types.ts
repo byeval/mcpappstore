@@ -151,6 +151,7 @@ export interface SeedRejectedSkillAssociation {
 
 export interface CategorySummary extends CategoryRecord {
   count: number;
+  latestUpdatedAt?: number;
 }
 
 export interface SubmissionInput {

@@ -6,12 +6,17 @@ import { localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Submit an MCP app or connector",
-  description:
-    "Submit an MCP app, ChatGPT app, or Claude connector for review with metadata, previews, tools, and platform details.",
-  path: "/submit",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale } = await getI18n();
+
+  return pageMetadata({
+    title: "Submit an MCP app or connector",
+    description:
+      "Submit an MCP app, ChatGPT app, or Claude connector for review with metadata, previews, tools, and platform details.",
+    path: "/submit",
+    locale,
+  });
+}
 
 export default async function SubmitPage({
   searchParams,

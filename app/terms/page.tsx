@@ -3,12 +3,17 @@ import type { Metadata } from "next";
 import { getI18n } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Terms of use",
-  description:
-    "Terms for MCP App Store directory listings, publisher responsibilities, moderation, and linked MCP endpoints.",
-  path: "/terms",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale } = await getI18n();
+
+  return pageMetadata({
+    title: "Terms of use",
+    description:
+      "Terms for MCP App Store directory listings, publisher responsibilities, moderation, and linked MCP endpoints.",
+    path: "/terms",
+    locale,
+  });
+}
 
 export default async function TermsPage() {
   const { messages: t } = await getI18n();

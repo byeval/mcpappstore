@@ -11,7 +11,7 @@ export async function generateMetadata({
 }: {
   searchParams: Promise<{ q?: string }>;
 }): Promise<Metadata> {
-  const { q = "" } = await searchParams;
+  const [{ locale }, { q = "" }] = await Promise.all([getI18n(), searchParams]);
   const query = q.trim();
 
   if (!query) {
@@ -19,6 +19,7 @@ export async function generateMetadata({
       title: "Search MCP servers, apps, and connectors",
       description: "Search MCP servers, MCP apps, ChatGPT apps, Claude connectors, tools, categories, and publishers.",
       path: "/search",
+      locale,
       robots: {
         index: false,
         follow: true,
@@ -31,6 +32,7 @@ export async function generateMetadata({
     title: `Search results for ${shortQuery}`,
     description: `MCP server, app, and connector search results matching ${shortQuery}.`,
     path: "/search",
+    locale,
     robots: {
       index: false,
       follow: true,
