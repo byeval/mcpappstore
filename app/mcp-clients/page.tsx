@@ -108,27 +108,15 @@ export default async function McpClientsPage() {
             A browsable version of the awesome MCP clients list, normalized into search-friendly cards and detail pages
             for every imported client.
           </p>
-          <div className="awesome-hero-actions mcp-clients-hero-actions">
-            <Link className="primary-link" href="#clients" prefetch={false}>
-              Browse clients
-            </Link>
-            <a className="secondary-link" href={MCP_CLIENTS_SOURCE.repoUrl} rel="noreferrer" target="_blank">
-              Open source list
-            </a>
-          </div>
           <div className="collection-hero-meta mcp-clients-hero-meta" aria-label="MCP clients page metadata">
             <span>{formatNumber(totalClients)} clients</span>
             <span>Updated {lastUpdatedDate}</span>
-            <span>{MCP_CLIENTS_SOURCE.name}</span>
           </div>
         </div>
         <aside className="collection-hero-panel awesome-hero-panel">
           <span>Imported source</span>
           <strong>{formatNumber(totalClients)}</strong>
           <span>Client entries with normalized platform, pricing, license, language, and source links.</span>
-          <a href={MCP_CLIENTS_SOURCE.readmeUrl} rel="noreferrer" target="_blank">
-            View raw README
-          </a>
         </aside>
       </section>
 
