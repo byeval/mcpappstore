@@ -17,6 +17,7 @@
     "media:thumbs": "node --import tsx scripts/generate-preview-thumbnails.ts",
     "scrape": "node --import tsx scripts/scrape-chatgpt.ts",
     "scrape:claude": "node --import tsx scripts/scrape-claude.ts",
+    "scrape:claude-connectors": "node --import tsx scripts/scrape-claude-connectors.ts",
     "skills:refresh": "node --import tsx scripts/refresh-skills.ts",
     "skills:import:skills-sh": "node --import tsx scripts/import-skills-sh.ts",
     "skills:review": "node --import tsx scripts/review-skill-associations.ts",

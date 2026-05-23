@@ -27,6 +27,7 @@ coverage/
 seed/*
 !seed/.gitkeep
 !seed/app-skill-associations.json
+!seed/awesome-mcp-clients.json
 !seed/chatgpt-apps.json
 !seed/rejected-skill-associations.json
 !seed/skills.json

@@ -6,6 +6,7 @@ import { appMetadataSignal, appPlatformLabel, formatDirectoryNumber as formatNum
 import { formatMessage } from "@/lib/i18n";
 import { localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
+import { listMcpClients } from "@/lib/mcp-clients";
 import { faqJsonLd, formatCategoryName, itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -47,7 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function McpDirectoryPage() {
-  const [{ locale, messages: t }, apps, categories, qualityStats, representativeApps, chatgptCount, claudeCount] = await Promise.all([
+  const [{ locale, messages: t }, apps, categories, qualityStats, representativeApps, chatgptCount, claudeCount, mcpClients] = await Promise.all([
     getI18n(),
     listPublishedApps(),
     getCategorySummaries(),
@@ -55,6 +56,7 @@ export default async function McpDirectoryPage() {
     listMetadataRichApps(8),
     countAppsByPlatform("chatgpt"),
     countAppsByPlatform("claude"),
+    listMcpClients(),
   ]);
   const href = (path: string) => localizedPath(path, locale);
   const lastUpdated = apps.reduce((max, app) => Math.max(max, app.updatedAt), 0);
@@ -91,6 +93,13 @@ export default async function McpDirectoryPage() {
       count: overlapCount,
       bestFor: "Teams comparing the same integration across ChatGPT and Claude before standardizing a workflow.",
       verify: "Confirm feature parity, transport support, support channels, and fallback behavior per host.",
+    },
+    {
+      surface: "MCP clients",
+      href: "/mcp-clients",
+      count: mcpClients.length,
+      bestFor: "Teams choosing the app, IDE, CLI, or agent surface that will connect to MCP servers.",
+      verify: "Check local credential handling, server transport support, license, pricing, and maintenance cadence.",
     },
   ];
   const directoryFaqs = [
@@ -150,6 +159,7 @@ export default async function McpDirectoryPage() {
             </p>
             <div className="category-related-links">
               <Link href={href("/store")} prefetch={false}>Browse all MCP listings A-Z</Link>
+              <Link href={href("/mcp-clients")} prefetch={false}>Browse MCP clients</Link>
               <Link href={href("/mcp-servers")} prefetch={false}>Browse MCP servers</Link>
               <Link href={href("/chatgpt-apps")} prefetch={false}>Browse ChatGPT apps</Link>
               <Link href={href("/chatgpt-connectors")} prefetch={false}>ChatGPT connectors guide</Link>
@@ -300,6 +310,7 @@ export default async function McpDirectoryPage() {
           itemListJsonLd(
             [
               { name: "MCP directory A-Z", path: "/store" },
+              { name: "MCP clients", path: "/mcp-clients" },
               { name: "MCP servers", path: "/mcp-servers" },
               { name: "ChatGPT apps", path: "/chatgpt-apps" },
               { name: "ChatGPT connectors", path: "/chatgpt-connectors" },

@@ -56,8 +56,12 @@ if [[ -n "${CRAWL_SOURCE_COMMAND:-}" ]]; then
 fi
 
 require_file "seed/raw-chatgpt-apps.json"
-require_file "tmp-claude-directory-servers.network-response"
-require_file "tmp-claude-interactive-connectors.json"
+legacy_claude_sources_available=false
+if [[ -s "tmp-claude-directory-servers.network-response" && -s "tmp-claude-interactive-connectors.json" ]]; then
+  legacy_claude_sources_available=true
+else
+  log "Legacy Claude network response files are missing; public connector crawl will run as the Claude source."
+fi
 
 REMOTE_MODE="${CF_REMOTE_MODE:-force}"
 remote_enabled=false
@@ -98,8 +102,13 @@ else
   npm run scrape -- seed/raw-chatgpt-apps.json seed/chatgpt-apps.json --no-upload-r2
 fi
 
-log "Merging Claude connectors"
-npm run scrape:claude -- tmp-claude-directory-servers.network-response tmp-claude-interactive-connectors.json seed/chatgpt-apps.json
+if [[ "$legacy_claude_sources_available" == true ]]; then
+  log "Merging Claude connectors from legacy network responses"
+  npm run scrape:claude -- tmp-claude-directory-servers.network-response tmp-claude-interactive-connectors.json seed/chatgpt-apps.json
+fi
+
+log "Merging Claude connectors from public directory"
+npm run scrape:claude-connectors -- seed/chatgpt-apps.json tmp-claude-public-connectors.json
 
 log "Refreshing skills catalog and candidate report"
 npm run skills:refresh -- --skip-seed

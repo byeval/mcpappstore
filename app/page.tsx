@@ -69,6 +69,12 @@ export default async function HomePage() {
         <Link href={href("/awesome-mcp-apps")} prefetch={false}>
           Awesome MCP apps for GitHub readers
         </Link>
+        <Link href={href("/mcp-clients")} prefetch={false}>
+          Awesome MCP clients directory
+        </Link>
+        <Link href={href("/mcp-inspector")} prefetch={false}>
+          MCP Inspector: test your MCP server in the browser
+        </Link>
         <Link href={href("/mcp-directory")} prefetch={false}>
           MCP directory: compare MCP servers, ChatGPT apps, and Claude connectors
         </Link>

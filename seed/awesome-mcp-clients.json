@@ -1,0 +1,2574 @@
+{
+  "source": {
+    "name": "punkpeye/awesome-mcp-clients",
+    "repoUrl": "https://github.com/punkpeye/awesome-mcp-clients",
+    "readmeUrl": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/README.md"
+  },
+  "generatedAt": "2026-05-23T00:00:00.000Z",
+  "clients": [
+    {
+      "id": "openclaw",
+      "name": "OpenClaw",
+      "summary": "OpenClaw is a powerful open-source AI agent that connects to multiple messaging platforms (WhatsApp, Telegram, Discord) and supports Model Context Protocol (MCP) for tool integration.",
+      "descriptionMarkdown": "**OpenClaw** is a powerful open-source AI agent that connects to multiple messaging platforms (WhatsApp, Telegram, Discord) and supports Model Context Protocol (MCP) for tool integration. It features a robust plugin ecosystem and automated workflows.",
+      "githubUrl": "https://github.com/openclaw/openclaw",
+      "websiteUrl": "https://openclaw.ai",
+      "license": "MIT",
+      "type": "Self-hosted AI Agent",
+      "platforms": [
+        "Linux",
+        "Windows",
+        "MacOS",
+        "Docker"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Node.js",
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#openclaw"
+    },
+    {
+      "id": "askit-mcp",
+      "name": "askit-mcp",
+      "summary": "askit-mcp is a flexible asyncio Python library and CLI tool that allows various LLM models to extend their abilities by invoking services from Model Context Protocol (MCP) servers and by calling locally-defined Python functions..",
+      "descriptionMarkdown": "**askit-mcp** is a flexible asyncio Python library and CLI tool that allows various LLM models to extend their abilities by invoking services from Model Context Protocol (MCP) servers and by calling locally-defined Python functions..\n\n`pip install git+https://github.com/johnrobinsn/askit.git`",
+      "githubUrl": "https://github.com/johnrobinsn/askit",
+      "license": "Apache 2.0",
+      "type": "CLI, Python library",
+      "platforms": [
+        "Linux",
+        "Windows",
+        "MacOS"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [
+        "pip install git+https://github.com/johnrobinsn/askit.git"
+      ],
+      "screenshots": [
+        {
+          "alt": "Command Line Interface",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/askit-mcp/cli.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#askit-mcp"
+    },
+    {
+      "id": "eechat",
+      "name": "eechat",
+      "summary": "An open-source, cross-platform desktop application that seamlessly connects with full support for MCP, across Linux, macOS, and Windows.",
+      "descriptionMarkdown": "An open-source, cross-platform desktop application that seamlessly connects with full support for MCP, across Linux, macOS, and Windows.",
+      "githubUrl": "https://github.com/Lucassssss/eechat",
+      "websiteUrl": "https://www.ee.chat/",
+      "license": "Modified Apache 2.0",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "example",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/eechat/mcp_main.png"
+        },
+        {
+          "alt": "add-mcp",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/eechat/mcp_add.png"
+        },
+        {
+          "alt": "mcp-env",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/eechat/mcp_bin.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#eechat"
+    },
+    {
+      "id": "5ire",
+      "name": "5ire",
+      "summary": "5ire is a cross-platform desktop AI assistant, MCP client. It compatible with major service providers, supports local knowledge base and tools via model context protocol servers.",
+      "descriptionMarkdown": "5ire is a cross-platform desktop AI assistant, MCP client. It compatible with major service providers, supports local knowledge base and tools via model context protocol servers.",
+      "githubUrl": "https://github.com/nanbingxyz/5ire",
+      "websiteUrl": "https://5ire.app/",
+      "license": "Modified Apache 2.0 (non-commercial)",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://github.com/user-attachments/assets/a27494c5-437d-481c-a25f-74cfa5a2bc45"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#5ire"
+    },
+    {
+      "id": "agent-bridge",
+      "name": "Agent Bridge",
+      "summary": "A deployable web-based agent platform for remote MCP servers featuring human-in-the-loop tool permissions, enabling intelligent automation.",
+      "descriptionMarkdown": "A deployable web-based agent platform for remote MCP servers featuring human-in-the-loop tool permissions, enabling intelligent automation.\n\n**Key Features:**\n- **Web Client**: Modern interface\n- **Remote MCP Servers**: Connectivity\n- **Scalability/Enterprise**: Ready for business use\n- **Human-in-the-loop**: Security/oversight\n- **Tool Permissions**: Granular control",
+      "githubUrl": "https://github.com/ramblinghermit0403/agent_bridge",
+      "license": "MIT",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python",
+        "Vue"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Chat Interface",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/agent-bridge/chat.png"
+        },
+        {
+          "alt": "Settings & Connections",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/agent-bridge/connections.png"
+        },
+        {
+          "alt": "Repository Search",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/agent-bridge/repo_search.png"
+        },
+        {
+          "alt": "Tool Configuration",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/agent-bridge/tool_config.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#agent-bridge"
+    },
+    {
+      "id": "agentone",
+      "name": "AgentOne",
+      "summary": "AgentOne is a fully-featured AI agent desktop app that takes a goal in plain language and carries it out end-to-end across your apps.",
+      "descriptionMarkdown": "AgentOne is a fully-featured AI agent desktop app that takes a goal in plain language and carries it out end-to-end across your apps. It connects 600+ AI models from 20+ providers (OpenAI, Anthropic, Google, xAI, Mistral, Groq, Cerebras, and more) with 2,000+ extensions for apps like Gmail, Notion, Slack, GitHub, and Google Calendar, and supports user-added MCP servers for further extensibility. Multiple agents can run in parallel, your data stays on your device by default, and you can bring your own API keys with no markup.\n\nLearn more on the [website](https://www.agent-one.dev), [docs](https://docs.agent-one.dev), or [blog](https://blog.agent-one.dev). Get help on the [forum](https://forum.agent-one.dev).",
+      "githubUrl": "https://github.com/AgentOne-Dev/agent-one-public",
+      "websiteUrl": "https://www.agent-one.dev",
+      "license": "Proprietary",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [
+        "TypeScript",
+        "Rust"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot of AgentOne chat UI",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/agent-one/1.png"
+        },
+        {
+          "alt": "Screenshot of AgentOne settings page on account tab",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/agent-one/2.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#agentone"
+    },
+    {
+      "id": "aiaw",
+      "name": "AIaW",
+      "summary": "AIaW is a cross-platform, full-featured and lightweight AI Chat client with full support for MCP.",
+      "descriptionMarkdown": "AIaW is a cross-platform, full-featured and lightweight AI Chat client with full support for MCP.",
+      "githubUrl": "https://github.com/NitroRCr/AIaW",
+      "websiteUrl": "https://aiaw.app/",
+      "license": "BSD 3-Clause",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Vue",
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/aiaw/plugins.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/aiaw/dialog.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/aiaw/dark.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#aiaw"
+    },
+    {
+      "id": "astrbot",
+      "name": "AstrBot",
+      "summary": "AstrBot is an Easy-to-use multi-platform LLM chatbot and development framework Platform supports QQ, QQ channel, Telegram, WeChat, Qiwei, Lark | MCP server, OpenAI, DeepSeek, Gemini, Silicon Flow, Dark Side of the Moon, Ollama, OneAPI, Dify, etc.",
+      "descriptionMarkdown": "AstrBot is an Easy-to-use multi-platform LLM chatbot and development framework Platform supports QQ, QQ channel, Telegram, WeChat, Qiwei, Lark | MCP server, OpenAI, DeepSeek, Gemini, Silicon Flow, Dark Side of the Moon, Ollama, OneAPI, Dify, etc. Comes with WebUI.",
+      "githubUrl": "https://github.com/AstrBotDevs/AstrBot",
+      "websiteUrl": "https://astrbot.app/",
+      "license": "AGPL-3.0 license",
+      "type": "LLM chatbot and development framework",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux",
+        "Android"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Vue",
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "provider_configure",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/astrbot/provider.png"
+        },
+        {
+          "alt": "sync_mcp_server",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/astrbot/sync_deployed_mcp_server_from_modelscope.png"
+        },
+        {
+          "alt": "view_tools",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/astrbot/plugins.png"
+        },
+        {
+          "alt": "webchat_interface",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/astrbot/chat_example.png"
+        },
+        {
+          "alt": "webchat_example",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/astrbot/chat_qq_example_without_avatar.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#astrbot"
+    },
+    {
+      "id": "autohand-code-cli",
+      "name": "Autohand Code CLI",
+      "summary": "Autohand Code CLI is a self-evolving autonomous coding agent with native MCP integration for external tool access.",
+      "descriptionMarkdown": "Autohand Code CLI is a self-evolving autonomous coding agent with native MCP integration for external tool access. It supports 40+ built-in tools, multiple LLM providers (OpenRouter, Anthropic, OpenAI, Ollama), semantic code search, and a modular skills system, all from the terminal.",
+      "githubUrl": "https://github.com/autohandai/code-cli",
+      "websiteUrl": "https://www.autohand.ai/code/",
+      "license": "Apache 2.0",
+      "type": "CLI, VS Code/Zed extension",
+      "platforms": [
+        "Linux",
+        "Windows",
+        "MacOS"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#autohand-code-cli"
+    },
+    {
+      "id": "anythingllm",
+      "name": "AnythingLLM",
+      "summary": "The all-in-one AI app you were looking for. Chat with your docs, use AI Agents, hyper-configurable, multi-user, & no frustrating set up required.",
+      "descriptionMarkdown": "The all-in-one AI app you were looking for. Chat with your docs, use AI Agents, hyper-configurable, multi-user, & no frustrating set up required.",
+      "githubUrl": "https://github.com/Mintplex-Labs/anything-llm",
+      "websiteUrl": "https://anythingllm.com/",
+      "license": "MIT",
+      "type": "Desktop, Docker, Cloud-hosted",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux",
+        "Docker",
+        "Cloud"
+      ],
+      "pricing": "Free app, paid hosting",
+      "programmingLanguages": [
+        "JavaScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/anythingllm/anythingllm.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#anythingllm"
+    },
+    {
+      "id": "browsewiz",
+      "name": "BrowseWiz",
+      "summary": "BrowseWiz is a customizable AI Chat, AI Assistant and AI Agent for browser's side panel.",
+      "descriptionMarkdown": "BrowseWiz is a *customizable* AI Chat, AI Assistant and AI Agent for browser's side panel.\nIt is a flexible tool that can help automate *your* workflows.\n\n**Key Features:**\n- give AI access to contexts: files, active tab, YT video transcript, text selected on a page\n- manage collection of prompts, add 1-click prompt buttons\n- set and manage system instructions\n- bring your own key or model (OpenAI API-compatible)\n- add tools for agentic capabilities via webhooks/APIs + JSON schema or by providing MCP server URLs (supports streamable HTTP and SSE)",
+      "websiteUrl": "https://browsewiz.com",
+      "license": "Proprietary",
+      "type": "Browser extension",
+      "platforms": [
+        "Chromium-based desktop browsers"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/browsewiz/agent.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/browsewiz/mcp.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#browsewiz"
+    },
+    {
+      "id": "canvas-mcp-client",
+      "name": "Canvas MCP Client",
+      "summary": "Canvas MCP Client is an infinite, zoomable, and pannable canvas. It provides a unified interface for interacting with multiple MCP (Model Context Protocol) servers through a flexible, widget-based system.",
+      "descriptionMarkdown": "Canvas MCP Client is an infinite, zoomable, and pannable canvas. It provides a unified interface for interacting with multiple MCP (Model Context Protocol) servers through a flexible, widget-based system.\n\n**Key Features:**\n\n- Infinite Canvas: Organize your workspace spatially with unlimited zoom and pan capabilities\n- Modular Widgets: Use 12+ pre-built widgets or create your own custom components\n- No-code Widget Builder: Use the widget builder to create your own widgets without coding\n- MCP Integration: Seamlessly connect to multiple MCP servers using the FastMCP library\n- AI-Powered: Configure multiple AI providers (OpenAI, Anthropic, Ollama, Google) for enhanced functionality\n- Template System: Save and share widget and dashboard configurations",
+      "githubUrl": "https://github.com/n00bvn/CanvasMCPClient",
+      "websiteUrl": "https://canvas-mcp.com/",
+      "license": "MIT",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python",
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "example1",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/canvas-mcp-client/infinite-canvas.jpg"
+        },
+        {
+          "alt": "example2",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/canvas-mcp-client/no-code-builder.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#canvas-mcp-client"
+    },
+    {
+      "id": "carrotai",
+      "name": "CarrotAI",
+      "summary": "CarrotAI is an advanced AI agent application that enables real-time streaming chat using Server-Sent Events (SSE) and Streamable HTTP, with seamless integration of the Model Control Protocol (MCP).",
+      "descriptionMarkdown": "CarrotAI is an advanced AI agent application that enables real-time streaming chat using Server-Sent Events (SSE) and Streamable HTTP, with seamless integration of the Model Control Protocol (MCP). It supports concurrent connections to multiple SSE MCP servers and offers a multilingual user interface in English, Chinese, and Japanese.",
+      "githubUrl": "https://github.com/Xingsandesu/CarrotAI",
+      "websiteUrl": "https://jintongshu.com/solutions/agent/",
+      "license": "Apache 2.0*",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Dart",
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "chat",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/carrotai/carrotai_chat.png"
+        },
+        {
+          "alt": "homepage",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/carrotai/carrotai_home.png"
+        },
+        {
+          "alt": "seetings",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/carrotai/carrotai_settings.png"
+        },
+        {
+          "alt": "app market",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/carrotai/carrotai_shop.png"
+        },
+        {
+          "alt": "install app",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/carrotai/carrotai_env.png"
+        },
+        {
+          "alt": "app installed",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/carrotai/carrotai_myapps.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#carrotai"
+    },
+    {
+      "id": "chainlit",
+      "name": "Chainlit",
+      "summary": "Chainlit is a python framework to build conversational AI apps with support for MCP.",
+      "descriptionMarkdown": "Chainlit is a python framework to build conversational AI apps with support for MCP.",
+      "githubUrl": "https://github.com/chainlit/chainlit",
+      "websiteUrl": "https://chainlit.io/",
+      "license": "Apache 2.0",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "example",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/chainlit/example.png"
+        },
+        {
+          "alt": "add-mcp",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/chainlit/add-mcp.png"
+        },
+        {
+          "alt": "manage-mcps",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/chainlit/manage-mcps.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#chainlit"
+    },
+    {
+      "id": "chatmcp",
+      "name": "ChatMCP",
+      "summary": "ChatMCP is an AI chat client implementing the Model Context Protocol (MCP).",
+      "descriptionMarkdown": "ChatMCP is an AI chat client implementing the Model Context Protocol (MCP).",
+      "githubUrl": "https://github.com/daodao97/chatmcp",
+      "license": "Apache 2.0",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Dart"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/chatmcp/preview.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/chatmcp/settings.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#chatmcp"
+    },
+    {
+      "id": "cherry-studio",
+      "name": "Cherry Studio",
+      "summary": "Cherry Studio is a desktop client that supports for multiple LLM providers, available on Windows, Mac and Linux.",
+      "descriptionMarkdown": "**Cherry Studio** is a desktop client that supports for multiple LLM providers, available on Windows, Mac and Linux.\n\n**Feature:**\n\n- **Multi-Model Support**: Integrates cloud (OpenAI, Gemini, Anthropic), web AI (Claude, Perplexity), and local models (Ollama, LM Studio).\n- **AI Assistants**: 300+ presets, custom creation, and multi-model parallel chats.\n- **Doc Processing**: Handles text/images/Office/PDF, WebDAV, Mermaid, and code highlighting.\n- **Productivity**: Global search, topic management, AI translation, drag-drop, mini-programs, and **MCP server**.\n- **UX**: Cross-platform (Win/Mac/Linux), plug-and-play, light/dark themes, transparent UI, full Markdown, and easy sharing.",
+      "githubUrl": "https://github.com/CherryHQ/cherry-studio",
+      "websiteUrl": "https://cherry-ai.com",
+      "license": "Apache 2.0 + Addendum Terms*",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "preview",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/cherry-studio/preview.png"
+        },
+        {
+          "alt": "settings",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/cherry-studio/settings.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#cherry-studio"
+    },
+    {
+      "id": "claude-desktop",
+      "name": "Claude Desktop",
+      "summary": "The Claude desktop app brings Claude's capabilities directly to your computer, allowing for seamless integration with your workflow.",
+      "descriptionMarkdown": "The Claude desktop app brings Claude's capabilities directly to your computer, allowing for seamless integration with your workflow.",
+      "websiteUrl": "https://claude.ai/download",
+      "license": "Proprietary",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/claude-desktop/claude-desktop.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#claude-desktop"
+    },
+    {
+      "id": "claude-code-open",
+      "name": "Claude Code Open",
+      "summary": "Open-source AI coding platform based on Claude Code CLI with full MCP protocol support.",
+      "descriptionMarkdown": "Open-source AI coding platform based on Claude Code CLI with full MCP protocol support. Features a browser-based Web IDE with Monaco editor, 37+ built-in tools, Blueprint multi-agent orchestration system, and scheduled task daemon. Supports MCP server configuration and integration for extending AI capabilities through external tools and services.",
+      "githubUrl": "https://github.com/kill136/claude-code-open",
+      "license": "MIT",
+      "type": "CLI, Web IDE",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#claude-code-open"
+    },
+    {
+      "id": "claudemind",
+      "name": "ClaudeMind",
+      "summary": "Experience Claude AI without limits. Use our desktop app for everyday AI assistance, or boost your coding productivity with our JetBrains plugin.",
+      "descriptionMarkdown": "Experience Claude AI without limits. Use our desktop app for everyday AI assistance, or boost your coding productivity with our JetBrains plugin.",
+      "websiteUrl": "https://claudemind.com/",
+      "license": "Proprietary",
+      "type": "Desktop app, JetBrains extension",
+      "platforms": [
+        "Windows",
+        "MacOS"
+      ],
+      "pricing": "Per seat (from $29)",
+      "programmingLanguages": [],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/claudemind/ClaudeMind_Desktop_Chat_History.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/claudemind/ClaudeMind_Desktop_NewChatPage.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/claudemind/ClaudeMind_Desktop_Projects.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#claudemind"
+    },
+    {
+      "id": "cline",
+      "name": "Cline",
+      "summary": "Cline can handle complex software development tasks step-by-step. With tools that let him create & edit files, explore large projects, use the browser, and execute terminal commands (after you grant permission), he can a",
+      "descriptionMarkdown": "Cline can handle complex software development tasks step-by-step. With tools that let him create & edit files, explore large projects, use the browser, and execute terminal commands (after you grant permission), he can assist you in ways that go beyond code completion or tech support. Cline can even use the Model Context Protocol (MCP) to create new tools and extend his own capabilities. While autonomous AI scripts traditionally run in sandboxed environments, this extension provides a human-in-the-loop GUI to approve every file change and terminal command, providing a safe and accessible way to explore the potential of agentic AI.",
+      "githubUrl": "https://github.com/cline/cline",
+      "websiteUrl": "https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev",
+      "license": "Apache 2.0",
+      "type": "VSCode extension",
+      "platforms": [
+        "Windows",
+        "MacOS"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/cline/cline-demo.gif"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#cline"
+    },
+    {
+      "id": "console-chat-gpt",
+      "name": "console-chat-gpt",
+      "summary": "Enjoy seamless interactions with ChatGPT, MistralAI, Claude by Anthropic, Grok by xAI, Gemini by Google and DeepSeek directly from your command line.",
+      "descriptionMarkdown": "Enjoy seamless interactions with ChatGPT, MistralAI, Claude by Anthropic, Grok by xAI, Gemini by Google and DeepSeek directly from your command line. Elevate your chat experience with efficiency and ease.",
+      "githubUrl": "https://github.com/amidabuddha/console-chat-gpt",
+      "license": "MIT",
+      "type": "CLI",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/console-chat-gpt/markdown_preview.gif"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/console-chat-gpt/python_for_loop.gif"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/console-chat-gpt/settings_preview.gif"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#console-chat-gpt"
+    },
+    {
+      "id": "contextkit",
+      "name": "ContextKit",
+      "summary": "A CLI tool and MCP client for creating spec files for AI coding agents. ContextKit generates specs from reusable Jinja2-based templates, filling in context from various MCP sources and user input.",
+      "descriptionMarkdown": "A CLI tool and MCP client for creating spec files for AI coding agents. ContextKit generates specs from reusable Jinja2-based templates, filling in context from various MCP sources and user input.",
+      "githubUrl": "https://github.com/eyalzh/context-kit",
+      "license": "MIT",
+      "type": "CLI",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#contextkit"
+    },
+    {
+      "id": "copilot-mcp",
+      "name": "Copilot-MCP",
+      "summary": "VSCode extension that acts as a Model Context Protocol (MCP) client, enabling integration between MCP servers and GitHub Copilot Chat",
+      "descriptionMarkdown": "VSCode extension that acts as a Model Context Protocol (MCP) client, enabling integration between MCP servers and GitHub Copilot Chat",
+      "githubUrl": "https://github.com/VikashLoomba/copilot-mcp",
+      "license": "GPL-v3",
+      "type": "VSCode Extension",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Any"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/copilot-mcp/preview.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#copilot-mcp"
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "summary": "Cursor is an AI-first code editor fork of VS Code that helps you code faster with built-in chat, edit, and debugging AI features.",
+      "descriptionMarkdown": "Cursor is an AI-first code editor fork of VS Code that helps you code faster with built-in chat, edit, and debugging AI features. It supports MCP for enhanced AI capabilities and tool integration.",
+      "githubUrl": "https://github.com/getcursor/cursor",
+      "websiteUrl": "https://cursor.com",
+      "license": "Proprietary",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Main Interface",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/cursor/cursor.png"
+        },
+        {
+          "alt": "Adding New MCP Server",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/cursor/new-server.png"
+        },
+        {
+          "alt": "Settings Interface",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/cursor/settings.png"
+        },
+        {
+          "alt": "Calling MCP Server",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/cursor/calling.png"
+        },
+        {
+          "alt": "MCP Server Response",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/cursor/called.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#cursor"
+    },
+    {
+      "id": "continue",
+      "name": "Continue",
+      "summary": "Continue is the leading open-source AI code assistant. You can connect any models and any context to build custom autocomplete and chat experiences inside VS Code and JetBrains.",
+      "descriptionMarkdown": "Continue is the leading open-source AI code assistant. You can connect any models and any context to build custom autocomplete and chat experiences inside VS Code and JetBrains.",
+      "githubUrl": "https://github.com/continuedev/continue",
+      "websiteUrl": "https://continue.dev/",
+      "license": "Apache 2.0",
+      "type": "VSCode extension, JetBrains extension",
+      "platforms": [
+        "Windows",
+        "MacOS"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/continue/continue-demo.gif"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#continue"
+    },
+    {
+      "id": "deepchat",
+      "name": "DeepChat",
+      "summary": "DeepChat is a cross-platform desktop AI assistant, MCP client. DeepChat brings the power of AI to your desktop with privacy and efficiency, making it your ideal companion for productive work.",
+      "descriptionMarkdown": "DeepChat is a cross-platform desktop AI assistant, MCP client. DeepChat brings the power of AI to your desktop with privacy and efficiency, making it your ideal companion for productive work.",
+      "githubUrl": "https://github.com/thinkinaixyz/deepchat",
+      "websiteUrl": "https://deepchat.thinkinai.xyz/",
+      "license": "Apache 2.0",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/deepchat/deepchat.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/deepchat/setting.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#deepchat"
+    },
+    {
+      "id": "dexto",
+      "name": "Dexto",
+      "summary": "Dexto is an open agent harness that ships with a production-ready coding agent and native MCP client support.",
+      "descriptionMarkdown": "Dexto is an open agent harness that ships with a production-ready coding agent and native MCP client support. It can connect to MCP servers for tools, resources, and prompts while also providing its own MCP tool packages (filesystem, process, task, plan).",
+      "githubUrl": "https://github.com/truffle-ai/dexto",
+      "websiteUrl": "https://dexto.ai",
+      "license": "Elastic 2.0",
+      "type": "CLI, Web app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#dexto"
+    },
+    {
+      "id": "docsgpt",
+      "name": "DocsGPT",
+      "summary": "DocsGPT is a privacy-focused, open-source AI platform designed to create intelligent agents and enterprise search solutions.",
+      "descriptionMarkdown": "DocsGPT is a privacy-focused, open-source AI platform designed to create intelligent agents and enterprise search solutions. As an MCP client, it enables agents to connect with external tools and APIs securely.",
+      "githubUrl": "https://github.com/arc53/DocsGPT",
+      "websiteUrl": "https://www.docsgpt.cloud//",
+      "license": "MIT",
+      "type": "Web app, Self-hosted",
+      "platforms": [
+        "Web",
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python",
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/docsgpt/docsgpt.gif"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#docsgpt"
+    },
+    {
+      "id": "dolphin-mcp",
+      "name": "Dolphin-MCP",
+      "summary": "Dolphin-MCP is an open-source multi-server bridging client for MCP. It allows you to connect any MCP-compatible server any LLM (local or remote), enabling flexible tool usage and resource access in real-time.",
+      "descriptionMarkdown": "**Dolphin-MCP** is an open-source multi-server bridging client for MCP. It allows you to connect any MCP-compatible server any LLM (local or remote), enabling flexible tool usage and resource access in real-time.\n\n`pip install dolphin-mcp`",
+      "githubUrl": "https://github.com/cognitivecomputations/dolphin-mcp",
+      "license": "MIT",
+      "type": "CLI, Python library",
+      "platforms": [
+        "Linux",
+        "Windows",
+        "MacOS"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [
+        "pip install dolphin-mcp"
+      ],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/dolphin-mcp/dolphin-mcp.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#dolphin-mcp"
+    },
+    {
+      "id": "fastchat-mcp",
+      "name": "Fastchat MCP",
+      "summary": "Overview Fastchat-mcp is a Python chat client designed to simplify connection to MCP servers through the httpstream or stdio transfer protocols.",
+      "descriptionMarkdown": "#### Overview\n\nFastchat-mcp is a Python chat client designed to simplify connection to MCP servers through the `httpstream` or `stdio` transfer protocols. Its intuitive design allows easy configuration and management of connections to both public and private MCP servers with authentication, using a JSON-format configuration file.\n\nThis package offers a clean and accessible terminal interface, ideal for quick chat testing without requiring complex setups. Additionally, it includes a `Chat` module (class) intended for advanced and flexible development, which can be easily integrated into custom projects, providing greater control and adaptability to the developer\u2019s needs.\n\n#### Installation\n\n```shell\npip install fastchat-mcp\n```\n\n#### Future\n\nFuture versions are expected to include additional features such as voice systems, quick integrations with databases, built-in websocket support for frontend connections, among other useful functionalities. We invite you to follow this repository to stay updated on the latest news and improvements implemented.",
+      "githubUrl": "https://github.com/rb58853/fastchat-mcp",
+      "license": "MIT",
+      "type": "CLI",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [
+        "pip install fastchat-mcp"
+      ],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#fastchat-mcp"
+    },
+    {
+      "id": "enola",
+      "name": "Enola",
+      "summary": "Enola.dev is an agentic AI toolkit for various LLMs (incl. e.g. Google Gemini & Anthropic APIs; as well as thousands of local models via Ollama).",
+      "descriptionMarkdown": "**Enola.dev** is an [agentic](https://docs.enola.dev/tutorial/agents/)\nAI toolkit for [various LLMs](https://docs.enola.dev/specs/aiuri/#introduction)\n(incl. e.g. Google Gemini & Anthropic APIs; as well as thousands of local models via Ollama).\nIt comes with a number of [built-in tools](https://docs.enola.dev/concepts/tool/),\nand [MCP client support for external tools](https://docs.enola.dev/concepts/mcp/).\nIt has [several UIs](https://docs.enola.dev/tutorial/chat):\n\n* Chat Web UI, served by a built-in local HTTP web-server\n* Chat CLI Textual User Interface (TUI) for the terminal (also available via a built-in SSH server)\n* _One-shot_ `ai` agent prompt CLI\n\nIt can also [simply invoke (call) any MCP server's tools directly](https://docs.enola.dev/use/mcp/) (without LLM).",
+      "githubUrl": "https://github.com/enola-dev/enola",
+      "websiteUrl": "https://docs.enola.dev",
+      "license": "Apache 2.0",
+      "type": "Desktop app with CLI and local Web server",
+      "platforms": [
+        "Linux",
+        "Windows",
+        "MacOS (JVM)"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Java"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "MCP Tools",
+          "url": "https://docs.enola.dev/use/mcp/script.svg"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#enola"
+    },
+    {
+      "id": "flujo",
+      "name": "FLUJO",
+      "summary": "Think n8n + ChatGPT. FLUJO is a desktop application that integrates with MCP to provide a workflow-builder interface for AI interactions.",
+      "descriptionMarkdown": "Think n8n + ChatGPT. **FLUJO** is a desktop application that integrates with MCP to provide a workflow-builder interface for AI interactions. Built with Next.js and React, it supports both online and offline (ollama) models, it manages API Keys and environment variables centrally and can install MCP Servers from GitHub. FLUJO has a ChatCompletions endpoint and flows can be executed from other AI applications like Cline, Roo or Claude. \n\n- Environment & API Key Management\n- Model Management\n- MCP Server Integration\n- Workflow Orchestration\n- Chat Interface",
+      "githubUrl": "https://github.com/mario-andreschak/FLUJO",
+      "license": "MIT",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/24e23174-4f1d-46e6-bf67-d40bec7135af"
+        },
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/7cb93912-f39c-40b5-9b8c-f485df2d3b69"
+        },
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/b27481b6-7c94-4ce6-aeba-211c9b9cdd4c"
+        },
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/eb9ff7ce-9083-44c1-9643-78acee50a66d"
+        },
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/c8910046-b642-4278-b48e-61083740c7a4"
+        },
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/ea381dda-1b0a-44d7-8a91-7ab48189ecad"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#flujo"
+    },
+    {
+      "id": "goose",
+      "name": "Goose",
+      "summary": "Goose is a general-purpose AI agent that can dynamically plug into new extensions and learn how to use them.",
+      "descriptionMarkdown": "Goose is a general-purpose AI agent that can dynamically plug into new extensions and learn how to use them. It solves higher-level problems using tools from multiple extensions and can interact with multiple extensions at once.",
+      "githubUrl": "https://github.com/block/goose",
+      "license": "Apache 2.0",
+      "type": "AI Agent",
+      "platforms": [
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Rust"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Goose Logo",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/goose/goose.png"
+        },
+        {
+          "alt": "Custom Extension Chat",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/goose/custom-extension-chat.png"
+        },
+        {
+          "alt": "Custom Extension Tools",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/goose/custom-extension-tools-9d440447ae99b18ae92819e652148abe.png"
+        },
+        {
+          "alt": "Extension Settings",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/goose/extension%20settings.png"
+        },
+        {
+          "alt": "List Tools",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/goose/list%20tools.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#goose"
+    },
+    {
+      "id": "glue",
+      "name": "Glue",
+      "summary": "Glue is a full-featured, thread-first team chat platform with a built-in AI agent and support for MCP, enabling teams to leverage intelligent tools and insights.",
+      "descriptionMarkdown": "Glue is a full-featured, thread-first team chat platform with a built-in AI agent and support for MCP, enabling teams to leverage intelligent tools and insights. [Learn more.](https://glue.ai/labs)",
+      "websiteUrl": "https://glue.ai",
+      "type": "Web app, Desktop app, Mobile app",
+      "platforms": [
+        "Web",
+        "MacOS",
+        "Windows",
+        "Mobile"
+      ],
+      "pricing": "$8/user/month",
+      "programmingLanguages": [],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Glue MCP Hero",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/glue/glue-mcp-hero.jpg"
+        },
+        {
+          "alt": "Glue Create Issue",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/glue/glue-create-issue.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#glue"
+    },
+    {
+      "id": "hyperchat",
+      "name": "HyperChat",
+      "summary": "HyperChat is an open Chat client that can use various LLM APIs to provide the best Chat experience and implement productivity tools through the MCP protocol.",
+      "descriptionMarkdown": "HyperChat is an open Chat client that can use various LLM APIs to provide the best Chat experience and implement productivity tools through the MCP protocol.",
+      "githubUrl": "https://github.com/BigSweetPotatoStudio/HyperChat",
+      "license": "Apache 2.0*",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "JavaScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/hyperchat/image13.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/hyperchat/image21.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/hyperchat/image22.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/hyperchat/image33.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/hyperchat/image34.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/hyperchat/image35.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#hyperchat"
+    },
+    {
+      "id": "jdbcx",
+      "name": "JDBCX",
+      "summary": "JDBCX extends JDBC by providing enhanced support for data formats and compression, object mapping, advanced type conversion, multi-language query capabilities, and MCP support.",
+      "descriptionMarkdown": "JDBCX extends JDBC by providing enhanced support for data formats and compression, object mapping, advanced type conversion, multi-language query capabilities, and MCP support.",
+      "githubUrl": "https://github.com/jdbcx/jdbcx",
+      "license": "Apache 2.0",
+      "type": "CLI, JDBC driver",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Java"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "CLI",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/jdbcx/cli.png"
+        },
+        {
+          "alt": "JDBC Client - DBeaver",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/jdbcx/dbeaver.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#jdbcx"
+    },
+    {
+      "id": "kibitz",
+      "name": "kibitz",
+      "summary": "kibitiz is the free and open-source Replit. Minimally, it is a lightweight chat interface to the popular LLM APIs (Anthropic and OpenAI API formats supported).",
+      "descriptionMarkdown": "kibitiz is the free and open-source Replit. Minimally, it is a lightweight chat interface to the popular LLM APIs (Anthropic and OpenAI API formats supported). Experience automated tool loops: try asking your agent to use [wcgw](https://github.com/rusiaaman/wcgw) to make a change to a local repository, then fix linter and compiler errors, make a commit, and push to remote, all without user intervention! Even better, code on-the-go by setting up MCP servers on your laptop, then connecting from your mobile through [Kinode](https://github.com/kinode-dao/kinode).",
+      "githubUrl": "https://github.com/nick1udwig/kibitz",
+      "websiteUrl": "https://kibi.tz",
+      "license": "MIT",
+      "type": "Mobile app, Desktop app",
+      "platforms": [
+        "Mobile",
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://github.com/user-attachments/assets/3f8df448-1c81-4ff2-8598-c48283a4dc00"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#kibitz"
+    },
+    {
+      "id": "langbot",
+      "name": "LangBot",
+      "summary": "LangBot is an open-source platform for creating LLM based instant messaging bots.",
+      "descriptionMarkdown": "LangBot is an open-source platform for creating LLM based instant messaging bots. It supports multi platforms like Discord, Telegram, WeChat, QQ. Currently supports LLMs from OpenAI, Anthropic, DeepSeek, Ollama, and more. And easy for users to create agents with MCP or plugins. Users can also customize their experience through WebUI, or create plugins to extend the functionality of the bot.",
+      "githubUrl": "https://github.com/langbot-app/LangBot",
+      "websiteUrl": "https://langbot.app",
+      "license": "AGPL-3.0 license",
+      "type": "Web app",
+      "platforms": [],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/langbot/langbot.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#langbot"
+    },
+    {
+      "id": "klavis-ai",
+      "name": "Klavis AI",
+      "summary": "Klavis AI is building open-source infrastructure to make Model Context Protocols (MCPs) easy for everyone.",
+      "descriptionMarkdown": "Klavis AI is building open-source infrastructure to make Model Context Protocols (MCPs) easy for everyone. We provide:\n\n- \ud83d\udcac Slack & Discord Clients: Run MCPs directly from your favorite messaging platforms\n- \u2601\ufe0f Hosted MCP Servers: Access powerful tools without infrastructure management\n- \ud83c\udf9b\ufe0f Simple Web UI: Configure and manage everything with no coding required\n\nWhether you're a non-technical user wanting to leverage AI workflows or a developer looking to build and scale MCPs, Klavis makes it simple.",
+      "githubUrl": "https://github.com/Klavis-AI/klavis",
+      "websiteUrl": "https://www.klavis.ai",
+      "license": "MIT",
+      "type": "Slack/Discord bots, Web UI, Hosted Service",
+      "platforms": [
+        "Slack",
+        "Discord",
+        "Web"
+      ],
+      "pricing": "Open Source: Free. Hosted: Freemium",
+      "programmingLanguages": [
+        "Python",
+        "Typescript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/klavis-ai/home.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/klavis-ai/dashboard.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/klavis-ai/slack.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/klavis-ai/discord.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#klavis-ai"
+    },
+    {
+      "id": "kiro",
+      "name": "Kiro",
+      "summary": "Kiro is an AI assistant and IDE built to assist developers. Kiro helps you do your best work by bringing structure to AI coding with spec-driven development.",
+      "descriptionMarkdown": "Kiro is an AI assistant and IDE built to assist developers. Kiro helps you do your best work by bringing structure to AI coding with spec-driven development.",
+      "githubUrl": "https://github.com/kirodotdev/Kiro",
+      "websiteUrl": "https://kiro.dev",
+      "license": "https://kiro.dev/license/",
+      "type": "Desktop app, IDE",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [
+        "All"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Kiro Interface",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/kiro/kiro-interface.png"
+        },
+        {
+          "alt": "MCP Integration",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/kiro/mcp-integration.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#kiro"
+    },
+    {
+      "id": "librechat",
+      "name": "LibreChat",
+      "summary": "Enhanced ChatGPT Clone: Features Agents, Anthropic, AWS, OpenAI, Assistants API, Azure, Groq, o1, GPT-4o, Mistral, OpenRouter, Vertex AI, Gemini, Artifacts, AI model switching, message search, Code Interpreter, langchain",
+      "descriptionMarkdown": "Enhanced ChatGPT Clone: Features Agents, Anthropic, AWS, OpenAI, Assistants API, Azure, Groq, o1, GPT-4o, Mistral, OpenRouter, Vertex AI, Gemini, Artifacts, AI model switching, message search, Code Interpreter, langchain, DALL-E-3, OpenAPI Actions, Functions, Secure Multi-User Auth, Presets, open-source for self-hosting.",
+      "githubUrl": "https://github.com/danny-avila/LibreChat",
+      "websiteUrl": "https://www.librechat.ai/",
+      "license": "MIT license",
+      "type": "Web app",
+      "platforms": [],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/librechat/librechat.webp"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#librechat"
+    },
+    {
+      "id": "lutra",
+      "name": "Lutra",
+      "summary": "Lutra is the first AI task agent that connects all your work apps. It is designed to turn your conversations into automated workflows.",
+      "descriptionMarkdown": "Lutra is the first AI task agent that connects all your work apps. It is designed to turn your conversations into automated workflows. Lutra understands your goals and actions it can take, and it automatically determines how to work with your apps to get tasks done. After completing a task, you can create playbooks which save the steps as reusable automations. Lutra connects with MCP servers easily: you only need to provide the server URL and it does all the setup behind the scenes.",
+      "websiteUrl": "https://lutra.ai/",
+      "license": "Proprietary",
+      "type": "Web app",
+      "platforms": [
+        "Any"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/lutra/connect-mcp-server.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/lutra/chat-and-create.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/lutra/create-playbook.gif"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#lutra"
+    },
+    {
+      "id": "mcp-agent",
+      "name": "mcp-agent",
+      "summary": "mcp-agent is a simple, composable framework to build agents using Model Context Protocol.",
+      "descriptionMarkdown": "**`mcp-agent`** is a simple, composable framework to build agents using [Model Context Protocol](https://modelcontextprotocol.io/introduction).\n\n**Inspiration**: Anthropic announced 2 foundational updates for AI application developers:\n\n1. [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) - a standardized interface to let any software be accessible to AI assistants via MCP servers.\n2. [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) - a seminal writeup on simple, composable patterns for building production-ready AI agents.\n\n`mcp-agent` puts these two foundational pieces into an AI application framework:\n\n1. It handles the pesky business of managing the lifecycle of MCP server connections so you don't have to.\n2. It implements every pattern described in Building Effective Agents, and does so in a _composable_ way, allowing you to chain these patterns together.\n3. **Bonus**: It implements [OpenAI's Swarm](https://github.com/openai/swarm) pattern for multi-agent orchestration, but in a model-agnostic way.",
+      "githubUrl": "https://github.com/lastmile-ai/mcp-agent",
+      "license": "Apache 2.0",
+      "type": "Python library",
+      "platforms": [],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#mcp-agent"
+    },
+    {
+      "id": "lobehub",
+      "name": "LobeHub",
+      "summary": "Modern AI chat framework with multi-model support: Features OpenAI, Anthropic Claude, Google Gemini, Azure OpenAI, Ollama, and 100+ AI models.",
+      "descriptionMarkdown": "Modern AI chat framework with multi-model support: Features OpenAI, Anthropic Claude, Google Gemini, Azure OpenAI, Ollama, and 100+ AI models. Includes plugin system, knowledge base, text-to-speech, vision recognition, DALL-E image generation, function calling, multi-agent conversations, PWA support, mobile-responsive design, i18n localization, theme customization, and self-hosting capabilities. Built with Next.js for optimal performance and user experience.",
+      "githubUrl": "https://github.com/lobehub/lobe-chat",
+      "websiteUrl": "https://lobehub.com",
+      "license": "MIT license",
+      "type": "Web app, Desktop app",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux",
+        "Web"
+      ],
+      "pricing": "Free(Open Source)",
+      "programmingLanguages": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/lobehub/lobehub.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/lobehub/settings.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#lobehub"
+    },
+    {
+      "id": "mcp-chatbot",
+      "name": "MCP Chatbot",
+      "summary": "This chatbot example demonstrates how to integrate the Model Context Protocol (MCP) into a simple CLI chatbot.",
+      "descriptionMarkdown": "This chatbot example demonstrates how to integrate the Model Context Protocol (MCP) into a simple CLI chatbot. The implementation showcases MCP's flexibility by supporting multiple tools through MCP servers and is compatible with any LLM provider that follows OpenAI API standards.",
+      "githubUrl": "https://github.com/3choff/mcp-chatbot",
+      "license": "MIT",
+      "type": "CLI",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#mcp-chatbot"
+    },
+    {
+      "id": "mcp-cli-client",
+      "name": "MCP CLI client",
+      "summary": "A simple CLI to run LLM prompt and implement MCP client.",
+      "descriptionMarkdown": "A simple CLI to run LLM prompt and implement MCP client.",
+      "githubUrl": "https://github.com/adhikasp/mcp-client-cli",
+      "license": "MIT",
+      "type": "CLI",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/mcp-cli-client/usage.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#mcp-cli-client"
+    },
+    {
+      "id": "mcphost",
+      "name": "MCPHost",
+      "summary": "MCPHost is a multi-server MCP client web application. It allows you to connect to multiple MCP servers simultaneously and manage your server configurations with persistence.",
+      "descriptionMarkdown": "MCPHost is a multi-server MCP client web application. It allows you to connect to multiple MCP servers simultaneously and manage your server configurations with persistence. Features include GitHub login for syncing server lists across devices and a streamlined interface for interacting with server tools, resources, and prompts.",
+      "githubUrl": "https://github.com/anthropics/mcp-use-cases",
+      "websiteUrl": "https://mcphost.link",
+      "license": "MIT",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#mcphost"
+    },
+    {
+      "id": "mcp-playground",
+      "name": "MCP Playground",
+      "summary": "MCP Playground is a comprehensive web-based MCP client for testing Claude and Gemini models with MCP server integration.",
+      "descriptionMarkdown": "MCP Playground is a comprehensive web-based MCP client for testing Claude and Gemini models with MCP server integration. Features dual AI provider support, advanced tool management with granular access control, custom system prompts, OAuth authentication, and real-time server monitoring. Perfect for testing MCP servers, comparing AI providers, and debugging tool implementations without writing code.\n\nKey Features:\n- **Dual AI Support** - Claude & Gemini models with seamless switching\n- **Smart Tool Control** - Restrict which tools AI can access (all/selected/none)  \n- **Custom System Prompts** - Shape AI personality and behavior\n- **OAuth & Bearer Auth** - Production-ready authentication support\n- **Real-time Testing** - Live server monitoring and direct tool execution",
+      "websiteUrl": "https://mcpsplayground.com/chat",
+      "license": "Proprietary",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/93b6c1b8-cb30-4775-8f82-551a0fa79c4c"
+        },
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/2e37e0a7-eed3-4ef3-acde-11f27b323bdd"
+        },
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/2dee26dd-6e83-4e51-867e-9e1a3b32c5a5"
+        },
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/781ef697-0658-4b1e-8e16-52f1cc838295"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#mcp-playground"
+    },
+    {
+      "id": "mcpico",
+      "name": "McPico",
+      "summary": "A simple CLI to run LLM prompt, attach files, discuss with MCP servers. For multiple LLMs, including local models.",
+      "descriptionMarkdown": "A simple CLI to run LLM prompt, attach files, discuss with MCP servers. For multiple LLMs, including local models.",
+      "githubUrl": "https://github.com/cryptax/mcpico",
+      "license": "GPL 3",
+      "type": "CLI",
+      "platforms": [
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/mcpico/mcpico.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#mcpico"
+    },
+    {
+      "id": "mcp-simple-slackbot",
+      "name": "MCP Simple Slackbot",
+      "summary": "A simple Slack bot that uses LLMs and the Model Context Protocol (MCP) tools.",
+      "descriptionMarkdown": "A simple Slack bot that uses LLMs and the Model Context Protocol (MCP) tools.",
+      "githubUrl": "https://github.com/sooperset/mcp-client-slackbot",
+      "license": "MIT",
+      "type": "Slack Bot",
+      "platforms": [
+        "Slack"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/mcp-simple-slackbot/demo.gif"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#mcp-simple-slackbot"
+    },
+    {
+      "id": "memex",
+      "name": "Memex",
+      "summary": "Memex is the first MCP client and MCP server builder in one desktop app. Unlike traditional MCP clients that only consume existing servers, Memex can create custom MCP servers from natural language prompts, immediately i",
+      "descriptionMarkdown": "**Memex** is the first MCP client and MCP server builder in one desktop app. Unlike traditional MCP clients that only consume existing servers, Memex can create custom MCP servers from natural language prompts, immediately integrate them into its toolkit, and use them to solve problems\u2014all within a single conversation.\n\n**Key MCP Features:**\n- **Prompt-to-MCP Server**: Generate fully functional MCP servers from natural language descriptions\n- **Self-Testing & Debugging**: Autonomously test, debug, and improve created MCP servers\n- **Universal MCP Client**: Works with any MCP server through intuitive, natural language integration\n- **Curated MCP Directory**: Access to tested, one-click installable MCP servers (Neon, Netlify, GitHub, Context7, and more)\n- **Multi-Server Orchestration**: Leverage multiple MCP servers simultaneously for complex workflows\n\nThis unique dual capability of creating AND consuming MCP tools makes Memex the most versatile all-in-one solution in the MCP ecosystem.",
+      "websiteUrl": "https://memex.tech/",
+      "license": "Proprietary",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "MCP Server Directory",
+          "url": "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/8a4e8495-68e5-4848-a895-0be95ec41b01/Screenshot_2025-06-17_at_3.38.13_PM.png?t=1750189420"
+        },
+        {
+          "alt": "Multi-Agent Orchestration",
+          "url": "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/10227cbc-36f6-44b4-83ec-5c33b742d667/2025-06-17_15.34.55.gif?t=1750188929"
+        },
+        {
+          "alt": "Memex Interface",
+          "url": "https://github.com/user-attachments/assets/6a1b6e76-5d5c-4ba4-87ee-70a31f0bc4ce"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#memex"
+    },
+    {
+      "id": "mcpomni-connect",
+      "name": "MCPOmni Connect",
+      "summary": "A powerful universal CLI client for MCP Servers that provides seamless integration with multiple protocols, AI models, and tools through an intelligent interface.",
+      "descriptionMarkdown": "A powerful universal CLI client for MCP Servers that provides seamless integration with multiple protocols, AI models, and tools through an intelligent interface.\n\n`uv add mcpomni-connect` or `pip install mcpomni-connect`",
+      "githubUrl": "https://github.com/Abiorh001/mcp_omni_connect",
+      "license": "MIT",
+      "type": "CLI",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [
+        "uv add mcpomni-connect",
+        "pip install mcpomni-connect"
+      ],
+      "screenshots": [
+        {
+          "alt": "mcp_client_new1",
+          "url": "https://github.com/user-attachments/assets/9c4eb3df-d0d5-464c-8815-8f7415a47fce"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#mcpomni-connect"
+    },
+    {
+      "id": "mcp-superassistant",
+      "name": "MCP SuperAssistant",
+      "summary": "Add MCP Capabilities to Chatgpt, Gemini, Grok, Google AI Studio, DeepSeek, AI Studio, OpenRouter, T3 Chat, Mistral and Github Copilot.",
+      "descriptionMarkdown": "Add MCP Capabilities to Chatgpt, Gemini, Grok, Google AI Studio, DeepSeek, AI Studio, OpenRouter, T3 Chat, Mistral and Github Copilot. This extension allows you to connect to any MCP server and use its tools, models, and capabilities directly from your browser without any API key required in these Chat Platforms.",
+      "githubUrl": "https://github.com/srbhptl39/MCP-SuperAssistant",
+      "websiteUrl": "https://mcpsuperassistant.ai/",
+      "license": "MIT",
+      "type": "Chrome Extenstion",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/mcp-superassistant/chatgpt.jpg"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#mcp-superassistant"
+    },
+    {
+      "id": "nerve",
+      "name": "Nerve",
+      "summary": "Nerve is an ADK ( Agent Development Kit ) and CLI designed to be a simple yet powerful platform for creating and executing LLM-based agents fully integrated with MCP.",
+      "descriptionMarkdown": "Nerve is an ADK ( Agent Development Kit ) and CLI designed to be a simple yet powerful platform for creating and executing LLM-based agents fully integrated with MCP.",
+      "githubUrl": "https://github.com/evilsocket/nerve",
+      "websiteUrl": "https://github.com/evilsocket/nerve",
+      "license": "GPL3",
+      "type": "CLI",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "asciicast",
+          "url": "https://asciinema.org/a/710433.svg"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#nerve"
+    },
+    {
+      "id": "octomind",
+      "name": "Octomind",
+      "summary": "Session-based AI development assistant with MCP support, 7 LLM providers, and extensible architecture.",
+      "descriptionMarkdown": "Session-based AI development assistant with MCP support, 7 LLM providers, and extensible architecture. Features plan-first workflow, semantic code search, and persistent memory.",
+      "githubUrl": "https://github.com/muvon/octomind",
+      "websiteUrl": "https://muvon.io",
+      "license": "Apache 2.0",
+      "type": "CLI",
+      "platforms": [
+        "Linux",
+        "Windows",
+        "MacOS"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Rust"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "asciicast",
+          "url": "https://asciinema.org/a/wpZmOSOgFXp8HRzTltncgN7e3.svg"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#octomind"
+    },
+    {
+      "id": "nextchat",
+      "name": "NextChat",
+      "summary": "Light and Fast AI Assistant, with Claude, DeepSeek, GPT4, Gemini Pro & MCP support.",
+      "descriptionMarkdown": "Light and Fast AI Assistant, with Claude, DeepSeek, GPT4, Gemini Pro & MCP support.",
+      "githubUrl": "https://github.com/ChatGPTNextWeb/NextChat",
+      "websiteUrl": "https://nextchat.club/",
+      "license": "MIT",
+      "type": "Web app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://github.com/ChatGPTNextWeb/NextChat/blob/main/docs/images/cover.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#nextchat"
+    },
+    {
+      "id": "oterm",
+      "name": "oterm",
+      "summary": "A terminal client for Ollama, with support for MCP servers.",
+      "descriptionMarkdown": "A terminal client for Ollama, with support for MCP servers.",
+      "githubUrl": "https://github.com/ggozad/oterm",
+      "license": "MIT",
+      "type": "CLI",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/oterm/chat.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/oterm/mcp.svg"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#oterm"
+    },
+    {
+      "id": "slack-mcp-client",
+      "name": "Slack MCP Client",
+      "summary": "This project provides a Slack bot client that serves as a bridge between Slack and Model Context Protocol (MCP) servers.",
+      "descriptionMarkdown": "This project provides a Slack bot client that serves as a bridge between Slack and Model Context Protocol (MCP) servers. By leveraging Slack as the user interface, it allows LLM models to interact with multiple MCP servers using standardized MCP tools.\n\nKey features:\n\n- \u2705 Multi-Mode MCP Client:\n  - SSE for real-time communication\n  - HTTP transport for JSON-RPC\n  - stdio for local development and testing\n- \u2705 Slack Integration:\n  - Socket Mode for secure, firewall-friendly communication\n  - Works with both channels and direct messages\n- \u2705 Tool Registration: Dynamically register and call MCP tools\n- \u2705 Docker container support",
+      "githubUrl": "https://github.com/tuannvm/slack-mcp-client",
+      "license": "MIT",
+      "type": "Slack bot client",
+      "platforms": [
+        "Slack"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Go"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/slack-mcp-client/demo.gif"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#slack-mcp-client"
+    },
+    {
+      "id": "runbear",
+      "name": "Runbear",
+      "summary": "No-code MCP clients for Slack, Microsoft Teams, and Discord with full support for MCP servers, connected knowledge sources, and custom instructions.",
+      "descriptionMarkdown": "No-code MCP clients for Slack, Microsoft Teams, and Discord with full support for MCP servers, connected knowledge sources, and custom instructions.",
+      "githubUrl": "https://github.com/runbear-io",
+      "websiteUrl": "https://runbear.io",
+      "license": "Proprietary",
+      "type": "Slack, MS Teams, Discord app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/runbear/slack-mcp-client.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/runbear/teams-mcp-client.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#runbear"
+    },
+    {
+      "id": "superinterface",
+      "name": "Superinterface",
+      "summary": "Superinterface is AI infrastructure and a developer platform to build in-app AI assistants with support for MCP, interactive components, client-side function calling and more.",
+      "descriptionMarkdown": "Superinterface is AI infrastructure and a developer platform to build in-app AI assistants with support for MCP, interactive components, client-side function calling and more.\n\nKey features:\n\n- Use tools from MCP servers in assistants embedded via React components or script tags\n- SSE transport support\n- Use any AI model from any AI provider (OpenAI, Anthropic, Ollama, others)",
+      "githubUrl": "https://github.com/supercorp-ai/superinterface",
+      "websiteUrl": "https://superinterface.ai",
+      "license": "Proprietary",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/superinterface/mcp-chat.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/superinterface/interfaces.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/superinterface/setup-1.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/superinterface/setup-2.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/superinterface/setup-3.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#superinterface"
+    },
+    {
+      "id": "seekchat",
+      "name": "SeekChat",
+      "summary": "\u2728 A Sleek and Powerful AI Chat Desktop Application \u2728 SeekChat supports MCP tool execution, enabling AI to directly control your computer and perform various tasks.",
+      "descriptionMarkdown": "\u2728 A Sleek and Powerful AI Chat Desktop Application \u2728\n\nSeekChat supports MCP tool execution, enabling AI to directly control your computer and perform various tasks. Easily automate file management, data analysis, code development, and more, turning AI into a truly intelligent assistant.",
+      "githubUrl": "https://github.com/seekrays/seekchat",
+      "websiteUrl": "https://seekrays.com/chat/",
+      "license": "Apache 2.0",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/seekchat/screenshot-chat.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/seekchat/screenshot-setting-mcp.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#seekchat"
+    },
+    {
+      "id": "simple-ai",
+      "name": "Simple AI",
+      "summary": "Simple AI (simple-ai-io) is a command-based web/cli application, supports MCP.",
+      "descriptionMarkdown": "Simple AI (simple-ai-io) is a command-based web/cli application, supports MCP.",
+      "githubUrl": "https://github.com/gcc3/simple-ai-chat",
+      "websiteUrl": "https://simple-ai.io",
+      "license": "Simple AI License",
+      "type": "Web/CLI",
+      "platforms": [
+        "Web/npm"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "JavaScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/simple-ai-chat/mcp-settings.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/simple-ai-chat/fetch.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#simple-ai"
+    },
+    {
+      "id": "swarmclaw",
+      "name": "SwarmClaw",
+      "summary": "Self-hosted multi-agent AI runtime. Acts as both an MCP client and an MCP server: connects agents to MCP servers and exposes its own agents as MCP tools for other clients.",
+      "descriptionMarkdown": "Self-hosted multi-agent AI runtime. Acts as both an MCP client and an MCP server: connects agents to MCP servers and exposes its own agents as MCP tools for other clients. Supports 23+ LLM providers, persistent memory, skills, schedules, sub-agent spawning, and inbound connectors for Discord, Slack, Telegram, WhatsApp, Teams, and Matrix.\n\n`npm install -g @swarmclawai/swarmclaw`",
+      "githubUrl": "https://github.com/swarmclawai/swarmclaw",
+      "websiteUrl": "https://swarmclaw.ai",
+      "license": "MIT",
+      "type": "Desktop app, CLI, Docker",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [
+        "npm install -g @swarmclawai/swarmclaw"
+      ],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#swarmclaw"
+    },
+    {
+      "id": "tambo",
+      "name": "Tambo",
+      "summary": "Tambo is a platform for building custom chat experiences, with integrated custom user interface components.",
+      "descriptionMarkdown": "[Tambo](https://tambo.co) is a platform for building custom chat experiences, with integrated custom user interface components.",
+      "githubUrl": "https://github.com/tambo-ai/tambo",
+      "websiteUrl": "https://tambo.co",
+      "license": "MIT",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/tambo/chat-with-graph.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/tambo/client-side-mcp.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#tambo"
+    },
+    {
+      "id": "taskade",
+      "name": "Taskade",
+      "summary": "Taskade is an AI-native workspace platform that connects to MCP servers for project management, AI agent orchestration, and workflow automation.",
+      "descriptionMarkdown": "[Taskade](https://taskade.com) is an AI-native workspace platform that connects to MCP servers for project management, AI agent orchestration, and workflow automation. Features custom AI agents with memory and knowledge bases, 8 workspace views, and real-time multiplayer collaboration.\n\nKey features:\n\n- Connects to MCP servers including its own [official MCP server](https://github.com/taskade/mcp) with 50+ tools\n- Custom AI agents with memory, knowledge bases, and tool integration\n- 8 workspace views (list, board, table, mind map, org chart, calendar, gallery, action)\n- Real-time multiplayer collaboration across all platforms\n- Cross-platform: Web, Desktop (Mac/Windows/Linux), Mobile (iOS/Android), Browser Extensions (Chrome/Firefox/Edge)",
+      "githubUrl": "https://github.com/taskade/taskade",
+      "websiteUrl": "https://taskade.com",
+      "license": "Proprietary",
+      "type": "Web app, Desktop app, Mobile app, Browser extension",
+      "platforms": [
+        "Web",
+        "MacOS",
+        "Windows",
+        "Linux",
+        "iOS",
+        "Android",
+        "Chrome",
+        "Firefox",
+        "Edge"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#taskade"
+    },
+    {
+      "id": "tester-mcp-client",
+      "name": "Tester MCP Client",
+      "summary": "A client that connects to any MCP server using Server-Sent Events (SSE) and displays conversations in a chat-like UI.",
+      "descriptionMarkdown": "A client that connects to any MCP server using Server-Sent Events (SSE) and displays conversations in a chat-like UI.  \nIt is a standalone Apify Actor for testing MCP servers over SSE, with support for Authorization headers.  \nBuilt with plain JavaScript (old-school style) and hosted on Apify, it requires no setup to run.  \n\nKey features:\n\n- Connects to any MCP server via Server-Sent Events (SSE).  \n- Works with the [Apify MCP Server](https://apify.com/apify/actors-mcp-server) to interact with one or more Apify [Actors](https://apify.com/store).  \n- Dynamically utilizes tools based on context and user queries (if supported by the server).  \n- Open-source\u2014review, suggest improvements, or modify as needed.",
+      "githubUrl": "https://github.com/apify/tester-mcp-client",
+      "websiteUrl": "https://apify.com/jiri.spilka/tester-mcp-client",
+      "license": "Apache 2.0",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [
+        "JavaScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/tester-mcp-client/setup.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/tester-mcp-client/chat-ui.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#tester-mcp-client"
+    },
+    {
+      "id": "tiles-notebook",
+      "name": "Tiles Notebook",
+      "summary": "Tiles is a notebook interface that makes working with AI agents easier.",
+      "descriptionMarkdown": "Tiles is a notebook interface that makes working with AI agents easier.",
+      "githubUrl": "https://github.com/tileshq/tiles",
+      "websiteUrl": "https://www.tiles.run/",
+      "license": "Apache 2.0",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/tiles.run/notebook-ui.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#tiles-notebook"
+    },
+    {
+      "id": "tome",
+      "name": "Tome",
+      "summary": "Tome is an open source cross-platform desktop app designed for working with local LLMs and MCP servers.",
+      "descriptionMarkdown": "Tome is an open source cross-platform desktop app designed for working with local LLMs and MCP servers. Tome manages your MCP servers so there's no fiddling with uv/npm or json files - connect it to Ollama, copy/paste some MCP servers, and chat with an MCP-powered model in seconds.\n\n**Key features:**\n\n- MCP servers are managed by Tome so there is no need to install uv or npm or configure JSON\n- Users can quickly add or remove MCP servers via UI\n- Any tool-supported local model on Ollama is compatible",
+      "githubUrl": "https://github.com/runebookai/tome",
+      "websiteUrl": "https://runebook.ai",
+      "license": "Apache 2.0",
+      "type": "Desktop app",
+      "platforms": [
+        "MacOS"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Rust",
+        "Typescript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Chat",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/tome/chat.png"
+        },
+        {
+          "alt": "MCP Servers",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/tome/mcp.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#tome"
+    },
+    {
+      "id": "vercade",
+      "name": "Vercade",
+      "summary": "LLM discord bot with MCP support, customizable personality and scheduling Key Features: - Invokes an LLM agent every time someone sends a message - Integrates with MCP servers - Supports all well-known LLM providers - Su",
+      "descriptionMarkdown": "LLM discord bot with MCP support, customizable personality and scheduling\n\n**Key Features:**\n\n- Invokes an LLM agent every time someone sends a message\n- Integrates with MCP servers\n- Supports all well-known LLM providers\n- Supports custom agent instructions",
+      "githubUrl": "https://github.com/lintyourcode/vercade",
+      "websiteUrl": "https://discord.gg/EMnkGjAh9v",
+      "license": "GPL-3.0",
+      "type": "Discord bot",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Vercade Discord assistant",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/vercade/k2.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#vercade"
+    },
+    {
+      "id": "vs-code-github-copilot",
+      "name": "VS Code GitHub Copilot",
+      "summary": "VS Code integrates MCP with GitHub Copilot through agent mode, allowing direct interaction with MCP-provided tools within your agentic coding workflow.",
+      "descriptionMarkdown": "VS Code integrates MCP with GitHub Copilot through [agent mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode), allowing direct interaction with MCP-provided tools within your agentic coding workflow. Configure servers in Claude Desktop, workspace or user settings, with guided MCP installation and secure handling of keys in input variables to avoid leaking hard-coded keys.\n\n**Key Features:**\n\n- Support for stdio and server-sent events (SSE) transport\n- Per-session selection of tools per agent session for optimal performance\n- Easy server debugging with restart commands and output logging\n- Tool calls with editable inputs and always-allow toggle\n- Integration with existing VS Code extension system to register MCP servers from extensions",
+      "githubUrl": "https://github.com/microsoft/vscode",
+      "websiteUrl": "https://code.visualstudio.com/",
+      "license": "MIT",
+      "type": "Desktop app, Web app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux",
+        "Web"
+      ],
+      "pricing": "Freemium (GitHub Copilot subscription)",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#vs-code-github-copilot"
+    },
+    {
+      "id": "windsurf",
+      "name": "Windsurf",
+      "summary": "The first agentic IDE, and then some. The Windsurf Editor is where the work of developers and AI truly flow together, allowing for a coding experience that feels like literal magic.",
+      "descriptionMarkdown": "The first agentic IDE, and then some. The Windsurf Editor is where the work of developers and AI truly flow together, allowing for a coding experience that feels like literal magic.",
+      "websiteUrl": "https://codeium.com/windsurf",
+      "license": "Proprietary",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Main Interface",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/windsurf/windsurf.png"
+        },
+        {
+          "alt": "Adding New MCP Server",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/windsurf/easy-add-mcp-servers.png"
+        },
+        {
+          "alt": "Settings Interface",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/windsurf/settings-cascade-mcp.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#windsurf"
+    },
+    {
+      "id": "witsy",
+      "name": "Witsy",
+      "summary": "Witsy is an AI desktop assistant supporting models from all major providers and one keyboard shortcut away!",
+      "descriptionMarkdown": "Witsy is an AI desktop assistant supporting models from all major providers and one keyboard shortcut away!",
+      "githubUrl": "https://github.com/nbonamy/witsy",
+      "websiteUrl": "https://witsyai.com",
+      "license": "Apache 2.0",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Typescript",
+        "Vue"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/witsy/main.jpg"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/witsy/mcp.jpg"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#witsy"
+    },
+    {
+      "id": "enconvo",
+      "name": "Enconvo",
+      "summary": "Enconvo is your AI Agent Launcher that revolutionizes productivity. With instant access, automate your daily tasks effortlessly.",
+      "descriptionMarkdown": "Enconvo is your AI Agent Launcher that revolutionizes productivity. With instant access, automate your daily tasks effortlessly. Our intelligent AI Agent system, powered by 150+ built-in tools and MCP support, learns and adapts to your workflow. Experience seamless automation and enhanced productivity with the most versatile AI assistant for macOS.",
+      "githubUrl": "https://github.com/Enconvo",
+      "websiteUrl": "https://enconvo.com",
+      "license": "Proprietary",
+      "type": "Desktop app",
+      "platforms": [
+        "MacOS"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [
+        "Typescript",
+        "Python",
+        "Swift"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/enconvo/agent_use_mcp.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/enconvo/mcp_config.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#enconvo"
+    },
+    {
+      "id": "y-cli",
+      "name": "y-cli",
+      "summary": "A tiny command-line interface chat application that brings AI conversations to your terminal.",
+      "descriptionMarkdown": "A tiny command-line interface chat application that brings AI conversations to your terminal. Features include chat data storage in JSONL files, interactive chat interface, support for multiple bot configurations compatible with OpenAI chat completion streaming format, Deepseek-r1 reasoning content support, and MCP client support with multiple server configurations.",
+      "githubUrl": "https://github.com/luohy15/y-cli",
+      "license": "MIT",
+      "type": "CLI",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Interactive Chat",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/y-cli/interactive-chat.png"
+        },
+        {
+          "alt": "MCP Server Configurations",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/y-cli/multi-mcp-server.png"
+        },
+        {
+          "alt": "MCP Demo",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/y-cli/mcp.gif"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#y-cli"
+    },
+    {
+      "id": "yume",
+      "name": "Yume",
+      "summary": "Desktop GUI for Claude Code with built-in MCP server management, custom MCP memory server (yume-mcp-memory), multi-tab sessions, background agents, and plugin system.",
+      "descriptionMarkdown": "Desktop GUI for Claude Code with built-in MCP server management, custom MCP memory server (yume-mcp-memory), multi-tab sessions, background agents, and plugin system.",
+      "githubUrl": "https://github.com/aofp/yume",
+      "websiteUrl": "https://aofp.github.io/yume/",
+      "license": "Proprietary",
+      "type": "Desktop app",
+      "platforms": [
+        "MacOS",
+        "Windows",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Rust",
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#yume"
+    },
+    {
+      "id": "zed",
+      "name": "Zed",
+      "summary": "Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.",
+      "descriptionMarkdown": "Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.",
+      "githubUrl": "https://github.com/zed-industries/zed",
+      "websiteUrl": "https://zed.dev/",
+      "license": "GNU",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Rust"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://github.com/user-attachments/assets/95624731-5469-4b58-a21f-bbb31d9838fa"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#zed"
+    },
+    {
+      "id": "mindpal",
+      "name": "MindPal",
+      "summary": "MindPal is a no-code platform for building and deploying AI agents and multi-agent workflows.",
+      "descriptionMarkdown": "MindPal is a no-code platform for building and deploying AI agents and multi-agent workflows. It enables anyone without technical skills to create powerful AI automation solutions by connecting any AI model with any tool. Build complex workflows where multiple AI agents work together to accomplish tasks, with built-in support for MCP servers and tools.\n\nKey features:\n- No-code AI agent builder\n- Multi-agent workflow orchestration\n- Support for any AI model provider\n- MCP server integration\n- Visual workflow designer\n- Built-in tool marketplace",
+      "githubUrl": "https://github.com/mindpal-ai/mindpal",
+      "websiteUrl": "https://mindpal.io",
+      "license": "Proprietary",
+      "type": "Web app",
+      "platforms": [
+        "Web"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [
+        "TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/mindpal/agent-config.jpg"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/mindpal/mcp-integration.jpg"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#mindpal"
+    },
+    {
+      "id": "whatsmcp",
+      "name": "WhatsMCP",
+      "summary": "WhatsMCP is a WhatsApp agent that allows you to interact with MCP servers. It is a simple and easy to use tool that allows you to interact with your AI stack from WhatsApp.",
+      "descriptionMarkdown": "WhatsMCP is a WhatsApp agent that allows you to interact with MCP servers. It is a simple and easy to use tool that allows you to interact with your AI stack from WhatsApp.",
+      "websiteUrl": "https://wassist.app/mcp/",
+      "license": "Proprietary",
+      "type": "Mobile app",
+      "platforms": [
+        "WhatsApp"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/whatsmcp/main.png"
+        },
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/whatsmcp/whatsmcp.gif"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#whatsmcp"
+    },
+    {
+      "id": "runbear-2",
+      "name": "Runbear",
+      "summary": "Runbear enables teams to create AI assistants in communication tools like Slack, MS Teams, and HubSpot.",
+      "descriptionMarkdown": "Runbear enables teams to create AI assistants in communication tools like Slack, MS Teams, and HubSpot. It supports MCP through SSE transport and provides managed MCP servers for easy integration.\n\nKey Features:\n\n* Support for MCP tools in team [communication platforms](https://runbear.io/solutions/integrations/slack/mcp)\n* Integration with remote MCP servers via SSE\n* Managed MCP server options for teams",
+      "websiteUrl": "https://runbear.io",
+      "license": "Proprietary",
+      "type": "Web app",
+      "platforms": [
+        "Web",
+        "Slack",
+        "MS Teams",
+        "HubSpot"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/runbear/slack-connect-mcp.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#runbear"
+    },
+    {
+      "id": "mcp-client-go",
+      "name": "mcp-client-go",
+      "summary": "mcp-client-go is a Golang client library for the Model Context Protocol (MCP). It allows developers to register and interact with various MCP-based services such as Amap (Gaode Maps) using a unified API.",
+      "descriptionMarkdown": "mcp-client-go is a Golang client library for the Model Context Protocol (MCP). It allows developers to register and interact with various MCP-based services such as Amap (Gaode Maps) using a unified API.",
+      "githubUrl": "https://github.com/yincongcyincong/mcp-client-go/tree/main",
+      "license": "MIT",
+      "type": "LIBRARY",
+      "platforms": [],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "GOLANG"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#mcp-client-go"
+    },
+    {
+      "id": "boltai",
+      "name": "BoltAI",
+      "summary": "BoltAI is an all-in-one AI chat client. It supports MCP tools calling, dynamic MCP server management and in-context server control.",
+      "descriptionMarkdown": "BoltAI is an all-in-one AI chat client. It supports MCP tools calling, dynamic MCP server management and in-context server control.\n\nKey features:\n- Multiple AI providers & models\n- MCP server integration\n- Native app: fast & powerful\n- Import configuration from Claude or Cursor\n- Built-in configuration editor",
+      "websiteUrl": "https://boltai.com",
+      "license": "Proprietary",
+      "type": "Mac & Mobile",
+      "platforms": [
+        "Mac"
+      ],
+      "pricing": "Paid",
+      "programmingLanguages": [],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "CleanShot 2025-04-15 at 22 30 45@2x",
+          "url": "https://github.com/user-attachments/assets/0263d468-dbbb-4036-87ec-169329687cdf"
+        },
+        {
+          "alt": "CleanShot 2025-04-15 at 22 45 30@2x",
+          "url": "https://github.com/user-attachments/assets/a9b3a128-0558-4f3b-8f5e-a2fa0759f2b7"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#boltai"
+    },
+    {
+      "id": "argo-localai",
+      "name": "Argo-LocalAI",
+      "summary": "Argo is a localized large model agent builder. Build agents with local & Cloud LLMs, RAG, MCP tools.",
+      "descriptionMarkdown": "Argo is a localized large model agent builder. Build agents with local & Cloud LLMs, RAG, MCP tools. Users can share these creations in our community, download AI agents from others.\n\nKey features:\n- Download opensource LLMs from ollama, huggingface or modelscope with one click.\n- Use local docs for RAG, sync with directories.\n- Support MCP tools.\n- Manage Agents with individual prompt, model, knowledge and MCP tools.",
+      "githubUrl": "https://github.com/xark-argo/argo",
+      "websiteUrl": "https://xark-argo.com",
+      "license": "Apache 2.0",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python/TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/27d0650c-608a-434b-bb4e-f7e3d11f90dc"
+        },
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/e5581d80-09cd-469e-b26d-5c1c446b37dd"
+        },
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/126e9ab9-a343-460c-9a9b-c2e94c58c356"
+        },
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/8cb04ffb-56bc-4a54-b719-ce944cf194da"
+        },
+        {
+          "alt": "image",
+          "url": "https://github.com/user-attachments/assets/d8e094cb-4346-45fe-99d7-e3a26f1ffdfb"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#argo-localai"
+    },
+    {
+      "id": "mcpclihost",
+      "name": "MCPCLIHost",
+      "summary": "A CLI host application that enables Large Language Models (LLMs) to interact with external tools through the Model Context Protocol (MCP).",
+      "descriptionMarkdown": "A CLI host application that enables Large Language Models (LLMs) to interact with external tools through the Model Context Protocol (MCP).",
+      "githubUrl": "https://github.com/vincent-pli/mcp-cli-host",
+      "license": "Apache-2.0",
+      "type": "CLI",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "Screenshot",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/mcpclihost/console.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#mcpclihost"
+    },
+    {
+      "id": "zin-mcp-client",
+      "name": "Zin-MCP-Client",
+      "summary": "Lightweight, Fast, Simple, CLI-Based MCP Client for STDIO MCP Servers, to fill the gap and provide bridge between your local LLMs running Ollama and MCP Servers.",
+      "descriptionMarkdown": "Lightweight, Fast, Simple, CLI-Based MCP Client for STDIO MCP Servers, to fill the gap and provide bridge between your local LLMs running Ollama and MCP Servers. Specially crafted for Zin MCP Servers for reverse engineering.",
+      "githubUrl": "https://github.com/zinja-coder/zin-mcp-client",
+      "license": "Apache 2.0",
+      "type": "Desktop app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "example1",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/zin-mcp-client/zin_mcp_1.png"
+        },
+        {
+          "alt": "example2",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/zin-mcp-client/zin_mcp_2.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#zin-mcp-client"
+    },
+    {
+      "id": "adal",
+      "name": "AdaL",
+      "summary": "AdaL is a self-evolving AI coding agent with full MCP support. Compatible with Claude Code skills and plugins, it features multi-model support (Claude, GPT, Gemini), web research capabilities, and autonomous code editing",
+      "descriptionMarkdown": "AdaL is a self-evolving AI coding agent with full MCP support. Compatible with Claude Code skills and plugins, it features multi-model support (Claude, GPT, Gemini), web research capabilities, and autonomous code editing.",
+      "githubUrl": "https://github.com/SylphAI-Inc/adal-cli",
+      "websiteUrl": "https://sylph.ai",
+      "license": "Proprietary",
+      "type": "CLI",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free tier available",
+      "programmingLanguages": [
+        "TypeScript",
+        "Python"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#adal"
+    },
+    {
+      "id": "agent-cli",
+      "name": "Agent-cli",
+      "summary": "Lightweight, Fast, Simple, CLI MCP Client for MCP Servers. Supporting TUI, stdio and NapCat.",
+      "descriptionMarkdown": "Lightweight, Fast, Simple, CLI MCP Client for MCP Servers. Supporting TUI, stdio and NapCat. Any LLM API compatible with the OpenAI API, such as Ollama and DeepSeek, can be configured for use.",
+      "githubUrl": "https://github.com/belowthetree/agent-cli",
+      "license": "GPLv3",
+      "type": "CLI",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Rust"
+      ],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "example1",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/agent-cli/agentcli.gif"
+        },
+        {
+          "alt": "example2",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/agent-cli/tui.gif"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#agent-cli"
+    },
+    {
+      "id": "qordinate",
+      "name": "Qordinate",
+      "summary": "Qordinate is a personal assistant that talks on your behalf, it knows what to share, when to share and with whom to share.",
+      "descriptionMarkdown": "Qordinate is a personal assistant that talks on your behalf, it knows what to share, when to share and with whom to share. It's available across WhatsApp and Arattai today, with other platforms coming soon. [Learn more](https://qordinate.ai).",
+      "websiteUrl": "https://qordinate.ai/",
+      "type": "Chatbot",
+      "platforms": [
+        "[Slack](https://qordinate.ai/slack)",
+        "[WhatsApp](https://qordinate.ai/whatsapp)",
+        "(coming soon - iMessage",
+        "MS Teams)"
+      ],
+      "pricing": "Freemium",
+      "programmingLanguages": [],
+      "installCommands": [],
+      "screenshots": [
+        {
+          "alt": "example1",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/qordinate/slack.png"
+        },
+        {
+          "alt": "example2",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/qordinate/app.png"
+        },
+        {
+          "alt": "example3",
+          "url": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/screenshots/qordinate/whatsapp.png"
+        }
+      ],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#qordinate"
+    },
+    {
+      "id": "praisonai",
+      "name": "PraisonAI",
+      "summary": "PraisonAI is a production-ready Multi-AI Agents framework with native MCP integration.",
+      "descriptionMarkdown": "PraisonAI is a production-ready Multi-AI Agents framework with native MCP integration. Features fastest agent instantiation (3.77\u03bcs), 100+ LLM support via LiteLLM, agentic workflows (route/parallel/loop/repeat), built-in memory, and self-reflection. Available as Python & JavaScript SDKs.",
+      "githubUrl": "https://github.com/MervinPraison/PraisonAI",
+      "websiteUrl": "https://docs.praison.ai",
+      "license": "MIT",
+      "type": "Python library, CLI, Web app",
+      "platforms": [
+        "Windows",
+        "MacOS",
+        "Linux"
+      ],
+      "pricing": "Free",
+      "programmingLanguages": [
+        "Python",
+        "JavaScript/TypeScript"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#praisonai"
+    }
+  ]
+}

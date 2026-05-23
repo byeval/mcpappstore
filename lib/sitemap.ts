@@ -10,6 +10,7 @@ import {
   listSitemapSkillEntries,
 } from "@/lib/data";
 import { learnArticles } from "@/lib/learn";
+import { MCP_CLIENTS_UPDATED_AT, listMcpClientSitemapEntries } from "@/lib/mcp-clients";
 import { paginatedPath } from "@/lib/pagination";
 import { isIndexableCategory } from "@/lib/seo-indexing";
 import { absoluteUrl } from "@/lib/utils";
@@ -201,12 +202,15 @@ export async function buildStaticSitemapEntries(): Promise<SitemapEntry[]> {
     latestPlatformAppTimestamp("claude"),
   ]);
   const appIndexPages = activeAppIndexKeys(apps);
+  const mcpClients = listMcpClientSitemapEntries();
   const catalogLastModified = dateFromTimestamp(maxUpdatedAt(apps));
   const skillsLastModified = dateFromTimestamp(maxUpdatedAt(skills));
+  const mcpClientsLastModified = new Date(MCP_CLIENTS_UPDATED_AT);
   const staticLastModified = dateFromTimestamp(
     Math.max(
       maxUpdatedAt(apps),
       maxUpdatedAt(skills),
+      maxUpdatedAt(mcpClients),
       ...appCollections.map((collection) => new Date(collection.updatedAt).getTime()),
       ...learnArticles.map((article) => new Date(article.updatedAt).getTime()),
     ),
@@ -217,8 +221,15 @@ export async function buildStaticSitemapEntries(): Promise<SitemapEntry[]> {
   return [
     ...localizedEntries("/", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 1 }),
     ...localizedEntries("/awesome-mcp-apps", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 0.94 }),
+    ...localizedEntries("/mcp-clients", { lastModified: mcpClientsLastModified, changeFrequency: "weekly", priority: 0.88 }),
+    ...mcpClients.flatMap((client) => localizedEntries(`/mcp-clients/${client.id}`, {
+      lastModified: new Date(client.updatedAt),
+      changeFrequency: "weekly" as const,
+      priority: 0.58,
+    })),
     ...localizedEntries("/mcp-directory", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 0.92 }),
     ...localizedEntries("/mcp-servers", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 0.9 }),
+    ...localizedEntries("/mcp-inspector", { lastModified: staticLastModified, changeFrequency: "monthly", priority: 0.78 }),
     ...localizedEntries("/store", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 0.9 }),
     ...localizedEntries("/skills", { lastModified: skillsLastModified, changeFrequency: "daily", priority: 0.82 }),
     ...appIndexPages.flatMap((key) => localizedEntries(appIndexPath(key), {

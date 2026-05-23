@@ -29,6 +29,11 @@ const hubLinks = [
     summary: "Review server-style integrations by platform fit and operational scope.",
   },
   {
+    href: "/mcp-clients",
+    label: "MCP clients",
+    summary: "Browse desktop, web, CLI, IDE, and agent clients that connect to MCP servers.",
+  },
+  {
     href: "/chatgpt-apps",
     label: "ChatGPT apps",
     summary: "Find MCP-backed apps built for ChatGPT workflows and UI surfaces.",
