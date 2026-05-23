@@ -167,6 +167,22 @@ function positiveInteger(value: string, fallback: number): number {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
 }
 
+function queryValue(names: string[], fallback = ""): string {
+  if (typeof window === "undefined") {
+    return fallback;
+  }
+
+  const searchParams = new URLSearchParams(window.location.search);
+  for (const name of names) {
+    const value = searchParams.get(name);
+    if (value) {
+      return value;
+    }
+  }
+
+  return fallback;
+}
+
 function statusLabel(status: CheckStatus): string {
   if (status === "ok") return "Pass";
   if (status === "warn") return "Note";
@@ -348,12 +364,12 @@ function makeNotification(method: string, params?: JsonValue): JsonRpcMessage {
 }
 
 export function McpInspector() {
-  const [endpointUrl, setEndpointUrl] = useState("");
+  const [endpointUrl, setEndpointUrl] = useState(() => queryValue(["serverUrl", "endpoint"]));
   const [appUrl, setAppUrl] = useState("");
-  const [protocolVersion, setProtocolVersion] = useState(protocolVersions[0]);
+  const [protocolVersion, setProtocolVersion] = useState(() => queryValue(["protocolVersion"], protocolVersions[0]));
   const [authToken, setAuthToken] = useState("");
   const [headersText, setHeadersText] = useState("");
-  const [requestTimeoutMs, setRequestTimeoutMs] = useState(defaultRequestTimeoutMs);
+  const [requestTimeoutMs, setRequestTimeoutMs] = useState(() => queryValue(["timeoutMs"], defaultRequestTimeoutMs));
   const [checks, setChecks] = useState<InspectorCheck[]>(initialChecks);
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [isRunning, setIsRunning] = useState(false);
@@ -375,6 +391,7 @@ export function McpInspector() {
   const [promptError, setPromptError] = useState("");
   const [resourceError, setResourceError] = useState("");
   const [configStatus, setConfigStatus] = useState("");
+  const [configPreview, setConfigPreview] = useState("");
   const [isCallingTool, setIsCallingTool] = useState(false);
   const [isGettingPrompt, setIsGettingPrompt] = useState(false);
   const [isReadingResource, setIsReadingResource] = useState(false);
@@ -460,14 +477,54 @@ export function McpInspector() {
     return entry;
   };
 
+  const writeClipboardText = async (value: string) => {
+    try {
+      await navigator.clipboard.writeText(value);
+      return;
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = value;
+      textarea.setAttribute("readonly", "true");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        if (!document.execCommand("copy")) {
+          throw new Error("Clipboard copy was blocked by the browser.");
+        }
+      } finally {
+        textarea.remove();
+      }
+    }
+  };
+
   const copyConfig = async (mode: "entry" | "file") => {
     try {
       const entry = createServerEntry();
       const payload = mode === "entry" ? entry : { mcpServers: { "default-server": entry } };
-      await navigator.clipboard.writeText(prettyJson(payload));
-      setConfigStatus(mode === "entry" ? "Server entry copied." : "mcp.json copied.");
+      const text = prettyJson(payload);
+
+      try {
+        await writeClipboardText(text);
+        setConfigPreview("");
+        setConfigStatus(mode === "entry" ? "Server entry copied." : "mcp.json copied.");
+      } catch (copyError) {
+        setConfigPreview(text);
+        setConfigStatus(
+          copyError instanceof Error
+            ? `${copyError.message} Config shown below.`
+            : "Could not copy config. Config shown below.",
+        );
+      }
     } catch (error) {
-      setConfigStatus(error instanceof Error ? error.message : "Could not copy config.");
+      setConfigPreview("");
+      setConfigStatus(
+        error instanceof Error
+          ? error.message
+          : "Could not copy config.",
+      );
     }
   };
 
@@ -784,6 +841,65 @@ export function McpInspector() {
     }
   };
 
+  const getSelectedPrompt = async () => {
+    if (!selectedPrompt) {
+      setPromptError("Choose a prompt first.");
+      return;
+    }
+
+    setIsGettingPrompt(true);
+    setPromptError("");
+    setPromptResult(undefined);
+
+    try {
+      const url = absoluteUrl(currentEndpointUrl());
+      const args = parsePromptArguments(promptArgumentsRef.current?.value ?? promptArguments);
+      const params: Record<string, JsonValue> = { name: selectedPrompt.name };
+      if (Object.keys(args).length > 0) {
+        params.arguments = args;
+      }
+
+      const response = await sendRequest({
+        url,
+        message: makeJsonRpc(Date.now(), "prompts/get", params),
+        includeProtocol: true,
+        includeSession: true,
+      });
+
+      setPromptResult(response.payload?.result);
+    } catch (error) {
+      setPromptError(error instanceof Error ? error.message : "Prompt request failed.");
+    } finally {
+      setIsGettingPrompt(false);
+    }
+  };
+
+  const readSelectedResource = async () => {
+    if (!selectedResource) {
+      setResourceError("Choose a resource first.");
+      return;
+    }
+
+    setIsReadingResource(true);
+    setResourceError("");
+    setResourceResult(undefined);
+
+    try {
+      const response = await sendRequest({
+        url: absoluteUrl(currentEndpointUrl()),
+        message: makeJsonRpc(Date.now(), "resources/read", { uri: selectedResource.uri }),
+        includeProtocol: true,
+        includeSession: true,
+      });
+
+      setResourceResult(response.payload?.result);
+    } catch (error) {
+      setResourceError(error instanceof Error ? error.message : "Resource request failed.");
+    } finally {
+      setIsReadingResource(false);
+    }
+  };
+
   const resetInspector = () => {
     setChecks(initialChecks);
     setLogs([]);
@@ -794,9 +910,18 @@ export function McpInspector() {
     setSessionId("");
     setNegotiatedVersion("");
     setSelectedToolName("");
+    setSelectedPromptName("");
+    setSelectedResourceUri("");
     setToolArguments("{}");
+    setPromptArguments("{}");
     setToolResult(undefined);
+    setPromptResult(undefined);
+    setResourceResult(undefined);
     setToolError("");
+    setPromptError("");
+    setResourceError("");
+    setConfigStatus("");
+    setConfigPreview("");
   };
 
   return (
@@ -845,7 +970,7 @@ export function McpInspector() {
             />
           </label>
 
-          <div className="row-2">
+          <div className="row-3">
             <label className="field">
               <span>Protocol version</span>
               <select className="input" onChange={(event) => setProtocolVersion(event.target.value)} ref={protocolVersionRef} value={protocolVersion}>
@@ -855,6 +980,18 @@ export function McpInspector() {
                   </option>
                 ))}
               </select>
+            </label>
+            <label className="field">
+              <span>Timeout ms</span>
+              <input
+                className="input"
+                min="1000"
+                onChange={(event) => setRequestTimeoutMs(event.target.value)}
+                ref={requestTimeoutRef}
+                step="1000"
+                type="number"
+                value={requestTimeoutMs}
+              />
             </label>
             <label className="field">
               <span>Bearer token</span>
@@ -906,6 +1043,23 @@ export function McpInspector() {
           <div className="inspector-privacy-note">
             <strong>Browser-only test</strong>
             <span>Endpoint URLs, tokens, and tool arguments are not submitted to mcpapp.</span>
+          </div>
+
+          <div className="inspector-result">
+            <span>Client config</span>
+            <p className="inspector-empty">
+              Copy the current endpoint as a Streamable HTTP MCP client config.
+            </p>
+            <div className="inspector-actions">
+              <button className="secondary-link" onClick={() => void copyConfig("entry")} type="button">
+                Copy server entry
+              </button>
+              <button className="secondary-link" onClick={() => void copyConfig("file")} type="button">
+                Copy mcp.json
+              </button>
+            </div>
+            {configStatus ? <p className="import-status">{configStatus}</p> : null}
+            {configPreview ? <pre>{configPreview}</pre> : null}
           </div>
         </div>
 
@@ -980,16 +1134,26 @@ export function McpInspector() {
           {prompts.length || resources.length ? (
             <div className="inspector-secondary-lists">
               {prompts.slice(0, 6).map((prompt) => (
-                <div key={`prompt-${prompt.name}`}>
+                <button
+                  className={`inspector-tool-row ${selectedPrompt?.name === prompt.name ? "active" : ""}`}
+                  key={`prompt-${prompt.name}`}
+                  onClick={() => setSelectedPromptName(prompt.name)}
+                  type="button"
+                >
                   <strong>{prompt.name}</strong>
                   <span>{prompt.description ?? "Prompt template"}</span>
-                </div>
+                </button>
               ))}
               {resources.slice(0, 6).map((resource) => (
-                <div key={`resource-${resource.uri}`}>
+                <button
+                  className={`inspector-tool-row ${selectedResource?.uri === resource.uri ? "active" : ""}`}
+                  key={`resource-${resource.uri}`}
+                  onClick={() => setSelectedResourceUri(resource.uri)}
+                  type="button"
+                >
                   <strong>{resource.name ?? resource.uri}</strong>
                   <span>{resource.mimeType ?? resource.description ?? resource.uri}</span>
-                </div>
+                </button>
               ))}
             </div>
           ) : null}
@@ -1011,7 +1175,7 @@ export function McpInspector() {
           )}
 
           <label className="field">
-            <span>Arguments JSON</span>
+            <span>Tool arguments JSON</span>
             <textarea
               className="textarea inspector-args"
               onChange={(event) => setToolArguments(event.target.value)}
@@ -1035,6 +1199,89 @@ export function McpInspector() {
             <div className="inspector-result">
               <span>Result</span>
               <pre>{prettyJson(toolResult)}</pre>
+            </div>
+          ) : null}
+        </div>
+      </section>
+
+      <section className="inspector-layout inspector-results-layout">
+        <div className="inspector-panel">
+          <div className="inspector-panel-head">
+            <p className="eyebrow">Prompt get</p>
+            <h2>{selectedPrompt?.name ?? "Select a prompt"}</h2>
+          </div>
+
+          {selectedPrompt?.arguments?.length ? (
+            <div className="inspector-secondary-lists">
+              {selectedPrompt.arguments.map((argument) => (
+                <div key={argument.name}>
+                  <strong>{argument.name}{argument.required ? " *" : ""}</strong>
+                  <span>{argument.description ?? "Prompt argument"}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="inspector-empty">Run inspection and select a prompt to see its arguments.</p>
+          )}
+
+          <label className="field">
+            <span>Prompt arguments JSON</span>
+            <textarea
+              className="textarea inspector-args"
+              onChange={(event) => setPromptArguments(event.target.value)}
+              ref={promptArgumentsRef}
+              spellCheck={false}
+              value={promptArguments}
+            />
+          </label>
+
+          <button
+            className="primary-link"
+            disabled={!selectedPrompt || !canUseSession || isGettingPrompt}
+            onClick={getSelectedPrompt}
+            type="button"
+          >
+            {isGettingPrompt ? "Getting..." : "Get prompt"}
+          </button>
+
+          {promptError ? <p className="import-status error">{promptError}</p> : null}
+          {promptResult !== undefined ? (
+            <div className="inspector-result">
+              <span>Result</span>
+              <pre>{prettyJson(promptResult)}</pre>
+            </div>
+          ) : null}
+        </div>
+
+        <div className="inspector-panel">
+          <div className="inspector-panel-head">
+            <p className="eyebrow">Resource read</p>
+            <h2>{selectedResource?.name ?? selectedResource?.uri ?? "Select a resource"}</h2>
+          </div>
+
+          {selectedResource ? (
+            <div className="inspector-result">
+              <span>Resource URI</span>
+              <pre>{selectedResource.uri}</pre>
+            </div>
+          ) : (
+            <p className="inspector-empty">Run inspection and select a resource to read it.</p>
+          )}
+
+          <button
+            className="primary-link"
+            disabled={!selectedResource || !canUseSession || isReadingResource}
+            onClick={readSelectedResource}
+            type="button"
+          >
+            {isReadingResource ? "Reading..." : "Read resource"}
+          </button>
+
+          {resourceError ? <p className="import-status error">{resourceError}</p> : null}
+          {resourceResult !== undefined ? (
+            <div className="inspector-result">
+              <span>Result</span>
+              <pre>{prettyJson(resourceResult)}</pre>
             </div>
           ) : null}
         </div>
