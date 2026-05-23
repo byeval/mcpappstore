@@ -6,87 +6,11 @@ import { countAppsByPlatform, listPublishedApps, listSitemapAppEntries } from "@
 import { formatMessage, localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
+import { staticPageCopy } from "@/lib/static-page-i18n";
 import { absoluteUrl } from "@/lib/utils";
 
-const pageTitle = "Awesome MCP Apps";
-const pageDescription =
-  "A GitHub-friendly awesome list for MCP apps, MCP servers, ChatGPT apps, and Claude connectors, backed by the MCP App Store catalog.";
-
-const hubLinks = [
+const builderResourceLinks = [
   {
-    href: "/store",
-    label: "Full MCP app index",
-    summary: "Browse every published MCP app and connector in A-Z form.",
-  },
-  {
-    href: "/mcp-directory",
-    label: "MCP directory",
-    summary: "Compare MCP servers, ChatGPT apps, and Claude connectors from one hub.",
-  },
-  {
-    href: "/mcp-servers",
-    label: "MCP servers",
-    summary: "Review server-style integrations by platform fit and operational scope.",
-  },
-  {
-    href: "/mcp-clients",
-    label: "MCP clients",
-    summary: "Browse desktop, web, CLI, IDE, and agent clients that connect to MCP servers.",
-  },
-  {
-    href: "/chatgpt-apps",
-    label: "ChatGPT apps",
-    summary: "Find MCP-backed apps built for ChatGPT workflows and UI surfaces.",
-  },
-  {
-    href: "/claude-connectors",
-    label: "Claude connectors",
-    summary: "Browse Claude-ready MCP connectors and interactive connector listings.",
-  },
-  {
-    href: "/collections",
-    label: "Curated collections",
-    summary: "Jump into developer, productivity, design, finance, and observability routes.",
-  },
-];
-
-const appTypeLinks = [
-  {
-    href: "/category/design",
-    label: "Diagrams & visualization",
-    summary: "Diagram editors, whiteboards, design canvases, and visual reasoning tools.",
-  },
-  {
-    href: "/category/3d",
-    label: "3D & creative",
-    summary: "3D viewers, creative coding, CAD-style workflows, and rich visual tools.",
-  },
-  {
-    href: "/category/productivity",
-    label: "Productivity",
-    summary: "Tasks, notes, docs, calendars, writing, meetings, and workspace automation.",
-  },
-  {
-    href: "/category/data-analysis",
-    label: "Data & analytics",
-    summary: "Dashboards, charts, BI, spreadsheets, logs, metrics, and data exploration.",
-  },
-  {
-    href: "/category/media",
-    label: "Media",
-    summary: "Audio, video, image, PDF, music, and document viewing or generation.",
-  },
-  {
-    href: "/category/developer-tools",
-    label: "Developer tools",
-    summary: "Coding agents, browser automation, terminals, deploys, testing, and debugging.",
-  },
-];
-
-const builderResourceGroups = [
-  {
-    label: "Official references",
-    summary: "Start with the protocol and host UI guidance.",
     links: [
       { href: "https://modelcontextprotocol.io/docs/extensions/apps", label: "MCP Apps docs" },
       { href: "https://github.com/modelcontextprotocol/ext-apps", label: "ext-apps spec & SDK" },
@@ -95,8 +19,6 @@ const builderResourceGroups = [
     ],
   },
   {
-    label: "Examples",
-    summary: "Matched examples open our detail pages; unmatched ones stay on GitHub.",
     links: [
       { href: "https://github.com/modelcontextprotocol/ext-apps/tree/main/examples", label: "Official examples" },
       { href: "/app/excalidraw-app-demo", label: "Excalidraw MCP" },
@@ -108,8 +30,6 @@ const builderResourceGroups = [
     ],
   },
   {
-    label: "Frameworks",
-    summary: "Libraries and kits for building app-style MCP surfaces.",
     links: [
       { href: "https://github.com/mcp-use/mcp-use", label: "mcp-use" },
       { href: "https://github.com/alpic-ai/skybridge", label: "Skybridge" },
@@ -118,8 +38,6 @@ const builderResourceGroups = [
     ],
   },
   {
-    label: "Tools & templates",
-    summary: "Inspectors, starters, and source lists for builders.",
     links: [
       { href: "https://github.com/MCPJam/inspector", label: "MCPJam Inspector" },
       { href: "https://github.com/sebderhy/mcp-app-template", label: "MCP app template" },
@@ -129,31 +47,14 @@ const builderResourceGroups = [
   },
 ];
 
-const faqs = [
-  {
-    question: "What is Awesome MCP Apps?",
-    answer:
-      "Awesome MCP Apps is a shareable, GitHub-friendly landing page for MCP apps, MCP servers, ChatGPT apps, and Claude connectors in the MCP App Store catalog.",
-  },
-  {
-    question: "How is this different from a normal GitHub awesome list?",
-    answer:
-      "A static awesome list is usually maintained by hand. This page uses the same catalog data as MCP App Store, so counts and featured listings can refresh with the directory.",
-  },
-  {
-    question: "Can I submit an MCP app for this list?",
-    answer:
-      "Yes. Submit the MCP app, server, or connector with publisher, platform, auth, tools, and workflow details so it can be reviewed for the directory.",
-  },
-];
-
 export async function generateMetadata(): Promise<Metadata> {
   const [{ locale }, apps] = await Promise.all([getI18n(), listSitemapAppEntries()]);
+  const copy = staticPageCopy(locale).awesomeMcpApps;
   const listingText = apps.length.toLocaleString("en-US");
 
   return pageMetadata({
-    title: `Awesome MCP Apps: ${listingText} MCP apps, servers, and connectors`,
-    description: pageDescription,
+    title: formatMessage(copy.metaTitle, { count: listingText }),
+    description: copy.pageDescription,
     path: "/awesome-mcp-apps",
     locale,
     keywords: [
@@ -176,76 +77,74 @@ export default async function AwesomeMcpAppsPage() {
     countAppsByPlatform("chatgpt"),
     countAppsByPlatform("claude"),
   ]);
+  const copy = staticPageCopy(locale).awesomeMcpApps;
   const href = (path: string) => localizedPath(path, locale);
   const totalListings = apps.length;
   const lastUpdated = apps.reduce((max, app) => Math.max(max, app.publishedAt ?? 0, app.updatedAt), 0);
   const lastUpdatedIso = new Date(lastUpdated || Date.now()).toISOString();
   const lastUpdatedDate = lastUpdatedIso.slice(0, 10);
   const featuredApps = apps.slice(0, 24);
+  const faqs = copy.faqs;
 
   return (
     <div className="page-stack">
       <section className="collection-hero awesome-hero">
         <div>
-          <p className="eyebrow">{pageTitle}</p>
-          <h1>Awesome MCP apps for GitHub readers and AI builders</h1>
-          <p>
-            A README-friendly route for people looking for the best MCP apps, MCP servers, ChatGPT apps, and Claude connectors without digging through scattered repos.
-          </p>
+          <p className="eyebrow">{copy.pageTitle}</p>
+          <h1>{copy.heroTitle}</h1>
+          <p>{copy.heroBody}</p>
           <div className="collection-hero-actions awesome-hero-actions">
             <Link className="primary-link" href={href("/store")} prefetch={false}>
-              Browse all listings
+              {copy.browseAll}
             </Link>
             <Link className="secondary-link" href={href("/submit")} prefetch={false}>
-              Submit an MCP app
+              {copy.submit}
             </Link>
           </div>
-          <div className="collection-hero-meta" aria-label="Awesome MCP Apps page metadata">
+          <div className="collection-hero-meta" aria-label={copy.metaAria}>
             <span>awesome-mcp-apps</span>
             <span>{formatMessage(t.common.updated, { date: lastUpdatedDate })}</span>
-            <span>GitHub-friendly</span>
+            <span>{copy.githubFriendly}</span>
           </div>
         </div>
         <aside className="collection-hero-panel awesome-hero-panel">
-          <span>Share this route from READMEs</span>
+          <span>{copy.shareRoute}</span>
           <strong>{totalListings}</strong>
-          <span>MCP apps, servers, and connectors indexed from the directory catalog.</span>
+          <span>{copy.indexedSummary}</span>
           <a href="https://github.com/byeval/mcpappstore" rel="noreferrer" target="_blank">
-            Open the GitHub repo
+            {copy.openRepo}
           </a>
         </aside>
       </section>
 
-      <div className="app-index-metrics" aria-label="Awesome MCP Apps directory counts">
+      <div className="app-index-metrics" aria-label={copy.metricsAria}>
         <div>
           <strong>{totalListings}</strong>
-          <span>Total MCP listings</span>
+          <span>{copy.totalListings}</span>
         </div>
         <div>
           <strong>{chatgptCount}</strong>
-          <span>ChatGPT app listings</span>
+          <span>{copy.chatgptListings}</span>
         </div>
         <div>
           <strong>{claudeCount}</strong>
-          <span>Claude connector listings</span>
+          <span>{copy.claudeListings}</span>
         </div>
       </div>
 
       <section className="catalog-shell compact-shell" aria-labelledby="awesome-types-title">
         <div className="section-head compact">
-          <p className="eyebrow">Browse by app type</p>
-          <h2 id="awesome-types-title">Find the kind of MCP app you need</h2>
-          <p className="section-copy">
-            Jump straight into the directory routes that match the strongest categories from the awesome MCP apps ecosystem.
-          </p>
+          <p className="eyebrow">{copy.typesEyebrow}</p>
+          <h2 id="awesome-types-title">{copy.typesTitle}</h2>
+          <p className="section-copy">{copy.typesBody}</p>
         </div>
         <div className="collection-card-grid awesome-link-grid">
-          {appTypeLinks.map((link) => (
+          {copy.appTypes.map((link) => (
             <Link className="collection-card" href={href(link.href)} key={link.href} prefetch={false}>
-              <span className="learn-card-type">MCP app type</span>
+              <span className="learn-card-type">{copy.appType}</span>
               <h2>{link.label}</h2>
               <p>{link.summary}</p>
-              <span className="collection-card-count">Browse category</span>
+              <span className="collection-card-count">{copy.browseCategory}</span>
             </Link>
           ))}
         </div>
@@ -253,20 +152,18 @@ export default async function AwesomeMcpAppsPage() {
 
       <section className="catalog-shell compact-shell" aria-labelledby="awesome-builder-title">
         <div className="section-head compact">
-          <p className="eyebrow">Builder resources</p>
-          <h2 id="awesome-builder-title">Useful links from the MCP app ecosystem</h2>
-          <p className="section-copy">
-            Official docs, examples, frameworks, and templates for people who want to inspect or build interactive MCP apps.
-          </p>
+          <p className="eyebrow">{copy.resourcesEyebrow}</p>
+          <h2 id="awesome-builder-title">{copy.resourcesTitle}</h2>
+          <p className="section-copy">{copy.resourcesBody}</p>
         </div>
         <div className="collection-card-grid awesome-resource-grid">
-          {builderResourceGroups.map((group) => (
+          {copy.resourceGroups.map((group, index) => (
             <div className="collection-card awesome-resource-card" key={group.label}>
-              <span className="learn-card-type">Resource group</span>
+              <span className="learn-card-type">{copy.resourceGroup}</span>
               <h2>{group.label}</h2>
               <p>{group.summary}</p>
               <div className="awesome-resource-list">
-                {group.links.map((link) => (
+                {(builderResourceLinks[index]?.links ?? []).map((link) => (
                   link.href.startsWith("/") ? (
                     <Link href={href(link.href)} key={link.href} prefetch={false}>
                       {link.label}
@@ -284,23 +181,21 @@ export default async function AwesomeMcpAppsPage() {
       </section>
 
       <section className="collection-card-grid awesome-link-grid" aria-label="Awesome MCP Apps sections">
-        {hubLinks.map((link) => (
+        {copy.hubLinks.map((link) => (
           <Link className="collection-card" href={href(link.href)} key={link.href} prefetch={false}>
-            <span className="learn-card-type">Awesome MCP route</span>
+            <span className="learn-card-type">{copy.routeType}</span>
             <h2>{link.label}</h2>
             <p>{link.summary}</p>
-            <span className="collection-card-count">Open section</span>
+            <span className="collection-card-count">{copy.openSection}</span>
           </Link>
         ))}
       </section>
 
       <section className="catalog-shell compact-shell" aria-labelledby="awesome-mcp-app-list">
         <div className="section-head compact">
-          <p className="eyebrow">Fresh from the catalog</p>
-          <h2 id="awesome-mcp-app-list">Featured MCP apps to start with</h2>
-          <p className="section-copy">
-            A compact starting list for GitHub visitors. Open any listing for tools, prompts, platform support, and publisher details.
-          </p>
+          <p className="eyebrow">{copy.freshEyebrow}</p>
+          <h2 id="awesome-mcp-app-list">{copy.freshTitle}</h2>
+          <p className="section-copy">{copy.freshBody}</p>
         </div>
         <div className="app-grid">
           {featuredApps.map((app) => (
@@ -312,7 +207,7 @@ export default async function AwesomeMcpAppsPage() {
       <section className="article-faq category-faq" id="faq">
         <div className="section-head compact">
           <p className="eyebrow">FAQ</p>
-          <h2>Awesome MCP Apps FAQ</h2>
+          <h2>{copy.faqTitle}</h2>
         </div>
         <div className="faq-list">
           {faqs.map((item) => (
@@ -329,23 +224,23 @@ export default async function AwesomeMcpAppsPage() {
           {
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            name: pageTitle,
-            description: pageDescription,
+            name: copy.pageTitle,
+            description: copy.pageDescription,
             url: absoluteUrl(href("/awesome-mcp-apps")),
             dateModified: lastUpdatedIso,
             mainEntity: {
               "@type": "ItemList",
-              name: pageTitle,
+              name: copy.pageTitle,
               numberOfItems: totalListings,
             },
           },
           breadcrumbJsonLd([
             { name: t.common.apps, path: "/" },
-            { name: pageTitle, path: "/awesome-mcp-apps" },
+            { name: copy.pageTitle, path: "/awesome-mcp-apps" },
           ]),
           itemListJsonLd(
             featuredApps.map((app) => ({ name: app.name, path: `/app/${app.id}` })),
-            pageTitle,
+            copy.pageTitle,
           ),
           faqJsonLd(faqs),
         ])}

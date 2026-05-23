@@ -6,19 +6,9 @@ import { appMetadataSignal, appPlatformLabel, formatDirectoryNumber as formatNum
 import { formatMessage, localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { faqJsonLd, formatCategoryName, itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
+import { staticPageCopy } from "@/lib/static-page-i18n";
 import type { CategorySummary } from "@/lib/types";
 import { absoluteUrl } from "@/lib/utils";
-
-const serverCategoryNotes: Record<string, string> = {
-  productivity: "Workspace servers for tasks, calendars, docs, meetings, and collaboration.",
-  data: "Query, summarize, transform, and visualize structured business or public data.",
-  code: "Developer servers for docs, repositories, debugging, code search, and engineering support.",
-  "developer-tools": "Build, deploy, test, inspect, automate, and operate software workflows.",
-  business: "Operations, CRM, support, hiring, and back-office systems.",
-  "financial-services": "Accounting, financial records, market data, filings, and banking workflows.",
-  communication: "Email, messaging, meetings, transcripts, and team knowledge.",
-  design: "Canvases, diagrams, creative tools, previews, and design-to-code workflows.",
-};
 
 function categoryCount(categories: CategorySummary[], slug: string): number {
   return categories.find((category) => category.slug === slug)?.count ?? 0;
@@ -26,13 +16,13 @@ function categoryCount(categories: CategorySummary[], slug: string): number {
 
 export async function generateMetadata(): Promise<Metadata> {
   const [{ locale }, apps] = await Promise.all([getI18n(), listPublishedApps()]);
+  const copy = staticPageCopy(locale).mcpServers;
   const totalListings = apps.length;
   const listingText = totalListings.toLocaleString("en-US");
 
   return pageMetadata({
-    title: `MCP servers directory: ${listingText} MCP server listings for ChatGPT and Claude`,
-    description:
-      `Explore ${listingText} MCP servers with category filters, platform support, and connector details for ChatGPT apps and Claude connectors.`,
+    title: formatMessage(copy.metaTitle, { count: listingText }),
+    description: formatMessage(copy.metaDescription, { count: listingText }),
     path: "/mcp-servers",
     locale,
     keywords: [
@@ -56,6 +46,9 @@ export default async function McpServersPage() {
     countAppsByPlatform("chatgpt"),
     countAppsByPlatform("claude"),
   ]);
+  const pageCopy = staticPageCopy(locale);
+  const copy = pageCopy.mcpServers;
+  const commonCopy = pageCopy.common;
   const href = (path: string) => localizedPath(path, locale);
   const totalListings = apps.length;
   const lastUpdated = apps.reduce((max, app) => Math.max(max, app.updatedAt), 0);
@@ -69,155 +62,126 @@ export default async function McpServersPage() {
   const withPromptsCount = qualityStats.withExamplePromptsCount;
   const withRepoCount = qualityStats.withRepoCount;
   const topServerCategories = categories
-    .filter((category) => category.count > 0 && serverCategoryNotes[category.slug])
+    .filter((category) => category.count > 0 && copy.categoryNotes[category.slug])
     .sort((left, right) => right.count - left.count)
     .slice(0, 8);
   const serverTypeRows = [
     {
-      type: "Retrieval and search servers",
+      type: copy.rows.retrieval.type,
       href: "/category/data",
       count: categoryCount(categories, "data"),
-      use: "Best when the assistant should find, summarize, or cite information without changing external state.",
-      check: "Confirm source freshness, citation behavior, query limits, and whether private data leaves the workspace.",
+      use: copy.rows.retrieval.use,
+      check: copy.rows.retrieval.check,
     },
     {
-      type: "Workspace action servers",
+      type: copy.rows.workspace.type,
       href: "/category/productivity",
       count: categoryCount(categories, "productivity"),
-      use: "Best for calendars, tasks, docs, email, CRM, support queues, and operational workflows.",
-      check: "Separate read-only access from write actions, and require approval for destructive or external-facing steps.",
+      use: copy.rows.workspace.use,
+      check: copy.rows.workspace.check,
     },
     {
-      type: "Developer and ops servers",
+      type: copy.rows.developer.type,
       href: "/category/developer-tools",
       count: categoryCount(categories, "developer-tools") + categoryCount(categories, "code"),
-      use: "Best for repositories, code search, deployment, debugging, browser automation, and observability.",
-      check: "Review repo permissions, secret exposure, environment access, command execution, and audit logs.",
+      use: copy.rows.developer.use,
+      check: copy.rows.developer.check,
     },
     {
-      type: "Interactive app-style servers",
+      type: copy.rows.interactive.type,
       href: "/awesome-mcp-apps",
       count: apps.filter((app) => app.previews.length > 0 || app.categories.includes("design")).length,
-      use: "Best when the server renders a UI surface such as diagrams, design canvases, PDFs, maps, or media tools.",
-      check: "Check host UI support, iframe/resource permissions, content security policy, and fallback text behavior.",
+      use: copy.rows.interactive.use,
+      check: copy.rows.interactive.check,
     },
   ];
-  const faqs = [
-    {
-      question: "What is the difference between MCP servers and MCP apps?",
-      answer:
-        "MCP servers expose tools, resources, and prompts over the Model Context Protocol. MCP apps or connectors package those capabilities for a host such as ChatGPT or Claude, sometimes with an interactive UI surface.",
-    },
-    {
-      question: "How should I choose an MCP server for production?",
-      answer:
-        "Prioritize host compatibility, auth model, permission scope, write actions, publisher trust, maintenance cadence, support path, and clear operational documentation before enabling the server in real workflows.",
-    },
-    {
-      question: "Are all listings open source MCP servers?",
-      answer:
-        "No. The catalog includes open-source examples, hosted MCP servers, ChatGPT apps, and Claude connectors. Use the GitHub repository field where available, and check publisher metadata when the implementation is closed source.",
-    },
-    {
-      question: "What should I verify before connecting an MCP server to company data?",
-      answer:
-        "Review OAuth scopes, whether tools can write or delete data, where data is processed, rate limits, logging behavior, failure modes, and how users can disconnect or revoke access.",
-    },
-  ];
+  const faqs = copy.faqs;
 
   return (
     <div className="page-stack">
       <section className="catalog-shell compact-shell">
         <div className="section-head">
-          <p className="eyebrow">MCP servers</p>
-          <h1>MCP servers directory for ChatGPT and Claude workflows</h1>
-          <p className="section-copy">
-            Use this MCP server directory page to compare platform coverage, category fit, and integration readiness before connecting servers to production assistants.
-          </p>
+          <p className="eyebrow">{copy.eyebrow}</p>
+          <h1>{copy.title}</h1>
+          <p className="section-copy">{copy.intro}</p>
           <p className="section-copy">{formatMessage(t.common.updated, { date: lastUpdatedDate })}</p>
         </div>
 
-        <div className="app-index-metrics" aria-label="MCP server directory counts">
+        <div className="app-index-metrics" aria-label={copy.metricsAria}>
           <div>
             <strong>{totalListings}</strong>
-            <span>Total MCP server listings</span>
+            <span>{copy.totalListings}</span>
           </div>
           <div>
             <strong>{chatgptCount}</strong>
-            <span>ChatGPT-compatible listings</span>
+            <span>{copy.chatgptCompatible}</span>
           </div>
           <div>
             <strong>{claudeCount}</strong>
-            <span>Claude-compatible listings</span>
+            <span>{copy.claudeCompatible}</span>
           </div>
         </div>
 
         <section className="category-guide" aria-labelledby="mcp-servers-guide-title">
           <div className="category-guide-copy">
-            <p className="eyebrow">Selection guide</p>
-            <h2 id="mcp-servers-guide-title">Compare MCP servers by host support and task type</h2>
-            <p>
-              Start with host support, then filter by workflow intent like search, coding, docs, or productivity. Prefer providers with transparent docs and clear operational boundaries.
-            </p>
+            <p className="eyebrow">{copy.guideEyebrow}</p>
+            <h2 id="mcp-servers-guide-title">{copy.guideTitle}</h2>
+            <p>{copy.guideBody}</p>
             <div className="category-related-links">
-              <Link href={href("/store")} prefetch={false}>Browse all MCP listings</Link>
-              <Link href={href("/mcp-directory")} prefetch={false}>Open full MCP directory guide</Link>
-              <Link href={href("/chatgpt-connectors")} prefetch={false}>Compare ChatGPT connectors</Link>
-              <Link href={href("/claude-connectors")} prefetch={false}>Compare Claude connectors</Link>
-              <Link href={href("/category/productivity")} prefetch={false}>Browse productivity MCP apps</Link>
+              <Link href={href("/store")} prefetch={false}>{copy.relatedAll}</Link>
+              <Link href={href("/mcp-directory")} prefetch={false}>{copy.relatedDirectory}</Link>
+              <Link href={href("/chatgpt-connectors")} prefetch={false}>{copy.relatedChatgpt}</Link>
+              <Link href={href("/claude-connectors")} prefetch={false}>{copy.relatedClaude}</Link>
+              <Link href={href("/category/productivity")} prefetch={false}>{copy.relatedProductivity}</Link>
             </div>
           </div>
           <div className="category-checklist">
-            <p className="eyebrow">Review before use</p>
+            <p className="eyebrow">{copy.reviewBeforeUse}</p>
             <ul>
-              <li>Host compatibility and fallback behavior.</li>
-              <li>Permission scope and write actions.</li>
-              <li>Maintenance cadence and integration docs.</li>
+              {copy.checklist.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </div>
         </section>
 
         <section className="directory-content-section" aria-labelledby="mcp-server-coverage-title">
           <div className="directory-section-head">
-            <p className="eyebrow">Coverage signals</p>
-            <h2 id="mcp-server-coverage-title">What the directory can tell you before install</h2>
-            <p>
-              A useful MCP server page should help builders decide whether an integration is worth opening, not just
-              repeat the protocol name. These signals summarize transport, authentication, and review depth across the
-              current catalog.
-            </p>
+            <p className="eyebrow">{copy.coverageEyebrow}</p>
+            <h2 id="mcp-server-coverage-title">{copy.coverageTitle}</h2>
+            <p>{copy.coverageBody}</p>
           </div>
           <div className="directory-card-grid">
             <div className="directory-card">
-              <span>Transport mix</span>
+              <span>{copy.transportMix}</span>
               <strong>{formatNumber(httpCount)} HTTP / {formatNumber(sseCount)} SSE</strong>
-              <p>Most hosted listings are HTTP-based; verify local or stdio setup on the detail page when needed.</p>
+              <p>{copy.transportMixDetail}</p>
             </div>
             <div className="directory-card">
-              <span>Permission model</span>
+              <span>{copy.permissionModel}</span>
               <strong>{formatNumber(oauthCount)} OAuth / {formatNumber(noAuthCount)} no-auth</strong>
-              <p>OAuth listings need scope review; no-auth listings still need data-flow and rate-limit checks.</p>
+              <p>{copy.permissionModelDetail}</p>
             </div>
             <div className="directory-card">
-              <span>Inspection depth</span>
-              <strong>{formatNumber(withToolsCount)} with tools</strong>
-              <p>{formatNumber(withPromptsCount)} include example prompts; {formatNumber(withRepoCount)} include GitHub repository links.</p>
+              <span>{copy.inspectionDepth}</span>
+              <strong>{formatMessage(copy.inspectionDepthWithTools, { count: formatNumber(withToolsCount) })}</strong>
+              <p>{formatMessage(copy.inspectionDepthDetail, { prompts: formatNumber(withPromptsCount), repos: formatNumber(withRepoCount) })}</p>
             </div>
           </div>
         </section>
 
         <section className="directory-content-section" aria-labelledby="mcp-server-types-title">
           <div className="directory-section-head">
-            <p className="eyebrow">Server type matrix</p>
-            <h2 id="mcp-server-types-title">Match the MCP server to the job it will perform</h2>
+            <p className="eyebrow">{copy.typeEyebrow}</p>
+            <h2 id="mcp-server-types-title">{copy.typeTitle}</h2>
           </div>
           <div className="directory-table-wrap">
             <table className="directory-table">
               <thead>
                 <tr>
-                  <th>Server type</th>
-                  <th>Good fit</th>
-                  <th>Risk check</th>
+                  <th>{copy.typeColumn}</th>
+                  <th>{copy.goodFitColumn}</th>
+                  <th>{copy.riskCheckColumn}</th>
                 </tr>
               </thead>
               <tbody>
@@ -225,7 +189,7 @@ export default async function McpServersPage() {
                   <tr key={row.type}>
                     <td>
                       <Link href={href(row.href)} prefetch={false}>{row.type}</Link>
-                      <span>{formatNumber(row.count)} related listings</span>
+                      <span>{formatMessage(commonCopy.relatedListingsCount, { count: formatNumber(row.count) })}</span>
                     </td>
                     <td>{row.use}</td>
                     <td>{row.check}</td>
@@ -238,44 +202,31 @@ export default async function McpServersPage() {
 
         <section className="directory-content-section" aria-labelledby="mcp-server-readiness-title">
           <div className="directory-section-head">
-            <p className="eyebrow">Production readiness</p>
-            <h2 id="mcp-server-readiness-title">A practical checklist for MCP server review</h2>
+            <p className="eyebrow">{copy.readinessEyebrow}</p>
+            <h2 id="mcp-server-readiness-title">{copy.readinessTitle}</h2>
           </div>
           <div className="directory-card-grid directory-card-grid-four">
-            <div className="directory-card">
-              <span>1. Scope</span>
-              <strong>Read, write, or execute?</strong>
-              <p>Separate passive retrieval from actions that send messages, update records, run commands, or spend money.</p>
-            </div>
-            <div className="directory-card">
-              <span>2. Identity</span>
-              <strong>Who owns access?</strong>
-              <p>Check publisher, OAuth scopes, workspace controls, user consent, and how access can be revoked.</p>
-            </div>
-            <div className="directory-card">
-              <span>3. Behavior</span>
-              <strong>What tools exist?</strong>
-              <p>Review tool names, example prompts, fallback behavior, errors, rate limits, and auditability.</p>
-            </div>
-            <div className="directory-card">
-              <span>4. Maintenance</span>
-              <strong>Can it be trusted later?</strong>
-              <p>Prefer clear docs, support links, GitHub repos when available, and evidence of recent updates.</p>
-            </div>
+            {copy.readiness.map((item) => (
+              <div className="directory-card" key={item.label}>
+                <span>{item.label}</span>
+                <strong>{item.title}</strong>
+                <p>{item.body}</p>
+              </div>
+            ))}
           </div>
         </section>
 
         <section className="directory-content-section" aria-labelledby="mcp-server-categories-title">
           <div className="directory-section-head">
-            <p className="eyebrow">Common MCP server categories</p>
-            <h2 id="mcp-server-categories-title">Browse by the workflow you need to automate</h2>
+            <p className="eyebrow">{copy.categoriesEyebrow}</p>
+            <h2 id="mcp-server-categories-title">{copy.categoriesTitle}</h2>
           </div>
           <div className="directory-link-grid">
             {topServerCategories.map((category) => (
               <Link className="directory-link-card" href={href(`/category/${category.slug}`)} key={category.slug} prefetch={false}>
-                <span>{formatNumber(category.count)} listings</span>
+                <span>{formatMessage(commonCopy.listingsCount, { count: formatNumber(category.count) })}</span>
                 <strong>{formatCategoryName(category.name)}</strong>
-                <p>{serverCategoryNotes[category.slug]}</p>
+                <p>{copy.categoryNotes[category.slug]}</p>
               </Link>
             ))}
           </div>
@@ -283,12 +234,9 @@ export default async function McpServersPage() {
 
         <section className="directory-content-section" aria-labelledby="mcp-server-examples-title">
           <div className="directory-section-head">
-            <p className="eyebrow">Representative MCP listings</p>
-            <h2 id="mcp-server-examples-title">Examples with tools, endpoints, prompts, or install context</h2>
-            <p>
-              Use these detail pages to inspect the kind of metadata that should exist before a server is connected to
-              a real assistant workflow.
-            </p>
+            <p className="eyebrow">{copy.examplesEyebrow}</p>
+            <h2 id="mcp-server-examples-title">{copy.examplesTitle}</h2>
+            <p>{copy.examplesBody}</p>
           </div>
           <div className="directory-example-list">
             {serverExamples.map((app) => (
@@ -306,7 +254,7 @@ export default async function McpServersPage() {
         <section className="article-faq category-faq" id="faq">
           <div className="section-head compact">
             <p className="eyebrow">FAQ</p>
-            <h2>MCP servers FAQ</h2>
+            <h2>{copy.faqTitle}</h2>
           </div>
           <div className="faq-list">
             {faqs.map((item) => (
@@ -323,22 +271,22 @@ export default async function McpServersPage() {
           {
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            name: "MCP servers directory",
+            name: copy.title,
             url: absoluteUrl(href("/mcp-servers")),
             dateModified: lastUpdatedIso,
             mainEntity: {
               "@type": "ItemList",
-              name: "MCP servers",
+              name: copy.title,
               numberOfItems: totalListings,
             },
           },
           itemListJsonLd(
             topServerCategories.map((category) => ({ name: `${formatCategoryName(category.name)} MCP servers`, path: `/category/${category.slug}` })),
-            "MCP server categories",
+            copy.categoryItemListName,
           ),
           itemListJsonLd(
             serverExamples.map((app) => ({ name: app.name, path: `/app/${app.id}` })),
-            "Representative MCP server listings",
+            copy.examplesItemListName,
           ),
           faqJsonLd(faqs),
         ])}
