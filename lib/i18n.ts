@@ -197,6 +197,8 @@ const enMessages = {
   nav: {
     browse: "Browse",
     apps: "Apps",
+    clients: "Clients",
+    inspector: "Inspector",
     skills: "Skills",
     chatgpt: "ChatGPT",
     claude: "Claude",
@@ -644,6 +646,8 @@ const esMessages: I18nMessages = {
   nav: {
     browse: "Explorar",
     apps: "Apps",
+    clients: "Clientes",
+    inspector: "Inspector",
     skills: "Skills",
     chatgpt: "ChatGPT",
     claude: "Claude",
@@ -980,6 +984,8 @@ const frMessages: I18nMessages = {
   nav: {
     browse: "Explorer",
     apps: "Apps",
+    clients: "Clients",
+    inspector: "Inspecteur",
     skills: "Skills",
     chatgpt: "ChatGPT",
     claude: "Claude",
@@ -1282,6 +1288,8 @@ const deMessages: I18nMessages = {
   nav: {
     browse: "Durchsuchen",
     apps: "Apps",
+    clients: "Clients",
+    inspector: "Inspector",
     skills: "Skills",
     chatgpt: "ChatGPT",
     claude: "Claude",
@@ -1582,6 +1590,8 @@ const zhMessages: I18nMessages = {
   nav: {
     browse: "浏览",
     apps: "应用",
+    clients: "客户端",
+    inspector: "检查器",
     skills: "技能",
     chatgpt: "ChatGPT",
     claude: "Claude",
@@ -1908,6 +1918,8 @@ const jaMessages: I18nMessages = {
   nav: {
     browse: "探す",
     apps: "アプリ",
+    clients: "クライアント",
+    inspector: "インスペクター",
     skills: "スキル",
     chatgpt: "ChatGPT",
     claude: "Claude",
@@ -2200,6 +2212,8 @@ const koMessages: I18nMessages = {
   nav: {
     browse: "둘러보기",
     apps: "앱",
+    clients: "클라이언트",
+    inspector: "검사기",
     skills: "스킬",
     chatgpt: "ChatGPT",
     claude: "Claude",

@@ -114,10 +114,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                 {t.nav.apps}
               </Link>
               <Link className="nav-link" href={href("/mcp-clients")} prefetch={false}>
-                Clients
+                {t.nav.clients}
               </Link>
               <Link className="nav-link" href={href("/mcp-inspector")} prefetch={false}>
-                Inspector
+                {t.nav.inspector}
               </Link>
               <Link className="nav-link" href={href("/skills")} prefetch={false}>
                 {t.nav.skills}
@@ -153,10 +153,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                 {t.nav.apps}
               </Link>
               <Link className="footer-link" href={href("/mcp-clients")} prefetch={false}>
-                Clients
+                {t.nav.clients}
               </Link>
               <Link className="footer-link" href={href("/mcp-inspector")} prefetch={false}>
-                Inspector
+                {t.nav.inspector}
               </Link>
               <Link className="footer-link" href={href("/skills")} prefetch={false}>
                 {t.nav.skills}
