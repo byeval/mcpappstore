@@ -217,6 +217,7 @@ export async function buildStaticSitemapEntries(): Promise<SitemapEntry[]> {
   return [
     ...localizedEntries("/", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 1 }),
     ...localizedEntries("/mcp-directory", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 0.92 }),
+    ...localizedEntries("/mcp-servers", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 0.9 }),
     ...localizedEntries("/store", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 0.9 }),
     ...localizedEntries("/skills", { lastModified: skillsLastModified, changeFrequency: "daily", priority: 0.82 }),
     ...appIndexPages.flatMap((key) => localizedEntries(appIndexPath(key), {

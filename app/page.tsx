@@ -69,6 +69,9 @@ export default async function HomePage() {
         <Link href={href("/mcp-directory")} prefetch={false}>
           MCP directory: compare MCP servers, ChatGPT apps, and Claude connectors
         </Link>
+        <Link href={href("/mcp-servers")} prefetch={false}>
+          MCP servers directory
+        </Link>
         <Link href={href("/chatgpt-connectors")} prefetch={false}>
           ChatGPT connectors (now apps)
         </Link>
