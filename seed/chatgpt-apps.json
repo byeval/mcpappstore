@@ -35185,7 +35185,8 @@
           "imageKey": "previews/excalidraw-app-demo/claude-6.webp",
           "imageUrl": "https://storage.googleapis.com/media-assets-299d7136-cb52-d546-ee02-34bc1307c35f/Connectors%20Directory/Carousel%20Prompt%20Images/App%20Excalidraw%20Card%206.png"
         }
-      ]
+      ],
+      "repoUrl": "https://github.com/excalidraw/excalidraw-mcp"
     },
     {
       "id": "postman",
@@ -50573,7 +50574,8 @@
           "name": "display_pdf"
         }
       ],
-      "previews": []
+      "previews": [],
+      "repoUrl": "https://github.com/modelcontextprotocol/ext-apps/tree/main/examples/pdf-server"
     },
     {
       "id": "open-targets",
@@ -57727,7 +57729,8 @@
       ],
       "tags": [],
       "tools": [],
-      "previews": []
+      "previews": [],
+      "repoUrl": "https://github.com/modelcontextprotocol/ext-apps/tree/main/examples/threejs-server"
     },
     {
       "id": "devrev",
@@ -59055,7 +59058,8 @@
       ],
       "tags": [],
       "tools": [],
-      "previews": []
+      "previews": [],
+      "repoUrl": "https://github.com/modelcontextprotocol/ext-apps/tree/main/examples/sheet-music-server"
     },
     {
       "id": "zocks",

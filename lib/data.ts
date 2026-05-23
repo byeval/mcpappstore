@@ -33,6 +33,13 @@ export const PLATFORM_APP_PAGE_SIZE = 36;
 const publicCacheTtlSeconds = 60 * 60;
 const publicCacheVersion = "v10";
 
+export interface CatalogQualityStats {
+  withToolsCount: number;
+  withExamplePromptsCount: number;
+  withRepoCount: number;
+  withPreviewsCount: number;
+}
+
 interface HydrateAppRowsOptions {
   includePreviews?: boolean;
   includeSurfacePreviews?: boolean;
@@ -913,6 +920,142 @@ export async function listHomeApps(): Promise<CatalogApp[]> {
       .map((app) => listAppPayload(withResolvedMediaUrls(app, assetCdnUrl))),
   ).slice(0, HOME_APP_LIMIT);
   await writePublicCache("home-apps", fallbackApps);
+  return fallbackApps;
+}
+
+export async function getCatalogQualityStats(): Promise<CatalogQualityStats> {
+  const cached = await readPublicCache<CatalogQualityStats>("catalog-quality-stats");
+  if (cached) {
+    return cached;
+  }
+
+  const db = await getDb();
+  if (db) {
+    try {
+      const [toolsRow, promptsRow, repoRow, previewsRow] = await Promise.all([
+        db
+          .prepare(
+            `SELECT COUNT(DISTINCT a.id) AS count
+             FROM apps a
+             LEFT JOIN app_tools tool ON tool.app_id = a.id
+             LEFT JOIN app_surfaces s ON s.app_id = a.id
+             WHERE a.status = 'published'
+               AND (tool.app_id IS NOT NULL OR (s.tools IS NOT NULL AND s.tools != '[]'))`,
+          )
+          .first<{ count?: number }>(),
+        db
+          .prepare(
+            `SELECT COUNT(DISTINCT a.id) AS count
+             FROM apps a
+             LEFT JOIN app_surfaces s ON s.app_id = a.id
+             WHERE a.status = 'published'
+               AND (
+                 (a.example_prompts IS NOT NULL AND a.example_prompts != '[]')
+                 OR (s.example_prompts IS NOT NULL AND s.example_prompts != '[]')
+               )`,
+          )
+          .first<{ count?: number }>(),
+        db
+          .prepare("SELECT COUNT(*) AS count FROM apps WHERE status = 'published' AND repo_url IS NOT NULL AND repo_url != ''")
+          .first<{ count?: number }>(),
+        db
+          .prepare(
+            `SELECT COUNT(DISTINCT a.id) AS count
+             FROM apps a
+             LEFT JOIN app_previews preview ON preview.app_id = a.id
+             LEFT JOIN app_surfaces s ON s.app_id = a.id
+             WHERE a.status = 'published'
+               AND (preview.app_id IS NOT NULL OR (s.previews IS NOT NULL AND s.previews != '[]'))`,
+          )
+          .first<{ count?: number }>(),
+      ]);
+      const stats = {
+        withToolsCount: Number(toolsRow?.count ?? 0),
+        withExamplePromptsCount: Number(promptsRow?.count ?? 0),
+        withRepoCount: Number(repoRow?.count ?? 0),
+        withPreviewsCount: Number(previewsRow?.count ?? 0),
+      };
+      await writePublicCache("catalog-quality-stats", stats);
+      return stats;
+    } catch {
+      // Fall through to the in-memory catalog.
+    }
+  }
+
+  const fallbackApps = FALLBACK_CATALOG.apps.filter((app) => app.status === "published");
+  const stats = {
+    withToolsCount: fallbackApps.filter((app) => app.tools.length > 0 || app.surfaces.some((surface) => surface.tools?.length)).length,
+    withExamplePromptsCount: fallbackApps.filter(
+      (app) => app.examplePrompts.length > 0 || app.surfaces.some((surface) => surface.examplePrompts?.length),
+    ).length,
+    withRepoCount: fallbackApps.filter((app) => app.repoUrl).length,
+    withPreviewsCount: fallbackApps.filter((app) => app.previews.length > 0 || app.surfaces.some((surface) => surface.previews?.length)).length,
+  };
+  await writePublicCache("catalog-quality-stats", stats);
+  return stats;
+}
+
+export async function listMetadataRichApps(limit = 8): Promise<CatalogApp[]> {
+  const safeLimit = Math.max(1, Math.min(limit, 24));
+  const cacheKey = `metadata-rich-apps:${safeLimit}`;
+  const cached = await readPublicCache<CatalogApp[]>(cacheKey);
+  if (cached) {
+    return cached;
+  }
+
+  const db = await getDb();
+  if (db) {
+    try {
+      const rows = await db
+        .prepare(
+          `SELECT DISTINCT a.*
+           FROM apps a
+           LEFT JOIN app_tools tool ON tool.app_id = a.id
+           LEFT JOIN app_previews preview ON preview.app_id = a.id
+           LEFT JOIN app_surfaces s ON s.app_id = a.id
+           WHERE a.status = 'published'
+             AND (
+               tool.app_id IS NOT NULL
+               OR preview.app_id IS NOT NULL
+               OR a.repo_url IS NOT NULL
+               OR a.install_cmd IS NOT NULL
+               OR a.mcp_endpoint IS NOT NULL
+               OR (a.example_prompts IS NOT NULL AND a.example_prompts != '[]')
+               OR (s.tools IS NOT NULL AND s.tools != '[]')
+               OR (s.example_prompts IS NOT NULL AND s.example_prompts != '[]')
+             )
+           ORDER BY a.is_featured DESC, COALESCE(a.published_at, a.updated_at) DESC
+           LIMIT ?`,
+        )
+        .bind(safeLimit)
+        .all<Record<string, unknown>>();
+
+      const apps = await hydrateAppRows(rows.results, fullHydration);
+      await writePublicCache(cacheKey, apps);
+      return apps;
+    } catch {
+      // Fall through to the in-memory catalog.
+    }
+  }
+
+  const assetCdnUrl = await getAssetCdnUrl();
+  const fallbackApps = sortApps(
+    FALLBACK_CATALOG.apps
+      .filter(
+        (app) =>
+          app.status === "published" &&
+          (app.tools.length > 0 ||
+            app.examplePrompts.length > 0 ||
+            app.previews.length > 0 ||
+            Boolean(app.repoUrl) ||
+            Boolean(app.installCmd) ||
+            Boolean(app.mcpEndpoint) ||
+            app.surfaces.some((surface) => surface.tools?.length || surface.examplePrompts?.length || surface.previews?.length)),
+      )
+      .map(cloneApp)
+      .map((app) => withResolvedMediaUrls(app, assetCdnUrl)),
+  ).slice(0, safeLimit);
+  await writePublicCache(cacheKey, fallbackApps);
   return fallbackApps;
 }
 

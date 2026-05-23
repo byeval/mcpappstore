@@ -576,6 +576,7 @@ const enMessages = {
     category: "Category",
     developer: "Developer",
     website: "Website",
+    githubRepo: "GitHub repository",
     version: "Version",
     privacyPolicy: "Privacy Policy",
     termsOfService: "Terms of Service",

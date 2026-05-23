@@ -420,6 +420,51 @@ const jaArticleSummaries: Record<string, LocalizedArticle> = {
     primaryCta: { label: "Grafana MCP の掲載を見る" },
     secondaryCta: { label: "可観測性コレクション" },
   },
+  "mcp-app-security-checklist": {
+    eyebrow: "信頼ガイド",
+    title: "チーム向け MCP アプリセキュリティチェックリスト",
+    description: "機密ツールやデータに接続する前に、MCP アプリ、MCP サーバー、ChatGPT アプリ、Claude コネクタを評価するためのチェックリストです。",
+    summary: "チームで使う前に、権限、認証、データフロー、公開者の信頼性、ログ、書き込み操作を確認します。",
+    readingTime: "7 分で読める",
+    primaryCta: { label: "セキュリティ MCP アプリを探す" },
+    secondaryCta: { label: "チーム向けディレクトリガイド" },
+  },
+  "mcp-apps-for-documents-and-knowledge": {
+    eyebrow: "ナレッジガイド",
+    title: "ドキュメントとナレッジベース向けおすすめ MCP アプリ",
+    description: "Google Drive、Microsoft 365、PDF、メモ、ドキュメント、ナレッジベース向け MCP アプリの評価方法です。",
+    summary: "アシスタントがファイル、ソース文書、メモ、PDF、共有ナレッジへ管理された形でアクセスする必要があるときに使います。",
+    readingTime: "6 分で読める",
+    primaryCta: { label: "生産性 MCP アプリを探す" },
+    secondaryCta: { label: "PDF ツールを比較" },
+  },
+  "mcp-apps-for-sales-teams": {
+    eyebrow: "営業ガイド",
+    title: "営業チーム向けおすすめ MCP アプリ",
+    description: "CRM、見込み客開拓、アカウント調査、アウトリーチ、顧客文脈、RevOps 向け MCP アプリの選び方です。",
+    summary: "営業チームは、アカウント文脈、CRM レコード、調査、アウトリーチを明確な権限境界でアシスタントに接続できます。",
+    readingTime: "6 分で読める",
+    primaryCta: { label: "営業・マーケティングアプリを探す" },
+    secondaryCta: { label: "マーケティング分析を見る" },
+  },
+  "mcp-apps-for-research-and-education": {
+    eyebrow: "リサーチガイド",
+    title: "研究と教育向けおすすめ MCP アプリ",
+    description: "文献検索、学習プラットフォーム、引用、データセット、科学ワークフロー向け MCP アプリの評価方法です。",
+    summary: "研究 MCP アプリは、根拠付きの文脈を返し、証拠を比較し、各主張に出典を残せるときに最も役立ちます。",
+    readingTime: "6 分で読める",
+    primaryCta: { label: "教育 MCP アプリを探す" },
+    secondaryCta: { label: "ライフサイエンスを見る" },
+  },
+  "mcp-browser-automation-tools": {
+    eyebrow: "自動化ガイド",
+    title: "エージェント向け MCP ブラウザ自動化ツール",
+    description: "ブラウザ操作、Web スクレイピング、Web テスト、デスクトップ自動化、実 UI を扱うエージェントワークフローの比較ガイドです。",
+    summary: "ブラウザ自動化 MCP ツールは、API だけでは足りないときにページ確認、構造化データ収集、テスト、Web UI 操作を助けます。",
+    readingTime: "7 分で読める",
+    primaryCta: { label: "開発者 MCP アプリを探す" },
+    secondaryCta: { label: "コーディングエージェントアプリを比較" },
+  },
 };
 
 const koArticleCopy: Record<string, LocalizedArticle> = {
@@ -688,6 +733,51 @@ const koArticleSummaries: Record<string, LocalizedArticle> = {
     primaryCta: { label: "Grafana MCP 목록 보기" },
     secondaryCta: { label: "관찰 가능성 컬렉션" },
   },
+  "mcp-app-security-checklist": {
+    eyebrow: "신뢰 가이드",
+    title: "팀을 위한 MCP 앱 보안 체크리스트",
+    description: "민감한 도구나 데이터에 연결하기 전에 MCP 앱, MCP 서버, ChatGPT 앱, Claude 커넥터를 평가하는 체크리스트입니다.",
+    summary: "팀 워크플로에 도입하기 전에 권한, 인증, 데이터 흐름, 게시자 신뢰도, 로그, 쓰기 작업을 검토하세요.",
+    readingTime: "7분 읽기",
+    primaryCta: { label: "보안 MCP 앱 둘러보기" },
+    secondaryCta: { label: "팀용 디렉터리 가이드" },
+  },
+  "mcp-apps-for-documents-and-knowledge": {
+    eyebrow: "지식 가이드",
+    title: "문서와 지식베이스를 위한 추천 MCP 앱",
+    description: "Google Drive, Microsoft 365, PDF, 노트, 문서, 지식베이스용 MCP 앱을 평가하는 방법입니다.",
+    summary: "어시스턴트가 파일, 원본 문서, 노트, PDF, 공유 지식 시스템에 통제된 방식으로 접근해야 할 때 사용합니다.",
+    readingTime: "6분 읽기",
+    primaryCta: { label: "생산성 MCP 앱 둘러보기" },
+    secondaryCta: { label: "PDF 도구 비교" },
+  },
+  "mcp-apps-for-sales-teams": {
+    eyebrow: "영업 가이드",
+    title: "영업 팀을 위한 추천 MCP 앱",
+    description: "CRM, 잠재고객 발굴, 계정 리서치, 아웃리치, 고객 컨텍스트, 매출 운영용 MCP 앱 가이드입니다.",
+    summary: "영업 팀은 계정 컨텍스트, CRM 레코드, 리서치, 아웃리치 워크플로를 명확한 권한 경계 안에서 어시스턴트에 연결할 수 있습니다.",
+    readingTime: "6분 읽기",
+    primaryCta: { label: "영업 및 마케팅 앱 둘러보기" },
+    secondaryCta: { label: "마케팅 분석 보기" },
+  },
+  "mcp-apps-for-research-and-education": {
+    eyebrow: "연구 가이드",
+    title: "연구와 교육을 위한 추천 MCP 앱",
+    description: "문헌 검색, 학습 플랫폼, 인용, 데이터셋, 과학 워크플로용 MCP 앱 평가 방법입니다.",
+    summary: "연구 MCP 앱은 출처가 붙은 컨텍스트를 반환하고, 근거를 비교하며, 각 주장에 기록을 남길 때 가장 유용합니다.",
+    readingTime: "6분 읽기",
+    primaryCta: { label: "교육 MCP 앱 둘러보기" },
+    secondaryCta: { label: "생명과학 앱 보기" },
+  },
+  "mcp-browser-automation-tools": {
+    eyebrow: "자동화 가이드",
+    title: "에이전트를 위한 MCP 브라우저 자동화 도구",
+    description: "브라우저 제어, 웹 스크래핑, 웹 테스트, 데스크톱 자동화, 실제 UI 작업용 MCP 앱 비교 가이드입니다.",
+    summary: "브라우저 자동화 MCP 도구는 API만으로 부족할 때 페이지 확인, 구조화 데이터 수집, 테스트, 웹 UI 조작을 돕습니다.",
+    readingTime: "7분 읽기",
+    primaryCta: { label: "개발자 MCP 앱 둘러보기" },
+    secondaryCta: { label: "코딩 에이전트 앱 비교" },
+  },
 };
 
 const zhArticleSummaries: Record<string, LocalizedArticle> = {
@@ -844,6 +934,51 @@ const zhArticleSummaries: Record<string, LocalizedArticle> = {
     primaryCta: { label: "查看 Grafana MCP 列表" },
     secondaryCta: { label: "可观测性集合" },
   },
+  "mcp-app-security-checklist": {
+    eyebrow: "信任指南",
+    title: "面向团队的 MCP 应用安全检查清单",
+    description: "在连接敏感工具或数据前，评估 MCP 应用、MCP 服务器、ChatGPT 应用和 Claude 连接器的实用清单。",
+    summary: "在团队工作流中启用 MCP 应用前，先检查权限、认证、数据流、发布者可信度、日志和写入操作。",
+    readingTime: "7 分钟阅读",
+    primaryCta: { label: "浏览安全 MCP 应用" },
+    secondaryCta: { label: "团队目录指南" },
+  },
+  "mcp-apps-for-documents-and-knowledge": {
+    eyebrow: "知识指南",
+    title: "适合文档和知识库的最佳 MCP 应用",
+    description: "评估适合 Google Drive、Microsoft 365、PDF、笔记、文档和知识库工作流的 MCP 应用。",
+    summary: "当助手需要以受控方式访问文件、源文档、笔记、PDF 和共享知识系统时，这类 MCP 应用最有用。",
+    readingTime: "6 分钟阅读",
+    primaryCta: { label: "浏览生产力 MCP 应用" },
+    secondaryCta: { label: "比较 PDF 工具" },
+  },
+  "mcp-apps-for-sales-teams": {
+    eyebrow: "营收指南",
+    title: "适合销售团队的最佳 MCP 应用",
+    description: "面向 CRM、线索开发、客户研究、外联、客户上下文和营收运营的 MCP 应用指南。",
+    summary: "销售团队可以用 MCP 应用把账号上下文、CRM 记录、研究和外联工作流接入助手，同时保持清晰权限边界。",
+    readingTime: "6 分钟阅读",
+    primaryCta: { label: "浏览销售和营销应用" },
+    secondaryCta: { label: "查看营销分析应用" },
+  },
+  "mcp-apps-for-research-and-education": {
+    eyebrow: "研究指南",
+    title: "适合研究和教育的最佳 MCP 应用",
+    description: "评估适合文献搜索、学习平台、引用、数据集和科学工作流的 MCP 应用。",
+    summary: "研究类 MCP 应用在能返回带来源的上下文、比较证据，并为每个结论保留引用或记录时最有价值。",
+    readingTime: "6 分钟阅读",
+    primaryCta: { label: "浏览教育 MCP 应用" },
+    secondaryCta: { label: "浏览生命科学应用" },
+  },
+  "mcp-browser-automation-tools": {
+    eyebrow: "自动化指南",
+    title: "面向智能体的 MCP 浏览器自动化工具",
+    description: "比较用于浏览器控制、网页抓取、Web 测试、桌面自动化和真实界面操作的 MCP 应用。",
+    summary: "当 API 不够用时，浏览器自动化 MCP 工具可以帮助助手检查页面、收集结构化数据、测试工作流和操作 Web UI。",
+    readingTime: "7 分钟阅读",
+    primaryCta: { label: "浏览开发者 MCP 应用" },
+    secondaryCta: { label: "比较编码智能体应用" },
+  },
 };
 
 const esArticleSummaries: Record<string, LocalizedArticle> = {
@@ -863,6 +998,11 @@ const esArticleSummaries: Record<string, LocalizedArticle> = {
   "n8n-mcp": { eyebrow: "Guía de búsqueda", title: "Conector n8n MCP para automatizaciones en Claude", description: "Evalúa n8n MCP para Claude: búsqueda de workflows, gestión de automatizaciones, pruebas, permisos y rollout.", summary: "Útil cuando Claude necesita inspeccionar, ejecutar o gestionar workflows de automatización.", readingTime: "5 min de lectura", primaryCta: { label: "Ver n8n" }, secondaryCta: { label: "Productividad" } },
   "calendly-to-claude": { eyebrow: "Guía de búsqueda", title: "Calendly to Claude: scheduling con un conector MCP", description: "Conecta workflows tipo Calendly a Claude con disponibilidad, tipos de evento, enlaces de reserva y permisos.", summary: "Útil cuando scheduling necesita contexto conversacional, disponibilidad y revisión del flujo de reservas.", readingTime: "5 min de lectura", primaryCta: { label: "Ver Calendly" }, secondaryCta: { label: "Productividad" } },
   "pyroscope-mcp": { eyebrow: "Guía de búsqueda", title: "Pyroscope MCP con Grafana: profiling y observabilidad", description: "Evalúa workflows Pyroscope mediante Grafana MCP Server: perfiles, dashboards, métricas, logs, alertas e incidentes.", summary: "Los perfiles rinden más cuando se analizan junto a dashboards, logs, métricas, alertas e incidentes.", readingTime: "6 min de lectura", primaryCta: { label: "Ver Grafana MCP" }, secondaryCta: { label: "Observabilidad" } },
+  "mcp-app-security-checklist": { eyebrow: "Guía de confianza", title: "Checklist de seguridad para apps MCP en equipos", description: "Checklist para evaluar apps MCP, servidores MCP, apps de ChatGPT y conectores de Claude antes de conectar datos sensibles.", summary: "Revisa permisos, auth, flujo de datos, confianza del editor, logs y acciones de escritura antes de usar apps MCP en equipo.", readingTime: "7 min de lectura", primaryCta: { label: "Explorar seguridad" }, secondaryCta: { label: "Guía para equipos" } },
+  "mcp-apps-for-documents-and-knowledge": { eyebrow: "Guía de conocimiento", title: "Mejores apps MCP para documentos y bases de conocimiento", description: "Evalúa apps MCP para Google Drive, Microsoft 365, PDF, notas, docs y flujos de conocimiento.", summary: "Úsalas cuando el asistente necesite acceso gobernado a archivos, documentos fuente, notas, PDF y conocimiento compartido.", readingTime: "6 min de lectura", primaryCta: { label: "Explorar productividad" }, secondaryCta: { label: "Comparar PDF" } },
+  "mcp-apps-for-sales-teams": { eyebrow: "Guía de ingresos", title: "Mejores apps MCP para equipos de ventas", description: "Guía de apps MCP para CRM, prospección, research de cuentas, outreach, contexto de clientes y RevOps.", summary: "Ventas puede llevar contexto de cuentas, CRM, investigación y outreach al asistente con límites claros de permisos.", readingTime: "6 min de lectura", primaryCta: { label: "Explorar ventas" }, secondaryCta: { label: "Analítica marketing" } },
+  "mcp-apps-for-research-and-education": { eyebrow: "Guía de research", title: "Mejores apps MCP para investigación y educación", description: "Evalúa apps MCP para búsqueda bibliográfica, aprendizaje, citas, datasets y ciencia.", summary: "Son más útiles cuando devuelven contexto con fuentes, comparan evidencia y mantienen citas o registros unidos a cada afirmación.", readingTime: "6 min de lectura", primaryCta: { label: "Explorar educación" }, secondaryCta: { label: "Ciencias de la vida" } },
+  "mcp-browser-automation-tools": { eyebrow: "Guía de automatización", title: "Herramientas MCP de automatización del navegador para agentes", description: "Compara apps MCP para controlar navegadores, scraping, testing web, automatización desktop y flujos con UI real.", summary: "Ayudan a inspeccionar páginas, recopilar datos estructurados, probar flujos y operar UIs web cuando una API no basta.", readingTime: "7 min de lectura", primaryCta: { label: "Explorar dev" }, secondaryCta: { label: "Agentes de código" } },
 };
 
 const frArticleSummaries: Record<string, LocalizedArticle> = {
@@ -882,6 +1022,11 @@ const frArticleSummaries: Record<string, LocalizedArticle> = {
   "n8n-mcp": { eyebrow: "Guide de recherche", title: "Connecteur n8n MCP pour automatisations Claude", description: "Évaluer n8n MCP pour Claude : recherche de workflows, gestion d'automatisations, tests, permissions et rollout.", summary: "Utile quand Claude doit inspecter, exécuter ou gérer des workflows d'automatisation.", readingTime: "5 min de lecture", primaryCta: { label: "Voir n8n" }, secondaryCta: { label: "Productivité" } },
   "calendly-to-claude": { eyebrow: "Guide de recherche", title: "Calendly to Claude : scheduling avec un connecteur MCP", description: "Connecter des workflows Calendly à Claude avec disponibilités, types d'événement, liens de réservation et permissions.", summary: "Utile quand la planification demande contexte conversationnel, disponibilité et revue du workflow de réservation.", readingTime: "5 min de lecture", primaryCta: { label: "Voir Calendly" }, secondaryCta: { label: "Productivité" } },
   "pyroscope-mcp": { eyebrow: "Guide de recherche", title: "Pyroscope MCP avec Grafana : profiling et observabilité", description: "Évaluer les workflows Pyroscope via Grafana MCP Server : profils, dashboards, métriques, logs, alertes et incidents.", summary: "Le profiling est plus utile quand il est analysé avec dashboards, logs, métriques, alertes et contexte incident.", readingTime: "6 min de lecture", primaryCta: { label: "Voir Grafana MCP" }, secondaryCta: { label: "Observabilité" } },
+  "mcp-app-security-checklist": { eyebrow: "Guide confiance", title: "Checklist sécurité des apps MCP pour équipes", description: "Checklist pour évaluer apps MCP, serveurs MCP, apps ChatGPT et connecteurs Claude avant de connecter des données sensibles.", summary: "Vérifiez permissions, auth, flux de données, confiance éditeur, logs et actions d'écriture avant un usage en équipe.", readingTime: "7 min de lecture", primaryCta: { label: "Explorer sécurité" }, secondaryCta: { label: "Guide équipes" } },
+  "mcp-apps-for-documents-and-knowledge": { eyebrow: "Guide connaissance", title: "Meilleures apps MCP pour documents et bases de connaissances", description: "Évaluer les apps MCP pour Google Drive, Microsoft 365, PDF, notes, docs et workflows de connaissance.", summary: "À utiliser quand l'assistant doit accéder de façon gouvernée aux fichiers, sources, notes, PDF et connaissances partagées.", readingTime: "6 min de lecture", primaryCta: { label: "Explorer productivité" }, secondaryCta: { label: "Comparer PDF" } },
+  "mcp-apps-for-sales-teams": { eyebrow: "Guide revenu", title: "Meilleures apps MCP pour équipes commerciales", description: "Guide des apps MCP pour CRM, prospection, recherche compte, outreach, contexte client et RevOps.", summary: "Les équipes sales peuvent relier comptes, CRM, recherche et outreach à l'assistant avec des limites de permissions claires.", readingTime: "6 min de lecture", primaryCta: { label: "Explorer sales" }, secondaryCta: { label: "Analytics marketing" } },
+  "mcp-apps-for-research-and-education": { eyebrow: "Guide recherche", title: "Meilleures apps MCP pour recherche et éducation", description: "Évaluer les apps MCP pour recherche bibliographique, apprentissage, citations, datasets et workflows scientifiques.", summary: "Elles sont plus utiles lorsqu'elles renvoient du contexte sourcé, comparent les preuves et gardent citations ou dossiers attachés aux affirmations.", readingTime: "6 min de lecture", primaryCta: { label: "Explorer éducation" }, secondaryCta: { label: "Sciences de la vie" } },
+  "mcp-browser-automation-tools": { eyebrow: "Guide automatisation", title: "Outils MCP d'automatisation navigateur pour agents", description: "Comparer les apps MCP pour contrôle navigateur, scraping, tests web, automatisation desktop et workflows en vraie UI.", summary: "Elles aident à inspecter pages, collecter données structurées, tester des flows et opérer des UIs web quand une API ne suffit pas.", readingTime: "7 min de lecture", primaryCta: { label: "Explorer dev" }, secondaryCta: { label: "Agents de code" } },
 };
 
 const deArticleSummaries: Record<string, LocalizedArticle> = {
@@ -901,6 +1046,11 @@ const deArticleSummaries: Record<string, LocalizedArticle> = {
   "n8n-mcp": { eyebrow: "Such-Guide", title: "n8n MCP-Connector für Claude-Automatisierungen", description: "n8n MCP für Claude bewerten: Workflow-Suche, Automatisierungsverwaltung, Tests, Rechte und Rollout.", summary: "Nützlich, wenn Claude Automatisierungs-Workflows prüfen, ausführen oder verwalten soll.", readingTime: "5 Min. Lesezeit", primaryCta: { label: "n8n ansehen" }, secondaryCta: { label: "Produktivität" } },
   "calendly-to-claude": { eyebrow: "Such-Guide", title: "Calendly to Claude: Scheduling mit MCP-Connector", description: "Calendly-ähnliche Scheduling-Workflows mit Verfügbarkeit, Eventtypen, Buchungslinks und Rechten an Claude anbinden.", summary: "Für Planung mit Gesprächskontext, Verfügbarkeit und Review von Buchungs-Workflows.", readingTime: "5 Min. Lesezeit", primaryCta: { label: "Calendly ansehen" }, secondaryCta: { label: "Produktivität" } },
   "pyroscope-mcp": { eyebrow: "Such-Guide", title: "Pyroscope MCP mit Grafana: Profiling und Observability", description: "Pyroscope-Workflows über Grafana MCP Server bewerten: Profile, Dashboards, Metriken, Logs, Alerts und Incidents.", summary: "Profiling ist am stärksten, wenn es mit Dashboards, Logs, Metriken, Alerts und Incident-Kontext analysiert wird.", readingTime: "6 Min. Lesezeit", primaryCta: { label: "Grafana MCP ansehen" }, secondaryCta: { label: "Observability" } },
+  "mcp-app-security-checklist": { eyebrow: "Trust-Guide", title: "MCP-App-Sicherheitscheckliste für Teams", description: "Checkliste zur Bewertung von MCP-Apps, MCP-Servern, ChatGPT-Apps und Claude-Connectors vor sensiblen Datenverbindungen.", summary: "Prüfe Rechte, Auth, Datenfluss, Publisher-Vertrauen, Logs und Schreibaktionen vor dem Einsatz im Team.", readingTime: "7 Min. Lesezeit", primaryCta: { label: "Security ansehen" }, secondaryCta: { label: "Team-Guide" } },
+  "mcp-apps-for-documents-and-knowledge": { eyebrow: "Knowledge-Guide", title: "Beste MCP-Apps für Dokumente und Wissensdatenbanken", description: "MCP-Apps für Google Drive, Microsoft 365, PDFs, Notizen, Dokumente und Knowledge-Workflows bewerten.", summary: "Für Workflows, in denen der Assistent kontrollierten Zugriff auf Dateien, Quellen, Notizen, PDFs und Teamwissen braucht.", readingTime: "6 Min. Lesezeit", primaryCta: { label: "Produktivität ansehen" }, secondaryCta: { label: "PDF vergleichen" } },
+  "mcp-apps-for-sales-teams": { eyebrow: "Revenue-Guide", title: "Beste MCP-Apps für Sales-Teams", description: "Guide für MCP-Apps rund um CRM, Prospecting, Account Research, Outreach, Kundendaten und Revenue Ops.", summary: "Sales-Teams verbinden Account-Kontext, CRM, Recherche und Outreach mit klaren Berechtigungsgrenzen mit dem Assistenten.", readingTime: "6 Min. Lesezeit", primaryCta: { label: "Sales ansehen" }, secondaryCta: { label: "Marketing-Analytics" } },
+  "mcp-apps-for-research-and-education": { eyebrow: "Research-Guide", title: "Beste MCP-Apps für Forschung und Bildung", description: "MCP-Apps für Literaturrecherche, Lernplattformen, Zitate, Datensätze und wissenschaftliche Workflows bewerten.", summary: "Research-Apps sind am wertvollsten, wenn sie Quellenkontext liefern, Evidenz vergleichen und Belege an Aussagen halten.", readingTime: "6 Min. Lesezeit", primaryCta: { label: "Bildung ansehen" }, secondaryCta: { label: "Life Sciences" } },
+  "mcp-browser-automation-tools": { eyebrow: "Automation-Guide", title: "MCP-Browser-Automationstools für Agents", description: "MCP-Apps für Browsersteuerung, Web Scraping, Webtests, Desktop-Automation und echte UI-Workflows vergleichen.", summary: "Sie helfen beim Prüfen von Seiten, Sammeln strukturierter Daten, Testen von Abläufen und Bedienen von Web-UIs, wenn APIs nicht reichen.", readingTime: "7 Min. Lesezeit", primaryCta: { label: "Dev-Apps ansehen" }, secondaryCta: { label: "Coding Agents" } },
 };
 
 const jaCollections: Record<string, LocalizedCollection> = {

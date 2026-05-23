@@ -786,6 +786,210 @@ button.dot {
   padding-top: 18px;
 }
 
+.directory-content-section {
+  display: grid;
+  gap: 16px;
+  max-width: 1160px;
+  padding-top: 12px;
+}
+
+.directory-section-head {
+  display: grid;
+  gap: 8px;
+  max-width: 780px;
+}
+
+.directory-section-head h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 26px;
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1.14;
+}
+
+.directory-section-head p:not(.eyebrow) {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.58;
+}
+
+.directory-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.directory-card-grid-four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.directory-card {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.directory-card span,
+.directory-link-card span {
+  color: var(--muted-2);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.directory-card strong,
+.directory-link-card strong {
+  color: var(--ink);
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.18;
+}
+
+.directory-card p,
+.directory-link-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.48;
+}
+
+.directory-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.directory-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+.directory-table th,
+.directory-table td {
+  padding: 15px 16px;
+  border-bottom: 1px solid var(--line-2);
+  text-align: left;
+  vertical-align: top;
+}
+
+.directory-table th {
+  color: var(--muted-2);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.directory-table td {
+  color: var(--ink-2);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.directory-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.directory-table td:first-child {
+  display: grid;
+  gap: 5px;
+  min-width: 190px;
+}
+
+.directory-table a {
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.directory-table td:first-child span {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.directory-link-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.directory-link-card {
+  display: grid;
+  gap: 8px;
+  min-height: 150px;
+  padding: 17px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.directory-link-card:hover {
+  border-color: rgba(10, 10, 10, 0.18);
+  transform: translateY(-2px);
+}
+
+.directory-example-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.directory-example-list a {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.directory-example-list a:hover {
+  border-color: rgba(10, 10, 10, 0.18);
+  transform: translateY(-1px);
+}
+
+.directory-example-list strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.directory-example-list span {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.directory-example-list small {
+  color: var(--muted-2);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
 .tab {
   padding: 8px 13px;
   border-radius: 999px;
@@ -2941,6 +3145,98 @@ button.dot {
   line-height: 1.45;
 }
 
+.awesome-hero {
+  background:
+    linear-gradient(135deg, rgba(31, 122, 74, 0.13), rgba(255, 231, 137, 0.18) 48%, rgba(86, 168, 255, 0.12)),
+    #ffffff;
+}
+
+.awesome-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.awesome-hero .collection-hero-meta {
+  margin-top: 14px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.awesome-hero .collection-hero-meta span {
+  min-height: 32px;
+  border: 1px solid rgba(10, 10, 10, 0.06);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.awesome-hero-panel {
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.awesome-hero-panel a {
+  justify-self: start;
+  margin-top: 2px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.awesome-link-grid .collection-card {
+  min-height: 210px;
+}
+
+.awesome-resource-card {
+  min-height: 270px;
+}
+
+.awesome-resource-list {
+  display: grid;
+  gap: 2px;
+  align-self: end;
+  margin-top: 4px;
+}
+
+.awesome-resource-list a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 0;
+  border-top: 1px solid var(--line-2);
+  color: var(--ink-2);
+  font-size: 13.5px;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.awesome-resource-list a::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  color: var(--muted);
+  rotate: 45deg;
+}
+
+.awesome-resource-list a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+
+
+
+
+
+
 .collection-card-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3943,6 +4239,16 @@ button.dot {
     border-left: 0;
   }
 
+  .directory-card-grid,
+  .directory-card-grid-four,
+  .directory-link-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .directory-example-list {
+    grid-template-columns: 1fr;
+  }
+
   .app-index-list a:nth-child(2) {
     border-top: 1px solid var(--line-2);
   }
@@ -4223,6 +4529,9 @@ button.dot {
   .learn-topic-grid,
   .article-footer,
   .collection-card-grid,
+  .directory-card-grid,
+  .directory-card-grid-four,
+  .directory-link-grid,
   .related-collection-grid {
     grid-template-columns: 1fr;
   }

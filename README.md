@@ -13,6 +13,7 @@ MCP App Store is built to be an indexable directory for people searching for Mod
 Useful landing pages on [mcpapp.net](https://mcpapp.net):
 
 - [MCP App Store](https://mcpapp.net) - browse featured MCP apps and connectors
+- [Awesome MCP Apps](https://mcpapp.net/awesome-mcp-apps) - GitHub-friendly MCP app, server, and connector list
 - [ChatGPT apps](https://mcpapp.net/chatgpt-apps) - compare MCP-backed apps for ChatGPT
 - [Claude connectors](https://mcpapp.net/claude-connectors) - discover Claude MCP connectors
 - [MCP app directory](https://mcpapp.net/store) - browse the full app index

@@ -1382,6 +1382,485 @@ export const learnArticles: LearnArticle[] = [
       { label: "Model Context Protocol introduction", url: "https://modelcontextprotocol.io/docs/getting-started/intro" },
     ],
   },
+  {
+    slug: "mcp-app-security-checklist",
+    eyebrow: "Trust guide",
+    title: "MCP app security checklist for teams",
+    description:
+      "A practical checklist for evaluating MCP apps, MCP servers, ChatGPT apps, and Claude connectors before connecting sensitive tools or data.",
+    summary:
+      "Review permissions, auth, data flow, publisher trust, logging, and write actions before rolling MCP apps into team workflows.",
+    readingTime: "7 min read",
+    updatedAt: "2026-05-23",
+    intent: "use-case",
+    topics: ["MCP security", "permissions", "team governance"],
+    featuredAppIds: [
+      "rapid7-bulk-export",
+      "socket",
+      "miggo",
+      "defense-com-threat-analysis",
+      "conviso-mcp-server",
+      "zscaler-mcp-server",
+      "malwarebytes",
+    ],
+    primaryCta: { label: "Browse security MCP apps", href: "/category/security" },
+    secondaryCta: { label: "Read team directory guide", href: "/learn/mcp-app-directory-for-teams" },
+    relatedLinks: [
+      { label: "MCP app directory for teams", href: "/learn/mcp-app-directory-for-teams" },
+      { label: "MCP servers directory", href: "/mcp-servers" },
+      { label: "Developer MCP apps", href: "/collections/mcp-apps-for-developers" },
+      { label: "Submit a secure MCP listing", href: "/submit" },
+    ],
+    sections: [
+      {
+        id: "why-security-matters",
+        title: "Why MCP app security needs its own review",
+        body: [
+          "MCP apps can make assistants more useful because they connect chat to tools, files, systems, and workflows. That same reach means teams should evaluate them like production integrations, not like ordinary browser bookmarks.",
+          "A good review separates discovery from connection. Browse listings freely, then check permissions, authentication, data handling, and write actions before adding the app to a real workspace.",
+        ],
+      },
+      {
+        id: "permission-scope",
+        title: "1. Start with permission scope",
+        body: [
+          "The first question is not whether the app is useful. It is what the assistant can read, what it can write, and whose account those actions use.",
+        ],
+        bullets: [
+          "Prefer read-only tools for first trials.",
+          "Separate search, summarize, create, update, delete, and external-send actions.",
+          "Check whether permissions are user-scoped, workspace-scoped, or shared through a service account.",
+          "Confirm whether the app can reach production systems, customer data, financial data, or private repositories.",
+        ],
+      },
+      {
+        id: "auth-and-data",
+        title: "2. Review auth, transport, and data flow",
+        body: [
+          "Authentication is part of the product boundary. A trustworthy listing should make it clear how accounts connect, where the MCP server runs, and whether the server stores user content.",
+          "If a workflow touches sensitive data, ask for the same details you would ask from any integration vendor: privacy link, support path, retention policy, and failure behavior.",
+        ],
+        bullets: [
+          "Look for clear OAuth or account-connection language.",
+          "Avoid broad API keys when scoped auth is available.",
+          "Check whether tool results include source links or IDs so users can verify answers.",
+          "Confirm how logs, prompts, files, and tool outputs are retained.",
+        ],
+      },
+      {
+        id: "write-actions",
+        title: "3. Treat write actions as a rollout milestone",
+        body: [
+          "Write-capable MCP apps can save time, but they need a stronger rollout path. The assistant should not silently mutate tickets, records, calendars, repos, campaigns, or payments without a clear user checkpoint.",
+        ],
+        bullets: [
+          "Start in a sandbox, test workspace, or limited project.",
+          "Require confirmation before writes, sends, deletes, or purchases.",
+          "Use narrow tools instead of one broad action that can do everything.",
+          "Log action IDs and source records for audit and rollback.",
+        ],
+      },
+      {
+        id: "team-rollout",
+        title: "4. Roll out with owners and review dates",
+        body: [
+          "Once a team adopts an MCP app, assign an owner and revisit the connection after the first real workflow. The app may be safe for one group and too broad for another.",
+          "The best governance pattern is lightweight but explicit: approved users, approved workflows, owner, review date, and a place to report issues.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Should teams allow write-capable MCP apps?",
+        answer:
+          "Yes, but only with scoped permissions, confirmation points, logging, and a rollout path that starts with low-risk workflows.",
+      },
+      {
+        question: "What is the safest first MCP app to connect?",
+        answer:
+          "A read-only app with clear publisher metadata, scoped auth, source links in outputs, and a workflow that does not expose sensitive production data.",
+      },
+    ],
+    sources: [
+      { label: "Model Context Protocol introduction", url: "https://modelcontextprotocol.io/docs/getting-started/intro" },
+      { label: "OpenAI guide to building an MCP server", url: "https://developers.openai.com/apps-sdk/build/mcp-server" },
+      { label: "Anthropic MCP connector documentation", url: "https://docs.anthropic.com/en/docs/agents-and-tools/mcp-connector" },
+    ],
+  },
+  {
+    slug: "mcp-apps-for-documents-and-knowledge",
+    eyebrow: "Knowledge guide",
+    title: "Best MCP apps for documents and knowledge bases",
+    description:
+      "How to evaluate MCP apps for Google Drive, Microsoft 365, PDFs, notes, docs, knowledge bases, and document-heavy team workflows.",
+    summary:
+      "Use document MCP apps when assistants need governed access to files, source documents, notes, PDFs, and shared knowledge systems.",
+    readingTime: "6 min read",
+    updatedAt: "2026-05-23",
+    intent: "use-case",
+    topics: ["documents", "knowledge bases", "PDF", "files"],
+    featuredAppIds: [
+      "google-drive",
+      "microsoft-365",
+      "sharepoint",
+      "box",
+      "dropbox",
+      "notion",
+      "docling-mcp",
+      "word-by-anthropic",
+      "pdf-tools-view-fill-merge-split-manage-pages-extract",
+    ],
+    primaryCta: { label: "Browse productivity MCP apps", href: "/collections/mcp-apps-for-productivity" },
+    secondaryCta: { label: "Compare PDF viewer tools", href: "/learn/anthropic-pdf-viewer-mcp" },
+    relatedLinks: [
+      { label: "PDF viewer MCP guide", href: "/learn/anthropic-pdf-viewer-mcp" },
+      { label: "Productivity MCP app collection", href: "/collections/mcp-apps-for-productivity" },
+      { label: "Claude productivity connectors", href: "/learn/best-claude-connectors-for-productivity" },
+      { label: "MCP app security checklist", href: "/learn/mcp-app-security-checklist" },
+    ],
+    sections: [
+      {
+        id: "where-they-help",
+        title: "Where document MCP apps help",
+        body: [
+          "Document and knowledge MCP apps are useful when an assistant needs to find, compare, summarize, or update source material that already lives in a team's systems.",
+          "The strongest workflows keep source context attached. Users should be able to open the file, page, note, ticket, or PDF that supports an answer.",
+        ],
+      },
+      {
+        id: "common-workflows",
+        title: "Common document workflows",
+        body: [
+          "A document app should reduce switching between chat, search, file storage, and editors. The goal is not just summarization; it is traceable work on the right source material.",
+        ],
+        bullets: [
+          "Find policy, contract, research, or project documents by natural language.",
+          "Summarize a folder, meeting pack, customer file, or product spec with source links.",
+          "Extract tables, dates, owners, obligations, or action items from PDFs and docs.",
+          "Draft an update while preserving the original source and review path.",
+          "Compare versions or related documents before a decision.",
+        ],
+      },
+      {
+        id: "evaluation",
+        title: "How to evaluate a document MCP app",
+        body: [
+          "Document workflows often touch private files. Before connecting, check account boundaries, folder scope, file types, retention, and whether write actions need confirmation.",
+        ],
+        bullets: [
+          "Confirm which drives, folders, workspaces, or libraries are in scope.",
+          "Prefer apps that return citations, file IDs, or direct source links.",
+          "Separate read/search tools from edit/export/share tools.",
+          "Check support for PDFs, docs, spreadsheets, slides, images, or OCR if those formats matter.",
+        ],
+      },
+      {
+        id: "prompting",
+        title: "Prompts that work well",
+        body: [
+          "Name the source boundary and desired output. A strong prompt says which folder, date range, customer, project, or file type the assistant should inspect.",
+        ],
+        bullets: [
+          "Find the latest renewal contract for this customer and summarize the renewal risks with source links.",
+          "Compare the product brief and launch checklist, then list mismatched owners or dates.",
+          "Extract all action items from the meeting notes folder for this week.",
+          "Create a first draft, but do not edit or share the source document yet.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Are document MCP apps safer than pasting files into chat?",
+        answer:
+          "They can be, because access can be scoped and source links can remain attached. Teams still need to review permissions, retention, and file boundaries before connecting.",
+      },
+      {
+        question: "Should document MCP apps be allowed to edit files?",
+        answer:
+          "Start with read-only search and summarization. Add edits later when the app provides clear review, confirmation, and rollback paths.",
+      },
+    ],
+    sources: [
+      { label: "MCP App Store productivity collection", url: "https://mcpapp.net/collections/mcp-apps-for-productivity" },
+      { label: "MCP App Store PDF viewer guide", url: "https://mcpapp.net/learn/anthropic-pdf-viewer-mcp" },
+      { label: "Model Context Protocol introduction", url: "https://modelcontextprotocol.io/docs/getting-started/intro" },
+    ],
+  },
+  {
+    slug: "mcp-apps-for-sales-teams",
+    eyebrow: "Revenue guide",
+    title: "Best MCP apps for sales teams",
+    description:
+      "A sales workflow guide for MCP apps across CRM, prospecting, account research, outreach, customer context, and revenue operations.",
+    summary:
+      "Sales teams should use MCP apps to bring account context, CRM records, research, and outreach workflows into the assistant with clear permission boundaries.",
+    readingTime: "6 min read",
+    updatedAt: "2026-05-23",
+    intent: "use-case",
+    topics: ["sales", "CRM", "prospecting", "revenue operations"],
+    featuredAppIds: ["hubspot", "agentforce-sales", "apollo", "clay", "outreach", "close", "zoominfo", "common-room", "lusha"],
+    primaryCta: { label: "Browse sales and marketing apps", href: "/collections/mcp-apps-for-sales-and-marketing" },
+    secondaryCta: { label: "Open marketing analytics apps", href: "/collections/mcp-apps-for-marketing-analytics" },
+    relatedLinks: [
+      { label: "Sales and marketing MCP app collection", href: "/collections/mcp-apps-for-sales-and-marketing" },
+      { label: "Marketing analytics MCP apps", href: "/collections/mcp-apps-for-marketing-analytics" },
+      { label: "Brand24 MCP guide", href: "/learn/brand24-mcp" },
+      { label: "MCP app security checklist", href: "/learn/mcp-app-security-checklist" },
+    ],
+    sections: [
+      {
+        id: "fit",
+        title: "Where sales MCP apps fit",
+        body: [
+          "Sales MCP apps are strongest when the assistant can pull together customer records, account research, messages, meetings, and tasks without asking the seller to copy data between tools.",
+          "The goal is better context before the human acts. For outbound, pipeline, and customer workflows, keep the assistant's write permissions explicit.",
+        ],
+      },
+      {
+        id: "workflows",
+        title: "High-value sales workflows",
+        body: [
+          "Useful sales workflows usually combine retrieval and drafting. The assistant can find context, summarize it, and prepare a next step while the seller reviews the final action.",
+        ],
+        bullets: [
+          "Prepare an account brief from CRM, notes, website context, and recent conversations.",
+          "Find similar customers, relevant case studies, or active expansion signals.",
+          "Draft outreach with account-specific context without sending automatically.",
+          "Summarize pipeline risks, stuck deals, missing next steps, or stale owners.",
+          "Update CRM records only after the seller confirms the change.",
+        ],
+      },
+      {
+        id: "evaluation",
+        title: "How to choose sales MCP apps",
+        body: [
+          "Sales systems often contain customer data and outbound channels. Evaluate apps by source access, account scope, write controls, and whether they can show which records supported the answer.",
+        ],
+        bullets: [
+          "Check whether the app can read contacts, companies, deals, activities, or email history.",
+          "Separate drafting from sending, logging, creating, or updating records.",
+          "Use team templates and approved messaging where possible.",
+          "Confirm whether the app respects CRM ownership, territory, and workspace permissions.",
+        ],
+      },
+      {
+        id: "rollout",
+        title: "A simple rollout path",
+        body: [
+          "Start with one low-risk workflow such as account research or pipeline summarization. Once sellers trust the output and managers trust the controls, add carefully reviewed record updates or task creation.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Can MCP apps send sales emails automatically?",
+        answer:
+          "Some sales tools may support sending or outreach actions, but teams should require explicit review before external messages are sent.",
+      },
+      {
+        question: "What is the best first sales MCP workflow?",
+        answer:
+          "Account research or pipeline summarization is usually a good first workflow because it is useful, mostly read-only, and easy to verify.",
+      },
+    ],
+    sources: [
+      { label: "Sales and marketing MCP app collection", url: "https://mcpapp.net/collections/mcp-apps-for-sales-and-marketing" },
+      { label: "Marketing analytics MCP app collection", url: "https://mcpapp.net/collections/mcp-apps-for-marketing-analytics" },
+      { label: "Model Context Protocol introduction", url: "https://modelcontextprotocol.io/docs/getting-started/intro" },
+    ],
+  },
+  {
+    slug: "mcp-apps-for-research-and-education",
+    eyebrow: "Research guide",
+    title: "Best MCP apps for research and education",
+    description:
+      "How students, analysts, educators, and research teams can evaluate MCP apps for literature search, learning platforms, citations, datasets, and scientific workflows.",
+    summary:
+      "Research MCP apps are most useful when they return source-backed context, help compare evidence, and keep citations or records attached to each claim.",
+    readingTime: "6 min read",
+    updatedAt: "2026-05-23",
+    intent: "use-case",
+    topics: ["research", "education", "citations", "science"],
+    featuredAppIds: [
+      "consensus",
+      "scite",
+      "pubmed",
+      "scholar-gateway",
+      "clinical-trials",
+      "biorxiv",
+      "coursera",
+      "datacamp",
+      "udemy-business",
+      "open-targets",
+    ],
+    primaryCta: { label: "Browse education MCP apps", href: "/category/education" },
+    secondaryCta: { label: "Browse life sciences apps", href: "/category/life-sciences" },
+    relatedLinks: [
+      { label: "Data and analytics apps", href: "/category/data" },
+      { label: "Document and knowledge apps", href: "/learn/mcp-apps-for-documents-and-knowledge" },
+      { label: "Claude database connectors", href: "/learn/claude-connectors-for-databases" },
+      { label: "MCP app security checklist", href: "/learn/mcp-app-security-checklist" },
+    ],
+    sections: [
+      {
+        id: "fit",
+        title: "Where research MCP apps help",
+        body: [
+          "Research and education workflows need traceability. The assistant should help users discover, compare, and summarize sources while keeping enough metadata to verify the result.",
+          "These apps are useful for literature search, course discovery, citation review, scientific databases, clinical trial context, and internal research libraries.",
+        ],
+      },
+      {
+        id: "workflows",
+        title: "High-value research workflows",
+        body: [
+          "A good research workflow narrows the question, gathers source-backed evidence, and explains uncertainty. It should not collapse all sources into an unsupported answer.",
+        ],
+        bullets: [
+          "Find recent papers or educational resources for a focused topic.",
+          "Compare claims across abstracts, citations, course modules, or datasets.",
+          "Summarize a research area with source links and open questions.",
+          "Extract study design, population, intervention, outcome, or limitation details.",
+          "Turn a learning goal into a course, reading, or practice plan.",
+        ],
+      },
+      {
+        id: "evaluation",
+        title: "How to evaluate research MCP apps",
+        body: [
+          "Look for source visibility first. Users should be able to inspect the paper, dataset, course, clinical record, or documentation page that backs the assistant's answer.",
+        ],
+        bullets: [
+          "Prefer answers with citations, IDs, links, or source names.",
+          "Check coverage by domain, date range, language, and source type.",
+          "Avoid medical, legal, or financial conclusions without expert review.",
+          "Separate search and summarization from actions like enrollment, sharing, or record updates.",
+        ],
+      },
+      {
+        id: "prompting",
+        title: "Prompts that work well",
+        body: [
+          "Use focused prompts with a topic, population, date range, difficulty level, or evidence standard. Ask the app to show sources and uncertainty.",
+        ],
+        bullets: [
+          "Find studies from the last five years about this topic and group them by evidence type.",
+          "Compare these two claims and show where the sources agree or conflict.",
+          "Build a two-week learning plan using beginner-friendly resources only.",
+          "Summarize this clinical or scientific topic for a non-specialist, with source links.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Can research MCP apps replace expert review?",
+        answer:
+          "No. They can help find and summarize source material, but high-stakes conclusions still need domain expert review.",
+      },
+      {
+        question: "What should a research MCP app return?",
+        answer:
+          "It should return concise summaries plus source links, identifiers, citations, or enough metadata for users to verify the answer.",
+      },
+    ],
+    sources: [
+      { label: "Model Context Protocol introduction", url: "https://modelcontextprotocol.io/docs/getting-started/intro" },
+      { label: "MCP App Store data category", url: "https://mcpapp.net/category/data" },
+      { label: "MCP App Store life sciences category", url: "https://mcpapp.net/category/life-sciences" },
+    ],
+  },
+  {
+    slug: "mcp-browser-automation-tools",
+    eyebrow: "Automation guide",
+    title: "MCP browser automation tools for agents",
+    description:
+      "How to compare MCP apps for browser control, web scraping, web testing, desktop automation, and agentic workflows that need to operate in real interfaces.",
+    summary:
+      "Browser automation MCP tools help assistants inspect pages, collect structured data, test workflows, and operate web UIs when APIs are not enough.",
+    readingTime: "7 min read",
+    updatedAt: "2026-05-23",
+    intent: "use-case",
+    topics: ["browser automation", "web scraping", "testing", "agents"],
+    featuredAppIds: [
+      "control-chrome",
+      "firefox-control",
+      "brave-applescript",
+      "apify",
+      "kapture-browser-automation",
+      "desktop-commander",
+      "windows-mcp",
+      "macos",
+    ],
+    primaryCta: { label: "Browse developer MCP apps", href: "/collections/mcp-apps-for-developers" },
+    secondaryCta: { label: "Compare coding agent apps", href: "/learn/best-mcp-apps-for-coding-agents" },
+    relatedLinks: [
+      { label: "Coding agent MCP apps", href: "/learn/best-mcp-apps-for-coding-agents" },
+      { label: "Developer MCP app collection", href: "/collections/mcp-apps-for-developers" },
+      { label: "MCP app security checklist", href: "/learn/mcp-app-security-checklist" },
+      { label: "MCP servers directory", href: "/mcp-servers" },
+    ],
+    sections: [
+      {
+        id: "why-browser",
+        title: "Why browser automation belongs in MCP",
+        body: [
+          "Some workflows do not have a clean API, or the API does not show what a user actually sees. Browser automation MCP tools let assistants inspect pages, fill forms, run tests, capture evidence, and interact with web apps through controlled tools.",
+          "The best use cases are bounded. Give the assistant a site, task, and stopping condition instead of an open-ended command to browse the web.",
+        ],
+      },
+      {
+        id: "workflows",
+        title: "Common browser automation workflows",
+        body: [
+          "Browser automation is useful when visual state, logged-in sessions, or web-only flows matter. Keep each workflow small enough that a user can review the result.",
+        ],
+        bullets: [
+          "Test a signup, checkout, dashboard, or admin workflow in a real browser.",
+          "Collect structured data from pages where no stable API is available.",
+          "Inspect a local web app, reproduce a bug, and capture console or screenshot evidence.",
+          "Operate internal tools with clear instructions and confirmation before submitting changes.",
+          "Compare browser-visible results against backend records or documentation.",
+        ],
+      },
+      {
+        id: "controls",
+        title: "Controls to require",
+        body: [
+          "Browser and desktop tools can reach real accounts, sessions, and interfaces. Treat them as high-capability tools with explicit scope and review points.",
+        ],
+        bullets: [
+          "Specify allowed domains, accounts, and actions.",
+          "Separate read-only inspection from clicks that submit, delete, buy, or publish.",
+          "Capture evidence such as screenshots, URLs, console logs, or extracted records.",
+          "Respect site terms, rate limits, robots policies, and sensitive data boundaries.",
+        ],
+      },
+      {
+        id: "agent-fit",
+        title: "When to choose browser tools over APIs",
+        body: [
+          "Use an API when the workflow is stable, authorized, and structured. Use browser automation when the real UI is the source of truth, when you need visual verification, or when a user-facing flow must be tested end to end.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Are browser automation MCP tools only for scraping?",
+        answer:
+          "No. They can support QA, debugging, local app inspection, form workflows, evidence capture, and controlled operation of web interfaces.",
+      },
+      {
+        question: "What is the biggest risk with browser automation agents?",
+        answer:
+          "They can act in real logged-in sessions. Limit scope, require confirmation before irreversible actions, and capture enough evidence for review.",
+      },
+    ],
+    sources: [
+      { label: "Developer MCP app collection", url: "https://mcpapp.net/collections/mcp-apps-for-developers" },
+      { label: "MCP App Store browser automation category", url: "https://mcpapp.net/category/browser" },
+      { label: "Model Context Protocol introduction", url: "https://modelcontextprotocol.io/docs/getting-started/intro" },
+    ],
+  },
 ];
 
 export const siteFaqItems: LearnFaq[] = [

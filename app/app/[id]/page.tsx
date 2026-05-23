@@ -1123,6 +1123,16 @@ export default async function AppDetailPage({
             <div className="info-key">{t.appDetail.website}</div>
             <div className="info-val">{app.homepageUrl ? <a href={app.homepageUrl}>{app.homepageUrl}</a> : t.common.notProvided}</div>
           </div>
+          {app.repoUrl ? (
+            <div className="info-row">
+              <div className="info-key">{t.appDetail.githubRepo}</div>
+              <div className="info-val">
+                <a href={app.repoUrl} rel="noreferrer" target="_blank">
+                  {app.repoUrl}
+                </a>
+              </div>
+            </div>
+          ) : null}
           <div className="info-row">
             <div className="info-key">{t.appDetail.version}</div>
             <div className="info-val">{app.version ?? t.common.unknown}</div>
