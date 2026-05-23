@@ -937,7 +937,7 @@ export default async function AppDetailPage({
         </div>
       </header>
 
-      <PreviewBubbles previews={primaryDetails.previews} />
+      <PreviewBubbles mockupLabel={t.appDetail.mockup} previews={primaryDetails.previews} />
 
       <section className="detail-section prose-grid">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{primaryDetails.description}</ReactMarkdown>

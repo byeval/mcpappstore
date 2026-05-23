@@ -29,7 +29,7 @@ export default async function FaqPage() {
         <svg fill="none" viewBox="0 0 24 24">
           <path d="M9 18 15 12 9 6" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
         </svg>
-        <span>FAQ</span>
+        <span>{t.common.faq}</span>
       </nav>
 
       <section className="catalog-shell compact-shell">

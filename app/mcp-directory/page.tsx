@@ -210,7 +210,7 @@ export default async function McpDirectoryPage() {
           <div className="directory-link-grid">
             {topCategories.map((category) => (
               <Link className="directory-link-card" href={href(`/category/${category.slug}`)} key={category.slug} prefetch={false}>
-                <span>{formatNumber(category.count)} listings</span>
+                <span>{formatMessage(commonCopy.listingsCount, { count: formatNumber(category.count) })}</span>
                 <strong>{formatCategoryName(category.name)}</strong>
                 <p>{copy.categoryNotes[category.slug] ?? copy.defaultCategoryNote}</p>
               </Link>

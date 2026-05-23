@@ -91,7 +91,7 @@ export default async function LearnArticlePage({
                 {section.title}
               </a>
             ))}
-            {article.faqs ? <a href="#faq">FAQ</a> : null}
+            {article.faqs ? <a href="#faq">{t.common.faq}</a> : null}
           </nav>
         </aside>
 
