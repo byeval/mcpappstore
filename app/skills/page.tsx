@@ -3,9 +3,10 @@ import Link from "next/link";
 
 import { listSkills } from "@/lib/data";
 import { getI18n } from "@/lib/i18n-server";
-import { localizedPath } from "@/lib/i18n";
+import { formatMessage, localizedPath } from "@/lib/i18n";
 import { itemListJsonLd, jsonLdScript, pageMetadata, truncateMeta } from "@/lib/seo";
 import { skillPath } from "@/lib/skill-routes";
+import { staticPageCopy } from "@/lib/static-page-i18n";
 import type { CatalogSkill, SkillSourceType } from "@/lib/types";
 
 const sourceTypes: SkillSourceType[] = ["bundled", "local", "external"];
@@ -16,19 +17,22 @@ export async function generateMetadata({
   searchParams: Promise<{ q?: string; source?: string; category?: string }>;
 }): Promise<Metadata> {
   const [{ locale }, { q = "", source = "", category = "" }] = await Promise.all([getI18n(), searchParams]);
+  const copy = staticPageCopy(locale).skills;
   const filters = [q.trim(), source.trim(), category.trim()].filter(Boolean);
   return pageMetadata({
-    title: filters.length > 0 ? `Agent skills matching ${truncateMeta(filters.join(" "), 64)}` : "Agent skills directory",
-    description: "Browse agent skills that pair with MCP apps, ChatGPT apps, Claude connectors, and MCP servers.",
+    title: filters.length > 0
+      ? formatMessage(copy.filteredMetaTitle, { filters: truncateMeta(filters.join(" "), 64) })
+      : copy.metaTitle,
+    description: copy.metaDescription,
     path: "/skills",
     locale,
   });
 }
 
-function sourceLabel(sourceType: string): string {
+function sourceLabel(sourceType: string, copy: ReturnType<typeof staticPageCopy>["skills"]): string {
   if (sourceType === "external") return "skills.sh";
-  if (sourceType === "bundled") return "Bundled";
-  return "Local";
+  if (sourceType === "bundled") return copy.sourceBundled;
+  return copy.sourceLocal;
 }
 
 function searchText(skill: CatalogSkill): string {
@@ -62,6 +66,7 @@ export default async function SkillsDirectoryPage({
   searchParams: Promise<{ q?: string; source?: string; category?: string }>;
 }) {
   const [{ locale }, skills, params] = await Promise.all([getI18n(), listSkills(), searchParams]);
+  const copy = staticPageCopy(locale).skills;
   const href = (path: string) => localizedPath(path, locale);
   const q = (params.q ?? "").trim();
   const source = sourceTypes.includes(params.source as SkillSourceType) ? params.source : "";
@@ -82,31 +87,29 @@ export default async function SkillsDirectoryPage({
     <div className="page-stack">
       <section className="catalog-shell compact-shell">
         <div className="section-head">
-          <p className="eyebrow">Skills</p>
-          <h1>Agent skills directory</h1>
-          <p className="section-copy">
-            Browse reusable skills that pair with MCP apps so agents know when to use a connected tool, how to use it safely, and what workflow rules to follow.
-          </p>
+          <p className="eyebrow">{copy.eyebrow}</p>
+          <h1>{copy.title}</h1>
+          <p className="section-copy">{copy.intro}</p>
         </div>
 
-        <div className="app-index-metrics" aria-label="Skill directory counts">
+        <div className="app-index-metrics" aria-label={copy.metricsAria}>
           <div>
             <strong>{skills.length}</strong>
-            <span>Total skills</span>
+            <span>{copy.totalSkills}</span>
           </div>
           <div>
             <strong>{externalCount}</strong>
-            <span>skills.sh imports</span>
+            <span>{copy.externalImports}</span>
           </div>
           <div>
             <strong>{localCount}</strong>
-            <span>Local and bundled</span>
+            <span>{copy.localAndBundled}</span>
           </div>
         </div>
 
-        <div className="skill-category-strip" aria-label="Skill categories">
+        <div className="skill-category-strip" aria-label={copy.categoriesAria}>
           <Link className={!category ? "active" : ""} href={href(queryPath({ q, source }))} prefetch={false}>
-            All categories
+            {copy.allCategories}
           </Link>
           {categories.slice(0, 16).map((category) => (
             <Link
@@ -122,14 +125,14 @@ export default async function SkillsDirectoryPage({
 
         <form action={href("/skills")} className="skill-filter-panel">
           <div className="search-form">
-            <input defaultValue={q} name="q" placeholder="Search skills, tags, sources, or paired workflows" />
+            <input defaultValue={q} name="q" placeholder={copy.searchPlaceholder} />
             {source ? <input name="source" type="hidden" value={source} /> : null}
             {category ? <input name="category" type="hidden" value={category} /> : null}
-            <button className="primary-link" type="submit">Search</button>
+            <button className="primary-link" type="submit">{copy.search}</button>
           </div>
-          <div className="skill-source-filters" aria-label="Skill source filters">
+          <div className="skill-source-filters" aria-label={copy.sourceFiltersAria}>
             <Link className={!source ? "active" : ""} href={href(queryPath({ q, category }))} prefetch={false}>
-              All sources
+              {copy.allSources}
             </Link>
             {sourceTypes.map((sourceType) => (
               <Link
@@ -138,24 +141,24 @@ export default async function SkillsDirectoryPage({
                 key={sourceType}
                 prefetch={false}
               >
-                {sourceLabel(sourceType)}
+                {sourceLabel(sourceType, copy)}
               </Link>
             ))}
             {activeFilterCount > 0 ? (
-              <Link href={href("/skills")} prefetch={false}>Clear filters</Link>
+              <Link href={href("/skills")} prefetch={false}>{copy.clearFilters}</Link>
             ) : null}
           </div>
         </form>
 
         <p className="skill-result-count">
-          Showing {filteredSkills.length} of {skills.length} skills
+          {formatMessage(copy.resultCount, { visible: filteredSkills.length, total: skills.length })}
         </p>
 
-        <section className="skill-directory-grid" aria-label="Agent skills">
+        <section className="skill-directory-grid" aria-label={copy.gridAria}>
           {filteredSkills.map((skill) => (
             <article className="skill-directory-card" key={skill.id}>
               <div className="skill-card-top">
-                <span className="skill-relation">{sourceLabel(skill.sourceType)}</span>
+                <span className="skill-relation">{sourceLabel(skill.sourceType, copy)}</span>
                 <span className="skill-confidence">{skill.status}</span>
               </div>
               <h2>
@@ -177,7 +180,7 @@ export default async function SkillsDirectoryPage({
         dangerouslySetInnerHTML={jsonLdScript([
           itemListJsonLd(
             filteredSkills.slice(0, 100).map((skill) => ({ name: skill.displayName, path: skillPath(skill.id) })),
-            "Agent skills directory",
+            copy.jsonLdName,
           ),
         ])}
         type="application/ld+json"

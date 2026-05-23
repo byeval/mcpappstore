@@ -5,9 +5,10 @@ import { notFound } from "next/navigation";
 import { AppCard } from "@/components/app-card";
 import { getSkillById, listAppsForSkill } from "@/lib/data";
 import { getI18n } from "@/lib/i18n-server";
-import { localizedPath } from "@/lib/i18n";
+import { formatMessage, localizedPath, type Locale } from "@/lib/i18n";
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, jsonLdScript, pageMetadata, truncateMeta } from "@/lib/seo";
 import { skillIdFromSegments, skillPath } from "@/lib/skill-routes";
+import { staticPageCopy } from "@/lib/static-page-i18n";
 import type { CatalogSkill, SkillAppRef } from "@/lib/types";
 
 export async function generateMetadata({
@@ -16,17 +17,18 @@ export async function generateMetadata({
   params: Promise<{ id?: string[] }>;
 }): Promise<Metadata> {
   const [{ locale }, { id }] = await Promise.all([getI18n(), params]);
+  const copy = staticPageCopy(locale).skills;
   const skillId = skillIdFromSegments(id);
   const [skill, apps] = await Promise.all([getSkillById(skillId), listAppsForSkill(skillId)]);
   if (!skill) {
     return {};
   }
   const appPhrase = apps.length > 0
-    ? ` Paired MCP apps include ${apps.slice(0, 3).map((app) => app.name).join(", ")}.`
+    ? formatMessage(copy.pairedAppsMeta, { apps: apps.slice(0, 3).map((app) => app.name).join(", ") })
     : "";
 
   return pageMetadata({
-    title: `${skill.displayName} agent skill`,
+    title: formatMessage(copy.detailTitle, { name: skill.displayName }),
     description: truncateMeta(`${skill.description}${appPhrase}`),
     path: skillPath(skill.id),
     locale,
@@ -54,46 +56,54 @@ function installCommand(skill: CatalogSkill): string | undefined {
   return undefined;
 }
 
-function sourceLabel(skill: CatalogSkill): string {
+function sourceLabel(skill: CatalogSkill, copy: ReturnType<typeof staticPageCopy>["skills"]): string {
   if (skill.sourceType === "external") return "skills.sh";
-  if (skill.sourceType === "bundled") return "Bundled skill";
-  return "Local skill";
+  if (skill.sourceType === "bundled") return copy.sourceBundledDetail;
+  return copy.sourceLocalDetail;
 }
 
-function readableList(items: string[]): string {
+function readableList(items: string[], locale: Locale): string {
   if (items.length <= 1) return items[0] ?? "";
+  if (locale === "zh-hans") {
+    return items.length === 2 ? `${items[0]}和${items[1]}` : `${items.slice(0, -1).join("、")}和${items[items.length - 1]}`;
+  }
   if (items.length === 2) return `${items[0]} and ${items[1]}`;
   return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
 }
 
-function skillUseCases(skill: CatalogSkill, apps: SkillAppRef[]): Array<{ title: string; body: string }> {
+function skillUseCases(skill: CatalogSkill, apps: SkillAppRef[], locale: Locale): Array<{ title: string; body: string }> {
+  const copy = staticPageCopy(locale).skills;
   const appNames = apps.slice(0, 4).map((app) => app.name);
-  const appPhrase = appNames.length > 0 ? readableList(appNames) : "an MCP app";
+  const appPhrase = appNames.length > 0 ? readableList(appNames, locale) : copy.fallbackApp;
   const categories = skill.categories.slice(0, 3).map((category) => category.replaceAll("-", " "));
-  const categoryPhrase = categories.length > 0 ? readableList(categories) : "tool";
+  const categoryPhrase = categories.length > 0 ? readableList(categories, locale) : copy.fallbackCategory;
 
   return [
     {
-      title: "Before tool calls",
-      body: `Use ${skill.displayName} before an agent calls ${appPhrase} so the model has workflow rules, naming conventions, and safety checks in context.`,
+      title: copy.beforeToolCalls,
+      body: formatMessage(copy.beforeToolCallsBody, { skill: skill.displayName, apps: appPhrase }),
     },
     {
-      title: "During implementation",
-      body: `Pair it with ${categoryPhrase} workflows when the agent needs domain-specific guidance instead of only raw MCP tool schemas.`,
+      title: copy.duringImplementation,
+      body: formatMessage(copy.duringImplementationBody, { categories: categoryPhrase }),
     },
     {
-      title: "For review",
-      body: "Use the skill as a review checklist for permissions, generated code, database changes, deployments, or other write-capable actions.",
+      title: copy.forReview,
+      body: copy.forReviewBody,
     },
   ];
 }
 
-function pairingCopy(skill: CatalogSkill, apps: SkillAppRef[]): string {
+function pairingCopy(skill: CatalogSkill, apps: SkillAppRef[], locale: Locale): string {
+  const copy = staticPageCopy(locale).skills;
   if (apps.length === 0) {
-    return `${skill.displayName} is available in the skills catalog but does not have curated MCP app pairings yet.`;
+    return formatMessage(copy.pairingCopyEmpty, { skill: skill.displayName });
   }
 
-  return `${skill.displayName} is curated for ${readableList(apps.slice(0, 5).map((app) => app.name))}. These pairings help agents combine tool access with task-specific operating guidance.`;
+  return formatMessage(copy.pairingCopy, {
+    skill: skill.displayName,
+    apps: readableList(apps.slice(0, 5).map((app) => app.name), locale),
+  });
 }
 
 export default async function SkillDetailPage({
@@ -112,19 +122,20 @@ export default async function SkillDetailPage({
     notFound();
   }
 
+  const copy = staticPageCopy(locale).skills;
   const href = (path: string) => localizedPath(path, locale);
   const command = installCommand(skill);
-  const useCases = skillUseCases(skill, apps);
+  const useCases = skillUseCases(skill, apps, locale);
   const faqs = [
     {
-      question: `When should I use the ${skill.displayName} skill?`,
-      answer: `${skill.displayName} is useful when an agent needs workflow-specific guidance before using paired MCP apps or related tools.`,
+      question: formatMessage(copy.faqWhenQuestion, { skill: skill.displayName }),
+      answer: formatMessage(copy.faqWhenAnswer, { skill: skill.displayName }),
     },
     {
-      question: `Which MCP apps pair with ${skill.displayName}?`,
+      question: formatMessage(copy.faqPairsQuestion, { skill: skill.displayName }),
       answer: apps.length > 0
-        ? `${skill.displayName} is currently paired with ${readableList(apps.slice(0, 6).map((app) => app.name))}.`
-        : `${skill.displayName} does not have curated MCP app pairings yet.`,
+        ? formatMessage(copy.faqPairsAnswer, { skill: skill.displayName, apps: readableList(apps.slice(0, 6).map((app) => app.name), locale) })
+        : formatMessage(copy.faqPairsEmpty, { skill: skill.displayName }),
     },
   ];
 
@@ -132,7 +143,7 @@ export default async function SkillDetailPage({
     <div className="page-stack">
       <section className="catalog-shell compact-shell">
         <nav className="crumbs">
-          <Link href={href("/skills")}>Skills</Link>
+          <Link href={href("/skills")}>{copy.eyebrow}</Link>
           <svg fill="none" viewBox="0 0 24 24">
             <path d="M9 18 15 12 9 6" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
           </svg>
@@ -141,20 +152,20 @@ export default async function SkillDetailPage({
 
         <header className="skill-detail-head">
           <div>
-            <p className="eyebrow">{sourceLabel(skill)}</p>
+            <p className="eyebrow">{sourceLabel(skill, copy)}</p>
             <h1>{skill.displayName}</h1>
             <p>{skill.description}</p>
           </div>
           {skill.sourceUrl ? (
             <a className="btn-connect" href={skill.sourceUrl} rel="noreferrer" target="_blank">
-              Open source
+              {copy.openSource}
             </a>
           ) : null}
         </header>
 
         <section className="detail-section">
-          <h2 className="section-title">When to use this skill</h2>
-          <p className="skill-section-copy">{pairingCopy(skill, apps)}</p>
+          <h2 className="section-title">{copy.whenToUse}</h2>
+          <p className="skill-section-copy">{pairingCopy(skill, apps, locale)}</p>
           <ul className="tool-list tool-table skill-use-list">
             {useCases.map((item) => (
               <li key={item.title}>
@@ -166,23 +177,23 @@ export default async function SkillDetailPage({
         </section>
 
         <section className="detail-section">
-          <h2 className="section-title">Skill metadata</h2>
+          <h2 className="section-title">{copy.metadata}</h2>
           <div className="info-table">
             <div className="info-row">
-              <div className="info-key">Skill ID</div>
+              <div className="info-key">{copy.skillId}</div>
               <div className="info-val"><code>{skill.id}</code></div>
             </div>
             <div className="info-row">
-              <div className="info-key">Source</div>
-              <div className="info-val">{sourceLabel(skill)}</div>
+              <div className="info-key">{copy.source}</div>
+              <div className="info-val">{sourceLabel(skill, copy)}</div>
             </div>
             <div className="info-row">
-              <div className="info-key">Status</div>
+              <div className="info-key">{copy.status}</div>
               <div className="info-val">{skill.status}</div>
             </div>
             {command ? (
               <div className="info-row">
-                <div className="info-key">Install</div>
+                <div className="info-key">{copy.install}</div>
                 <div className="info-val"><code>{command}</code></div>
               </div>
             ) : null}
@@ -195,9 +206,9 @@ export default async function SkillDetailPage({
         </section>
 
         <section className="detail-section">
-          <h2 className="section-title">Paired MCP apps</h2>
+          <h2 className="section-title">{copy.pairedApps}</h2>
           {apps.length === 0 ? (
-            <p className="skill-section-copy">No curated MCP app associations yet.</p>
+            <p className="skill-section-copy">{copy.noPairs}</p>
           ) : (
             <div className="app-grid related-app-grid">
               {apps.map((app) => (
@@ -210,12 +221,12 @@ export default async function SkillDetailPage({
       <script
         dangerouslySetInnerHTML={jsonLdScript([
           breadcrumbJsonLd([
-            { name: "Skills", path: "/skills" },
+            { name: copy.eyebrow, path: "/skills" },
             { name: skill.displayName, path: skillPath(skill.id) },
           ]),
           itemListJsonLd(
             apps.map((app) => ({ name: app.name, path: `/app/${app.id}` })),
-            `${skill.displayName} paired MCP apps`,
+            formatMessage(copy.pairedAppsListName, { skill: skill.displayName }),
           ),
           faqJsonLd(faqs),
         ])}

@@ -13,6 +13,7 @@ import { formatMessage, localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { offsetForPage, pageFromSearchParam, paginatedPath } from "@/lib/pagination";
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
+import { staticPageCopy } from "@/lib/static-page-i18n";
 import { absoluteUrl } from "@/lib/utils";
 
 export async function generateMetadata({
@@ -52,6 +53,7 @@ export default async function ClaudeConnectorsPage({
   searchParams: Promise<{ page?: string }>;
 }) {
   const [{ locale, messages: t }, { page: pageParam }] = await Promise.all([getI18n(), searchParams]);
+  const linkCopy = staticPageCopy(locale).platformLinks;
   const href = (path: string) => localizedPath(path, locale);
   const page = pageFromSearchParam(pageParam);
   const offset = offsetForPage(page, PLATFORM_APP_PAGE_SIZE);
@@ -93,8 +95,8 @@ export default async function ClaudeConnectorsPage({
             <p>{t.platformPages.claudeGuideBody1}</p>
             <p>{t.platformPages.claudeGuideBody2}</p>
             <div className="category-related-links">
-              <Link href={href("/mcp-directory")} prefetch={false}>Browse the full MCP directory</Link>
-              <Link href={href("/chatgpt-connectors")} prefetch={false}>Compare with ChatGPT connectors</Link>
+              <Link href={href("/mcp-directory")} prefetch={false}>{linkCopy.browseDirectory}</Link>
+              <Link href={href("/chatgpt-connectors")} prefetch={false}>{linkCopy.compareChatgpt}</Link>
               <Link href={href("/learn/chatgpt-apps-vs-claude-connectors")} prefetch={false}>{t.platformPages.claudeRelatedComparison}</Link>
               <Link href={href("/learn/claude-connectors-for-databases")} prefetch={false}>{t.platformPages.claudeRelatedDatabases}</Link>
               <Link href={href("/learn/best-claude-connectors-for-productivity")} prefetch={false}>{t.platformPages.claudeRelatedProductivity}</Link>

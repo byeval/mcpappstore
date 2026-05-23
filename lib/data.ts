@@ -31,7 +31,8 @@ const HOME_APP_LIMIT = 36;
 export const CATEGORY_APP_PAGE_SIZE = 36;
 export const PLATFORM_APP_PAGE_SIZE = 36;
 const publicCacheTtlSeconds = 60 * 60;
-const publicCacheVersion = "v10";
+const publicCacheVersion = "v11";
+const seedSources = new Set(["chatgpt_seed", "claude_seed"]);
 
 export interface CatalogQualityStats {
   withToolsCount: number;
@@ -268,6 +269,32 @@ function cloneApp(app: CatalogApp): CatalogApp {
     skills: (app.skills?.length ? app.skills : skillsForAppFromSeed(app.id)).map(cloneAppSkill),
     examplePrompts: [...app.examplePrompts],
   };
+}
+
+async function fallbackPublishedApps(payload: "list" | "full" = "list"): Promise<CatalogApp[]> {
+  const assetCdnUrl = await getAssetCdnUrl();
+  const apps = FALLBACK_CATALOG.apps
+    .filter((app) => app.status === "published")
+    .map(cloneApp)
+    .map((app) => withResolvedMediaUrls(app, assetCdnUrl));
+
+  return sortApps(payload === "list" ? apps.map(listAppPayload) : apps);
+}
+
+function mergeFreshSeedApps(dbApps: CatalogApp[] | null | undefined, seedApps: CatalogApp[]): CatalogApp[] {
+  if (!dbApps) {
+    return seedApps;
+  }
+
+  const dbSeedCount = dbApps.filter((app) => seedSources.has(app.source)).length;
+  const seedCount = seedApps.filter((app) => seedSources.has(app.source)).length;
+  if (dbSeedCount >= seedCount) {
+    return dbApps;
+  }
+
+  const seedIds = new Set(seedApps.map((app) => app.id));
+  const userApps = dbApps.filter((app) => !seedSources.has(app.source) && !seedIds.has(app.id));
+  return sortApps([...seedApps, ...userApps]);
 }
 
 async function getAppSurfacesFromDb(
@@ -883,21 +910,11 @@ export async function listPublishedApps(): Promise<CatalogApp[]> {
     return cached;
   }
 
+  const seedApps = await fallbackPublishedApps("list");
   const dbApps = await listAppsFromDb("published", listHydration);
-  if (dbApps) {
-    await writePublicCache("published-apps", dbApps);
-    return dbApps;
-  }
-
-  const assetCdnUrl = await getAssetCdnUrl();
-  const fallbackApps = sortApps(
-    FALLBACK_CATALOG.apps
-      .filter((app) => app.status === "published")
-      .map(cloneApp)
-      .map((app) => listAppPayload(withResolvedMediaUrls(app, assetCdnUrl))),
-  );
-  await writePublicCache("published-apps", fallbackApps);
-  return fallbackApps;
+  const apps = mergeFreshSeedApps(dbApps, seedApps);
+  await writePublicCache("published-apps", apps);
+  return apps;
 }
 
 export async function listHomeApps(): Promise<CatalogApp[]> {
@@ -906,21 +923,9 @@ export async function listHomeApps(): Promise<CatalogApp[]> {
     return cached;
   }
 
-  const dbApps = await listAppsFromDb("published", listHydration, HOME_APP_LIMIT);
-  if (dbApps) {
-    await writePublicCache("home-apps", dbApps);
-    return dbApps;
-  }
-
-  const assetCdnUrl = await getAssetCdnUrl();
-  const fallbackApps = sortApps(
-    FALLBACK_CATALOG.apps
-      .filter((app) => app.status === "published")
-      .map(cloneApp)
-      .map((app) => listAppPayload(withResolvedMediaUrls(app, assetCdnUrl))),
-  ).slice(0, HOME_APP_LIMIT);
-  await writePublicCache("home-apps", fallbackApps);
-  return fallbackApps;
+  const apps = (await listPublishedApps()).slice(0, HOME_APP_LIMIT);
+  await writePublicCache("home-apps", apps);
+  return apps;
 }
 
 export async function getCatalogQualityStats(): Promise<CatalogQualityStats> {
@@ -1060,31 +1065,11 @@ export async function listMetadataRichApps(limit = 8): Promise<CatalogApp[]> {
 }
 
 export async function listSitemapAppEntries(): Promise<Array<{ id: string; name: string; updatedAt: number }>> {
-  const db = await getDb();
-
-  if (db) {
-    try {
-      const rows = await db
-        .prepare("SELECT id, name, updated_at FROM apps WHERE status = 'published' ORDER BY updated_at DESC")
-        .all<{ id: string; name: string; updated_at: number }>();
-
-      return rows.results.map((row) => ({
-        id: row.id,
-        name: row.name,
-        updatedAt: Number(row.updated_at ?? Date.now()),
-      }));
-    } catch {
-      // Fall through to the seed catalog.
-    }
-  }
-
-  return FALLBACK_CATALOG.apps
-    .filter((app) => app.status === "published")
-    .map((app) => ({
-      id: app.id,
-      name: app.name,
-      updatedAt: app.updatedAt,
-    }));
+  return (await listPublishedApps()).map((app) => ({
+    id: app.id,
+    name: app.name,
+    updatedAt: app.updatedAt,
+  }));
 }
 
 export async function listSitemapSkillEntries(): Promise<Array<{ id: string; name: string; updatedAt: number }>> {
@@ -1108,22 +1093,9 @@ export async function getFeaturedApps(): Promise<CatalogApp[]> {
     return cached;
   }
 
-  const dbApps = await getFeaturedAppsFromDb();
-  if (dbApps) {
-    await writePublicCache("featured-apps", dbApps);
-    return dbApps;
-  }
-
-  const assetCdnUrl = await getAssetCdnUrl();
-  const fallbackApps = sortApps(
-    FALLBACK_CATALOG.apps
-      .filter((app) => app.status === "published" && app.isFeatured)
-      .slice(0, FEATURED_APP_LIMIT)
-      .map(cloneApp)
-      .map((app) => withResolvedMediaUrls(app, assetCdnUrl)),
-  );
-  await writePublicCache("featured-apps", fallbackApps);
-  return fallbackApps;
+  const apps = (await fallbackPublishedApps("full")).filter((app) => app.isFeatured).slice(0, FEATURED_APP_LIMIT);
+  await writePublicCache("featured-apps", apps);
+  return apps;
 }
 
 export async function getCategorySummaries(): Promise<CategorySummary[]> {
@@ -1132,20 +1104,13 @@ export async function getCategorySummaries(): Promise<CategorySummary[]> {
     return cached;
   }
 
-  const dbCategories = await listCategoriesFromDb();
-  if (dbCategories) {
-    await writePublicCache("category-summaries", dbCategories);
-    return dbCategories;
-  }
-
+  const apps = await listPublishedApps();
   const fallbackCategories = FALLBACK_CATALOG.categories
     .map((category) => ({
       ...category,
-      count: FALLBACK_CATALOG.apps.filter(
-        (app) => app.status === "published" && app.categories.includes(category.slug),
-      ).length,
-      latestUpdatedAt: FALLBACK_CATALOG.apps.reduce(
-        (max, app) => app.status === "published" && app.categories.includes(category.slug)
+      count: apps.filter((app) => app.categories.includes(category.slug)).length,
+      latestUpdatedAt: apps.reduce(
+        (max, app) => app.categories.includes(category.slug)
           ? Math.max(max, app.publishedAt ?? 0, app.updatedAt)
           : max,
         0,
@@ -1237,13 +1202,13 @@ export async function getAppById(id: string): Promise<CatalogApp | null> {
     return cached;
   }
 
+  const fallback = FALLBACK_CATALOG.apps.find((app) => app.id === id);
   const dbApp = await getAppFromDb(id);
-  if (dbApp) {
+  if (dbApp && (!fallback || dbApp.updatedAt >= fallback.updatedAt)) {
     await writePublicCache(`app:${id}`, dbApp);
     return dbApp;
   }
 
-  const fallback = FALLBACK_CATALOG.apps.find((app) => app.id === id);
   if (!fallback) {
     return null;
   }
@@ -1264,28 +1229,6 @@ export async function listAppsByCategoryPage(
 ): Promise<CatalogApp[]> {
   const safeLimit = Math.max(1, Math.min(limit, 72));
   const safeOffset = Math.max(0, offset);
-  const db = await getDb();
-
-  if (db) {
-    try {
-      const rows = await db
-        .prepare(
-          `SELECT a.*
-           FROM apps a
-           INNER JOIN app_categories ac ON ac.app_id = a.id
-           WHERE a.status = 'published' AND ac.category_slug = ?
-           ORDER BY a.is_featured DESC, COALESCE(a.published_at, a.updated_at) DESC
-           LIMIT ? OFFSET ?`,
-        )
-        .bind(category, safeLimit, safeOffset)
-        .all<Record<string, unknown>>();
-
-      return hydrateAppRows(rows.results, listHydration);
-    } catch {
-      // Fall through to the in-memory catalog.
-    }
-  }
-
   const apps = await listPublishedApps();
   return apps.filter((app) => app.categories.includes(category)).slice(safeOffset, safeOffset + safeLimit);
 }
@@ -1296,54 +1239,11 @@ export async function listAppsByPlatform(platform: "chatgpt" | "claude"): Promis
 }
 
 export async function countAppsByPlatform(platform: "chatgpt" | "claude"): Promise<number> {
-  const db = await getDb();
-
-  if (db) {
-    try {
-      const row = await db
-        .prepare(
-          `SELECT COUNT(DISTINCT a.id) AS count
-           FROM apps a
-           INNER JOIN app_surfaces s ON s.app_id = a.id
-           WHERE a.status = 'published' AND s.platform = ?`,
-        )
-        .bind(platform)
-        .first<{ count?: number }>();
-
-      return Number(row?.count ?? 0);
-    } catch {
-      // Fall through to the in-memory catalog.
-    }
-  }
-
   const apps = await listAppsByPlatform(platform);
   return apps.length;
 }
 
 export async function latestPlatformAppTimestamp(platform: "chatgpt" | "claude"): Promise<number> {
-  const db = await getDb();
-
-  if (db) {
-    try {
-      const row = await db
-        .prepare(
-          `SELECT MAX(COALESCE(a.published_at, a.updated_at)) AS latest
-           FROM apps a
-           INNER JOIN app_surfaces s ON s.app_id = a.id
-           WHERE a.status = 'published' AND s.platform = ?`,
-        )
-        .bind(platform)
-        .first<{ latest?: number }>();
-
-      const latest = Number(row?.latest ?? 0);
-      if (latest > 0) {
-        return latest;
-      }
-    } catch {
-      // Fall through to the in-memory catalog.
-    }
-  }
-
   const apps = await listAppsByPlatform(platform);
   return apps.reduce((max, app) => Math.max(max, app.publishedAt ?? 0, app.updatedAt), 0) || Date.now();
 }
@@ -1354,28 +1254,6 @@ export async function listAppsByPlatformPage(
 ): Promise<CatalogApp[]> {
   const safeLimit = Math.max(1, Math.min(limit, 72));
   const safeOffset = Math.max(0, offset);
-  const db = await getDb();
-
-  if (db) {
-    try {
-      const rows = await db
-        .prepare(
-          `SELECT DISTINCT a.*
-           FROM apps a
-           INNER JOIN app_surfaces s ON s.app_id = a.id
-           WHERE a.status = 'published' AND s.platform = ?
-           ORDER BY a.is_featured DESC, COALESCE(a.published_at, a.updated_at) DESC
-           LIMIT ? OFFSET ?`,
-        )
-        .bind(platform, safeLimit, safeOffset)
-        .all<Record<string, unknown>>();
-
-      return hydrateAppRows(rows.results, listHydration);
-    } catch {
-      // Fall through to the in-memory catalog.
-    }
-  }
-
   const apps = await listPublishedApps();
   return apps
     .filter((app) => app.surfaces.some((surface) => surface.platform === platform))

@@ -1195,7 +1195,7 @@ export default async function AppDetailPage({
           <div className="related-collection-grid">
             {relatedGuideLinks.map((guide) => (
               <Link className="related-collection-card" href={href(guide.href)} key={guide.href}>
-                <span>Guide</span>
+                <span>{t.appDetail.guide}</span>
                 <strong>{guide.label}</strong>
                 <p>{guide.summary}</p>
               </Link>
