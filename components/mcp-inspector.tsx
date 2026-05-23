@@ -44,6 +44,11 @@ interface McpTool {
 interface McpPrompt {
   name: string;
   description?: string;
+  arguments?: Array<{
+    name: string;
+    description?: string;
+    required?: boolean;
+  }>;
 }
 
 interface McpResource {
@@ -64,6 +69,7 @@ interface InitializeResult {
 }
 
 const protocolVersions = ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"];
+const defaultRequestTimeoutMs = "30000";
 
 const initialChecks: InspectorCheck[] = [
   { key: "url", label: "Endpoint URL", status: "idle", detail: "Waiting for an MCP endpoint." },
@@ -138,8 +144,27 @@ function parseToolArguments(value: string): Record<string, JsonValue> {
   return Object.fromEntries(Object.entries(parsed).map(([key, item]) => [key, toJsonValue(item)]));
 }
 
+function parsePromptArguments(value: string): Record<string, string> {
+  const args = parseJsonObject(value, "Prompt arguments");
+  const invalidKey = Object.entries(args).find(([, item]) => item !== null && typeof item !== "string")?.[0];
+  if (invalidKey) {
+    throw new Error(`Prompt argument "${invalidKey}" must be a string or null.`);
+  }
+
+  return Object.fromEntries(
+    Object.entries(args)
+      .filter(([, item]) => item !== null)
+      .map(([key, item]) => [key, item as string]),
+  );
+}
+
 function absoluteUrl(value: string, base?: string): string {
   return new URL(value.trim(), base).toString();
+}
+
+function positiveInteger(value: string, fallback: number): number {
+  const parsed = Number.parseInt(value, 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
 }
 
 function statusLabel(status: CheckStatus): string {
@@ -187,9 +212,24 @@ function coercePrompts(value: JsonValue | undefined): McpPrompt[] {
       return [];
     }
 
+    const args = Array.isArray(prompt.arguments)
+      ? prompt.arguments.flatMap((item) => {
+          if (!isRecord(item)) {
+            return [];
+          }
+
+          return [{
+            name: typeof item.name === "string" ? item.name : "argument",
+            description: typeof item.description === "string" ? item.description : undefined,
+            required: typeof item.required === "boolean" ? item.required : undefined,
+          }];
+        })
+      : undefined;
+
     return [{
       name: typeof prompt.name === "string" ? prompt.name : "unnamed_prompt",
       description: typeof prompt.description === "string" ? prompt.description : undefined,
+      arguments: args,
     }];
   });
 }
@@ -313,6 +353,7 @@ export function McpInspector() {
   const [protocolVersion, setProtocolVersion] = useState(protocolVersions[0]);
   const [authToken, setAuthToken] = useState("");
   const [headersText, setHeadersText] = useState("");
+  const [requestTimeoutMs, setRequestTimeoutMs] = useState(defaultRequestTimeoutMs);
   const [checks, setChecks] = useState<InspectorCheck[]>(initialChecks);
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [isRunning, setIsRunning] = useState(false);
@@ -323,21 +364,41 @@ export function McpInspector() {
   const [prompts, setPrompts] = useState<McpPrompt[]>([]);
   const [resources, setResources] = useState<McpResource[]>([]);
   const [selectedToolName, setSelectedToolName] = useState("");
+  const [selectedPromptName, setSelectedPromptName] = useState("");
+  const [selectedResourceUri, setSelectedResourceUri] = useState("");
   const [toolArguments, setToolArguments] = useState("{}");
+  const [promptArguments, setPromptArguments] = useState("{}");
   const [toolResult, setToolResult] = useState<JsonValue | undefined>(undefined);
+  const [promptResult, setPromptResult] = useState<JsonValue | undefined>(undefined);
+  const [resourceResult, setResourceResult] = useState<JsonValue | undefined>(undefined);
   const [toolError, setToolError] = useState("");
+  const [promptError, setPromptError] = useState("");
+  const [resourceError, setResourceError] = useState("");
+  const [configStatus, setConfigStatus] = useState("");
   const [isCallingTool, setIsCallingTool] = useState(false);
+  const [isGettingPrompt, setIsGettingPrompt] = useState(false);
+  const [isReadingResource, setIsReadingResource] = useState(false);
   const endpointUrlRef = useRef<HTMLInputElement>(null);
   const appUrlRef = useRef<HTMLInputElement>(null);
   const protocolVersionRef = useRef<HTMLSelectElement>(null);
   const authTokenRef = useRef<HTMLInputElement>(null);
   const headersTextRef = useRef<HTMLTextAreaElement>(null);
+  const requestTimeoutRef = useRef<HTMLInputElement>(null);
   const toolArgumentsRef = useRef<HTMLTextAreaElement>(null);
+  const promptArgumentsRef = useRef<HTMLTextAreaElement>(null);
   const logIdRef = useRef(0);
 
   const selectedTool = useMemo(
     () => tools.find((tool) => tool.name === selectedToolName) ?? tools[0],
     [selectedToolName, tools],
+  );
+  const selectedPrompt = useMemo(
+    () => prompts.find((prompt) => prompt.name === selectedPromptName) ?? prompts[0],
+    [selectedPromptName, prompts],
+  );
+  const selectedResource = useMemo(
+    () => resources.find((resource) => resource.uri === selectedResourceUri) ?? resources[0],
+    [selectedResourceUri, resources],
   );
   const canUseSession = Boolean(negotiatedVersion);
 
@@ -360,6 +421,56 @@ export function McpInspector() {
     setChecks((current) => current.map((check) => (check.key === key ? { ...check, status, detail } : check)));
   };
 
+  const currentEndpointUrl = () => endpointUrlRef.current?.value.trim() || endpointUrl.trim();
+
+  const currentRequestTimeoutMs = () =>
+    positiveInteger(requestTimeoutRef.current?.value ?? requestTimeoutMs, Number.parseInt(defaultRequestTimeoutMs, 10));
+
+  const createConfigHeaders = () => {
+    const headers: Record<string, string> = {};
+    const token = (authTokenRef.current?.value ?? authToken).trim();
+    if (token) {
+      headers.Authorization = token.toLowerCase().startsWith("bearer ") ? token : `Bearer ${token}`;
+    }
+
+    const customHeaders = parseJsonObject(headersTextRef.current?.value ?? headersText, "Custom headers");
+    for (const [key, value] of Object.entries(customHeaders)) {
+      if (typeof value !== "string") {
+        throw new Error(`Custom header "${key}" must be a string value.`);
+      }
+      headers[key] = value;
+    }
+
+    return headers;
+  };
+
+  const createServerEntry = () => {
+    const url = absoluteUrl(currentEndpointUrl());
+    const headers = createConfigHeaders();
+    const entry: Record<string, JsonValue> = {
+      type: "streamable-http",
+      url,
+      note: "For Streamable HTTP connections, add this URL directly in your MCP client.",
+    };
+
+    if (Object.keys(headers).length > 0) {
+      entry.headers = headers;
+    }
+
+    return entry;
+  };
+
+  const copyConfig = async (mode: "entry" | "file") => {
+    try {
+      const entry = createServerEntry();
+      const payload = mode === "entry" ? entry : { mcpServers: { "default-server": entry } };
+      await navigator.clipboard.writeText(prettyJson(payload));
+      setConfigStatus(mode === "entry" ? "Server entry copied." : "mcp.json copied.");
+    } catch (error) {
+      setConfigStatus(error instanceof Error ? error.message : "Could not copy config.");
+    }
+  };
+
   const createHeaders = (
     options: {
       includeProtocol?: boolean;
@@ -372,16 +483,7 @@ export function McpInspector() {
     headers.set("content-type", "application/json");
     headers.set("accept", "application/json, text/event-stream");
 
-    const token = (authTokenRef.current?.value ?? authToken).trim();
-    if (token) {
-      headers.set("authorization", token.toLowerCase().startsWith("bearer ") ? token : `Bearer ${token}`);
-    }
-
-    const customHeaders = parseJsonObject(headersTextRef.current?.value ?? headersText, "Custom headers");
-    for (const [key, value] of Object.entries(customHeaders)) {
-      if (typeof value !== "string") {
-        throw new Error(`Custom header "${key}" must be a string value.`);
-      }
+    for (const [key, value] of Object.entries(createConfigHeaders())) {
       headers.set(key, value);
     }
 
@@ -396,6 +498,23 @@ export function McpInspector() {
     }
 
     return headers;
+  };
+
+  const fetchWithTimeout = async (url: string, options: RequestInit) => {
+    const timeoutMs = currentRequestTimeoutMs();
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+      return await fetch(url, { ...options, signal: controller.signal });
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") {
+        throw new Error(`Request timed out after ${timeoutMs} ms.`);
+      }
+      throw error;
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
   };
 
   const sendRequest = async ({
@@ -415,7 +534,7 @@ export function McpInspector() {
   }): Promise<{ payload?: JsonRpcMessage; sessionHeader?: string }> => {
     addLog({ direction: "request", title: `POST ${message.method ?? "response"}`, body: prettyJson(message) });
 
-    const response = await fetch(url, {
+    const response = await fetchWithTimeout(url, {
       body: JSON.stringify(message),
       headers: createHeaders({ includeProtocol, includeSession, protocolVersionHeader, sessionIdHeader }),
       method: "POST",
@@ -456,7 +575,7 @@ export function McpInspector() {
   const sendNotification = async (url: string, method: string, protocolVersionHeader?: string, sessionIdHeader?: string) => {
     const message = makeNotification(method);
     addLog({ direction: "request", title: `POST ${method}`, body: prettyJson(message) });
-    const response = await fetch(url, {
+    const response = await fetchWithTimeout(url, {
       body: JSON.stringify(message),
       headers: createHeaders({ includeProtocol: true, includeSession: true, protocolVersionHeader, sessionIdHeader }),
       method: "POST",
@@ -483,8 +602,14 @@ export function McpInspector() {
     setSessionId("");
     setNegotiatedVersion("");
     setSelectedToolName("");
+    setSelectedPromptName("");
+    setSelectedResourceUri("");
     setToolResult(undefined);
+    setPromptResult(undefined);
+    setResourceResult(undefined);
     setToolError("");
+    setPromptError("");
+    setResourceError("");
     setLogs([]);
 
     let requestId = 1;
@@ -588,7 +713,9 @@ export function McpInspector() {
           protocolVersionHeader: nextVersion,
           sessionIdHeader: nextSessionId,
         });
-        setPrompts(coercePrompts(promptsResponse.payload?.result));
+        const nextPrompts = coercePrompts(promptsResponse.payload?.result);
+        setPrompts(nextPrompts);
+        setSelectedPromptName(nextPrompts[0]?.name ?? "");
         updateCheck("prompts", "ok", `${resultCount(promptsResponse.payload?.result, "prompts")} prompts found.`);
       } catch (error) {
         updateCheck("prompts", "warn", error instanceof Error ? error.message : "prompts/list was not available.");
@@ -604,7 +731,9 @@ export function McpInspector() {
           protocolVersionHeader: nextVersion,
           sessionIdHeader: nextSessionId,
         });
-        setResources(coerceResources(resourcesResponse.payload?.result));
+        const nextResources = coerceResources(resourcesResponse.payload?.result);
+        setResources(nextResources);
+        setSelectedResourceUri(nextResources[0]?.uri ?? "");
         updateCheck("resources", "ok", `${resultCount(resourcesResponse.payload?.result, "resources")} resources found.`);
       } catch (error) {
         updateCheck("resources", "warn", error instanceof Error ? error.message : "resources/list was not available.");
