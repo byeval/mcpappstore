@@ -10,8 +10,10 @@ import {
   type McpClient,
 } from "@/lib/mcp-clients";
 import { localizedPath } from "@/lib/i18n";
+import { formatMessage } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
+import { staticPageCopy } from "@/lib/static-page-i18n";
 import { absoluteUrl, initials } from "@/lib/utils";
 
 function formatNumber(value: number): string {
@@ -42,34 +44,14 @@ function ClientRow({ client, href }: { client: McpClient; href: string }) {
   );
 }
 
-const pageDescription =
-  "Browse awesome MCP clients for desktop, web, CLI, IDE, and agent workflows, with detail pages sourced from punkpeye/awesome-mcp-clients.";
-
-const faqs = [
-  {
-    question: "What is an MCP client?",
-    answer:
-      "An MCP client is the app, IDE, chatbot, agent framework, or command-line tool that connects to Model Context Protocol servers and lets users invoke those server capabilities.",
-  },
-  {
-    question: "Where does this MCP clients list come from?",
-    answer:
-      "The initial client data is imported from the punkpeye/awesome-mcp-clients GitHub repository and normalized into detail pages for easier browsing.",
-  },
-  {
-    question: "How should I choose an MCP client?",
-    answer:
-      "Start with the environment you need, such as desktop, web, CLI, IDE, or team chat, then compare license, pricing, platform support, language ecosystem, and whether the client supports your preferred MCP server transport.",
-  },
-];
-
 export async function generateMetadata(): Promise<Metadata> {
   const { locale } = await getI18n();
+  const copy = staticPageCopy(locale).mcpClients;
   const totalClients = listMcpClients().length;
 
   return pageMetadata({
-    title: `Awesome MCP Clients: ${formatNumber(totalClients)} MCP clients`,
-    description: pageDescription,
+    title: formatMessage(copy.metaTitle, { count: formatNumber(totalClients) }),
+    description: copy.pageDescription,
     path: "/mcp-clients",
     locale,
     keywords: [
@@ -86,6 +68,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function McpClientsPage() {
   const { locale } = await getI18n();
+  const pageCopy = staticPageCopy(locale);
+  const copy = pageCopy.mcpClients;
+  const commonCopy = pageCopy.common;
   const href = (path: string) => localizedPath(path, locale);
   const clients = listMcpClients();
   const typeSummaries = listMcpClientTypeSummaries(6);
@@ -97,58 +82,54 @@ export default async function McpClientsPage() {
   const desktopCount = clients.filter(hasDesktopPlatform).length;
   const cliCount = clients.filter((client) => /cli|terminal|command/i.test(client.type ?? "")).length;
   const screenshotCount = clients.filter((client) => client.screenshots.length > 0).length;
+  const faqs = copy.faqs;
 
   return (
     <div className="page-stack">
       <section className="collection-hero awesome-hero mcp-clients-hero">
         <div className="mcp-clients-hero-copy">
-          <p className="eyebrow">Awesome MCP Clients</p>
-          <h1>MCP clients for desktop apps, IDEs, terminals, agents, and team chat</h1>
-          <p>
-            A browsable version of the awesome MCP clients list, normalized into search-friendly cards and detail pages
-            for every imported client.
-          </p>
-          <div className="collection-hero-meta mcp-clients-hero-meta" aria-label="MCP clients page metadata">
-            <span>{formatNumber(totalClients)} clients</span>
-            <span>Updated {lastUpdatedDate}</span>
+          <p className="eyebrow">{copy.eyebrow}</p>
+          <h1>{copy.title}</h1>
+          <p>{copy.intro}</p>
+          <div className="collection-hero-meta mcp-clients-hero-meta" aria-label={copy.metadataAria}>
+            <span>{formatMessage(commonCopy.clientsCount, { count: formatNumber(totalClients) })}</span>
+            <span>{formatMessage(copy.updated, { date: lastUpdatedDate })}</span>
           </div>
         </div>
         <aside className="collection-hero-panel awesome-hero-panel">
-          <span>Imported source</span>
+          <span>{copy.importedSource}</span>
           <strong>{formatNumber(totalClients)}</strong>
-          <span>Client entries with normalized platform, pricing, license, language, and source links.</span>
+          <span>{copy.importedSummary}</span>
         </aside>
       </section>
 
-      <div className="app-index-metrics" aria-label="Awesome MCP clients counts">
+      <div className="app-index-metrics" aria-label={copy.metricsAria}>
         <div>
           <strong>{formatNumber(githubCount)}</strong>
-          <span>with GitHub links</span>
+          <span>{copy.withGithub}</span>
         </div>
         <div>
           <strong>{formatNumber(desktopCount)}</strong>
-          <span>desktop-capable</span>
+          <span>{copy.desktopCapable}</span>
         </div>
         <div>
           <strong>{formatNumber(webCount)}</strong>
-          <span>web clients</span>
+          <span>{copy.webClients}</span>
         </div>
       </div>
 
       <section className="catalog-shell compact-shell" aria-labelledby="mcp-client-types-title">
         <div className="section-head compact">
-          <p className="eyebrow">Client types</p>
-          <h2 id="mcp-client-types-title">Start from the surface where users already work</h2>
-          <p className="section-copy">
-            The source list spans desktop apps, web apps, CLIs, IDEs, browser extensions, bots, and agent frameworks.
-          </p>
+          <p className="eyebrow">{copy.typesEyebrow}</p>
+          <h2 id="mcp-client-types-title">{copy.typesTitle}</h2>
+          <p className="section-copy">{copy.typesBody}</p>
         </div>
         <div className="directory-card-grid">
           {typeSummaries.map((item) => (
             <div className="directory-card" key={item.type}>
-              <span>{formatNumber(item.count)} clients</span>
+              <span>{formatMessage(commonCopy.clientsCount, { count: formatNumber(item.count) })}</span>
               <strong>{item.type}</strong>
-              <p>Compare platform coverage, license, pricing, and language stack before adopting this client type.</p>
+              <p>{copy.typeCardBody}</p>
             </div>
           ))}
         </div>
@@ -156,36 +137,31 @@ export default async function McpClientsPage() {
 
       <section className="category-guide" aria-labelledby="mcp-client-platforms-title">
         <div className="category-guide-copy">
-          <p className="eyebrow">Platform coverage</p>
-          <h2 id="mcp-client-platforms-title">Desktop, web, and automation clients in one list</h2>
-          <p>
-            Use the client detail pages to see repository links, source-list anchors, install commands when available,
-            screenshots, and the platforms each client claims to support.
-          </p>
+          <p className="eyebrow">{copy.platformEyebrow}</p>
+          <h2 id="mcp-client-platforms-title">{copy.platformTitle}</h2>
+          <p>{copy.platformBody}</p>
           <div className="category-related-links">
-            <Link href={href("/mcp-directory")} prefetch={false}>Open MCP directory</Link>
-            <Link href={href("/mcp-servers")} prefetch={false}>Browse MCP servers</Link>
-            <Link href={href("/awesome-mcp-apps")} prefetch={false}>Awesome MCP apps</Link>
-            <Link href={href("/submit")} prefetch={false}>Submit an MCP listing</Link>
+            <Link href={href("/mcp-directory")} prefetch={false}>{copy.relatedDirectory}</Link>
+            <Link href={href("/mcp-servers")} prefetch={false}>{copy.relatedServers}</Link>
+            <Link href={href("/awesome-mcp-apps")} prefetch={false}>{copy.relatedAwesomeApps}</Link>
+            <Link href={href("/submit")} prefetch={false}>{copy.relatedSubmit}</Link>
           </div>
         </div>
         <div className="category-checklist">
-          <p className="eyebrow">Quick signals</p>
+          <p className="eyebrow">{copy.signalsEyebrow}</p>
           <ul>
-            <li>{formatNumber(cliCount)} CLI or terminal-oriented clients.</li>
-            <li>{formatNumber(screenshotCount)} entries include screenshots.</li>
-            <li>{platformSummaries.slice(0, 3).map((platform) => `${platform.platform} (${platform.count})`).join(", ")} lead platform coverage.</li>
+            <li>{formatMessage(copy.cliSignal, { count: formatNumber(cliCount) })}</li>
+            <li>{formatMessage(copy.screenshotSignal, { count: formatNumber(screenshotCount) })}</li>
+            <li>{formatMessage(copy.platformSignal, { items: platformSummaries.slice(0, 3).map((platform) => `${platform.platform} (${platform.count})`).join(", ") })}</li>
           </ul>
         </div>
       </section>
 
       <section className="catalog-shell compact-shell" id="clients" aria-labelledby="mcp-clients-list-title">
         <div className="section-head compact">
-          <p className="eyebrow">All clients</p>
-          <h2 id="mcp-clients-list-title">{formatNumber(totalClients)} awesome MCP clients</h2>
-          <p className="section-copy">
-            Entries are kept in the upstream awesome-list order so the page stays close to the source repository.
-          </p>
+          <p className="eyebrow">{copy.allClientsEyebrow}</p>
+          <h2 id="mcp-clients-list-title">{formatMessage(copy.allClientsTitle, { count: formatNumber(totalClients) })}</h2>
+          <p className="section-copy">{copy.allClientsBody}</p>
         </div>
         <div className="app-grid">
           {clients.map((client) => (
@@ -196,8 +172,8 @@ export default async function McpClientsPage() {
 
       <section className="article-faq category-faq" id="faq">
         <div className="section-head compact">
-          <p className="eyebrow">FAQ</p>
-          <h2>MCP clients FAQ</h2>
+          <p className="eyebrow">{commonCopy.faq}</p>
+          <h2>{copy.faqTitle}</h2>
         </div>
         <div className="faq-list">
           {faqs.map((item) => (
@@ -214,23 +190,23 @@ export default async function McpClientsPage() {
           {
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            name: "Awesome MCP Clients",
+            name: copy.eyebrow,
             url: absoluteUrl(href("/mcp-clients")),
             dateModified: MCP_CLIENTS_UPDATED_AT,
             mainEntity: {
               "@type": "ItemList",
-              name: "Awesome MCP clients",
+              name: copy.collectionName,
               numberOfItems: totalClients,
             },
             isBasedOn: MCP_CLIENTS_SOURCE.repoUrl,
           },
           breadcrumbJsonLd([
             { name: "MCP App Store", path: "/" },
-            { name: "MCP clients", path: "/mcp-clients" },
+            { name: commonCopy.mcpClients, path: "/mcp-clients" },
           ]),
           itemListJsonLd(
             clients.map((client) => ({ name: client.name, path: `/mcp-clients/${client.id}` })),
-            "Awesome MCP clients",
+            copy.collectionName,
           ),
           faqJsonLd(faqs),
         ])}

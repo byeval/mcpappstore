@@ -253,7 +253,7 @@ export default async function McpServersPage() {
 
         <section className="article-faq category-faq" id="faq">
           <div className="section-head compact">
-            <p className="eyebrow">FAQ</p>
+            <p className="eyebrow">{commonCopy.faq}</p>
             <h2>{copy.faqTitle}</h2>
           </div>
           <div className="faq-list">

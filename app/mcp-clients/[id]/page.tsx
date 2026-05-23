@@ -12,14 +12,16 @@ import {
   relatedMcpClients,
   type McpClient,
 } from "@/lib/mcp-clients";
-import { localizedPath } from "@/lib/i18n";
+import { formatMessage, localizedPath, type Locale } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { breadcrumbJsonLd, itemListJsonLd, jsonLdScript, pageMetadata, truncateMeta } from "@/lib/seo";
+import { staticPageCopy } from "@/lib/static-page-i18n";
 import { absoluteUrl, initials } from "@/lib/utils";
 
-function clientDescription(client: McpClient): string {
+function clientDescription(client: McpClient, locale: Locale): string {
+  const copy = staticPageCopy(locale).mcpClientDetail;
   return truncateMeta(
-    `${client.name} MCP client. ${client.summary} Compare platform support, license, pricing, source links, and screenshots from the awesome MCP clients list.`,
+    formatMessage(copy.description, { name: client.name, summary: client.summary }),
   );
 }
 
@@ -27,14 +29,15 @@ function primaryClientUrl(client: McpClient): string {
   return client.websiteUrl ?? client.githubUrl ?? client.sourceUrl;
 }
 
-function primaryClientAction(client: McpClient): string {
-  if (client.websiteUrl) return "Open website";
-  if (client.githubUrl) return "Open GitHub";
-  return "Open source entry";
+function primaryClientAction(client: McpClient, locale: Locale): string {
+  const copy = staticPageCopy(locale).common;
+  if (client.websiteUrl) return copy.openWebsite;
+  if (client.githubUrl) return copy.openGithub;
+  return copy.openSourceEntry;
 }
 
-function displayValue(value: string | undefined): string {
-  return value?.trim() || "Not listed";
+function displayValue(value: string | undefined, locale: Locale): string {
+  return value?.trim() || staticPageCopy(locale).common.notListed;
 }
 
 function clientMeta(client: McpClient): string {
@@ -75,9 +78,11 @@ export async function generateMetadata({
     return {};
   }
 
+  const copy = staticPageCopy(locale).mcpClientDetail;
+
   return pageMetadata({
-    title: `${client.name} MCP client`,
-    description: clientDescription(client),
+    title: formatMessage(copy.title, { name: client.name }),
+    description: clientDescription(client, locale),
     path: `/mcp-clients/${client.id}`,
     locale,
     openGraphType: "article",
@@ -103,24 +108,27 @@ export default async function McpClientDetailPage({
     notFound();
   }
 
+  const pageCopy = staticPageCopy(locale);
+  const copy = pageCopy.mcpClientDetail;
+  const commonCopy = pageCopy.common;
   const href = (path: string) => localizedPath(path, locale);
   const relatedClients = relatedMcpClients(client, 6);
   const primaryUrl = primaryClientUrl(client);
   const sameAs = [client.websiteUrl, client.githubUrl, client.sourceUrl].filter(Boolean);
   const metadataRows = [
-    { key: "Client type", value: displayValue(client.type) },
-    { key: "Pricing", value: displayValue(client.pricing) },
-    { key: "License", value: displayValue(client.license) },
+    { key: copy.clientType, value: displayValue(client.type, locale) },
+    { key: copy.pricing, value: displayValue(client.pricing, locale) },
+    { key: copy.license, value: displayValue(client.license, locale) },
   ];
 
   return (
     <div className="page-stack">
       <nav className="crumbs">
-        <Link href={href("/")} prefetch={false}>Apps</Link>
+        <Link href={href("/")} prefetch={false}>{commonCopy.appsCrumb}</Link>
         <svg fill="none" viewBox="0 0 24 24">
           <path d="M9 18 15 12 9 6" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
         </svg>
-        <Link href={href("/mcp-clients")} prefetch={false}>MCP clients</Link>
+        <Link href={href("/mcp-clients")} prefetch={false}>{commonCopy.mcpClients}</Link>
         <svg fill="none" viewBox="0 0 24 24">
           <path d="M9 18 15 12 9 6" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
         </svg>
@@ -134,7 +142,7 @@ export default async function McpClientDetailPage({
         <div className="app-head-text">
           <h1>{client.name}</h1>
           <p>{client.summary}</p>
-          <div className="collection-chip-list detail-surfaces" aria-label={`${client.name} metadata`}>
+          <div className="collection-chip-list detail-surfaces" aria-label={formatMessage(copy.metadataAria, { name: client.name })}>
             {client.type ? <span>{client.type}</span> : null}
             {client.platforms.slice(0, 4).map((platform) => (
               <span key={platform}>{platform}</span>
@@ -148,7 +156,7 @@ export default async function McpClientDetailPage({
             </a>
           ) : null}
           <a className="btn-connect" href={primaryUrl} rel="noreferrer" target="_blank">
-            {primaryClientAction(client)}
+            {primaryClientAction(client, locale)}
           </a>
         </div>
       </header>
@@ -158,7 +166,7 @@ export default async function McpClientDetailPage({
       </section>
 
       <section className="detail-section" aria-labelledby="mcp-client-facts">
-        <h2 className="section-title" id="mcp-client-facts">Client facts</h2>
+        <h2 className="section-title" id="mcp-client-facts">{copy.factsTitle}</h2>
         <div className="info-table">
           {metadataRows.map((row) => (
             <div className="info-row" key={row.key}>
@@ -167,33 +175,33 @@ export default async function McpClientDetailPage({
             </div>
           ))}
           <div className="info-row">
-            <span className="info-key">Platforms</span>
+            <span className="info-key">{copy.platforms}</span>
             <span className="info-val surface-list">
-              {client.platforms.length > 0 ? client.platforms.map((platform) => <span key={platform}>{platform}</span>) : "Not listed"}
+              {client.platforms.length > 0 ? client.platforms.map((platform) => <span key={platform}>{platform}</span>) : commonCopy.notListed}
             </span>
           </div>
           <div className="info-row">
-            <span className="info-key">Languages</span>
+            <span className="info-key">{copy.languages}</span>
             <span className="info-val surface-list">
               {client.programmingLanguages.length > 0
                 ? client.programmingLanguages.map((language) => <span key={language}>{language}</span>)
-                : "Not listed"}
+                : commonCopy.notListed}
             </span>
           </div>
           <div className="info-row">
-            <span className="info-key">Website</span>
+            <span className="info-key">{copy.website}</span>
             <span className="info-val">
-              {client.websiteUrl ? <a href={client.websiteUrl} rel="noreferrer" target="_blank">{client.websiteUrl}</a> : "Not listed"}
+              {client.websiteUrl ? <a href={client.websiteUrl} rel="noreferrer" target="_blank">{client.websiteUrl}</a> : commonCopy.notListed}
             </span>
           </div>
           <div className="info-row">
-            <span className="info-key">Repository</span>
+            <span className="info-key">{copy.repository}</span>
             <span className="info-val">
-              {client.githubUrl ? <a href={client.githubUrl} rel="noreferrer" target="_blank">{client.githubUrl}</a> : "Not listed"}
+              {client.githubUrl ? <a href={client.githubUrl} rel="noreferrer" target="_blank">{client.githubUrl}</a> : commonCopy.notListed}
             </span>
           </div>
           <div className="info-row">
-            <span className="info-key">Source entry</span>
+            <span className="info-key">{copy.sourceEntry}</span>
             <span className="info-val">
               <a href={client.sourceUrl} rel="noreferrer" target="_blank">{MCP_CLIENTS_SOURCE.name}</a>
             </span>
@@ -203,7 +211,7 @@ export default async function McpClientDetailPage({
 
       {client.installCommands.length > 0 ? (
         <section className="detail-section prose-grid" aria-labelledby="mcp-client-install">
-          <h2 className="section-title" id="mcp-client-install">Install command</h2>
+          <h2 className="section-title" id="mcp-client-install">{copy.installCommand}</h2>
           {client.installCommands.map((command) => (
             <pre key={command}>
               <code>{command}</code>
@@ -214,7 +222,7 @@ export default async function McpClientDetailPage({
 
       {client.screenshots.length > 0 ? (
         <section className="detail-section" aria-labelledby="mcp-client-screenshots">
-          <h2 className="section-title" id="mcp-client-screenshots">Screenshots</h2>
+          <h2 className="section-title" id="mcp-client-screenshots">{copy.screenshots}</h2>
           <div className="mcp-client-screenshot-grid">
             {client.screenshots.map((screenshot) => (
               <figure className="mcp-client-screenshot" key={screenshot.url}>
@@ -227,26 +235,20 @@ export default async function McpClientDetailPage({
       ) : null}
 
       <section className="detail-section" aria-labelledby="mcp-client-adoption">
-        <h2 className="section-title" id="mcp-client-adoption">Before adopting {client.name}</h2>
+        <h2 className="section-title" id="mcp-client-adoption">{formatMessage(copy.beforeAdopting, { name: client.name })}</h2>
         <ul className="tool-list tool-table">
-          <li>
-            <strong>Match the working surface</strong>
-            <span>Confirm that {client.name} runs where users actually work: desktop, browser, IDE, terminal, chat, or hosted web app.</span>
-          </li>
-          <li>
-            <strong>Check server compatibility</strong>
-            <span>Review how the client connects to MCP servers, how credentials are stored, and whether remote or local servers are supported.</span>
-          </li>
-          <li>
-            <strong>Review trust and maintenance</strong>
-            <span>Use the source links to inspect license, update cadence, docs, issue activity, and support channels before production use.</span>
-          </li>
+          {copy.adoption.map((item) => (
+            <li key={item.title}>
+              <strong>{item.title}</strong>
+              <span>{formatMessage(item.body, { name: client.name })}</span>
+            </li>
+          ))}
         </ul>
       </section>
 
       {relatedClients.length > 0 ? (
         <section className="detail-section" aria-labelledby="related-mcp-clients">
-          <h2 className="section-title" id="related-mcp-clients">Related MCP clients</h2>
+          <h2 className="section-title" id="related-mcp-clients">{copy.relatedTitle}</h2>
           <div className="app-grid related-app-grid">
             {relatedClients.map((related) => (
               <RelatedClientRow client={related} href={href(`/mcp-clients/${related.id}`)} key={related.id} />
@@ -261,9 +263,9 @@ export default async function McpClientDetailPage({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
             name: client.name,
-            applicationCategory: client.type ?? "MCP client",
-            operatingSystem: client.platforms.join(", ") || "Not listed",
-            description: clientDescription(client),
+            applicationCategory: client.type ?? copy.appCategoryFallback,
+            operatingSystem: client.platforms.join(", ") || commonCopy.notListed,
+            description: clientDescription(client, locale),
             url: absoluteUrl(href(`/mcp-clients/${client.id}`)),
             sameAs,
             isBasedOn: client.sourceUrl,
@@ -271,12 +273,12 @@ export default async function McpClientDetailPage({
           },
           breadcrumbJsonLd([
             { name: "MCP App Store", path: "/" },
-            { name: "MCP clients", path: "/mcp-clients" },
+            { name: commonCopy.mcpClients, path: "/mcp-clients" },
             { name: client.name, path: `/mcp-clients/${client.id}` },
           ]),
           itemListJsonLd(
             relatedClients.map((related) => ({ name: related.name, path: `/mcp-clients/${related.id}` })),
-            `Related MCP clients for ${client.name}`,
+            formatMessage(commonCopy.relatedClientsFor, { name: client.name }),
           ),
         ])}
         type="application/ld+json"

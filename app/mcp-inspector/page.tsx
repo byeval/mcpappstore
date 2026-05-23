@@ -3,16 +3,15 @@ import type { Metadata } from "next";
 import { McpInspector } from "@/components/mcp-inspector";
 import { getI18n } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
-
-const description =
-  "Test an MCP server from the browser with a Streamable HTTP inspector for initialize, tools, prompts, resources, tool calls, and app preview checks.";
+import { staticPageCopy } from "@/lib/static-page-i18n";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { locale } = await getI18n();
+  const copy = staticPageCopy(locale).mcpInspector;
 
   return pageMetadata({
-    title: "MCP Inspector: browser MCP server tester",
-    description,
+    title: copy.metaTitle,
+    description: copy.description,
     path: "/mcp-inspector",
     locale,
     keywords: [
@@ -25,6 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default function McpInspectorPage() {
-  return <McpInspector />;
+export default async function McpInspectorPage() {
+  const { locale } = await getI18n();
+  return <McpInspector locale={locale} />;
 }

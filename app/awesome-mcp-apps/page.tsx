@@ -77,7 +77,9 @@ export default async function AwesomeMcpAppsPage() {
     countAppsByPlatform("chatgpt"),
     countAppsByPlatform("claude"),
   ]);
-  const copy = staticPageCopy(locale).awesomeMcpApps;
+  const pageCopy = staticPageCopy(locale);
+  const copy = pageCopy.awesomeMcpApps;
+  const commonCopy = pageCopy.common;
   const href = (path: string) => localizedPath(path, locale);
   const totalListings = apps.length;
   const lastUpdated = apps.reduce((max, app) => Math.max(max, app.publishedAt ?? 0, app.updatedAt), 0);
@@ -180,7 +182,7 @@ export default async function AwesomeMcpAppsPage() {
         </div>
       </section>
 
-      <section className="collection-card-grid awesome-link-grid" aria-label="Awesome MCP Apps sections">
+      <section className="collection-card-grid awesome-link-grid" aria-label={copy.sectionsAria}>
         {copy.hubLinks.map((link) => (
           <Link className="collection-card" href={href(link.href)} key={link.href} prefetch={false}>
             <span className="learn-card-type">{copy.routeType}</span>
@@ -206,7 +208,7 @@ export default async function AwesomeMcpAppsPage() {
 
       <section className="article-faq category-faq" id="faq">
         <div className="section-head compact">
-          <p className="eyebrow">FAQ</p>
+          <p className="eyebrow">{commonCopy.faq}</p>
           <h2>{copy.faqTitle}</h2>
         </div>
         <div className="faq-list">

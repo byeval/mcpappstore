@@ -2,6 +2,9 @@
 
 import { useMemo, useRef, useState } from "react";
 
+import { formatMessage, type Locale } from "@/lib/i18n";
+import { staticPageCopy } from "@/lib/static-page-i18n";
+
 type JsonPrimitive = string | number | boolean | null;
 type JsonValue = JsonPrimitive | JsonValue[] | { [key: string]: JsonValue };
 type CheckStatus = "idle" | "running" | "ok" | "warn" | "error";
@@ -71,17 +74,19 @@ interface InitializeResult {
 const protocolVersions = ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"];
 const defaultRequestTimeoutMs = "30000";
 
-const initialChecks: InspectorCheck[] = [
-  { key: "url", label: "Endpoint URL", status: "idle", detail: "Waiting for an MCP endpoint." },
-  { key: "cors", label: "Browser access", status: "idle", detail: "Checks whether this page can reach the server." },
-  { key: "initialize", label: "Initialize", status: "idle", detail: "Negotiates protocol version and capabilities." },
-  { key: "initialized", label: "Initialized notification", status: "idle", detail: "Sends the ready notification after initialize." },
-  { key: "ping", label: "Ping", status: "idle", detail: "Runs an MCP liveness request." },
-  { key: "tools", label: "Tools", status: "idle", detail: "Lists available tools." },
-  { key: "prompts", label: "Prompts", status: "idle", detail: "Lists prompt templates if supported." },
-  { key: "resources", label: "Resources", status: "idle", detail: "Lists readable resources if supported." },
-  { key: "app", label: "App preview", status: "idle", detail: "Optional browser preview for the app surface." },
-];
+function initialChecks(copy: ReturnType<typeof staticPageCopy>["mcpInspector"]): InspectorCheck[] {
+  return [
+    { key: "url", label: copy.checks.url.label, status: "idle", detail: copy.checks.url.detail },
+    { key: "cors", label: copy.checks.cors.label, status: "idle", detail: copy.checks.cors.detail },
+    { key: "initialize", label: copy.checks.initialize.label, status: "idle", detail: copy.checks.initialize.detail },
+    { key: "initialized", label: copy.checks.initialized.label, status: "idle", detail: copy.checks.initialized.detail },
+    { key: "ping", label: copy.checks.ping.label, status: "idle", detail: copy.checks.ping.detail },
+    { key: "tools", label: copy.checks.tools.label, status: "idle", detail: copy.checks.tools.detail },
+    { key: "prompts", label: copy.checks.prompts.label, status: "idle", detail: copy.checks.prompts.detail },
+    { key: "resources", label: copy.checks.resources.label, status: "idle", detail: copy.checks.resources.detail },
+    { key: "app", label: copy.checks.app.label, status: "idle", detail: copy.checks.app.detail },
+  ];
+}
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -183,12 +188,8 @@ function queryValue(names: string[], fallback = ""): string {
   return fallback;
 }
 
-function statusLabel(status: CheckStatus): string {
-  if (status === "ok") return "Pass";
-  if (status === "warn") return "Note";
-  if (status === "error") return "Fail";
-  if (status === "running") return "Running";
-  return "Idle";
+function statusLabel(status: CheckStatus, copy: ReturnType<typeof staticPageCopy>["mcpInspector"]): string {
+  return copy.statuses[status];
 }
 
 function resultCount(value: JsonValue | undefined, key: "tools" | "prompts" | "resources"): number {
@@ -363,14 +364,16 @@ function makeNotification(method: string, params?: JsonValue): JsonRpcMessage {
   return params === undefined ? { jsonrpc: "2.0", method } : { jsonrpc: "2.0", method, params };
 }
 
-export function McpInspector() {
+export function McpInspector({ locale }: { locale: Locale }) {
+  const copy = useMemo(() => staticPageCopy(locale).mcpInspector, [locale]);
+  const baseChecks = useMemo(() => initialChecks(copy), [copy]);
   const [endpointUrl, setEndpointUrl] = useState(() => queryValue(["serverUrl", "endpoint"]));
   const [appUrl, setAppUrl] = useState("");
   const [protocolVersion, setProtocolVersion] = useState(() => queryValue(["protocolVersion"], protocolVersions[0]));
   const [authToken, setAuthToken] = useState("");
   const [headersText, setHeadersText] = useState("");
   const [requestTimeoutMs, setRequestTimeoutMs] = useState(() => queryValue(["timeoutMs"], defaultRequestTimeoutMs));
-  const [checks, setChecks] = useState<InspectorCheck[]>(initialChecks);
+  const [checks, setChecks] = useState<InspectorCheck[]>(baseChecks);
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [isRunning, setIsRunning] = useState(false);
   const [sessionId, setSessionId] = useState("");
@@ -651,7 +654,7 @@ export function McpInspector() {
 
   const inspectServer = async () => {
     setIsRunning(true);
-    setChecks(initialChecks.map((check) => ({ ...check, status: "idle" as const })));
+    setChecks(baseChecks.map((check) => ({ ...check, status: "idle" as const })));
     setTools([]);
     setPrompts([]);
     setResources([]);
@@ -901,7 +904,7 @@ export function McpInspector() {
   };
 
   const resetInspector = () => {
-    setChecks(initialChecks);
+    setChecks(baseChecks);
     setLogs([]);
     setTools([]);
     setPrompts([]);
@@ -928,38 +931,35 @@ export function McpInspector() {
     <div className="page-stack">
       <section className="inspector-hero">
         <div>
-          <p className="eyebrow">MCP Inspector</p>
-          <h1>Test an MCP server from the same browser your users run</h1>
-          <p>
-            Initialize a Streamable HTTP endpoint, verify browser access, inspect tools, prompts, and resources, then
-            call a tool with JSON arguments.
-          </p>
+          <p className="eyebrow">{copy.heroEyebrow}</p>
+          <h1>{copy.heroTitle}</h1>
+          <p>{copy.heroBody}</p>
           <div className="inspector-hero-actions">
             <a className="primary-link" href="#inspector-workbench">
-              Start testing
+              {copy.startTesting}
             </a>
             <a className="secondary-link" href="https://modelcontextprotocol.io/specification/2025-11-25/basic/transports" rel="noreferrer" target="_blank">
-              MCP transport spec
+              {copy.transportSpec}
             </a>
           </div>
         </div>
-        <div className="inspector-trace" aria-label="MCP inspector protocol sequence">
-          <span>POST initialize</span>
-          <span>notifications/initialized</span>
-          <span>tools/list</span>
-          <span>tools/call</span>
+        <div className="inspector-trace" aria-label={copy.protocolSequenceAria}>
+          <span>{copy.traceInitialize}</span>
+          <span>{copy.traceInitialized}</span>
+          <span>{copy.traceToolsList}</span>
+          <span>{copy.traceToolsCall}</span>
         </div>
       </section>
 
       <section className="inspector-layout" id="inspector-workbench">
         <div className="inspector-panel inspector-config">
           <div className="inspector-panel-head">
-            <p className="eyebrow">Connection</p>
-            <h2>Endpoint settings</h2>
+            <p className="eyebrow">{copy.connectionEyebrow}</p>
+            <h2>{copy.endpointSettings}</h2>
           </div>
 
           <label className="field">
-            <span>MCP endpoint URL</span>
+            <span>{copy.endpointUrl}</span>
             <input
               className="input"
               onChange={(event) => setEndpointUrl(event.target.value)}
@@ -972,7 +972,7 @@ export function McpInspector() {
 
           <div className="row-3">
             <label className="field">
-              <span>Protocol version</span>
+              <span>{copy.protocolVersion}</span>
               <select className="input" onChange={(event) => setProtocolVersion(event.target.value)} ref={protocolVersionRef} value={protocolVersion}>
                 {protocolVersions.map((version) => (
                   <option key={version} value={version}>
@@ -982,7 +982,7 @@ export function McpInspector() {
               </select>
             </label>
             <label className="field">
-              <span>Timeout ms</span>
+              <span>{copy.timeoutMs}</span>
               <input
                 className="input"
                 min="1000"
@@ -994,11 +994,11 @@ export function McpInspector() {
               />
             </label>
             <label className="field">
-              <span>Bearer token</span>
+              <span>{copy.bearerToken}</span>
               <input
                 className="input"
                 onChange={(event) => setAuthToken(event.target.value)}
-                placeholder="Optional"
+                placeholder={copy.optional}
                 ref={authTokenRef}
                 type="password"
                 value={authToken}
@@ -1007,7 +1007,7 @@ export function McpInspector() {
           </div>
 
           <label className="field">
-            <span>Custom headers JSON</span>
+            <span>{copy.customHeaders}</span>
             <textarea
               className="textarea inspector-small-textarea"
               onChange={(event) => setHeadersText(event.target.value)}
@@ -1015,11 +1015,11 @@ export function McpInspector() {
               ref={headersTextRef}
               value={headersText}
             />
-            <span className="hint">Header values must be strings. They are sent from this browser only.</span>
+            <span className="hint">{copy.headersHint}</span>
           </label>
 
           <label className="field">
-            <span>App URL</span>
+            <span>{copy.appUrl}</span>
             <input
               className="input"
               onChange={(event) => setAppUrl(event.target.value)}
@@ -1028,34 +1028,34 @@ export function McpInspector() {
               type="url"
               value={appUrl}
             />
-            <span className="hint">Optional. The preview below helps catch framing and browser runtime issues.</span>
+            <span className="hint">{copy.appUrlHint}</span>
           </label>
 
           <div className="inspector-actions">
             <button className="primary-link" disabled={isRunning} onClick={inspectServer} type="button">
-              {isRunning ? "Testing..." : "Run inspection"}
+              {isRunning ? copy.testing : copy.runInspection}
             </button>
             <button className="secondary-link" disabled={isRunning || isCallingTool} onClick={resetInspector} type="button">
-              Reset
+              {copy.reset}
             </button>
           </div>
 
           <div className="inspector-privacy-note">
-            <strong>Browser-only test</strong>
-            <span>Endpoint URLs, tokens, and tool arguments are not submitted to mcpapp.</span>
+            <strong>{copy.privacyTitle}</strong>
+            <span>{copy.privacyBody}</span>
           </div>
 
           <div className="inspector-result">
-            <span>Client config</span>
+            <span>{copy.clientConfig}</span>
             <p className="inspector-empty">
-              Copy the current endpoint as a Streamable HTTP MCP client config.
+              {copy.clientConfigBody}
             </p>
             <div className="inspector-actions">
               <button className="secondary-link" onClick={() => void copyConfig("entry")} type="button">
-                Copy server entry
+                {copy.copyServerEntry}
               </button>
               <button className="secondary-link" onClick={() => void copyConfig("file")} type="button">
-                Copy mcp.json
+                {copy.copyMcpJson}
               </button>
             </div>
             {configStatus ? <p className="import-status">{configStatus}</p> : null}
@@ -1065,13 +1065,13 @@ export function McpInspector() {
 
         <div className="inspector-panel">
           <div className="inspector-panel-head">
-            <p className="eyebrow">Checks</p>
-            <h2>Inspection results</h2>
+            <p className="eyebrow">{copy.checksEyebrow}</p>
+            <h2>{copy.checksTitle}</h2>
           </div>
           <div className="inspector-checks">
             {checks.map((check) => (
               <div className="inspector-check" key={check.key}>
-                <span className={`inspector-status ${check.status}`}>{statusLabel(check.status)}</span>
+                <span className={`inspector-status ${check.status}`}>{statusLabel(check.status, copy)}</span>
                 <div>
                   <strong>{check.label}</strong>
                   <p>{check.detail}</p>
@@ -1084,33 +1084,33 @@ export function McpInspector() {
 
       <section className="inspector-summary-grid">
         <article className="inspector-summary-card">
-          <span>Server</span>
-          <strong>{serverInfo.serverInfo?.name ?? "Not initialized"}</strong>
-          <p>{serverInfo.serverInfo?.version ? `Version ${serverInfo.serverInfo.version}` : "Run inspection to read server info."}</p>
+          <span>{copy.summaryServer}</span>
+          <strong>{serverInfo.serverInfo?.name ?? copy.notInitialized}</strong>
+          <p>{serverInfo.serverInfo?.version ? formatMessage(copy.version, { version: serverInfo.serverInfo.version }) : copy.runToReadServerInfo}</p>
         </article>
         <article className="inspector-summary-card">
-          <span>Protocol</span>
+          <span>{copy.summaryProtocol}</span>
           <strong>{negotiatedVersion || "-"}</strong>
-          <p>{sessionId ? "Session header captured." : "No readable session header yet."}</p>
+          <p>{sessionId ? copy.sessionCaptured : copy.noSessionYet}</p>
         </article>
         <article className="inspector-summary-card">
-          <span>Capabilities</span>
-          <strong>{serverInfo.capabilities ? Object.keys(serverInfo.capabilities).join(", ") || "None" : "-"}</strong>
-          <p>{serverInfo.instructions ? serverInfo.instructions : "Server instructions appear here when provided."}</p>
+          <span>{copy.summaryCapabilities}</span>
+          <strong>{serverInfo.capabilities ? Object.keys(serverInfo.capabilities).join(", ") || copy.none : "-"}</strong>
+          <p>{serverInfo.instructions ? serverInfo.instructions : copy.instructionsPlaceholder}</p>
         </article>
       </section>
 
       <section className="inspector-layout inspector-results-layout">
         <div className="inspector-panel">
           <div className="inspector-panel-head">
-            <p className="eyebrow">Inventory</p>
-            <h2>Tools, prompts, and resources</h2>
+            <p className="eyebrow">{copy.inventoryEyebrow}</p>
+            <h2>{copy.inventoryTitle}</h2>
           </div>
 
           <div className="inspector-tabs">
-            <span>{tools.length} tools</span>
-            <span>{prompts.length} prompts</span>
-            <span>{resources.length} resources</span>
+            <span>{formatMessage(copy.toolsCount, { count: tools.length })}</span>
+            <span>{formatMessage(copy.promptsCount, { count: prompts.length })}</span>
+            <span>{formatMessage(copy.resourcesCount, { count: resources.length })}</span>
           </div>
 
           <div className="inspector-inventory">
@@ -1123,11 +1123,11 @@ export function McpInspector() {
                   type="button"
                 >
                   <strong>{tool.name}</strong>
-                  <span>{tool.description ?? "No description supplied."}</span>
+                  <span>{tool.description ?? copy.noDescription}</span>
                 </button>
               ))
             ) : (
-              <p className="inspector-empty">No tools loaded yet.</p>
+              <p className="inspector-empty">{copy.noTools}</p>
             )}
           </div>
 
@@ -1141,7 +1141,7 @@ export function McpInspector() {
                   type="button"
                 >
                   <strong>{prompt.name}</strong>
-                  <span>{prompt.description ?? "Prompt template"}</span>
+                  <span>{prompt.description ?? copy.promptTemplate}</span>
                 </button>
               ))}
               {resources.slice(0, 6).map((resource) => (
@@ -1161,21 +1161,21 @@ export function McpInspector() {
 
         <div className="inspector-panel">
           <div className="inspector-panel-head">
-            <p className="eyebrow">Tool call</p>
-            <h2>{selectedTool?.name ?? "Select a tool"}</h2>
+            <p className="eyebrow">{copy.toolCallEyebrow}</p>
+            <h2>{selectedTool?.name ?? copy.selectTool}</h2>
           </div>
 
           {selectedTool?.inputSchema ? (
             <details className="inspector-schema">
-              <summary>Input schema</summary>
+              <summary>{copy.inputSchema}</summary>
               <pre>{prettyJson(selectedTool.inputSchema)}</pre>
             </details>
           ) : (
-            <p className="inspector-empty">Run inspection and select a tool to see its input schema.</p>
+            <p className="inspector-empty">{copy.toolSchemaEmpty}</p>
           )}
 
           <label className="field">
-            <span>Tool arguments JSON</span>
+            <span>{copy.toolArguments}</span>
             <textarea
               className="textarea inspector-args"
               onChange={(event) => setToolArguments(event.target.value)}
@@ -1191,13 +1191,13 @@ export function McpInspector() {
             onClick={callSelectedTool}
             type="button"
           >
-            {isCallingTool ? "Calling..." : "Call tool"}
+            {isCallingTool ? copy.calling : copy.callTool}
           </button>
 
           {toolError ? <p className="import-status error">{toolError}</p> : null}
           {toolResult !== undefined ? (
             <div className="inspector-result">
-              <span>Result</span>
+              <span>{copy.result}</span>
               <pre>{prettyJson(toolResult)}</pre>
             </div>
           ) : null}
@@ -1207,8 +1207,8 @@ export function McpInspector() {
       <section className="inspector-layout inspector-results-layout">
         <div className="inspector-panel">
           <div className="inspector-panel-head">
-            <p className="eyebrow">Prompt get</p>
-            <h2>{selectedPrompt?.name ?? "Select a prompt"}</h2>
+            <p className="eyebrow">{copy.promptGetEyebrow}</p>
+            <h2>{selectedPrompt?.name ?? copy.selectPrompt}</h2>
           </div>
 
           {selectedPrompt?.arguments?.length ? (
@@ -1216,16 +1216,16 @@ export function McpInspector() {
               {selectedPrompt.arguments.map((argument) => (
                 <div key={argument.name}>
                   <strong>{argument.name}{argument.required ? " *" : ""}</strong>
-                  <span>{argument.description ?? "Prompt argument"}</span>
+                  <span>{argument.description ?? copy.promptArgument}</span>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="inspector-empty">Run inspection and select a prompt to see its arguments.</p>
+            <p className="inspector-empty">{copy.promptEmpty}</p>
           )}
 
           <label className="field">
-            <span>Prompt arguments JSON</span>
+            <span>{copy.promptArguments}</span>
             <textarea
               className="textarea inspector-args"
               onChange={(event) => setPromptArguments(event.target.value)}
@@ -1241,13 +1241,13 @@ export function McpInspector() {
             onClick={getSelectedPrompt}
             type="button"
           >
-            {isGettingPrompt ? "Getting..." : "Get prompt"}
+            {isGettingPrompt ? copy.getting : copy.getPrompt}
           </button>
 
           {promptError ? <p className="import-status error">{promptError}</p> : null}
           {promptResult !== undefined ? (
             <div className="inspector-result">
-              <span>Result</span>
+              <span>{copy.result}</span>
               <pre>{prettyJson(promptResult)}</pre>
             </div>
           ) : null}
@@ -1255,17 +1255,17 @@ export function McpInspector() {
 
         <div className="inspector-panel">
           <div className="inspector-panel-head">
-            <p className="eyebrow">Resource read</p>
-            <h2>{selectedResource?.name ?? selectedResource?.uri ?? "Select a resource"}</h2>
+            <p className="eyebrow">{copy.resourceReadEyebrow}</p>
+            <h2>{selectedResource?.name ?? selectedResource?.uri ?? copy.selectResource}</h2>
           </div>
 
           {selectedResource ? (
             <div className="inspector-result">
-              <span>Resource URI</span>
+              <span>{copy.resourceUri}</span>
               <pre>{selectedResource.uri}</pre>
             </div>
           ) : (
-            <p className="inspector-empty">Run inspection and select a resource to read it.</p>
+            <p className="inspector-empty">{copy.resourceEmpty}</p>
           )}
 
           <button
@@ -1274,13 +1274,13 @@ export function McpInspector() {
             onClick={readSelectedResource}
             type="button"
           >
-            {isReadingResource ? "Reading..." : "Read resource"}
+            {isReadingResource ? copy.reading : copy.readResource}
           </button>
 
           {resourceError ? <p className="import-status error">{resourceError}</p> : null}
           {resourceResult !== undefined ? (
             <div className="inspector-result">
-              <span>Result</span>
+              <span>{copy.result}</span>
               <pre>{prettyJson(resourceResult)}</pre>
             </div>
           ) : null}
@@ -1290,8 +1290,8 @@ export function McpInspector() {
       <section className="inspector-layout inspector-results-layout">
         <div className="inspector-panel">
           <div className="inspector-panel-head">
-            <p className="eyebrow">Protocol log</p>
-            <h2>Request and response trace</h2>
+            <p className="eyebrow">{copy.protocolLogEyebrow}</p>
+            <h2>{copy.protocolLogTitle}</h2>
           </div>
           <div className="inspector-log" aria-live="polite">
             {logs.length ? (
@@ -1302,15 +1302,15 @@ export function McpInspector() {
                 </article>
               ))
             ) : (
-              <p className="inspector-empty">Run an inspection to see JSON-RPC traffic.</p>
+              <p className="inspector-empty">{copy.protocolLogEmpty}</p>
             )}
           </div>
         </div>
 
         <div className="inspector-panel">
           <div className="inspector-panel-head">
-            <p className="eyebrow">App surface</p>
-            <h2>Browser preview</h2>
+            <p className="eyebrow">{copy.appSurfaceEyebrow}</p>
+            <h2>{copy.browserPreview}</h2>
           </div>
           {appUrl.trim() ? (
             <iframe
@@ -1318,10 +1318,10 @@ export function McpInspector() {
               referrerPolicy="no-referrer"
               sandbox="allow-forms allow-popups allow-same-origin allow-scripts"
               src={appUrl}
-              title="MCP app browser preview"
+              title={copy.previewTitle}
             />
           ) : (
-            <div className="inspector-app-empty">Add an app URL to preview the user-facing surface.</div>
+            <div className="inspector-app-empty">{copy.previewEmpty}</div>
           )}
         </div>
       </section>
