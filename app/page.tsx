@@ -65,24 +65,24 @@ export default async function HomePage() {
           <input name="q" placeholder={t.home.searchPlaceholder} type="search" />
         </form>
       </header>
-      <section className="home-quick-links" aria-label="MCP directory quick links">
+      <section className="home-quick-links" aria-label={t.home.quickLinksAria}>
         <Link href={href("/awesome-mcp-apps")} prefetch={false}>
-          Awesome MCP apps for GitHub readers
+          {t.home.quickAwesomeApps}
         </Link>
         <Link href={href("/mcp-clients")} prefetch={false}>
-          Awesome MCP clients directory
+          {t.home.quickMcpClients}
         </Link>
         <Link href={href("/mcp-inspector")} prefetch={false}>
-          MCP Inspector: test your MCP server in the browser
+          {t.home.quickInspector}
         </Link>
         <Link href={href("/mcp-directory")} prefetch={false}>
-          MCP directory: compare MCP servers, ChatGPT apps, and Claude connectors
+          {t.home.quickDirectory}
         </Link>
         <Link href={href("/mcp-servers")} prefetch={false}>
-          MCP servers directory
+          {t.home.quickServers}
         </Link>
         <Link href={href("/chatgpt-connectors")} prefetch={false}>
-          ChatGPT connectors (now apps)
+          {t.home.quickChatgptConnectors}
         </Link>
         <Link href={href("/chatgpt-apps")} prefetch={false}>
           {t.nav.chatgpt}

@@ -1,7 +1,7 @@
 import type { AppPreview } from "@/lib/types";
 import { optimizedImageUrl } from "@/lib/image-urls";
 
-export function PreviewBubbles({ previews }: { previews: AppPreview[] }) {
+export function PreviewBubbles({ mockupLabel = "Mockup", previews }: { mockupLabel?: string; previews: AppPreview[] }) {
   if (previews.length === 0) {
     return null;
   }
@@ -27,7 +27,7 @@ export function PreviewBubbles({ previews }: { previews: AppPreview[] }) {
                   />
                 ) : (
                   <div className="preview-art-inner">
-                    <span>Mockup</span>
+                    <span>{mockupLabel}</span>
                   </div>
                 )}
               </div>
