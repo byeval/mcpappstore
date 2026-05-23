@@ -22,6 +22,10 @@ const categoryAcronyms: Record<string, string> = {
 const categoryMinorWords = new Set(["and", "as", "by", "for", "in", "of", "on", "or", "to", "with"]);
 
 export function siteNameForLocale(locale?: Locale): string {
+  if (locale === "ru") {
+    return "Магазин MCP-приложений";
+  }
+
   if (locale === "zh-hans") {
     return "MCP 应用商店";
   }

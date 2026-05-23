@@ -36,7 +36,7 @@ export async function generateMetadata({
   }
   const displayName = localizedCategoryName(slug, formatCategoryName(category.name), locale);
   const content = localizedCategoryContent(slug, displayName, category.count, locale);
-  const pageSuffix = page > 1 ? (locale === "zh-hans" ? ` - 第 ${page} 页` : ` - Page ${page}`) : "";
+  const pageSuffix = page > 1 ? (locale === "zh-hans" ? ` - 第 ${page} 页` : locale === "ru" ? ` - Страница ${page}` : ` - Page ${page}`) : "";
 
   return pageMetadata({
     title: `${formatMessage(t.categoryPage.title, { category: displayName })}${pageSuffix}`,

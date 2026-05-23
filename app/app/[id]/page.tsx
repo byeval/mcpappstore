@@ -121,6 +121,14 @@ function readableList(items: string[], locale: Locale = "en"): string {
     return `${items.slice(0, -1).join(", ")} 및 ${items[items.length - 1]}`;
   }
 
+  if (locale === "ru") {
+    if (items.length === 2) {
+      return `${items[0]} и ${items[1]}`;
+    }
+
+    return `${items.slice(0, -1).join(", ")} и ${items[items.length - 1]}`;
+  }
+
   if (items.length === 2) {
     return `${items[0]} and ${items[1]}`;
   }
@@ -151,6 +159,10 @@ function authLabel(authType: SurfaceResolvedDetails["authType"], locale: Locale 
 
   if (locale === "zh-hans") {
     return "无";
+  }
+
+  if (locale === "ru") {
+    return "нет";
   }
 
   return "none";
@@ -210,6 +222,17 @@ function localizedAppKind(app: Pick<CatalogApp, "surfaces">, locale: Locale): st
     return hasClaude ? "MCP 连接器" : "MCP 应用";
   }
 
+  if (locale === "ru") {
+    const hasChatGpt = app.surfaces.some((surface) => surface.platform === "chatgpt");
+    const hasClaude = app.surfaces.some((surface) => surface.platform === "claude");
+
+    if (hasChatGpt && hasClaude) {
+      return "MCP-приложение и коннектор";
+    }
+
+    return hasClaude ? "MCP-коннектор" : "MCP-приложение";
+  }
+
   return appKindPhrase(app);
 }
 
@@ -235,6 +258,10 @@ function localizedPlatformText(app: Pick<CatalogApp, "surfaces">, locale: Locale
 
   if (locale === "zh-hans") {
     return `（适用于 ${platforms}）`;
+  }
+
+  if (locale === "ru") {
+    return ` для ${platforms}`;
   }
 
   return ` for ${platforms}`;
@@ -267,6 +294,9 @@ function fallbackScope(
     if (locale === "zh-hans") {
       return `列表中包含 ${details.capabilities.length} 项能力。连接前请确认只读、交互式和可写范围。`;
     }
+    if (locale === "ru") {
+      return `В листинге указано возможностей: ${details.capabilities.length}. Перед подключением проверьте read-only, interactive и write-capable scope.`;
+    }
 
     const capabilities = readableList(details.capabilities.slice(0, 5), locale);
     return `Listed capabilities include ${capabilities}.`;
@@ -283,6 +313,9 @@ function fallbackScope(
     if (locale === "zh-hans") {
       return `此列表被归类为${categories}工作流。`;
     }
+    if (locale === "ru") {
+      return `Листинг относится к workflows: ${categories}.`;
+    }
     return `The listing is categorized for ${categories} workflows.`;
   }
 
@@ -296,6 +329,10 @@ function fallbackScope(
 
   if (locale === "zh-hans") {
     return "此列表包含发布者、认证、传输方式和平台详情，可用于连接前审查。";
+  }
+
+  if (locale === "ru") {
+    return "Листинг содержит издателя, auth, transport и детали платформы для проверки перед подключением.";
   }
 
   return "The listing includes publisher, auth, transport, and platform details for review.";
@@ -312,10 +349,10 @@ function appFaqItems(
   const mcpName = mcpSearchName(app.name);
   const kind = localizedAppKind(app, locale);
   const platforms = localizedAppPlatformPhrase(app, locale);
-  const platformText = platforms ? ` for ${platforms}` : "";
+  const platformText = platforms ? (locale === "ru" ? ` для ${platforms}` : ` for ${platforms}`) : "";
   const surfaceText = primaryListing
     ? surfaceLabelFor(primaryListing, surfaceCopy)
-    : platforms || (locale === "ja" ? "MCP ホスト" : locale === "ko" ? "MCP 호스트" : locale === "zh-hans" ? "MCP 宿主" : "an MCP host");
+    : platforms || (locale === "ja" ? "MCP ホスト" : locale === "ko" ? "MCP 호스트" : locale === "zh-hans" ? "MCP 宿主" : locale === "ru" ? "MCP-хост" : "an MCP host");
   const summary = trimSentence(details.tagline || app.tagline || app.description);
   const toolNames = details.tools.slice(0, 5).map((tool) => tool.name);
 
@@ -378,6 +415,27 @@ function appFaqItems(
         answer: toolNames.length > 0
           ? `列表工具包括 ${readableList(toolNames, locale)}。使用可写操作前，请先检查工具列表和权限。`
           : `${fallbackScope(app, details, categoryBySlug, locale)} 请查看发布者详情确认最新工具范围。`,
+      },
+    ];
+  }
+
+  if (locale === "ru") {
+    return [
+      {
+        question: `Что такое ${mcpName}?`,
+        answer: `${app.name} указано в MCP App Store как ${kind}${platformText}. Перед подключением можно сравнить платформу, tools, permissions и publisher info.`,
+      },
+      {
+        question: `Как использовать ${mcpName}?`,
+        answer: details.installCmd
+          ? `Используйте install command из листинга, затем перед подключением проверьте ${authLabel(details.authType, locale)} auth и ${details.mcpTransport} transport.`
+          : `Откройте ссылку ${surfaceText} из листинга, затем проверьте auth, permissions и publisher details приложения.`,
+      },
+      {
+        question: `Какие tools предоставляет ${app.name}?`,
+        answer: toolNames.length > 0
+          ? `В листинге указаны tools: ${readableList(toolNames, locale)}. Перед write-capable actions проверьте список tools и permissions.`
+          : `${fallbackScope(app, details, categoryBySlug, locale)} Проверьте publisher details для актуального tool scope.`,
       },
     ];
   }
@@ -527,6 +585,44 @@ function appUseCaseItems(
     return items.slice(0, 4);
   }
 
+  if (locale === "ru") {
+    items.push({
+      title: "Соответствие workflow",
+      body: `${app.name} особенно полезно, когда ${platforms || "MCP-хосту"} нужен живой контекст для ${categoryText || "подключенных"} workflows, а не статичный chat-only ответ.`,
+    });
+
+    if (toolNames.length > 0) {
+      items.push({
+        title: "Покрытие tools",
+        body: `Перед подключением приложения к workspace или assistant host сравните доступ к MCP tools, например ${readableList(toolNames, locale)}.`,
+      });
+    } else if (details.capabilities.length > 0) {
+      items.push({
+        title: "Проверка возможностей",
+        body: `Проверьте указанные возможности, например ${readableList(details.capabilities.slice(0, 4), locale)}, и уточните, какие действия read-only, interactive или write-capable.`,
+      });
+    }
+
+    if (details.examplePrompts.length > 0) {
+      items.push({
+        title: "Тест prompts",
+        body: `Начните с небольшого prompt для ${app.name} и проверьте, возвращает ли ответ достаточно исходного контекста для продолжения работы.`,
+      });
+    }
+
+    items.push(details.previews.length > 0
+      ? {
+          title: "Проверка preview",
+          body: `Используйте preview examples, чтобы понять, возвращает ли ${app.name} нужный результат, UI или confirmation step для вашего workflow.`,
+        }
+      : {
+          title: "Контекст сравнения",
+          body: `Сравните ${app.name} с похожими листингами по platform support, auth type, transport, publisher links и связанным MCP app collections.`,
+        });
+
+    return items.slice(0, 4);
+  }
+
   items.push({
     title: "Workflow fit",
     body: `${app.name} is most relevant when ${platforms || "an MCP host"} needs live context for ${categoryText || "connected"} workflows instead of static chat-only answers.`,
@@ -575,7 +671,7 @@ function appConnectionChecklist(
 ): Array<{ title: string; body: string }> {
   const surfaceText = primaryListing
     ? surfaceLabelFor(primaryListing, surfaceCopy)
-    : localizedAppPlatformPhrase(app, locale) || (locale === "ja" ? "MCP ホスト" : locale === "ko" ? "MCP 호스트" : locale === "zh-hans" ? "MCP 宿主" : "MCP host");
+    : localizedAppPlatformPhrase(app, locale) || (locale === "ja" ? "MCP ホスト" : locale === "ko" ? "MCP 호스트" : locale === "zh-hans" ? "MCP 宿主" : locale === "ru" ? "MCP-хост" : "MCP host");
   const publisherText = app.publisher && app.publisher !== "Unknown"
     ? app.publisher
     : locale === "ja"
@@ -584,7 +680,9 @@ function appConnectionChecklist(
         ? "등록된 게시자"
         : locale === "zh-hans"
           ? "列表中的发布者"
-          : "the listed publisher";
+          : locale === "ru"
+            ? "указанный издатель"
+            : "the listed publisher";
   const privacyText = app.privacyUrl
     ? locale === "ja"
       ? "プライバシーポリシーあり"
@@ -592,14 +690,18 @@ function appConnectionChecklist(
         ? "개인정보 처리방침 링크 있음"
         : locale === "zh-hans"
           ? "已提供隐私政策"
-          : "a privacy policy is linked"
+          : locale === "ru"
+            ? "privacy policy указана"
+            : "a privacy policy is linked"
     : locale === "ja"
       ? "プライバシーポリシーなし"
       : locale === "ko"
         ? "개인정보 처리방침 없음"
         : locale === "zh-hans"
           ? "未列出隐私政策"
-          : "no privacy policy is listed";
+          : locale === "ru"
+            ? "privacy policy не указана"
+            : "no privacy policy is listed";
   const supportText = app.supportUrl
     ? locale === "ja"
       ? "サポート情報あり"
@@ -607,14 +709,18 @@ function appConnectionChecklist(
         ? "지원 정보 링크 있음"
         : locale === "zh-hans"
           ? "已提供支持信息"
-          : "support details are linked"
+          : locale === "ru"
+            ? "support details указаны"
+            : "support details are linked"
     : locale === "ja"
       ? "サポート情報なし"
       : locale === "ko"
         ? "지원 정보 없음"
         : locale === "zh-hans"
           ? "未列出支持信息"
-          : "support details are not listed";
+          : locale === "ru"
+            ? "support details не указаны"
+            : "support details are not listed";
 
   if (locale === "ja") {
     return [
@@ -663,6 +769,23 @@ function appConnectionChecklist(
       {
         title: "发布者和政策链接",
         body: `发布者：${publisherText}。${privacyText}，${supportText}。缺失的政策或支持链接应作为上线前审查项。`,
+      },
+    ];
+  }
+
+  if (locale === "ru") {
+    return [
+      {
+        title: "Платформа",
+        body: `Основная поверхность: ${surfaceText}. Перед оценкой prompts или tools подтвердите, что это хост, которым реально пользуется команда.`,
+      },
+      {
+        title: "Auth и transport",
+        body: `В листинге указаны ${authLabel(details.authType, locale)} auth и ${details.mcpTransport} transport. Сверьте это с требованиями security и deployment.`,
+      },
+      {
+        title: "Издатель и policy links",
+        body: `Издатель: ${publisherText}; ${privacyText}; ${supportText}. Отсутствующие policy или support links считайте пунктами review перед rollout.`,
       },
     ];
   }
@@ -879,7 +1002,9 @@ export default async function AppDetailPage({
         ? `등록된 MCP 도구에는 ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name), locale)} 등이 포함됩니다.`
         : locale === "zh-hans"
           ? `已列出的 MCP 工具包括 ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name), locale)} 等。`
-          : `Listed MCP tools include ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name))}.`
+          : locale === "ru"
+            ? `В листинге указаны MCP tools: ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name), locale)}.`
+            : `Listed MCP tools include ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name))}.`
     : fallbackScope(app, primaryDetails, categoryBySlug, locale);
   const useCaseItems = appUseCaseItems(app, primaryDetails, categoryBySlug, locale);
   const connectionChecklist = appConnectionChecklist(app, primaryDetails, primaryListing, locale, t.surface);
@@ -1256,7 +1381,9 @@ export default async function AppDetailPage({
                       ? `${app.name} 関連 MCP アプリコレクション`
                       : locale === "ko"
                         ? `${app.name} 관련 MCP 앱 컬렉션`
-                        : `${app.name} related MCP app collections`,
+                        : locale === "ru"
+                          ? `${app.name}: связанные коллекции MCP-приложений`
+                          : `${app.name} related MCP app collections`,
                 ),
               ]
             : []),
@@ -1273,7 +1400,9 @@ export default async function AppDetailPage({
                       ? `${app.name} 関連 MCP ガイド`
                       : locale === "ko"
                         ? `${app.name} 관련 MCP 가이드`
-                        : `${app.name} related MCP guides`,
+                        : locale === "ru"
+                          ? `${app.name}: связанные MCP-гайды`
+                          : `${app.name} related MCP guides`,
                 ),
               ]
             : []),
@@ -1290,7 +1419,9 @@ export default async function AppDetailPage({
                       ? `${app.name} 関連 MCP アプリ`
                       : locale === "ko"
                         ? `${app.name} 관련 MCP 앱`
-                        : `${app.name} related MCP apps`,
+                        : locale === "ru"
+                          ? `${app.name}: связанные MCP-приложения`
+                          : `${app.name} related MCP apps`,
                 ),
               ]
             : []),

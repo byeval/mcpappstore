@@ -1550,6 +1550,44 @@ const deCategoryNames: Record<string, string> = {
   code: "Code",
 };
 
+const ruCategoryNames: Record<string, string> = {
+  featured: "Избранное",
+  productivity: "Продуктивность",
+  design: "Дизайн",
+  data: "Данные",
+  "developer-tools": "Инструменты разработчика",
+  finance: "Финансы",
+  travel: "Путешествия",
+  mcp: "MCP",
+  shopping: "Покупки",
+  food: "Еда",
+  education: "Образование",
+  api: "API",
+  testing: "Тестирование",
+  devops: "DevOps",
+  observability: "Observability",
+  "write-code": "Написание кода",
+  "agentic-coding": "Agentic coding",
+  business: "Бизнес",
+  media: "Медиа",
+  voice: "Голос",
+  audio: "Аудио",
+  documents: "Документы",
+  database: "База данных",
+  databases: "Базы данных",
+  "text-to-speech": "Text-to-speech",
+  marketing: "Маркетинг",
+  visualization: "Визуализация",
+  csv: "CSV",
+  "mcp-server": "MCP-сервер",
+  "sales-and-marketing": "Продажи и маркетинг",
+  "financial-services": "Финансовые сервисы",
+  lifestyle: "Лайфстайл",
+  entertainment: "Развлечения",
+  automation: "Автоматизация",
+  code: "Код",
+};
+
 const jaCategoryGuides: Record<string, Partial<CategoryContent>> = {
   productivity: {
     eyebrow: "生産性ガイド",
@@ -1665,6 +1703,14 @@ const localizedFaqs: Record<ContentLocale, LearnFaq[]> = {
     { question: "Werden alle Listings geprüft?", answer: "Einreichungen werden vor Veröffentlichung moderiert, aber prüfe vor dem Verbinden selbst Rechte, Datenschutz und Publisher." },
     { question: "Was gehört in ein gutes Listing?", answer: "Klares Tagline, einfache Beschreibung, Plattformen, Fähigkeiten, Auth, Datenschutz-/Support-URLs und Beispielprompts." },
   ],
+  ru: [
+    { question: "Что такое MCP App Store?", answer: "MCP App Store - это каталог для поиска MCP-приложений, приложений ChatGPT, коннекторов Claude и связанных платформенных поверхностей." },
+    { question: "Чем приложения ChatGPT отличаются от коннекторов Claude?", answer: "Оба варианта могут использовать MCP-серверы, но работают в разных хостах: ChatGPT или Claude." },
+    { question: "Можно отправить свое MCP-приложение?", answer: "Да. Отправьте название, описание, платформы, MCP-детали, ссылки, инструменты и примеры превью на проверку." },
+    { question: "Вы хостите MCP-серверы?", answer: "Нет. Каталог перечисляет приложения и коннекторы; endpoint и поддержку обслуживает издатель." },
+    { question: "Все листинги проверяются?", answer: "Отправки модерируются перед публикацией, но перед подключением все равно проверьте права, приватность и издателя." },
+    { question: "Что должно быть в хорошем листинге?", answer: "Понятный tagline, простое описание, платформы, возможности, auth, ссылки на приватность и поддержку, а также примерные prompts." },
+  ],
   "zh-hans": [
     { question: "MCP App Store 是什么？", answer: "MCP App Store 是用于发现 MCP 应用、ChatGPT 应用、Claude 连接器以及相关平台入口的目录。" },
     { question: "ChatGPT 应用和 Claude 连接器有什么区别？", answer: "两者都可以基于 MCP 服务器，但出现的宿主不同。ChatGPT 应用面向 ChatGPT，Claude 连接器面向 Claude 或 Claude API 工作流。" },
@@ -1694,7 +1740,7 @@ const localizedFaqs: Record<ContentLocale, LearnFaq[]> = {
 function localizedLinkLabel(href: string, fallback: string, locale: Locale): string {
   const categoryMatch = href.match(/^\/category\/(.+)$/);
 
-  if (locale === "es" || locale === "fr" || locale === "de") {
+  if (locale === "es" || locale === "fr" || locale === "de" || locale === "ru") {
     const copy = {
       es: {
         apps: "Explorar apps",
@@ -1746,6 +1792,23 @@ function localizedLinkLabel(href: string, fallback: string, locale: Locale): str
         developer: "Entwickler",
         finance: "Finanzen",
         travel: "Reisen",
+      },
+      ru: {
+        apps: "Смотреть приложения",
+        submit: "Добавить MCP",
+        faq: "Читать FAQ",
+        docs: "Гайд по листингу",
+        collections: "Коллекции",
+        whatIs: "Что такое MCP-приложение?",
+        build: "Создать первое MCP-приложение",
+        chatgpt: "Приложения ChatGPT",
+        claude: "Коннекторы Claude",
+        productivity: "Продуктивность",
+        design: "Дизайн",
+        data: "Данные",
+        developer: "Разработчики",
+        finance: "Финансы",
+        travel: "Путешествия",
       },
     }[locale];
 
@@ -1855,7 +1918,7 @@ function genericArticleSections(article: LearnArticle, patch: LocalizedArticle, 
   const summary = patch.summary ?? article.summary;
   const description = patch.description ?? article.description;
 
-  if (locale === "es" || locale === "fr" || locale === "de") {
+  if (locale === "es" || locale === "fr" || locale === "de" || locale === "ru") {
     const copy = {
       es: {
         overview: "Resumen",
@@ -1886,6 +1949,16 @@ function genericArticleSections(article: LearnArticle, patch: LocalizedArticle, 
         bullets: ["Starte mit read-only Suche und Zusammenfassung.", "Verlange klare Bestätigung für Schreibaktionen oder externe Übermittlung.", "Nutze Previews, Support und Datenschutzlinks als Vertrauenssignale."],
         next: "Nächster Schritt",
         nextBody: "Grenze Kandidaten über Kollektionen und Kategorien ein und vergleiche Tools, Rechte, Beispiele und Publisher-Links.",
+      },
+      ru: {
+        overview: "Обзор",
+        overviewBody: `${title} собирает ключевые вопросы перед оценкой MCP-приложений и коннекторов.`,
+        evaluation: "Критерии сравнения",
+        evaluationBody:
+          "Проверьте поддерживаемые хосты, права чтения и записи, издателя, auth, превью и область инструментов перед подключением важных аккаунтов или production-данных.",
+        bullets: ["Начинайте с поиска и сводок только для чтения.", "Требуйте явного подтверждения для записи или внешней отправки.", "Используйте превью, поддержку и privacy links как сигналы доверия."],
+        next: "Следующий шаг",
+        nextBody: "Сузьте кандидатов через связанные коллекции и категории, затем сравните инструменты, права, примеры и ссылки издателя.",
       },
     }[locale];
 
@@ -2000,7 +2073,7 @@ function genericArticleSections(article: LearnArticle, patch: LocalizedArticle, 
 
 function genericArticleFaqs(article: LearnArticle, patch: LocalizedArticle, locale: Locale): LearnFaq[] | undefined {
   const title = patch.title ?? article.title;
-  if (locale === "es" || locale === "fr" || locale === "de") {
+  if (locale === "es" || locale === "fr" || locale === "de" || locale === "ru") {
     const copy = {
       es: {
         q1: `¿Qué debo revisar en ${title}?`,
@@ -2019,6 +2092,12 @@ function genericArticleFaqs(article: LearnArticle, patch: LocalizedArticle, loca
         a1: "Plattformen, Tool-Umfang, Lese-/Schreibrechte, Publisher-Links und Preview-Beispiele.",
         q2: "Wie wähle ich die erste MCP-App?",
         a2: "Starte mit einem leseorientierten Workflow und priorisiere klare Bestätigung sowie Least Privilege für wichtige Daten oder Schreibaktionen.",
+      },
+      ru: {
+        q1: `Что проверить в ${title}?`,
+        a1: "Платформы, область инструментов, права чтения/записи, ссылки издателя и примеры превью.",
+        q2: "Как выбрать первое MCP-приложение?",
+        a2: "Начните с workflow, ориентированного на чтение, и для важных данных или записи выбирайте явное подтверждение и минимальные права.",
       },
     }[locale];
     return [
@@ -2133,6 +2212,13 @@ function genericCollectionCheckpoints(locale: Locale): string[] | undefined {
       "Prüfe Publisher, Auth, Datenschutz und Support vor dem Verbinden.",
     ];
   }
+  if (locale === "ru") {
+    return [
+      "Проверьте, что приложение подходит вашей платформе и рабочему процессу.",
+      "Сравнивайте read-only действия отдельно от записи или интерактивного UI.",
+      "Перед подключением проверьте издателя, auth, приватность и поддержку.",
+    ];
+  }
   if (locale === "zh-hans") {
     return [
       "确认候选应用是否匹配你的平台和工作流。",
@@ -2174,6 +2260,12 @@ function genericCollectionFaqs(collectionTitle: string, locale: Locale): LearnFa
     return [
       { question: `Wie wähle ich ${collectionTitle}?`, answer: "Grenze zuerst nach echtem Workflow ein und vergleiche Tools, Auth, Rechte, Previews und Publisher-Links." },
       { question: "Was vor dem Verbinden prüfen?", answer: "Lese-/Schreibumfang, Support, Datenschutz und Konto-Grenzen des Teams." },
+    ];
+  }
+  if (locale === "ru") {
+    return [
+      { question: `Как выбрать ${collectionTitle}?`, answer: "Сначала сузьте выбор по реальному workflow, затем сравните tools, auth, permissions, previews и ссылки издателя." },
+      { question: "Что проверить перед подключением?", answer: "Область чтения/записи, поддержку, приватность и границы командного аккаунта." },
     ];
   }
   if (locale === "zh-hans") {
@@ -2269,6 +2361,9 @@ export function localizedCategoryName(slug: string, fallback: string, locale: Lo
   if (locale === "de") {
     return deCategoryNames[slug] ?? fallback;
   }
+  if (locale === "ru") {
+    return ruCategoryNames[slug] ?? fallback;
+  }
   if (locale === "zh-hans") {
     return zhCategoryNames[slug] ?? fallback;
   }
@@ -2282,7 +2377,7 @@ export function localizedCategoryName(slug: string, fallback: string, locale: Lo
 }
 
 function localizedGenericCategoryContent(slug: string, name: string, count: number, locale: Locale): CategoryContent {
-  if (locale === "es" || locale === "fr" || locale === "de") {
+  if (locale === "es" || locale === "fr" || locale === "de" || locale === "ru") {
     const copy = {
       es: {
         eyebrow: "Guía de categoría",
@@ -2322,6 +2417,19 @@ function localizedGenericCategoryContent(slug: string, name: string, count: numb
         a1: `Für ${name}-Workflows gelistete MCP-Apps, Connectors oder Server mit vergleichbaren Hosts, Tools, Auth und Publisher-Links.`,
         q2: `Wie wähle ich ${name}-MCP-Apps?`,
         a2: "Starte mit Host-Support, Tool-Umfang, Rechten, Previews und Bestätigung für wichtige Aktionen.",
+      },
+      ru: {
+        eyebrow: "Гайд по категории",
+        title: `Сравните MCP-приложения ${name} по платформе, инструментам и сигналам доверия.`,
+        meta: `Сравните MCP-приложения ${name}, приложения ChatGPT, коннекторы Claude и MCP-серверы по платформам, инструментам, превью и правам.`,
+        body1: `В этой категории сейчас ${count} опубликованных приложений и коннекторов, связанных с ${name}. Сравните, как они подходят для ChatGPT, Claude, Claude Code или других MCP-хостов.`,
+        body2: "Хороший MCP-листинг до подключения показывает workflow, платформенную поверхность, auth, tools и ссылки поддержки.",
+        checkpoints: ["Проверьте поддержку хоста, которым пользуется команда.", "Отделяйте read-only tools от действий с записью или интерактивным UI.", "Перед внедрением проверьте издателя, приватность, поддержку, auth и transport."],
+        links: ["Приложения ChatGPT", "Коннекторы Claude", "Основы MCP"],
+        q1: `Что такое MCP-приложения ${name}?`,
+        a1: `Это приложения, коннекторы или MCP-серверы для workflows ${name}, где можно сравнить хосты, tools, auth и ссылки издателя.`,
+        q2: `Как выбрать MCP-приложения ${name}?`,
+        a2: "Начните с поддержки хоста, области инструментов, прав, превью и подтверждения для важных действий.",
       },
     }[locale];
 
@@ -2435,7 +2543,7 @@ export function localizedCategoryContent(slug: string, name: string, count: numb
           ? koCategoryGuides[slug]
           : undefined;
   if (base) {
-    if (locale === "es" || locale === "fr" || locale === "de") {
+    if (locale === "es" || locale === "fr" || locale === "de" || locale === "ru") {
       return localizedGenericCategoryContent(slug, name, count, locale);
     }
 

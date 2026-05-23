@@ -67,6 +67,9 @@ function readableList(items: string[], locale: Locale): string {
   if (locale === "zh-hans") {
     return items.length === 2 ? `${items[0]}和${items[1]}` : `${items.slice(0, -1).join("、")}和${items[items.length - 1]}`;
   }
+  if (locale === "ru") {
+    return items.length === 2 ? `${items[0]} и ${items[1]}` : `${items.slice(0, -1).join(", ")} и ${items[items.length - 1]}`;
+  }
   if (items.length === 2) return `${items[0]} and ${items[1]}`;
   return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
 }

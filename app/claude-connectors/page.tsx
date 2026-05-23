@@ -27,7 +27,7 @@ export async function generateMetadata({
     countAppsByPlatform("claude"),
   ]);
   const page = pageFromSearchParam(pageParam);
-  const pageSuffix = page > 1 ? (locale === "zh-hans" ? ` - 第 ${page} 页` : ` - Page ${page}`) : "";
+  const pageSuffix = page > 1 ? (locale === "zh-hans" ? ` - 第 ${page} 页` : locale === "ru" ? ` - Страница ${page}` : ` - Page ${page}`) : "";
   const listingText = totalCount.toLocaleString("en-US");
 
   return pageMetadata({

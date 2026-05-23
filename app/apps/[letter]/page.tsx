@@ -56,6 +56,7 @@ function appPlatformLabel(app: CatalogApp, locale: Locale): string {
   if (locale === "es" && platforms.length > 1) return `${platforms.slice(0, -1).join(", ")} y ${platforms[platforms.length - 1]}`;
   if (locale === "fr" && platforms.length > 1) return `${platforms.slice(0, -1).join(", ")} et ${platforms[platforms.length - 1]}`;
   if (locale === "de" && platforms.length > 1) return `${platforms.slice(0, -1).join(", ")} und ${platforms[platforms.length - 1]}`;
+  if (locale === "ru" && platforms.length > 1) return `${platforms.slice(0, -1).join(", ")} и ${platforms[platforms.length - 1]}`;
   if (locale === "ko" && platforms.length > 1) return `${platforms.slice(0, -1).join(", ")} 및 ${platforms[platforms.length - 1]}`;
   return platforms.join(" and ");
 }
