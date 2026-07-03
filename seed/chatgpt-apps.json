@@ -79571,6 +79571,113 @@
       "tags": [],
       "tools": [],
       "previews": []
+    },
+    {
+      "id": "xquik",
+      "name": "Xquik",
+      "tagline": "X/Twitter automation API and remote MCP",
+      "description": "Xquik gives AI agents and applications a public REST API, webhooks, SDKs, and a remote MCP server for X/Twitter search, profile reads, follower exports, monitors, trends, draft composition, and guarded write actions.",
+      "iconUrl": "https://xquik.com/icon.svg",
+      "homepageUrl": "https://xquik.com",
+      "repoUrl": "https://github.com/Xquik-dev/hermes-tweet",
+      "mcpEndpoint": "https://docs.xquik.com/mcp",
+      "mcpTransport": "http",
+      "installCmd": "claude mcp add --transport http xquik https://docs.xquik.com/mcp",
+      "authType": "api_key",
+      "publisher": "Xquik",
+      "publisherUrl": "https://xquik.com",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP",
+        "Reads",
+        "Writes"
+      ],
+      "supportUrl": "https://docs.xquik.com",
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Search recent X posts about my product launch",
+        "Monitor follower growth for an X account",
+        "Draft an X reply using recent social context"
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783057741000,
+      "updatedAt": 1783057741000,
+      "publishedAt": 1783057741000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Xquik",
+          "tagline": "X/Twitter automation API and remote MCP",
+          "description": "Use Xquik from Claude-compatible MCP clients to search X/Twitter, inspect public profiles, export followers, monitor social signals, and route guarded write workflows through documented Xquik APIs.",
+          "url": "https://docs.xquik.com/mcp",
+          "mcpEndpoint": "https://docs.xquik.com/mcp",
+          "mcpTransport": "http",
+          "installCmd": "claude mcp add --transport http xquik https://docs.xquik.com/mcp",
+          "authType": "api_key",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP",
+            "Reads",
+            "Writes"
+          ],
+          "examplePrompts": [
+            "Search recent X posts about my product launch",
+            "Monitor follower growth for an X account",
+            "Draft an X reply using recent social context"
+          ],
+          "tools": [
+            {
+              "name": "search_x_posts"
+            },
+            {
+              "name": "read_x_profile"
+            },
+            {
+              "name": "export_x_followers"
+            },
+            {
+              "name": "create_x_draft"
+            }
+          ],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools",
+        "social-media",
+        "data",
+        "marketing"
+      ],
+      "tags": [
+        "x",
+        "twitter",
+        "social-media",
+        "automation",
+        "api",
+        "mcp"
+      ],
+      "tools": [
+        {
+          "name": "search_x_posts"
+        },
+        {
+          "name": "read_x_profile"
+        },
+        {
+          "name": "export_x_followers"
+        },
+        {
+          "name": "create_x_draft"
+        }
+      ],
+      "previews": []
     }
   ]
 }
