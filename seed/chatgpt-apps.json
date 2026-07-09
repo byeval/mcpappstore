@@ -79580,9 +79580,9 @@
       "iconUrl": "https://xquik.com/icon.svg",
       "homepageUrl": "https://xquik.com",
       "repoUrl": "https://github.com/Xquik-dev/hermes-tweet",
-      "mcpEndpoint": "https://docs.xquik.com/mcp",
+      "mcpEndpoint": "https://xquik.com/mcp",
       "mcpTransport": "http",
-      "installCmd": "claude mcp add --transport http xquik https://docs.xquik.com/mcp",
+      "installCmd": "claude mcp add --transport http xquik https://xquik.com/mcp",
       "authType": "api_key",
       "publisher": "Xquik",
       "publisherUrl": "https://xquik.com",
@@ -79612,10 +79612,10 @@
           "displayName": "Xquik",
           "tagline": "X/Twitter automation API and remote MCP",
           "description": "Use Xquik from Claude-compatible MCP clients to search X/Twitter, inspect public profiles, export followers, monitor social signals, and route guarded write workflows through documented Xquik APIs.",
-          "url": "https://docs.xquik.com/mcp",
-          "mcpEndpoint": "https://docs.xquik.com/mcp",
+          "url": "https://xquik.com/mcp",
+          "mcpEndpoint": "https://xquik.com/mcp",
           "mcpTransport": "http",
-          "installCmd": "claude mcp add --transport http xquik https://docs.xquik.com/mcp",
+          "installCmd": "claude mcp add --transport http xquik https://xquik.com/mcp",
           "authType": "api_key",
           "capabilities": [
             "Claude",
@@ -79631,16 +79631,10 @@
           ],
           "tools": [
             {
-              "name": "search_x_posts"
+              "name": "explore"
             },
             {
-              "name": "read_x_profile"
-            },
-            {
-              "name": "export_x_followers"
-            },
-            {
-              "name": "create_x_draft"
+              "name": "xquik"
             }
           ],
           "previews": [],
@@ -79665,16 +79659,10 @@
       ],
       "tools": [
         {
-          "name": "search_x_posts"
+          "name": "explore"
         },
         {
-          "name": "read_x_profile"
-        },
-        {
-          "name": "export_x_followers"
-        },
-        {
-          "name": "create_x_draft"
+          "name": "xquik"
         }
       ],
       "previews": []
