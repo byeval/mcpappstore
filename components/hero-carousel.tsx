@@ -86,9 +86,9 @@ export function HeroCarousel({
           </div>
           <div className="hero-title-group">
             <div className="surface-badges hero-surfaces" aria-label={t.common.availableSurfaces}>
-              {activeApp.surfaces.slice(0, 2).map((surface) => (
+              {activeApp.surfaces.slice(0, 2).map((surface, index) => (
                 <PlatformBadge
-                  key={`${surface.platform}-${surface.type}`}
+                  key={`${surface.platform}-${surface.type}-${index}`}
                   label={surfaceLabelFor(surface, t.surface)}
                   surface={surface}
                 />
@@ -98,7 +98,7 @@ export function HeroCarousel({
           </div>
           <p className="hero-sub">{activeDetails.tagline}</p>
           <Link className="hero-cta" href={localizedPath(`/app/${activeApp.id}`, locale)} prefetch={false}>
-            {t.hero.view}
+            {t.hero.view} {activeApp.name}
           </Link>
         </div>
         <div className="hero-right">

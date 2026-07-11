@@ -9,8 +9,9 @@ export function PreviewBubbles({ mockupLabel = "Mockup", previews }: { mockupLab
   return (
     <section className="preview-gallery">
       <div className="preview-grid detail-preview-grid">
-        {previews.map((preview) => (
+        {previews.map((preview, index) => (
           <article className="pv" key={`${preview.sort}-${preview.prompt}`}>
+            <span className="preview-position" aria-hidden="true">{index + 1} / {previews.length}</span>
             <div className="pv-prompt">{preview.prompt}</div>
             <div className="pv-card">
               <div className="pv-mockup">

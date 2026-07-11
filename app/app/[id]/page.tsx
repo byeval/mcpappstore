@@ -1016,11 +1016,11 @@ export default async function AppDetailPage({
     <div className="page-stack">
       <nav className="crumbs">
         <Link href={href("/")}>{t.common.apps}</Link>
-        <svg fill="none" viewBox="0 0 24 24">
+        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24">
           <path d="M9 18 15 12 9 6" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
         </svg>
         <Link href={href(breadcrumbCategory.path)}>{breadcrumbCategory.name}</Link>
-        <svg fill="none" viewBox="0 0 24 24">
+        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24">
           <path d="M9 18 15 12 9 6" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
         </svg>
         <span>{app.name}</span>
@@ -1047,8 +1047,8 @@ export default async function AppDetailPage({
           <h1>{app.name}</h1>
           <p>{primaryDetails.tagline}</p>
           <div className="surface-badges detail-surfaces" aria-label={t.common.availableSurfaces}>
-            {app.surfaces.map((surface) => (
-              <PlatformBadge key={`${surface.platform}-${surface.type}`} label={surfaceLabelFor(surface, t.surface)} surface={surface} />
+            {app.surfaces.map((surface, index) => (
+              <PlatformBadge key={`${surface.platform}-${surface.type}-${index}`} label={surfaceLabelFor(surface, t.surface)} surface={surface} />
             ))}
           </div>
         </div>

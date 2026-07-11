@@ -97,6 +97,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html dir={localeDetail.dir} lang={localeDetail.htmlLang}>
       <body>
+        <a className="skip-link" href="#main-content">
+          {t.nav.browse}
+        </a>
         <div className="page-chrome">
           <header className="topnav">
             <Link className="brand" href={href("/")} prefetch={false}>
@@ -106,6 +109,21 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             <Link className="mobile-submit" href={href("/submit")} prefetch={false}>
               {t.common.submitYourMcp}
             </Link>
+            <details className="mobile-nav-menu">
+              <summary>{t.nav.browse}</summary>
+              <nav aria-label={t.nav.browse} className="mobile-nav-panel">
+                <Link href={href("/")} prefetch={false}>{t.nav.browse}</Link>
+                <Link href={href("/store")} prefetch={false}>{t.nav.apps}</Link>
+                <Link href={href("/mcp-clients")} prefetch={false}>{t.nav.clients}</Link>
+                <Link href={href("/mcp-inspector")} prefetch={false}>{t.nav.inspector}</Link>
+                <Link href={href("/skills")} prefetch={false}>{t.nav.skills}</Link>
+                <Link href={href("/chatgpt-apps")} prefetch={false}>{t.nav.chatgpt}</Link>
+                <Link href={href("/claude-connectors")} prefetch={false}>{t.nav.claude}</Link>
+                <Link href={href("/learn")} prefetch={false}>{t.nav.learn}</Link>
+                <Link className="mobile-nav-submit" href={href("/submit")} prefetch={false}>{t.common.submitYourMcp}</Link>
+                <LanguageSwitcher locale={locale} messages={t} pathname={pathname} />
+              </nav>
+            </details>
             <nav className="nav-right">
               <Link className="nav-link" href={href("/")} prefetch={false}>
                 {t.nav.browse}
@@ -137,7 +155,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
               </Link>
             </nav>
           </header>
-          <main>{children}</main>
+          <main id="main-content">{children}</main>
           <footer className="footer">
             <div className="footer-links">
               <Link className="submit-cta" href={href("/submit")} prefetch={false}>

@@ -55,9 +55,9 @@ export function AppCard({
         <p className="app-name">
           {app.name}
           <span className="surface-badges" aria-label={t.common.availableSurfaces}>
-            {app.surfaces.slice(0, 2).map((surface) => (
+            {app.surfaces.slice(0, 2).map((surface, index) => (
               <PlatformBadge
-                key={`${surface.platform}-${surface.type}`}
+                key={`${surface.platform}-${surface.type}-${index}`}
                 label={surfaceLabelFor(surface, t.surface)}
                 surface={surface}
               />
@@ -66,7 +66,7 @@ export function AppCard({
         </p>
         <p className="app-tag">{details.tagline}</p>
       </div>
-      <svg className="app-chev" fill="none" viewBox="0 0 24 24">
+      <svg aria-hidden="true" className="app-chev" fill="none" viewBox="0 0 24 24">
         <path d="M9 18 15 12 9 6" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
       </svg>
     </Link>

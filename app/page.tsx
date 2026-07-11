@@ -58,11 +58,12 @@ export default async function HomePage() {
           </p>
         </div>
         <form action={href("/search")} className="search">
+          <label className="sr-only" htmlFor="home-search">{t.common.search}</label>
           <svg aria-hidden="true" viewBox="0 0 24 24">
             <circle cx="11" cy="11" fill="none" r="7" stroke="currentColor" strokeWidth="2" />
             <path d="m20 20-3.5-3.5" fill="none" stroke="currentColor" strokeWidth="2" />
           </svg>
-          <input name="q" placeholder={t.home.searchPlaceholder} type="search" />
+          <input autoComplete="off" id="home-search" name="q" placeholder={t.home.searchPlaceholder} type="search" />
         </form>
       </header>
       <section className="home-quick-links" aria-label={t.home.quickLinksAria}>
@@ -75,24 +76,17 @@ export default async function HomePage() {
         <Link href={href("/mcp-inspector")} prefetch={false}>
           {t.home.quickInspector}
         </Link>
-        <Link href={href("/mcp-directory")} prefetch={false}>
-          {t.home.quickDirectory}
-        </Link>
-        <Link href={href("/mcp-servers")} prefetch={false}>
-          {t.home.quickServers}
-        </Link>
-        <Link href={href("/chatgpt-connectors")} prefetch={false}>
-          {t.home.quickChatgptConnectors}
-        </Link>
-        <Link href={href("/chatgpt-apps")} prefetch={false}>
-          {t.nav.chatgpt}
-        </Link>
-        <Link href={href("/claude-connectors")} prefetch={false}>
-          {t.nav.claude}
-        </Link>
-        <Link href={href("/apps")} prefetch={false}>
-          {t.nav.apps}
-        </Link>
+        <details className="quick-links-more">
+          <summary>{t.common.all}</summary>
+          <div>
+            <Link href={href("/mcp-directory")} prefetch={false}>{t.home.quickDirectory}</Link>
+            <Link href={href("/mcp-servers")} prefetch={false}>{t.home.quickServers}</Link>
+            <Link href={href("/chatgpt-connectors")} prefetch={false}>{t.home.quickChatgptConnectors}</Link>
+            <Link href={href("/chatgpt-apps")} prefetch={false}>{t.nav.chatgpt}</Link>
+            <Link href={href("/claude-connectors")} prefetch={false}>{t.nav.claude}</Link>
+            <Link href={href("/apps")} prefetch={false}>{t.nav.apps}</Link>
+          </div>
+        </details>
       </section>
       <HeroCarousel apps={featuredApps} locale={locale} messages={t} />
       <CategoryTabs activeSlug={undefined} categories={categories} locale={locale} messages={t} />
