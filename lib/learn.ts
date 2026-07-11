@@ -442,7 +442,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Use spreadsheet MCP apps when the assistant needs to inspect tables, explain formulas, draft reports, or update planning data with review.",
     readingTime: "6 min read",
-    updatedAt: "2026-04-25",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["spreadsheets", "productivity", "finance"],
     featuredAppIds: ["smartsheet", "microsoft-365", "google-drive", "google-drive-drivemcp", "word-by-anthropic"],
@@ -522,10 +522,10 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Coding agents benefit most from MCP apps that expose the right project context with safe operating boundaries.",
     readingTime: "7 min read",
-    updatedAt: "2026-04-25",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["coding agents", "developer tools", "Claude Code"],
-    featuredAppIds: ["github", "linear", "sentry", "vercel", "netlify", "desktop-commander", "microsoft-learn"],
+    featuredAppIds: ["github", "linear", "openai-developers", "sourcegraph", "retool", "latlng", "xquik"],
     primaryCta: { label: "Browse developer apps", href: "/category/developer-tools" },
     secondaryCta: { label: "Developer collection", href: "/collections/mcp-apps-for-developers" },
     relatedLinks: [
@@ -561,6 +561,7 @@ export const learnArticles: LearnArticle[] = [
         title: "What to check in a listing",
         body: [
           "A strong developer listing should state the host surface, transport, auth type, tools exposed, and whether actions run locally, remotely, or against production systems.",
+          "Recent directory additions also show two common developer-facing shapes: remote API connectors such as Xquik for social data workflows, and geospatial utility servers such as LatLng for maps, places, and coordinate lookups.",
         ],
         bullets: [
           "Does it work in your agent host, such as Claude Code, ChatGPT, or an IDE?",
@@ -606,10 +607,10 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Claude productivity connectors are most useful when they bring trusted workspace context into chat without over-broad permissions.",
     readingTime: "6 min read",
-    updatedAt: "2026-04-25",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["Claude connectors", "productivity", "team workflows"],
-    featuredAppIds: ["google-drive-drivemcp", "google-calendar-calendarmcp", "microsoft-365", "slack", "notion", "linear"],
+    featuredAppIds: ["google-drive", "google-calendar", "gmail", "notion", "linear", "dropbox"],
     primaryCta: { label: "Browse Claude connectors", href: "/claude-connectors" },
     secondaryCta: { label: "Productivity category", href: "/category/productivity" },
     relatedLinks: [
@@ -680,7 +681,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "The right surface depends on where users work, what the MCP server can do, and how much UI or workflow control the experience needs.",
     readingTime: "7 min read",
-    updatedAt: "2026-04-25",
+    updatedAt: "2026-07-12",
     intent: "guide",
     topics: ["ChatGPT apps", "Claude connectors", "MCP"],
     primaryCta: { label: "Browse ChatGPT apps", href: "/chatgpt-apps" },
@@ -768,7 +769,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "A directory helps teams compare MCP apps before they connect sensitive tools, data, or workflows to an assistant.",
     readingTime: "6 min read",
-    updatedAt: "2026-04-25",
+    updatedAt: "2026-07-12",
     intent: "guide",
     topics: ["MCP directory", "teams", "governance"],
     primaryCta: { label: "Browse the directory", href: "/" },
@@ -786,6 +787,7 @@ export const learnArticles: LearnArticle[] = [
         body: [
           "MCP makes it easier for assistants to connect to tools and data. That creates a discovery problem: teams need to know what an app does, where it runs, what it can access, and who publishes it before they connect it.",
           "A directory gives buyers and admins a place to compare categories, platform surfaces, example prompts, tools, auth types, privacy links, and related alternatives.",
+          "This is especially important now that ChatGPT apps and Claude connectors are converging around the same product names: Google Drive, Google Calendar, Gmail, GitHub, Notion, Linear, and other tools may appear as different host surfaces with different permissions.",
         ],
       },
       {
@@ -798,7 +800,7 @@ export const learnArticles: LearnArticle[] = [
           "Platform surface: ChatGPT app, Claude connector, Claude Code, or another MCP host.",
           "Capability level: read-only, write-capable, interactive, local, remote, or API-backed.",
           "Trust signals: publisher, homepage, privacy policy, terms, support, and version details.",
-          "Workflow evidence: previews, example prompts, tools, and related listings.",
+          "Workflow evidence: previews, example prompts, tools, related listings, and whether the listing was last refreshed from a current host directory.",
         ],
       },
       {
@@ -1391,7 +1393,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Review permissions, auth, data flow, publisher trust, logging, and write actions before rolling MCP apps into team workflows.",
     readingTime: "7 min read",
-    updatedAt: "2026-05-23",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["MCP security", "permissions", "team governance"],
     featuredAppIds: [
@@ -1439,6 +1441,7 @@ export const learnArticles: LearnArticle[] = [
         body: [
           "Authentication is part of the product boundary. A trustworthy listing should make it clear how accounts connect, where the MCP server runs, and whether the server stores user content.",
           "If a workflow touches sensitive data, ask for the same details you would ask from any integration vendor: privacy link, support path, retention policy, and failure behavior.",
+          "Remote HTTP MCP endpoints can return a healthy 401 or auth-required response when unauthenticated; treat that as a signal to review the auth model, not as proof that the tool is safe to connect.",
         ],
         bullets: [
           "Look for clear OAuth or account-connection language.",
@@ -1496,11 +1499,13 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Use document MCP apps when assistants need governed access to files, source documents, notes, PDFs, and shared knowledge systems.",
     readingTime: "6 min read",
-    updatedAt: "2026-05-23",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["documents", "knowledge bases", "PDF", "files"],
     featuredAppIds: [
       "google-drive",
+      "google-calendar",
+      "gmail",
       "microsoft-365",
       "sharepoint",
       "box",
@@ -1523,7 +1528,7 @@ export const learnArticles: LearnArticle[] = [
         id: "where-they-help",
         title: "Where document MCP apps help",
         body: [
-          "Document and knowledge MCP apps are useful when an assistant needs to find, compare, summarize, or update source material that already lives in a team's systems.",
+          "Document and knowledge MCP apps are useful when an assistant needs to find, compare, summarize, or update source material that already lives in a team's systems. The newer ChatGPT plugin surface makes this especially visible for Drive, email, calendar, notes, and project-management tools.",
           "The strongest workflows keep source context attached. Users should be able to open the file, page, note, ticket, or PDF that supports an answer.",
         ],
       },
@@ -1595,10 +1600,10 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Sales teams should use MCP apps to bring account context, CRM records, research, and outreach workflows into the assistant with clear permission boundaries.",
     readingTime: "6 min read",
-    updatedAt: "2026-05-23",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["sales", "CRM", "prospecting", "revenue operations"],
-    featuredAppIds: ["hubspot", "agentforce-sales", "apollo", "clay", "outreach", "close", "zoominfo", "common-room", "lusha"],
+    featuredAppIds: ["sales", "hubspot", "attio", "clay", "intercom", "highspot", "salesloft", "xquik"],
     primaryCta: { label: "Browse sales and marketing apps", href: "/collections/mcp-apps-for-sales-and-marketing" },
     secondaryCta: { label: "Open marketing analytics apps", href: "/collections/mcp-apps-for-marketing-analytics" },
     relatedLinks: [
@@ -1621,6 +1626,7 @@ export const learnArticles: LearnArticle[] = [
         title: "High-value sales workflows",
         body: [
           "Useful sales workflows usually combine retrieval and drafting. The assistant can find context, summarize it, and prepare a next step while the seller reviews the final action.",
+          "Social and market-signal connectors can complement CRM tools when teams need account context from public channels before drafting or prioritizing outreach.",
         ],
         bullets: [
           "Prepare an account brief from CRM, notes, website context, and recent conversations.",

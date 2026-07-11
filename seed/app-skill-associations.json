@@ -140,11 +140,25 @@
     "reason": "Publishing local changes to GitHub is a natural follow-up to repository work."
   },
   {
+    "appId": "gmail",
+    "skillId": "gmail",
+    "relationType": "recommended",
+    "confidence": 0.99,
+    "reason": "Candidate match from exact app and skill name match; app id and skill id overlap; 1 shared category."
+  },
+  {
     "appId": "gmail-gmailmcp",
     "skillId": "gmail",
     "relationType": "recommended",
     "confidence": 0.98,
     "reason": "The Gmail MCP server maps directly to Gmail email workflows."
+  },
+  {
+    "appId": "google-calendar",
+    "skillId": "google-calendar",
+    "relationType": "recommended",
+    "confidence": 0.99,
+    "reason": "Candidate match from exact app and skill name match; app id and skill id overlap; 1 shared category."
   },
   {
     "appId": "google-calendar-calendarmcp",

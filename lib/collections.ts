@@ -28,7 +28,7 @@ export const appCollections: AppCollection[] = [
       "Explore ChatGPT apps and MCP-backed tools for design briefs, images, diagrams, brand assets, prototypes, and design-to-code workflows.",
     summary:
       "A focused collection for teams that want visual workflows inside ChatGPT, from asset creation to design system support.",
-    updatedAt: "2026-04-24",
+    updatedAt: "2026-07-12",
     platform: "chatgpt",
     categorySlugs: ["design", "figma", "prototyping", "design-to-code", "images", "presentations", "slides"],
     appIds: [
@@ -151,7 +151,8 @@ export const appCollections: AppCollection[] = [
       "browser",
       "web-automation",
     ],
-    matchTerms: ["github", "api", "deploy", "browser", "terminal", "security"],
+    appIds: ["github", "openai-developers", "sourcegraph", "retool", "swagger", "latlng", "xquik"],
+    matchTerms: ["github", "api", "deploy", "browser", "terminal", "security", "geocoding", "social api"],
     primaryCategorySlug: "developer-tools",
     relatedLinks: [
       { label: "Build your first MCP app", href: "/learn/build-your-first-mcp-app" },
@@ -184,7 +185,7 @@ export const appCollections: AppCollection[] = [
       "Compare MCP apps for notes, calendars, documents, project management, automation, communication, meetings, and daily work.",
     summary:
       "Productivity MCP apps are useful when assistant work needs live context from tasks, documents, meetings, or team systems.",
-    updatedAt: "2026-04-24",
+    updatedAt: "2026-07-12",
     categorySlugs: [
       "productivity",
       "automation",
@@ -204,7 +205,19 @@ export const appCollections: AppCollection[] = [
       "collaboration",
       "workflow",
     ],
-    matchTerms: ["calendar", "notes", "meeting", "document", "workflow", "automation"],
+    appIds: [
+      "google-drive",
+      "google-calendar",
+      "gmail",
+      "notion",
+      "linear",
+      "clickup",
+      "dropbox",
+      "asana",
+      "superhuman-mail",
+      "zoom",
+    ],
+    matchTerms: ["calendar", "notes", "meeting", "document", "workflow", "automation", "drive", "email"],
     primaryCategorySlug: "productivity",
     relatedLinks: [
       { label: "What is an MCP app?", href: "/learn/what-is-an-mcp-app" },
@@ -239,8 +252,9 @@ export const appCollections: AppCollection[] = [
       "Browse MCP apps for CRM, prospecting, customer research, email workflows, marketing analytics, campaign work, and sales operations.",
     summary:
       "Sales and marketing MCP apps can connect assistants to the systems where customer, campaign, and pipeline context already lives.",
-    updatedAt: "2026-04-24",
+    updatedAt: "2026-07-12",
     categorySlugs: [
+      "sales",
       "sales-and-marketing",
       "marketing",
       "lead-generation",
@@ -252,7 +266,8 @@ export const appCollections: AppCollection[] = [
       "analytics",
       "business-insights",
     ],
-    matchTerms: ["crm", "sales", "marketing", "lead", "prospect", "campaign", "customer", "pipeline"],
+    appIds: ["sales", "hubspot", "attio", "clay", "intercom", "highspot", "salesloft", "xquik"],
+    matchTerms: ["crm", "sales", "marketing", "lead", "prospect", "campaign", "customer", "pipeline", "social"],
     primaryCategorySlug: "sales-and-marketing",
     relatedLinks: [
       { label: "Brand24 MCP guide", href: "/learn/brand24-mcp" },
@@ -286,7 +301,7 @@ export const appCollections: AppCollection[] = [
       "Compare MCP apps for brand monitoring, SEO research, AI visibility, campaign analytics, social listening, and marketing reporting workflows.",
     summary:
       "A search-focused collection for teams that want assistants to inspect marketing performance, brand visibility, and SEO signals from live tools.",
-    updatedAt: "2026-05-04",
+    updatedAt: "2026-07-12",
     categorySlugs: [
       "marketing",
       "sales-and-marketing",
@@ -294,6 +309,7 @@ export const appCollections: AppCollection[] = [
       "analytics",
       "brand-monitoring",
       "social-listening",
+      "social-media",
       "campaigns",
       "visibility",
       "search",
@@ -311,6 +327,7 @@ export const appCollections: AppCollection[] = [
       "ubersuggest",
       "posthog",
       "polar-analytics",
+      "xquik",
     ],
     matchTerms: [
       "brand24",
@@ -321,6 +338,8 @@ export const appCollections: AppCollection[] = [
       "brand monitoring",
       "ai visibility",
       "campaign",
+      "x",
+      "twitter",
       "search analytics",
     ],
     primaryCategorySlug: "sales-and-marketing",
@@ -356,7 +375,7 @@ export const appCollections: AppCollection[] = [
       "Browse MCP apps and connectors for observability, monitoring, logs, metrics, incidents, Kubernetes, security operations, and infrastructure troubleshooting.",
     summary:
       "A developer and operations collection for teams that want assistants to inspect systems, explain incidents, and summarize operational signals.",
-    updatedAt: "2026-05-04",
+    updatedAt: "2026-07-12",
     categorySlugs: [
       "observability",
       "monitoring",
@@ -429,7 +448,7 @@ export const appCollections: AppCollection[] = [
       "Find MCP apps for text-to-speech, transcription, voice agents, music, video, media search, creative assets, and audio-driven workflows.",
     summary:
       "A media-focused collection for assistant workflows that need speech, audio, video, creative assets, or media libraries.",
-    updatedAt: "2026-05-04",
+    updatedAt: "2026-07-12",
     categorySlugs: [
       "text-to-speech",
       "speech",
@@ -499,7 +518,7 @@ export const appCollections: AppCollection[] = [
       "Compare MCP apps for accounting, market research, business finance, payments, tax workflows, banking, and financial analysis.",
     summary:
       "A finance-focused collection for teams that need assistant access to live numbers, documents, analysis, and financial systems.",
-    updatedAt: "2026-04-25",
+    updatedAt: "2026-07-12",
     categorySlugs: [
       "finance",
       "financial-services",
@@ -565,7 +584,7 @@ export const appCollections: AppCollection[] = [
       "Browse MCP apps for flights, hotels, tours, maps, rentals, reservations, itinerary planning, and destination research.",
     summary:
       "Travel MCP apps help assistants move from broad trip ideas to concrete options across places to stay, ways to get around, and things to do.",
-    updatedAt: "2026-04-25",
+    updatedAt: "2026-07-12",
     categorySlugs: ["travel", "lifestyle", "maps", "routing", "geocoding", "vacation-rental", "airbnb"],
     appIds: [
       "booking-com",
@@ -582,8 +601,9 @@ export const appCollections: AppCollection[] = [
       "alltrails",
       "atlys",
       "makemytrip",
+      "latlng",
     ],
-    matchTerms: ["travel", "hotel", "flight", "trip", "itinerary", "booking", "rental", "tour", "maps"],
+    matchTerms: ["travel", "hotel", "flight", "trip", "itinerary", "booking", "rental", "tour", "maps", "geocoding", "places"],
     primaryCategorySlug: "travel",
     relatedLinks: [
       { label: "Travel category", href: "/category/travel" },
@@ -616,7 +636,7 @@ export const appCollections: AppCollection[] = [
       "Find ChatGPT apps for documents, notes, slides, files, project work, task workflows, collaboration, and everyday productivity.",
     summary:
       "A ChatGPT-focused shortlist for people who want the assistant to create, organize, summarize, and act on daily work artifacts.",
-    updatedAt: "2026-04-25",
+    updatedAt: "2026-07-12",
     platform: "chatgpt",
     categorySlugs: [
       "productivity",
@@ -644,6 +664,10 @@ export const appCollections: AppCollection[] = [
       "dropbox",
       "asana",
       "notion",
+      "google-calendar",
+      "gmail",
+      "linear",
+      "clickup",
       "slack",
     ],
     matchTerms: ["document", "pdf", "slides", "notes", "task", "calendar", "drive", "workspace", "meeting"],
