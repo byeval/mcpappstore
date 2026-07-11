@@ -57,6 +57,39 @@ interface ChatgptDirectoryCrawlResponse {
   details?: ChatgptDetailApp[];
 }
 
+interface ChatgptPluginsHomeResponse {
+  sections?: ChatgptPluginsSection[];
+}
+
+interface ChatgptPluginsSection {
+  id?: string;
+  urlSlug?: string;
+  title?: string;
+  plugins?: ChatgptPluginRecord[];
+}
+
+interface ChatgptPluginRecord {
+  id?: string;
+  name?: string | null;
+  description?: string | null;
+  keywords?: string[] | null;
+  interface?: {
+    display_name?: string | null;
+    short_description?: string | null;
+    long_description?: string | null;
+    icon?: string | null;
+    logo?: string | null;
+    logo_dark?: string | null;
+    developer_name?: string | null;
+    website_url?: string | null;
+    privacy_policy_url?: string | null;
+    terms_of_service_url?: string | null;
+    screenshot_urls?: string[] | null;
+  } | null;
+  status?: string | null;
+  source?: string | null;
+}
+
 interface ChatgptDirectoryApp {
   id?: string;
   display_name?: string | null;
@@ -741,7 +774,123 @@ function parseDirectoryApps(cards: ChatgptDirectoryApp[], details: ChatgptDetail
   return normalizedApps;
 }
 
+function parsePluginsHome(source: ChatgptPluginsHomeResponse): CatalogApp[] {
+  const now = Date.now();
+  const seenIds = new Set<string>();
+  const recordsByExternalId = new Map<string, { plugin: ChatgptPluginRecord; categories: string[]; index: number }>();
+  let index = 0;
+
+  for (const section of source.sections ?? []) {
+    const category = slugify(section.urlSlug ?? section.id ?? section.title ?? "featured") || "featured";
+    for (const plugin of section.plugins ?? []) {
+      const externalId = normalizeText(plugin.id);
+      const appName = normalizeText(plugin.interface?.display_name ?? plugin.name ?? undefined);
+      if (!externalId || !appName || plugin.status?.toUpperCase() === "DISABLED") {
+        continue;
+      }
+
+      const existing = recordsByExternalId.get(externalId);
+      if (existing) {
+        existing.categories.push(category);
+        continue;
+      }
+
+      recordsByExternalId.set(externalId, { plugin, categories: [category], index });
+      index += 1;
+    }
+  }
+
+  return [...recordsByExternalId.values()].map(({ plugin, categories: rawCategories, index: appIndex }) => {
+    const appName = normalizeText(plugin.interface?.display_name ?? plugin.name ?? undefined) ?? "Unknown";
+    const externalId = normalizeText(plugin.id) ?? appName;
+    const id = uniqueSlug(appName, externalId, seenIds);
+    const tagline =
+      normalizeText(plugin.interface?.short_description ?? undefined) ??
+      normalizeText(plugin.description ?? undefined) ??
+      "Imported from the ChatGPT plugins directory.";
+    const description =
+      normalizeText(plugin.interface?.long_description ?? undefined) ??
+      normalizeText(plugin.description ?? undefined) ??
+      tagline;
+    const categories = [...new Set(rawCategories.length > 0 ? rawCategories : ["featured"])];
+    const screenshotUrls = plugin.interface?.screenshot_urls ?? [];
+    const previews = screenshotUrls
+      .map((imageUrl, previewIndex) => ({
+        sort: previewIndex,
+        prompt: `Use ${appName}`,
+        imageKey: `previews/${id}/${previewIndex + 1}.jpg`,
+        imageUrl,
+      }))
+      .filter((preview) => Boolean(preview.imageUrl));
+
+    return {
+      id,
+      name: appName,
+      tagline,
+      description,
+      iconKey: undefined,
+      iconUrl:
+        normalizeText(plugin.interface?.icon ?? undefined) ??
+        normalizeText(plugin.interface?.logo ?? undefined) ??
+        normalizeText(plugin.interface?.logo_dark ?? undefined),
+      homepageUrl: normalizeText(plugin.interface?.website_url ?? undefined),
+      repoUrl: undefined,
+      mcpEndpoint: undefined,
+      mcpTransport: "http",
+      installCmd: undefined,
+      authType: "oauth",
+      publisher: normalizeText(plugin.interface?.developer_name ?? undefined) ?? "Unknown",
+      publisherUrl: normalizeText(plugin.interface?.website_url ?? undefined),
+      capabilities: ["Interactive"],
+      version: undefined,
+      privacyUrl: normalizeText(plugin.interface?.privacy_policy_url ?? undefined),
+      termsUrl: normalizeText(plugin.interface?.terms_of_service_url ?? undefined),
+      supportUrl: undefined,
+      status: "published",
+      isFeatured: categories.includes("featured") || appIndex < 6,
+      examplePrompts: [],
+      source: "chatgpt_seed",
+      createdAt: now,
+      updatedAt: now,
+      publishedAt: now,
+      surfaces: [
+        {
+          platform: "chatgpt",
+          type: "app",
+          displayName: appName,
+          tagline,
+          description,
+          url: `https://chatgpt.com/plugins/${externalId}`,
+          externalId,
+          mcpEndpoint: undefined,
+          mcpTransport: "http",
+          authType: "oauth",
+          capabilities: ["Interactive"],
+          examplePrompts: [],
+          tools: [],
+          previews,
+          isPrimary: true,
+          status: "available",
+        },
+      ],
+      categories,
+      tags: plugin.keywords ?? [],
+      tools: [],
+      previews,
+    } satisfies CatalogApp;
+  });
+}
+
 function toCatalogApps(source: unknown): CatalogApp[] {
+  if (
+    source &&
+    typeof source === "object" &&
+    Array.isArray((source as ChatgptPluginsHomeResponse).sections) &&
+    ((source as ChatgptPluginsHomeResponse).sections ?? []).some((section) => Array.isArray(section.plugins))
+  ) {
+    return parsePluginsHome(source as ChatgptPluginsHomeResponse);
+  }
+
   if (Array.isArray(source) && source.every((item) => item && typeof item === "object" && "app_metadata" in item)) {
     return parseDetailResponse(source as ChatgptDetailApp[]);
   }
@@ -799,6 +948,56 @@ function toCatalogApps(source: unknown): CatalogApp[] {
 function detectBucketName(configText: string): string | undefined {
   const match = configText.match(/"bucket_name"\s*:\s*"([^"]+)"/);
   return match?.[1];
+}
+
+async function readExistingCatalog(path: string): Promise<SeedCatalog | undefined> {
+  try {
+    return JSON.parse(await readFile(path, "utf8")) as SeedCatalog;
+  } catch {
+    return undefined;
+  }
+}
+
+function surfaceKey(surface: CatalogApp["surfaces"][number]): string {
+  return [surface.platform, surface.type, surface.externalId ?? "", surface.url ?? ""].join(":");
+}
+
+function mergeWithExistingCatalog(apps: CatalogApp[], existingCatalog: SeedCatalog | undefined): CatalogApp[] {
+  if (!existingCatalog) {
+    return apps;
+  }
+
+  const existingById = new Map(existingCatalog.apps.map((app) => [app.id, app]));
+  const mergedApps = apps.map((app) => {
+    const existing = existingById.get(app.id);
+    if (!existing) {
+      return app;
+    }
+
+    const surfaces = [...app.surfaces];
+    const surfaceKeys = new Set(surfaces.map(surfaceKey));
+    for (const surface of existing.surfaces) {
+      if (!surfaceKeys.has(surfaceKey(surface))) {
+        surfaces.push(surface);
+      }
+    }
+
+    return {
+      ...app,
+      createdAt: existing.createdAt ?? app.createdAt,
+      skills: app.skills ?? existing.skills,
+      surfaces,
+    };
+  });
+
+  const mergedIds = new Set(mergedApps.map((app) => app.id));
+  for (const existing of existingCatalog.apps) {
+    if (!mergedIds.has(existing.id)) {
+      mergedApps.push(existing);
+    }
+  }
+
+  return mergedApps;
 }
 
 async function uploadFileToR2(
@@ -996,9 +1195,10 @@ async function main() {
     });
   }
 
+  const mergedApps = mergeWithExistingCatalog(apps, await readExistingCatalog(options.outputPath));
   const catalog: SeedCatalog = {
-    categories: normalizeCategories(apps),
-    apps,
+    categories: normalizeCategories(mergedApps),
+    apps: mergedApps,
   };
 
   await mkdir(dirname(options.outputPath), { recursive: true });
@@ -1006,6 +1206,9 @@ async function main() {
 
   console.log(`Wrote normalized catalog JSON to ${options.outputPath}`);
   console.log(`Kept ${apps.length} ChatGPT app(s).`);
+  if (mergedApps.length > apps.length) {
+    console.log(`Preserved ${mergedApps.length - apps.length} existing app(s) that were absent from the latest ChatGPT scrape.`);
+  }
   console.log(`Kept ${keptWithoutPreviews} app(s) without usable preview images for SEO only.`);
   console.log(`Downloaded ${downloadedIcons} icon(s) and ${downloadedPreviews} preview image(s) into ${mediaRoot}`);
   if (skippedPreviewAssets > 0) {

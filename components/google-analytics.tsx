@@ -26,8 +26,8 @@ export function GoogleAnalyticsPageTracker({ measurementId }: { measurementId: s
     window.dataLayer = window.dataLayer || [];
 
     if (typeof window.gtag !== "function") {
-      window.gtag = (...args: unknown[]) => {
-        window.dataLayer.push(args);
+      window.gtag = function gtag() {
+        window.dataLayer.push(arguments);
       };
     }
 

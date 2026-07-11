@@ -17,16 +17,14 @@ require_file() {
 }
 
 has_cloudflare_auth() {
-  if [[ -n "${CLOUDFLARE_API_TOKEN:-}" ]]; then
-    return 0
-  fi
-
   local whoami_output
   if ! whoami_output="$(npx wrangler whoami 2>&1)"; then
     return 1
   fi
 
-  if grep -qi "not authenticated" <<<"$whoami_output"; then
+  if grep -Eqi \
+    "not authenticated|unable to resolve cloudflare's api hostname|no internet connection|network connectivity issues|dns resolver|firewall or vpn blocking dns requests|error" \
+    <<<"$whoami_output"; then
     return 1
   fi
 
@@ -108,7 +106,7 @@ if [[ "$legacy_claude_sources_available" == true ]]; then
 fi
 
 log "Merging Claude connectors from public directory"
-npm run scrape:claude-connectors -- seed/chatgpt-apps.json tmp-claude-public-connectors.json
+npm run scrape:claude-connectors -- seed/chatgpt-apps.json tmp-claude-public-connectors.json --cache-on-fail
 
 log "Refreshing skills catalog and candidate report"
 npm run skills:refresh -- --skip-seed

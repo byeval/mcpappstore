@@ -21,6 +21,18 @@ function run(command: string, args: string[]): void {
   }
 }
 
+function runIfPossible(command: string, args: string[]): boolean {
+  try {
+    run(command, args);
+    return true;
+  } catch (error) {
+    console.warn(
+      `Skipping ${command} ${args.join(" ")} and keeping the existing skill registry: ${error instanceof Error ? error.message : String(error)}`,
+    );
+    return false;
+  }
+}
+
 function markdownForCandidates(candidates: SkillAssociationCandidate[], threshold: number): string {
   const lines = [
     "# Skill Association Candidates",
@@ -62,7 +74,7 @@ async function main() {
   const skipSeed = process.argv.includes("--skip-seed");
 
   if (!skipImport) {
-    run("npm", [
+    runIfPossible("npm", [
       "run",
       "skills:import:skills-sh",
       "--",

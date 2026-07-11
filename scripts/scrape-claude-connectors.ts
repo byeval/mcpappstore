@@ -36,6 +36,7 @@ interface PublicClaudeConnectorDetail {
 interface CliOptions {
   catalogPath: string;
   rawPath: string;
+  cacheMode: "refresh" | "cache-only" | "cache-on-fail";
 }
 
 const sourceUrl = "https://claude.com/connectors";
@@ -43,10 +44,38 @@ const requestTimeoutMs = 20_000;
 const detailConcurrency = Number(process.env.CLAUDE_CONNECTOR_DETAIL_CONCURRENCY ?? "8");
 
 function parseCliOptions(argv: string[]): CliOptions {
+  const positional: string[] = [];
+  let cacheMode: CliOptions["cacheMode"] = "refresh";
+
+  for (const arg of argv) {
+    if (arg === "--cache-only") {
+      cacheMode = "cache-only";
+      continue;
+    }
+    if (arg === "--cache-on-fail") {
+      cacheMode = "cache-on-fail";
+      continue;
+    }
+    positional.push(arg);
+  }
+
   return {
-    catalogPath: resolve(process.cwd(), argv[0] ?? "seed/chatgpt-apps.json"),
-    rawPath: resolve(process.cwd(), argv[1] ?? "tmp-claude-public-connectors.json"),
+    catalogPath: resolve(process.cwd(), positional[0] ?? "seed/chatgpt-apps.json"),
+    rawPath: resolve(process.cwd(), positional[1] ?? "tmp-claude-public-connectors.json"),
+    cacheMode,
   };
+}
+
+async function readCachedConnectors(rawPath: string): Promise<PublicClaudeConnector[]> {
+  const cached = JSON.parse(await readFile(rawPath, "utf8")) as {
+    connectors?: PublicClaudeConnector[];
+  };
+
+  if (!Array.isArray(cached.connectors) || cached.connectors.length === 0) {
+    throw new Error(`No cached Claude connectors found in ${rawPath}`);
+  }
+
+  return cached.connectors;
 }
 
 function decodeHtml(value: string | undefined): string {
@@ -437,11 +466,33 @@ function mergePublicConnectors(catalog: SeedCatalog, connectors: PublicClaudeCon
 
 async function main() {
   const options = parseCliOptions(process.argv.slice(2));
-  const connectors = await scrapeConnectors();
+  let connectors: PublicClaudeConnector[];
+
+  if (options.cacheMode === "cache-only") {
+    connectors = await readCachedConnectors(options.rawPath);
+    console.log(`Loaded ${connectors.length} cached public Claude connector(s) from ${options.rawPath}.`);
+  } else {
+    try {
+      connectors = await scrapeConnectors();
+    } catch (error) {
+      if (options.cacheMode !== "cache-on-fail") {
+        throw error;
+      }
+
+      console.warn(
+        `Falling back to cached Claude connectors from ${options.rawPath}: ${error instanceof Error ? error.message : String(error)}`,
+      );
+      connectors = await readCachedConnectors(options.rawPath);
+      console.log(`Loaded ${connectors.length} cached public Claude connector(s) from ${options.rawPath}.`);
+    }
+  }
+
   const catalog = JSON.parse(await readFile(options.catalogPath, "utf8")) as SeedCatalog;
   const result = mergePublicConnectors(catalog, connectors);
 
-  await writeFile(options.rawPath, `${JSON.stringify({ crawledAt: new Date().toISOString(), sourceUrl, connectors }, null, 2)}\n`, "utf8");
+  if (options.cacheMode !== "cache-only") {
+    await writeFile(options.rawPath, `${JSON.stringify({ crawledAt: new Date().toISOString(), sourceUrl, connectors }, null, 2)}\n`, "utf8");
+  }
   await writeFile(options.catalogPath, `${JSON.stringify(catalog, null, 2)}\n`, "utf8");
 
   console.log(`Fetched ${connectors.length} public Claude connector(s).`);
