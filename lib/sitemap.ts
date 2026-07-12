@@ -16,6 +16,7 @@ import { isIndexableCategory } from "@/lib/seo-indexing";
 import { absoluteUrl } from "@/lib/utils";
 import { localizedPath, supportedLocales } from "@/lib/i18n";
 import { skillPath } from "@/lib/skill-routes";
+import { mcpTopics } from "@/lib/topics";
 
 type ChangeFrequency = "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
 
@@ -229,6 +230,15 @@ export async function buildStaticSitemapEntries(): Promise<SitemapEntry[]> {
     })),
     ...localizedEntries("/mcp-directory", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 0.92 }),
     ...localizedEntries("/mcp-servers", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 0.9 }),
+    ...localizedEntries("/remote-mcp-servers", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 0.88 }),
+    ...localizedEntries("/official-mcp-servers", { lastModified: catalogLastModified, changeFrequency: "weekly", priority: 0.82 }),
+    ...localizedEntries("/popular-searches", { lastModified: catalogLastModified, changeFrequency: "weekly", priority: 0.78 }),
+    ...localizedEntries("/topics", { lastModified: staticLastModified, changeFrequency: "weekly", priority: 0.86 }),
+    ...mcpTopics.flatMap((topic) => localizedEntries(`/topics/${topic.slug}`, {
+      lastModified: staticLastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
     ...localizedEntries("/mcp-inspector", { lastModified: staticLastModified, changeFrequency: "monthly", priority: 0.78 }),
     ...localizedEntries("/store", { lastModified: catalogLastModified, changeFrequency: "daily", priority: 0.9 }),
     ...localizedEntries("/skills", { lastModified: skillsLastModified, changeFrequency: "daily", priority: 0.82 }),

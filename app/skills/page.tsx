@@ -60,6 +60,23 @@ function queryPath(params: { q?: string; source?: string; category?: string }): 
   return value ? `/skills?${value}` : "/skills";
 }
 
+function providerForSkill(skill: CatalogSkill): string {
+  if (skill.sourceType === "external" && skill.sourceUrl) {
+    try {
+      const path = new URL(skill.sourceUrl).pathname.split("/").filter(Boolean);
+      return path.length >= 2 ? `${path[0]}/${path[1]}` : "skills.sh";
+    } catch {
+      return "skills.sh";
+    }
+  }
+
+  if (skill.sourceType === "bundled") {
+    return "Bundled";
+  }
+
+  return "Local";
+}
+
 export default async function SkillsDirectoryPage({
   searchParams,
 }: {
@@ -82,6 +99,19 @@ export default async function SkillsDirectoryPage({
   const localCount = skills.length - externalCount;
   const categories = Array.from(new Set(skills.flatMap((skill) => skill.categories))).sort();
   const activeFilterCount = [q, source, category].filter(Boolean).length;
+  const providerSummaries = Array.from(
+    skills.reduce((map, skill) => {
+      const provider = providerForSkill(skill);
+      map.set(provider, (map.get(provider) ?? 0) + 1);
+      return map;
+    }, new Map<string, number>()),
+  )
+    .map(([provider, count]) => ({ provider, count }))
+    .sort((left, right) => right.count - left.count || left.provider.localeCompare(right.provider))
+    .slice(0, 10);
+  const featuredSkills = skills
+    .filter((skill) => /official|frontend|react|cloudflare|figma|github|pdf|browser|design/i.test(`${skill.description} ${skill.tags.join(" ")}`))
+    .slice(0, 6);
 
   return (
     <div className="page-stack">
@@ -106,6 +136,39 @@ export default async function SkillsDirectoryPage({
             <span>{copy.localAndBundled}</span>
           </div>
         </div>
+
+        <section className="directory-content-section" aria-labelledby="skill-library-title">
+          <div className="directory-section-head">
+            <p className="eyebrow">Agent skills library</p>
+            <h2 id="skill-library-title">Browse by provider, source, and workflow</h2>
+            <p>Skills are reusable instruction and code packages for coding agents. Use them alongside MCP apps when a workflow needs agent behavior, local files, project rules, or repeatable implementation guidance.</p>
+          </div>
+          <div className="directory-card-grid">
+            {providerSummaries.slice(0, 6).map((item) => (
+              <div className="directory-card" key={item.provider}>
+                <span>{item.provider}</span>
+                <strong>{item.count} skills</strong>
+                <p>Filter the library to compare categories, tags, install signals, and related MCP app associations.</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="directory-content-section" aria-labelledby="featured-skills-title">
+          <div className="directory-section-head">
+            <p className="eyebrow">Featured skill paths</p>
+            <h2 id="featured-skills-title">Start with broadly useful agent skills</h2>
+          </div>
+          <div className="directory-example-list">
+            {featuredSkills.map((skill) => (
+              <Link href={href(skillPath(skill.id))} key={skill.id} prefetch={false}>
+                <strong>{skill.displayName}</strong>
+                <span>{skill.description}</span>
+                <small>{sourceLabel(skill.sourceType, copy)} · {skill.categories.slice(0, 3).join(", ")}</small>
+              </Link>
+            ))}
+          </div>
+        </section>
 
         <div className="skill-category-strip" aria-label={copy.categoriesAria}>
           <Link className={!category ? "active" : ""} href={href(queryPath({ q, source }))} prefetch={false}>

@@ -76,11 +76,19 @@ export default async function HomePage() {
         <Link href={href("/mcp-inspector")} prefetch={false}>
           {t.home.quickInspector}
         </Link>
+        <Link href={href("/remote-mcp-servers")} prefetch={false}>
+          Remote MCP servers
+        </Link>
+        <Link href={href("/topics")} prefetch={false}>
+          MCP topics
+        </Link>
         <details className="quick-links-more">
           <summary>{t.common.all}</summary>
           <div>
             <Link href={href("/mcp-directory")} prefetch={false}>{t.home.quickDirectory}</Link>
             <Link href={href("/mcp-servers")} prefetch={false}>{t.home.quickServers}</Link>
+            <Link href={href("/official-mcp-servers")} prefetch={false}>Official MCP servers</Link>
+            <Link href={href("/popular-searches")} prefetch={false}>Popular searches</Link>
             <Link href={href("/chatgpt-connectors")} prefetch={false}>{t.home.quickChatgptConnectors}</Link>
             <Link href={href("/chatgpt-apps")} prefetch={false}>{t.nav.chatgpt}</Link>
             <Link href={href("/claude-connectors")} prefetch={false}>{t.nav.claude}</Link>

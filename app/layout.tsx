@@ -117,6 +117,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                 <Link href={href("/store")} prefetch={false}>{t.nav.apps}</Link>
                 <Link href={href("/mcp-clients")} prefetch={false}>{t.nav.clients}</Link>
                 <Link href={href("/mcp-inspector")} prefetch={false}>{t.nav.inspector}</Link>
+                <Link href={href("/remote-mcp-servers")} prefetch={false}>Remote</Link>
+                <Link href={href("/topics")} prefetch={false}>Topics</Link>
                 <Link href={href("/skills")} prefetch={false}>{t.nav.skills}</Link>
                 <Link href={href("/chatgpt-apps")} prefetch={false}>{t.nav.chatgpt}</Link>
                 <Link href={href("/claude-connectors")} prefetch={false}>{t.nav.claude}</Link>
@@ -137,6 +139,12 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
               </Link>
               <Link className="nav-link" href={href("/mcp-inspector")} prefetch={false}>
                 {t.nav.inspector}
+              </Link>
+              <Link className="nav-link" href={href("/remote-mcp-servers")} prefetch={false}>
+                Remote
+              </Link>
+              <Link className="nav-link" href={href("/topics")} prefetch={false}>
+                Topics
               </Link>
               <Link className="nav-link" href={href("/skills")} prefetch={false}>
                 {t.nav.skills}
@@ -171,6 +179,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                   <Link className="footer-link" href={href("/store")} prefetch={false}>{t.nav.apps}</Link>
                   <Link className="footer-link" href={href("/mcp-clients")} prefetch={false}>{t.nav.clients}</Link>
                   <Link className="footer-link" href={href("/mcp-inspector")} prefetch={false}>{t.nav.inspector}</Link>
+                  <Link className="footer-link" href={href("/remote-mcp-servers")} prefetch={false}>Remote MCP servers</Link>
+                  <Link className="footer-link" href={href("/topics")} prefetch={false}>MCP topics</Link>
                   <Link className="footer-link" href={href("/skills")} prefetch={false}>{t.nav.skills}</Link>
                   <Link className="footer-link" href={href("/collections")} prefetch={false}>{t.common.collections}</Link>
                 </div>
