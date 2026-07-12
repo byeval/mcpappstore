@@ -19,6 +19,16 @@ function stripLeadingMention(prompt: string, appName: string): string {
   return prompt.replace(/^@\S+\s*/, "");
 }
 
+function normalizePreviewText(value: string): string {
+  return value
+    .toLocaleLowerCase()
+    .replace(/^@\S+\s*/, "")
+    .replace(/[’‘]/g, "'")
+    .replace(/\s+/g, " ")
+    .replace(/[.!?]+$/, "")
+    .trim();
+}
+
 export function HeroCarousel({
   apps,
   locale = "en",
@@ -64,6 +74,11 @@ export function HeroCarousel({
   });
   const primaryPreview = activeDetails.previews[0];
   const previewImageUrl = primaryPreview?.imageUrl;
+  const previewPrompt = primaryPreview ? stripLeadingMention(primaryPreview.prompt, activeApp.name) : "";
+  const previewCaption = primaryPreview?.caption ?? activeDetails.examplePrompts[0] ?? activeDetails.tagline;
+  const showPreviewCaption = Boolean(
+    previewCaption && normalizePreviewText(previewCaption) !== normalizePreviewText(previewPrompt),
+  );
 
   return (
     <section
@@ -116,7 +131,7 @@ export function HeroCarousel({
           <div className="bubble-stack">
             {primaryPreview ? (
               <div className="bubble-prompt">
-                <b>@{activeApp.name}</b> {stripLeadingMention(primaryPreview.prompt, activeApp.name)}
+                <b>@{activeApp.name}</b> {previewPrompt}
               </div>
             ) : null}
             {primaryPreview && previewImageUrl ? (
@@ -129,15 +144,13 @@ export function HeroCarousel({
                       fetchPriority="high"
                       height={540}
                       loading="eager"
-                      sizes="(max-width: 640px) 78vw, 360px"
+                      sizes="(max-width: 960px) 42vw, 720px"
                       src={optimizedImageUrl(previewImageUrl)}
                       width={720}
                     />
                   </div>
                 </div>
-                <div className="bubble-text">
-                  {primaryPreview.caption ?? activeDetails.examplePrompts[0] ?? activeDetails.tagline}
-                </div>
+                {showPreviewCaption ? <div className="bubble-text">{previewCaption}</div> : null}
               </div>
             ) : null}
           </div>

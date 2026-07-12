@@ -5749,7 +5749,8 @@ body {
 
 .bubble-stack {
   width: 100%;
-  max-width: none;
+  max-width: 720px;
+  margin-left: auto;
   align-items: stretch;
 }
 
@@ -5771,7 +5772,7 @@ body {
 }
 
 .bubble-thumb {
-  height: 220px;
+  height: clamp(240px, 17vw, 300px);
   aspect-ratio: auto;
   border-radius: 0;
   background: var(--surface);
