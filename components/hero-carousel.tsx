@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import type { CatalogApp } from "@/lib/types";
 import { PlatformBadge } from "@/components/platform-badge";
@@ -25,12 +28,27 @@ export function HeroCarousel({
   locale?: Locale;
   messages?: I18nMessages;
 }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (apps.length < 2 || isPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % apps.length);
+    }, 6000);
+
+    return () => window.clearInterval(interval);
+  }, [apps.length, isPaused]);
+
   if (apps.length === 0) {
     return null;
   }
 
   const t = messages ?? getMessages(locale);
-  const activeApp = apps[0]!;
+  const activeApp = apps[activeIndex] ?? apps[0]!;
   const activeSurface = primarySurface(activeApp.surfaces);
   const activeDetails = surfaceDetails(activeSurface, {
     tagline: activeApp.tagline,
@@ -48,7 +66,17 @@ export function HeroCarousel({
   const previewImageUrl = primaryPreview?.imageUrl;
 
   return (
-    <section className="hero-carousel">
+    <section
+      className="hero-carousel"
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          setIsPaused(false);
+        }
+      }}
+      onFocus={() => setIsPaused(true)}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div className="hero-inner">
         <div className="hero-left">
           <div className="hero-icon">
@@ -115,9 +143,16 @@ export function HeroCarousel({
           </div>
         </div>
       </div>
-      <div className="hero-dots" aria-hidden="true">
+      <div className="hero-dots" aria-label="Featured apps">
         {apps.map((app, index) => (
-          <span className={index === 0 ? "dot active" : "dot"} key={app.id} />
+          <button
+            aria-label={`Show ${app.name}`}
+            aria-pressed={index === activeIndex}
+            className={index === activeIndex ? "dot active" : "dot"}
+            key={app.id}
+            onClick={() => setActiveIndex(index)}
+            type="button"
+          />
         ))}
       </div>
     </section>
