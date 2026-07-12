@@ -99,7 +99,8 @@ export default async function HomePage() {
         <div className="home-learn-links">
           {learning.slice(0, 3).map((article) => (
             <Link href={href(`/learn/${article.slug}`)} key={article.slug} prefetch={false}>
-              {article.title}
+              <span>{article.title}</span>
+              <span aria-hidden="true" className="home-learn-arrow">→</span>
             </Link>
           ))}
         </div>

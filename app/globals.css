@@ -5836,6 +5836,10 @@ body {
 }
 
 .home-learn-links a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
   min-height: 68px;
   padding: 14px 22px;
   border: 0;
@@ -5845,9 +5849,9 @@ body {
   box-shadow: none;
 }
 
-.home-learn-links a::after {
+.home-learn-arrow {
   color: var(--accent);
-  content: " →";
+  line-height: 1;
 }
 
 .home-directory-head {
