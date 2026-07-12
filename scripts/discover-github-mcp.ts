@@ -23,6 +23,12 @@ interface GithubSearchResponse {
   items: GithubRepo[];
 }
 
+interface QueryWarning {
+  query: string;
+  page: number;
+  message: string;
+}
+
 function argValue(name: string): string | undefined {
   const index = process.argv.indexOf(name);
   return index >= 0 ? process.argv[index + 1] : undefined;
@@ -93,18 +99,37 @@ async function main() {
     .split(",")
     .map((query) => query.trim())
     .filter(Boolean);
-  const limit = Number(argValue("--limit") ?? 50);
+  const limit = Number(argValue("--limit") ?? 500);
+  const perPage = Number(argValue("--per-page") ?? 100);
+  const pages = Number(argValue("--pages") ?? 3);
   const outputPath = argValue("--output") ?? "reports/github-mcp-discovery.json";
   const markdownPath = argValue("--report") ?? "reports/github-mcp-discovery.md";
 
-  const results = await Promise.all(queries.map(async (query) => {
-    const url = new URL("https://api.github.com/search/repositories");
-    url.searchParams.set("q", query);
-    url.searchParams.set("sort", "updated");
-    url.searchParams.set("order", "desc");
-    url.searchParams.set("per_page", String(Math.min(Math.max(limit, 1), 100)));
-    return { query, result: await fetchJson<GithubSearchResponse>(url.toString()) };
-  }));
+  const pageCount = Math.min(Math.max(Number.isFinite(pages) ? Math.floor(pages) : 3, 1), 10);
+  const pageSize = Math.min(Math.max(Number.isFinite(perPage) ? Math.floor(perPage) : 100, 1), 100);
+  const results: Array<{ query: string; page: number; result: GithubSearchResponse }> = [];
+  const warnings: QueryWarning[] = [];
+
+  for (const query of queries) {
+    for (let page = 1; page <= pageCount; page += 1) {
+      const url = new URL("https://api.github.com/search/repositories");
+      url.searchParams.set("q", query);
+      url.searchParams.set("sort", "updated");
+      url.searchParams.set("order", "desc");
+      url.searchParams.set("per_page", String(pageSize));
+      url.searchParams.set("page", String(page));
+      try {
+        results.push({ query, page, result: await fetchJson<GithubSearchResponse>(url.toString()) });
+      } catch (error) {
+        warnings.push({
+          query,
+          page,
+          message: error instanceof Error ? error.message : String(error),
+        });
+        break;
+      }
+    }
+  }
 
   const repoByName = new Map<string, GithubRepo>();
   for (const { result } of results) {
@@ -113,23 +138,27 @@ async function main() {
     }
   }
 
+  const repoLimit = Math.max(Number.isFinite(limit) ? Math.floor(limit) : 500, 1);
   const repos = [...repoByName.values()]
     .map((repo) => ({ ...repo, score: repoScore(repo) }))
     .sort((left, right) => right.score - left.score || right.stargazers_count - left.stargazers_count)
-    .slice(0, limit);
+    .slice(0, repoLimit);
   const generatedAt = new Date().toISOString();
   const payload = {
     generatedAt,
     queries,
+    pages: pageCount,
+    perPage: pageSize,
     totalCount: results.reduce((sum, item) => sum + item.result.total_count, 0),
     incompleteResults: results.some((item) => item.result.incomplete_results),
+    warnings,
     repos,
   };
 
   await mkdir(dirname(resolve(process.cwd(), outputPath)), { recursive: true });
   await writeFile(resolve(process.cwd(), outputPath), `${JSON.stringify(payload, null, 2)}\n`, "utf8");
   await writeFile(resolve(process.cwd(), markdownPath), markdownReport(repos, generatedAt), "utf8");
-  console.log(JSON.stringify({ queries, totalCount: payload.totalCount, repos: repos.length, output: outputPath }, null, 2));
+  console.log(JSON.stringify({ queries, pages: pageCount, perPage: pageSize, totalCount: payload.totalCount, repos: repos.length, output: outputPath }, null, 2));
 }
 
 await main();

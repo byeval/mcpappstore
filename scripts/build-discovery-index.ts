@@ -4,6 +4,7 @@ import { dirname, resolve } from "node:path";
 import type { CatalogApp, SeedCatalog } from "../lib/types";
 
 const defaultGithubDiscoveryPath = "reports/github-mcp-discovery.json";
+const defaultNpmDiscoveryPath = "reports/npm-mcp-discovery.json";
 const defaultSeedPath = "seed/chatgpt-apps.json";
 const defaultOutputPath = "data/discovery-index.json";
 const defaultReportPath = "reports/discovery-index.md";
@@ -32,7 +33,7 @@ interface GithubDiscoveryReport {
 
 interface DiscoveryCandidate {
   id: string;
-  source: "github";
+  source: "github" | "npm";
   sourceId: string;
   name: string;
   url: string;
@@ -73,6 +74,35 @@ interface DiscoveryIndex {
     existingCatalogApps: number;
   };
   candidates: DiscoveryCandidate[];
+}
+
+interface NpmDiscoveryPackage {
+  qualityScore?: number;
+  package: {
+    name: string;
+    version: string;
+    description?: string;
+    keywords?: string[];
+    date: string;
+    links?: {
+      npm?: string;
+      homepage?: string;
+      repository?: string;
+    };
+    publisher?: {
+      username?: string;
+    };
+  };
+  score?: {
+    final?: number;
+  };
+}
+
+interface NpmDiscoveryReport {
+  generatedAt: string;
+  queries: string[];
+  totalCount: number;
+  packages: NpmDiscoveryPackage[];
 }
 
 function argValue(name: string): string | undefined {
@@ -200,6 +230,7 @@ function scoreGithubRepo(repo: GithubRepo): Pick<DiscoveryCandidate, "qualitySco
 
 function existingMaps(apps: CatalogApp[]) {
   const repoUrlToAppId = new Map<string, string>();
+  const installPackageToAppId = new Map<string, string>();
   const appIds = new Set<string>();
 
   for (const app of apps) {
@@ -208,9 +239,13 @@ function existingMaps(apps: CatalogApp[]) {
     if (normalized) {
       repoUrlToAppId.set(normalized, app.id);
     }
+    const installPackage = app.installCmd?.match(/(?:npx|npm i|npm install|pnpm dlx|bunx)\s+(?:-y\s+)?(@?[\w.-]+\/?[\w.-]*)/i)?.[1];
+    if (installPackage) {
+      installPackageToAppId.set(installPackage.toLowerCase(), app.id);
+    }
   }
 
-  return { repoUrlToAppId, appIds };
+  return { repoUrlToAppId, installPackageToAppId, appIds };
 }
 
 function githubCandidate(repo: GithubRepo, catalog: SeedCatalog, discoveredAt: string): DiscoveryCandidate {
@@ -246,6 +281,109 @@ function githubCandidate(repo: GithubRepo, catalog: SeedCatalog, discoveredAt: s
   };
 }
 
+function scoreNpmPackage(item: NpmDiscoveryPackage): Pick<DiscoveryCandidate, "qualityScore" | "confidence" | "reasons" | "warnings" | "status"> {
+  const pkg = item.package;
+  const haystack = `${pkg.name} ${pkg.description ?? ""} ${(pkg.keywords ?? []).join(" ")}`.toLowerCase();
+  const reasons: string[] = [];
+  const warnings: string[] = [];
+  const baseScore = item.score?.final ?? 0;
+  let score = Math.round(baseScore <= 1 ? baseScore * 100 : Math.min(baseScore / 5, 120));
+
+  if (/\bmcp\b|model context protocol/.test(haystack)) {
+    score += 45;
+    reasons.push("package metadata mentions MCP");
+  }
+  if (/server/.test(haystack)) {
+    score += 25;
+    reasons.push("package metadata indicates server");
+  }
+  if (/claude|cursor|agent|llm/.test(haystack)) {
+    score += 8;
+    reasons.push("agent/client ecosystem signal");
+  }
+  if (/client|inspector|sdk|framework|awesome|template|example/.test(haystack)) {
+    score -= 30;
+    warnings.push("may be a client, SDK, framework, template, or example");
+  }
+  if (!pkg.links?.repository) {
+    warnings.push("missing repository link");
+  }
+
+  const updatedDays = Math.max(0, Math.floor((Date.now() - new Date(pkg.date).getTime()) / 86_400_000));
+  if (updatedDays <= 30) score += 15;
+  else if (updatedDays <= 180) score += 8;
+  else if (updatedDays > 540) {
+    score -= 20;
+    warnings.push("stale package activity");
+  }
+
+  const confidence = Math.max(0.05, Math.min(0.99, score / 220));
+  let status: DiscoveryCandidateStatus =
+    score >= 170 && warnings.length === 0 ? "verified" :
+    score >= 120 ? "indexed" :
+    score >= 70 ? "candidate" :
+    "rejected";
+  if (warnings.some((warning) => /client|SDK|framework|template|example/i.test(warning)) && status === "indexed") {
+    status = "candidate";
+  }
+
+  return { qualityScore: score, confidence, reasons, warnings, status };
+}
+
+function npmCategories(item: NpmDiscoveryPackage): string[] {
+  const haystack = `${item.package.name} ${item.package.description ?? ""} ${(item.package.keywords ?? []).join(" ")}`.toLowerCase();
+  const categories = ["mcp"];
+  const rules: Array<[RegExp, string]> = [
+    [/github|gitlab|code|developer|sdk|api/, "developer-tools"],
+    [/aws|azure|gcp|cloudflare|kubernetes|terraform|docker|devops|circleci/, "devops"],
+    [/postgres|mysql|sqlite|database|sql\b|redis|mongodb|vector/, "data"],
+    [/browser|playwright|puppeteer|chrome|scrap/, "browser"],
+    [/security|audit|threat|scan/, "security"],
+    [/finance|stripe|payment|billing|stock|crypto/, "finance"],
+    [/pdf|document|notion|excel|spreadsheet|drive|docs?/, "documents"],
+    [/figma|design|image|creative|drawio/, "design"],
+    [/slack|gmail|email|calendar|productivity/, "productivity"],
+    [/search|rag|vector|knowledge|retrieval/, "search"],
+  ];
+
+  for (const [pattern, category] of rules) {
+    if (pattern.test(haystack)) categories.push(category);
+  }
+
+  return Array.from(new Set(categories)).slice(0, 8);
+}
+
+function npmCandidate(item: NpmDiscoveryPackage, catalog: SeedCatalog, discoveredAt: string): DiscoveryCandidate {
+  const { repoUrlToAppId, installPackageToAppId } = existingMaps(catalog.apps);
+  const pkg = item.package;
+  const normalizedRepoUrl = normalizeUrl(pkg.links?.repository);
+  const duplicateOf = (normalizedRepoUrl ? repoUrlToAppId.get(normalizedRepoUrl) : undefined) ?? installPackageToAppId.get(pkg.name.toLowerCase());
+  const scored = scoreNpmPackage(item);
+  const status: DiscoveryCandidateStatus = duplicateOf ? "duplicate" : scored.status;
+  const warnings = duplicateOf ? [...scored.warnings, "already present in the main catalog"] : scored.warnings;
+
+  return {
+    id: `npm:${slugify(pkg.name)}`,
+    source: "npm",
+    sourceId: pkg.name,
+    name: pkg.name,
+    url: pkg.links?.npm ?? `https://www.npmjs.com/package/${encodeURIComponent(pkg.name)}`,
+    repoUrl: pkg.links?.repository ?? pkg.links?.npm ?? `https://www.npmjs.com/package/${encodeURIComponent(pkg.name)}`,
+    description: pkg.description,
+    status,
+    qualityScore: scored.qualityScore,
+    confidence: scored.confidence,
+    reasons: scored.reasons,
+    warnings,
+    duplicateOf,
+    language: "JavaScript",
+    topics: pkg.keywords ?? [],
+    categories: npmCategories(item),
+    lastActivityAt: pkg.date,
+    discoveredAt,
+  };
+}
+
 function markdownReport(index: DiscoveryIndex): string {
   const lines = [
     "# MCP Discovery Index",
@@ -276,18 +414,23 @@ function markdownReport(index: DiscoveryIndex): string {
 
 async function main() {
   const githubDiscoveryPath = argValue("--github") ?? defaultGithubDiscoveryPath;
+  const npmDiscoveryPath = argValue("--npm") ?? defaultNpmDiscoveryPath;
   const seedPath = argValue("--seed") ?? defaultSeedPath;
   const outputPath = argValue("--output") ?? defaultOutputPath;
   const reportPath = argValue("--report") ?? defaultReportPath;
-  const [catalogRaw, githubRaw] = await Promise.all([
+  const [catalogRaw, githubRaw, npmRaw] = await Promise.all([
     readFile(resolve(process.cwd(), seedPath), "utf8"),
     readFile(resolve(process.cwd(), githubDiscoveryPath), "utf8"),
+    readFile(resolve(process.cwd(), npmDiscoveryPath), "utf8").catch(() => ""),
   ]);
   const catalog = JSON.parse(catalogRaw) as SeedCatalog;
   const github = JSON.parse(githubRaw) as GithubDiscoveryReport;
+  const npm = npmRaw ? JSON.parse(npmRaw) as NpmDiscoveryReport : undefined;
   const generatedAt = new Date().toISOString();
-  const candidates = github.repos
-    .map((repo) => githubCandidate(repo, catalog, generatedAt))
+  const candidates = [
+    ...github.repos.map((repo) => githubCandidate(repo, catalog, generatedAt)),
+    ...(npm?.packages ?? []).map((item) => npmCandidate(item, catalog, generatedAt)),
+  ]
     .sort((left, right) => {
       const statusRank: Record<DiscoveryCandidateStatus, number> = {
         verified: 0,
@@ -318,6 +461,13 @@ async function main() {
         totalCount: github.totalCount,
         importedCount: github.repos.length,
       },
+      ...(npm ? [{
+        id: "npm-mcp-discovery",
+        type: "npm-search",
+        sourcePath: npmDiscoveryPath,
+        totalCount: npm.totalCount,
+        importedCount: npm.packages.length,
+      }] : []),
     ],
     stats,
     candidates,
