@@ -52,7 +52,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Understand the difference between the user-facing app, the MCP server behind it, and the host where the app runs.",
     readingTime: "5 min read",
-    updatedAt: "2026-04-24",
+    updatedAt: "2026-07-12",
     intent: "guide",
     topics: ["MCP", "ChatGPT apps", "Claude connectors"],
     primaryCta: { label: "Browse MCP apps", href: "/" },
@@ -69,7 +69,7 @@ export const learnArticles: LearnArticle[] = [
         title: "The short definition",
         body: [
           "An MCP app is a product experience that lets an AI assistant reach outside the chat window. It usually combines a name, description, tools, permissions, and sometimes an embedded UI. The technical layer underneath is an MCP server.",
-          "The server exposes capabilities through the Model Context Protocol, while a host such as ChatGPT, Claude, Claude Code, or another MCP-compatible client decides how those capabilities appear to the user.",
+          "The server exposes capabilities through the Model Context Protocol, while a host such as ChatGPT, Claude, Claude Code, desktop clients, or another MCP-compatible client decides how those capabilities appear to the user.",
         ],
         callout:
           "On this directory, we use app for the listing people browse, and server for the backend endpoint that exposes tools.",
@@ -98,7 +98,7 @@ export const learnArticles: LearnArticle[] = [
         id: "chatgpt-vs-claude",
         title: "ChatGPT apps vs Claude connectors",
         body: [
-          "A ChatGPT app is a ChatGPT-facing experience built on an MCP server, and it can optionally include an embedded UI. A Claude connector is a Claude-facing connection to an MCP server or service that gives Claude access to external context and tools.",
+          "A ChatGPT app is a ChatGPT-facing experience built on an MCP server, and it can optionally include an embedded UI. A Claude connector is a Claude-facing connection to an MCP server or service that gives Claude access to external context and tools. Some newer listings, such as MCP360-style gateways, are best evaluated by the surfaces they expose rather than by a single host label.",
           "Many products can support both. The useful question is not which label is better, but which host your users already work in and which actions your server can safely perform.",
         ],
       },
@@ -144,7 +144,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Start with one safe workflow, define a small tool contract, add auth and testing, then package the result for discovery.",
     readingTime: "8 min read",
-    updatedAt: "2026-04-24",
+    updatedAt: "2026-07-12",
     intent: "tutorial",
     topics: ["MCP server", "Apps SDK", "builder checklist"],
     primaryCta: { label: "Submit a listing", href: "/submit" },
@@ -161,7 +161,7 @@ export const learnArticles: LearnArticle[] = [
         title: "1. Pick one workflow",
         body: [
           "The easiest first app is not a whole product. It is one narrow workflow with a clear before and after: search records, summarize a project, create a task, update a design, or query a database.",
-          "Write the user promise in one sentence before you write code. If the promise needs more than one sentence, split it into smaller tools.",
+          "Write the user promise in one sentence before you write code. If the promise needs more than one sentence, split it into smaller tools. Recent submissions such as LatLng and MCP360 are good reminders that small, clearly-scoped utility apps can be more useful than broad bundles.",
         ],
         bullets: [
           "Good first workflow: Search open support tickets and summarize the top blockers.",
@@ -220,7 +220,7 @@ export const learnArticles: LearnArticle[] = [
         ],
         bullets: [
           "Add homepage, privacy, terms, and support URLs.",
-          "List every platform surface separately: ChatGPT app, Claude connector, Claude Code, or another host.",
+          "List every platform surface separately: ChatGPT app, Claude connector, Claude Code, desktop client, or another host.",
           "Include example prompts that show real use, not marketing claims.",
           "Prefer least-privilege OAuth scopes and read-only first releases.",
         ],
@@ -267,7 +267,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Compare design app patterns and know when to use a visual ChatGPT app instead of a general prompt.",
     readingTime: "6 min read",
-    updatedAt: "2026-04-24",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["ChatGPT apps", "design", "creative workflows"],
     featuredAppIds: ["canva", "figma", "adobe-express", "adobe-photoshop", "shutterstock", "miro"],
@@ -293,6 +293,7 @@ export const learnArticles: LearnArticle[] = [
         title: "Common design workflows",
         body: [
           "Most useful design apps fit into a few repeatable patterns. Use the pattern to choose the app, then judge the result by how little cleanup it needs.",
+          "The directory now also tracks skills and client surfaces, so design teams can compare a visual ChatGPT app with a coding or frontend-design skill when the work ends in production UI.",
         ],
         bullets: [
           "Brief to first draft: turn a campaign idea into a post, deck, wireframe, or moodboard.",
@@ -349,7 +350,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Use Claude connectors for data access when you need governed context, scoped tools, and conversational analysis.",
     readingTime: "7 min read",
-    updatedAt: "2026-04-24",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["Claude connectors", "databases", "analytics"],
     featuredAppIds: ["airtable", "bigquery", "motherduck", "neon-postgres", "supabase", "notion"],
@@ -403,6 +404,7 @@ export const learnArticles: LearnArticle[] = [
         title: "What to check before connecting",
         body: [
           "Data connectors deserve stricter review than simple content apps. Before you connect a production database, check the transport, auth type, permission model, privacy policy, support path, and the exact tools exposed by the MCP server.",
+          "The current catalog includes both product connectors and skill-driven data workflows, including Databricks-related skills, so teams should evaluate the host, the data boundary, and the execution environment together.",
         ],
       },
     ],
@@ -854,7 +856,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Use tldraw with Claude when a visual workflow needs a shared canvas for diagrams, wireframes, architecture sketches, or mind maps.",
     readingTime: "5 min read",
-    updatedAt: "2026-05-06",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["tldraw", "Claude connectors", "diagrams", "design"],
     featuredAppIds: ["tldraw", "figma", "miro", "canva"],
@@ -879,7 +881,7 @@ export const learnArticles: LearnArticle[] = [
         id: "best-workflows",
         title: "Best workflows for tldraw and Claude",
         body: [
-          "tldraw is a good fit when the user wants Claude to reason visually and then keep the result in a canvas. The value is not just generating a first draft; it is being able to adjust the visual object and continue the conversation from that shared state.",
+          "tldraw is a good fit when the user wants Claude to reason visually and then keep the result in a canvas. The value is not just generating a first draft; it is being able to adjust the visual object and continue the conversation from that shared state. Compare it with design apps and frontend skills when the work needs to move from sketch to production UI.",
         ],
         bullets: [
           "Turn a product idea into a wireframe or user flow.",
@@ -942,7 +944,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Brand24 is useful when marketing or PR teams want an assistant to summarize brand mentions, sentiment, trends, and online conversations.",
     readingTime: "5 min read",
-    updatedAt: "2026-05-06",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["Brand24", "ChatGPT apps", "brand monitoring", "marketing analytics"],
     featuredAppIds: ["brand24", "semrush", "ahrefs", "supermetrics", "peec-ai"],
@@ -985,7 +987,7 @@ export const learnArticles: LearnArticle[] = [
         bullets: [
           "Check whether answers cite mentions, media sources, campaigns, or date ranges.",
           "Separate read-only analysis from actions that publish, reply, or change campaigns.",
-          "Compare Brand24 with SEO, AI visibility, and campaign analytics tools when the question crosses channels.",
+          "Compare Brand24 with SEO, AI visibility, social-data, and campaign analytics tools when the question crosses channels.",
           "Use recurring report prompts only after the first manual results look reliable.",
         ],
       },
@@ -1017,7 +1019,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Morningstar is a finance-focused MCP app and connector for market insight workflows that need trusted investment context and careful review.",
     readingTime: "6 min read",
-    updatedAt: "2026-05-06",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["Morningstar", "finance", "market data", "Claude connectors"],
     featuredAppIds: ["morningstar", "factset-ai-ready-data", "pitchbook", "aiera", "massive-market-data"],
@@ -1034,7 +1036,7 @@ export const learnArticles: LearnArticle[] = [
         id: "what-it-does",
         title: "What the Morningstar MCP app does",
         body: [
-          "The Morningstar listing describes access to Morningstar AI-ready capabilities, including analyst research, market analysis, and investment data for workflows across ChatGPT and Claude.",
+          "The Morningstar listing describes access to Morningstar AI-ready capabilities, including analyst research, market analysis, and investment data for workflows across ChatGPT and Claude. The finance collection now also groups market-data, company-data, and spreadsheet-adjacent tools for comparison.",
           "For SEO and discovery, the important distinction is that this is not a generic finance chatbot. It is a connected app or connector that can support market research workflows from a trusted financial data context.",
         ],
       },
@@ -1092,7 +1094,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "PDF viewer MCP apps help assistants inspect documents, extract text, navigate files, and support review workflows without turning every PDF into pasted chat text.",
     readingTime: "6 min read",
-    updatedAt: "2026-05-06",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["PDF", "Anthropic", "Claude connectors", "documents"],
     featuredAppIds: ["ant-dir-gh-anthropic-pdf-server-mcp", "pdf-viewer", "smallpdf", "anypdf-your-pdf-converter", "pdf-tools-view-fill-merge-split-manage-pages-extract"],
@@ -1110,7 +1112,7 @@ export const learnArticles: LearnArticle[] = [
         title: "What a PDF viewer MCP app does",
         body: [
           "A PDF viewer MCP app connects an assistant to document viewing or document utility actions. Depending on the listing, that may include reading, search, navigation, annotations, form filling, conversion, compression, merge, split, or extraction.",
-          "The search phrase Anthropic PDF viewer usually points to Claude-facing PDF workflows, but the directory also includes ChatGPT PDF apps. The right page depends on whether you need interactive viewing, document conversion, or structured extraction.",
+          "The search phrase Anthropic PDF viewer usually points to Claude-facing PDF workflows, but the directory also includes ChatGPT PDF apps, document skills, and knowledge-base connectors. The right page depends on whether you need interactive viewing, document conversion, or structured extraction.",
         ],
       },
       {
@@ -1168,7 +1170,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "n8n MCP is useful when Claude needs to inspect, run, or manage automation workflows without making every automation step manual.",
     readingTime: "5 min read",
-    updatedAt: "2026-05-06",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["n8n", "Claude connectors", "automation", "workflows"],
     featuredAppIds: ["n8n", "zapier", "tray-ai", "apify", "coupler-io"],
@@ -1185,7 +1187,7 @@ export const learnArticles: LearnArticle[] = [
         id: "what-it-does",
         title: "What the n8n MCP connector does",
         body: [
-          "The n8n listing describes a Claude connector that lets users talk to an n8n instance, create and test automations, and manage resources such as workflows, data tables, and projects.",
+          "The n8n listing describes a Claude connector that lets users talk to an n8n instance, create and test automations, and manage resources such as workflows, data tables, and projects. It belongs beside gateway-style listings such as MCP360 when teams compare automation coverage across hosts.",
           "That makes n8n a good candidate when the assistant should understand automation context and help operate workflow systems rather than only draft instructions.",
         ],
       },
@@ -1243,7 +1245,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Calendly in Claude is useful when scheduling needs conversational context, event type management, availability checks, and booking workflow review.",
     readingTime: "5 min read",
-    updatedAt: "2026-05-06",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["Calendly", "Claude connectors", "calendar", "productivity"],
     featuredAppIds: ["calendly", "google-calendar-calendarmcp", "microsoft-365", "motion", "busycal"],
@@ -1261,7 +1263,7 @@ export const learnArticles: LearnArticle[] = [
         title: "What Calendly to Claude means",
         body: [
           "The Calendly listing describes a Claude connector for scheduling workflows such as managing event types, availability, bookings, and scheduling links from conversation.",
-          "This is useful when scheduling is not just a calendar lookup. The assistant can help reason through meeting type, audience, availability, and follow-up context before an action is taken.",
+          "This is useful when scheduling is not just a calendar lookup. The assistant can help reason through meeting type, audience, availability, and follow-up context before an action is taken. Compare Calendly with broader workspace connectors when the workflow also needs email, docs, or CRM context.",
         ],
       },
       {
@@ -1318,7 +1320,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Pyroscope-related MCP workflows are strongest when profiling data sits next to dashboards, logs, metrics, alerts, and incident context.",
     readingTime: "6 min read",
-    updatedAt: "2026-05-06",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["Pyroscope", "Grafana", "observability", "Claude connectors"],
     featuredAppIds: ["grafana-mcp-server", "honeycomb", "dynatrace-mcp-server", "incident-io", "pagerduty"],
@@ -1335,7 +1337,7 @@ export const learnArticles: LearnArticle[] = [
         id: "what-it-does",
         title: "Where Pyroscope fits in MCP workflows",
         body: [
-          "Pyroscope is represented in this directory through the Grafana MCP Server listing, which includes observability categories such as dashboards, metrics, logs, alerting, incidents, and profiling.",
+          "Pyroscope is represented in this directory through the Grafana MCP Server listing, which includes observability categories such as dashboards, metrics, logs, alerting, incidents, and profiling. Developer skills such as Firecrawl and cloud-platform skills now sit alongside these app listings when teams plan incident and diagnostics workflows.",
           "For searchers looking for Pyroscope MCP, the practical question is whether the connector can help an assistant inspect profiling context alongside the rest of the incident or performance picture.",
         ],
       },
@@ -1684,7 +1686,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Research MCP apps are most useful when they return source-backed context, help compare evidence, and keep citations or records attached to each claim.",
     readingTime: "6 min read",
-    updatedAt: "2026-05-23",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["research", "education", "citations", "science"],
     featuredAppIds: [
@@ -1713,7 +1715,7 @@ export const learnArticles: LearnArticle[] = [
         title: "Where research MCP apps help",
         body: [
           "Research and education workflows need traceability. The assistant should help users discover, compare, and summarize sources while keeping enough metadata to verify the result.",
-          "These apps are useful for literature search, course discovery, citation review, scientific databases, clinical trial context, and internal research libraries.",
+          "These apps are useful for literature search, course discovery, citation review, scientific databases, clinical trial context, and internal research libraries. The refreshed catalog also makes it easier to compare app listings with relevant skills and MCP clients for research workflows.",
         ],
       },
       {
@@ -1784,7 +1786,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Browser automation MCP tools help assistants inspect pages, collect structured data, test workflows, and operate web UIs when APIs are not enough.",
     readingTime: "7 min read",
-    updatedAt: "2026-05-23",
+    updatedAt: "2026-07-12",
     intent: "use-case",
     topics: ["browser automation", "web scraping", "testing", "agents"],
     featuredAppIds: [
@@ -1810,7 +1812,7 @@ export const learnArticles: LearnArticle[] = [
         id: "why-browser",
         title: "Why browser automation belongs in MCP",
         body: [
-          "Some workflows do not have a clean API, or the API does not show what a user actually sees. Browser automation MCP tools let assistants inspect pages, fill forms, run tests, capture evidence, and interact with web apps through controlled tools.",
+          "Some workflows do not have a clean API, or the API does not show what a user actually sees. Browser automation MCP tools let assistants inspect pages, fill forms, run tests, capture evidence, and interact with web apps through controlled tools. With the refreshed skills data, teams can compare browser apps with browser-oriented skills before choosing a runtime.",
           "The best use cases are bounded. Give the assistant a site, task, and stopping condition instead of an open-ended command to browse the web.",
         ],
       },

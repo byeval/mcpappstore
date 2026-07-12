@@ -76,7 +76,7 @@ export const appCollections: AppCollection[] = [
       "Browse Claude connectors and MCP servers for databases, warehouses, analytics dashboards, BI tools, and governed data workflows.",
     summary:
       "A practical shortlist for data teams that want Claude to query, summarize, and explain business or operational data.",
-    updatedAt: "2026-04-24",
+    updatedAt: "2026-07-12",
     platform: "claude",
     categorySlugs: [
       "data",
@@ -93,7 +93,7 @@ export const appCollections: AppCollection[] = [
       "company-data",
       "market-data",
     ],
-    appIds: ["airtable", "bigquery", "motherduck", "neon-postgres", "supabase", "snowflake", "databricks"],
+    appIds: ["airtable", "bigquery", "motherduck", "neon-postgres", "supabase", "snowflake", "databricks", "mcp360"],
     matchTerms: ["postgres", "bigquery", "snowflake", "databricks", "analytics", "dashboard", "warehouse", "sql"],
     primaryCategorySlug: "data",
     relatedLinks: [
@@ -105,6 +105,7 @@ export const appCollections: AppCollection[] = [
       "Confirm whether the connector is read-only or can write back to the source system.",
       "Check auth, workspace scoping, and which tables, dashboards, or datasets Claude can reach.",
       "Prefer connectors that return structured results with enough context for follow-up analysis.",
+      "Compare direct database connectors with gateway-style options when one endpoint needs to cover multiple systems.",
     ],
     faqs: [
       {
@@ -127,7 +128,7 @@ export const appCollections: AppCollection[] = [
       "Find MCP apps and connectors for coding, API work, testing, observability, infrastructure, browser automation, and developer workflows.",
     summary:
       "Developer-focused MCP apps help assistants read code context, inspect services, search docs, automate browsers, and operate tools with narrower context switching.",
-    updatedAt: "2026-04-24",
+    updatedAt: "2026-07-12",
     categorySlugs: [
       "developer-tools",
       "code",
@@ -151,8 +152,8 @@ export const appCollections: AppCollection[] = [
       "browser",
       "web-automation",
     ],
-    appIds: ["github", "openai-developers", "sourcegraph", "retool", "swagger", "latlng", "xquik"],
-    matchTerms: ["github", "api", "deploy", "browser", "terminal", "security", "geocoding", "social api"],
+    appIds: ["github", "openai-developers", "sourcegraph", "retool", "swagger", "latlng", "xquik", "mcp360", "databricks"],
+    matchTerms: ["github", "api", "deploy", "browser", "terminal", "security", "geocoding", "social api", "gateway", "databricks"],
     primaryCategorySlug: "developer-tools",
     relatedLinks: [
       { label: "Build your first MCP app", href: "/learn/build-your-first-mcp-app" },
@@ -163,6 +164,7 @@ export const appCollections: AppCollection[] = [
       "Look for precise tool descriptions so the assistant knows when to call each action.",
       "Prefer integrations with clear read/write boundaries for repos, tickets, deployments, and environments.",
       "Check whether local tools require install commands, remote auth, or workspace-specific setup.",
+      "For gateway or multi-tool apps, verify each downstream permission instead of approving the gateway as one broad capability.",
     ],
     faqs: [
       {
