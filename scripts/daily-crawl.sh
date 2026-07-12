@@ -111,6 +111,12 @@ npm run scrape:claude-connectors -- seed/chatgpt-apps.json tmp-claude-public-con
 log "Refreshing skills catalog and candidate report"
 npm run skills:refresh -- --skip-seed
 
+log "Refreshing MCP clients catalog"
+npm run clients:import
+
+log "Checking data source health"
+npm run data:health
+
 log "Generating seed SQL"
 npm run seed
 
