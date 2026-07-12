@@ -18,6 +18,12 @@
     "rejectedAt": "2026-05-05T19:17:22.493Z"
   },
   {
+    "appId": "make",
+    "skillId": "skills-sh:open.feishu.cn/lark-skill-maker",
+    "reason": "Rejected during skill association review.",
+    "rejectedAt": "2026-07-12T06:42:12.585Z"
+  },
+  {
     "appId": "uber",
     "skillId": "skills-sh:microsoft/azure-skills/azure-kubernetes",
     "reason": "False positive from substring overlap; Azure Kubernetes is unrelated to the Uber app.",

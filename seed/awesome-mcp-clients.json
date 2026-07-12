@@ -4,7 +4,7 @@
     "repoUrl": "https://github.com/punkpeye/awesome-mcp-clients",
     "readmeUrl": "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/README.md"
   },
-  "generatedAt": "2026-05-23T00:00:00.000Z",
+  "generatedAt": "2026-07-12T00:00:00.000Z",
   "clients": [
     {
       "id": "openclaw",
@@ -222,6 +222,31 @@
         }
       ],
       "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#aiaw"
+    },
+    {
+      "id": "ano",
+      "name": "Ano",
+      "summary": "Ano is a collaborative chat and workspace for developers with a native in-app terminal, integrated AI, and direct MCP client support.",
+      "descriptionMarkdown": "**Ano** is a collaborative chat and workspace for devs that features a native in-app terminal and integrated AI (like Claude Code). It is built as an MCP client, allowing users to run local CLIs, trigger custom automations, and connect to any Model Context Protocol (MCP) server directly from their channels.",
+      "githubUrl": null,
+      "websiteUrl": "https://ano.chat/",
+      "license": "Proprietary",
+      "type": "Web, Desktop app",
+      "platforms": [
+        "macOS",
+        "Windows",
+        "Linux",
+        "Web"
+      ],
+      "pricing": "Free (during beta)",
+      "programmingLanguages": [
+        "TypeScript",
+        "Rust",
+        "Swift"
+      ],
+      "installCommands": [],
+      "screenshots": [],
+      "sourceUrl": "https://github.com/punkpeye/awesome-mcp-clients#ano"
     },
     {
       "id": "astrbot",

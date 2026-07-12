@@ -135,7 +135,7 @@ async function fetchText(url: string): Promise<string> {
 function parseLeaderboardEntries(html: string): SkillsShEntry[] {
   const normalized = html.replace(/\\"/g, "\"").replace(/\\u002F/g, "/");
   const entries = new Map<string, SkillsShEntry>();
-  const pattern = /\{"source":"([^"]+)","skillId":"([^"]+)","name":"([^"]+)","installs":(\d+)\}/g;
+  const pattern = /\{"source":"([^"]+)","skillId":"([^"]+)","name":"([^"]+)","installs":(\d+)(?:,[^{}]*)?\}/g;
 
   for (const match of normalized.matchAll(pattern)) {
     const [, source, skillId, name, installs] = match;
