@@ -85245,6 +85245,1053 @@
       "tools": [],
       "previews": [],
       "submitterEmail": "hoeshilee18@gmail.com"
+    },
+    {
+      "id": "containers-kubernetes",
+      "name": "Kubernetes",
+      "tagline": "Model Context Protocol (MCP) server for Kubernetes and OpenShift",
+      "description": "Model Context Protocol (MCP) server for Kubernetes and OpenShift",
+      "homepageUrl": "https://github.com/containers/kubernetes-mcp-server",
+      "repoUrl": "https://github.com/containers/kubernetes-mcp-server",
+      "mcpTransport": "stdio",
+      "authType": "none",
+      "publisher": "containers",
+      "publisherUrl": "https://github.com/containers",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Open source",
+        "MCP server",
+        "Local MCP",
+        "No auth"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Use Kubernetes to inspect available MCP tools and summarize what it can do.",
+        "Configure Kubernetes for a local Claude-compatible MCP client.",
+        "Review Kubernetes's repository metadata before using it in a production agent."
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783841336171,
+      "updatedAt": 1783678925000,
+      "publishedAt": 1783841336171,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Kubernetes",
+          "tagline": "Model Context Protocol (MCP) server for Kubernetes and OpenShift",
+          "description": "Model Context Protocol (MCP) server for Kubernetes and OpenShift",
+          "url": "https://github.com/containers/kubernetes-mcp-server",
+          "mcpTransport": "stdio",
+          "authType": "none",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Open source",
+            "MCP server",
+            "Local MCP",
+            "No auth"
+          ],
+          "examplePrompts": [
+            "Use Kubernetes to inspect available MCP tools and summarize what it can do.",
+            "Configure Kubernetes for a local Claude-compatible MCP client.",
+            "Review Kubernetes's repository metadata before using it in a production agent."
+          ],
+          "tools": [
+            {
+              "name": "inspect_infra"
+            }
+          ],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools",
+        "devops"
+      ],
+      "tags": [
+        "github-discovery",
+        "mcp-server",
+        "go",
+        "containers",
+        "context",
+        "kubernetes",
+        "kubernetes-mcp",
+        "mcp",
+        "model",
+        "modelcontextprotocol",
+        "openshift",
+        "protocol",
+        "stars-1797"
+      ],
+      "tools": [
+        {
+          "name": "inspect_infra"
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "robotmcp-ros",
+      "name": "ROS MCP Server",
+      "tagline": "Connect AI models like Claude & GPT with robots using MCP and ROS.",
+      "description": "Connect AI models like Claude & GPT with robots using MCP and ROS.",
+      "homepageUrl": "https://github.com/robotmcp/ros-mcp-server",
+      "repoUrl": "https://github.com/robotmcp/ros-mcp-server",
+      "mcpTransport": "stdio",
+      "installCmd": "uvx ros-mcp-server",
+      "authType": "none",
+      "publisher": "robotmcp",
+      "publisherUrl": "https://github.com/robotmcp",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Open source",
+        "MCP server",
+        "Local MCP",
+        "No auth"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Use ROS MCP Server to inspect available MCP tools and summarize what it can do.",
+        "Configure ROS MCP Server for a local Claude-compatible MCP client.",
+        "Review ROS MCP Server's repository metadata before using it in a production agent."
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783841336171,
+      "updatedAt": 1783761445000,
+      "publishedAt": 1783841336171,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "ROS MCP Server",
+          "tagline": "Connect AI models like Claude & GPT with robots using MCP and ROS.",
+          "description": "Connect AI models like Claude & GPT with robots using MCP and ROS.",
+          "url": "https://github.com/robotmcp/ros-mcp-server",
+          "mcpTransport": "stdio",
+          "installCmd": "uvx ros-mcp-server",
+          "authType": "none",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Open source",
+            "MCP server",
+            "Local MCP",
+            "No auth"
+          ],
+          "examplePrompts": [
+            "Use ROS MCP Server to inspect available MCP tools and summarize what it can do.",
+            "Configure ROS MCP Server for a local Claude-compatible MCP client.",
+            "Review ROS MCP Server's repository metadata before using it in a production agent."
+          ],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools"
+      ],
+      "tags": [
+        "github-discovery",
+        "mcp-server",
+        "python",
+        "mcp",
+        "modelcontextprotocol",
+        "ros",
+        "ros-mcp-server",
+        "ros2",
+        "ros2-mcp-server",
+        "stars-1342"
+      ],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "suekou-mcp-notion",
+      "name": "Notion Server",
+      "tagline": "A Model Context Protocol server for connecting Notion to MCP-compatible clients",
+      "description": "A Model Context Protocol server for connecting Notion to MCP-compatible clients",
+      "homepageUrl": "https://github.com/suekou/mcp-notion-server",
+      "repoUrl": "https://github.com/suekou/mcp-notion-server",
+      "mcpTransport": "stdio",
+      "installCmd": "npx -y mcp-notion-server",
+      "authType": "none",
+      "publisher": "suekou",
+      "publisherUrl": "https://github.com/suekou",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Open source",
+        "MCP server",
+        "Local MCP",
+        "No auth"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Use Notion Server to inspect available MCP tools and summarize what it can do.",
+        "Configure Notion Server for a local Claude-compatible MCP client.",
+        "Review Notion Server's repository metadata before using it in a production agent."
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783841336171,
+      "updatedAt": 1783834946000,
+      "publishedAt": 1783841336171,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Notion Server",
+          "tagline": "A Model Context Protocol server for connecting Notion to MCP-compatible clients",
+          "description": "A Model Context Protocol server for connecting Notion to MCP-compatible clients",
+          "url": "https://github.com/suekou/mcp-notion-server",
+          "mcpTransport": "stdio",
+          "installCmd": "npx -y mcp-notion-server",
+          "authType": "none",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Open source",
+            "MCP server",
+            "Local MCP",
+            "No auth"
+          ],
+          "examplePrompts": [
+            "Use Notion Server to inspect available MCP tools and summarize what it can do.",
+            "Configure Notion Server for a local Claude-compatible MCP client.",
+            "Review Notion Server's repository metadata before using it in a production agent."
+          ],
+          "tools": [
+            {
+              "name": "fetch"
+            },
+            {
+              "name": "read_document"
+            }
+          ],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools",
+        "documents"
+      ],
+      "tags": [
+        "github-discovery",
+        "mcp-server",
+        "typescript",
+        "mcp",
+        "model-context-protocol",
+        "notion",
+        "notion-api",
+        "npm",
+        "stars-913"
+      ],
+      "tools": [
+        {
+          "name": "fetch"
+        },
+        {
+          "name": "read_document"
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "spences10-mcp-sequentialthinking-tools",
+      "name": "Sequential Thinking Tools",
+      "tagline": "🧠 An adaptation of the MCP Sequential Thinking Server to guide tool usage. This server provides recommendations for...",
+      "description": "🧠 An adaptation of the MCP Sequential Thinking Server to guide tool usage. This server provides recommendations for which MCP tools would be most effective at each stage.",
+      "homepageUrl": "https://github.com/spences10/mcp-sequentialthinking-tools",
+      "repoUrl": "https://github.com/spences10/mcp-sequentialthinking-tools",
+      "mcpTransport": "stdio",
+      "installCmd": "npx -y mcp-sequentialthinking-tools",
+      "authType": "none",
+      "publisher": "spences10",
+      "publisherUrl": "https://github.com/spences10",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Open source",
+        "MCP server",
+        "Local MCP",
+        "No auth"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Use Sequential Thinking Tools to inspect available MCP tools and summarize what it can do.",
+        "Configure Sequential Thinking Tools for a local Claude-compatible MCP client.",
+        "Review Sequential Thinking Tools's repository metadata before using it in a production agent."
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783841336171,
+      "updatedAt": 1783811577000,
+      "publishedAt": 1783841336171,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Sequential Thinking Tools",
+          "tagline": "🧠 An adaptation of the MCP Sequential Thinking Server to guide tool usage. This server provides recommendations for...",
+          "description": "🧠 An adaptation of the MCP Sequential Thinking Server to guide tool usage. This server provides recommendations for which MCP tools would be most effective at each stage.",
+          "url": "https://github.com/spences10/mcp-sequentialthinking-tools",
+          "mcpTransport": "stdio",
+          "installCmd": "npx -y mcp-sequentialthinking-tools",
+          "authType": "none",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Open source",
+            "MCP server",
+            "Local MCP",
+            "No auth"
+          ],
+          "examplePrompts": [
+            "Use Sequential Thinking Tools to inspect available MCP tools and summarize what it can do.",
+            "Configure Sequential Thinking Tools for a local Claude-compatible MCP client.",
+            "Review Sequential Thinking Tools's repository metadata before using it in a production agent."
+          ],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools"
+      ],
+      "tags": [
+        "github-discovery",
+        "mcp-server",
+        "typescript",
+        "mcp",
+        "model-context-protocol",
+        "modelcontextprotocol",
+        "tool",
+        "stars-583"
+      ],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "sbroenne-mcp-server-excel",
+      "name": "Excel",
+      "tagline": "Excel MCP Server & CLI - 23 tools, 214 operations for AI-powered Excel automation via COM API",
+      "description": "Excel MCP Server & CLI - 23 tools, 214 operations for AI-powered Excel automation via COM API",
+      "homepageUrl": "https://github.com/sbroenne/mcp-server-excel",
+      "repoUrl": "https://github.com/sbroenne/mcp-server-excel",
+      "mcpTransport": "stdio",
+      "authType": "none",
+      "publisher": "sbroenne",
+      "publisherUrl": "https://github.com/sbroenne",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Open source",
+        "MCP server",
+        "Local MCP",
+        "No auth"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Use Excel to inspect available MCP tools and summarize what it can do.",
+        "Configure Excel for a local Claude-compatible MCP client.",
+        "Review Excel's repository metadata before using it in a production agent."
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783841336171,
+      "updatedAt": 1783838091000,
+      "publishedAt": 1783841336171,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Excel",
+          "tagline": "Excel MCP Server & CLI - 23 tools, 214 operations for AI-powered Excel automation via COM API",
+          "description": "Excel MCP Server & CLI - 23 tools, 214 operations for AI-powered Excel automation via COM API",
+          "url": "https://github.com/sbroenne/mcp-server-excel",
+          "mcpTransport": "stdio",
+          "authType": "none",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Open source",
+            "MCP server",
+            "Local MCP",
+            "No auth"
+          ],
+          "examplePrompts": [
+            "Use Excel to inspect available MCP tools and summarize what it can do.",
+            "Configure Excel for a local Claude-compatible MCP client.",
+            "Review Excel's repository metadata before using it in a production agent."
+          ],
+          "tools": [
+            {
+              "name": "github"
+            },
+            {
+              "name": "fetch"
+            }
+          ],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools"
+      ],
+      "tags": [
+        "github-discovery",
+        "mcp-server",
+        "c#",
+        "ai-automation",
+        "claude-ai",
+        "com-automation",
+        "conditional-formatting",
+        "data-connections",
+        "dax",
+        "dotnet",
+        "excel",
+        "excel-automation",
+        "excel-charts",
+        "excel-pivottables",
+        "excel-tables",
+        "github-copilot",
+        "model-context-protocol",
+        "named-ranges"
+      ],
+      "tools": [
+        {
+          "name": "github"
+        },
+        {
+          "name": "fetch"
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "damionrashford-rivalsearchmcp",
+      "name": "RivalSearch",
+      "tagline": "Deterministic research MCP server on FastMCP 3 — 5-engine web search, 9-platform social search, 6 academic DBs, news...",
+      "description": "Deterministic research MCP server on FastMCP 3 — 5-engine web search, 9-platform social search, 6 academic DBs, news aggregation, entity profiles, conflict detection, document analysis. No API keys. No in-server LLM. Structured outputs for agent chaining.",
+      "homepageUrl": "https://github.com/damionrashford/RivalSearchMCP",
+      "repoUrl": "https://github.com/damionrashford/RivalSearchMCP",
+      "mcpTransport": "stdio",
+      "installCmd": "uvx RivalSearchMCP",
+      "authType": "api_key",
+      "publisher": "damionrashford",
+      "publisherUrl": "https://github.com/damionrashford",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Open source",
+        "MCP server",
+        "Local MCP",
+        "API key"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Use RivalSearch to inspect available MCP tools and summarize what it can do.",
+        "Configure RivalSearch for a local Claude-compatible MCP client.",
+        "Review RivalSearch's repository metadata before using it in a production agent."
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783841336171,
+      "updatedAt": 1783813567000,
+      "publishedAt": 1783841336171,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "RivalSearch",
+          "tagline": "Deterministic research MCP server on FastMCP 3 — 5-engine web search, 9-platform social search, 6 academic DBs, news...",
+          "description": "Deterministic research MCP server on FastMCP 3 — 5-engine web search, 9-platform social search, 6 academic DBs, news aggregation, entity profiles, conflict detection, document analysis. No API keys. No in-server LLM. Structured outputs for agent chaining.",
+          "url": "https://github.com/damionrashford/RivalSearchMCP",
+          "mcpTransport": "stdio",
+          "installCmd": "uvx RivalSearchMCP",
+          "authType": "api_key",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Open source",
+            "MCP server",
+            "Local MCP",
+            "API key"
+          ],
+          "examplePrompts": [
+            "Use RivalSearch to inspect available MCP tools and summarize what it can do.",
+            "Configure RivalSearch for a local Claude-compatible MCP client.",
+            "Review RivalSearch's repository metadata before using it in a production agent."
+          ],
+          "tools": [
+            {
+              "name": "fetch"
+            },
+            {
+              "name": "search"
+            },
+            {
+              "name": "read_document"
+            }
+          ],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools",
+        "documents",
+        "search"
+      ],
+      "tags": [
+        "github-discovery",
+        "mcp-server",
+        "python",
+        "agent-skills",
+        "ai-agent",
+        "ai-assistant",
+        "claude-code",
+        "claude-code-skills",
+        "claude-mcp",
+        "competitor-analysis",
+        "cursor-mcp",
+        "deterministic-tools",
+        "entity-research",
+        "fastmcp",
+        "market-intelligence",
+        "mcp",
+        "modelcontextprotocol",
+        "osint"
+      ],
+      "tools": [
+        {
+          "name": "fetch"
+        },
+        {
+          "name": "search"
+        },
+        {
+          "name": "read_document"
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "professionalwiki-mediawiki",
+      "name": "MediaWiki",
+      "tagline": "Model Context Protocol (MCP) Server to connect your AI with any MediaWiki",
+      "description": "Model Context Protocol (MCP) Server to connect your AI with any MediaWiki",
+      "homepageUrl": "https://github.com/ProfessionalWiki/MediaWiki-MCP-Server",
+      "repoUrl": "https://github.com/ProfessionalWiki/MediaWiki-MCP-Server",
+      "mcpTransport": "stdio",
+      "installCmd": "npx -y MediaWiki-MCP-Server",
+      "authType": "none",
+      "publisher": "ProfessionalWiki",
+      "publisherUrl": "https://github.com/ProfessionalWiki",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Open source",
+        "MCP server",
+        "Local MCP",
+        "No auth"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Use MediaWiki to inspect available MCP tools and summarize what it can do.",
+        "Configure MediaWiki for a local Claude-compatible MCP client.",
+        "Review MediaWiki's repository metadata before using it in a production agent."
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783841336171,
+      "updatedAt": 1783613296000,
+      "publishedAt": 1783841336171,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "MediaWiki",
+          "tagline": "Model Context Protocol (MCP) Server to connect your AI with any MediaWiki",
+          "description": "Model Context Protocol (MCP) Server to connect your AI with any MediaWiki",
+          "url": "https://github.com/ProfessionalWiki/MediaWiki-MCP-Server",
+          "mcpTransport": "stdio",
+          "installCmd": "npx -y MediaWiki-MCP-Server",
+          "authType": "none",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Open source",
+            "MCP server",
+            "Local MCP",
+            "No auth"
+          ],
+          "examplePrompts": [
+            "Use MediaWiki to inspect available MCP tools and summarize what it can do.",
+            "Configure MediaWiki for a local Claude-compatible MCP client.",
+            "Review MediaWiki's repository metadata before using it in a production agent."
+          ],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools"
+      ],
+      "tags": [
+        "github-discovery",
+        "mcp-server",
+        "typescript",
+        "agents",
+        "ai",
+        "ai-agent-tools",
+        "gemini-cli-extension",
+        "llms",
+        "mcp",
+        "mediawiki",
+        "model-context-protocol",
+        "model-context-protocol-servers",
+        "modelcontextprotocol",
+        "stars-102"
+      ],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "jacob-bd-notebooklm-mcp-cli",
+      "name": "NotebookLM MCP CLI",
+      "tagline": "Programmatic access to Google NotebookLM — via command-line interface (CLI), Model Context Protocol (MCP) server, and...",
+      "description": "Programmatic access to Google NotebookLM — via command-line interface (CLI), Model Context Protocol (MCP) server, and AI agent skills.",
+      "homepageUrl": "https://github.com/jacob-bd/notebooklm-mcp-cli",
+      "repoUrl": "https://github.com/jacob-bd/notebooklm-mcp-cli",
+      "mcpTransport": "stdio",
+      "installCmd": "uvx notebooklm-mcp-cli",
+      "authType": "none",
+      "publisher": "jacob-bd",
+      "publisherUrl": "https://github.com/jacob-bd",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Open source",
+        "MCP server",
+        "Local MCP",
+        "No auth"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Use NotebookLM MCP CLI to inspect available MCP tools and summarize what it can do.",
+        "Configure NotebookLM MCP CLI for a local Claude-compatible MCP client.",
+        "Review NotebookLM MCP CLI's repository metadata before using it in a production agent."
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783841336171,
+      "updatedAt": 1783793471000,
+      "publishedAt": 1783841336171,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "NotebookLM MCP CLI",
+          "tagline": "Programmatic access to Google NotebookLM — via command-line interface (CLI), Model Context Protocol (MCP) server, and...",
+          "description": "Programmatic access to Google NotebookLM — via command-line interface (CLI), Model Context Protocol (MCP) server, and AI agent skills.",
+          "url": "https://github.com/jacob-bd/notebooklm-mcp-cli",
+          "mcpTransport": "stdio",
+          "installCmd": "uvx notebooklm-mcp-cli",
+          "authType": "none",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Open source",
+            "MCP server",
+            "Local MCP",
+            "No auth"
+          ],
+          "examplePrompts": [
+            "Use NotebookLM MCP CLI to inspect available MCP tools and summarize what it can do.",
+            "Configure NotebookLM MCP CLI for a local Claude-compatible MCP client.",
+            "Review NotebookLM MCP CLI's repository metadata before using it in a production agent."
+          ],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools"
+      ],
+      "tags": [
+        "github-discovery",
+        "mcp-server",
+        "python",
+        "stars-5420"
+      ],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "truss44-mcp-crypto-price",
+      "name": "Crypto Price",
+      "tagline": "A Model Context Protocol (MCP) server that provides real-time cryptocurrency analysis via CoinCap's API. Enables Clau...",
+      "description": "A Model Context Protocol (MCP) server that provides real-time cryptocurrency analysis via CoinCap's API. Enables Claude and other MCP clients to fetch crypto prices, analyze market trends, and track historical data.",
+      "homepageUrl": "https://github.com/truss44/mcp-crypto-price",
+      "repoUrl": "https://github.com/truss44/mcp-crypto-price",
+      "mcpTransport": "stdio",
+      "installCmd": "npx -y mcp-crypto-price",
+      "authType": "none",
+      "publisher": "truss44",
+      "publisherUrl": "https://github.com/truss44",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Open source",
+        "MCP server",
+        "Local MCP",
+        "No auth"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Use Crypto Price to inspect available MCP tools and summarize what it can do.",
+        "Configure Crypto Price for a local Claude-compatible MCP client.",
+        "Review Crypto Price's repository metadata before using it in a production agent."
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783841336171,
+      "updatedAt": 1783326873000,
+      "publishedAt": 1783841336171,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Crypto Price",
+          "tagline": "A Model Context Protocol (MCP) server that provides real-time cryptocurrency analysis via CoinCap's API. Enables Clau...",
+          "description": "A Model Context Protocol (MCP) server that provides real-time cryptocurrency analysis via CoinCap's API. Enables Claude and other MCP clients to fetch crypto prices, analyze market trends, and track historical data.",
+          "url": "https://github.com/truss44/mcp-crypto-price",
+          "mcpTransport": "stdio",
+          "installCmd": "npx -y mcp-crypto-price",
+          "authType": "none",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Open source",
+            "MCP server",
+            "Local MCP",
+            "No auth"
+          ],
+          "examplePrompts": [
+            "Use Crypto Price to inspect available MCP tools and summarize what it can do.",
+            "Configure Crypto Price for a local Claude-compatible MCP client.",
+            "Review Crypto Price's repository metadata before using it in a production agent."
+          ],
+          "tools": [
+            {
+              "name": "fetch"
+            }
+          ],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools",
+        "finance"
+      ],
+      "tags": [
+        "github-discovery",
+        "mcp-server",
+        "typescript",
+        "anthropic",
+        "claude",
+        "coincap",
+        "crypto",
+        "crypto-api",
+        "cryptocurrency",
+        "financial-data",
+        "market-analysis",
+        "mcp",
+        "modelcontextprotocol",
+        "nodejs",
+        "real-time",
+        "trading",
+        "stars-39"
+      ],
+      "tools": [
+        {
+          "name": "fetch"
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "falkordb-falkordb-mcpserver",
+      "name": "FalkorDB",
+      "tagline": "FalkorDB-MCPServer is an MCP (Model Context Protocol) server that connects LLMs to FalkorDB",
+      "description": "FalkorDB-MCPServer is an MCP (Model Context Protocol) server that connects LLMs to FalkorDB",
+      "homepageUrl": "https://github.com/FalkorDB/FalkorDB-MCPServer",
+      "repoUrl": "https://github.com/FalkorDB/FalkorDB-MCPServer",
+      "mcpTransport": "stdio",
+      "installCmd": "npx -y FalkorDB-MCPServer",
+      "authType": "none",
+      "publisher": "FalkorDB",
+      "publisherUrl": "https://github.com/FalkorDB",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Open source",
+        "MCP server",
+        "Local MCP",
+        "No auth"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Use FalkorDB to inspect available MCP tools and summarize what it can do.",
+        "Configure FalkorDB for a local Claude-compatible MCP client.",
+        "Review FalkorDB's repository metadata before using it in a production agent."
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783841336171,
+      "updatedAt": 1783839237000,
+      "publishedAt": 1783841336171,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "FalkorDB",
+          "tagline": "FalkorDB-MCPServer is an MCP (Model Context Protocol) server that connects LLMs to FalkorDB",
+          "description": "FalkorDB-MCPServer is an MCP (Model Context Protocol) server that connects LLMs to FalkorDB",
+          "url": "https://github.com/FalkorDB/FalkorDB-MCPServer",
+          "mcpTransport": "stdio",
+          "installCmd": "npx -y FalkorDB-MCPServer",
+          "authType": "none",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Open source",
+            "MCP server",
+            "Local MCP",
+            "No auth"
+          ],
+          "examplePrompts": [
+            "Use FalkorDB to inspect available MCP tools and summarize what it can do.",
+            "Configure FalkorDB for a local Claude-compatible MCP client.",
+            "Review FalkorDB's repository metadata before using it in a production agent."
+          ],
+          "tools": [
+            {
+              "name": "query"
+            }
+          ],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools",
+        "data"
+      ],
+      "tags": [
+        "github-discovery",
+        "mcp-server",
+        "typescript",
+        "falkordb",
+        "graphdatabase",
+        "stars-37"
+      ],
+      "tools": [
+        {
+          "name": "query"
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "verygoodplugins-mcp-toggl",
+      "name": "Toggl",
+      "tagline": "MCP server for Toggl Track integration with intelligent caching and reporting tools",
+      "description": "MCP server for Toggl Track integration with intelligent caching and reporting tools",
+      "homepageUrl": "https://github.com/verygoodplugins/mcp-toggl",
+      "repoUrl": "https://github.com/verygoodplugins/mcp-toggl",
+      "mcpTransport": "stdio",
+      "installCmd": "npx -y mcp-toggl",
+      "authType": "none",
+      "publisher": "verygoodplugins",
+      "publisherUrl": "https://github.com/verygoodplugins",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Open source",
+        "MCP server",
+        "Local MCP",
+        "No auth"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Use Toggl to inspect available MCP tools and summarize what it can do.",
+        "Configure Toggl for a local Claude-compatible MCP client.",
+        "Review Toggl's repository metadata before using it in a production agent."
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783841336171,
+      "updatedAt": 1783571201000,
+      "publishedAt": 1783841336171,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Toggl",
+          "tagline": "MCP server for Toggl Track integration with intelligent caching and reporting tools",
+          "description": "MCP server for Toggl Track integration with intelligent caching and reporting tools",
+          "url": "https://github.com/verygoodplugins/mcp-toggl",
+          "mcpTransport": "stdio",
+          "installCmd": "npx -y mcp-toggl",
+          "authType": "none",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Open source",
+            "MCP server",
+            "Local MCP",
+            "No auth"
+          ],
+          "examplePrompts": [
+            "Use Toggl to inspect available MCP tools and summarize what it can do.",
+            "Configure Toggl for a local Claude-compatible MCP client.",
+            "Review Toggl's repository metadata before using it in a production agent."
+          ],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools"
+      ],
+      "tags": [
+        "github-discovery",
+        "mcp-server",
+        "typescript",
+        "automation",
+        "mcp",
+        "modelcontextprotocol",
+        "reporting",
+        "time-tracking",
+        "toggl",
+        "stars-27"
+      ],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "circleci-public-mcp-server-circleci",
+      "name": "CircleCI",
+      "tagline": "A specialized server implementation for the Model Context Protocol (MCP) designed to integrate with CircleCI's develo...",
+      "description": "A specialized server implementation for the Model Context Protocol (MCP) designed to integrate with CircleCI's development workflow. This project serves as a bridge between CircleCI's infrastructure and the Model Context Protocol, enabling enhanced AI-powered development experiences.",
+      "homepageUrl": "https://github.com/CircleCI-Public/mcp-server-circleci",
+      "repoUrl": "https://github.com/CircleCI-Public/mcp-server-circleci",
+      "mcpTransport": "stdio",
+      "installCmd": "npx -y mcp-server-circleci",
+      "authType": "none",
+      "publisher": "CircleCI-Public",
+      "publisherUrl": "https://github.com/CircleCI-Public",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Open source",
+        "MCP server",
+        "Local MCP",
+        "No auth"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Use CircleCI to inspect available MCP tools and summarize what it can do.",
+        "Configure CircleCI for a local Claude-compatible MCP client.",
+        "Review CircleCI's repository metadata before using it in a production agent."
+      ],
+      "source": "claude_seed",
+      "createdAt": 1783841336171,
+      "updatedAt": 1783795359000,
+      "publishedAt": 1783841336171,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "CircleCI",
+          "tagline": "A specialized server implementation for the Model Context Protocol (MCP) designed to integrate with CircleCI's develo...",
+          "description": "A specialized server implementation for the Model Context Protocol (MCP) designed to integrate with CircleCI's development workflow. This project serves as a bridge between CircleCI's infrastructure and the Model Context Protocol, enabling enhanced AI-powered development experiences.",
+          "url": "https://github.com/CircleCI-Public/mcp-server-circleci",
+          "mcpTransport": "stdio",
+          "installCmd": "npx -y mcp-server-circleci",
+          "authType": "none",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Open source",
+            "MCP server",
+            "Local MCP",
+            "No auth"
+          ],
+          "examplePrompts": [
+            "Use CircleCI to inspect available MCP tools and summarize what it can do.",
+            "Configure CircleCI for a local Claude-compatible MCP client.",
+            "Review CircleCI's repository metadata before using it in a production agent."
+          ],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "mcp",
+        "developer-tools",
+        "design"
+      ],
+      "tags": [
+        "github-discovery",
+        "mcp-server",
+        "typescript",
+        "modelcontextprotocol",
+        "stars-86"
+      ],
+      "tools": [],
+      "previews": []
     }
   ]
 }
