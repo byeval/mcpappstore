@@ -85147,6 +85147,104 @@
       ],
       "previews": [],
       "iconKey": "icons/latlng.svg"
+    },
+    {
+      "id": "mcp360",
+      "name": "MCP360",
+      "tagline": "Unified MCP Gateway, Marketplace & Custom MCPs",
+      "description": "MCP360 is a unified integration platform and marketplace that connects AI agents to more than 100 external tools and custom MCPs through a single integration. It serves as a central access layer that allows AI agents to interact with a wide range of third-party services without requiring separate configurations for each tool. Once integrated, AI agents can use MCP360 tools to coordinate actions across multiple external services. New tools added to the MCP360 marketplace become available to existing integrations, giving teams a stable foundation for AI agents that rely on external services to complete real-world tasks.",
+      "iconKey": "submissions/mcp360/icon",
+      "homepageUrl": "https://mcp360.ai",
+      "repoUrl": "https://github.com/mcp360/unified-gateway-mcp",
+      "mcpEndpoint": "https://connect.mcp360.ai/v1/mcp360/mcp?token",
+      "mcpTransport": "http",
+      "installCmd": "npm i @mcp360ai/unified-gateway",
+      "authType": "api_key",
+      "publisher": "MCP360",
+      "publisherUrl": "https://mcp360.ai",
+      "capabilities": [
+        "Interactive",
+        "Reads",
+        "Tools"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "Connect an agent to the MCP360 gateway and list available marketplace tools.",
+        "Use MCP360 to coordinate actions across connected external services.",
+        "Add a new custom MCP through MCP360 and make it available to my agent."
+      ],
+      "source": "user",
+      "createdAt": 1783785600000,
+      "updatedAt": 1783785600000,
+      "publishedAt": 1783785600000,
+      "surfaces": [
+        {
+          "platform": "chatgpt",
+          "type": "app",
+          "displayName": "MCP360",
+          "tagline": "Unified MCP Gateway, Marketplace & Custom MCPs",
+          "description": "Use MCP360 as a gateway and marketplace layer for connecting AI agents to external tools and custom MCPs.",
+          "url": "https://mcp360.ai",
+          "mcpEndpoint": "https://connect.mcp360.ai/v1/mcp360/mcp?token",
+          "mcpTransport": "http",
+          "installCmd": "npm i @mcp360ai/unified-gateway",
+          "authType": "api_key",
+          "capabilities": [
+            "Interactive",
+            "Reads",
+            "Tools"
+          ],
+          "examplePrompts": [
+            "Connect an agent to the MCP360 gateway and list available marketplace tools."
+          ],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "interactive_connector",
+          "displayName": "MCP360",
+          "tagline": "Unified MCP Gateway, Marketplace & Custom MCPs",
+          "description": "Use MCP360 from Claude-compatible MCP clients as a central gateway to external services and custom MCPs.",
+          "url": "https://mcp360.ai",
+          "mcpEndpoint": "https://connect.mcp360.ai/v1/mcp360/mcp?token",
+          "mcpTransport": "http",
+          "installCmd": "npm i @mcp360ai/unified-gateway",
+          "authType": "api_key",
+          "capabilities": [
+            "Interactive",
+            "Reads",
+            "Tools"
+          ],
+          "examplePrompts": [
+            "Use MCP360 to coordinate actions across connected external services."
+          ],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "productivity",
+        "developer-tools",
+        "research",
+        "automation",
+        "mcp"
+      ],
+      "tags": [
+        "mcp-server",
+        "mcp-gateway",
+        "marketplace",
+        "custom-mcps",
+        "agent-tools"
+      ],
+      "tools": [],
+      "previews": [],
+      "submitterEmail": "hoeshilee18@gmail.com"
     }
   ]
 }
