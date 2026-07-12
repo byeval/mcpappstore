@@ -21,6 +21,7 @@
     "clients:import": "node --import tsx scripts/import-mcp-clients.ts",
     "data:health": "node --import tsx scripts/data-source-health.ts",
     "discover:github-mcp": "node --import tsx scripts/discover-github-mcp.ts",
+    "discovery:index": "node --import tsx scripts/build-discovery-index.ts",
     "import:github-mcp": "node --import tsx scripts/import-github-mcp-candidates.ts",
     "skills:refresh": "node --import tsx scripts/refresh-skills.ts",
     "skills:import:skills-sh": "node --import tsx scripts/import-skills-sh.ts",
