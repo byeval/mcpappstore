@@ -93,6 +93,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const googleAnalyticsId = process.env.GOOGLE_ANALYTICS_ID ?? "G-17PKWX92D6";
   const localeDetail = localeDetails[locale];
   const href = (path: string) => localizedPath(path, locale);
+  const currentYear = new Date().getUTCFullYear();
 
   return (
     <html dir={localeDetail.dir} lang={localeDetail.htmlLang}>
@@ -157,46 +158,38 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           </header>
           <main id="main-content">{children}</main>
           <footer className="footer">
-            <div className="footer-links">
-              <Link className="submit-cta" href={href("/submit")} prefetch={false}>
-                {t.common.submitYourMcpLong}
+            <div className="footer-main">
+              <div className="footer-brand-copy">
+                <Link className="footer-brand" href={href("/")} prefetch={false}>
+                  <span className="brand-mark" />
+                  <span>{t.common.brand}</span>
+                </Link>
+                <p>{defaultDescription}</p>
+              </div>
+              <nav aria-label="Footer" className="footer-links">
+                <div className="footer-link-group">
+                  <Link className="footer-link" href={href("/store")} prefetch={false}>{t.nav.apps}</Link>
+                  <Link className="footer-link" href={href("/mcp-clients")} prefetch={false}>{t.nav.clients}</Link>
+                  <Link className="footer-link" href={href("/mcp-inspector")} prefetch={false}>{t.nav.inspector}</Link>
+                  <Link className="footer-link" href={href("/skills")} prefetch={false}>{t.nav.skills}</Link>
+                  <Link className="footer-link" href={href("/collections")} prefetch={false}>{t.common.collections}</Link>
+                </div>
+                <div className="footer-link-group">
+                  <Link className="footer-link" href={href("/learn")} prefetch={false}>{t.nav.learn}</Link>
+                  <Link className="footer-link" href={href("/docs")} prefetch={false}>{t.common.docs}</Link>
+                  <Link className="footer-link" href={href("/faq")} prefetch={false}>{t.common.faq}</Link>
+                  <Link className="footer-link" href={href("/terms")} prefetch={false}>{t.nav.terms}</Link>
+                  <Link className="footer-link" href={href("/privacy")} prefetch={false}>{t.nav.privacy}</Link>
+                  <Link className="footer-link" href="/rss.xml" prefetch={false}>{t.nav.rss}</Link>
+                  <a className="footer-link" href="https://github.com/byeval/mcpappstore" rel="noreferrer" target="_blank">GitHub</a>
+                </div>
+              </nav>
+            </div>
+            <div className="footer-meta">
+              <span>© {currentYear} {t.common.brand}</span>
+              <Link className="footer-submit" href={href("/submit")} prefetch={false}>
+                {t.common.submitYourMcpLong} <span aria-hidden="true">→</span>
               </Link>
-              <Link className="footer-link" href={href("/terms")} prefetch={false}>
-                {t.nav.terms}
-              </Link>
-              <Link className="footer-link" href={href("/learn")} prefetch={false}>
-                {t.nav.learn}
-              </Link>
-              <Link className="footer-link" href={href("/store")} prefetch={false}>
-                {t.nav.apps}
-              </Link>
-              <Link className="footer-link" href={href("/mcp-clients")} prefetch={false}>
-                {t.nav.clients}
-              </Link>
-              <Link className="footer-link" href={href("/mcp-inspector")} prefetch={false}>
-                {t.nav.inspector}
-              </Link>
-              <Link className="footer-link" href={href("/skills")} prefetch={false}>
-                {t.nav.skills}
-              </Link>
-              <Link className="footer-link" href={href("/collections")} prefetch={false}>
-                {t.common.collections}
-              </Link>
-              <Link className="footer-link" href={href("/docs")} prefetch={false}>
-                {t.common.docs}
-              </Link>
-              <Link className="footer-link" href={href("/faq")} prefetch={false}>
-                {t.common.faq}
-              </Link>
-              <Link className="footer-link" href={href("/privacy")} prefetch={false}>
-                {t.nav.privacy}
-              </Link>
-              <Link className="footer-link" href="/rss.xml" prefetch={false}>
-                {t.nav.rss}
-              </Link>
-              <a className="footer-link" href="https://github.com/byeval/mcpappstore" rel="noreferrer" target="_blank">
-                GitHub
-              </a>
             </div>
           </footer>
         </div>

@@ -5918,7 +5918,93 @@ body {
 }
 
 .footer {
+  display: grid;
+  gap: 34px;
+  justify-content: stretch;
+  margin-top: 88px;
+  padding: 40px 0 0;
   border-top: 1px solid var(--line);
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(420px, 1.15fr);
+  gap: clamp(60px, 10vw, 150px);
+  align-items: start;
+}
+
+.footer-brand-copy {
+  display: grid;
+  gap: 14px;
+  max-width: 380px;
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: start;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.footer-brand-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px;
+  align-items: start;
+  justify-content: stretch;
+}
+
+.footer-link-group {
+  display: grid;
+  gap: 4px;
+}
+
+.footer-link,
+.submit-cta {
+  justify-self: start;
+  padding: 6px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.footer-link:hover,
+.submit-cta:hover {
+  background: transparent;
+  color: var(--accent);
+  transform: none;
+}
+
+.footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 0 4px;
+  border-top: 1px solid var(--line-2);
+  color: var(--muted-2);
+  font-size: 12px;
+}
+
+.footer-submit {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.footer-submit span {
+  margin-left: 6px;
 }
 
 /* Editorial app detail */
@@ -6230,6 +6316,27 @@ body {
   .tool-list.tool-table li {
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+
+  .footer {
+    gap: 28px;
+    margin-top: 64px;
+    padding-top: 30px;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-links {
+    gap: 28px;
+  }
+
+  .footer-meta {
+    align-items: flex-start;
+    flex-direction: column-reverse;
+    gap: 12px;
   }
 
   .detail-section,
