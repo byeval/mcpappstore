@@ -5772,7 +5772,15 @@ body {
 
 .bubble-thumb {
   height: 220px;
+  aspect-ratio: auto;
   border-radius: 0;
+  background: var(--surface);
+}
+
+.bubble-thumb img {
+  display: block;
+  object-fit: contain;
+  object-position: center;
 }
 
 .bubble-text {
