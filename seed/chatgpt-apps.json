@@ -85041,7 +85041,6 @@
       "name": "LatLng",
       "tagline": "OSM-based geocoding, places, and map APIs for AI agents.",
       "description": "LatLng provides developer-friendly location APIs through MCP, including forward geocoding, reverse geocoding, places search, nearby places, and place categories powered by OpenStreetMap data.",
-      "iconUrl": "https://www.latlng.work/favicon.ico",
       "homepageUrl": "https://www.latlng.work/mcp",
       "repoUrl": "https://github.com/latlng-work/latlng-mcp",
       "mcpEndpoint": "https://mcp.latlng.work/mcp",
@@ -85146,7 +85145,8 @@
           "name": "place_categories"
         }
       ],
-      "previews": []
+      "previews": [],
+      "iconKey": "icons/latlng.svg"
     }
   ]
 }
