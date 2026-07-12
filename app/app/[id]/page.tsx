@@ -1173,10 +1173,10 @@ export default async function AppDetailPage({
         <section className="detail-section">
           <h2 className="section-title">{t.appDetail.platformSurfaces}</h2>
           <div className="surface-detail-list">
-            {app.surfaces.map((surface) => {
+            {app.surfaces.map((surface, index) => {
               const details = surfaceDetails(surface, fallbackDetails);
               return (
-                <article className="surface-detail" key={`${surface.platform}-${surface.type}-${surface.externalId ?? surface.url}`}>
+                <article className="surface-detail" key={`${surface.platform}-${surface.type}-${surface.externalId ?? surface.url}-${index}`}>
                   <div>
                     <h3>{surfaceLabelFor(surface, t.surface)}</h3>
                     <p>{details.tagline}</p>
@@ -1208,13 +1208,13 @@ export default async function AppDetailPage({
           <div className="info-row">
             <div className="info-key">{t.appDetail.availableIn}</div>
             <div className="info-val surface-list">
-              {app.surfaces.map((surface) =>
+              {app.surfaces.map((surface, index) =>
                 surface.url ? (
-                  <a href={surface.url} key={`${surface.platform}-${surface.type}`} rel="noreferrer" target="_blank">
+                  <a href={surface.url} key={`${surface.platform}-${surface.type}-${index}`} rel="noreferrer" target="_blank">
                     {surfaceLabelFor(surface, t.surface)}
                   </a>
                 ) : (
-                  <span key={`${surface.platform}-${surface.type}`}>{surfaceLabelFor(surface, t.surface)}</span>
+                  <span key={`${surface.platform}-${surface.type}-${index}`}>{surfaceLabelFor(surface, t.surface)}</span>
                 ),
               )}
             </div>

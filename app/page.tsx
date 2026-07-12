@@ -104,6 +104,20 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+      <section className="grid" aria-label={t.common.appListAria}>
+        <div className="home-directory-head">
+          <div>
+            <p className="eyebrow">{t.categoryTabs.featured}</p>
+            <h2>{t.home.appListName}</h2>
+          </div>
+          <Link href={href("/store")} prefetch={false}>{t.common.all} {t.common.apps}</Link>
+        </div>
+        <div className="app-list">
+          {apps.map((app) => (
+            <AppCard app={app} key={app.id} locale={locale} messages={t} />
+          ))}
+        </div>
+      </section>
       <section className="home-collection-strip" aria-label={t.home.collectionsAria}>
         <div className="home-collection-copy">
           <p className="eyebrow">{t.home.collectionsEyebrow}</p>
@@ -116,13 +130,6 @@ export default async function HomePage() {
               <span>{collection.eyebrow}</span>
               <strong>{collection.title}</strong>
             </Link>
-          ))}
-        </div>
-      </section>
-      <section className="grid" aria-label={t.common.appListAria}>
-        <div className="app-list">
-          {apps.map((app) => (
-            <AppCard app={app} key={app.id} locale={locale} messages={t} />
           ))}
         </div>
       </section>

@@ -16,23 +16,6 @@ function stripLeadingMention(prompt: string, appName: string): string {
   return prompt.replace(/^@\S+\s*/, "");
 }
 
-function previewThumbnailUrl(imageUrl: string): string {
-  if (imageUrl.includes("/api/assets?")) {
-    const url = new URL(imageUrl, "https://mcpapp.local");
-    const key = url.searchParams.get("key");
-    if (key?.startsWith("previews/") && key.endsWith(".webp") && !key.endsWith(".thumb.webp")) {
-      url.searchParams.set("key", key.replace(/\.webp$/, ".thumb.webp"));
-      return `${url.pathname}?${url.searchParams.toString()}`;
-    }
-  }
-
-  if (imageUrl.includes("/previews/") && imageUrl.endsWith(".webp") && !imageUrl.endsWith(".thumb.webp")) {
-    return imageUrl.replace(/\.webp$/, ".thumb.webp");
-  }
-
-  return imageUrl;
-}
-
 export function HeroCarousel({
   apps,
   locale = "en",
@@ -62,7 +45,7 @@ export function HeroCarousel({
     authType: activeApp.authType,
   });
   const primaryPreview = activeDetails.previews[0];
-  const thumbnailUrl = primaryPreview?.imageUrl ? previewThumbnailUrl(primaryPreview.imageUrl) : undefined;
+  const previewImageUrl = primaryPreview?.imageUrl;
 
   return (
     <section className="hero-carousel">
@@ -108,7 +91,7 @@ export function HeroCarousel({
                 <b>@{activeApp.name}</b> {stripLeadingMention(primaryPreview.prompt, activeApp.name)}
               </div>
             ) : null}
-            {primaryPreview && thumbnailUrl ? (
+            {primaryPreview && previewImageUrl ? (
               <div className="bubble-card">
                 <div className="bubble-gallery single">
                   <div className="bubble-thumb">
@@ -119,7 +102,7 @@ export function HeroCarousel({
                       height={540}
                       loading="eager"
                       sizes="(max-width: 640px) 78vw, 360px"
-                      src={optimizedImageUrl(thumbnailUrl)}
+                      src={optimizedImageUrl(previewImageUrl)}
                       width={720}
                     />
                   </div>

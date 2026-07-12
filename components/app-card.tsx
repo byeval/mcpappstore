@@ -66,6 +66,7 @@ export function AppCard({
         </p>
         <p className="app-tag">{details.tagline}</p>
       </div>
+      <span className="app-category" aria-hidden="true">{app.categories[0]?.replaceAll("-", " ") ?? "MCP"}</span>
       <svg aria-hidden="true" className="app-chev" fill="none" viewBox="0 0 24 24">
         <path d="M9 18 15 12 9 6" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
       </svg>
