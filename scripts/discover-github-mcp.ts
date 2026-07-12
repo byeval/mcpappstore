@@ -81,7 +81,15 @@ function markdownReport(repos: Array<GithubRepo & { score: number }>, generatedA
 }
 
 async function main() {
-  const queries = (argValue("--query") ?? "topic:mcp-server,topic:model-context-protocol,topic:mcp-client")
+  const queries = (argValue("--query") ?? [
+    "topic:mcp-server",
+    "topic:model-context-protocol",
+    "topic:modelcontextprotocol",
+    "model context protocol mcp server in:name",
+    "model context protocol mcp server in:description",
+    "mcp server in:name",
+    "awesome mcp servers in:name",
+  ].join(","))
     .split(",")
     .map((query) => query.trim())
     .filter(Boolean);
