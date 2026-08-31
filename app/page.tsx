@@ -5,21 +5,18 @@ import { AppCard } from "@/components/app-card";
 import { CategoryTabs } from "@/components/category-tabs";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { localizedFeaturedAppCollections, localizedFeaturedLearnArticles } from "@/lib/content-i18n";
-import { getCategorySummaries, getFeaturedApps, listHomeApps, listSitemapAppEntries } from "@/lib/data";
+import { getCategorySummaries, getFeaturedApps, listHomeApps } from "@/lib/data";
 import { getI18n } from "@/lib/i18n-server";
 import { localizedPath } from "@/lib/i18n";
 import { absoluteUrl } from "@/lib/utils";
 import { itemListJsonLd, jsonLdScript, organizationJsonLd, pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [{ locale }, apps] = await Promise.all([getI18n(), listSitemapAppEntries()]);
-  const totalListings = apps.length;
-  const listingText = totalListings.toLocaleString("en-US");
+  const { locale, messages } = await getI18n();
 
   return pageMetadata({
-    title: `MCP apps directory: ${listingText} MCP servers for ChatGPT & Claude`,
-    description:
-      `mcpapp is an MCP apps directory and MCP server directory with ${listingText} listings for model context protocol apps, ChatGPT apps, and Claude connectors, including tools, categories, previews, and integration details.`,
+    title: messages.home.metaTitle,
+    description: messages.home.metaDescription,
     path: "/",
     locale,
     keywords: [

@@ -1,10 +1,8 @@
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 
 import {
   defaultLocale,
-  detectLocaleFromAcceptLanguage,
   getMessages,
-  localeCookieName,
   localeFromPath,
   normalizeLocale,
   stripLocaleFromPath,
@@ -33,13 +31,7 @@ export async function getRequestLocale(): Promise<Locale> {
     return pathLocale;
   }
 
-  const cookieStore = await cookies();
-  const cookieLocale = normalizeLocale(cookieStore.get(localeCookieName)?.value);
-  if (cookieLocale) {
-    return cookieLocale;
-  }
-
-  return detectLocaleFromAcceptLanguage(headerStore.get("accept-language")) ?? defaultLocale;
+  return defaultLocale;
 }
 
 export async function getI18n() {

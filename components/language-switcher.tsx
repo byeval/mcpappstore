@@ -24,7 +24,7 @@ export function LanguageSwitcher({
           return (
             <Link
               aria-current={isCurrent ? "true" : undefined}
-              href={localizedPath(pathname, item, { includeDefaultLocale: true })}
+              href={localizedPath(pathname, item)}
               hrefLang={detail.htmlLang}
               key={item}
               prefetch={false}

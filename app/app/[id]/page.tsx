@@ -14,15 +14,16 @@ import { formatMessage, localizedPath, surfaceLabelFor, type I18nMessages, type 
 import { optimizedImageUrl } from "@/lib/image-urls";
 import { getI18n } from "@/lib/i18n-server";
 import {
-  appDescription,
   appJsonLd,
-  appKindPhrase,
-  appSeoTitle,
   breadcrumbJsonLd,
   faqJsonLd,
   formatCategoryName,
   itemListJsonLd,
   jsonLdScript,
+  localizedAppDescription,
+  localizedAppKind,
+  localizedAppPlatformPhrase,
+  localizedAppSeoTitle,
   pageMetadata,
 } from "@/lib/seo";
 import { isIndexableCategory, redirectedAppPath } from "@/lib/seo-indexing";
@@ -46,8 +47,8 @@ export async function generateMetadata({
   }
 
   return pageMetadata({
-    title: appSeoTitle(app),
-    description: appDescription(app),
+    title: localizedAppSeoTitle(app, locale),
+    description: localizedAppDescription(app, locale),
     path: `/app/${app.id}`,
     locale,
     imagePath: `/api/og/${app.id}.png`,
@@ -188,60 +189,6 @@ function kindArticle(kind: string): string {
   return kind.startsWith("MCP") ? "an" : "a";
 }
 
-function localizedAppKind(app: Pick<CatalogApp, "surfaces">, locale: Locale): string {
-  if (locale === "ja") {
-    const hasChatGpt = app.surfaces.some((surface) => surface.platform === "chatgpt");
-    const hasClaude = app.surfaces.some((surface) => surface.platform === "claude");
-
-    if (hasChatGpt && hasClaude) {
-      return "MCP アプリとコネクタ";
-    }
-
-    return hasClaude ? "MCP コネクタ" : "MCP アプリ";
-  }
-
-  if (locale === "ko") {
-    const hasChatGpt = app.surfaces.some((surface) => surface.platform === "chatgpt");
-    const hasClaude = app.surfaces.some((surface) => surface.platform === "claude");
-
-    if (hasChatGpt && hasClaude) {
-      return "MCP 앱 및 커넥터";
-    }
-
-    return hasClaude ? "MCP 커넥터" : "MCP 앱";
-  }
-
-  if (locale === "zh-hans") {
-    const hasChatGpt = app.surfaces.some((surface) => surface.platform === "chatgpt");
-    const hasClaude = app.surfaces.some((surface) => surface.platform === "claude");
-
-    if (hasChatGpt && hasClaude) {
-      return "MCP 应用和连接器";
-    }
-
-    return hasClaude ? "MCP 连接器" : "MCP 应用";
-  }
-
-  if (locale === "ru") {
-    const hasChatGpt = app.surfaces.some((surface) => surface.platform === "chatgpt");
-    const hasClaude = app.surfaces.some((surface) => surface.platform === "claude");
-
-    if (hasChatGpt && hasClaude) {
-      return "MCP-приложение и коннектор";
-    }
-
-    return hasClaude ? "MCP-коннектор" : "MCP-приложение";
-  }
-
-  return appKindPhrase(app);
-}
-
-function localizedAppPlatformPhrase(app: Pick<CatalogApp, "surfaces">, locale: Locale): string {
-  const platforms = Array.from(new Set(app.surfaces.map((surface) => (surface.platform === "claude" ? "Claude" : "ChatGPT"))));
-
-  return readableList(platforms, locale);
-}
-
 function localizedPlatformText(app: Pick<CatalogApp, "surfaces">, locale: Locale): string {
   const platforms = localizedAppPlatformPhrase(app, locale);
   if (!platforms) {
@@ -262,6 +209,18 @@ function localizedPlatformText(app: Pick<CatalogApp, "surfaces">, locale: Locale
 
   if (locale === "ru") {
     return ` для ${platforms}`;
+  }
+
+  if (locale === "es") {
+    return ` para ${platforms}`;
+  }
+
+  if (locale === "fr") {
+    return ` pour ${platforms}`;
+  }
+
+  if (locale === "de") {
+    return ` für ${platforms}`;
   }
 
   return ` for ${platforms}`;
@@ -1362,7 +1321,7 @@ export default async function AppDetailPage({
       </div>
       <script
         dangerouslySetInnerHTML={jsonLdScript([
-          appJsonLd(app),
+          appJsonLd(app, locale),
           breadcrumbJsonLd([
             { name: "Apps", path: "/" },
             breadcrumbCategory,

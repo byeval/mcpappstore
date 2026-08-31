@@ -2,10 +2,8 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { isAdminRequestAuthorized } from "@/lib/auth";
 import {
-  detectLocaleFromAcceptLanguage,
-  localeCookieName,
+  defaultLocale,
   localeFromPath,
-  normalizeLocale,
   stripLocaleFromPath,
 } from "@/lib/i18n";
 
@@ -78,6 +76,12 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(redirectUrl, 308);
   }
 
+  if (pathLocale === defaultLocale) {
+    const redirectUrl = new URL(request.url);
+    redirectUrl.pathname = internalPathname;
+    return NextResponse.redirect(redirectUrl, 308);
+  }
+
   const storeRedirectPath = mapAppsPathToStore(internalPathname);
 
   if (storeRedirectPath) {
@@ -86,10 +90,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(redirectUrl, 308);
   }
 
-  const locale =
-    pathLocale ??
-    normalizeLocale(request.cookies.get(localeCookieName)?.value) ??
-    detectLocaleFromAcceptLanguage(request.headers.get("accept-language"));
+  const locale = pathLocale ?? defaultLocale;
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-mcp-locale", locale);
@@ -97,7 +98,7 @@ export async function proxy(request: NextRequest) {
   requestHeaders.set("x-mcp-internal-pathname", internalPathname);
 
   if (!internalPathname.startsWith("/admin")) {
-    const response = pathLocale
+    return pathLocale
       ? NextResponse.rewrite(
           new URL(`${internalPathname}${request.nextUrl.search}`, request.url),
           {
@@ -111,20 +112,12 @@ export async function proxy(request: NextRequest) {
             headers: requestHeaders,
           },
         });
-
-    response.cookies.set(localeCookieName, locale, {
-      maxAge: 60 * 60 * 24 * 365,
-      path: "/",
-      sameSite: "Lax",
-    });
-
-    return response;
   }
 
   const authorized = await isAdminRequestAuthorized(request, request.nextUrl.hostname);
 
   if (authorized) {
-    const response = pathLocale
+    return pathLocale
       ? NextResponse.rewrite(
           new URL(`${internalPathname}${request.nextUrl.search}`, request.url),
           {
@@ -138,14 +131,6 @@ export async function proxy(request: NextRequest) {
             headers: requestHeaders,
           },
         });
-
-    response.cookies.set(localeCookieName, locale, {
-      maxAge: 60 * 60 * 24 * 365,
-      path: "/",
-      sameSite: "Lax",
-    });
-
-    return response;
   }
 
   return new NextResponse("Authentication required", {

@@ -4,6 +4,12 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
+PREVIOUS_CATALOG="$(mktemp "${TMPDIR:-/tmp}/mcpapp-catalog.XXXXXX")"
+PREVIOUS_SKILLS="$(mktemp "${TMPDIR:-/tmp}/mcpapp-skills.XXXXXX")"
+cp seed/chatgpt-apps.json "$PREVIOUS_CATALOG"
+cp seed/skills.json "$PREVIOUS_SKILLS"
+trap 'rm -f "$PREVIOUS_CATALOG" "$PREVIOUS_SKILLS"' EXIT
+
 log() {
   printf '%s %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$*"
 }
@@ -134,6 +140,9 @@ if [[ "$remote_enabled" == true ]]; then
   run_step "verify mcpapp.net" verify_live_url "https://mcpapp.net/"
   run_step "verify sitemap" verify_live_url "https://mcpapp.net/sitemap.xml"
   run_step "verify robots" verify_live_url "https://mcpapp.net/robots.txt"
+
+  log "Notifying IndexNow about changed public URLs"
+  run_step "notify IndexNow" npm run indexnow:submit -- --before "$PREVIOUS_CATALOG" --before-skills "$PREVIOUS_SKILLS"
 else
   log "Skipping remote D1 apply and deploy (no Cloudflare auth)"
 fi

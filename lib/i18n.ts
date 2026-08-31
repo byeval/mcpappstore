@@ -239,7 +239,7 @@ const enMessages = {
     articleAn: "an",
   },
   home: {
-    metaTitle: "MCP App Store (mcpapp)",
+    metaTitle: "MCP Apps Directory for ChatGPT & Claude",
     metaDescription:
       "mcpapp is an MCP App Store for ChatGPT apps, Claude connectors, and MCP servers, with categories, previews, tools, and integration details.",
     headline: "MCP App Store",
@@ -693,7 +693,7 @@ const esMessages: I18nMessages = {
   },
   home: {
     ...enMessages.home,
-    metaTitle: "MCP App Store (mcpapp)",
+    metaTitle: "Directorio de apps MCP para ChatGPT y Claude",
     metaDescription:
       "mcpapp es una tienda de apps MCP para apps de ChatGPT, conectores de Claude y servidores MCP, con categorías, vistas previas, herramientas e integración.",
     subtitle:
@@ -1031,6 +1031,9 @@ const frMessages: I18nMessages = {
   },
   home: {
     ...enMessages.home,
+    metaTitle: "Répertoire d’apps MCP pour ChatGPT et Claude",
+    metaDescription:
+      "Comparez les apps ChatGPT, les connecteurs Claude et les serveurs MCP par outils, aperçus, catégories et détails d’intégration.",
     subtitle:
       "mcpapp vous aide à comparer les apps ChatGPT, les connecteurs Claude et les serveurs MCP par outils, aperçus, catégories et prise en charge des plateformes.",
     searchPlaceholder: "Rechercher apps et connecteurs",
@@ -1334,6 +1337,9 @@ const deMessages: I18nMessages = {
   },
   home: {
     ...enMessages.home,
+    metaTitle: "MCP-App-Verzeichnis für ChatGPT und Claude",
+    metaDescription:
+      "Vergleiche ChatGPT-Apps, Claude-Connectors und MCP-Server nach Tools, Vorschauen, Kategorien und Integrationsdetails.",
     subtitle:
       "mcpapp hilft beim Vergleichen von ChatGPT-Apps, Claude-Connectors und MCP-Servern nach Tools, Vorschauen, Kategorien und Plattform-Support.",
     searchPlaceholder: "Apps und Connectors suchen",
@@ -1637,6 +1643,8 @@ const zhMessages: I18nMessages = {
   },
   home: {
     ...enMessages.home,
+    metaTitle: "ChatGPT 与 Claude 的 MCP 应用目录",
+    metaDescription: "比较 ChatGPT 应用、Claude 连接器和 MCP 服务器的工具、预览、分类与集成详情。",
     headline: "MCP App Store",
     subtitle: "mcpapp 帮你按工具、预览、分类和平台支持比较 ChatGPT 应用、Claude 连接器和 MCP 服务器。",
     searchPlaceholder: "搜索应用和连接器",
@@ -1975,6 +1983,9 @@ const jaMessages: I18nMessages = {
   },
   home: {
     ...enMessages.home,
+    metaTitle: "ChatGPT・Claude 向け MCP アプリ一覧",
+    metaDescription:
+      "ChatGPT アプリ、Claude コネクタ、MCP サーバーをツール、プレビュー、カテゴリ、連携情報で比較できます。",
     subtitle:
       "mcpapp は、ChatGPT アプリ、Claude コネクタ、MCP サーバーをツール、プレビュー、カテゴリ、プラットフォーム対応で比較できます。",
     searchPlaceholder: "アプリとコネクタを検索",
@@ -2269,6 +2280,9 @@ const koMessages: I18nMessages = {
   },
   home: {
     ...enMessages.home,
+    metaTitle: "ChatGPT 및 Claude용 MCP 앱 디렉터리",
+    metaDescription:
+      "ChatGPT 앱, Claude 커넥터, MCP 서버의 도구, 미리보기, 카테고리와 통합 정보를 비교하세요.",
     subtitle:
       "mcpapp에서 ChatGPT 앱, Claude 커넥터, MCP 서버를 도구, 미리보기, 카테고리, 플랫폼 지원 기준으로 비교하세요.",
     searchPlaceholder: "앱과 커넥터 검색",
@@ -2570,7 +2584,7 @@ const ruMessages: I18nMessages = {
   },
   home: {
     ...enMessages.home,
-    metaTitle: "Магазин MCP-приложений (mcpapp)",
+    metaTitle: "Каталог MCP-приложений для ChatGPT и Claude",
     metaDescription:
       "mcpapp - каталог MCP-приложений для ChatGPT, коннекторов Claude и MCP-серверов с категориями, превью, инструментами и деталями интеграций.",
     headline: "Магазин MCP-приложений",
