@@ -86292,6 +86292,420 @@
       ],
       "tools": [],
       "previews": []
+    },
+    {
+      "id": "letter-md",
+      "name": "Letter.md",
+      "tagline": "Read, review, and publish Markdown with AI",
+      "description": "Letter.md is a collaborative Markdown workspace with a hosted OAuth MCP server. AI clients can list and search accessible documents, read Markdown, images, versions, and comments, create reviewable suggestions and traceable comments, save new unpublished documents, open the realtime editor, and explicitly publish or update public pages. Access is limited to approved workspaces and scopes, document changes remain reviewable, and publishing always requires an explicit request.",
+      "iconKey": "icons/letter-md.svg",
+      "homepageUrl": "https://letter.md",
+      "mcpEndpoint": "https://mcp.letter.md/mcp",
+      "mcpTransport": "http",
+      "installCmd": "claude mcp add --transport http letter-md https://mcp.letter.md/mcp",
+      "authType": "oauth",
+      "publisher": "Letter.md",
+      "publisherUrl": "https://letter.md",
+      "capabilities": [
+        "Interactive",
+        "Reads",
+        "Writes",
+        "Remote MCP"
+      ],
+      "privacyUrl": "https://letter.md/privacy",
+      "termsUrl": "https://letter.md/terms",
+      "supportUrl": "https://letter.md/support",
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [
+        "List my recently updated Letter.md documents.",
+        "Review this Letter.md document for clarity and create only useful suggestions.",
+        "Save this Markdown as a new unpublished Letter.md document titled Launch Plan.",
+        "Publish this document after showing me its current publication context."
+      ],
+      "source": "admin",
+      "createdAt": 1788197969000,
+      "updatedAt": 1788197969000,
+      "publishedAt": 1788197969000,
+      "surfaces": [
+        {
+          "platform": "chatgpt",
+          "type": "app",
+          "displayName": "Letter.md",
+          "tagline": "Review Markdown with AI",
+          "description": "Read, search, review, and publish authorized Letter.md documents from ChatGPT, with reviewable suggestions and a complete collaborative editor.",
+          "url": "https://letter.md/docs/mcp",
+          "mcpEndpoint": "https://mcp.letter.md/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Interactive",
+            "Reads",
+            "Writes",
+            "Remote MCP"
+          ],
+          "examplePrompts": [
+            "List my recently updated Letter.md documents.",
+            "Review this Letter.md document for clarity and create only useful suggestions.",
+            "Open this Letter.md document in the collaborative editor."
+          ],
+          "tools": [
+            {
+              "name": "list_document_create_destinations",
+              "description": "List writable workspaces and folders for a new unpublished document."
+            },
+            {
+              "name": "list_workspaces",
+              "description": "List the workspaces the linked user can access."
+            },
+            {
+              "name": "list_folders",
+              "description": "List the cloud folder tree for a workspace."
+            },
+            {
+              "name": "list_documents",
+              "description": "List the documents the linked user can access."
+            },
+            {
+              "name": "get_edit_request_context",
+              "description": "Resolve an in-editor AI request into its document, sources, selection, and instructions."
+            },
+            {
+              "name": "heartbeat_ai_request",
+              "description": "Renew the execution lease for a long-running in-editor request."
+            },
+            {
+              "name": "get_document",
+              "description": "Read the latest Markdown and block structure."
+            },
+            {
+              "name": "get_document_version_context",
+              "description": "Read the current document and a saved version for comparison."
+            },
+            {
+              "name": "get_publication_context",
+              "description": "Read document content and publication metadata without changing it."
+            },
+            {
+              "name": "publish_document",
+              "description": "Publish an unpublished document after an explicit user request."
+            },
+            {
+              "name": "update_document_publication",
+              "description": "Update an existing public version after an explicit user request."
+            },
+            {
+              "name": "get_document_assets_context",
+              "description": "List image assets referenced by a document."
+            },
+            {
+              "name": "get_document_asset",
+              "description": "Read one image referenced by the current document."
+            },
+            {
+              "name": "upload_document_image",
+              "description": "Store an image in the document asset library for reviewable insertion."
+            },
+            {
+              "name": "search_workspace_documents",
+              "description": "Semantically search accessible Markdown documents."
+            },
+            {
+              "name": "create_suggestion",
+              "description": "Create a reviewable suggestion without directly editing the document."
+            },
+            {
+              "name": "create_agent_comment",
+              "description": "Add a traceable AI comment anchored to a selection."
+            },
+            {
+              "name": "create_review_findings",
+              "description": "Create categorized, anchored review findings."
+            },
+            {
+              "name": "complete_ai_request",
+              "description": "Complete an in-editor AI workflow with structured results."
+            },
+            {
+              "name": "fail_ai_request",
+              "description": "Mark an in-editor AI request as failed."
+            },
+            {
+              "name": "create_document",
+              "description": "Save Markdown as a separate unpublished document without overwriting existing content."
+            },
+            {
+              "name": "create_document_from_ai",
+              "description": "Create a separate derivative document during an in-editor AI workflow."
+            },
+            {
+              "name": "list_document_comments",
+              "description": "Read open or resolved document comments."
+            },
+            {
+              "name": "get_review_context",
+              "description": "Read current Markdown together with unresolved comments."
+            },
+            {
+              "name": "render_letter_editor",
+              "description": "Open the complete collaborative Markdown editor in the MCP host."
+            }
+          ],
+          "previews": [],
+          "isPrimary": true,
+          "status": "pending"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Letter.md",
+          "tagline": "Read, review, and publish Markdown with AI",
+          "description": "Connect Claude-compatible MCP clients to authorized Letter.md workspaces for document retrieval, reviewable suggestions, document creation, and explicit publishing.",
+          "url": "https://letter.md/docs/mcp",
+          "mcpEndpoint": "https://mcp.letter.md/mcp",
+          "mcpTransport": "http",
+          "installCmd": "claude mcp add --transport http letter-md https://mcp.letter.md/mcp",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Reads",
+            "Writes",
+            "Remote MCP"
+          ],
+          "examplePrompts": [
+            "List my recently updated Letter.md documents.",
+            "Review this Letter.md document and create traceable suggestions.",
+            "Save this Markdown as a new unpublished Letter.md document."
+          ],
+          "tools": [
+            {
+              "name": "list_document_create_destinations",
+              "description": "List writable workspaces and folders for a new unpublished document."
+            },
+            {
+              "name": "list_workspaces",
+              "description": "List the workspaces the linked user can access."
+            },
+            {
+              "name": "list_folders",
+              "description": "List the cloud folder tree for a workspace."
+            },
+            {
+              "name": "list_documents",
+              "description": "List the documents the linked user can access."
+            },
+            {
+              "name": "get_edit_request_context",
+              "description": "Resolve an in-editor AI request into its document, sources, selection, and instructions."
+            },
+            {
+              "name": "heartbeat_ai_request",
+              "description": "Renew the execution lease for a long-running in-editor request."
+            },
+            {
+              "name": "get_document",
+              "description": "Read the latest Markdown and block structure."
+            },
+            {
+              "name": "get_document_version_context",
+              "description": "Read the current document and a saved version for comparison."
+            },
+            {
+              "name": "get_publication_context",
+              "description": "Read document content and publication metadata without changing it."
+            },
+            {
+              "name": "publish_document",
+              "description": "Publish an unpublished document after an explicit user request."
+            },
+            {
+              "name": "update_document_publication",
+              "description": "Update an existing public version after an explicit user request."
+            },
+            {
+              "name": "get_document_assets_context",
+              "description": "List image assets referenced by a document."
+            },
+            {
+              "name": "get_document_asset",
+              "description": "Read one image referenced by the current document."
+            },
+            {
+              "name": "upload_document_image",
+              "description": "Store an image in the document asset library for reviewable insertion."
+            },
+            {
+              "name": "search_workspace_documents",
+              "description": "Semantically search accessible Markdown documents."
+            },
+            {
+              "name": "create_suggestion",
+              "description": "Create a reviewable suggestion without directly editing the document."
+            },
+            {
+              "name": "create_agent_comment",
+              "description": "Add a traceable AI comment anchored to a selection."
+            },
+            {
+              "name": "create_review_findings",
+              "description": "Create categorized, anchored review findings."
+            },
+            {
+              "name": "complete_ai_request",
+              "description": "Complete an in-editor AI workflow with structured results."
+            },
+            {
+              "name": "fail_ai_request",
+              "description": "Mark an in-editor AI request as failed."
+            },
+            {
+              "name": "create_document",
+              "description": "Save Markdown as a separate unpublished document without overwriting existing content."
+            },
+            {
+              "name": "create_document_from_ai",
+              "description": "Create a separate derivative document during an in-editor AI workflow."
+            },
+            {
+              "name": "list_document_comments",
+              "description": "Read open or resolved document comments."
+            },
+            {
+              "name": "get_review_context",
+              "description": "Read current Markdown together with unresolved comments."
+            },
+            {
+              "name": "render_letter_editor",
+              "description": "Open the complete collaborative Markdown editor in the MCP host."
+            }
+          ],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "productivity",
+        "documents",
+        "collaboration",
+        "writing",
+        "mcp"
+      ],
+      "tags": [
+        "letter-md",
+        "markdown",
+        "document-editor",
+        "collaborative-editing",
+        "document-review",
+        "mcp-server",
+        "remote-mcp",
+        "oauth",
+        "publishing"
+      ],
+      "tools": [
+        {
+          "name": "list_document_create_destinations",
+          "description": "List writable workspaces and folders for a new unpublished document."
+        },
+        {
+          "name": "list_workspaces",
+          "description": "List the workspaces the linked user can access."
+        },
+        {
+          "name": "list_folders",
+          "description": "List the cloud folder tree for a workspace."
+        },
+        {
+          "name": "list_documents",
+          "description": "List the documents the linked user can access."
+        },
+        {
+          "name": "get_edit_request_context",
+          "description": "Resolve an in-editor AI request into its document, sources, selection, and instructions."
+        },
+        {
+          "name": "heartbeat_ai_request",
+          "description": "Renew the execution lease for a long-running in-editor request."
+        },
+        {
+          "name": "get_document",
+          "description": "Read the latest Markdown and block structure."
+        },
+        {
+          "name": "get_document_version_context",
+          "description": "Read the current document and a saved version for comparison."
+        },
+        {
+          "name": "get_publication_context",
+          "description": "Read document content and publication metadata without changing it."
+        },
+        {
+          "name": "publish_document",
+          "description": "Publish an unpublished document after an explicit user request."
+        },
+        {
+          "name": "update_document_publication",
+          "description": "Update an existing public version after an explicit user request."
+        },
+        {
+          "name": "get_document_assets_context",
+          "description": "List image assets referenced by a document."
+        },
+        {
+          "name": "get_document_asset",
+          "description": "Read one image referenced by the current document."
+        },
+        {
+          "name": "upload_document_image",
+          "description": "Store an image in the document asset library for reviewable insertion."
+        },
+        {
+          "name": "search_workspace_documents",
+          "description": "Semantically search accessible Markdown documents."
+        },
+        {
+          "name": "create_suggestion",
+          "description": "Create a reviewable suggestion without directly editing the document."
+        },
+        {
+          "name": "create_agent_comment",
+          "description": "Add a traceable AI comment anchored to a selection."
+        },
+        {
+          "name": "create_review_findings",
+          "description": "Create categorized, anchored review findings."
+        },
+        {
+          "name": "complete_ai_request",
+          "description": "Complete an in-editor AI workflow with structured results."
+        },
+        {
+          "name": "fail_ai_request",
+          "description": "Mark an in-editor AI request as failed."
+        },
+        {
+          "name": "create_document",
+          "description": "Save Markdown as a separate unpublished document without overwriting existing content."
+        },
+        {
+          "name": "create_document_from_ai",
+          "description": "Create a separate derivative document during an in-editor AI workflow."
+        },
+        {
+          "name": "list_document_comments",
+          "description": "Read open or resolved document comments."
+        },
+        {
+          "name": "get_review_context",
+          "description": "Read current Markdown together with unresolved comments."
+        },
+        {
+          "name": "render_letter_editor",
+          "description": "Open the complete collaborative Markdown editor in the MCP host."
+        }
+      ],
+      "previews": []
     }
   ]
 }
