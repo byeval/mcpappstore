@@ -61,6 +61,18 @@ interface ChatgptPluginsHomeResponse {
   sections?: ChatgptPluginsSection[];
 }
 
+interface ChatgptPluginsBrowserCapture {
+  categories?: Record<
+    string,
+    {
+      status?: number;
+      data?: {
+        plugins?: ChatgptPluginRecord[];
+      };
+    }
+  >;
+}
+
 interface ChatgptPluginsSection {
   id?: string;
   urlSlug?: string;
@@ -71,7 +83,11 @@ interface ChatgptPluginsSection {
 interface ChatgptPluginRecord {
   id?: string;
   name?: string | null;
+  display_name?: string | null;
   description?: string | null;
+  short_description?: string | null;
+  icon_url?: string | null;
+  icon_url_dark?: string | null;
   keywords?: string[] | null;
   interface?: {
     display_name?: string | null;
@@ -148,6 +164,7 @@ interface CliOptions {
   inputPath: string;
   outputPath: string;
   uploadR2: boolean;
+  downloadMedia: boolean;
   bucketName?: string;
   envName?: string;
 }
@@ -167,6 +184,7 @@ const mediaDownloadTimeoutMs = 15_000;
 function parseCliOptions(argv: string[]): CliOptions {
   const positional: string[] = [];
   let uploadR2 = process.env.SCRAPE_UPLOAD_R2 === "1";
+  let downloadMedia = true;
   let bucketName = process.env.R2_BUCKET_NAME;
   let envName = process.env.CLOUDFLARE_ENV;
 
@@ -177,6 +195,11 @@ function parseCliOptions(argv: string[]): CliOptions {
       continue;
     }
     if (arg === "--no-upload-r2") {
+      uploadR2 = false;
+      continue;
+    }
+    if (arg === "--no-download-media") {
+      downloadMedia = false;
       uploadR2 = false;
       continue;
     }
@@ -206,6 +229,7 @@ function parseCliOptions(argv: string[]): CliOptions {
     inputPath: resolve(process.cwd(), positional[0] ?? defaultInputPath),
     outputPath: resolve(process.cwd(), positional[1] ?? defaultOutputPath),
     uploadR2,
+    downloadMedia,
     bucketName,
     envName,
   };
@@ -784,7 +808,7 @@ function parsePluginsHome(source: ChatgptPluginsHomeResponse): CatalogApp[] {
     const category = slugify(section.urlSlug ?? section.id ?? section.title ?? "featured") || "featured";
     for (const plugin of section.plugins ?? []) {
       const externalId = normalizeText(plugin.id);
-      const appName = normalizeText(plugin.interface?.display_name ?? plugin.name ?? undefined);
+      const appName = normalizeText(plugin.interface?.display_name ?? plugin.display_name ?? plugin.name ?? undefined);
       if (!externalId || !appName || plugin.status?.toUpperCase() === "DISABLED") {
         continue;
       }
@@ -801,11 +825,12 @@ function parsePluginsHome(source: ChatgptPluginsHomeResponse): CatalogApp[] {
   }
 
   return [...recordsByExternalId.values()].map(({ plugin, categories: rawCategories, index: appIndex }) => {
-    const appName = normalizeText(plugin.interface?.display_name ?? plugin.name ?? undefined) ?? "Unknown";
+    const appName = normalizeText(plugin.interface?.display_name ?? plugin.display_name ?? plugin.name ?? undefined) ?? "Unknown";
     const externalId = normalizeText(plugin.id) ?? appName;
     const id = uniqueSlug(appName, externalId, seenIds);
     const tagline =
       normalizeText(plugin.interface?.short_description ?? undefined) ??
+      normalizeText(plugin.short_description ?? undefined) ??
       normalizeText(plugin.description ?? undefined) ??
       "Imported from the ChatGPT plugins directory.";
     const description =
@@ -832,7 +857,9 @@ function parsePluginsHome(source: ChatgptPluginsHomeResponse): CatalogApp[] {
       iconUrl:
         normalizeText(plugin.interface?.icon ?? undefined) ??
         normalizeText(plugin.interface?.logo ?? undefined) ??
-        normalizeText(plugin.interface?.logo_dark ?? undefined),
+        normalizeText(plugin.interface?.logo_dark ?? undefined) ??
+        normalizeText(plugin.icon_url ?? undefined) ??
+        normalizeText(plugin.icon_url_dark ?? undefined),
       homepageUrl: normalizeText(plugin.interface?.website_url ?? undefined),
       repoUrl: undefined,
       mcpEndpoint: undefined,
@@ -882,6 +909,23 @@ function parsePluginsHome(source: ChatgptPluginsHomeResponse): CatalogApp[] {
 }
 
 function toCatalogApps(source: unknown): CatalogApp[] {
+  if (
+    source &&
+    typeof source === "object" &&
+    (source as ChatgptPluginsBrowserCapture).categories &&
+    typeof (source as ChatgptPluginsBrowserCapture).categories === "object"
+  ) {
+    const capture = source as ChatgptPluginsBrowserCapture;
+    return parsePluginsHome({
+      sections: Object.entries(capture.categories ?? {}).map(([slug, entry]) => ({
+        id: slug,
+        urlSlug: slug,
+        title: slug,
+        plugins: entry.status === 200 ? entry.data?.plugins ?? [] : [],
+      })),
+    });
+  }
+
   if (
     source &&
     typeof source === "object" &&
@@ -984,6 +1028,7 @@ function mergeWithExistingCatalog(apps: CatalogApp[], existingCatalog: SeedCatal
 
     return {
       ...app,
+      iconKey: app.iconKey ?? existing.iconKey,
       createdAt: existing.createdAt ?? app.createdAt,
       skills: app.skills ?? existing.skills,
       surfaces,
@@ -1130,10 +1175,12 @@ async function main() {
 
   for (const app of source) {
     let iconAsset: AssetResult = { key: undefined, downloaded: false, uploaded: false };
-    try {
-      iconAsset = await downloadMediaAsset(app.iconUrl, `icons/${app.id}`, "png", options);
-    } catch (error) {
-      console.warn(`Skipping icon for ${app.name}: ${error instanceof Error ? error.message : String(error)}`);
+    if (options.downloadMedia) {
+      try {
+        iconAsset = await downloadMediaAsset(app.iconUrl, `icons/${app.id}`, "png", options);
+      } catch (error) {
+        console.warn(`Skipping icon for ${app.name}: ${error instanceof Error ? error.message : String(error)}`);
+      }
     }
     if (iconAsset.downloaded) {
       downloadedIcons += 1;
@@ -1143,7 +1190,7 @@ async function main() {
     }
 
     const previews: CatalogApp["previews"] = [];
-    for (const preview of app.previews) {
+    for (const preview of options.downloadMedia ? app.previews : []) {
       let previewAsset: AssetResult;
       try {
         previewAsset = await downloadMediaAsset(
@@ -1182,7 +1229,7 @@ async function main() {
     apps.push({
       ...app,
       iconKey: iconAsset.key,
-      isFeatured: app.isFeatured && previews.length > 0,
+      isFeatured: options.downloadMedia ? app.isFeatured && previews.length > 0 : app.isFeatured,
       surfaces: app.surfaces.map((surface) =>
         surface.platform === "chatgpt"
           ? {
