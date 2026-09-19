@@ -136,7 +136,7 @@ async function fetchText(url: string): Promise<string> {
 }
 
 function extractTotalPages(html: string): number {
-  const pages = [...html.matchAll(/\b(\d+)\s*\/\s*(\d+)\b/g)].map((match) => Number(match[2]));
+  const pages = [...html.matchAll(/[?&]cc61befa_page=(\d+)/g)].map((match) => Number(match[1]));
   return Math.max(1, ...pages.filter(Number.isFinite));
 }
 
@@ -172,21 +172,57 @@ function extractConnectorCards(html: string, page: number): PublicClaudeConnecto
     });
   }
 
+  if (connectors.length > 0) return connectors;
+
+  const cards = html.split(/(?=<div class="CardConnector[^>]*__card")/).slice(1);
+  for (const block of cards) {
+    const href = absoluteConnectorHref(decodeHtml(block.match(/<a href="(\/connectors\/[^"]+)"/)?.[1]));
+    const slug = connectorSlugFromHref(href);
+    const name = stripTags(block.match(/<a href="\/connectors\/[^"]+"[^>]*>([\s\S]*?)<\/a>/)?.[1]);
+    if (!href || !slug || !name) continue;
+
+    const tagline = stripTags(block.match(/<p class="CardConnector[^>]*__subtitle[^>]*>([\s\S]*?)<\/p>/)?.[1]);
+    const iconUrl = decodeHtml(block.match(/<img[^>]*\ssrc="([^"]*)"/)?.[1]);
+    connectors.push({
+      page,
+      name,
+      slug,
+      href,
+      tagline: tagline || undefined,
+      iconUrl: iconUrl || undefined,
+      categories: [],
+      worksWith: ["Claude"],
+    });
+  }
+
   return connectors;
 }
 
 function parseDetail(html: string): PublicClaudeConnectorDetail {
   const title = stripTags(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1]);
-  const tagline = decodeHtml(html.match(/<meta content="([^"]*)" name="description"/)?.[1]);
-  const iconUrl = decodeHtml(html.match(/<div class="hero_connector_icon[\s\S]*?<img[^>]*\ssrc="([^"]*)"/)?.[1]);
+  const tagline = decodeHtml(
+    html.match(/<meta name="description" content="([^"]*)"/)?.[1] ??
+      html.match(/<meta content="([^"]*)" name="description"/)?.[1],
+  );
+  const iconUrl = decodeHtml(
+    html.match(/<span class="ConnectorIcon[^>]*__hero[\s\S]*?<img[^>]*\ssrc="([^"]*)"/)?.[1] ??
+      html.match(/<div class="hero_connector_icon[\s\S]*?<img[^>]*\ssrc="([^"]*)"/)?.[1],
+  );
   const directoryLinks: PublicClaudeConnectorDetail["directoryLinks"] = [];
+  const heroDirectoryLink = html.match(
+    /<a[^>]*href="(https:\/\/claude\.ai\/directory\/([^"]+))"[^>]*data-cta-position="connectorHero"[^>]*>/,
+  );
 
-  for (const match of html.matchAll(/<a[^>]*href="(https:\/\/claude\.ai\/directory\/([^"]+))"[^>]*>([\s\S]*?)<\/a>/g)) {
-    const href = decodeHtml(match[1]);
-    const id = decodeHtml(match[2]);
-    const label = stripTags(match[3]);
-    if (id && !directoryLinks.some((link) => link.id === id)) {
-      directoryLinks.push({ id, href, label: label || undefined });
+  if (heroDirectoryLink) {
+    directoryLinks.push({ id: decodeHtml(heroDirectoryLink[2]), href: decodeHtml(heroDirectoryLink[1]) });
+  } else {
+    for (const match of html.matchAll(/<a[^>]*href="(https:\/\/claude\.ai\/directory\/([^"]+))"[^>]*>([\s\S]*?)<\/a>/g)) {
+      const href = decodeHtml(match[1]);
+      const id = decodeHtml(match[2]);
+      const label = stripTags(match[3]);
+      if (id && !directoryLinks.some((link) => link.id === id)) {
+        directoryLinks.push({ id, href, label: label || undefined });
+      }
     }
   }
 
@@ -243,6 +279,9 @@ async function scrapeConnectors(): Promise<PublicClaudeConnector[]> {
 
   const connectors = pages.flatMap(({ page, html }) => extractConnectorCards(html, page));
   const unique = new Map(connectors.map((connector) => [connector.href, connector]));
+  if (unique.size === 0) {
+    throw new Error("No Claude connectors were found in the public directory HTML.");
+  }
   const detailed = await mapConcurrent([...unique.values()], detailConcurrency, async (connector) => {
     try {
       return {

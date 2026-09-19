@@ -65,7 +65,7 @@ function markdownForCandidates(candidates: SkillAssociationCandidate[], threshol
 
 async function main() {
   const threshold = Number(argValue("--threshold") ?? 120);
-  const limit = argValue("--limit") ?? "250";
+  const limit = argValue("--limit") ?? "600";
   const enrich = argValue("--enrich") ?? "25";
   const minInstalls = argValue("--min-installs") ?? "0";
   const candidateJsonPath = argValue("--candidates") ?? "reports/skill-association-candidates.json";

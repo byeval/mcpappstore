@@ -120,6 +120,11 @@ npm run skills:refresh -- --skip-seed
 log "Refreshing MCP clients catalog"
 npm run clients:import
 
+log "Refreshing MCP discovery candidates"
+npm run discover:github-mcp -- --limit 1000 --pages 10 --per-page 100 --resume
+npm run discover:npm-mcp -- --limit 4000 --size 250 --pages 10 --resume
+npm run discovery:index
+
 log "Checking data source health"
 npm run data:health
 

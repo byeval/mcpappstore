@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 
 const requestTimeoutMs = 20_000;
@@ -48,11 +48,17 @@ async function fetchJson<T>(url: string): Promise<T> {
   }
 
   try {
-    const response = await fetch(url, { headers, signal: controller.signal });
-    if (!response.ok) {
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      const response = await fetch(url, { headers, signal: controller.signal });
+      if (response.ok) return (await response.json()) as T;
+      if ((response.status === 403 || response.status === 429) && attempt < 2) {
+        const retryAfter = Math.min(Number(response.headers.get("retry-after") ?? 2 ** attempt), 5);
+        await new Promise((resolveWait) => setTimeout(resolveWait, retryAfter * 1_000));
+        continue;
+      }
       throw new Error(`GitHub request failed: ${response.status} ${response.statusText}`);
     }
-    return (await response.json()) as T;
+    throw new Error("GitHub request failed after retries");
   } finally {
     clearTimeout(timeout);
   }
@@ -104,11 +110,21 @@ async function main() {
   const pages = Number(argValue("--pages") ?? 3);
   const outputPath = argValue("--output") ?? "reports/github-mcp-discovery.json";
   const markdownPath = argValue("--report") ?? "reports/github-mcp-discovery.md";
+  const resume = process.argv.includes("--resume");
 
   const pageCount = Math.min(Math.max(Number.isFinite(pages) ? Math.floor(pages) : 3, 1), 10);
   const pageSize = Math.min(Math.max(Number.isFinite(perPage) ? Math.floor(perPage) : 100, 1), 100);
   const results: Array<{ query: string; page: number; result: GithubSearchResponse }> = [];
   const warnings: QueryWarning[] = [];
+  const previousRepos: GithubRepo[] = [];
+  if (resume) {
+    try {
+      const previous = JSON.parse(await readFile(resolve(process.cwd(), outputPath), "utf8")) as { repos?: GithubRepo[] };
+      previousRepos.push(...(previous.repos ?? []));
+    } catch {
+      // A missing first-run report is expected.
+    }
+  }
 
   for (const query of queries) {
     for (let page = 1; page <= pageCount; page += 1) {
@@ -132,6 +148,7 @@ async function main() {
   }
 
   const repoByName = new Map<string, GithubRepo>();
+  for (const repo of previousRepos) repoByName.set(repo.full_name, repo);
   for (const { result } of results) {
     for (const repo of result.items) {
       repoByName.set(repo.full_name, repo);
@@ -158,7 +175,7 @@ async function main() {
   await mkdir(dirname(resolve(process.cwd(), outputPath)), { recursive: true });
   await writeFile(resolve(process.cwd(), outputPath), `${JSON.stringify(payload, null, 2)}\n`, "utf8");
   await writeFile(resolve(process.cwd(), markdownPath), markdownReport(repos, generatedAt), "utf8");
-  console.log(JSON.stringify({ queries, pages: pageCount, perPage: pageSize, totalCount: payload.totalCount, repos: repos.length, output: outputPath }, null, 2));
+  console.log(JSON.stringify({ queries, pages: pageCount, perPage: pageSize, totalCount: payload.totalCount, repos: repos.length, resumed: previousRepos.length, warnings: warnings.length, output: outputPath }, null, 2));
 }
 
 await main();

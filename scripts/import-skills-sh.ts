@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-import type { CatalogSkill, SeedSkillAssociation, SeedSkillRegistry } from "../lib/types";
+import type { CatalogSkill, SeedSkillRegistry } from "../lib/types";
 
 const defaultSourceUrl = "https://skills.sh/";
 const defaultOutputPath = "seed/skills.json";
@@ -32,14 +32,14 @@ function argValue(name: string): string | undefined {
 }
 
 function parseOptions(): ImportOptions {
-  const limit = Number(argValue("--limit") ?? 250);
+  const limit = Number(argValue("--limit") ?? 600);
   const enrich = Number(argValue("--enrich") ?? 25);
   const minInstalls = Number(argValue("--min-installs") ?? 0);
 
   return {
     sourceUrl: argValue("--source") ?? defaultSourceUrl,
     outputPath: argValue("--output") ?? defaultOutputPath,
-    limit: Number.isFinite(limit) && limit > 0 ? Math.floor(limit) : 250,
+    limit: Number.isFinite(limit) && limit > 0 ? Math.floor(limit) : 600,
     enrich: Number.isFinite(enrich) && enrich > 0 ? Math.floor(enrich) : 0,
     minInstalls: Number.isFinite(minInstalls) && minInstalls > 0 ? Math.floor(minInstalls) : 0,
     associationsPath: argValue("--associations") ?? "seed/app-skill-associations.json",
@@ -226,25 +226,20 @@ async function main() {
     throw new Error("No skills.sh leaderboard entries were found in the fetched page.");
   }
 
-  const summaries = await enrichEntries(entries, Math.min(options.enrich, entries.length));
-  const importedSkills = entries.map((entry) => skillForEntry(entry, summaries.get(`${entry.source}/${entry.skillId}`)));
   const outputPath = resolve(process.cwd(), options.outputPath);
   const current = JSON.parse(await readFile(outputPath, "utf8")) as SeedSkillRegistry;
-  const associations = JSON.parse(
-    await readFile(resolve(process.cwd(), options.associationsPath), "utf8"),
-  ) as SeedSkillAssociation[];
-  const pinnedExternalSkillIds = new Set(
-    associations
-      .map((association) => association.skillId)
-      .filter((skillId) => skillId.startsWith(importedIdPrefix)),
-  );
+  const currentById = new Map(current.skills.map((skill) => [skill.id, skill]));
+  const summaries = await enrichEntries(entries, Math.min(options.enrich, entries.length));
+  const importedSkills = entries.map((entry) => {
+    const summary = summaries.get(`${entry.source}/${entry.skillId}`);
+    const imported = skillForEntry(entry, summary);
+    const existing = currentById.get(imported.id);
+    return existing && !summary ? { ...imported, description: existing.description } : imported;
+  });
   const importedSkillIds = new Set(importedSkills.map((skill) => skill.id));
   const localSkills = current.skills.filter((skill) => !skill.id.startsWith(importedIdPrefix));
   const preservedExternalSkills = current.skills.filter(
-    (skill) =>
-      skill.id.startsWith(importedIdPrefix) &&
-      pinnedExternalSkillIds.has(skill.id) &&
-      !importedSkillIds.has(skill.id),
+    (skill) => skill.id.startsWith(importedIdPrefix) && !importedSkillIds.has(skill.id),
   );
   const next: SeedSkillRegistry = {
     skills: [...localSkills, ...importedSkills, ...preservedExternalSkills].sort((left, right) => left.id.localeCompare(right.id)),

@@ -143,7 +143,7 @@ async function main() {
       status: "ok",
       localCount: skillExternalCount,
       expectedLocalMinimum: 250,
-      notes: [`total skills=${skills.skills.length}`, "importer keeps top 250 plus pinned associations"],
+      notes: [`total skills=${skills.skills.length}`, "importer keeps the current top 600 plus historical entries"],
     },
     {
       id: "mcp-clients",

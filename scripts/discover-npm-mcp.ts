@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 
 const requestTimeoutMs = 20_000;
@@ -48,17 +48,23 @@ async function fetchJson<T>(url: string): Promise<T> {
   const timeout = setTimeout(() => controller.abort(), requestTimeoutMs);
 
   try {
-    const response = await fetch(url, {
-      headers: {
-        accept: "application/json",
-        "user-agent": userAgent,
-      },
-      signal: controller.signal,
-    });
-    if (!response.ok) {
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      const response = await fetch(url, {
+        headers: {
+          accept: "application/json",
+          "user-agent": userAgent,
+        },
+        signal: controller.signal,
+      });
+      if (response.ok) return (await response.json()) as T;
+      if (response.status === 429 && attempt < 2) {
+        const retryAfter = Math.min(Number(response.headers.get("retry-after") ?? 2 ** attempt), 5);
+        await new Promise((resolveWait) => setTimeout(resolveWait, retryAfter * 1_000));
+        continue;
+      }
       throw new Error(`npm request failed: ${response.status} ${response.statusText}`);
     }
-    return (await response.json()) as T;
+    throw new Error("npm request failed after retries");
   } finally {
     clearTimeout(timeout);
   }
@@ -112,9 +118,22 @@ async function main() {
   const limit = Math.max(Number(argValue("--limit") ?? 500), 1);
   const outputPath = argValue("--output") ?? "reports/npm-mcp-discovery.json";
   const markdownPath = argValue("--report") ?? "reports/npm-mcp-discovery.md";
+  const resume = process.argv.includes("--resume");
   const warnings: Array<{ query: string; message: string }> = [];
   const byName = new Map<string, NpmSearchObject>();
   let totalCount = 0;
+  let resumed = 0;
+  if (resume) {
+    try {
+      const previous = JSON.parse(await readFile(resolve(process.cwd(), outputPath), "utf8")) as {
+        packages?: NpmSearchObject[];
+      };
+      for (const item of previous.packages ?? []) byName.set(item.package.name, item);
+      resumed = byName.size;
+    } catch {
+      // A missing first-run report is expected.
+    }
+  }
 
   for (const query of queries) {
     for (let page = 0; page < pages; page += 1) {
@@ -161,7 +180,7 @@ async function main() {
   await mkdir(dirname(resolve(process.cwd(), outputPath)), { recursive: true });
   await writeFile(resolve(process.cwd(), outputPath), `${JSON.stringify(payload, null, 2)}\n`, "utf8");
   await writeFile(resolve(process.cwd(), markdownPath), markdownReport(packages, generatedAt), "utf8");
-  console.log(JSON.stringify({ queries, totalCount, pages, packages: packages.length, warnings: warnings.length, output: outputPath }, null, 2));
+  console.log(JSON.stringify({ queries, totalCount, pages, packages: packages.length, resumed, warnings: warnings.length, output: outputPath }, null, 2));
 }
 
 await main();
