@@ -3,6 +3,8 @@ import { resolve } from "node:path";
 
 import type { AppSurface, AppSurfaceType, AuthType, CatalogApp, CategoryRecord, McpTransport, SeedCatalog } from "../lib/types";
 import { slugify } from "../lib/utils";
+import { extractPublicDirectoryItems } from "./claude-public-directory";
+import { publicServerUrl } from "./public-server-url";
 
 interface PublicClaudeConnector {
   page: number;
@@ -14,6 +16,10 @@ interface PublicClaudeConnector {
   categories: string[];
   worksWith: string[];
   date?: string;
+  serverUrl?: string;
+  author?: string;
+  authorUrl?: string;
+  local?: boolean;
   detail?: PublicClaudeConnectorDetail;
 }
 
@@ -230,7 +236,7 @@ function parseDetail(html: string): PublicClaudeConnectorDetail {
   const links = [...html.matchAll(/<a[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)].map((match) => ({
     href: decodeHtml(match[1]),
     label: stripTags(match[2]).toLowerCase(),
-  }));
+  })).filter((link) => /^https?:\/\//.test(link.href) && new URL(link.href).hostname !== "claude.com");
 
   return {
     name: title || undefined,
@@ -267,6 +273,29 @@ async function mapConcurrent<T, R>(
 
 async function scrapeConnectors(): Promise<PublicClaudeConnector[]> {
   const firstHtml = await fetchText(sourceUrl);
+  const publicItems = extractPublicDirectoryItems(firstHtml);
+  if (publicItems) {
+    console.log(`Validated ${publicItems.length} structured public Claude connectors.`);
+    return publicItems.map((item) => ({
+      page: 1,
+      name: item.title,
+      slug: item.slug,
+      href: `https://claude.com/marketplace/connectors/${encodeURIComponent(item.slug)}`,
+      tagline: item.oneLiner ?? undefined,
+      iconUrl: item.iconUrl ?? undefined,
+      categories: item.categories ?? [],
+      worksWith: item.worksWith ?? [],
+      date: item.addedAt ?? undefined,
+      serverUrl: publicServerUrl(item.serverUrl),
+      author: item.author ?? undefined,
+      authorUrl: item.authorUrl ?? undefined,
+      local: item.type === "local",
+      detail: {
+        capabilities: item.hasMcpApp ? ["Interactive"] : [],
+        directoryLinks: [{ id: new URL(item.directoryUrl).pathname.split("/").at(-1)!, href: item.directoryUrl }],
+      },
+    }));
+  }
   const totalPages = extractTotalPages(firstHtml);
   const pages = [{ page: 1, html: firstHtml }];
 
@@ -322,9 +351,9 @@ function inferCapabilities(connector: PublicClaudeConnector): string[] {
   const capabilities = new Set<string>(["Claude"]);
   const detailCapabilities = connector.detail?.capabilities ?? [];
   const installCmd = connector.detail?.installCmd ?? "";
-  const endpoint = endpointFromInstallCmd(installCmd);
+  const endpoint = connector.serverUrl ?? endpointFromInstallCmd(installCmd);
 
-  if (connector.worksWith.some((item) => item.toLowerCase().includes("claude code")) || installCmd) {
+  if (connector.worksWith.some((item) => /claude[ -]code/i.test(item)) || installCmd) {
     capabilities.add("Claude Code");
   }
   if (detailCapabilities.some((item) => item.toLowerCase().includes("interactive"))) {
@@ -339,6 +368,7 @@ function inferCapabilities(connector: PublicClaudeConnector): string[] {
   if (endpoint) {
     capabilities.add("Remote MCP");
   }
+  if (connector.local) capabilities.add("Claude Desktop");
 
   return [...capabilities];
 }
@@ -356,7 +386,7 @@ function endpointFromInstallCmd(installCmd: string | undefined): string | undefi
 
 function parsePublishedAt(date: string | undefined, fallback: number): number {
   if (!date) return fallback;
-  const parsed = Date.parse(`${date} UTC`);
+  const parsed = Date.parse(date.includes("T") ? date : `${date} UTC`);
   return Number.isFinite(parsed) ? parsed : fallback;
 }
 
@@ -397,7 +427,7 @@ function surfaceForConnector(
   isPrimary: boolean,
 ): AppSurface {
   const installCmd = connector.detail?.installCmd;
-  const endpoint = endpointFromInstallCmd(installCmd);
+  const endpoint = connector.serverUrl ?? endpointFromInstallCmd(installCmd);
   const capabilities = inferCapabilities(connector);
   const tagline = connector.detail?.tagline ?? connector.tagline;
 
@@ -410,9 +440,9 @@ function surfaceForConnector(
     url,
     externalId,
     mcpEndpoint: endpoint,
-    mcpTransport: "http" satisfies McpTransport,
+    mcpTransport: connector.local ? undefined : "http" satisfies McpTransport,
     installCmd,
-    authType: "oauth" satisfies AuthType,
+    authType: connector.local ? undefined : "oauth" satisfies AuthType,
     capabilities,
     examplePrompts: [],
     tools: [],
@@ -422,14 +452,20 @@ function surfaceForConnector(
   };
 }
 
-function mergePublicConnectors(catalog: SeedCatalog, connectors: PublicClaudeConnector[]) {
+function mergePublicConnectors(catalog: SeedCatalog, connectors: PublicClaudeConnector[], protectedIds: Set<string>) {
   const now = Date.now();
   let addedApps = 0;
   let addedSurfaces = 0;
   let skippedExisting = 0;
+  let deferredLocal = 0;
 
   for (const connector of connectors) {
     const existing = findExistingApp(catalog, connector);
+    if (existing && (protectedIds.has(existing.id) || !["chatgpt_seed", "claude_seed"].includes(existing.source))) continue;
+    if (connector.local && !existing) {
+      deferredLocal += 1;
+      continue;
+    }
     const directoryLinks = connector.detail?.directoryLinks ?? [];
     const externalLinks =
       directoryLinks.length > 0
@@ -439,7 +475,17 @@ function mergePublicConnectors(catalog: SeedCatalog, connectors: PublicClaudeCon
     if (existing) {
       let changed = false;
       for (const link of externalLinks) {
-        if (existing.surfaces.some((surface) => surface.platform === "claude" && surface.externalId === link.externalId)) {
+        const currentSurface = existing.surfaces.find((surface) => surface.platform === "claude" && surface.externalId === link.externalId);
+        if (currentSurface) {
+          if (!currentSurface.mcpEndpoint && connector.serverUrl) {
+            currentSurface.mcpEndpoint = connector.serverUrl;
+            changed = true;
+          }
+          const capabilities = [...new Set([...(currentSurface.capabilities ?? []), ...inferCapabilities(connector)])];
+          if (capabilities.length !== (currentSurface.capabilities ?? []).length) {
+            currentSurface.capabilities = capabilities;
+            changed = true;
+          }
           skippedExisting += 1;
           continue;
         }
@@ -453,6 +499,10 @@ function mergePublicConnectors(catalog: SeedCatalog, connectors: PublicClaudeCon
       }
 
       if (changed) {
+        existing.capabilities = [...new Set([...existing.capabilities, ...inferCapabilities(connector)])];
+        existing.mcpEndpoint ??= connector.serverUrl;
+        if (existing.publisher === "Unknown" && connector.author) existing.publisher = connector.author;
+        existing.publisherUrl ??= connector.authorUrl;
         existing.iconUrl = existing.iconUrl ?? connector.detail?.iconUrl ?? connector.iconUrl;
         existing.homepageUrl = existing.homepageUrl ?? connector.href;
         existing.privacyUrl = existing.privacyUrl ?? connector.detail?.privacyUrl;
@@ -467,18 +517,22 @@ function mergePublicConnectors(catalog: SeedCatalog, connectors: PublicClaudeCon
     const publishedAt = parsePublishedAt(connector.date, now);
     const capabilities = inferCapabilities(connector);
 
+    let id = slugify(connector.slug);
+    if (protectedIds.has(id)) id = `${id}-claude`;
+    while (protectedIds.has(id) || catalog.apps.some((app) => app.id === id)) id += "-claude";
     catalog.apps.push({
-      id: slugify(connector.slug),
+      id,
       name: connector.detail?.name ?? connector.name,
       tagline,
       description: tagline || `Connect ${connector.name} to Claude.`,
       iconUrl: connector.detail?.iconUrl ?? connector.iconUrl,
-      homepageUrl: connector.href,
-      mcpEndpoint: endpointFromInstallCmd(connector.detail?.installCmd),
+      homepageUrl: connector.authorUrl ?? connector.href,
+      mcpEndpoint: connector.serverUrl ?? endpointFromInstallCmd(connector.detail?.installCmd),
       mcpTransport: "http",
       installCmd: connector.detail?.installCmd,
       authType: "oauth",
-      publisher: "Unknown",
+      publisher: connector.author ?? "Unknown",
+      publisherUrl: connector.authorUrl,
       capabilities,
       privacyUrl: connector.detail?.privacyUrl,
       termsUrl: undefined,
@@ -500,7 +554,7 @@ function mergePublicConnectors(catalog: SeedCatalog, connectors: PublicClaudeCon
   }
 
   catalog.categories = categoryRecords(catalog.apps);
-  return { addedApps, addedSurfaces, skippedExisting };
+  return { addedApps, addedSurfaces, skippedExisting, deferredLocal };
 }
 
 async function main() {
@@ -527,7 +581,12 @@ async function main() {
   }
 
   const catalog = JSON.parse(await readFile(options.catalogPath, "utf8")) as SeedCatalog;
-  const result = mergePublicConnectors(catalog, connectors);
+  const protectedIds = new Set<string>();
+  if (process.env.PROTECTED_APPS_PATH) {
+    const snapshots = JSON.parse(await readFile(process.env.PROTECTED_APPS_PATH, "utf8"));
+    for (const snapshot of snapshots) for (const app of snapshot.results ?? []) protectedIds.add(app.id);
+  }
+  const result = mergePublicConnectors(catalog, connectors, protectedIds);
 
   if (options.cacheMode !== "cache-only") {
     await writeFile(options.rawPath, `${JSON.stringify({ crawledAt: new Date().toISOString(), sourceUrl, connectors }, null, 2)}\n`, "utf8");
@@ -538,6 +597,7 @@ async function main() {
   console.log(`Added ${result.addedApps} Claude connector app(s).`);
   console.log(`Added ${result.addedSurfaces} Claude surface(s) to existing app(s).`);
   console.log(`Skipped ${result.skippedExisting} already indexed Claude surface(s).`);
+  console.log(`Deferred ${result.deferredLocal} new local extensions until install/transport metadata is verified.`);
 }
 
 await main();

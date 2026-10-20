@@ -18,12 +18,19 @@ try {
 }
 await mkdir("reports", { recursive: true });
 const startedAt = new Date().toISOString();
+const sourcesIndex = process.argv.indexOf("--sources");
+const selectedSources = sourcesIndex < 0 ? undefined : process.argv[sourcesIndex + 1]?.split(",");
+if (sourcesIndex >= 0 && (!selectedSources?.length || selectedSources.some((id) => !["chatgpt", "claude", "skills", "clients", "github", "npm"].includes(id)))) {
+  throw new Error("--sources requires comma-separated known source names");
+}
+Object.assign(sources, previous.sources);
 
 async function save() {
   await writeFile(reportPath, JSON.stringify({ startedAt, sources }, null, 2) + "\n");
 }
 
 async function refresh(id: string, command: string[], validate?: () => Promise<void>) {
+  if (selectedSources && !selectedSources.includes(id)) return;
   const checkedAt = new Date().toISOString();
   try {
     if (validate) await validate();
@@ -57,6 +64,10 @@ async function refresh(id: string, command: string[], validate?: () => Promise<v
       lastSuccessAt: warnings ? previous.sources?.[id]?.lastSuccessAt : new Date().toISOString(),
       message: warnings ? `${warnings} incomplete queries/categories; retained historical records` : "Fresh source fetched and merged",
     };
+    if (id === "claude") {
+      const capture = JSON.parse(await readFile("tmp-claude-public-connectors.json", "utf8"));
+      sources[id].message += ` (${capture.connectors.length} public connectors captured; unverified local extensions retained for review)`;
+    }
   } catch (error) {
     sources[id] = {
       checkedAt,

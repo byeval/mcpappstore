@@ -17,7 +17,7 @@
         const url = new URL('/backend-api/ps/plugin-categories/' + encodeURIComponent(slug) + '/plugins', location.origin);
         url.searchParams.set('scope', 'GLOBAL');
         url.searchParams.set('limit', '700');
-        if (token) url.searchParams.set('page_token', token);
+        if (token) url.searchParams.set('pageToken', token);
         const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
         if (!response.ok) throw new Error('HTTP ' + response.status);
         const data = await response.json();

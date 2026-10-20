@@ -22,6 +22,8 @@ The old `daily-mcp-app-catalog-crawl` task is no longer installed on this Mac.
    run, and errors. A partial discovery run retains previous candidates and does
    not advance the full-success timestamp. `npm run data:health` includes these
    results. Generated report time is not proof that an upstream fetch succeeded.
+   To retry only repaired sources, use `npm run data:sync -- --sources chatgpt,claude`;
+   untouched sources retain their original results and timestamps.
 4. Validate ID uniqueness and that all previous app/skill IDs are preserved.
    Check the diff and run typecheck/build before applying seed SQL and deploying.
    Preserve historical records and existing detailed metadata. Discovery entries
@@ -35,10 +37,17 @@ The old `daily-mcp-app-catalog-crawl` task is no longer installed on this Mac.
 The daily script does not capture browser responses itself; the scheduled agent
 must perform step 1. A blocked browser must not prevent other sources refreshing.
 
-Current limitation (2026-10-20): Productivity, Finance, Business & Operations,
-and Other did not advance with the capture's `page_token` parameter. They were
-excluded from this partial import. Resolve the current server pagination contract
-before claiming a full ChatGPT directory sync; HTTP 200 alone is insufficient.
+The ChatGPT public directory currently uses the camel-case `pageToken` query
+parameter (verified against its public client on 2026-10-21). A repeated page or
+unfinished category remains a partial run, never a successful full sync.
+
+Claude's current marketplace embeds its complete connector collection in Next.js
+Flight data. The importer parses that collection and validates its length against
+the visible connector count; the rendered first page is not the whole directory.
+New local desktop extensions without verified install/transport metadata remain
+in the raw capture for review rather than being mislabeled as remote HTTP servers.
+Server URLs containing embedded credentials or authentication/API-key query
+parameters are omitted from public seed data, even when an upstream lists them.
 
 ## Legacy Webhook Recovery
 

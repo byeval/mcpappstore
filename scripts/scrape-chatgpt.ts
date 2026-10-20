@@ -4,6 +4,7 @@ import { dirname, extname, resolve } from "node:path";
 
 import type { AuthType, CatalogApp, CategoryRecord, McpTransport, SeedCatalog } from "../lib/types";
 import { slugify } from "../lib/utils";
+import { publicServerUrl } from "./public-server-url";
 
 interface LegacyRawRecord {
   name: string;
@@ -1326,6 +1327,12 @@ async function main() {
     ? JSON.parse(await readFile(options.protectedAppsPath, "utf8")) as Array<{ results: Array<{ id: string }> }>
     : [];
   const mergedApps = mergeWithExistingCatalog(apps, await readExistingCatalog(options.outputPath), protectedRows.flatMap((result) => result.results.map((app) => app.id)));
+  for (const app of mergedApps) {
+    if (app.source !== "chatgpt_seed" && app.source !== "claude_seed") continue;
+    for (const record of [app, ...app.surfaces]) {
+      if (record.mcpEndpoint && !publicServerUrl(record.mcpEndpoint)) delete record.mcpEndpoint;
+    }
+  }
   const catalog: SeedCatalog = {
     categories: normalizeCategories(mergedApps),
     apps: mergedApps,
