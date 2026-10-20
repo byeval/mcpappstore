@@ -14,6 +14,7 @@
     "indexnow:submit": "node --import tsx scripts/submit-indexnow.ts",
     "cf-types": "wrangler types",
     "crawl:daily": "bash scripts/daily-crawl.sh",
+    "data:sync": "node --import tsx scripts/sync-data.ts",
     "crawl:webhook": "node --import tsx scripts/crawl-webhook.ts",
     "seed": "node --import tsx scripts/seed.ts",
     "media:webp": "node --import tsx scripts/convert-seed-media-to-webp.ts",

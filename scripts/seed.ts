@@ -67,6 +67,7 @@ for (const category of data.categories) {
 }
 
 for (const app of data.apps) {
+  if (app.source !== "chatgpt_seed" && app.source !== "claude_seed") continue;
   statements.push(
     `INSERT OR REPLACE INTO apps (
       id, name, tagline, description, icon_key, hero_key, homepage_url, repo_url,
@@ -160,7 +161,7 @@ for (const app of data.apps) {
   }
 }
 
-const appIds = new Set(data.apps.map((app) => app.id));
+const appIds = new Set(data.apps.filter((app) => app.source === "chatgpt_seed" || app.source === "claude_seed").map((app) => app.id));
 const skillIds = new Set(skills.skills.map((skill) => skill.id));
 
 for (const association of associations) {

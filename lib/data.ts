@@ -23,6 +23,7 @@ import type {
 import { absoluteUrl, safeJsonParse, slugify } from "@/lib/utils";
 
 const FALLBACK_CATALOG = seedCatalog as SeedCatalog;
+const fallbackAppById = new Map(FALLBACK_CATALOG.apps.map((app) => [app.id, app]));
 const FALLBACK_SKILL_REGISTRY = seedSkills as SeedSkillRegistry;
 const FALLBACK_SKILL_ASSOCIATIONS = seedSkillAssociations as SeedSkillAssociation[];
 const fallbackSkillById = new Map(FALLBACK_SKILL_REGISTRY.skills.map((skill) => [skill.id, skill]));
@@ -742,7 +743,9 @@ async function hydrateAppRows(
         tagline: String(row.tagline),
         description: String(row.description ?? ""),
         iconKey: row.icon_key ? String(row.icon_key) : undefined,
-        iconUrl: row.icon_key ? assetUrlForKey(String(row.icon_key), assetCdnUrl) : undefined,
+        iconUrl: row.icon_key
+          ? assetUrlForKey(String(row.icon_key), assetCdnUrl)
+          : seedSources.has(String(row.source)) ? fallbackAppById.get(id)?.iconUrl : undefined,
         heroKey: row.hero_key ? String(row.hero_key) : undefined,
         homepageUrl: row.homepage_url ? String(row.homepage_url) : undefined,
         repoUrl: row.repo_url ? String(row.repo_url) : undefined,

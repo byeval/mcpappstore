@@ -66,8 +66,10 @@ interface ChatgptPluginsBrowserCapture {
     string,
     {
       status?: number;
+      complete?: boolean;
       data?: {
         plugins?: ChatgptPluginRecord[];
+        pagination?: { next_page_token?: string | null };
       };
     }
   >;
@@ -165,6 +167,8 @@ interface CliOptions {
   outputPath: string;
   uploadR2: boolean;
   downloadMedia: boolean;
+  allowPartial: boolean;
+  protectedAppsPath?: string;
   bucketName?: string;
   envName?: string;
 }
@@ -185,11 +189,21 @@ function parseCliOptions(argv: string[]): CliOptions {
   const positional: string[] = [];
   let uploadR2 = process.env.SCRAPE_UPLOAD_R2 === "1";
   let downloadMedia = true;
+  let allowPartial = false;
+  let protectedAppsPath: string | undefined;
   let bucketName = process.env.R2_BUCKET_NAME;
   let envName = process.env.CLOUDFLARE_ENV;
 
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
+    if (arg === "--protected-apps") {
+      protectedAppsPath = argv[++index];
+      continue;
+    }
+    if (arg === "--allow-partial") {
+      allowPartial = true;
+      continue;
+    }
     if (arg === "--upload-r2") {
       uploadR2 = true;
       continue;
@@ -230,6 +244,8 @@ function parseCliOptions(argv: string[]): CliOptions {
     outputPath: resolve(process.cwd(), positional[1] ?? defaultOutputPath),
     uploadR2,
     downloadMedia,
+    allowPartial,
+    protectedAppsPath,
     bucketName,
     envName,
   };
@@ -908,7 +924,7 @@ function parsePluginsHome(source: ChatgptPluginsHomeResponse): CatalogApp[] {
   });
 }
 
-function toCatalogApps(source: unknown): CatalogApp[] {
+function toCatalogApps(source: unknown, allowPartial = false): CatalogApp[] {
   if (
     source &&
     typeof source === "object" &&
@@ -916,8 +932,14 @@ function toCatalogApps(source: unknown): CatalogApp[] {
     typeof (source as ChatgptPluginsBrowserCapture).categories === "object"
   ) {
     const capture = source as ChatgptPluginsBrowserCapture;
+    const entries = Object.entries(capture.categories ?? {});
+    const complete = entries.filter(([, entry]) => entry.status === 200 && entry.complete !== false && !entry.data?.pagination?.next_page_token);
+    if (!complete.length || (!allowPartial && complete.length !== entries.length)) {
+      throw new Error("Incomplete ChatGPT browser capture; finish all category pages before importing.");
+    }
+    if (complete.length !== entries.length) console.warn(`Importing ${complete.length}/${entries.length} complete ChatGPT categories; incomplete categories are preserved from the existing catalog.`);
     return parsePluginsHome({
-      sections: Object.entries(capture.categories ?? {}).map(([slug, entry]) => ({
+      sections: complete.map(([slug, entry]) => ({
         id: slug,
         urlSlug: slug,
         title: slug,
@@ -1006,19 +1028,47 @@ function surfaceKey(surface: CatalogApp["surfaces"][number]): string {
   return [surface.platform, surface.type, surface.externalId ?? "", surface.url ?? ""].join(":");
 }
 
-function mergeWithExistingCatalog(apps: CatalogApp[], existingCatalog: SeedCatalog | undefined): CatalogApp[] {
+function mergeWithExistingCatalog(apps: CatalogApp[], existingCatalog: SeedCatalog | undefined, protectedIds: string[] = []): CatalogApp[] {
   if (!existingCatalog) {
     return apps;
   }
 
   const existingById = new Map(existingCatalog.apps.map((app) => [app.id, app]));
-  const mergedApps = apps.map((app) => {
-    const existing = existingById.get(app.id);
+  const existingByExternalId = new Map(existingCatalog.apps.flatMap((app) =>
+    app.surfaces.filter((surface) => surface.platform === "chatgpt" && surface.externalId)
+      .map((surface) => [surface.externalId!, app] as const),
+  ));
+  const occupiedIds = new Set([...existingById.keys(), ...protectedIds]);
+  const mergedById = new Map<string, CatalogApp>();
+  for (const app of apps) {
+    const externalId = app.surfaces.find((surface) => surface.platform === "chatgpt")?.externalId;
+    const slugMatch = existingById.get(app.id);
+    const eligibleSlugMatch = slugMatch && ["chatgpt_seed", "claude_seed"].includes(slugMatch.source) &&
+      !slugMatch.surfaces.some((surface) => surface.platform === "chatgpt" && surface.externalId);
+    const matched = (externalId && existingByExternalId.get(externalId)) || (eligibleSlugMatch ? slugMatch : undefined);
+    const existing = matched ? mergedById.get(matched.id) ?? matched : undefined;
     if (!existing) {
-      return app;
+      const id = occupiedIds.has(app.id) ? uniqueSlug(app.name, externalId ?? app.id, occupiedIds) : app.id;
+      occupiedIds.add(id);
+      mergedById.set(id, { ...app, id });
+      continue;
     }
 
-    const surfaces = [...app.surfaces];
+    const surfaces = app.surfaces.map((surface) => {
+      const previous = existing.surfaces.find((item) => item.platform === surface.platform && item.externalId === surface.externalId);
+      return previous ? {
+        ...previous,
+        ...surface,
+        description: (previous.description?.length ?? 0) > (surface.description?.length ?? 0) ? previous.description : surface.description,
+        mcpEndpoint: surface.mcpEndpoint ?? previous.mcpEndpoint,
+        mcpTransport: surface.mcpEndpoint ? surface.mcpTransport : previous.mcpTransport,
+        installCmd: surface.installCmd ?? previous.installCmd,
+        authType: surface.mcpEndpoint ? surface.authType : previous.authType,
+        tools: surface.tools?.length ? surface.tools : previous.tools,
+        previews: surface.previews?.length ? surface.previews : previous.previews,
+        examplePrompts: surface.examplePrompts?.length ? surface.examplePrompts : previous.examplePrompts,
+      } : surface;
+    });
     const surfaceKeys = new Set(surfaces.map(surfaceKey));
     for (const surface of existing.surfaces) {
       if (!surfaceKeys.has(surfaceKey(surface))) {
@@ -1026,14 +1076,44 @@ function mergeWithExistingCatalog(apps: CatalogApp[], existingCatalog: SeedCatal
       }
     }
 
-    return {
+    const mergedApp: CatalogApp = {
+      ...existing,
       ...app,
+      id: existing.id,
+      source: existing.source,
       iconKey: app.iconKey ?? existing.iconKey,
+      iconUrl: app.iconUrl ?? existing.iconUrl,
+      homepageUrl: app.homepageUrl ?? existing.homepageUrl,
+      repoUrl: app.repoUrl ?? existing.repoUrl,
+      mcpEndpoint: app.mcpEndpoint ?? existing.mcpEndpoint,
+      mcpTransport: app.mcpEndpoint ? app.mcpTransport : existing.mcpTransport,
+      installCmd: app.installCmd ?? existing.installCmd,
+      authType: app.mcpEndpoint ? app.authType : existing.authType,
+      version: app.version ?? existing.version,
+      publisher: app.publisher === "Unknown" ? existing.publisher : app.publisher,
+      publisherUrl: app.publisherUrl ?? existing.publisherUrl,
+      privacyUrl: app.privacyUrl ?? existing.privacyUrl,
+      termsUrl: app.termsUrl ?? existing.termsUrl,
+      supportUrl: app.supportUrl ?? existing.supportUrl,
+      description: existing.description.length > app.description.length ? existing.description : app.description,
+      categories: [...new Set([...existing.categories, ...app.categories])],
+      capabilities: [...new Set([...existing.capabilities, ...app.capabilities])],
+      tags: [...new Set([...existing.tags, ...app.tags])],
+      tools: app.tools.length ? app.tools : existing.tools,
+      previews: app.previews.length ? app.previews : existing.previews,
+      examplePrompts: app.examplePrompts.length ? app.examplePrompts : existing.examplePrompts,
+      publishedAt: existing.publishedAt ?? app.publishedAt,
       createdAt: existing.createdAt ?? app.createdAt,
       skills: app.skills ?? existing.skills,
       surfaces,
     };
-  });
+    const { updatedAt: previousUpdatedAt, ...previousPayload } = existing;
+    const { updatedAt: nextUpdatedAt, ...nextPayload } = mergedApp;
+    if (JSON.stringify(previousPayload) === JSON.stringify(nextPayload)) mergedApp.updatedAt = previousUpdatedAt;
+    mergedById.set(existing.id, mergedApp);
+  }
+
+  const mergedApps = [...mergedById.values()];
 
   const mergedIds = new Set(mergedApps.map((app) => app.id));
   for (const existing of existingCatalog.apps) {
@@ -1163,7 +1243,7 @@ async function main() {
     process.exit(1);
   }
 
-  const source = toCatalogApps(rawSource);
+  const source = toCatalogApps(rawSource, options.allowPartial);
   let downloadedIcons = 0;
   let downloadedPreviews = 0;
   let uploadedIcons = 0;
@@ -1242,7 +1322,10 @@ async function main() {
     });
   }
 
-  const mergedApps = mergeWithExistingCatalog(apps, await readExistingCatalog(options.outputPath));
+  const protectedRows = options.protectedAppsPath
+    ? JSON.parse(await readFile(options.protectedAppsPath, "utf8")) as Array<{ results: Array<{ id: string }> }>
+    : [];
+  const mergedApps = mergeWithExistingCatalog(apps, await readExistingCatalog(options.outputPath), protectedRows.flatMap((result) => result.results.map((app) => app.id)));
   const catalog: SeedCatalog = {
     categories: normalizeCategories(mergedApps),
     apps: mergedApps,

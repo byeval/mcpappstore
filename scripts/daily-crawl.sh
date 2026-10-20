@@ -14,14 +14,6 @@ log() {
   printf '%s %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$*"
 }
 
-require_file() {
-  if [[ ! -s "$1" ]]; then
-    log "Missing required source file: $1"
-    log "Set CRAWL_SOURCE_COMMAND to capture fresh ChatGPT/Claude network responses before normalization."
-    exit 1
-  fi
-}
-
 has_cloudflare_auth() {
   local whoami_output
   if ! whoami_output="$(npx wrangler whoami 2>&1)"; then
@@ -59,14 +51,6 @@ if [[ -n "${CRAWL_SOURCE_COMMAND:-}" ]]; then
   bash -lc "$CRAWL_SOURCE_COMMAND"
 fi
 
-require_file "seed/raw-chatgpt-apps.json"
-legacy_claude_sources_available=false
-if [[ -s "tmp-claude-directory-servers.network-response" && -s "tmp-claude-interactive-connectors.json" ]]; then
-  legacy_claude_sources_available=true
-else
-  log "Legacy Claude network response files are missing; public connector crawl will run as the Claude source."
-fi
-
 REMOTE_MODE="${CF_REMOTE_MODE:-force}"
 remote_enabled=false
 
@@ -95,43 +79,24 @@ esac
 
 if [[ "$remote_enabled" == true ]]; then
   log "Cloudflare remote mode enabled"
+  mkdir -p reports
+  npx wrangler d1 execute mcpapp --remote --json --command "SELECT id, source, status, updated_at FROM apps WHERE source NOT IN ('chatgpt_seed','claude_seed') ORDER BY id;" > reports/non-seed-before.json
 else
   log "Cloudflare remote mode disabled (CF_REMOTE_MODE=false or auto without auth)"
 fi
 
-log "Normalizing ChatGPT catalog"
+log "Refreshing all data sources (partial failures are recorded in reports/data-sync.json)"
 if [[ "$remote_enabled" == true ]]; then
-  npm run scrape -- seed/raw-chatgpt-apps.json seed/chatgpt-apps.json --upload-r2
+  PROTECTED_APPS_PATH=reports/non-seed-before.json npm run data:sync
 else
-  npm run scrape -- seed/raw-chatgpt-apps.json seed/chatgpt-apps.json --no-upload-r2
+  npm run data:sync
 fi
-
-if [[ "$legacy_claude_sources_available" == true ]]; then
-  log "Merging Claude connectors from legacy network responses"
-  npm run scrape:claude -- tmp-claude-directory-servers.network-response tmp-claude-interactive-connectors.json seed/chatgpt-apps.json
-fi
-
-log "Merging Claude connectors from public directory"
-npm run scrape:claude-connectors -- seed/chatgpt-apps.json tmp-claude-public-connectors.json --cache-on-fail
-
-log "Refreshing skills catalog and candidate report"
-npm run skills:refresh -- --skip-seed
-
-log "Refreshing MCP clients catalog"
-npm run clients:import
-
-log "Refreshing MCP discovery candidates"
-npm run discover:github-mcp -- --limit 1000 --pages 10 --per-page 100 --resume
-npm run discover:npm-mcp -- --limit 4000 --size 250 --pages 10 --resume
-npm run discovery:index
-
-log "Checking data source health"
-npm run data:health
-
-log "Generating seed SQL"
-npm run seed
+npm run check
 
 if [[ "$remote_enabled" == true ]]; then
+  log "Validating production build"
+  run_step "build" npm run build
+
   log "Applying skills schema to remote D1"
   run_step "apply skills schema" npx wrangler d1 execute mcpapp --remote --yes --file migrations/0006_skills.sql
 
@@ -140,6 +105,9 @@ if [[ "$remote_enabled" == true ]]; then
 
   log "Deploying site"
   run_step "deploy" npm run deploy
+
+  log "Refreshing public catalog caches"
+  run_step "refresh caches" npx wrangler kv bulk delete reports/public-cache-keys.json --binding KV --remote --force
 
   log "Verifying live site"
   run_step "verify mcpapp.net" verify_live_url "https://mcpapp.net/"

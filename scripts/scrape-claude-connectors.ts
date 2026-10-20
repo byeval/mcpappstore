@@ -39,7 +39,7 @@ interface CliOptions {
   cacheMode: "refresh" | "cache-only" | "cache-on-fail";
 }
 
-const sourceUrl = "https://claude.com/connectors";
+const sourceUrl = "https://claude.com/marketplace/connectors-plugins";
 const requestTimeoutMs = 20_000;
 const detailConcurrency = Number(process.env.CLAUDE_CONNECTOR_DETAIL_CONCURRENCY ?? "8");
 
@@ -176,9 +176,9 @@ function extractConnectorCards(html: string, page: number): PublicClaudeConnecto
 
   const cards = html.split(/(?=<div class="CardConnector[^>]*__card")/).slice(1);
   for (const block of cards) {
-    const href = absoluteConnectorHref(decodeHtml(block.match(/<a href="(\/connectors\/[^"]+)"/)?.[1]));
+    const href = absoluteConnectorHref(decodeHtml(block.match(/<a href="((?:\/marketplace)?\/connectors\/[^"]+)"/)?.[1]));
     const slug = connectorSlugFromHref(href);
-    const name = stripTags(block.match(/<a href="\/connectors\/[^"]+"[^>]*>([\s\S]*?)<\/a>/)?.[1]);
+    const name = stripTags(block.match(/<a href="(?:\/marketplace)?\/connectors\/[^"]+"[^>]*>([\s\S]*?)<\/a>/)?.[1]);
     if (!href || !slug || !name) continue;
 
     const tagline = stripTags(block.match(/<p class="CardConnector[^>]*__subtitle[^>]*>([\s\S]*?)<\/p>/)?.[1]);

@@ -155,6 +155,36 @@ async function main() {
     },
   ];
 
+  try {
+    const sync = JSON.parse(await readFile("reports/data-sync.json", "utf8")) as {
+      sources: Record<string, { checkedAt: string; lastSuccessAt?: string; status: string; message: string }>;
+    };
+    for (const [id, source] of Object.entries(sync.sources)) {
+      checks.push({
+        id: `sync-${id}`,
+        label: `${id} sync`,
+        status: source.status === "ok" && statusForAge(daysSince(source.lastSuccessAt), 2) === "ok" ? "ok" : "warn",
+        generatedAt: source.lastSuccessAt,
+        notes: [`Last attempt: ${source.checkedAt}`, source.message],
+      });
+    }
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+  }
+
+  try {
+    const capture = JSON.parse(await readFile("seed/raw-chatgpt-apps.json", "utf8"));
+    checks.push({
+      id: "chatgpt-capture",
+      label: "ChatGPT browser capture",
+      status: capture.capturedAt ? statusForAge(daysSince(capture.capturedAt), 1) : "warn",
+      generatedAt: capture.capturedAt,
+      notes: ["Capture age is independent of app update timestamps"],
+    });
+  } catch {
+    checks.push({ id: "chatgpt-capture", label: "ChatGPT browser capture", status: "warn", notes: ["No browser capture available"] });
+  }
+
   if (!skipRemote) {
     await maybeRemoteCount(checks[1], "https://skills.sh/", parseSkillsCount, "text/html,*/*;q=0.8");
     await maybeRemoteCount(
