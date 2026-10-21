@@ -30,13 +30,12 @@ function updateColumns(columns: string[]): string {
 
 const statements: string[] = [];
 const seededIds = data.apps.filter((app) => app.source === "chatgpt_seed" || app.source === "claude_seed").map((app) => escapeSql(app.id));
-const seededAppFilter = `(SELECT id FROM apps WHERE source IN ('chatgpt_seed', 'claude_seed') AND id IN (${seededIds.join(", ")}))`;
-
-statements.push(`DELETE FROM app_previews WHERE app_id IN ${seededAppFilter};`);
-statements.push(`DELETE FROM app_tools WHERE app_id IN ${seededAppFilter};`);
-statements.push(`DELETE FROM app_tags WHERE app_id IN ${seededAppFilter};`);
-statements.push(`DELETE FROM app_categories WHERE app_id IN ${seededAppFilter};`);
-statements.push(`DELETE FROM app_surfaces WHERE app_id IN ${seededAppFilter};`);
+for (let index = 0; index < seededIds.length; index += 100) {
+  const seededAppFilter = `(SELECT id FROM apps WHERE source IN ('chatgpt_seed', 'claude_seed') AND id IN (${seededIds.slice(index, index + 100).join(", ")}))`;
+  for (const table of ["app_previews", "app_tools", "app_tags", "app_categories", "app_surfaces"]) {
+    statements.push(`DELETE FROM ${table} WHERE app_id IN ${seededAppFilter};`);
+  }
+}
 
 for (const skill of skills.skills) {
   statements.push(

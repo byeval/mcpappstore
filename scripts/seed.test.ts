@@ -36,7 +36,11 @@ test("seed updates preserve parent rows, user links, and historical associations
     INSERT INTO submissions (app_id,raw_payload,created_at) VALUES (${quote(app.id)},'{}',123);
   ` });
   execFileSync(process.execPath, ["--import", "tsx", "scripts/seed.ts", sqlPath], { stdio: "pipe" });
-  execFileSync("sqlite3", [database], { input: `PRAGMA foreign_keys = ON;\nBEGIN;\n${await readFile(sqlPath, "utf8")}\nCOMMIT;` });
+  const seedSql = await readFile(sqlPath, "utf8");
+  for (const line of seedSql.split("\n").filter((line) => line.startsWith("DELETE FROM"))) {
+    assert.ok(Buffer.byteLength(line) < 100_000, "cleanup must fit the D1 statement limit");
+  }
+  execFileSync("sqlite3", [database], { input: `PRAGMA foreign_keys = ON;\nBEGIN;\n${seedSql}\nCOMMIT;` });
   const query = (sql: string) => execFileSync("sqlite3", ["-json", database, sql], { encoding: "utf8" }).trim();
   const scalar = (sql: string) => Object.values(JSON.parse(query(sql))[0])[0];
   assert.equal(scalar("SELECT name FROM apps WHERE id = '__user'"), "User details");
