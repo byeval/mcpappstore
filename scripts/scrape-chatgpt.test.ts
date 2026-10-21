@@ -31,13 +31,14 @@ test("a browser summary preserves existing rich data and stable IDs", async () =
     pagination: { next_page_token: null as string | null },
   } } } };
   await writeFile(input, JSON.stringify(capture));
-  await writeFile(output, JSON.stringify({ categories: catalog.categories, apps: [existing, untouched] }));
+  await writeFile(output, JSON.stringify({ categories: catalog.categories, apps: [untouched, existing] }));
   const protectedPath = join(dir, "protected.json");
   await writeFile(protectedPath, JSON.stringify([{ results: [{ id: "pending-submission" }] }]));
   execFileSync(process.execPath, ["--import", "tsx", "scripts/scrape-chatgpt.ts", input, output, "--no-download-media", "--protected-apps", protectedPath], { stdio: "pipe" });
   const result = JSON.parse(await readFile(output, "utf8"));
   assert.equal(result.apps.length, 4);
   assert.equal(new Set(result.apps.map((app: { id: string }) => app.id)).size, 4);
+  assert.deepEqual(result.apps.slice(0, 2).map((app: { id: string }) => app.id), [untouched.id, existing.id]);
   assert.equal(result.apps.some((app: { id: string }) => app.id === "pending-submission"), false);
   const merged = result.apps.find((app: { id: string }) => app.id === existing.id);
   assert.equal(merged.description, existing.description);

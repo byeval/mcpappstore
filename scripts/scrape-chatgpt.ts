@@ -1114,16 +1114,10 @@ function mergeWithExistingCatalog(apps: CatalogApp[], existingCatalog: SeedCatal
     mergedById.set(existing.id, mergedApp);
   }
 
-  const mergedApps = [...mergedById.values()];
-
-  const mergedIds = new Set(mergedApps.map((app) => app.id));
-  for (const existing of existingCatalog.apps) {
-    if (!mergedIds.has(existing.id)) {
-      mergedApps.push(existing);
-    }
-  }
-
-  return mergedApps;
+  return [
+    ...existingCatalog.apps.map((app) => mergedById.get(app.id) ?? app),
+    ...[...mergedById.values()].filter((app) => !existingById.has(app.id)),
+  ];
 }
 
 async function uploadFileToR2(

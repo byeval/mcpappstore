@@ -2,6 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const defaultSourceUrl = "https://raw.githubusercontent.com/punkpeye/awesome-mcp-clients/main/README.md";
+const fallbackSourceUrl = "https://api.github.com/repos/punkpeye/awesome-mcp-clients/contents/README.md?ref=main";
 const defaultOutputPath = "seed/awesome-mcp-clients.json";
 const requestTimeoutMs = 20_000;
 const userAgent = "mcpapp-client-importer/1.0 (+https://mcpapp.net)";
@@ -158,7 +159,7 @@ async function fetchText(url: string): Promise<string> {
   try {
     const response = await fetch(url, {
       headers: {
-        accept: "text/markdown,text/plain,*/*;q=0.8",
+        accept: url === fallbackSourceUrl ? "application/vnd.github.raw+json" : "text/markdown,text/plain,*/*;q=0.8",
         "user-agent": userAgent,
       },
       signal: controller.signal,
@@ -169,6 +170,10 @@ async function fetchText(url: string): Promise<string> {
     }
 
     return await response.text();
+  } catch (error) {
+    if (url !== defaultSourceUrl) throw error;
+    console.warn("Clients raw README request failed; retrying the same public file through the GitHub contents API.");
+    return await fetchText(fallbackSourceUrl);
   } finally {
     clearTimeout(timeout);
   }

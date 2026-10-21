@@ -40,6 +40,15 @@ must perform step 1. A blocked browser must not prevent other sources refreshing
 The ChatGPT public directory currently uses the camel-case `pageToken` query
 parameter (verified against its public client on 2026-10-21). A repeated page or
 unfinished category remains a partial run, never a successful full sync.
+Existing catalog order stays stable; newly discovered apps are appended.
+
+The clients importer retries the same public README through GitHub's contents
+API when raw.githubusercontent.com fails. It does not fall back to an old local
+snapshot or replace existing client metadata.
+
+Seed SQL updates apps, skills, and categories in place rather than replacing
+their parent rows. This preserves submission references, user category links,
+and existing skill associations, including ones not present in the local seed.
 
 Claude's current marketplace embeds its complete connector collection in Next.js
 Flight data. The importer parses that collection and validates its length against

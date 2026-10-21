@@ -24,21 +24,23 @@ function json(value: unknown): string {
   return escapeSql(JSON.stringify(value));
 }
 
-const statements: string[] = [];
-const seededAppFilter = "(SELECT id FROM apps WHERE source IN ('chatgpt_seed', 'claude_seed'))";
+function updateColumns(columns: string[]): string {
+  return columns.map((column) => `${column} = excluded.${column}`).join(", ");
+}
 
-statements.push(`DELETE FROM app_skills WHERE app_id IN ${seededAppFilter};`);
-statements.push(`DELETE FROM surface_skills WHERE app_id IN ${seededAppFilter};`);
+const statements: string[] = [];
+const seededIds = data.apps.filter((app) => app.source === "chatgpt_seed" || app.source === "claude_seed").map((app) => escapeSql(app.id));
+const seededAppFilter = `(SELECT id FROM apps WHERE source IN ('chatgpt_seed', 'claude_seed') AND id IN (${seededIds.join(", ")}))`;
+
 statements.push(`DELETE FROM app_previews WHERE app_id IN ${seededAppFilter};`);
 statements.push(`DELETE FROM app_tools WHERE app_id IN ${seededAppFilter};`);
 statements.push(`DELETE FROM app_tags WHERE app_id IN ${seededAppFilter};`);
 statements.push(`DELETE FROM app_categories WHERE app_id IN ${seededAppFilter};`);
 statements.push(`DELETE FROM app_surfaces WHERE app_id IN ${seededAppFilter};`);
-statements.push("DELETE FROM apps WHERE source IN ('chatgpt_seed', 'claude_seed');");
 
 for (const skill of skills.skills) {
   statements.push(
-    `INSERT OR REPLACE INTO skills (
+    `INSERT INTO skills (
       id, name, display_name, description, source_type, source_url, install_url, skill_path,
       platforms, categories, tags, status, created_at, updated_at
     ) VALUES (
@@ -56,20 +58,23 @@ for (const skill of skills.skills) {
       ${escapeSql(skill.status)},
       ${skillSeedTimestamp},
       ${skillSeedTimestamp}
-    );`,
+    ) ON CONFLICT(id) DO UPDATE SET ${updateColumns([
+      "name", "display_name", "description", "source_type", "source_url", "install_url", "skill_path",
+      "platforms", "categories", "tags", "status", "updated_at",
+    ])};`,
   );
 }
 
 for (const category of data.categories) {
   statements.push(
-    `INSERT OR REPLACE INTO categories (slug, name, sort) VALUES (${escapeSql(category.slug)}, ${escapeSql(category.name)}, ${category.sort});`,
+    `INSERT INTO categories (slug, name, sort) VALUES (${escapeSql(category.slug)}, ${escapeSql(category.name)}, ${category.sort}) ON CONFLICT(slug) DO UPDATE SET name = excluded.name, sort = excluded.sort;`,
   );
 }
 
 for (const app of data.apps) {
   if (app.source !== "chatgpt_seed" && app.source !== "claude_seed") continue;
   statements.push(
-    `INSERT OR REPLACE INTO apps (
+    `INSERT INTO apps (
       id, name, tagline, description, icon_key, hero_key, homepage_url, repo_url,
       mcp_endpoint, mcp_transport, install_cmd, auth_type, publisher, publisher_url,
       capabilities, version, privacy_url, terms_url, support_url,
@@ -101,7 +106,12 @@ for (const app of data.apps) {
       ${app.createdAt},
       ${app.updatedAt},
       ${app.publishedAt ?? "NULL"}
-    );`,
+    ) ON CONFLICT(id) DO UPDATE SET ${updateColumns([
+      "name", "tagline", "description", "icon_key", "hero_key", "homepage_url", "repo_url",
+      "mcp_endpoint", "mcp_transport", "install_cmd", "auth_type", "publisher", "publisher_url",
+      "capabilities", "version", "privacy_url", "terms_url", "support_url", "status", "is_featured",
+      "example_prompts", "source", "updated_at", "published_at",
+    ])} WHERE apps.source IN ('chatgpt_seed', 'claude_seed');`,
   );
 
   for (const category of app.categories) {
