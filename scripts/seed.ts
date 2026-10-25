@@ -180,7 +180,7 @@ for (const association of associations) {
 
   if (association.surface) {
     statements.push(
-      `INSERT OR REPLACE INTO surface_skills (
+      `INSERT INTO surface_skills (
         app_id, platform, surface_type, external_id, skill_id, relation_type, reason, confidence, created_at, updated_at
       ) VALUES (
         ${escapeSql(association.appId)},
@@ -193,13 +193,18 @@ for (const association of associations) {
         ${association.confidence ?? "NULL"},
         ${skillSeedTimestamp},
         ${skillSeedTimestamp}
-      );`,
+      ) ON CONFLICT(app_id, platform, surface_type, external_id, skill_id) DO UPDATE SET
+        relation_type = excluded.relation_type, reason = excluded.reason,
+        confidence = excluded.confidence, updated_at = excluded.updated_at
+      WHERE surface_skills.relation_type IS NOT excluded.relation_type
+        OR surface_skills.reason IS NOT excluded.reason
+        OR surface_skills.confidence IS NOT excluded.confidence;`,
     );
     continue;
   }
 
   statements.push(
-    `INSERT OR REPLACE INTO app_skills (
+    `INSERT INTO app_skills (
       app_id, skill_id, relation_type, reason, confidence, created_at, updated_at
     ) VALUES (
       ${escapeSql(association.appId)},
@@ -209,7 +214,12 @@ for (const association of associations) {
       ${association.confidence ?? "NULL"},
       ${skillSeedTimestamp},
       ${skillSeedTimestamp}
-    );`,
+    ) ON CONFLICT(app_id, skill_id) DO UPDATE SET
+      relation_type = excluded.relation_type, reason = excluded.reason,
+      confidence = excluded.confidence, updated_at = excluded.updated_at
+    WHERE app_skills.relation_type IS NOT excluded.relation_type
+      OR app_skills.reason IS NOT excluded.reason
+      OR app_skills.confidence IS NOT excluded.confidence;`,
   );
 }
 

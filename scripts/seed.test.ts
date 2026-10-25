@@ -14,6 +14,11 @@ test("seed updates preserve parent rows, user links, and historical associations
   const app = catalog.apps.find((item: { source: string }) => item.source === "chatgpt_seed");
   const skill = registry.skills[0];
   const category = catalog.categories[0];
+  const associations = JSON.parse(await readFile("seed/app-skill-associations.json", "utf8"));
+  const association = associations.find((item: { appId: string; skillId: string; surface?: unknown }) =>
+    !item.surface && catalog.apps.some((app: { id: string }) => app.id === item.appId) &&
+    registry.skills.some((skill: { id: string }) => skill.id === item.skillId));
+  assert.ok(association, "an existing seed association is required");
   const quote = (value: string) => `'${value.replaceAll("'", "''")}'`;
   execFileSync("sqlite3", [database], { input: `
     PRAGMA foreign_keys = ON;
@@ -34,6 +39,13 @@ test("seed updates preserve parent rows, user links, and historical associations
       ('__user','claude','connector',${quote(skill.id)},123,123),
       (${quote(app.id)},'chatgpt','app','__historic_skill',123,123);
     INSERT INTO submissions (app_id,raw_payload,created_at) VALUES (${quote(app.id)},'{}',123);
+    INSERT OR IGNORE INTO apps (id,name,tagline,source,created_at,updated_at) VALUES
+      (${quote(association.appId)},'Existing','Existing','chatgpt_seed',123,123);
+    INSERT OR IGNORE INTO skills (id,name,display_name,description,created_at,updated_at) VALUES
+      (${quote(association.skillId)},'Existing','Existing','Existing',123,123);
+    INSERT INTO app_skills (app_id,skill_id,relation_type,reason,confidence,created_at,updated_at) VALUES
+      (${quote(association.appId)},${quote(association.skillId)},${quote(association.relationType)},
+       ${association.reason == null ? "NULL" : quote(association.reason)},${association.confidence ?? "NULL"},125,126);
   ` });
   execFileSync(process.execPath, ["--import", "tsx", "scripts/seed.ts", sqlPath], { stdio: "pipe" });
   const seedSql = await readFile(sqlPath, "utf8");
@@ -52,5 +64,16 @@ test("seed updates preserve parent rows, user links, and historical associations
   assert.equal(scalar("SELECT app_id FROM submissions"), app.id);
   assert.equal(scalar(`SELECT created_at FROM apps WHERE id = ${quote(app.id)}`), 123);
   assert.equal(scalar(`SELECT created_at FROM skills WHERE id = ${quote(skill.id)}`), 123);
+  assert.equal(scalar(`SELECT created_at FROM app_skills WHERE app_id = ${quote(association.appId)} AND skill_id = ${quote(association.skillId)}`), 125);
+  assert.equal(scalar(`SELECT updated_at FROM app_skills WHERE app_id = ${quote(association.appId)} AND skill_id = ${quote(association.skillId)}`), 126);
+  execFileSync("sqlite3", [database], { input: `
+    BEGIN;
+    UPDATE app_skills SET reason = 'Outdated association reason'
+      WHERE app_id = ${quote(association.appId)} AND skill_id = ${quote(association.skillId)};
+    ${seedSql}
+    COMMIT;
+  ` });
+  assert.equal(scalar(`SELECT created_at FROM app_skills WHERE app_id = ${quote(association.appId)} AND skill_id = ${quote(association.skillId)}`), 125);
+  assert.ok(Number(scalar(`SELECT updated_at FROM app_skills WHERE app_id = ${quote(association.appId)} AND skill_id = ${quote(association.skillId)}`)) > 126);
   assert.equal(query("PRAGMA foreign_key_check"), "");
 });
