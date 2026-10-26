@@ -89,6 +89,10 @@ await refresh("chatgpt", ["npm", "run", "scrape", "--", "seed/raw-chatgpt-apps.j
   if (!Number.isFinite(age) || age < -300_000 || age > 24 * 60 * 60_000) {
     throw new Error(`ChatGPT browser capture is missing or older than 24 hours (${capture.capturedAt ?? "unknown"}); capture fresh public categories first`);
   }
+  const lastSuccessAt = Date.parse(previous.sources?.chatgpt?.lastSuccessAt ?? "");
+  if (Number.isFinite(lastSuccessAt) && capturedAt <= lastSuccessAt) {
+    throw new Error(`ChatGPT browser capture was already synchronized before ${previous.sources?.chatgpt?.lastSuccessAt}; capture fresh public categories first`);
+  }
   const entries = Object.values(capture.categories ?? {}) as Array<{ status?: number; complete?: boolean; data?: { plugins?: unknown[]; pagination?: { next_page_token?: string } } }>;
   if (!entries.some((entry) => entry.status === 200 && entry.complete === true && Array.isArray(entry.data?.plugins) && !entry.data?.pagination?.next_page_token)) {
     throw new Error("ChatGPT capture has no complete category pages");
