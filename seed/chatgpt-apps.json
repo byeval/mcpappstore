@@ -60873,16 +60873,19 @@
       "iconUrl": "https://files.openai.com/content?id=file_00000000567481f5af3be37977f858db&cdn=1&cp=pi&ma=32572800&ts=0&p=pi&cid=8&sig=12e8b7baa5aaf8bed64cf0696eaf9a34a212e922eea41222db63adddd7be56d5&v=0",
       "mcpTransport": "http",
       "authType": "oauth",
-      "publisher": "Unknown",
+      "publisher": "Configure",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792527503521,
-      "updatedAt": 1792527503521,
+      "updatedAt": 1793183334972,
       "publishedAt": 1792527503521,
       "surfaces": [
         {
@@ -60903,6 +60906,29 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "interactive_connector",
+          "displayName": "Configure Memory",
+          "tagline": "Portable memory you own, across your AI assistants",
+          "description": "Portable memory you own, across your AI assistants",
+          "url": "https://claude.ai/directory/53c01e1b-cc0c-4e0a-9ba9-4a5893c6d644",
+          "externalId": "53c01e1b-cc0c-4e0a-9ba9-4a5893c6d644",
+          "mcpEndpoint": "https://mcp-claude.configure.dev/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Interactive",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
@@ -60910,7 +60936,10 @@
       ],
       "tags": [],
       "tools": [],
-      "previews": []
+      "previews": [],
+      "mcpEndpoint": "https://mcp-claude.configure.dev/mcp",
+      "publisherUrl": "https://configure.dev/",
+      "homepageUrl": "https://claude.com/marketplace/connectors/configure"
     },
     {
       "id": "telagus",
@@ -529025,16 +529054,19 @@
       "iconUrl": "https://files.openai.com/content?id=file_00000000f2ec820abaf24be1f52adfa1&cdn=1&cp=pi&ma=31795200&ts=0&p=pi&cid=8&sig=1d23871567bd9b72285a074749767ed631f831e57af88e48168a0d6ae9dde05d&v=0",
       "mcpTransport": "http",
       "authType": "oauth",
-      "publisher": "Unknown",
+      "publisher": "Aquila Labs, Inc",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1793045007649,
-      "updatedAt": 1793045007649,
+      "updatedAt": 1793183334972,
       "publishedAt": 1793045007649,
       "surfaces": [
         {
@@ -529055,10 +529087,35 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Wonder",
+          "tagline": "Create and edit designs with Claude on a canvas where every design is real code.",
+          "description": "Create and edit designs with Claude on a canvas where every design is real code.",
+          "url": "https://claude.ai/directory/5c9720c2-a744-4679-ad63-81b3e7bb157f",
+          "externalId": "5c9720c2-a744-4679-ad63-81b3e7bb157f",
+          "mcpEndpoint": "https://mcp.wonder.so/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "creativity"
+        "creativity",
+        "creative",
+        "developer-tools",
+        "productivity"
       ],
       "tags": [
         "wonder",
@@ -529071,7 +529128,10 @@
         "mcp"
       ],
       "tools": [],
-      "previews": []
+      "previews": [],
+      "mcpEndpoint": "https://mcp.wonder.so/mcp",
+      "publisherUrl": "https://wonder.design/",
+      "homepageUrl": "https://claude.com/marketplace/connectors/wonder"
     },
     {
       "id": "gilmos",
@@ -535904,6 +535964,892 @@
         "cart",
         "MCP"
       ],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "aptus-ai-nextos",
+      "name": "Aptus.AI - NextOS",
+      "tagline": "Aptus.AI NextOS in your assistant: what a law, regulation or court ruling provides on your point, with quotations and links to the full text on Aptus.AI.",
+      "description": "Aptus.AI NextOS in your assistant: what a law, regulation or court ruling provides on your point, with quotations and links to the full text on Aptus.AI.",
+      "homepageUrl": "https://aptus.ai/",
+      "mcpEndpoint": "https://legalmcp.next.aptus.ai/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Aptus.AI",
+      "publisherUrl": "https://aptus.ai/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1792108800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Aptus.AI - NextOS",
+          "tagline": "Aptus.AI NextOS in your assistant: what a law, regulation or court ruling provides on your point, with quotations and links to the full text on Aptus.AI.",
+          "description": "Aptus.AI NextOS in your assistant: what a law, regulation or court ruling provides on your point, with quotations and links to the full text on Aptus.AI.",
+          "url": "https://claude.ai/directory/71d99ca9-485b-470f-8ff9-4ba0234a6e33",
+          "externalId": "71d99ca9-485b-470f-8ff9-4ba0234a6e33",
+          "mcpEndpoint": "https://legalmcp.next.aptus.ai/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "legal"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "j-p-morgan-asset-management-55ip",
+      "name": "J.P. Morgan Asset Management (55ip)",
+      "tagline": "Develop and analyze personalized, tax-aware portfolio transition scenarios",
+      "description": "Develop and analyze personalized, tax-aware portfolio transition scenarios",
+      "homepageUrl": "https://55-ip.com/",
+      "mcpEndpoint": "https://mcp.55-ip.com/proposal-generation-mcp/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "J.P. Morgan Asset Management (55ip)",
+      "publisherUrl": "https://55-ip.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1792713600000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "J.P. Morgan Asset Management (55ip)",
+          "tagline": "Develop and analyze personalized, tax-aware portfolio transition scenarios",
+          "description": "Develop and analyze personalized, tax-aware portfolio transition scenarios",
+          "url": "https://claude.ai/directory/b940ac7d-2f9a-4f80-b1a4-adec8fe75641",
+          "externalId": "b940ac7d-2f9a-4f80-b1a4-adec8fe75641",
+          "mcpEndpoint": "https://mcp.55-ip.com/proposal-generation-mcp/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "financial-services"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "biggerpockets",
+      "name": "BiggerPockets",
+      "tagline": "Underwrite real estate deals and search BiggerPockets' investing library.",
+      "description": "Underwrite real estate deals and search BiggerPockets' investing library.",
+      "homepageUrl": "https://www.biggerpockets.com/",
+      "mcpEndpoint": "https://www.biggerpockets.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "BiggerPockets, LLC",
+      "publisherUrl": "https://www.biggerpockets.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1785974400000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "BiggerPockets",
+          "tagline": "Underwrite real estate deals and search BiggerPockets' investing library.",
+          "description": "Underwrite real estate deals and search BiggerPockets' investing library.",
+          "url": "https://claude.ai/directory/b6e21ad9-24cd-45f3-b61a-10eb322c2963",
+          "externalId": "b6e21ad9-24cd-45f3-b61a-10eb322c2963",
+          "mcpEndpoint": "https://www.biggerpockets.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "education",
+        "financial-services"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "schwab-advisor-services",
+      "name": "Schwab Advisor Services",
+      "tagline": "Less time searching. More time focused on your clients. For professional use only.",
+      "description": "Less time searching. More time focused on your clients. For professional use only.",
+      "iconUrl": "https://sac.schwabinstitutional.com/static/assets/images/cs_logo-04.png",
+      "homepageUrl": "https://advisorservices.schwab.com/",
+      "mcpEndpoint": "https://agent.schwabinstitutional.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Charles Schwab",
+      "publisherUrl": "https://advisorservices.schwab.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1792108800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Schwab Advisor Services",
+          "tagline": "Less time searching. More time focused on your clients. For professional use only.",
+          "description": "Less time searching. More time focused on your clients. For professional use only.",
+          "url": "https://claude.ai/directory/135037c6-28e5-43a2-af33-866014d9f449",
+          "externalId": "135037c6-28e5-43a2-af33-866014d9f449",
+          "mcpEndpoint": "https://agent.schwabinstitutional.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "financial-services"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "nevis",
+      "name": "Nevis",
+      "tagline": "The AI platform for wealth management",
+      "description": "The AI platform for wealth management",
+      "homepageUrl": "https://www.neviswealth.com/",
+      "mcpEndpoint": "https://app.neviswealth.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Nevis Inc.",
+      "publisherUrl": "https://www.neviswealth.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1792454400000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Nevis",
+          "tagline": "The AI platform for wealth management",
+          "description": "The AI platform for wealth management",
+          "url": "https://claude.ai/directory/ab82ac00-aa59-43ea-8061-4e470e4e5b86",
+          "externalId": "ab82ac00-aa59-43ea-8061-4e470e4e5b86",
+          "mcpEndpoint": "https://app.neviswealth.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "financial-services",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "finny",
+      "name": "FINNY",
+      "tagline": "Your FINNY campaigns, website visitor tracking, and prospect uploads in Claude.",
+      "description": "Your FINNY campaigns, website visitor tracking, and prospect uploads in Claude.",
+      "homepageUrl": "https://finny.com/",
+      "mcpEndpoint": "https://mcp.finny.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "FINNY AI Inc.",
+      "publisherUrl": "https://finny.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1792108800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "FINNY",
+          "tagline": "Your FINNY campaigns, website visitor tracking, and prospect uploads in Claude.",
+          "description": "Your FINNY campaigns, website visitor tracking, and prospect uploads in Claude.",
+          "url": "https://claude.ai/directory/2d5f6dad-7bf3-4780-a49d-3ab6741486a4",
+          "externalId": "2d5f6dad-7bf3-4780-a49d-3ab6741486a4",
+          "mcpEndpoint": "https://mcp.finny.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "financial-services",
+        "sales-and-marketing"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "franklin-templeton-funds-and-insights",
+      "name": "Franklin Templeton Funds and Insights",
+      "tagline": "Explore public Franklin Templeton fund information, document links and published investment insights.",
+      "description": "Explore public Franklin Templeton fund information, document links and published investment insights.",
+      "iconUrl": "https://franklintempletonprod.widen.net/content/hrxzxi4q8b/png/ft-global-logo-header.png",
+      "homepageUrl": "https://www.franklintempleton.com/",
+      "mcpEndpoint": "https://api.frk.com/mcp/v1/ft-funds-insights/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Franklin Templeton",
+      "publisherUrl": "https://www.franklintempleton.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1792108800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Franklin Templeton Funds and Insights",
+          "tagline": "Explore public Franklin Templeton fund information, document links and published investment insights.",
+          "description": "Explore public Franklin Templeton fund information, document links and published investment insights.",
+          "url": "https://claude.ai/directory/af38acef-f0fc-47cf-8088-79ec3fd57d8d",
+          "externalId": "af38acef-f0fc-47cf-8088-79ec3fd57d8d",
+          "mcpEndpoint": "https://api.frk.com/mcp/v1/ft-funds-insights/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "financial-services"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "invesco-for-advisors",
+      "name": "Invesco for Advisors",
+      "tagline": "Tools to help solve your investing and business challenges",
+      "description": "Tools to help solve your investing and business challenges",
+      "iconUrl": "https://invesco.com/content/dam/invesco/global/en/images/invesco%20square%20logo.jpg",
+      "homepageUrl": "https://www.invesco.com/us/en/financial-professional.html",
+      "mcpEndpoint": "https://financial-professional-mcp.invesco.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Invesco",
+      "publisherUrl": "https://www.invesco.com/us/en/financial-professional.html",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1792108800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Invesco for Advisors",
+          "tagline": "Tools to help solve your investing and business challenges",
+          "description": "Tools to help solve your investing and business challenges",
+          "url": "https://claude.ai/directory/87dc3d62-f6a8-4793-842c-e5606bb4123b",
+          "externalId": "87dc3d62-f6a8-4793-842c-e5606bb4123b",
+          "mcpEndpoint": "https://financial-professional-mcp.invesco.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "financial-services"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "conquest-mcp-server",
+      "name": "Conquest MCP Server",
+      "tagline": "Conquest’s verifiable AI financial advice engine in Claude — create plans, review client goals, and apply SAM strategies right where you work.",
+      "description": "Conquest’s verifiable AI financial advice engine in Claude — create plans, review client goals, and apply SAM strategies right where you work.",
+      "iconUrl": "https://cdn.prod.website-files.com/62aa2492f1114e6a77f39a86/6ac6a00cf343f4e48abbf461_logo-icon.svg",
+      "homepageUrl": "https://conquestplanning.com/",
+      "mcpEndpoint": "https://api.conquest-cloud.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Conquest",
+      "publisherUrl": "https://conquestplanning.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1791504000000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Conquest MCP Server",
+          "tagline": "Conquest’s verifiable AI financial advice engine in Claude — create plans, review client goals, and apply SAM strategies right where you work.",
+          "description": "Conquest’s verifiable AI financial advice engine in Claude — create plans, review client goals, and apply SAM strategies right where you work.",
+          "url": "https://claude.ai/directory/da444758-4ed5-4f3b-ab1f-c752c4d67c86",
+          "externalId": "da444758-4ed5-4f3b-ab1f-c752c4d67c86",
+          "mcpEndpoint": "https://api.conquest-cloud.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "financial-services"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "civic-iq",
+      "name": "Civic IQ",
+      "tagline": "Sales intelligence for selling to US state and local government: open RFPs, pre-RFP meeting signals, agency contacts and vendor spend.",
+      "description": "Sales intelligence for selling to US state and local government: open RFPs, pre-RFP meeting signals, agency contacts and vendor spend.",
+      "homepageUrl": "https://civiciq.com/",
+      "mcpEndpoint": "https://mcp.civiciq.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Civic IQ Inc.",
+      "publisherUrl": "https://civiciq.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1790812800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Civic IQ",
+          "tagline": "Sales intelligence for selling to US state and local government: open RFPs, pre-RFP meeting signals, agency contacts and vendor spend.",
+          "description": "Sales intelligence for selling to US state and local government: open RFPs, pre-RFP meeting signals, agency contacts and vendor spend.",
+          "url": "https://claude.ai/directory/8572cc05-4d45-4636-9c75-90667344ecef",
+          "externalId": "8572cc05-4d45-4636-9c75-90667344ecef",
+          "mcpEndpoint": "https://mcp.civiciq.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "sales-and-marketing"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "billingmart",
+      "name": "BillingMart",
+      "tagline": "BillingMart.com MCP Server- Invoice drafts, estimates, client lookup, expenses, and billing reports",
+      "description": "BillingMart.com MCP Server- Invoice drafts, estimates, client lookup, expenses, and billing reports",
+      "homepageUrl": "https://billingmart.com/",
+      "mcpEndpoint": "https://api.billingmart.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "BillingMart.com LLC",
+      "publisherUrl": "https://billingmart.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1790812800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "BillingMart",
+          "tagline": "BillingMart.com MCP Server- Invoice drafts, estimates, client lookup, expenses, and billing reports",
+          "description": "BillingMart.com MCP Server- Invoice drafts, estimates, client lookup, expenses, and billing reports",
+          "url": "https://claude.ai/directory/ced23d97-c96c-4525-97f8-e1b16a62dc5a",
+          "externalId": "ced23d97-c96c-4525-97f8-e1b16a62dc5a",
+          "mcpEndpoint": "https://api.billingmart.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "financial-services",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "theysaid",
+      "name": "Theysaid",
+      "tagline": "Run AI-powered usability tests on any live app, prototype, or design and get actionable insights, all from your chat",
+      "description": "Run AI-powered usability tests on any live app, prototype, or design and get actionable insights, all from your chat",
+      "homepageUrl": "https://www.theysaid.io/",
+      "mcpEndpoint": "https://ai.theysaid.io/api/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Theysaid",
+      "publisherUrl": "https://www.theysaid.io/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Interactive",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1790121600000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "interactive_connector",
+          "displayName": "Theysaid",
+          "tagline": "Run AI-powered usability tests on any live app, prototype, or design and get actionable insights, all from your chat",
+          "description": "Run AI-powered usability tests on any live app, prototype, or design and get actionable insights, all from your chat",
+          "url": "https://claude.ai/directory/df000de5-52d6-4fb0-9a64-46143aae9388",
+          "externalId": "df000de5-52d6-4fb0-9a64-46143aae9388",
+          "mcpEndpoint": "https://ai.theysaid.io/api/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Interactive",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "other",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "easypost",
+      "name": "EasyPost",
+      "tagline": "Check rates, tracking, and claims in one ask",
+      "description": "Check rates, tracking, and claims in one ask",
+      "homepageUrl": "https://www.easypost.com/",
+      "mcpEndpoint": "https://app-api.easypost.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "EasyPost",
+      "publisherUrl": "https://www.easypost.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1789948800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "EasyPost",
+          "tagline": "Check rates, tracking, and claims in one ask",
+          "description": "Check rates, tracking, and claims in one ask",
+          "url": "https://claude.ai/directory/418bc5bc-1b89-4c3d-9ef7-9b5f40690a0f",
+          "externalId": "418bc5bc-1b89-4c3d-9ef7-9b5f40690a0f",
+          "mcpEndpoint": "https://app-api.easypost.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "fax-plus",
+      "name": "Fax.Plus",
+      "tagline": "Send and receive faxes securely from Claude",
+      "description": "Send and receive faxes securely from Claude",
+      "iconUrl": "https://www.fax.plus/",
+      "homepageUrl": "https://www.alohi.com/",
+      "mcpEndpoint": "https://mcp.fax.plus/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Alohi",
+      "publisherUrl": "https://www.alohi.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Interactive",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1789516800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "interactive_connector",
+          "displayName": "Fax.Plus",
+          "tagline": "Send and receive faxes securely from Claude",
+          "description": "Send and receive faxes securely from Claude",
+          "url": "https://claude.ai/directory/4a8fc67f-bde4-494c-b745-0e686312c3c4",
+          "externalId": "4a8fc67f-bde4-494c-b745-0e686312c3c4",
+          "mcpEndpoint": "https://mcp.fax.plus/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Interactive",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "legora",
+      "name": "Legora",
+      "tagline": "Ask legal questions and get grounded answers with citations.",
+      "description": "Ask legal questions and get grounded answers with citations.",
+      "iconUrl": "https://legora.com/",
+      "homepageUrl": "https://legora.com/",
+      "mcpEndpoint": "https://mcp.legora.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Legora",
+      "publisherUrl": "https://legora.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1789603200000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Legora",
+          "tagline": "Ask legal questions and get grounded answers with citations.",
+          "description": "Ask legal questions and get grounded answers with citations.",
+          "url": "https://claude.ai/directory/5b14e411-1366-42a6-b1e4-fec246cc6cdf",
+          "externalId": "5b14e411-1366-42a6-b1e4-fec246cc6cdf",
+          "mcpEndpoint": "https://mcp.legora.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "legal"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "saily",
+      "name": "Saily",
+      "tagline": "Browse and buy eSIM data plans for 190+ countries",
+      "description": "Browse and buy eSIM data plans for 190+ countries",
+      "iconUrl": "https://saily.com/saily-logo.png",
+      "homepageUrl": "https://nordsecurity.com/",
+      "mcpEndpoint": "https://mcp.saily.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Nord Security",
+      "publisherUrl": "https://nordsecurity.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793183334972,
+      "updatedAt": 1793183334972,
+      "publishedAt": 1785196800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Saily",
+          "tagline": "Browse and buy eSIM data plans for 190+ countries",
+          "description": "Browse and buy eSIM data plans for 190+ countries",
+          "url": "https://claude.ai/directory/bff72f49-8573-4251-b082-9f98c0b8c6b0",
+          "externalId": "bff72f49-8573-4251-b082-9f98c0b8c6b0",
+          "mcpEndpoint": "https://mcp.saily.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "communication",
+        "productivity",
+        "travel"
+      ],
+      "tags": [],
       "tools": [],
       "previews": []
     }
