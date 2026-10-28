@@ -9,7 +9,12 @@ import type { SeedCatalog, SeedSkillAssociation, SeedSkillRegistry } from "../li
 const data = catalog as SeedCatalog;
 const skills = skillRegistry as SeedSkillRegistry;
 const associations = skillAssociations as SeedSkillAssociation[];
-const outputPath = resolve(process.cwd(), process.argv[2] ?? "migrations/0002_seed.sql");
+const args = process.argv.slice(2);
+const skillsOnly = args.includes("--skills-only");
+const outputArg = args.find((arg) => arg !== "--skills-only");
+if (skillsOnly && !outputArg) throw new Error("--skills-only requires an explicit output path");
+const outputPath = resolve(process.cwd(), outputArg ?? "migrations/0002_seed.sql");
+const appsToSeed = skillsOnly ? [] : data.apps;
 const skillSeedTimestamp = Math.max(...data.apps.map((app) => app.updatedAt), 0);
 
 function escapeSql(value: string | null | undefined): string {
@@ -29,7 +34,7 @@ function updateColumns(columns: string[]): string {
 }
 
 const statements: string[] = [];
-const seededIds = data.apps.filter((app) => app.source === "chatgpt_seed" || app.source === "claude_seed").map((app) => escapeSql(app.id));
+const seededIds = appsToSeed.filter((app) => app.source === "chatgpt_seed" || app.source === "claude_seed").map((app) => escapeSql(app.id));
 for (let index = 0; index < seededIds.length; index += 100) {
   const seededAppFilter = `(SELECT id FROM apps WHERE source IN ('chatgpt_seed', 'claude_seed') AND id IN (${seededIds.slice(index, index + 100).join(", ")}))`;
   for (const table of ["app_previews", "app_tools", "app_tags", "app_categories", "app_surfaces"]) {
@@ -64,13 +69,13 @@ for (const skill of skills.skills) {
   );
 }
 
-for (const category of data.categories) {
+for (const category of skillsOnly ? [] : data.categories) {
   statements.push(
     `INSERT INTO categories (slug, name, sort) VALUES (${escapeSql(category.slug)}, ${escapeSql(category.name)}, ${category.sort}) ON CONFLICT(slug) DO UPDATE SET name = excluded.name, sort = excluded.sort;`,
   );
 }
 
-for (const app of data.apps) {
+for (const app of appsToSeed) {
   if (app.source !== "chatgpt_seed" && app.source !== "claude_seed") continue;
   statements.push(
     `INSERT INTO apps (
@@ -170,7 +175,7 @@ for (const app of data.apps) {
   }
 }
 
-const appIds = new Set(data.apps.filter((app) => app.source === "chatgpt_seed" || app.source === "claude_seed").map((app) => app.id));
+const appIds = new Set(appsToSeed.filter((app) => app.source === "chatgpt_seed" || app.source === "claude_seed").map((app) => app.id));
 const skillIds = new Set(skills.skills.map((skill) => skill.id));
 
 for (const association of associations) {

@@ -30,6 +30,13 @@ The old `daily-mcp-app-catalog-crawl` task is no longer installed on this Mac.
    Check the diff and run typecheck/build before applying seed SQL and deploying.
    Preserve historical records and existing detailed metadata. Discovery entries
    are review candidates, not automatic public listings.
+   When the app catalog and skill associations are unchanged, generate the remote
+   seed with `npm run seed -- /tmp/skills-seed.sql --skills-only`. This updates
+   skills without rewriting apps, categories, app child rows, or associations.
+   The flag requires an explicit output path to protect the default full seed.
+   Continue to compare protected remote records before and after applying it.
+   Scope cache refreshes to skill lists, changed skill detail/reference caches,
+   and cached apps referencing those skills; keep unrelated app caches warm.
 5. Commit/push scoped changes, generate seed SQL, apply to remote D1, deploy,
    refresh public caches, and verify live counts and representative detail pages.
    Report failed sources separately even when other sources update successfully.

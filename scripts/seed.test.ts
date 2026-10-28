@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import { mkdtemp, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import test from "node:test";
 
 test("seed updates preserve parent rows, user links, and historical associations", async () => {
@@ -75,5 +75,52 @@ test("seed updates preserve parent rows, user links, and historical associations
   ` });
   assert.equal(scalar(`SELECT created_at FROM app_skills WHERE app_id = ${quote(association.appId)} AND skill_id = ${quote(association.skillId)}`), 125);
   assert.ok(Number(scalar(`SELECT updated_at FROM app_skills WHERE app_id = ${quote(association.appId)} AND skill_id = ${quote(association.skillId)}`)) > 126);
+  assert.equal(query("PRAGMA foreign_key_check"), "");
+});
+
+test("skills-only seed preserves all app data and associations", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "mcpapp-skills-seed-test-"));
+  const database = join(dir, "test.sqlite");
+  const sqlPath = join(dir, "skills.sql");
+  const catalog = JSON.parse(await readFile("seed/chatgpt-apps.json", "utf8"));
+  const registry = JSON.parse(await readFile("seed/skills.json", "utf8"));
+  const app = catalog.apps.find((item: { source: string }) => item.source === "chatgpt_seed");
+  const skill = registry.skills[0];
+  const category = catalog.categories[0];
+  const quote = (value: string) => `'${value.replaceAll("'", "''")}'`;
+  execFileSync("sqlite3", [database], { input: `
+    PRAGMA foreign_keys = ON;
+    ${await readFile("migrations/0001_init.sql", "utf8")}
+    INSERT INTO apps (id,name,tagline,source,created_at,updated_at) VALUES
+      (${quote(app.id)},'Keep app','Keep tagline','chatgpt_seed',123,124);
+    INSERT INTO categories VALUES (${quote(category.slug)},'Keep category',7);
+    INSERT INTO app_categories VALUES (${quote(app.id)},${quote(category.slug)});
+    INSERT INTO app_tools VALUES (${quote(app.id)},'keep-tool','Keep description');
+    INSERT INTO app_surfaces (app_id,platform,surface_type,external_id) VALUES
+      (${quote(app.id)},'chatgpt','app','manual');
+    INSERT INTO skills (id,name,display_name,description,created_at,updated_at) VALUES
+      (${quote(skill.id)},'Old','Old','Old',123,124),
+      ('__historical_skill','Historic','Historic','Keep',123,124);
+    INSERT INTO app_skills (app_id,skill_id,reason,created_at,updated_at) VALUES
+      (${quote(app.id)},${quote(skill.id)},'Keep reason',123,124);
+    INSERT INTO surface_skills (app_id,platform,surface_type,external_id,skill_id,created_at,updated_at) VALUES
+      (${quote(app.id)},'chatgpt','app','manual',${quote(skill.id)},123,124);
+    INSERT INTO submissions (app_id,raw_payload,created_at) VALUES (${quote(app.id)},'{}',123);
+  ` });
+  const query = (sql: string) => execFileSync("sqlite3", ["-json", database, sql], { encoding: "utf8" }).trim();
+  const tables = ["apps", "categories", "app_categories", "app_tools", "app_surfaces", "app_previews", "app_tags", "tags", "app_skills", "surface_skills", "submissions"];
+  const snapshot = () => tables.map((table) => query(`SELECT * FROM ${table}`));
+  const before = snapshot();
+  assert.throws(() => execFileSync(process.execPath, [
+    "--import", import.meta.resolve("tsx"), resolve("scripts/seed.ts"), "--skills-only",
+  ], { cwd: dir, stdio: "pipe" }), /requires an explicit output path/);
+  execFileSync(process.execPath, ["--import", "tsx", "scripts/seed.ts", "--skills-only", sqlPath], { stdio: "pipe" });
+  const sql = await readFile(sqlPath, "utf8");
+  assert.doesNotMatch(sql, /^DELETE FROM/m);
+  execFileSync("sqlite3", [database], { input: `PRAGMA foreign_keys = ON;\nBEGIN;\n${sql}\nCOMMIT;` });
+  assert.deepEqual(snapshot(), before);
+  assert.equal(JSON.parse(query(`SELECT name,created_at FROM skills WHERE id = ${quote(skill.id)}`))[0].name, skill.name);
+  assert.equal(JSON.parse(query(`SELECT created_at FROM skills WHERE id = ${quote(skill.id)}`))[0].created_at, 123);
+  assert.equal(JSON.parse(query("SELECT count(*) AS total FROM skills"))[0].total, registry.skills.length + 1);
   assert.equal(query("PRAGMA foreign_key_check"), "");
 });
