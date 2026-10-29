@@ -491,7 +491,7 @@
         "superpowers",
         "browser",
         "skills.sh",
-        "installs-169287"
+        "installs-169467"
       ],
       "status": "available"
     },
@@ -510,7 +510,7 @@
         "superpowers",
         "tools",
         "skills.sh",
-        "installs-112892"
+        "installs-112989"
       ],
       "status": "available"
     },
@@ -531,7 +531,7 @@
         "avatar",
         "video",
         "skills.sh",
-        "installs-895136"
+        "installs-895990"
       ],
       "status": "available"
     },
@@ -552,7 +552,7 @@
         "image",
         "generation",
         "skills.sh",
-        "installs-895743"
+        "installs-896607"
       ],
       "status": "available"
     },
@@ -573,7 +573,7 @@
         "video",
         "generation",
         "skills.sh",
-        "installs-896995"
+        "installs-897896"
       ],
       "status": "available"
     },
@@ -593,7 +593,7 @@
         "infsh",
         "cli",
         "skills.sh",
-        "installs-112920"
+        "installs-113017"
       ],
       "status": "available"
     },
@@ -613,7 +613,7 @@
         "python",
         "executor",
         "skills.sh",
-        "installs-112890"
+        "installs-112987"
       ],
       "status": "available"
     },
@@ -633,7 +633,7 @@
         "remotion",
         "render",
         "skills.sh",
-        "installs-112939"
+        "installs-113037"
       ],
       "status": "available"
     },
@@ -653,7 +653,7 @@
         "twitter",
         "automation",
         "skills.sh",
-        "installs-895393"
+        "installs-896246"
       ],
       "status": "available"
     },
@@ -673,7 +673,7 @@
         "web",
         "search",
         "skills.sh",
-        "installs-113240"
+        "installs-113350"
       ],
       "status": "available"
     },
@@ -692,7 +692,7 @@
         "review",
         "loop",
         "skills.sh",
-        "installs-107634"
+        "installs-108828"
       ],
       "status": "available"
     },
@@ -714,7 +714,7 @@
         "interface",
         "design",
         "skills.sh",
-        "installs-64560"
+        "installs-65403"
       ],
       "status": "available"
     },
@@ -735,7 +735,7 @@
         "and",
         "quality",
         "skills.sh",
-        "installs-75345"
+        "installs-76152"
       ],
       "status": "available"
     },
@@ -754,7 +754,7 @@
         "code",
         "simplification",
         "skills.sh",
-        "installs-64707"
+        "installs-65526"
       ],
       "status": "available"
     },
@@ -773,7 +773,7 @@
         "context",
         "engineering",
         "skills.sh",
-        "installs-63455"
+        "installs-64239"
       ],
       "status": "available"
     },
@@ -794,7 +794,7 @@
         "error",
         "recovery",
         "skills.sh",
-        "installs-64719"
+        "installs-65531"
       ],
       "status": "available"
     },
@@ -814,7 +814,7 @@
         "and",
         "adrs",
         "skills.sh",
-        "installs-65788"
+        "installs-66619"
       ],
       "status": "available"
     },
@@ -834,7 +834,7 @@
         "ui",
         "engineering",
         "skills.sh",
-        "installs-69424"
+        "installs-70314"
       ],
       "status": "available"
     },
@@ -855,7 +855,26 @@
         "and",
         "versioning",
         "skills.sh",
-        "installs-61419"
+        "installs-62119"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:addyosmani/agent-skills/idea-refine",
+      "name": "idea-refine",
+      "displayName": "Idea Refine",
+      "description": "Imported from skills.sh. Published by addyosmani/agent-skills; 61,828 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/addyosmani/agent-skills/idea-refine",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "addyosmani",
+        "idea",
+        "refine",
+        "skills.sh",
+        "installs-61828"
       ],
       "status": "available"
     },
@@ -874,7 +893,7 @@
         "incremental",
         "implementation",
         "skills.sh",
-        "installs-63786"
+        "installs-64485"
       ],
       "status": "available"
     },
@@ -893,7 +912,7 @@
         "performance",
         "optimization",
         "skills.sh",
-        "installs-67207"
+        "installs-68046"
       ],
       "status": "available"
     },
@@ -914,7 +933,7 @@
         "task",
         "breakdown",
         "skills.sh",
-        "installs-66144"
+        "installs-66857"
       ],
       "status": "available"
     },
@@ -934,7 +953,7 @@
         "and",
         "hardening",
         "skills.sh",
-        "installs-72412"
+        "installs-73355"
       ],
       "status": "available"
     },
@@ -954,7 +973,7 @@
         "driven",
         "development",
         "skills.sh",
-        "installs-66902"
+        "installs-67722"
       ],
       "status": "available"
     },
@@ -974,7 +993,25 @@
         "driven",
         "development",
         "skills.sh",
-        "installs-63885"
+        "installs-64599"
+      ],
+      "status": "available"
+    },
+    {
+      "id": "skills-sh:addyosmani/agent-skills/using-agent-skills",
+      "name": "using-agent-skills",
+      "displayName": "Using Agent Skills",
+      "description": "Imported from skills.sh. Published by addyosmani/agent-skills; 61,655 all-time installs on the skills.sh leaderboard.",
+      "sourceType": "external",
+      "sourceUrl": "https://skills.sh/addyosmani/agent-skills/using-agent-skills",
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "addyosmani",
+        "using",
+        "skills.sh",
+        "installs-61655"
       ],
       "status": "available"
     },
@@ -994,7 +1031,7 @@
         "quality",
         "accessibility",
         "skills.sh",
-        "installs-64949"
+        "installs-65210"
       ],
       "status": "available"
     },
@@ -1033,7 +1070,7 @@
         "agently",
         "mail",
         "skills.sh",
-        "installs-68968"
+        "installs-69156"
       ],
       "status": "available"
     },
@@ -1052,7 +1089,7 @@
         "cloud",
         "ceo",
         "skills.sh",
-        "installs-74423"
+        "installs-74898"
       ],
       "status": "available"
     },
@@ -1112,7 +1149,7 @@
         "algorithmic",
         "art",
         "skills.sh",
-        "installs-90348"
+        "installs-90661"
       ],
       "status": "available"
     },
@@ -1131,7 +1168,7 @@
         "brand",
         "guidelines",
         "skills.sh",
-        "installs-111736"
+        "installs-112416"
       ],
       "status": "available"
     },
@@ -1150,7 +1187,7 @@
         "canvas",
         "design",
         "skills.sh",
-        "installs-123618"
+        "installs-124117"
       ],
       "status": "available"
     },
@@ -1169,7 +1206,7 @@
         "claude",
         "api",
         "skills.sh",
-        "installs-75447"
+        "installs-75755"
       ],
       "status": "available"
     },
@@ -1188,7 +1225,7 @@
         "doc",
         "coauthoring",
         "skills.sh",
-        "installs-95413"
+        "installs-95787"
       ],
       "status": "available"
     },
@@ -1206,7 +1243,7 @@
         "anthropics",
         "docx",
         "skills.sh",
-        "installs-208936"
+        "installs-209538"
       ],
       "status": "available"
     },
@@ -1225,7 +1262,7 @@
         "frontend",
         "design",
         "skills.sh",
-        "installs-1045299"
+        "installs-1049908"
       ],
       "status": "available"
     },
@@ -1244,7 +1281,7 @@
         "internal",
         "comms",
         "skills.sh",
-        "installs-81247"
+        "installs-81591"
       ],
       "status": "available"
     },
@@ -1263,7 +1300,7 @@
         "mcp",
         "builder",
         "skills.sh",
-        "installs-133270"
+        "installs-133954"
       ],
       "status": "available"
     },
@@ -1281,7 +1318,7 @@
         "anthropics",
         "pdf",
         "skills.sh",
-        "installs-218822"
+        "installs-219436"
       ],
       "status": "available"
     },
@@ -1299,7 +1336,7 @@
         "anthropics",
         "pptx",
         "skills.sh",
-        "installs-244360"
+        "installs-245044"
       ],
       "status": "available"
     },
@@ -1317,7 +1354,7 @@
         "anthropics",
         "creator",
         "skills.sh",
-        "installs-417910"
+        "installs-418843"
       ],
       "status": "available"
     },
@@ -1337,7 +1374,7 @@
         "gif",
         "creator",
         "skills.sh",
-        "installs-76360"
+        "installs-76630"
       ],
       "status": "available"
     },
@@ -1355,7 +1392,7 @@
         "anthropics",
         "template",
         "skills.sh",
-        "installs-72110"
+        "installs-72339"
       ],
       "status": "available"
     },
@@ -1374,7 +1411,7 @@
         "theme",
         "factory",
         "skills.sh",
-        "installs-96421"
+        "installs-96789"
       ],
       "status": "available"
     },
@@ -1394,7 +1431,7 @@
         "artifacts",
         "builder",
         "skills.sh",
-        "installs-113630"
+        "installs-114027"
       ],
       "status": "available"
     },
@@ -1413,7 +1450,7 @@
         "webapp",
         "testing",
         "skills.sh",
-        "installs-191158"
+        "installs-192208"
       ],
       "status": "available"
     },
@@ -1431,7 +1468,7 @@
         "anthropics",
         "xlsx",
         "skills.sh",
-        "installs-189586"
+        "installs-190173"
       ],
       "status": "available"
     },
@@ -1451,7 +1488,7 @@
         "detect",
         "browser",
         "skills.sh",
-        "installs-140192"
+        "installs-141349"
       ],
       "status": "available"
     },
@@ -1472,7 +1509,7 @@
         "browser",
         "mcp",
         "skills.sh",
-        "installs-109714"
+        "installs-110873"
       ],
       "status": "available"
     },
@@ -1495,7 +1532,7 @@
         "account",
         "isolation",
         "skills.sh",
-        "installs-109666"
+        "installs-110829"
       ],
       "status": "available"
     },
@@ -1533,7 +1570,7 @@
         "design",
         "system",
         "skills.sh",
-        "installs-130763"
+        "installs-130802"
       ],
       "status": "available"
     },
@@ -1553,7 +1590,7 @@
         "platform",
         "picker",
         "skills.sh",
-        "installs-105906"
+        "installs-107067"
       ],
       "status": "available"
     },
@@ -1574,7 +1611,7 @@
         "conversion",
         "audit",
         "skills.sh",
-        "installs-107714"
+        "installs-108896"
       ],
       "status": "available"
     },
@@ -1595,7 +1632,7 @@
         "upsell",
         "flow",
         "skills.sh",
-        "installs-105914"
+        "installs-107085"
       ],
       "status": "available"
     },
@@ -1615,7 +1652,7 @@
         "funnel",
         "blueprint",
         "skills.sh",
-        "installs-106211"
+        "installs-107379"
       ],
       "status": "available"
     },
@@ -1636,7 +1673,7 @@
         "funnel",
         "launch",
         "skills.sh",
-        "installs-105809"
+        "installs-106958"
       ],
       "status": "available"
     },
@@ -1657,7 +1694,7 @@
         "conversion",
         "tracking",
         "skills.sh",
-        "installs-105985"
+        "installs-107147"
       ],
       "status": "available"
     },
@@ -1695,7 +1732,7 @@
         "superpowers",
         "browser",
         "skills.sh",
-        "installs-77327"
+        "installs-77492"
       ],
       "status": "available"
     },
@@ -1716,7 +1753,7 @@
         "avatar",
         "video",
         "skills.sh",
-        "installs-412791"
+        "installs-413618"
       ],
       "status": "available"
     },
@@ -1737,7 +1774,7 @@
         "image",
         "generation",
         "skills.sh",
-        "installs-412842"
+        "installs-413669"
       ],
       "status": "available"
     },
@@ -1758,7 +1795,7 @@
         "video",
         "generation",
         "skills.sh",
-        "installs-412731"
+        "installs-413558"
       ],
       "status": "available"
     },
@@ -1778,7 +1815,7 @@
         "twitter",
         "automation",
         "skills.sh",
-        "installs-412722"
+        "installs-413549"
       ],
       "status": "available"
     },
@@ -1798,7 +1835,7 @@
         "best",
         "practices",
         "skills.sh",
-        "installs-127605"
+        "installs-128147"
       ],
       "status": "available"
     },
@@ -1816,7 +1853,7 @@
         "browser",
         "act",
         "skills.sh",
-        "installs-108318"
+        "installs-108323"
       ],
       "status": "available"
     },
@@ -1835,7 +1872,7 @@
         "act",
         "forge",
         "skills.sh",
-        "installs-85171"
+        "installs-85174"
       ],
       "status": "available"
     },
@@ -1853,7 +1890,7 @@
         "browser",
         "use",
         "skills.sh",
-        "installs-98474"
+        "installs-98553"
       ],
       "status": "available"
     },
@@ -1911,7 +1948,7 @@
         "security",
         "audit",
         "skills.sh",
-        "installs-63557"
+        "installs-66442"
       ],
       "status": "available"
     },
@@ -1930,7 +1967,7 @@
         "agents",
         "sdk",
         "skills.sh",
-        "installs-108883"
+        "installs-109816"
       ],
       "status": "available"
     },
@@ -1947,7 +1984,7 @@
       "tags": [
         "cloudflare",
         "skills.sh",
-        "installs-140744"
+        "installs-141926"
       ],
       "status": "available"
     },
@@ -1967,7 +2004,7 @@
         "email",
         "service",
         "skills.sh",
-        "installs-104601"
+        "installs-105517"
       ],
       "status": "available"
     },
@@ -1985,7 +2022,7 @@
         "cloudflare",
         "one",
         "skills.sh",
-        "installs-95579"
+        "installs-96563"
       ],
       "status": "available"
     },
@@ -2004,7 +2041,7 @@
         "one",
         "migrations",
         "skills.sh",
-        "installs-91776"
+        "installs-92673"
       ],
       "status": "available"
     },
@@ -2023,7 +2060,7 @@
         "durable",
         "objects",
         "skills.sh",
-        "installs-112983"
+        "installs-113929"
       ],
       "status": "available"
     },
@@ -2044,7 +2081,7 @@
         "to",
         "next",
         "skills.sh",
-        "installs-69914"
+        "installs-70775"
       ],
       "status": "available"
     },
@@ -2063,7 +2100,7 @@
         "sandbox",
         "next",
         "skills.sh",
-        "installs-70014"
+        "installs-70873"
       ],
       "status": "available"
     },
@@ -2082,7 +2119,7 @@
         "sandbox",
         "stable",
         "skills.sh",
-        "installs-70686"
+        "installs-71552"
       ],
       "status": "available"
     },
@@ -2101,7 +2138,7 @@
         "turnstile",
         "spin",
         "skills.sh",
-        "installs-95376"
+        "installs-96278"
       ],
       "status": "available"
     },
@@ -2120,7 +2157,7 @@
         "web",
         "perf",
         "skills.sh",
-        "installs-112726"
+        "installs-113733"
       ],
       "status": "available"
     },
@@ -2140,7 +2177,7 @@
         "best",
         "practices",
         "skills.sh",
-        "installs-128949"
+        "installs-130085"
       ],
       "status": "available"
     },
@@ -2158,7 +2195,7 @@
         "cloudflare",
         "wrangler",
         "skills.sh",
-        "installs-132217"
+        "installs-133308"
       ],
       "status": "available"
     },
@@ -2175,7 +2212,7 @@
       "tags": [
         "convex",
         "skills.sh",
-        "installs-109166"
+        "installs-109615"
       ],
       "status": "available"
     },
@@ -2194,7 +2231,7 @@
         "create",
         "component",
         "skills.sh",
-        "installs-132012"
+        "installs-132451"
       ],
       "status": "available"
     },
@@ -2250,7 +2287,7 @@
         "convex",
         "quickstart",
         "skills.sh",
-        "installs-132208"
+        "installs-132647"
       ],
       "status": "available"
     },
@@ -2311,7 +2348,7 @@
         "ab",
         "testing",
         "skills.sh",
-        "installs-78907"
+        "installs-79544"
       ],
       "status": "available"
     },
@@ -2331,7 +2368,7 @@
         "ad",
         "creative",
         "skills.sh",
-        "installs-136303"
+        "installs-137069"
       ],
       "status": "available"
     },
@@ -2350,7 +2387,7 @@
         "marketingskills",
         "ads",
         "skills.sh",
-        "installs-84671"
+        "installs-85348"
       ],
       "status": "available"
     },
@@ -2370,7 +2407,7 @@
         "ai",
         "seo",
         "skills.sh",
-        "installs-153123"
+        "installs-153983"
       ],
       "status": "available"
     },
@@ -2389,7 +2426,7 @@
         "marketingskills",
         "analytics",
         "skills.sh",
-        "installs-86119"
+        "installs-86791"
       ],
       "status": "available"
     },
@@ -2428,7 +2465,7 @@
         "marketingskills",
         "aso",
         "skills.sh",
-        "installs-77058"
+        "installs-77678"
       ],
       "status": "available"
     },
@@ -2448,7 +2485,7 @@
         "churn",
         "prevention",
         "skills.sh",
-        "installs-122624"
+        "installs-123211"
       ],
       "status": "available"
     },
@@ -2468,7 +2505,7 @@
         "co",
         "marketing",
         "skills.sh",
-        "installs-81870"
+        "installs-82434"
       ],
       "status": "available"
     },
@@ -2489,7 +2526,7 @@
         "cold",
         "email",
         "skills.sh",
-        "installs-129533"
+        "installs-130212"
       ],
       "status": "available"
     },
@@ -2509,7 +2546,7 @@
         "community",
         "marketing",
         "skills.sh",
-        "installs-91205"
+        "installs-91806"
       ],
       "status": "available"
     },
@@ -2549,7 +2586,7 @@
         "competitor",
         "profiling",
         "skills.sh",
-        "installs-96314"
+        "installs-96958"
       ],
       "status": "available"
     },
@@ -2568,7 +2605,7 @@
         "marketingskills",
         "competitors",
         "skills.sh",
-        "installs-80324"
+        "installs-80920"
       ],
       "status": "available"
     },
@@ -2588,7 +2625,7 @@
         "content",
         "strategy",
         "skills.sh",
-        "installs-166270"
+        "installs-167122"
       ],
       "status": "available"
     },
@@ -2608,7 +2645,7 @@
         "copy",
         "editing",
         "skills.sh",
-        "installs-151280"
+        "installs-152093"
       ],
       "status": "available"
     },
@@ -2627,7 +2664,7 @@
         "marketingskills",
         "copywriting",
         "skills.sh",
-        "installs-238542"
+        "installs-239736"
       ],
       "status": "available"
     },
@@ -2646,7 +2683,7 @@
         "marketingskills",
         "cro",
         "skills.sh",
-        "installs-92444"
+        "installs-93221"
       ],
       "status": "available"
     },
@@ -2666,7 +2703,7 @@
         "customer",
         "research",
         "skills.sh",
-        "installs-116897"
+        "installs-117634"
       ],
       "status": "available"
     },
@@ -2686,7 +2723,7 @@
         "directory",
         "submissions",
         "skills.sh",
-        "installs-87293"
+        "installs-87885"
       ],
       "status": "available"
     },
@@ -2727,7 +2764,7 @@
         "marketingskills",
         "emails",
         "skills.sh",
-        "installs-80022"
+        "installs-80643"
       ],
       "status": "available"
     },
@@ -2788,7 +2825,7 @@
         "free",
         "tools",
         "skills.sh",
-        "installs-75458"
+        "installs-76031"
       ],
       "status": "available"
     },
@@ -2807,7 +2844,7 @@
         "marketingskills",
         "image",
         "skills.sh",
-        "installs-89000"
+        "installs-89643"
       ],
       "status": "available"
     },
@@ -2826,7 +2863,7 @@
         "marketingskills",
         "launch",
         "skills.sh",
-        "installs-79896"
+        "installs-80531"
       ],
       "status": "available"
     },
@@ -2866,7 +2903,7 @@
         "lead",
         "magnets",
         "skills.sh",
-        "installs-114714"
+        "installs-115364"
       ],
       "status": "available"
     },
@@ -2886,7 +2923,7 @@
         "marketing",
         "ideas",
         "skills.sh",
-        "installs-148552"
+        "installs-149188"
       ],
       "status": "available"
     },
@@ -2906,7 +2943,7 @@
         "marketing",
         "plan",
         "skills.sh",
-        "installs-69589"
+        "installs-70210"
       ],
       "status": "available"
     },
@@ -2926,7 +2963,7 @@
         "marketing",
         "psychology",
         "skills.sh",
-        "installs-166640"
+        "installs-167395"
       ],
       "status": "available"
     },
@@ -2945,7 +2982,7 @@
         "marketingskills",
         "onboarding",
         "skills.sh",
-        "installs-75196"
+        "installs-75788"
       ],
       "status": "available"
     },
@@ -3045,7 +3082,7 @@
         "marketingskills",
         "paywalls",
         "skills.sh",
-        "installs-72177"
+        "installs-72775"
       ],
       "status": "available"
     },
@@ -3084,7 +3121,7 @@
         "marketingskills",
         "popups",
         "skills.sh",
-        "installs-72033"
+        "installs-72621"
       ],
       "status": "available"
     },
@@ -3103,7 +3140,7 @@
         "marketingskills",
         "pricing",
         "skills.sh",
-        "installs-81110"
+        "installs-81789"
       ],
       "status": "available"
     },
@@ -3143,7 +3180,7 @@
         "product",
         "marketing",
         "skills.sh",
-        "installs-86233"
+        "installs-86962"
       ],
       "status": "available"
     },
@@ -3184,7 +3221,7 @@
         "programmatic",
         "seo",
         "skills.sh",
-        "installs-152072"
+        "installs-152768"
       ],
       "status": "available"
     },
@@ -3203,7 +3240,7 @@
         "marketingskills",
         "prospecting",
         "skills.sh",
-        "installs-66979"
+        "installs-67603"
       ],
       "status": "available"
     },
@@ -3242,7 +3279,7 @@
         "marketingskills",
         "referrals",
         "skills.sh",
-        "installs-73597"
+        "installs-74190"
       ],
       "status": "available"
     },
@@ -3261,7 +3298,7 @@
         "marketingskills",
         "revops",
         "skills.sh",
-        "installs-115117"
+        "installs-115714"
       ],
       "status": "available"
     },
@@ -3281,7 +3318,7 @@
         "sales",
         "enablement",
         "skills.sh",
-        "installs-120455"
+        "installs-121062"
       ],
       "status": "available"
     },
@@ -3300,7 +3337,7 @@
         "marketingskills",
         "schema",
         "skills.sh",
-        "installs-80139"
+        "installs-80812"
       ],
       "status": "available"
     },
@@ -3340,7 +3377,7 @@
         "seo",
         "audit",
         "skills.sh",
-        "installs-240291"
+        "installs-241262"
       ],
       "status": "available"
     },
@@ -3359,7 +3396,7 @@
         "marketingskills",
         "signup",
         "skills.sh",
-        "installs-73299"
+        "installs-73871"
       ],
       "status": "available"
     },
@@ -3400,7 +3437,7 @@
         "site",
         "architecture",
         "skills.sh",
-        "installs-124658"
+        "installs-125324"
       ],
       "status": "available"
     },
@@ -3419,7 +3456,7 @@
         "marketingskills",
         "sms",
         "skills.sh",
-        "installs-65768"
+        "installs-66329"
       ],
       "status": "available"
     },
@@ -3438,7 +3475,7 @@
         "marketingskills",
         "social",
         "skills.sh",
-        "installs-86955"
+        "installs-87765"
       ],
       "status": "available"
     },
@@ -3477,7 +3514,7 @@
         "marketingskills",
         "video",
         "skills.sh",
-        "installs-87739"
+        "installs-88391"
       ],
       "status": "available"
     },
@@ -3498,7 +3535,7 @@
         "best",
         "practices",
         "skills.sh",
-        "installs-99428"
+        "installs-100067"
       ],
       "status": "available"
     },
@@ -3579,7 +3616,7 @@
         "mobile",
         "apps",
         "skills.sh",
-        "installs-1091213"
+        "installs-1111573"
       ],
       "status": "available"
     },
@@ -3597,7 +3634,7 @@
         "dietrichgebert",
         "ponytail",
         "skills.sh",
-        "installs-110150"
+        "installs-111604"
       ],
       "status": "available"
     },
@@ -3615,7 +3652,7 @@
         "emilkowalski",
         "animate",
         "skills.sh",
-        "installs-179368"
+        "installs-181899"
       ],
       "status": "available"
     },
@@ -3634,7 +3671,7 @@
         "animate",
         "expo",
         "skills.sh",
-        "installs-143558"
+        "installs-145718"
       ],
       "status": "available"
     },
@@ -3653,7 +3690,7 @@
         "animation",
         "vocabulary",
         "skills.sh",
-        "installs-245285"
+        "installs-247679"
       ],
       "status": "available"
     },
@@ -3672,7 +3709,7 @@
         "apple",
         "design",
         "skills.sh",
-        "installs-251944"
+        "installs-254831"
       ],
       "status": "available"
     },
@@ -3691,7 +3728,7 @@
         "ask",
         "sonner",
         "skills.sh",
-        "installs-146179"
+        "installs-148301"
       ],
       "status": "available"
     },
@@ -3710,7 +3747,7 @@
         "break",
         "ui",
         "skills.sh",
-        "installs-71559"
+        "installs-73857"
       ],
       "status": "available"
     },
@@ -3730,7 +3767,7 @@
         "design",
         "eng",
         "skills.sh",
-        "installs-396198"
+        "installs-399180"
       ],
       "status": "available"
     },
@@ -3750,7 +3787,7 @@
         "animation",
         "opportunities",
         "skills.sh",
-        "installs-215214"
+        "installs-217596"
       ],
       "status": "available"
     },
@@ -3769,7 +3806,7 @@
         "improve",
         "animations",
         "skills.sh",
-        "installs-230642"
+        "installs-233069"
       ],
       "status": "available"
     },
@@ -3788,7 +3825,7 @@
         "mobile",
         "native",
         "skills.sh",
-        "installs-92638"
+        "installs-94924"
       ],
       "status": "available"
     },
@@ -3808,7 +3845,7 @@
         "ui",
         "library",
         "skills.sh",
-        "installs-191297"
+        "installs-193517"
       ],
       "status": "available"
     },
@@ -3826,7 +3863,7 @@
         "emilkowalski",
         "prototype",
         "skills.sh",
-        "installs-180207"
+        "installs-182428"
       ],
       "status": "available"
     },
@@ -3845,7 +3882,7 @@
         "review",
         "animations",
         "skills.sh",
-        "installs-263327"
+        "installs-265922"
       ],
       "status": "available"
     },
@@ -3864,7 +3901,7 @@
         "write",
         "swift",
         "skills.sh",
-        "installs-124866"
+        "installs-126949"
       ],
       "status": "available"
     },
@@ -3959,7 +3996,7 @@
         "dev",
         "client",
         "skills.sh",
-        "installs-71210"
+        "installs-71586"
       ],
       "status": "available"
     },
@@ -4135,7 +4172,7 @@
         "logic",
         "basics",
         "skills.sh",
-        "installs-137007"
+        "installs-137523"
       ],
       "status": "available"
     },
@@ -4155,7 +4192,7 @@
         "hosting",
         "basics",
         "skills.sh",
-        "installs-170985"
+        "installs-171510"
       ],
       "status": "available"
     },
@@ -4174,7 +4211,7 @@
         "auth",
         "basics",
         "skills.sh",
-        "installs-176087"
+        "installs-176614"
       ],
       "status": "available"
     },
@@ -4192,7 +4229,7 @@
         "firebase",
         "basics",
         "skills.sh",
-        "installs-177191"
+        "installs-177723"
       ],
       "status": "available"
     },
@@ -4210,7 +4247,7 @@
         "firebase",
         "crashlytics",
         "skills.sh",
-        "installs-132988"
+        "installs-133502"
       ],
       "status": "available"
     },
@@ -4229,7 +4266,7 @@
         "data",
         "connect",
         "skills.sh",
-        "installs-170087"
+        "installs-170601"
       ],
       "status": "available"
     },
@@ -4247,7 +4284,7 @@
         "firebase",
         "firestore",
         "skills.sh",
-        "installs-136720"
+        "installs-137251"
       ],
       "status": "available"
     },
@@ -4306,7 +4343,7 @@
         "hosting",
         "basics",
         "skills.sh",
-        "installs-171609"
+        "installs-172122"
       ],
       "status": "available"
     },
@@ -4326,7 +4363,7 @@
         "config",
         "basics",
         "skills.sh",
-        "installs-122558"
+        "installs-123070"
       ],
       "status": "available"
     },
@@ -4346,7 +4383,7 @@
         "rules",
         "auditor",
         "skills.sh",
-        "installs-139992"
+        "installs-140538"
       ],
       "status": "available"
     },
@@ -4366,7 +4403,7 @@
         "project",
         "setup",
         "skills.sh",
-        "installs-132017"
+        "installs-132532"
       ],
       "status": "available"
     },
@@ -4384,7 +4421,7 @@
         "firecrawl",
         "cli",
         "skills.sh",
-        "installs-103592"
+        "installs-103662"
       ],
       "status": "available"
     },
@@ -4402,7 +4439,7 @@
         "firecrawl",
         "cli",
         "skills.sh",
-        "installs-81488"
+        "installs-81533"
       ],
       "status": "available"
     },
@@ -4421,7 +4458,7 @@
         "cli",
         "crawl",
         "skills.sh",
-        "installs-80873"
+        "installs-80913"
       ],
       "status": "available"
     },
@@ -4440,7 +4477,7 @@
         "cli",
         "download",
         "skills.sh",
-        "installs-80012"
+        "installs-80049"
       ],
       "status": "available"
     },
@@ -4459,7 +4496,7 @@
         "cli",
         "interact",
         "skills.sh",
-        "installs-65262"
+        "installs-65296"
       ],
       "status": "available"
     },
@@ -4478,7 +4515,7 @@
         "cli",
         "map",
         "skills.sh",
-        "installs-80399"
+        "installs-80436"
       ],
       "status": "available"
     },
@@ -4516,7 +4553,7 @@
         "cli",
         "scrape",
         "skills.sh",
-        "installs-83731"
+        "installs-83785"
       ],
       "status": "available"
     },
@@ -4535,7 +4572,7 @@
         "cli",
         "search",
         "skills.sh",
-        "installs-84641"
+        "installs-84701"
       ],
       "status": "available"
     },
@@ -4554,7 +4591,7 @@
         "build",
         "interact",
         "skills.sh",
-        "installs-61454"
+        "installs-61511"
       ],
       "status": "available"
     },
@@ -4573,7 +4610,7 @@
         "build",
         "onboarding",
         "skills.sh",
-        "installs-61460"
+        "installs-61520"
       ],
       "status": "available"
     },
@@ -4592,7 +4629,7 @@
         "build",
         "scrape",
         "skills.sh",
-        "installs-61834"
+        "installs-61893"
       ],
       "status": "available"
     },
@@ -4611,7 +4648,7 @@
         "build",
         "search",
         "skills.sh",
-        "installs-61748"
+        "installs-61806"
       ],
       "status": "available"
     },
@@ -4631,7 +4668,7 @@
         "reddit",
         "automation",
         "skills.sh",
-        "installs-1139478"
+        "installs-1153807"
       ],
       "status": "available"
     },
@@ -4652,7 +4689,7 @@
         "image",
         "generation",
         "skills.sh",
-        "installs-316945"
+        "installs-331273"
       ],
       "status": "available"
     },
@@ -4672,7 +4709,7 @@
         "ai",
         "music",
         "skills.sh",
-        "installs-318044"
+        "installs-332320"
       ],
       "status": "available"
     },
@@ -4693,7 +4730,7 @@
         "video",
         "generation",
         "skills.sh",
-        "installs-317071"
+        "installs-331403"
       ],
       "status": "available"
     },
@@ -4714,7 +4751,7 @@
         "to",
         "video",
         "skills.sh",
-        "installs-316605"
+        "installs-330881"
       ],
       "status": "available"
     },
@@ -4734,7 +4771,7 @@
         "video",
         "edit",
         "skills.sh",
-        "installs-317291"
+        "installs-331716"
       ],
       "status": "available"
     },
@@ -5204,7 +5241,7 @@
         "design",
         "md",
         "skills.sh",
-        "installs-65015"
+        "installs-65095"
       ],
       "status": "available"
     },
@@ -5335,7 +5372,7 @@
         "adk",
         "code",
         "skills.sh",
-        "installs-520592"
+        "installs-525510"
       ],
       "status": "available"
     },
@@ -5355,7 +5392,7 @@
         "cli",
         "deploy",
         "skills.sh",
-        "installs-519915"
+        "installs-524840"
       ],
       "status": "available"
     },
@@ -5375,7 +5412,7 @@
         "cli",
         "eval",
         "skills.sh",
-        "installs-519166"
+        "installs-524056"
       ],
       "status": "available"
     },
@@ -5395,7 +5432,7 @@
         "cli",
         "observability",
         "skills.sh",
-        "installs-519020"
+        "installs-523909"
       ],
       "status": "available"
     },
@@ -5415,7 +5452,7 @@
         "cli",
         "publish",
         "skills.sh",
-        "installs-519702"
+        "installs-524627"
       ],
       "status": "available"
     },
@@ -5435,7 +5472,7 @@
         "cli",
         "scaffold",
         "skills.sh",
-        "installs-519052"
+        "installs-523941"
       ],
       "status": "available"
     },
@@ -5455,7 +5492,7 @@
         "cli",
         "workflow",
         "skills.sh",
-        "installs-519180"
+        "installs-524071"
       ],
       "status": "available"
     },
@@ -5476,7 +5513,7 @@
         "gws",
         "calendar",
         "skills.sh",
-        "installs-61550"
+        "installs-61680"
       ],
       "status": "available"
     },
@@ -5584,7 +5621,7 @@
         "gws",
         "drive",
         "skills.sh",
-        "installs-75019"
+        "installs-75163"
       ],
       "status": "available"
     },
@@ -5627,7 +5664,7 @@
         "gws",
         "gmail",
         "skills.sh",
-        "installs-82498"
+        "installs-82661"
       ],
       "status": "available"
     },
@@ -5649,7 +5686,7 @@
         "gmail",
         "send",
         "skills.sh",
-        "installs-75107"
+        "installs-75215"
       ],
       "status": "available"
     },
@@ -5670,7 +5707,7 @@
         "gws",
         "shared",
         "skills.sh",
-        "installs-66506"
+        "installs-66643"
       ],
       "status": "available"
     },
@@ -5734,7 +5771,7 @@
         "gsap",
         "core",
         "skills.sh",
-        "installs-77321"
+        "installs-78071"
       ],
       "status": "available"
     },
@@ -5753,7 +5790,7 @@
         "gsap",
         "frameworks",
         "skills.sh",
-        "installs-64184"
+        "installs-64774"
       ],
       "status": "available"
     },
@@ -5772,7 +5809,7 @@
         "gsap",
         "performance",
         "skills.sh",
-        "installs-71286"
+        "installs-71973"
       ],
       "status": "available"
     },
@@ -5791,7 +5828,7 @@
         "gsap",
         "plugins",
         "skills.sh",
-        "installs-69033"
+        "installs-69700"
       ],
       "status": "available"
     },
@@ -5811,7 +5848,7 @@
         "gsap",
         "react",
         "skills.sh",
-        "installs-68164"
+        "installs-68802"
       ],
       "status": "available"
     },
@@ -5830,7 +5867,7 @@
         "gsap",
         "scrolltrigger",
         "skills.sh",
-        "installs-74180"
+        "installs-74899"
       ],
       "status": "available"
     },
@@ -5849,7 +5886,7 @@
         "gsap",
         "timeline",
         "skills.sh",
-        "installs-71056"
+        "installs-71752"
       ],
       "status": "available"
     },
@@ -5868,7 +5905,7 @@
         "gsap",
         "utils",
         "skills.sh",
-        "installs-67011"
+        "installs-67637"
       ],
       "status": "available"
     },
@@ -5886,7 +5923,7 @@
         "herdrdev",
         "herdr",
         "skills.sh",
-        "installs-74514"
+        "installs-75056"
       ],
       "status": "available"
     },
@@ -6033,7 +6070,7 @@
         "embedded",
         "captions",
         "skills.sh",
-        "installs-453455"
+        "installs-453521"
       ],
       "status": "available"
     },
@@ -6054,7 +6091,7 @@
         "faceless",
         "explainer",
         "skills.sh",
-        "installs-521539"
+        "installs-521606"
       ],
       "status": "available"
     },
@@ -6074,7 +6111,7 @@
         "hyperframes",
         "figma",
         "skills.sh",
-        "installs-349222"
+        "installs-357394"
       ],
       "status": "available"
     },
@@ -6095,7 +6132,7 @@
         "general",
         "video",
         "skills.sh",
-        "installs-661284"
+        "installs-661349"
       ],
       "status": "available"
     },
@@ -6134,7 +6171,7 @@
         "com",
         "hyperframes",
         "skills.sh",
-        "installs-1268121"
+        "installs-1288079"
       ],
       "status": "available"
     },
@@ -6154,7 +6191,7 @@
         "hyperframes",
         "animation",
         "skills.sh",
-        "installs-1004913"
+        "installs-1004979"
       ],
       "status": "available"
     },
@@ -6174,7 +6211,7 @@
         "hyperframes",
         "audio",
         "skills.sh",
-        "installs-663405"
+        "installs-663470"
       ],
       "status": "available"
     },
@@ -6194,7 +6231,7 @@
         "hyperframes",
         "cli",
         "skills.sh",
-        "installs-1302030"
+        "installs-1322970"
       ],
       "status": "available"
     },
@@ -6214,7 +6251,7 @@
         "hyperframes",
         "core",
         "skills.sh",
-        "installs-930600"
+        "installs-930665"
       ],
       "status": "available"
     },
@@ -6234,7 +6271,7 @@
         "hyperframes",
         "creative",
         "skills.sh",
-        "installs-916648"
+        "installs-916714"
       ],
       "status": "available"
     },
@@ -6254,7 +6291,7 @@
         "hyperframes",
         "keyframes",
         "skills.sh",
-        "installs-754334"
+        "installs-754399"
       ],
       "status": "available"
     },
@@ -6294,7 +6331,7 @@
         "hyperframes",
         "registry",
         "skills.sh",
-        "installs-1063877"
+        "installs-1084683"
       ],
       "status": "available"
     },
@@ -6314,7 +6351,7 @@
         "hyperframes",
         "studio",
         "skills.sh",
-        "installs-451178"
+        "installs-451243"
       ],
       "status": "available"
     },
@@ -6355,7 +6392,7 @@
         "media",
         "use",
         "skills.sh",
-        "installs-1172913"
+        "installs-1193703"
       ],
       "status": "available"
     },
@@ -6397,7 +6434,7 @@
         "motion",
         "graphics",
         "skills.sh",
-        "installs-513862"
+        "installs-513927"
       ],
       "status": "available"
     },
@@ -6419,7 +6456,7 @@
         "to",
         "video",
         "skills.sh",
-        "installs-418830"
+        "installs-418895"
       ],
       "status": "available"
     },
@@ -6462,7 +6499,7 @@
         "to",
         "video",
         "skills.sh",
-        "installs-448791"
+        "installs-448856"
       ],
       "status": "available"
     },
@@ -6484,7 +6521,7 @@
         "launch",
         "video",
         "skills.sh",
-        "installs-538846"
+        "installs-538911"
       ],
       "status": "available"
     },
@@ -6505,7 +6542,7 @@
         "remotion",
         "to",
         "skills.sh",
-        "installs-527446"
+        "installs-536105"
       ],
       "status": "available"
     },
@@ -6546,7 +6583,7 @@
         "hyperframes",
         "slideshow",
         "skills.sh",
-        "installs-435973"
+        "installs-444337"
       ],
       "status": "available"
     },
@@ -6588,7 +6625,7 @@
         "head",
         "recut",
         "skills.sh",
-        "installs-407484"
+        "installs-407549"
       ],
       "status": "available"
     },
@@ -6710,7 +6747,7 @@
         "ai",
         "brandkit",
         "skills.sh",
-        "installs-105082"
+        "installs-106502"
       ],
       "status": "available"
     },
@@ -6729,7 +6766,7 @@
         "ai",
         "generate",
         "skills.sh",
-        "installs-221549"
+        "installs-223044"
       ],
       "status": "available"
     },
@@ -6749,7 +6786,7 @@
         "marketplace",
         "cards",
         "skills.sh",
-        "installs-196703"
+        "installs-198129"
       ],
       "status": "available"
     },
@@ -6769,7 +6806,7 @@
         "product",
         "photoshoot",
         "skills.sh",
-        "installs-199842"
+        "installs-201285"
       ],
       "status": "available"
     },
@@ -6789,7 +6826,7 @@
         "soul",
         "id",
         "skills.sh",
-        "installs-198737"
+        "installs-200167"
       ],
       "status": "available"
     },
@@ -6809,7 +6846,7 @@
         "video",
         "explainer",
         "skills.sh",
-        "installs-126929"
+        "installs-128351"
       ],
       "status": "available"
     },
@@ -6828,7 +6865,7 @@
         "ai",
         "websites",
         "skills.sh",
-        "installs-138545"
+        "installs-139963"
       ],
       "status": "available"
     },
@@ -6848,7 +6885,7 @@
         "youtube",
         "thumbnail",
         "skills.sh",
-        "installs-105195"
+        "installs-106620"
       ],
       "status": "available"
     },
@@ -6883,7 +6920,7 @@
       "tags": [
         "insforge",
         "skills.sh",
-        "installs-61291"
+        "installs-61603"
       ],
       "status": "available"
     },
@@ -6920,7 +6957,7 @@
         "notion",
         "api",
         "skills.sh",
-        "installs-96212"
+        "installs-96719"
       ],
       "status": "available"
     },
@@ -6940,7 +6977,7 @@
         "superpowers",
         "browser",
         "skills.sh",
-        "installs-80405"
+        "installs-80571"
       ],
       "status": "available"
     },
@@ -6962,7 +6999,7 @@
         "avatar",
         "video",
         "skills.sh",
-        "installs-427879"
+        "installs-428751"
       ],
       "status": "available"
     },
@@ -6984,7 +7021,7 @@
         "image",
         "generation",
         "skills.sh",
-        "installs-428015"
+        "installs-428889"
       ],
       "status": "available"
     },
@@ -7006,7 +7043,7 @@
         "video",
         "generation",
         "skills.sh",
-        "installs-427668"
+        "installs-428540"
       ],
       "status": "available"
     },
@@ -7027,7 +7064,7 @@
         "twitter",
         "automation",
         "skills.sh",
-        "installs-427919"
+        "installs-428791"
       ],
       "status": "available"
     },
@@ -7048,7 +7085,7 @@
         "feel",
         "better",
         "skills.sh",
-        "installs-73976"
+        "installs-74184"
       ],
       "status": "available"
     },
@@ -7088,7 +7125,7 @@
         "caveman",
         "cavecrew",
         "skills.sh",
-        "installs-362032"
+        "installs-363282"
       ],
       "status": "available"
     },
@@ -7106,7 +7143,7 @@
         "juliusbrussee",
         "caveman",
         "skills.sh",
-        "installs-597947"
+        "installs-599916"
       ],
       "status": "available"
     },
@@ -7125,7 +7162,7 @@
         "caveman",
         "commit",
         "skills.sh",
-        "installs-418963"
+        "installs-420272"
       ],
       "status": "available"
     },
@@ -7144,7 +7181,7 @@
         "caveman",
         "compress",
         "skills.sh",
-        "installs-414936"
+        "installs-416302"
       ],
       "status": "available"
     },
@@ -7163,7 +7200,7 @@
         "caveman",
         "discover",
         "skills.sh",
-        "installs-107330"
+        "installs-108526"
       ],
       "status": "available"
     },
@@ -7183,7 +7220,7 @@
         "evidence",
         "review",
         "skills.sh",
-        "installs-107391"
+        "installs-108586"
       ],
       "status": "available"
     },
@@ -7202,7 +7239,7 @@
         "caveman",
         "explore",
         "skills.sh",
-        "installs-110507"
+        "installs-111731"
       ],
       "status": "available"
     },
@@ -7221,7 +7258,7 @@
         "caveman",
         "help",
         "skills.sh",
-        "installs-405979"
+        "installs-407246"
       ],
       "status": "available"
     },
@@ -7240,7 +7277,7 @@
         "caveman",
         "learn",
         "skills.sh",
-        "installs-109695"
+        "installs-110909"
       ],
       "status": "available"
     },
@@ -7259,7 +7296,7 @@
         "caveman",
         "manage",
         "skills.sh",
-        "installs-107122"
+        "installs-108307"
       ],
       "status": "available"
     },
@@ -7278,7 +7315,7 @@
         "caveman",
         "optimize",
         "skills.sh",
-        "installs-108709"
+        "installs-109914"
       ],
       "status": "available"
     },
@@ -7297,7 +7334,7 @@
         "caveman",
         "review",
         "skills.sh",
-        "installs-414954"
+        "installs-416253"
       ],
       "status": "available"
     },
@@ -7316,7 +7353,7 @@
         "caveman",
         "setup",
         "skills.sh",
-        "installs-106379"
+        "installs-107562"
       ],
       "status": "available"
     },
@@ -7335,7 +7372,7 @@
         "caveman",
         "stats",
         "skills.sh",
-        "installs-360828"
+        "installs-362068"
       ],
       "status": "available"
     },
@@ -7374,7 +7411,7 @@
         "investigate",
         "first",
         "skills.sh",
-        "installs-108340"
+        "installs-109545"
       ],
       "status": "available"
     },
@@ -7394,7 +7431,7 @@
         "lean",
         "build",
         "skills.sh",
-        "installs-107388"
+        "installs-108582"
       ],
       "status": "available"
     },
@@ -7413,7 +7450,7 @@
         "caveman",
         "migration",
         "skills.sh",
-        "installs-106746"
+        "installs-107927"
       ],
       "status": "available"
     },
@@ -7433,7 +7470,7 @@
         "safe",
         "refactor",
         "skills.sh",
-        "installs-109433"
+        "installs-110640"
       ],
       "status": "available"
     },
@@ -7453,7 +7490,7 @@
         "surgical",
         "patch",
         "skills.sh",
-        "installs-107693"
+        "installs-108891"
       ],
       "status": "available"
     },
@@ -7474,7 +7511,7 @@
         "and",
         "stop",
         "skills.sh",
-        "installs-107854"
+        "installs-109052"
       ],
       "status": "available"
     },
@@ -7493,7 +7530,7 @@
         "obsidian",
         "defuddle",
         "skills.sh",
-        "installs-75074"
+        "installs-75227"
       ],
       "status": "available"
     },
@@ -7513,7 +7550,7 @@
         "json",
         "canvas",
         "skills.sh",
-        "installs-75127"
+        "installs-75272"
       ],
       "status": "available"
     },
@@ -7532,7 +7569,7 @@
         "obsidian",
         "bases",
         "skills.sh",
-        "installs-80464"
+        "installs-80625"
       ],
       "status": "available"
     },
@@ -7551,7 +7588,7 @@
         "obsidian",
         "cli",
         "skills.sh",
-        "installs-81521"
+        "installs-81674"
       ],
       "status": "available"
     },
@@ -7570,7 +7607,7 @@
         "obsidian",
         "markdown",
         "skills.sh",
-        "installs-93477"
+        "installs-93664"
       ],
       "status": "available"
     },
@@ -7590,7 +7627,7 @@
         "lark",
         "approval",
         "skills.sh",
-        "installs-442772"
+        "installs-443815"
       ],
       "status": "available"
     },
@@ -7610,7 +7647,7 @@
         "lark",
         "apps",
         "skills.sh",
-        "installs-318292"
+        "installs-319337"
       ],
       "status": "available"
     },
@@ -7630,7 +7667,7 @@
         "lark",
         "attendance",
         "skills.sh",
-        "installs-420329"
+        "installs-421364"
       ],
       "status": "available"
     },
@@ -7650,7 +7687,7 @@
         "lark",
         "base",
         "skills.sh",
-        "installs-478626"
+        "installs-479678"
       ],
       "status": "available"
     },
@@ -7671,7 +7708,7 @@
         "lark",
         "calendar",
         "skills.sh",
-        "installs-471502"
+        "installs-472538"
       ],
       "status": "available"
     },
@@ -7691,7 +7728,7 @@
         "lark",
         "contact",
         "skills.sh",
-        "installs-468968"
+        "installs-470002"
       ],
       "status": "available"
     },
@@ -7711,7 +7748,7 @@
         "lark",
         "doc",
         "skills.sh",
-        "installs-481129"
+        "installs-482204"
       ],
       "status": "available"
     },
@@ -7731,7 +7768,7 @@
         "lark",
         "drive",
         "skills.sh",
-        "installs-475395"
+        "installs-476442"
       ],
       "status": "available"
     },
@@ -7751,7 +7788,7 @@
         "lark",
         "event",
         "skills.sh",
-        "installs-469225"
+        "installs-470258"
       ],
       "status": "available"
     },
@@ -7771,7 +7808,7 @@
         "lark",
         "im",
         "skills.sh",
-        "installs-475427"
+        "installs-476470"
       ],
       "status": "available"
     },
@@ -7791,7 +7828,7 @@
         "lark",
         "mail",
         "skills.sh",
-        "installs-469905"
+        "installs-470942"
       ],
       "status": "available"
     },
@@ -7811,7 +7848,7 @@
         "lark",
         "markdown",
         "skills.sh",
-        "installs-387986"
+        "installs-389028"
       ],
       "status": "available"
     },
@@ -7831,7 +7868,7 @@
         "lark",
         "minutes",
         "skills.sh",
-        "installs-469445"
+        "installs-470476"
       ],
       "status": "available"
     },
@@ -7851,7 +7888,7 @@
         "lark",
         "note",
         "skills.sh",
-        "installs-244607"
+        "installs-245627"
       ],
       "status": "available"
     },
@@ -7871,7 +7908,7 @@
         "lark",
         "okr",
         "skills.sh",
-        "installs-406499"
+        "installs-407532"
       ],
       "status": "available"
     },
@@ -7893,7 +7930,7 @@
         "openapi",
         "explorer",
         "skills.sh",
-        "installs-467189"
+        "installs-468210"
       ],
       "status": "available"
     },
@@ -7913,7 +7950,7 @@
         "lark",
         "shared",
         "skills.sh",
-        "installs-477527"
+        "installs-478583"
       ],
       "status": "available"
     },
@@ -7934,7 +7971,7 @@
         "lark",
         "sheets",
         "skills.sh",
-        "installs-474717"
+        "installs-475756"
       ],
       "status": "available"
     },
@@ -7954,7 +7991,7 @@
         "lark",
         "maker",
         "skills.sh",
-        "installs-466850"
+        "installs-467868"
       ],
       "status": "available"
     },
@@ -7975,7 +8012,7 @@
         "lark",
         "slides",
         "skills.sh",
-        "installs-423332"
+        "installs-424360"
       ],
       "status": "available"
     },
@@ -7995,7 +8032,7 @@
         "lark",
         "task",
         "skills.sh",
-        "installs-472388"
+        "installs-473440"
       ],
       "status": "available"
     },
@@ -8015,7 +8052,7 @@
         "lark",
         "vc",
         "skills.sh",
-        "installs-469237"
+        "installs-470263"
       ],
       "status": "available"
     },
@@ -8035,7 +8072,7 @@
         "lark",
         "vc",
         "skills.sh",
-        "installs-357563"
+        "installs-358582"
       ],
       "status": "available"
     },
@@ -8055,7 +8092,7 @@
         "lark",
         "whiteboard",
         "skills.sh",
-        "installs-472538"
+        "installs-473568"
       ],
       "status": "available"
     },
@@ -8075,7 +8112,7 @@
         "lark",
         "wiki",
         "skills.sh",
-        "installs-474152"
+        "installs-475185"
       ],
       "status": "available"
     },
@@ -8098,7 +8135,7 @@
         "meeting",
         "summary",
         "skills.sh",
-        "installs-468186"
+        "installs-469213"
       ],
       "status": "available"
     },
@@ -8120,7 +8157,7 @@
         "standup",
         "report",
         "skills.sh",
-        "installs-467351"
+        "installs-468372"
       ],
       "status": "available"
     },
@@ -8139,7 +8176,7 @@
         "taste",
         "brandkit",
         "skills.sh",
-        "installs-390688"
+        "installs-390690"
       ],
       "status": "available"
     },
@@ -8159,7 +8196,7 @@
         "design",
         "frontend",
         "skills.sh",
-        "installs-694374"
+        "installs-700407"
       ],
       "status": "available"
     },
@@ -8180,7 +8217,7 @@
         "frontend",
         "v1",
         "skills.sh",
-        "installs-330352"
+        "installs-330353"
       ],
       "status": "available"
     },
@@ -8201,7 +8238,7 @@
         "output",
         "enforcement",
         "skills.sh",
-        "installs-401051"
+        "installs-401052"
       ],
       "status": "available"
     },
@@ -8220,7 +8257,7 @@
         "taste",
         "gpt",
         "skills.sh",
-        "installs-399515"
+        "installs-399516"
       ],
       "status": "available"
     },
@@ -8242,7 +8279,7 @@
         "visual",
         "design",
         "skills.sh",
-        "installs-458839"
+        "installs-458842"
       ],
       "status": "available"
     },
@@ -8263,7 +8300,7 @@
         "to",
         "code",
         "skills.sh",
-        "installs-385898"
+        "installs-385900"
       ],
       "status": "available"
     },
@@ -8284,7 +8321,7 @@
         "frontend",
         "mobile",
         "skills.sh",
-        "installs-373769"
+        "installs-373770"
       ],
       "status": "available"
     },
@@ -8305,7 +8342,7 @@
         "frontend",
         "web",
         "skills.sh",
-        "installs-380123"
+        "installs-380124"
       ],
       "status": "available"
     },
@@ -8326,7 +8363,7 @@
         "brutalist",
         "ui",
         "skills.sh",
-        "installs-396927"
+        "installs-396928"
       ],
       "status": "available"
     },
@@ -8346,7 +8383,7 @@
         "minimalist",
         "ui",
         "skills.sh",
-        "installs-425113"
+        "installs-425114"
       ],
       "status": "available"
     },
@@ -8367,7 +8404,7 @@
         "existing",
         "projects",
         "skills.sh",
-        "installs-458705"
+        "installs-458706"
       ],
       "status": "available"
     },
@@ -8387,7 +8424,7 @@
         "stitch",
         "design",
         "skills.sh",
-        "installs-394879"
+        "installs-394881"
       ],
       "status": "available"
     },
@@ -8408,7 +8445,7 @@
         "fingerprint",
         "audit",
         "skills.sh",
-        "installs-105375"
+        "installs-106489"
       ],
       "status": "available"
     },
@@ -8429,7 +8466,7 @@
         "ci",
         "gate",
         "skills.sh",
-        "installs-105274"
+        "installs-106401"
       ],
       "status": "available"
     },
@@ -8450,7 +8487,7 @@
         "failure",
         "triage",
         "skills.sh",
-        "installs-105245"
+        "installs-106367"
       ],
       "status": "available"
     },
@@ -8471,7 +8508,7 @@
         "stealth",
         "verify",
         "skills.sh",
-        "installs-105307"
+        "installs-106435"
       ],
       "status": "available"
     },
@@ -8586,7 +8623,7 @@
         "research",
         "explore",
         "skills.sh",
-        "installs-340150"
+        "installs-341406"
       ],
       "status": "available"
     },
@@ -8607,7 +8644,7 @@
         "research",
         "reproduction",
         "skills.sh",
-        "installs-339784"
+        "installs-341040"
       ],
       "status": "available"
     },
@@ -8627,7 +8664,7 @@
         "analyze",
         "project",
         "skills.sh",
-        "installs-339980"
+        "installs-341240"
       ],
       "status": "available"
     },
@@ -8649,7 +8686,7 @@
         "assets",
         "bootstrap",
         "skills.sh",
-        "installs-478776"
+        "installs-480029"
       ],
       "status": "available"
     },
@@ -8669,7 +8706,7 @@
         "explore",
         "code",
         "skills.sh",
-        "installs-339450"
+        "installs-340701"
       ],
       "status": "available"
     },
@@ -8689,7 +8726,7 @@
         "explore",
         "run",
         "skills.sh",
-        "installs-339190"
+        "installs-340441"
       ],
       "status": "available"
     },
@@ -8711,7 +8748,7 @@
         "and",
         "audit",
         "skills.sh",
-        "installs-478886"
+        "installs-480140"
       ],
       "status": "available"
     },
@@ -8732,7 +8769,7 @@
         "context",
         "resolver",
         "skills.sh",
-        "installs-479765"
+        "installs-481021"
       ],
       "status": "available"
     },
@@ -8754,7 +8791,7 @@
         "and",
         "plan",
         "skills.sh",
-        "installs-478964"
+        "installs-480217"
       ],
       "status": "available"
     },
@@ -8774,7 +8811,7 @@
         "run",
         "train",
         "skills.sh",
-        "installs-339216"
+        "installs-340468"
       ],
       "status": "available"
     },
@@ -8794,7 +8831,7 @@
         "safe",
         "debug",
         "skills.sh",
-        "installs-339462"
+        "installs-340714"
       ],
       "status": "available"
     },
@@ -8813,7 +8850,7 @@
         "superpowers",
         "browser",
         "skills.sh",
-        "installs-147698"
+        "installs-147841"
       ],
       "status": "available"
     },
@@ -8832,7 +8869,7 @@
         "superpowers",
         "tools",
         "skills.sh",
-        "installs-98253"
+        "installs-98368"
       ],
       "status": "available"
     },
@@ -8853,7 +8890,7 @@
         "avatar",
         "video",
         "skills.sh",
-        "installs-786909"
+        "installs-787721"
       ],
       "status": "available"
     },
@@ -8874,7 +8911,7 @@
         "image",
         "generation",
         "skills.sh",
-        "installs-787412"
+        "installs-788235"
       ],
       "status": "available"
     },
@@ -8895,7 +8932,7 @@
         "video",
         "generation",
         "skills.sh",
-        "installs-787004"
+        "installs-787818"
       ],
       "status": "available"
     },
@@ -8915,7 +8952,7 @@
         "infsh",
         "cli",
         "skills.sh",
-        "installs-98080"
+        "installs-98195"
       ],
       "status": "available"
     },
@@ -8935,7 +8972,7 @@
         "python",
         "executor",
         "skills.sh",
-        "installs-98234"
+        "installs-98349"
       ],
       "status": "available"
     },
@@ -8955,7 +8992,7 @@
         "remotion",
         "render",
         "skills.sh",
-        "installs-98246"
+        "installs-98361"
       ],
       "status": "available"
     },
@@ -8975,7 +9012,7 @@
         "twitter",
         "automation",
         "skills.sh",
-        "installs-786792"
+        "installs-787603"
       ],
       "status": "available"
     },
@@ -8995,7 +9032,7 @@
         "web",
         "search",
         "skills.sh",
-        "installs-98287"
+        "installs-98402"
       ],
       "status": "available"
     },
@@ -9013,7 +9050,7 @@
         "mastra",
         "ai",
         "skills.sh",
-        "installs-86655"
+        "installs-87993"
       ],
       "status": "available"
     },
@@ -9032,7 +9069,7 @@
         "ask",
         "matt",
         "skills.sh",
-        "installs-786089"
+        "installs-791043"
       ],
       "status": "available"
     },
@@ -9090,7 +9127,7 @@
         "of",
         "staff",
         "skills.sh",
-        "installs-85626"
+        "installs-89340"
       ],
       "status": "available"
     },
@@ -9109,7 +9146,7 @@
         "claude",
         "handoff",
         "skills.sh",
-        "installs-434950"
+        "installs-438571"
       ],
       "status": "available"
     },
@@ -9128,7 +9165,7 @@
         "code",
         "review",
         "skills.sh",
-        "installs-812174"
+        "installs-818716"
       ],
       "status": "available"
     },
@@ -9148,7 +9185,7 @@
         "codebase",
         "design",
         "skills.sh",
-        "installs-872794"
+        "installs-879500"
       ],
       "status": "available"
     },
@@ -9224,7 +9261,7 @@
         "diagnosing",
         "bugs",
         "skills.sh",
-        "installs-857386"
+        "installs-863151"
       ],
       "status": "available"
     },
@@ -9243,7 +9280,7 @@
         "domain",
         "modeling",
         "skills.sh",
-        "installs-900100"
+        "installs-906085"
       ],
       "status": "available"
     },
@@ -9283,7 +9320,7 @@
         "claude",
         "code",
         "skills.sh",
-        "installs-513250"
+        "installs-516779"
       ],
       "status": "available"
     },
@@ -9302,7 +9339,7 @@
         "grill",
         "me",
         "skills.sh",
-        "installs-1453640"
+        "installs-1460689"
       ],
       "status": "available"
     },
@@ -9322,7 +9359,7 @@
         "with",
         "docs",
         "skills.sh",
-        "installs-1244602"
+        "installs-1250684"
       ],
       "status": "available"
     },
@@ -9340,7 +9377,7 @@
         "mattpocock",
         "grilling",
         "skills.sh",
-        "installs-1007420"
+        "installs-1015414"
       ],
       "status": "available"
     },
@@ -9358,7 +9395,7 @@
         "mattpocock",
         "handoff",
         "skills.sh",
-        "installs-1061981"
+        "installs-1067692"
       ],
       "status": "available"
     },
@@ -9376,7 +9413,7 @@
         "mattpocock",
         "implement",
         "skills.sh",
-        "installs-794684"
+        "installs-799995"
       ],
       "status": "available"
     },
@@ -9395,7 +9432,7 @@
         "implement",
         "spec",
         "skills.sh",
-        "installs-301096"
+        "installs-306266"
       ],
       "status": "available"
     },
@@ -9415,7 +9452,7 @@
         "codebase",
         "architecture",
         "skills.sh",
-        "installs-1186740"
+        "installs-1193393"
       ],
       "status": "available"
     },
@@ -9434,7 +9471,7 @@
         "loop",
         "me",
         "skills.sh",
-        "installs-453363"
+        "installs-456898"
       ],
       "status": "available"
     },
@@ -9454,7 +9491,7 @@
         "to",
         "shoehorn",
         "skills.sh",
-        "installs-489383"
+        "installs-492837"
       ],
       "status": "available"
     },
@@ -9491,7 +9528,7 @@
         "mattpocock",
         "pr",
         "skills.sh",
-        "installs-186304"
+        "installs-190960"
       ],
       "status": "available"
     },
@@ -9509,7 +9546,7 @@
         "mattpocock",
         "prototype",
         "skills.sh",
-        "installs-1007621"
+        "installs-1012899"
       ],
       "status": "available"
     },
@@ -9565,7 +9602,7 @@
         "mattpocock",
         "research",
         "skills.sh",
-        "installs-730656"
+        "installs-736701"
       ],
       "status": "available"
     },
@@ -9585,7 +9622,7 @@
         "merge",
         "conflicts",
         "skills.sh",
-        "installs-551123"
+        "installs-551128"
       ],
       "status": "available"
     },
@@ -9603,7 +9640,7 @@
         "mattpocock",
         "retro",
         "skills.sh",
-        "installs-294112"
+        "installs-298913"
       ],
       "status": "available"
     },
@@ -9640,7 +9677,7 @@
         "scaffold",
         "exercises",
         "skills.sh",
-        "installs-493369"
+        "installs-496832"
       ],
       "status": "available"
     },
@@ -9660,7 +9697,7 @@
         "matt",
         "pocock",
         "skills.sh",
-        "installs-1074939"
+        "installs-1080971"
       ],
       "status": "available"
     },
@@ -9680,7 +9717,7 @@
         "pre",
         "commit",
         "skills.sh",
-        "installs-502672"
+        "installs-506196"
       ],
       "status": "available"
     },
@@ -9701,7 +9738,7 @@
         "deep",
         "modules",
         "skills.sh",
-        "installs-381234"
+        "installs-384678"
       ],
       "status": "available"
     },
@@ -9719,7 +9756,7 @@
         "mattpocock",
         "tdd",
         "skills.sh",
-        "installs-1163358"
+        "installs-1169294"
       ],
       "status": "available"
     },
@@ -9737,7 +9774,7 @@
         "mattpocock",
         "teach",
         "skills.sh",
-        "installs-882336"
+        "installs-887521"
       ],
       "status": "available"
     },
@@ -9794,7 +9831,7 @@
         "to",
         "questionnaire",
         "skills.sh",
-        "installs-515973"
+        "installs-520576"
       ],
       "status": "available"
     },
@@ -9813,7 +9850,7 @@
         "to",
         "spec",
         "skills.sh",
-        "installs-735576"
+        "installs-740784"
       ],
       "status": "available"
     },
@@ -9832,7 +9869,7 @@
         "to",
         "tickets",
         "skills.sh",
-        "installs-731828"
+        "installs-737192"
       ],
       "status": "available"
     },
@@ -9850,7 +9887,7 @@
         "mattpocock",
         "triage",
         "skills.sh",
-        "installs-1009633"
+        "installs-1014687"
       ],
       "status": "available"
     },
@@ -9888,7 +9925,7 @@
         "wait",
         "what",
         "skills.sh",
-        "installs-467025"
+        "installs-471746"
       ],
       "status": "available"
     },
@@ -9906,7 +9943,7 @@
         "mattpocock",
         "wayfinder",
         "skills.sh",
-        "installs-738191"
+        "installs-744168"
       ],
       "status": "available"
     },
@@ -9924,7 +9961,7 @@
         "mattpocock",
         "wizard",
         "skills.sh",
-        "installs-571824"
+        "installs-576594"
       ],
       "status": "available"
     },
@@ -9961,7 +9998,7 @@
         "writing",
         "beats",
         "skills.sh",
-        "installs-496026"
+        "installs-499543"
       ],
       "status": "available"
     },
@@ -9981,7 +10018,7 @@
         "for",
         "agents",
         "skills.sh",
-        "installs-487157"
+        "installs-492191"
       ],
       "status": "available"
     },
@@ -10000,7 +10037,7 @@
         "writing",
         "fragments",
         "skills.sh",
-        "installs-494959"
+        "installs-498462"
       ],
       "status": "available"
     },
@@ -10038,7 +10075,7 @@
         "writing",
         "shape",
         "skills.sh",
-        "installs-495606"
+        "installs-499125"
       ],
       "status": "available"
     },
@@ -10077,7 +10114,7 @@
         "best",
         "practices",
         "skills.sh",
-        "installs-84916"
+        "installs-86148"
       ],
       "status": "available"
     },
@@ -10098,7 +10135,7 @@
         "aks",
         "setup",
         "skills.sh",
-        "installs-362876"
+        "installs-364311"
       ],
       "status": "available"
     },
@@ -10118,7 +10155,7 @@
         "appinsights",
         "instrumentation",
         "skills.sh",
-        "installs-569311"
+        "installs-570747"
       ],
       "status": "available"
     },
@@ -10137,7 +10174,7 @@
         "azure",
         "ai",
         "skills.sh",
-        "installs-571310"
+        "installs-572755"
       ],
       "status": "available"
     },
@@ -10156,7 +10193,7 @@
         "azure",
         "aigateway",
         "skills.sh",
-        "installs-568539"
+        "installs-569971"
       ],
       "status": "available"
     },
@@ -10176,7 +10213,7 @@
         "app",
         "onboard",
         "skills.sh",
-        "installs-157092"
+        "installs-158527"
       ],
       "status": "available"
     },
@@ -10197,7 +10234,7 @@
         "onboard",
         "prereq",
         "skills.sh",
-        "installs-156897"
+        "installs-158330"
       ],
       "status": "available"
     },
@@ -10217,7 +10254,7 @@
         "cloud",
         "migrate",
         "skills.sh",
-        "installs-517790"
+        "installs-519222"
       ],
       "status": "available"
     },
@@ -10236,7 +10273,7 @@
         "azure",
         "compliance",
         "skills.sh",
-        "installs-569503"
+        "installs-570944"
       ],
       "status": "available"
     },
@@ -10255,7 +10292,7 @@
         "azure",
         "compute",
         "skills.sh",
-        "installs-525016"
+        "installs-526450"
       ],
       "status": "available"
     },
@@ -10313,7 +10350,7 @@
         "azure",
         "deploy",
         "skills.sh",
-        "installs-571071"
+        "installs-572512"
       ],
       "status": "available"
     },
@@ -10332,7 +10369,7 @@
         "azure",
         "diagnostics",
         "skills.sh",
-        "installs-572542"
+        "installs-574093"
       ],
       "status": "available"
     },
@@ -10353,7 +10390,7 @@
         "infra",
         "planner",
         "skills.sh",
-        "installs-443311"
+        "installs-444748"
       ],
       "status": "available"
     },
@@ -10393,7 +10430,7 @@
         "azure",
         "kubernetes",
         "skills.sh",
-        "installs-437324"
+        "installs-438939"
       ],
       "status": "available"
     },
@@ -10412,7 +10449,7 @@
         "azure",
         "kusto",
         "skills.sh",
-        "installs-568925"
+        "installs-570361"
       ],
       "status": "available"
     },
@@ -10431,7 +10468,7 @@
         "azure",
         "messaging",
         "skills.sh",
-        "installs-560193"
+        "installs-561624"
       ],
       "status": "available"
     },
@@ -10469,7 +10506,7 @@
         "azure",
         "prepare",
         "skills.sh",
-        "installs-571881"
+        "installs-573418"
       ],
       "status": "available"
     },
@@ -10488,7 +10525,7 @@
         "azure",
         "quotas",
         "skills.sh",
-        "installs-473549"
+        "installs-474987"
       ],
       "status": "available"
     },
@@ -10526,7 +10563,7 @@
         "azure",
         "reliability",
         "skills.sh",
-        "installs-302322"
+        "installs-303756"
       ],
       "status": "available"
     },
@@ -10546,7 +10583,7 @@
         "resource",
         "lookup",
         "skills.sh",
-        "installs-569258"
+        "installs-570693"
       ],
       "status": "available"
     },
@@ -10566,7 +10603,7 @@
         "resource",
         "visualizer",
         "skills.sh",
-        "installs-569216"
+        "installs-570654"
       ],
       "status": "available"
     },
@@ -10585,7 +10622,7 @@
         "azure",
         "storage",
         "skills.sh",
-        "installs-569901"
+        "installs-571340"
       ],
       "status": "available"
     },
@@ -10604,7 +10641,7 @@
         "azure",
         "upgrade",
         "skills.sh",
-        "installs-466676"
+        "installs-468123"
       ],
       "status": "available"
     },
@@ -10623,7 +10660,7 @@
         "azure",
         "validate",
         "skills.sh",
-        "installs-570412"
+        "installs-571869"
       ],
       "status": "available"
     },
@@ -10643,7 +10680,7 @@
         "entra",
         "id",
         "skills.sh",
-        "installs-338994"
+        "installs-340424"
       ],
       "status": "available"
     },
@@ -10664,7 +10701,7 @@
         "app",
         "registration",
         "skills.sh",
-        "installs-569181"
+        "installs-570614"
       ],
       "status": "available"
     },
@@ -10683,7 +10720,7 @@
         "azure",
         "foundry",
         "skills.sh",
-        "installs-581730"
+        "installs-583415"
       ],
       "status": "available"
     },
@@ -10704,7 +10741,7 @@
         "appservice",
         "deploy",
         "skills.sh",
-        "installs-232550"
+        "installs-233980"
       ],
       "status": "available"
     },
@@ -10723,7 +10760,7 @@
         "playwright",
         "cli",
         "skills.sh",
-        "installs-199329"
+        "installs-200653"
       ],
       "status": "available"
     },
@@ -10743,7 +10780,7 @@
         "result",
         "classification",
         "skills.sh",
-        "installs-68494"
+        "installs-68496"
       ],
       "status": "available"
     },
@@ -10762,7 +10799,7 @@
         "ai",
         "test",
         "skills.sh",
-        "installs-68522"
+        "installs-68524"
       ],
       "status": "available"
     },
@@ -10780,7 +10817,7 @@
         "msmps",
         "opentui",
         "skills.sh",
-        "installs-64469"
+        "installs-64474"
       ],
       "status": "available"
     },
@@ -10798,7 +10835,7 @@
         "neondatabase",
         "neon",
         "skills.sh",
-        "installs-242206"
+        "installs-245576"
       ],
       "status": "available"
     },
@@ -10817,7 +10854,7 @@
         "neon",
         "postgres",
         "skills.sh",
-        "installs-289294"
+        "installs-292657"
       ],
       "status": "available"
     },
@@ -10859,7 +10896,7 @@
         "product",
         "research",
         "skills.sh",
-        "installs-78193"
+        "installs-78203"
       ],
       "status": "available"
     },
@@ -10880,7 +10917,7 @@
         "cross",
         "border",
         "skills.sh",
-        "installs-62901"
+        "installs-62911"
       ],
       "status": "available"
     },
@@ -11049,7 +11086,7 @@
         "pro",
         "max",
         "skills.sh",
-        "installs-421061"
+        "installs-423099"
       ],
       "status": "available"
     },
@@ -11090,7 +11127,7 @@
         "config",
         "workspace",
         "skills.sh",
-        "installs-79331"
+        "installs-80546"
       ],
       "status": "available"
     },
@@ -11108,7 +11145,7 @@
         "nutlope",
         "hallmark",
         "skills.sh",
-        "installs-76823"
+        "installs-78763"
       ],
       "status": "available"
     },
@@ -11127,7 +11164,7 @@
         "superpowers",
         "brainstorming",
         "skills.sh",
-        "installs-409564"
+        "installs-410897"
       ],
       "status": "available"
     },
@@ -11148,7 +11185,7 @@
         "parallel",
         "agents",
         "skills.sh",
-        "installs-221779"
+        "installs-222674"
       ],
       "status": "available"
     },
@@ -11168,7 +11205,7 @@
         "executing",
         "plans",
         "skills.sh",
-        "installs-247083"
+        "installs-248101"
       ],
       "status": "available"
     },
@@ -11189,7 +11226,7 @@
         "development",
         "branch",
         "skills.sh",
-        "installs-218027"
+        "installs-218925"
       ],
       "status": "available"
     },
@@ -11210,7 +11247,7 @@
         "code",
         "review",
         "skills.sh",
-        "installs-225031"
+        "installs-225954"
       ],
       "status": "available"
     },
@@ -11231,7 +11268,7 @@
         "code",
         "review",
         "skills.sh",
-        "installs-265904"
+        "installs-266913"
       ],
       "status": "available"
     },
@@ -11252,7 +11289,7 @@
         "driven",
         "development",
         "skills.sh",
-        "installs-241604"
+        "installs-242623"
       ],
       "status": "available"
     },
@@ -11272,7 +11309,7 @@
         "systematic",
         "debugging",
         "skills.sh",
-        "installs-311898"
+        "installs-313208"
       ],
       "status": "available"
     },
@@ -11293,7 +11330,7 @@
         "driven",
         "development",
         "skills.sh",
-        "installs-263355"
+        "installs-264421"
       ],
       "status": "available"
     },
@@ -11314,7 +11351,7 @@
         "git",
         "worktrees",
         "skills.sh",
-        "installs-220591"
+        "installs-221479"
       ],
       "status": "available"
     },
@@ -11333,7 +11370,7 @@
         "superpowers",
         "using",
         "skills.sh",
-        "installs-273820"
+        "installs-274723"
       ],
       "status": "available"
     },
@@ -11354,7 +11391,7 @@
         "before",
         "completion",
         "skills.sh",
-        "installs-256701"
+        "installs-257896"
       ],
       "status": "available"
     },
@@ -11374,7 +11411,7 @@
         "writing",
         "plans",
         "skills.sh",
-        "installs-287153"
+        "installs-288234"
       ],
       "status": "available"
     },
@@ -11393,7 +11430,7 @@
         "superpowers",
         "writing",
         "skills.sh",
-        "installs-221609"
+        "installs-222543"
       ],
       "status": "available"
     },
@@ -11431,7 +11468,7 @@
         "lark",
         "approval",
         "skills.sh",
-        "installs-822089"
+        "installs-829241"
       ],
       "status": "available"
     },
@@ -11450,7 +11487,7 @@
         "lark",
         "apps",
         "skills.sh",
-        "installs-732365"
+        "installs-739531"
       ],
       "status": "available"
     },
@@ -11469,7 +11506,7 @@
         "lark",
         "attendance",
         "skills.sh",
-        "installs-820395"
+        "installs-827534"
       ],
       "status": "available"
     },
@@ -11488,7 +11525,7 @@
         "lark",
         "base",
         "skills.sh",
-        "installs-823544"
+        "installs-830713"
       ],
       "status": "available"
     },
@@ -11507,7 +11544,7 @@
         "lark",
         "calendar",
         "skills.sh",
-        "installs-822202"
+        "installs-829357"
       ],
       "status": "available"
     },
@@ -11526,7 +11563,7 @@
         "lark",
         "contact",
         "skills.sh",
-        "installs-821248"
+        "installs-828393"
       ],
       "status": "available"
     },
@@ -11545,7 +11582,7 @@
         "lark",
         "doc",
         "skills.sh",
-        "installs-824183"
+        "installs-831362"
       ],
       "status": "available"
     },
@@ -11564,7 +11601,7 @@
         "lark",
         "drive",
         "skills.sh",
-        "installs-823522"
+        "installs-830690"
       ],
       "status": "available"
     },
@@ -11583,7 +11620,7 @@
         "lark",
         "event",
         "skills.sh",
-        "installs-820720"
+        "installs-827866"
       ],
       "status": "available"
     },
@@ -11602,7 +11639,7 @@
         "lark",
         "im",
         "skills.sh",
-        "installs-822593"
+        "installs-829747"
       ],
       "status": "available"
     },
@@ -11621,7 +11658,7 @@
         "lark",
         "mail",
         "skills.sh",
-        "installs-820956"
+        "installs-828108"
       ],
       "status": "available"
     },
@@ -11640,7 +11677,7 @@
         "lark",
         "markdown",
         "skills.sh",
-        "installs-787196"
+        "installs-794351"
       ],
       "status": "available"
     },
@@ -11659,7 +11696,7 @@
         "lark",
         "meeting",
         "skills.sh",
-        "installs-221165"
+        "installs-228311"
       ],
       "status": "available"
     },
@@ -11678,7 +11715,7 @@
         "lark",
         "minutes",
         "skills.sh",
-        "installs-819798"
+        "installs-826892"
       ],
       "status": "available"
     },
@@ -11697,7 +11734,7 @@
         "lark",
         "note",
         "skills.sh",
-        "installs-603939"
+        "installs-611034"
       ],
       "status": "available"
     },
@@ -11716,7 +11753,7 @@
         "lark",
         "okr",
         "skills.sh",
-        "installs-801345"
+        "installs-808492"
       ],
       "status": "available"
     },
@@ -11736,7 +11773,7 @@
         "openapi",
         "explorer",
         "skills.sh",
-        "installs-820484"
+        "installs-827628"
       ],
       "status": "available"
     },
@@ -11755,7 +11792,7 @@
         "lark",
         "shared",
         "skills.sh",
-        "installs-823278"
+        "installs-830460"
       ],
       "status": "available"
     },
@@ -11774,7 +11811,7 @@
         "lark",
         "sheets",
         "skills.sh",
-        "installs-822087"
+        "installs-829254"
       ],
       "status": "available"
     },
@@ -11793,7 +11830,7 @@
         "lark",
         "maker",
         "skills.sh",
-        "installs-820030"
+        "installs-827167"
       ],
       "status": "available"
     },
@@ -11812,7 +11849,7 @@
         "lark",
         "slides",
         "skills.sh",
-        "installs-821008"
+        "installs-828158"
       ],
       "status": "available"
     },
@@ -11831,7 +11868,7 @@
         "lark",
         "task",
         "skills.sh",
-        "installs-821125"
+        "installs-828278"
       ],
       "status": "available"
     },
@@ -11850,7 +11887,7 @@
         "lark",
         "vc",
         "skills.sh",
-        "installs-819061"
+        "installs-826154"
       ],
       "status": "available"
     },
@@ -11869,7 +11906,7 @@
         "lark",
         "vc",
         "skills.sh",
-        "installs-763690"
+        "installs-770783"
       ],
       "status": "available"
     },
@@ -11888,7 +11925,7 @@
         "lark",
         "whiteboard",
         "skills.sh",
-        "installs-820813"
+        "installs-827957"
       ],
       "status": "available"
     },
@@ -11907,7 +11944,7 @@
         "lark",
         "wiki",
         "skills.sh",
-        "installs-821967"
+        "installs-829137"
       ],
       "status": "available"
     },
@@ -11928,7 +11965,7 @@
         "meeting",
         "summary",
         "skills.sh",
-        "installs-819879"
+        "installs-827024"
       ],
       "status": "available"
     },
@@ -11949,7 +11986,7 @@
         "standup",
         "report",
         "skills.sh",
-        "installs-819607"
+        "installs-826741"
       ],
       "status": "available"
     },
@@ -12235,7 +12272,7 @@
         "pbakaus",
         "impeccable",
         "skills.sh",
-        "installs-368362"
+        "installs-371091"
       ],
       "status": "available"
     },
@@ -12484,7 +12521,7 @@
         "ace",
         "step",
         "skills.sh",
-        "installs-369706"
+        "installs-370109"
       ],
       "status": "available"
     },
@@ -12505,7 +12542,7 @@
         "avatar",
         "video",
         "skills.sh",
-        "installs-381219"
+        "installs-381621"
       ],
       "status": "available"
     },
@@ -12526,7 +12563,7 @@
         "image",
         "generation",
         "skills.sh",
-        "installs-384364"
+        "installs-384773"
       ],
       "status": "available"
     },
@@ -12546,7 +12583,7 @@
         "ai",
         "music",
         "skills.sh",
-        "installs-370299"
+        "installs-370704"
       ],
       "status": "available"
     },
@@ -12567,7 +12604,7 @@
         "video",
         "generation",
         "skills.sh",
-        "installs-384272"
+        "installs-384675"
       ],
       "status": "available"
     },
@@ -12587,7 +12624,7 @@
         "codex",
         "pet",
         "skills.sh",
-        "installs-402857"
+        "installs-403260"
       ],
       "status": "available"
     },
@@ -12607,7 +12644,7 @@
         "controlnet",
         "pose",
         "skills.sh",
-        "installs-378715"
+        "installs-379118"
       ],
       "status": "available"
     },
@@ -12628,7 +12665,7 @@
         "music",
         "generation",
         "skills.sh",
-        "installs-378188"
+        "installs-378596"
       ],
       "status": "available"
     },
@@ -12648,7 +12685,7 @@
         "face",
         "swap",
         "skills.sh",
-        "installs-381093"
+        "installs-381496"
       ],
       "status": "available"
     },
@@ -12668,7 +12705,7 @@
         "flux",
         "klein",
         "skills.sh",
-        "installs-437267"
+        "installs-437669"
       ],
       "status": "available"
     },
@@ -12688,7 +12725,7 @@
         "flux",
         "kontext",
         "skills.sh",
-        "installs-438231"
+        "installs-438633"
       ],
       "status": "available"
     },
@@ -12708,7 +12745,7 @@
         "gpt",
         "image",
         "skills.sh",
-        "installs-85577"
+        "installs-85980"
       ],
       "status": "available"
     },
@@ -12729,7 +12766,7 @@
         "image",
         "edit",
         "skills.sh",
-        "installs-437510"
+        "installs-437913"
       ],
       "status": "available"
     },
@@ -12748,7 +12785,7 @@
         "runcomfy",
         "happyhorse",
         "skills.sh",
-        "installs-437435"
+        "installs-437837"
       ],
       "status": "available"
     },
@@ -12768,7 +12805,7 @@
         "image",
         "edit",
         "skills.sh",
-        "installs-438592"
+        "installs-438997"
       ],
       "status": "available"
     },
@@ -12788,7 +12825,7 @@
         "image",
         "inpainting",
         "skills.sh",
-        "installs-378972"
+        "installs-379375"
       ],
       "status": "available"
     },
@@ -12808,7 +12845,7 @@
         "image",
         "outpainting",
         "skills.sh",
-        "installs-378016"
+        "installs-378418"
       ],
       "status": "available"
     },
@@ -12829,7 +12866,7 @@
         "to",
         "video",
         "skills.sh",
-        "installs-439348"
+        "installs-439753"
       ],
       "status": "available"
     },
@@ -12848,7 +12885,7 @@
         "runcomfy",
         "kling",
         "skills.sh",
-        "installs-414486"
+        "installs-414891"
       ],
       "status": "available"
     },
@@ -12867,7 +12904,7 @@
         "runcomfy",
         "lipsync",
         "skills.sh",
-        "installs-378695"
+        "installs-379098"
       ],
       "status": "available"
     },
@@ -12887,7 +12924,7 @@
         "nano",
         "banana",
         "skills.sh",
-        "installs-439036"
+        "installs-439441"
       ],
       "status": "available"
     },
@@ -12908,7 +12945,7 @@
         "banana",
         "edit",
         "skills.sh",
-        "installs-438440"
+        "installs-438843"
       ],
       "status": "available"
     },
@@ -12927,7 +12964,7 @@
         "runcomfy",
         "relight",
         "skills.sh",
-        "installs-377919"
+        "installs-378321"
       ],
       "status": "available"
     },
@@ -12946,7 +12983,7 @@
         "runcomfy",
         "cli",
         "skills.sh",
-        "installs-381430"
+        "installs-381833"
       ],
       "status": "available"
     },
@@ -12966,7 +13003,7 @@
         "seedance",
         "v2",
         "skills.sh",
-        "installs-437517"
+        "installs-437921"
       ],
       "status": "available"
     },
@@ -12986,7 +13023,7 @@
         "video",
         "edit",
         "skills.sh",
-        "installs-441120"
+        "installs-441535"
       ],
       "status": "available"
     },
@@ -13006,7 +13043,7 @@
         "video",
         "extend",
         "skills.sh",
-        "installs-378288"
+        "installs-378690"
       ],
       "status": "available"
     },
@@ -13026,7 +13063,7 @@
         "video",
         "inpainting",
         "skills.sh",
-        "installs-379451"
+        "installs-379853"
       ],
       "status": "available"
     },
@@ -13046,7 +13083,7 @@
         "video",
         "outpainting",
         "skills.sh",
-        "installs-377826"
+        "installs-378228"
       ],
       "status": "available"
     },
@@ -13065,7 +13102,7 @@
         "runcomfy",
         "wan",
         "skills.sh",
-        "installs-437673"
+        "installs-438076"
       ],
       "status": "available"
     },
@@ -13083,7 +13120,7 @@
         "prisma",
         "cli",
         "skills.sh",
-        "installs-395270"
+        "installs-397918"
       ],
       "status": "available"
     },
@@ -13102,7 +13139,7 @@
         "client",
         "api",
         "skills.sh",
-        "installs-398066"
+        "installs-400729"
       ],
       "status": "available"
     },
@@ -13120,7 +13157,7 @@
         "prisma",
         "compute",
         "skills.sh",
-        "installs-378300"
+        "installs-380918"
       ],
       "status": "available"
     },
@@ -13139,7 +13176,7 @@
         "database",
         "setup",
         "skills.sh",
-        "installs-396739"
+        "installs-399374"
       ],
       "status": "available"
     },
@@ -13159,7 +13196,7 @@
         "adapter",
         "implementation",
         "skills.sh",
-        "installs-383366"
+        "installs-385983"
       ],
       "status": "available"
     },
@@ -13178,7 +13215,7 @@
         "mongodb",
         "upgrade",
         "skills.sh",
-        "installs-376835"
+        "installs-379451"
       ],
       "status": "available"
     },
@@ -13197,7 +13234,7 @@
         "orm",
         "setup",
         "skills.sh",
-        "installs-74460"
+        "installs-77110"
       ],
       "status": "available"
     },
@@ -13215,7 +13252,7 @@
         "prisma",
         "postgres",
         "skills.sh",
-        "installs-388743"
+        "installs-391369"
       ],
       "status": "available"
     },
@@ -13234,7 +13271,7 @@
         "postgres",
         "setup",
         "skills.sh",
-        "installs-383320"
+        "installs-385968"
       ],
       "status": "available"
     },
@@ -13253,7 +13290,7 @@
         "upgrade",
         "v7",
         "skills.sh",
-        "installs-383143"
+        "installs-385761"
       ],
       "status": "available"
     },
@@ -13272,7 +13309,7 @@
         "superpowers",
         "browser",
         "skills.sh",
-        "installs-109445"
+        "installs-109603"
       ],
       "status": "available"
     },
@@ -13291,7 +13328,7 @@
         "superpowers",
         "tools",
         "skills.sh",
-        "installs-73102"
+        "installs-73203"
       ],
       "status": "available"
     },
@@ -13312,7 +13349,7 @@
         "avatar",
         "video",
         "skills.sh",
-        "installs-579806"
+        "installs-580683"
       ],
       "status": "available"
     },
@@ -13333,7 +13370,7 @@
         "image",
         "generation",
         "skills.sh",
-        "installs-579241"
+        "installs-580116"
       ],
       "status": "available"
     },
@@ -13354,7 +13391,7 @@
         "video",
         "generation",
         "skills.sh",
-        "installs-579271"
+        "installs-580147"
       ],
       "status": "available"
     },
@@ -13374,7 +13411,7 @@
         "infsh",
         "cli",
         "skills.sh",
-        "installs-73106"
+        "installs-73207"
       ],
       "status": "available"
     },
@@ -13394,7 +13431,7 @@
         "python",
         "executor",
         "skills.sh",
-        "installs-72985"
+        "installs-73086"
       ],
       "status": "available"
     },
@@ -13414,7 +13451,7 @@
         "remotion",
         "render",
         "skills.sh",
-        "installs-73027"
+        "installs-73128"
       ],
       "status": "available"
     },
@@ -13434,7 +13471,7 @@
         "twitter",
         "automation",
         "skills.sh",
-        "installs-579400"
+        "installs-580275"
       ],
       "status": "available"
     },
@@ -13454,7 +13491,7 @@
         "web",
         "search",
         "skills.sh",
-        "installs-73014"
+        "installs-73115"
       ],
       "status": "available"
     },
@@ -13474,7 +13511,7 @@
         "best",
         "practices",
         "skills.sh",
-        "installs-702049"
+        "installs-708868"
       ],
       "status": "available"
     },
@@ -13493,7 +13530,7 @@
         "dev",
         "captions",
         "skills.sh",
-        "installs-227707"
+        "installs-233924"
       ],
       "status": "available"
     },
@@ -13512,7 +13549,7 @@
         "dev",
         "create",
         "skills.sh",
-        "installs-229781"
+        "installs-235953"
       ],
       "status": "available"
     },
@@ -13531,7 +13568,7 @@
         "dev",
         "docs",
         "skills.sh",
-        "installs-215837"
+        "installs-221919"
       ],
       "status": "available"
     },
@@ -13550,7 +13587,7 @@
         "dev",
         "interactivity",
         "skills.sh",
-        "installs-218327"
+        "installs-224357"
       ],
       "status": "available"
     },
@@ -13569,7 +13606,7 @@
         "dev",
         "maps",
         "skills.sh",
-        "installs-200751"
+        "installs-206774"
       ],
       "status": "available"
     },
@@ -13588,7 +13625,7 @@
         "dev",
         "markup",
         "skills.sh",
-        "installs-223395"
+        "installs-229531"
       ],
       "status": "available"
     },
@@ -13607,7 +13644,7 @@
         "dev",
         "multimedia",
         "skills.sh",
-        "installs-202469"
+        "installs-208554"
       ],
       "status": "available"
     },
@@ -13626,7 +13663,7 @@
         "dev",
         "render",
         "skills.sh",
-        "installs-231137"
+        "installs-237364"
       ],
       "status": "available"
     },
@@ -13645,7 +13682,7 @@
         "dev",
         "saas",
         "skills.sh",
-        "installs-216124"
+        "installs-222136"
       ],
       "status": "available"
     },
@@ -13664,7 +13701,7 @@
         "dev",
         "studio",
         "skills.sh",
-        "installs-192888"
+        "installs-199009"
       ],
       "status": "available"
     },
@@ -13683,7 +13720,7 @@
         "dev",
         "upgrade",
         "skills.sh",
-        "installs-207338"
+        "installs-213367"
       ],
       "status": "available"
     },
@@ -14473,7 +14510,7 @@
         "just",
         "scrape",
         "skills.sh",
-        "installs-245008"
+        "installs-245009"
       ],
       "status": "available"
     },
@@ -14492,7 +14529,7 @@
         "dev",
         "cli",
         "skills.sh",
-        "installs-175845"
+        "installs-176835"
       ],
       "status": "available"
     },
@@ -14510,7 +14547,7 @@
         "shadcn",
         "ui",
         "skills.sh",
-        "installs-127248"
+        "installs-128569"
       ],
       "status": "available"
     },
@@ -14547,7 +14584,7 @@
         "superpowers",
         "browser",
         "skills.sh",
-        "installs-90887"
+        "installs-91210"
       ],
       "status": "available"
     },
@@ -14568,7 +14605,7 @@
         "avatar",
         "video",
         "skills.sh",
-        "installs-483436"
+        "installs-485163"
       ],
       "status": "available"
     },
@@ -14589,7 +14626,7 @@
         "image",
         "generation",
         "skills.sh",
-        "installs-483727"
+        "installs-485459"
       ],
       "status": "available"
     },
@@ -14610,7 +14647,7 @@
         "video",
         "generation",
         "skills.sh",
-        "installs-483765"
+        "installs-485497"
       ],
       "status": "available"
     },
@@ -14630,7 +14667,7 @@
         "twitter",
         "automation",
         "skills.sh",
-        "installs-483723"
+        "installs-485450"
       ],
       "status": "available"
     },
@@ -14669,7 +14706,7 @@
         "foundation",
         "dev",
         "skills.sh",
-        "installs-102796"
+        "installs-103791"
       ],
       "status": "available"
     },
@@ -14689,7 +14726,7 @@
         "doc",
         "mermaid",
         "skills.sh",
-        "installs-84250"
+        "installs-85484"
       ],
       "status": "available"
     },
@@ -14708,7 +14745,7 @@
         "audit",
         "website",
         "skills.sh",
-        "installs-74314"
+        "installs-74542"
       ],
       "status": "available"
     },
@@ -14728,7 +14765,7 @@
         "computer",
         "use",
         "skills.sh",
-        "installs-240195"
+        "installs-240470"
       ],
       "status": "available"
     },
@@ -14747,7 +14784,7 @@
         "orca",
         "cli",
         "skills.sh",
-        "installs-355355"
+        "installs-355983"
       ],
       "status": "available"
     },
@@ -14766,7 +14803,7 @@
         "orca",
         "orchestration",
         "skills.sh",
-        "installs-351777"
+        "installs-352424"
       ],
       "status": "available"
     },
@@ -14786,7 +14823,7 @@
         "best",
         "practices",
         "skills.sh",
-        "installs-99497"
+        "installs-99880"
       ],
       "status": "available"
     },
@@ -14805,7 +14842,7 @@
         "ai",
         "projects",
         "skills.sh",
-        "installs-69979"
+        "installs-70106"
       ],
       "status": "available"
     },
@@ -14824,7 +14861,7 @@
         "ai",
         "upgrade",
         "skills.sh",
-        "installs-73784"
+        "installs-74002"
       ],
       "status": "available"
     },
@@ -14841,7 +14878,7 @@
       "tags": [
         "supabase",
         "skills.sh",
-        "installs-348062"
+        "installs-349607"
       ],
       "status": "available"
     },
@@ -14861,7 +14898,7 @@
         "best",
         "practices",
         "skills.sh",
-        "installs-464534"
+        "installs-466062"
       ],
       "status": "available"
     },
@@ -14880,7 +14917,7 @@
         "a1i",
         "archify",
         "skills.sh",
-        "installs-181426"
+        "installs-183390"
       ],
       "status": "available"
     },
@@ -14898,7 +14935,7 @@
         "typesafe",
         "ai",
         "skills.sh",
-        "installs-97153"
+        "installs-97588"
       ],
       "status": "available"
     },
@@ -14917,7 +14954,7 @@
         "ios",
         "design",
         "skills.sh",
-        "installs-416770"
+        "installs-416927"
       ],
       "status": "available"
     },
@@ -14936,7 +14973,7 @@
         "ui",
         "taste",
         "skills.sh",
-        "installs-794296"
+        "installs-823273"
       ],
       "status": "available"
     },
@@ -14956,7 +14993,7 @@
         "to",
         "ui",
         "skills.sh",
-        "installs-76420"
+        "installs-82024"
       ],
       "status": "available"
     },
@@ -14974,7 +15011,7 @@
         "uizze",
         "ui",
         "skills.sh",
-        "installs-182560"
+        "installs-199675"
       ],
       "status": "available"
     },
@@ -15077,7 +15114,7 @@
         "labs",
         "browser",
         "skills.sh",
-        "installs-1283727"
+        "installs-1299696"
       ],
       "status": "available"
     },
@@ -15097,7 +15134,7 @@
         "deploy",
         "to",
         "skills.sh",
-        "installs-173724"
+        "installs-175313"
       ],
       "status": "available"
     },
@@ -15118,7 +15155,7 @@
         "with",
         "tokens",
         "skills.sh",
-        "installs-139290"
+        "installs-140597"
       ],
       "status": "available"
     },
@@ -15138,7 +15175,7 @@
         "composition",
         "patterns",
         "skills.sh",
-        "installs-424594"
+        "installs-426749"
       ],
       "status": "available"
     },
@@ -15157,7 +15194,7 @@
         "labs",
         "optimize",
         "skills.sh",
-        "installs-114296"
+        "installs-115658"
       ],
       "status": "available"
     },
@@ -15179,7 +15216,7 @@
         "best",
         "practices",
         "skills.sh",
-        "installs-848976"
+        "installs-852510"
       ],
       "status": "available"
     },
@@ -15200,7 +15237,7 @@
         "react",
         "native",
         "skills.sh",
-        "installs-258759"
+        "installs-260259"
       ],
       "status": "available"
     },
@@ -15222,7 +15259,7 @@
         "view",
         "transitions",
         "skills.sh",
-        "installs-171929"
+        "installs-173557"
       ],
       "status": "available"
     },
@@ -15244,7 +15281,7 @@
         "design",
         "guidelines",
         "skills.sh",
-        "installs-796829"
+        "installs-801315"
       ],
       "status": "available"
     },
@@ -15265,7 +15302,7 @@
         "writing",
         "guidelines",
         "skills.sh",
-        "installs-110270"
+        "installs-111653"
       ],
       "status": "available"
     },
@@ -15305,7 +15342,7 @@
         "labs",
         "find",
         "skills.sh",
-        "installs-4093826"
+        "installs-4111501"
       ],
       "status": "available"
     },
@@ -15324,7 +15361,7 @@
         "ai",
         "sdk",
         "skills.sh",
-        "installs-66700"
+        "installs-66868"
       ],
       "status": "available"
     },
@@ -15342,7 +15379,7 @@
         "vercel",
         "turborepo",
         "skills.sh",
-        "installs-85825"
+        "installs-86126"
       ],
       "status": "available"
     },
@@ -15362,7 +15399,7 @@
         "alicemarket",
         "mcp",
         "skills.sh",
-        "installs-225394"
+        "installs-227637"
       ],
       "status": "available"
     },
@@ -15425,7 +15462,7 @@
         "design",
         "system",
         "skills.sh",
-        "installs-70925"
+        "installs-71095"
       ],
       "status": "available"
     },
@@ -15446,7 +15483,7 @@
         "advanced",
         "types",
         "skills.sh",
-        "installs-94391"
+        "installs-94816"
       ],
       "status": "available"
     },
