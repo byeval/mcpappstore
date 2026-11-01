@@ -20,6 +20,9 @@ The old `daily-mcp-app-catalog-crawl` task is no longer installed on this Mac.
    reported as partial without advancing its full-success timestamp.
    A capture from before the last complete ChatGPT sync is also rejected, even
    within 24 hours, so replaying yesterday's snapshot cannot advance freshness.
+   Partial imports record `lastImportedCaptureAt` independently of the last full
+   success. Reusing that capture is rejected too, including after retries or a
+   source-only refresh. Older publication reports supply the initial marker.
 3. Read `reports/data-sync.json` for source status, last attempt, last successful
    run, and errors. A partial discovery run retains previous candidates and does
    not advance the full-success timestamp. `npm run data:health` includes these

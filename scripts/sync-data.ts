@@ -5,12 +5,13 @@ interface SourceResult {
   checkedAt: string;
   status: "ok" | "partial" | "failed";
   lastSuccessAt?: string;
+  lastImportedCaptureAt?: string;
   message: string;
 }
 
 const reportPath = "reports/data-sync.json";
 const sources: Record<string, SourceResult> = {};
-let previous: { sources?: Record<string, SourceResult> } = {};
+let previous: { sources?: Record<string, SourceResult>; publication?: { chatgpt?: { capturedAt?: string } } } = {};
 try {
   previous = JSON.parse(await readFile(reportPath, "utf8"));
 } catch (error) {
@@ -24,6 +25,9 @@ if (sourcesIndex >= 0 && (!selectedSources?.length || selectedSources.some((id) 
   throw new Error("--sources requires comma-separated known source names");
 }
 Object.assign(sources, previous.sources);
+if (sources.chatgpt && !sources.chatgpt.lastImportedCaptureAt && previous.publication?.chatgpt?.capturedAt) {
+  sources.chatgpt.lastImportedCaptureAt = previous.publication.chatgpt.capturedAt;
+}
 
 async function save() {
   await writeFile(reportPath, JSON.stringify({ startedAt, sources }, null, 2) + "\n");
@@ -32,6 +36,7 @@ async function save() {
 async function refresh(id: string, command: string[], validate?: () => Promise<void>) {
   if (selectedSources && !selectedSources.includes(id)) return;
   const checkedAt = new Date().toISOString();
+  let lastImportedCaptureAt = previous.sources?.[id]?.lastImportedCaptureAt;
   try {
     if (validate) await validate();
     const env = { ...process.env };
@@ -53,6 +58,7 @@ async function refresh(id: string, command: string[], validate?: () => Promise<v
     }
     if (id === "chatgpt") {
       const capture = JSON.parse(await readFile("seed/raw-chatgpt-apps.json", "utf8"));
+      lastImportedCaptureAt = capture.capturedAt;
       warnings = Object.values(capture.categories).filter((entry) => {
         const value = entry as { status: number; complete: boolean };
         return value.status !== 200 || value.complete !== true;
@@ -62,6 +68,7 @@ async function refresh(id: string, command: string[], validate?: () => Promise<v
       checkedAt,
       status: warnings ? "partial" : "ok",
       lastSuccessAt: warnings ? previous.sources?.[id]?.lastSuccessAt : new Date().toISOString(),
+      lastImportedCaptureAt,
       message: warnings ? `${warnings} incomplete queries/categories; retained historical records` : "Fresh source fetched and merged",
     };
     if (id === "claude") {
@@ -73,6 +80,7 @@ async function refresh(id: string, command: string[], validate?: () => Promise<v
       checkedAt,
       status: "failed",
       lastSuccessAt: previous.sources?.[id]?.lastSuccessAt,
+      lastImportedCaptureAt: previous.sources?.[id]?.lastImportedCaptureAt,
       message: error instanceof Error ? error.message : String(error),
     };
     console.warn(`${id}: ${sources[id].message}`);
@@ -89,9 +97,11 @@ await refresh("chatgpt", ["npm", "run", "scrape", "--", "seed/raw-chatgpt-apps.j
   if (!Number.isFinite(age) || age < -300_000 || age > 24 * 60 * 60_000) {
     throw new Error(`ChatGPT browser capture is missing or older than 24 hours (${capture.capturedAt ?? "unknown"}); capture fresh public categories first`);
   }
-  const lastSuccessAt = Date.parse(previous.sources?.chatgpt?.lastSuccessAt ?? "");
-  if (Number.isFinite(lastSuccessAt) && capturedAt <= lastSuccessAt) {
-    throw new Error(`ChatGPT browser capture was already synchronized before ${previous.sources?.chatgpt?.lastSuccessAt}; capture fresh public categories first`);
+  const previousImports = [sources.chatgpt?.lastSuccessAt, sources.chatgpt?.lastImportedCaptureAt]
+    .map((value) => Date.parse(value ?? "")).filter(Number.isFinite);
+  const lastImportAt = Math.max(...previousImports);
+  if (capturedAt <= lastImportAt) {
+    throw new Error(`ChatGPT browser capture was already synchronized before ${new Date(lastImportAt).toISOString()}; capture fresh public categories first`);
   }
   const entries = Object.values(capture.categories ?? {}) as Array<{ status?: number; complete?: boolean; data?: { plugins?: unknown[]; pagination?: { next_page_token?: string } } }>;
   if (!entries.some((entry) => entry.status === 200 && entry.complete === true && Array.isArray(entry.data?.plugins) && !entry.data?.pagination?.next_page_token)) {
