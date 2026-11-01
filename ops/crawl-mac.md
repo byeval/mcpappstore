@@ -61,6 +61,8 @@ snapshot or replace existing client metadata.
 Seed SQL updates apps, skills, and categories in place rather than replacing
 their parent rows. This preserves submission references, user category links,
 and existing skill associations, including ones not present in the local seed.
+Do not cache seed-only skill-list fallbacks after D1 failures: historical skills
+may exist only in D1, so the next request must retry the authoritative source.
 
 Claude's current marketplace embeds its complete connector collection in Next.js
 Flight data. The importer parses that collection and validates its length against

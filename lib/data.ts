@@ -1137,7 +1137,7 @@ export async function listSkills(): Promise<CatalogSkill[]> {
   }
 
   const fallbackSkills = sortSkills(FALLBACK_SKILL_REGISTRY.skills.map(cloneSkill));
-  await writePublicCache("skills", fallbackSkills);
+  // A seed-only fallback omits database-only skills; retry D1 on the next request.
   return fallbackSkills;
 }
 
