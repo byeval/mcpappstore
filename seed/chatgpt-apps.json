@@ -168,2442 +168,2442 @@
     {
       "slug": "security",
       "name": "security",
-      "sort": 7199
+      "sort": 7203
     },
     {
       "slug": "entertainment",
       "name": "entertainment",
-      "sort": 7257
+      "sort": 7261
     },
     {
       "slug": "lifestyle",
       "name": "lifestyle",
-      "sort": 8467
+      "sort": 8471
     },
     {
       "slug": "shopping",
       "name": "shopping",
-      "sort": 8468
+      "sort": 8472
     },
     {
       "slug": "food",
       "name": "food",
-      "sort": 8470
+      "sort": 8474
     },
     {
       "slug": "business",
       "name": "business",
-      "sort": 8472
+      "sort": 8476
     },
     {
       "slug": "signing",
       "name": "signing",
-      "sort": 8529
+      "sort": 8533
     },
     {
       "slug": "pdf",
       "name": "pdf",
-      "sort": 8530
+      "sort": 8534
     },
     {
       "slug": "dynatrace",
       "name": "dynatrace",
-      "sort": 8545
+      "sort": 8549
     },
     {
       "slug": "mcp",
       "name": "mcp",
-      "sort": 8546
+      "sort": 8550
     },
     {
       "slug": "observability",
       "name": "observability",
-      "sort": 8547
+      "sort": 8551
     },
     {
       "slug": "monitoring",
       "name": "monitoring",
-      "sort": 8548
+      "sort": 8552
     },
     {
       "slug": "logs",
       "name": "logs",
-      "sort": 8549
+      "sort": 8553
     },
     {
       "slug": "metrics",
       "name": "metrics",
-      "sort": 8550
+      "sort": 8554
     },
     {
       "slug": "devops",
       "name": "devops",
-      "sort": 8551
+      "sort": 8555
     },
     {
       "slug": "life-sciences",
       "name": "life sciences",
-      "sort": 8552
+      "sort": 8556
     },
     {
       "slug": "health",
       "name": "health",
-      "sort": 8553
+      "sort": 8557
     },
     {
       "slug": "react",
       "name": "react",
-      "sort": 8554
+      "sort": 8558
     },
     {
       "slug": "react-spectrum",
       "name": "react spectrum",
-      "sort": 8555
+      "sort": 8559
     },
     {
       "slug": "spectrum",
       "name": "spectrum",
-      "sort": 8556
+      "sort": 8560
     },
     {
       "slug": "adobe",
       "name": "adobe",
-      "sort": 8557
+      "sort": 8561
     },
     {
       "slug": "design-system",
       "name": "design system",
-      "sort": 8558
+      "sort": 8562
     },
     {
       "slug": "components",
       "name": "components",
-      "sort": 8559
+      "sort": 8563
     },
     {
       "slug": "react-aria",
       "name": "react aria",
-      "sort": 8562
+      "sort": 8566
     },
     {
       "slug": "accessibility",
       "name": "accessibility",
-      "sort": 8564
+      "sort": 8568
     },
     {
       "slug": "aria",
       "name": "aria",
-      "sort": 8565
+      "sort": 8569
     },
     {
       "slug": "science",
       "name": "science",
-      "sort": 8569
+      "sort": 8573
     },
     {
       "slug": "tooluniverse",
       "name": "tooluniverse",
-      "sort": 8570
+      "sort": 8574
     },
     {
       "slug": "bioinformatics",
       "name": "bioinformatics",
-      "sort": 8571
+      "sort": 8575
     },
     {
       "slug": "orchestration",
       "name": "orchestration",
-      "sort": 8574
+      "sort": 8578
     },
     {
       "slug": "workflow",
       "name": "workflow",
-      "sort": 8575
+      "sort": 8579
     },
     {
       "slug": "development",
       "name": "development",
-      "sort": 8576
+      "sort": 8580
     },
     {
       "slug": "prototyping",
       "name": "prototyping",
-      "sort": 8577
+      "sort": 8581
     },
     {
       "slug": "terminal",
       "name": "terminal",
-      "sort": 8578
+      "sort": 8582
     },
     {
       "slug": "processes",
       "name": "processes",
-      "sort": 8579
+      "sort": 8583
     },
     {
       "slug": "file-management",
       "name": "file management",
-      "sort": 8580
+      "sort": 8584
     },
     {
       "slug": "automation",
       "name": "automation",
-      "sort": 8581
+      "sort": 8585
     },
     {
       "slug": "end-to-end",
       "name": "end to end",
-      "sort": 8583
+      "sort": 8587
     },
     {
       "slug": "data-analysis",
       "name": "data analysis",
-      "sort": 8584
+      "sort": 8588
     },
     {
       "slug": "docx",
       "name": "docx",
-      "sort": 8585
+      "sort": 8589
     },
     {
       "slug": "excel",
       "name": "excel",
-      "sort": 8587
+      "sort": 8591
     },
     {
       "slug": "autodesk-fusion",
       "name": "autodesk fusion",
-      "sort": 8590
+      "sort": 8594
     },
     {
       "slug": "autodesk-fusion-integration",
       "name": "autodesk fusion integration",
-      "sort": 8591
+      "sort": 8595
     },
     {
       "slug": "fusion",
       "name": "fusion",
-      "sort": 8592
+      "sort": 8596
     },
     {
       "slug": "fusion-360",
       "name": "fusion 360",
-      "sort": 8593
+      "sort": 8597
     },
     {
       "slug": "fusion-360-mcp",
       "name": "fusion 360 mcp",
-      "sort": 8594
+      "sort": 8598
     },
     {
       "slug": "fusion-mcp",
       "name": "fusion mcp",
-      "sort": 8595
+      "sort": 8599
     },
     {
       "slug": "fusion-automation",
       "name": "fusion automation",
-      "sort": 8596
+      "sort": 8600
     },
     {
       "slug": "product-design",
       "name": "product design",
-      "sort": 8597
+      "sort": 8601
     },
     {
       "slug": "cad-cam",
       "name": "cad cam",
-      "sort": 8598
+      "sort": 8602
     },
     {
       "slug": "cad",
       "name": "cad",
-      "sort": 8599
+      "sort": 8603
     },
     {
       "slug": "design-automation",
       "name": "design automation",
-      "sort": 8600
+      "sort": 8604
     },
     {
       "slug": "cam",
       "name": "cam",
-      "sort": 8601
+      "sort": 8605
     },
     {
       "slug": "manufacturing-automation",
       "name": "manufacturing automation",
-      "sort": 8602
+      "sort": 8606
     },
     {
       "slug": "product-manufacturing",
       "name": "product manufacturing",
-      "sort": 8604
+      "sort": 8608
     },
     {
       "slug": "autodesk",
       "name": "autodesk",
-      "sort": 8605
+      "sort": 8609
     },
     {
       "slug": "autodesk-ai",
       "name": "autodesk ai",
-      "sort": 8606
+      "sort": 8610
     },
     {
       "slug": "autodesk-llm",
       "name": "autodesk llm",
-      "sort": 8607
+      "sort": 8611
     },
     {
       "slug": "autodesk-mcp",
       "name": "autodesk mcp",
-      "sort": 8608
+      "sort": 8612
     },
     {
       "slug": "autodesk-mcp-server",
       "name": "autodesk mcp server",
-      "sort": 8609
+      "sort": 8613
     },
     {
       "slug": "autodesk-assistant",
       "name": "autodesk assistant",
-      "sort": 8610
+      "sort": 8614
     },
     {
       "slug": "autodesk-agent",
       "name": "autodesk agent",
-      "sort": 8611
+      "sort": 8615
     },
     {
       "slug": "autodesk-cloud-mcp-server",
       "name": "autodesk cloud mcp server",
-      "sort": 8612
+      "sort": 8616
     },
     {
       "slug": "autodesk-local-mcp-server",
       "name": "autodesk local mcp server",
-      "sort": 8613
+      "sort": 8617
     },
     {
       "slug": "autodesk-hybrid-mcp-server",
       "name": "autodesk hybrid mcp server",
-      "sort": 8614
+      "sort": 8618
     },
     {
       "slug": "lens-studio",
       "name": "lens studio",
-      "sort": 8615
+      "sort": 8619
     },
     {
       "slug": "3d",
       "name": "3d",
-      "sort": 8616
+      "sort": 8620
     },
     {
       "slug": "ar",
       "name": "ar",
-      "sort": 8617
+      "sort": 8621
     },
     {
       "slug": "snapchat",
       "name": "snapchat",
-      "sort": 8618
+      "sort": 8622
     },
     {
       "slug": "spectacles",
       "name": "spectacles",
-      "sort": 8619
+      "sort": 8623
     },
     {
       "slug": "lenses",
       "name": "lenses",
-      "sort": 8621
+      "sort": 8625
     },
     {
       "slug": "resolume",
       "name": "resolume",
-      "sort": 8622
+      "sort": 8626
     },
     {
       "slug": "arena",
       "name": "arena",
-      "sort": 8623
+      "sort": 8627
     },
     {
       "slug": "vj",
       "name": "vj",
-      "sort": 8624
+      "sort": 8628
     },
     {
       "slug": "vjing",
       "name": "vjing",
-      "sort": 8625
+      "sort": 8629
     },
     {
       "slug": "visuals",
       "name": "visuals",
-      "sort": 8626
+      "sort": 8630
     },
     {
       "slug": "video",
       "name": "video",
-      "sort": 8627
+      "sort": 8631
     },
     {
       "slug": "live-visuals",
       "name": "live visuals",
-      "sort": 8628
+      "sort": 8632
     },
     {
       "slug": "projection-mapping",
       "name": "projection mapping",
-      "sort": 8629
+      "sort": 8633
     },
     {
       "slug": "led",
       "name": "led",
-      "sort": 8630
+      "sort": 8634
     },
     {
       "slug": "lighting",
       "name": "lighting",
-      "sort": 8631
+      "sort": 8635
     },
     {
       "slug": "performance",
       "name": "performance",
-      "sort": 8632
+      "sort": 8636
     },
     {
       "slug": "creative-coding",
       "name": "creative coding",
-      "sort": 8633
+      "sort": 8637
     },
     {
       "slug": "wire",
       "name": "wire",
-      "sort": 8635
+      "sort": 8639
     },
     {
       "slug": "node-based",
       "name": "node based",
-      "sort": 8636
+      "sort": 8640
     },
     {
       "slug": "compositing",
       "name": "compositing",
-      "sort": 8637
+      "sort": 8641
     },
     {
       "slug": "ableton",
       "name": "ableton",
-      "sort": 8642
+      "sort": 8646
     },
     {
       "slug": "live",
       "name": "live",
-      "sort": 8643
+      "sort": 8647
     },
     {
       "slug": "push",
       "name": "push",
-      "sort": 8644
+      "sort": 8648
     },
     {
       "slug": "move",
       "name": "move",
-      "sort": 8645
+      "sort": 8649
     },
     {
       "slug": "note",
       "name": "note",
-      "sort": 8646
+      "sort": 8650
     },
     {
       "slug": "music",
       "name": "music",
-      "sort": 8647
+      "sort": 8651
     },
     {
       "slug": "production",
       "name": "production",
-      "sort": 8648
+      "sort": 8652
     },
     {
       "slug": "daw",
       "name": "daw",
-      "sort": 8649
+      "sort": 8653
     },
     {
       "slug": "manual",
       "name": "manual",
-      "sort": 8650
+      "sort": 8654
     },
     {
       "slug": "documents",
       "name": "documents",
-      "sort": 8653
+      "sort": 8657
     },
     {
       "slug": "viewer",
       "name": "viewer",
-      "sort": 8654
+      "sort": 8658
     },
     {
       "slug": "reading",
       "name": "reading",
-      "sort": 8655
+      "sort": 8659
     },
     {
       "slug": "sap-fiori-tools",
       "name": "sap fiori tools",
-      "sort": 8656
+      "sort": 8660
     },
     {
       "slug": "sap-fiori-elements",
       "name": "sap fiori elements",
-      "sort": 8657
+      "sort": 8661
     },
     {
       "slug": "sap-fiori-freestyle",
       "name": "sap fiori freestyle",
-      "sort": 8658
+      "sort": 8662
     },
     {
       "slug": "ai",
       "name": "ai",
-      "sort": 8660
+      "sort": 8664
     },
     {
       "slug": "vulnerabilities",
       "name": "vulnerabilities",
-      "sort": 8662
+      "sort": 8666
     },
     {
       "slug": "rapid7",
       "name": "rapid7",
-      "sort": 8663
+      "sort": 8667
     },
     {
       "slug": "insightvm",
       "name": "insightvm",
-      "sort": 8664
+      "sort": 8668
     },
     {
       "slug": "bulk-export",
       "name": "bulk export",
-      "sort": 8665
+      "sort": 8669
     },
     {
       "slug": "analysis",
       "name": "analysis",
-      "sort": 8666
+      "sort": 8670
     },
     {
       "slug": "life-sciences-and-healthcare",
       "name": "life sciences and healthcare",
-      "sort": 8669
+      "sort": 8673
     },
     {
       "slug": "ckan",
       "name": "ckan",
-      "sort": 8670
+      "sort": 8674
     },
     {
       "slug": "open-data",
       "name": "open data",
-      "sort": 8671
+      "sort": 8675
     },
     {
       "slug": "data-portal",
       "name": "data portal",
-      "sort": 8672
+      "sort": 8676
     },
     {
       "slug": "cloudinary",
       "name": "cloudinary",
-      "sort": 8673
+      "sort": 8677
     },
     {
       "slug": "asset-management",
       "name": "asset management",
-      "sort": 8674
+      "sort": 8678
     },
     {
       "slug": "images",
       "name": "images",
-      "sort": 8675
+      "sort": 8679
     },
     {
       "slug": "videos",
       "name": "videos",
-      "sort": 8676
+      "sort": 8680
     },
     {
       "slug": "media",
       "name": "media",
-      "sort": 8677
+      "sort": 8681
     },
     {
       "slug": "cdn",
       "name": "cdn",
-      "sort": 8678
+      "sort": 8682
     },
     {
       "slug": "transformation",
       "name": "transformation",
-      "sort": 8679
+      "sort": 8683
     },
     {
       "slug": "qase",
       "name": "qase",
-      "sort": 8686
+      "sort": 8690
     },
     {
       "slug": "testing",
       "name": "testing",
-      "sort": 8687
+      "sort": 8691
     },
     {
       "slug": "test-management",
       "name": "test management",
-      "sort": 8688
+      "sort": 8692
     },
     {
       "slug": "model-context-protocol",
       "name": "model context protocol",
-      "sort": 8689
+      "sort": 8693
     },
     {
       "slug": "test-automation",
       "name": "test automation",
-      "sort": 8690
+      "sort": 8694
     },
     {
       "slug": "qa",
       "name": "qa",
-      "sort": 8691
+      "sort": 8695
     },
     {
       "slug": "quality-assurance",
       "name": "quality assurance",
-      "sort": 8692
+      "sort": 8696
     },
     {
       "slug": "test-cases",
       "name": "test cases",
-      "sort": 8693
+      "sort": 8697
     },
     {
       "slug": "test-runs",
       "name": "test runs",
-      "sort": 8694
+      "sort": 8698
     },
     {
       "slug": "defect-tracking",
       "name": "defect tracking",
-      "sort": 8695
+      "sort": 8699
     },
     {
       "slug": "claude",
       "name": "claude",
-      "sort": 8696
+      "sort": 8700
     },
     {
       "slug": "ai-assistant",
       "name": "ai assistant",
-      "sort": 8697
+      "sort": 8701
     },
     {
       "slug": "llm",
       "name": "llm",
-      "sort": 8698
+      "sort": 8702
     },
     {
       "slug": "anthropic",
       "name": "anthropic",
-      "sort": 8699
+      "sort": 8703
     },
     {
       "slug": "meetings",
       "name": "meetings",
-      "sort": 8700
+      "sort": 8704
     },
     {
       "slug": "transcription",
       "name": "transcription",
-      "sort": 8701
+      "sort": 8705
     },
     {
       "slug": "voice-memo",
       "name": "voice memo",
-      "sort": 8702
+      "sort": 8706
     },
     {
       "slug": "whisper",
       "name": "whisper",
-      "sort": 8703
+      "sort": 8707
     },
     {
       "slug": "memory",
       "name": "memory",
-      "sort": 8704
+      "sort": 8708
     },
     {
       "slug": "search",
       "name": "search",
-      "sort": 8705
+      "sort": 8709
     },
     {
       "slug": "action-items",
       "name": "action items",
-      "sort": 8706
+      "sort": 8710
     },
     {
       "slug": "decisions",
       "name": "decisions",
-      "sort": 8707
+      "sort": 8711
     },
     {
       "slug": "health-and-wellness",
       "name": "health and wellness",
-      "sort": 8717
+      "sort": 8721
     },
     {
       "slug": "company-data",
       "name": "company data",
-      "sort": 8722
+      "sort": 8726
     },
     {
       "slug": "contact-data",
       "name": "contact data",
-      "sort": 8723
+      "sort": 8727
     },
     {
       "slug": "b2b-data",
       "name": "b2b data",
-      "sort": 8724
+      "sort": 8728
     },
     {
       "slug": "vibe-prospecting",
       "name": "vibe prospecting",
-      "sort": 8725
+      "sort": 8729
     },
     {
       "slug": "business-insights",
       "name": "business insights",
-      "sort": 8726
+      "sort": 8730
     },
     {
       "slug": "leads",
       "name": "leads",
-      "sort": 8727
+      "sort": 8731
     },
     {
       "slug": "fantastical",
       "name": "fantastical",
-      "sort": 8736
+      "sort": 8740
     },
     {
       "slug": "calendar",
       "name": "calendar",
-      "sort": 8737
+      "sort": 8741
     },
     {
       "slug": "tasks",
       "name": "tasks",
-      "sort": 8738
+      "sort": 8742
     },
     {
       "slug": "docling",
       "name": "docling",
-      "sort": 8745
+      "sort": 8749
     },
     {
       "slug": "document",
       "name": "document",
-      "sort": 8746
+      "sort": 8750
     },
     {
       "slug": "pptx",
       "name": "pptx",
-      "sort": 8749
+      "sort": 8753
     },
     {
       "slug": "html",
       "name": "html",
-      "sort": 8750
+      "sort": 8754
     },
     {
       "slug": "markdown",
       "name": "markdown",
-      "sort": 8751
+      "sort": 8755
     },
     {
       "slug": "processing",
       "name": "processing",
-      "sort": 8752
+      "sort": 8756
     },
     {
       "slug": "convert",
       "name": "convert",
-      "sort": 8753
+      "sort": 8757
     },
     {
       "slug": "creation",
       "name": "creation",
-      "sort": 8754
+      "sort": 8758
     },
     {
       "slug": "api",
       "name": "api",
-      "sort": 8756
+      "sort": 8760
     },
     {
       "slug": "apify",
       "name": "apify",
-      "sort": 8764
+      "sort": 8768
     },
     {
       "slug": "actors",
       "name": "actors",
-      "sort": 8765
+      "sort": 8769
     },
     {
       "slug": "dataset",
       "name": "dataset",
-      "sort": 8766
+      "sort": 8770
     },
     {
       "slug": "web",
       "name": "web",
-      "sort": 8769
+      "sort": 8773
     },
     {
       "slug": "web-automation",
       "name": "web automation",
-      "sort": 8770
+      "sort": 8774
     },
     {
       "slug": "web-scraper",
       "name": "web scraper",
-      "sort": 8771
+      "sort": 8775
     },
     {
       "slug": "web-crawler",
       "name": "web crawler",
-      "sort": 8772
+      "sort": 8776
     },
     {
       "slug": "scraping",
       "name": "scraping",
-      "sort": 8773
+      "sort": 8777
     },
     {
       "slug": "crawl",
       "name": "crawl",
-      "sort": 8774
+      "sort": 8778
     },
     {
       "slug": "crawler",
       "name": "crawler",
-      "sort": 8775
+      "sort": 8779
     },
     {
       "slug": "crawling",
       "name": "crawling",
-      "sort": 8776
+      "sort": 8780
     },
     {
       "slug": "extraction",
       "name": "extraction",
-      "sort": 8779
+      "sort": 8783
     },
     {
       "slug": "bright",
       "name": "bright",
-      "sort": 8780
+      "sort": 8784
     },
     {
       "slug": "fire",
       "name": "fire",
-      "sort": 8781
+      "sort": 8785
     },
     {
       "slug": "data-extraction",
       "name": "data extraction",
-      "sort": 8782
+      "sort": 8786
     },
     {
       "slug": "windows",
       "name": "windows",
-      "sort": 8785
+      "sort": 8789
     },
     {
       "slug": "computer-use",
       "name": "computer use",
-      "sort": 8789
+      "sort": 8793
     },
     {
       "slug": "socket",
       "name": "socket",
-      "sort": 8790
+      "sort": 8794
     },
     {
       "slug": "dependencies",
       "name": "dependencies",
-      "sort": 8792
+      "sort": 8796
     },
     {
       "slug": "vibecoding",
       "name": "vibecoding",
-      "sort": 8793
+      "sort": 8797
     },
     {
       "slug": "chrome",
       "name": "chrome",
-      "sort": 8794
+      "sort": 8798
     },
     {
       "slug": "browser",
       "name": "browser",
-      "sort": 8795
+      "sort": 8799
     },
     {
       "slug": "tabs",
       "name": "tabs",
-      "sort": 8796
+      "sort": 8800
     },
     {
       "slug": "navigation",
       "name": "navigation",
-      "sort": 8797
+      "sort": 8801
     },
     {
       "slug": "javascript",
       "name": "javascript",
-      "sort": 8800
+      "sort": 8804
     },
     {
       "slug": "macos",
       "name": "macos",
-      "sort": 8802
+      "sort": 8806
     },
     {
       "slug": "kubernetes",
       "name": "kubernetes",
-      "sort": 8803
+      "sort": 8807
     },
     {
       "slug": "docker",
       "name": "docker",
-      "sort": 8804
+      "sort": 8808
     },
     {
       "slug": "containers",
       "name": "containers",
-      "sort": 8805
+      "sort": 8809
     },
     {
       "slug": "containerization",
       "name": "containerization",
-      "sort": 8806
+      "sort": 8810
     },
     {
       "slug": "email",
       "name": "email",
-      "sort": 8807
+      "sort": 8811
     },
     {
       "slug": "mailtrap",
       "name": "mailtrap",
-      "sort": 8808
+      "sort": 8812
     },
     {
       "slug": "smtp",
       "name": "smtp",
-      "sort": 8809
+      "sort": 8813
     },
     {
       "slug": "email-testing",
       "name": "email testing",
-      "sort": 8810
+      "sort": 8814
     },
     {
       "slug": "email-delivery",
       "name": "email delivery",
-      "sort": 8811
+      "sort": 8815
     },
     {
       "slug": "templates",
       "name": "templates",
-      "sort": 8812
+      "sort": 8816
     },
     {
       "slug": "pathmode",
       "name": "pathmode",
-      "sort": 8816
+      "sort": 8820
     },
     {
       "slug": "intent-engineering",
       "name": "intent engineering",
-      "sort": 8817
+      "sort": 8821
     },
     {
       "slug": "product-development",
       "name": "product development",
-      "sort": 8818
+      "sort": 8822
     },
     {
       "slug": "dependency-graph",
       "name": "dependency graph",
-      "sort": 8819
+      "sort": 8823
     },
     {
       "slug": "ai-agents",
       "name": "ai agents",
-      "sort": 8820
+      "sort": 8824
     },
     {
       "slug": "strategic-planning",
       "name": "strategic planning",
-      "sort": 8821
+      "sort": 8825
     },
     {
       "slug": "noteplan",
       "name": "noteplan",
-      "sort": 8824
+      "sort": 8828
     },
     {
       "slug": "notes",
       "name": "notes",
-      "sort": 8825
+      "sort": 8829
     },
     {
       "slug": "to-do-list",
       "name": "to do list",
-      "sort": 8827
+      "sort": 8831
     },
     {
       "slug": "reminders",
       "name": "reminders",
-      "sort": 8828
+      "sort": 8832
     },
     {
       "slug": "events",
       "name": "events",
-      "sort": 8830
+      "sort": 8834
     },
     {
       "slug": "market-data",
       "name": "market data",
-      "sort": 8833
+      "sort": 8837
     },
     {
       "slug": "stocks",
       "name": "stocks",
-      "sort": 8834
+      "sort": 8838
     },
     {
       "slug": "forex",
       "name": "forex",
-      "sort": 8835
+      "sort": 8839
     },
     {
       "slug": "crypto",
       "name": "crypto",
-      "sort": 8836
+      "sort": 8840
     },
     {
       "slug": "options",
       "name": "options",
-      "sort": 8837
+      "sort": 8841
     },
     {
       "slug": "futures",
       "name": "futures",
-      "sort": 8838
+      "sort": 8842
     },
     {
       "slug": "trading",
       "name": "trading",
-      "sort": 8839
+      "sort": 8843
     },
     {
       "slug": "merge",
       "name": "merge",
-      "sort": 8844
+      "sort": 8848
     },
     {
       "slug": "split",
       "name": "split",
-      "sort": 8845
+      "sort": 8849
     },
     {
       "slug": "rotate",
       "name": "rotate",
-      "sort": 8846
+      "sort": 8850
     },
     {
       "slug": "reorder",
       "name": "reorder",
-      "sort": 8847
+      "sort": 8851
     },
     {
       "slug": "interactive",
       "name": "interactive",
-      "sort": 8849
+      "sort": 8853
     },
     {
       "slug": "research",
       "name": "research",
-      "sort": 8851
+      "sort": 8855
     },
     {
       "slug": "academic",
       "name": "academic",
-      "sort": 8852
+      "sort": 8856
     },
     {
       "slug": "analyze",
       "name": "analyze",
-      "sort": 8853
+      "sort": 8857
     },
     {
       "slug": "compare",
       "name": "compare",
-      "sort": 8854
+      "sort": 8858
     },
     {
       "slug": "extract",
       "name": "extract",
-      "sort": 8855
+      "sort": 8859
     },
     {
       "slug": "documentation",
       "name": "documentation",
-      "sort": 8856
+      "sort": 8860
     },
     {
       "slug": "contracts",
       "name": "contracts",
-      "sort": 8857
+      "sort": 8861
     },
     {
       "slug": "forms",
       "name": "forms",
-      "sort": 8858
+      "sort": 8862
     },
     {
       "slug": "fill",
       "name": "fill",
-      "sort": 8859
+      "sort": 8863
     },
     {
       "slug": "w9",
       "name": "w9",
-      "sort": 8860
+      "sort": 8864
     },
     {
       "slug": "1099",
       "name": "1099",
-      "sort": 8861
+      "sort": 8865
     },
     {
       "slug": "tax",
       "name": "tax",
-      "sort": 8862
+      "sort": 8866
     },
     {
       "slug": "invoice",
       "name": "invoice",
-      "sort": 8863
+      "sort": 8867
     },
     {
       "slug": "openui5",
       "name": "openui5",
-      "sort": 8866
+      "sort": 8870
     },
     {
       "slug": "sapui5",
       "name": "sapui5",
-      "sort": 8867
+      "sort": 8871
     },
     {
       "slug": "ui5",
       "name": "ui5",
-      "sort": 8868
+      "sort": 8872
     },
     {
       "slug": "services",
       "name": "services",
-      "sort": 8880
+      "sort": 8884
     },
     {
       "slug": "findings",
       "name": "findings",
-      "sort": 8881
+      "sort": 8885
     },
     {
       "slug": "endpoints",
       "name": "endpoints",
-      "sort": 8883
+      "sort": 8887
     },
     {
       "slug": "third-party",
       "name": "third party",
-      "sort": 8884
+      "sort": 8888
     },
     {
       "slug": "microsoft",
       "name": "microsoft",
-      "sort": 8934
+      "sort": 8938
     },
     {
       "slug": "powerpoint",
       "name": "powerpoint",
-      "sort": 8935
+      "sort": 8939
     },
     {
       "slug": "office",
       "name": "office",
-      "sort": 8936
+      "sort": 8940
     },
     {
       "slug": "presentations",
       "name": "presentations",
-      "sort": 8937
+      "sort": 8941
     },
     {
       "slug": "slides",
       "name": "slides",
-      "sort": 8938
+      "sort": 8942
     },
     {
       "slug": "word",
       "name": "word",
-      "sort": 8943
+      "sort": 8947
     },
     {
       "slug": "writing",
       "name": "writing",
-      "sort": 8946
+      "sort": 8950
     },
     {
       "slug": "apple-notes",
       "name": "apple notes",
-      "sort": 8952
+      "sort": 8956
     },
     {
       "slug": "organization",
       "name": "organization",
-      "sort": 8955
+      "sort": 8959
     },
     {
       "slug": "apple",
       "name": "apple",
-      "sort": 8958
+      "sort": 8962
     },
     {
       "slug": "applescript",
       "name": "applescript",
-      "sort": 8960
+      "sort": 8964
     },
     {
       "slug": "osascript",
       "name": "osascript",
-      "sort": 8961
+      "sort": 8965
     },
     {
       "slug": "drafts",
       "name": "drafts",
-      "sort": 8963
+      "sort": 8967
     },
     {
       "slug": "enrichr",
       "name": "enrichr",
-      "sort": 8969
+      "sort": 8973
     },
     {
       "slug": "gene-ontology",
       "name": "gene ontology",
-      "sort": 8970
+      "sort": 8974
     },
     {
       "slug": "go",
       "name": "go",
-      "sort": 8971
+      "sort": 8975
     },
     {
       "slug": "enrichment-analysis",
       "name": "enrichment analysis",
-      "sort": 8973
+      "sort": 8977
     },
     {
       "slug": "devtools",
       "name": "devtools",
-      "sort": 8978
+      "sort": 8982
     },
     {
       "slug": "imessage",
       "name": "imessage",
-      "sort": 8982
+      "sort": 8986
     },
     {
       "slug": "messages",
       "name": "messages",
-      "sort": 8983
+      "sort": 8987
     },
     {
       "slug": "sms",
       "name": "sms",
-      "sort": 8984
+      "sort": 8988
     },
     {
       "slug": "contacts",
       "name": "contacts",
-      "sort": 8985
+      "sort": 8989
     },
     {
       "slug": "send",
       "name": "send",
-      "sort": 8986
+      "sort": 8990
     },
     {
       "slug": "read",
       "name": "read",
-      "sort": 8987
+      "sort": 8991
     },
     {
       "slug": "unread",
       "name": "unread",
-      "sort": 8988
+      "sort": 8992
     },
     {
       "slug": "history",
       "name": "history",
-      "sort": 8989
+      "sort": 8993
     },
     {
       "slug": "aws",
       "name": "aws",
-      "sort": 8994
+      "sort": 8998
     },
     {
       "slug": "cloud",
       "name": "cloud",
-      "sort": 8995
+      "sort": 8999
     },
     {
       "slug": "infrastructure",
       "name": "infrastructure",
-      "sort": 8996
+      "sort": 9000
     },
     {
       "slug": "clarity",
       "name": "clarity",
-      "sort": 8997
+      "sort": 9001
     },
     {
       "slug": "analytics",
       "name": "analytics",
-      "sort": 8999
+      "sort": 9003
     },
     {
       "slug": "behavior-analytics-tools",
       "name": "behavior analytics tools",
-      "sort": 9000
+      "sort": 9004
     },
     {
       "slug": "heatmaps",
       "name": "heatmaps",
-      "sort": 9001
+      "sort": 9005
     },
     {
       "slug": "session-recordings",
       "name": "session recordings",
-      "sort": 9002
+      "sort": 9006
     },
     {
       "slug": "data-insights",
       "name": "data insights",
-      "sort": 9004
+      "sort": 9008
     },
     {
       "slug": "insights",
       "name": "insights",
-      "sort": 9005
+      "sort": 9009
     },
     {
       "slug": "agent",
       "name": "agent",
-      "sort": 9008
+      "sort": 9012
     },
     {
       "slug": "audio",
       "name": "audio",
-      "sort": 9010
+      "sort": 9014
     },
     {
       "slug": "player",
       "name": "player",
-      "sort": 9011
+      "sort": 9015
     },
     {
       "slug": "elevenlabs",
       "name": "elevenlabs",
-      "sort": 9012
+      "sort": 9016
     },
     {
       "slug": "tts",
       "name": "tts",
-      "sort": 9013
+      "sort": 9017
     },
     {
       "slug": "text-to-speech",
       "name": "text to speech",
-      "sort": 9014
+      "sort": 9018
     },
     {
       "slug": "sound-effects",
       "name": "sound effects",
-      "sort": 9015
+      "sort": 9019
     },
     {
       "slug": "firefox",
       "name": "firefox",
-      "sort": 9019
+      "sort": 9023
     },
     {
       "slug": "desktop",
       "name": "desktop",
-      "sort": 9021
+      "sort": 9025
     },
     {
       "slug": "airbnb",
       "name": "airbnb",
-      "sort": 9025
+      "sort": 9029
     },
     {
       "slug": "vacation-rental",
       "name": "vacation rental",
-      "sort": 9026
+      "sort": 9030
     },
     {
       "slug": "grafana",
       "name": "grafana",
-      "sort": 9028
+      "sort": 9032
     },
     {
       "slug": "dashboards",
       "name": "dashboards",
-      "sort": 9031
+      "sort": 9035
     },
     {
       "slug": "prometheus",
       "name": "prometheus",
-      "sort": 9032
+      "sort": 9036
     },
     {
       "slug": "loki",
       "name": "loki",
-      "sort": 9033
+      "sort": 9037
     },
     {
       "slug": "clickhouse",
       "name": "clickhouse",
-      "sort": 9034
+      "sort": 9038
     },
     {
       "slug": "alerting",
       "name": "alerting",
-      "sort": 9035
+      "sort": 9039
     },
     {
       "slug": "incidents",
       "name": "incidents",
-      "sort": 9036
+      "sort": 9040
     },
     {
       "slug": "pyroscope",
       "name": "pyroscope",
-      "sort": 9039
+      "sort": 9043
     },
     {
       "slug": "oncall",
       "name": "oncall",
-      "sort": 9040
+      "sort": 9044
     },
     {
       "slug": "profiling",
       "name": "profiling",
-      "sort": 9041
+      "sort": 9045
     },
     {
       "slug": "notifications",
       "name": "notifications",
-      "sort": 9043
+      "sort": 9047
     },
     {
       "slug": "push-notifications",
       "name": "push notifications",
-      "sort": 9044
+      "sort": 9048
     },
     {
       "slug": "sounds",
       "name": "sounds",
-      "sort": 9045
+      "sort": 9049
     },
     {
       "slug": "alerts",
       "name": "alerts",
-      "sort": 9046
+      "sort": 9050
     },
     {
       "slug": "vybit",
       "name": "vybit",
-      "sort": 9047
+      "sort": 9051
     },
     {
       "slug": "webhook",
       "name": "webhook",
-      "sort": 9048
+      "sort": 9052
     },
     {
       "slug": "shadcn",
       "name": "shadcn",
-      "sort": 9052
+      "sort": 9056
     },
     {
       "slug": "shadcn-ui",
       "name": "shadcn ui",
-      "sort": 9053
+      "sort": 9057
     },
     {
       "slug": "ui-components",
       "name": "ui components",
-      "sort": 9054
+      "sort": 9058
     },
     {
       "slug": "typescript",
       "name": "typescript",
-      "sort": 9056
+      "sort": 9060
     },
     {
       "slug": "ai-tools",
       "name": "ai tools",
-      "sort": 9057
+      "sort": 9061
     },
     {
       "slug": "copilot",
       "name": "copilot",
-      "sort": 9059
+      "sort": 9063
     },
     {
       "slug": "things",
       "name": "things",
-      "sort": 9062
+      "sort": 9066
     },
     {
       "slug": "todo",
       "name": "todo",
-      "sort": 9063
+      "sort": 9067
     },
     {
       "slug": "project-management",
       "name": "project management",
-      "sort": 9064
+      "sort": 9068
     },
     {
       "slug": "brave",
       "name": "brave",
-      "sort": 9066
+      "sort": 9070
     },
     {
       "slug": "public-health",
       "name": "public health",
-      "sort": 9075
+      "sort": 9079
     },
     {
       "slug": "epidemiology",
       "name": "epidemiology",
-      "sort": 9076
+      "sort": 9080
     },
     {
       "slug": "cdc",
       "name": "cdc",
-      "sort": 9077
+      "sort": 9081
     },
     {
       "slug": "immunizations",
       "name": "immunizations",
-      "sort": 9078
+      "sort": 9082
     },
     {
       "slug": "respiratory",
       "name": "respiratory",
-      "sort": 9079
+      "sort": 9083
     },
     {
       "slug": "chronic-disease",
       "name": "chronic disease",
-      "sort": 9080
+      "sort": 9084
     },
     {
       "slug": "surveillance",
       "name": "surveillance",
-      "sort": 9081
+      "sort": 9085
     },
     {
       "slug": "yale",
       "name": "yale",
-      "sort": 9082
+      "sort": 9086
     },
     {
       "slug": "epic-cosmos",
       "name": "epic cosmos",
-      "sort": 9083
+      "sort": 9087
     },
     {
       "slug": "hospital-capacity",
       "name": "hospital capacity",
-      "sort": 9084
+      "sort": 9088
     },
     {
       "slug": "overdose",
       "name": "overdose",
-      "sort": 9085
+      "sort": 9089
     },
     {
       "slug": "mental-health",
       "name": "mental health",
-      "sort": 9086
+      "sort": 9090
     },
     {
       "slug": "android",
       "name": "android",
-      "sort": 9087
+      "sort": 9091
     },
     {
       "slug": "mobile",
       "name": "mobile",
-      "sort": 9091
+      "sort": 9095
     },
     {
       "slug": "braze",
       "name": "braze",
-      "sort": 9092
+      "sort": 9096
     },
     {
       "slug": "marketing",
       "name": "marketing",
-      "sort": 9097
+      "sort": 9101
     },
     {
       "slug": "genomics",
       "name": "genomics",
-      "sort": 9100
+      "sort": 9104
     },
     {
       "slug": "10x-genomics",
       "name": "10x genomics",
-      "sort": 9101
+      "sort": 9105
     },
     {
       "slug": "single-cell",
       "name": "single cell",
-      "sort": 9102
+      "sort": 9106
     },
     {
       "slug": "cell-ranger",
       "name": "cell ranger",
-      "sort": 9104
+      "sort": 9108
     },
     {
       "slug": "pipeline",
       "name": "pipeline",
-      "sort": 9105
+      "sort": 9109
     },
     {
       "slug": "rna-seq",
       "name": "rna seq",
-      "sort": 9107
+      "sort": 9111
     },
     {
       "slug": "chromium",
       "name": "chromium",
-      "sort": 9108
+      "sort": 9112
     },
     {
       "slug": "atac-seq",
       "name": "atac seq",
-      "sort": 9109
+      "sort": 9113
     },
     {
       "slug": "scrna-seq",
       "name": "scrna seq",
-      "sort": 9110
+      "sort": 9114
     },
     {
       "slug": "biotechnology",
       "name": "biotechnology",
-      "sort": 9112
+      "sort": 9116
     },
     {
       "slug": "sequencing",
       "name": "sequencing",
-      "sort": 9113
+      "sort": 9117
     },
     {
       "slug": "computational-biology",
       "name": "computational biology",
-      "sort": 9115
+      "sort": 9119
     },
     {
       "slug": "instana",
       "name": "instana",
-      "sort": 9117
+      "sort": 9121
     },
     {
       "slug": "obserability",
       "name": "obserability",
-      "sort": 9118
+      "sort": 9122
     },
     {
       "slug": "blockchain",
       "name": "blockchain",
-      "sort": 9119
+      "sort": 9123
     },
     {
       "slug": "web3",
       "name": "web3",
-      "sort": 9121
+      "sort": 9125
     },
     {
       "slug": "rpc",
       "name": "rpc",
-      "sort": 9122
+      "sort": 9126
     },
     {
       "slug": "ethereum",
       "name": "ethereum",
-      "sort": 9123
+      "sort": 9127
     },
     {
       "slug": "eth",
       "name": "eth",
-      "sort": 9124
+      "sort": 9128
     },
     {
       "slug": "solana",
       "name": "solana",
-      "sort": 9125
+      "sort": 9129
     },
     {
       "slug": "sol",
       "name": "sol",
-      "sort": 9126
+      "sort": 9130
     },
     {
       "slug": "cosmos",
       "name": "cosmos",
-      "sort": 9127
+      "sort": 9131
     },
     {
       "slug": "sui",
       "name": "sui",
-      "sort": 9128
+      "sort": 9132
     },
     {
       "slug": "near",
       "name": "near",
-      "sort": 9129
+      "sort": 9133
     },
     {
       "slug": "tron",
       "name": "tron",
-      "sort": 9130
+      "sort": 9134
     },
     {
       "slug": "trx",
       "name": "trx",
-      "sort": 9131
+      "sort": 9135
     },
     {
       "slug": "evm",
       "name": "evm",
-      "sort": 9132
+      "sort": 9136
     },
     {
       "slug": "defi",
       "name": "defi",
-      "sort": 9133
+      "sort": 9137
     },
     {
       "slug": "token",
       "name": "token",
-      "sort": 9134
+      "sort": 9138
     },
     {
       "slug": "wallet",
       "name": "wallet",
-      "sort": 9135
+      "sort": 9139
     },
     {
       "slug": "balance",
       "name": "balance",
-      "sort": 9136
+      "sort": 9140
     },
     {
       "slug": "transaction",
       "name": "transaction",
-      "sort": 9137
+      "sort": 9141
     },
     {
       "slug": "staking",
       "name": "staking",
-      "sort": 9138
+      "sort": 9142
     },
     {
       "slug": "governance",
       "name": "governance",
-      "sort": 9139
+      "sort": 9143
     },
     {
       "slug": "nft",
       "name": "nft",
-      "sort": 9140
+      "sort": 9144
     },
     {
       "slug": "smart-contract",
       "name": "smart contract",
-      "sort": 9141
+      "sort": 9145
     },
     {
       "slug": "gas",
       "name": "gas",
-      "sort": 9142
+      "sort": 9146
     },
     {
       "slug": "block",
       "name": "block",
-      "sort": 9143
+      "sort": 9147
     },
     {
       "slug": "stablecoin",
       "name": "stablecoin",
-      "sort": 9144
+      "sort": 9148
     },
     {
       "slug": "usdc",
       "name": "usdc",
-      "sort": 9145
+      "sort": 9149
     },
     {
       "slug": "usdt",
       "name": "usdt",
-      "sort": 9146
+      "sort": 9150
     },
     {
       "slug": "dai",
       "name": "dai",
-      "sort": 9147
+      "sort": 9151
     },
     {
       "slug": "weth",
       "name": "weth",
-      "sort": 9148
+      "sort": 9152
     },
     {
       "slug": "ens",
       "name": "ens",
-      "sort": 9149
+      "sort": 9153
     },
     {
       "slug": "unstoppable-domains",
       "name": "unstoppable domains",
-      "sort": 9150
+      "sort": 9154
     },
     {
       "slug": "domain-resolution",
       "name": "domain resolution",
-      "sort": 9151
+      "sort": 9155
     },
     {
       "slug": "pocket-network",
       "name": "pocket network",
-      "sort": 9152
+      "sort": 9156
     },
     {
       "slug": "decentralized-rpc",
       "name": "decentralized rpc",
-      "sort": 9153
+      "sort": 9157
     },
     {
       "slug": "arbitrum",
       "name": "arbitrum",
-      "sort": 9154
+      "sort": 9158
     },
     {
       "slug": "arb",
       "name": "arb",
-      "sort": 9155
+      "sort": 9159
     },
     {
       "slug": "base",
       "name": "base",
-      "sort": 9156
+      "sort": 9160
     },
     {
       "slug": "polygon",
       "name": "polygon",
-      "sort": 9157
+      "sort": 9161
     },
     {
       "slug": "matic",
       "name": "matic",
-      "sort": 9158
+      "sort": 9162
     },
     {
       "slug": "optimism",
       "name": "optimism",
-      "sort": 9159
+      "sort": 9163
     },
     {
       "slug": "op",
       "name": "op",
-      "sort": 9160
+      "sort": 9164
     },
     {
       "slug": "avalanche",
       "name": "avalanche",
-      "sort": 9161
+      "sort": 9165
     },
     {
       "slug": "avax",
       "name": "avax",
-      "sort": 9162
+      "sort": 9166
     },
     {
       "slug": "bnb",
       "name": "bnb",
-      "sort": 9163
+      "sort": 9167
     },
     {
       "slug": "bsc",
       "name": "bsc",
-      "sort": 9164
+      "sort": 9168
     },
     {
       "slug": "fantom",
       "name": "fantom",
-      "sort": 9165
+      "sort": 9169
     },
     {
       "slug": "gnosis",
       "name": "gnosis",
-      "sort": 9166
+      "sort": 9170
     },
     {
       "slug": "linea",
       "name": "linea",
-      "sort": 9167
+      "sort": 9171
     },
     {
       "slug": "scroll",
       "name": "scroll",
-      "sort": 9168
+      "sort": 9172
     },
     {
       "slug": "zksync",
       "name": "zksync",
-      "sort": 9169
+      "sort": 9173
     },
     {
       "slug": "blast",
       "name": "blast",
-      "sort": 9170
+      "sort": 9174
     },
     {
       "slug": "mantle",
       "name": "mantle",
-      "sort": 9171
+      "sort": 9175
     },
     {
       "slug": "celo",
       "name": "celo",
-      "sort": 9172
+      "sort": 9176
     },
     {
       "slug": "moonbeam",
       "name": "moonbeam",
-      "sort": 9173
+      "sort": 9177
     },
     {
       "slug": "moonriver",
       "name": "moonriver",
-      "sort": 9174
+      "sort": 9178
     },
     {
       "slug": "berachain",
       "name": "berachain",
-      "sort": 9175
+      "sort": 9179
     },
     {
       "slug": "bera",
       "name": "bera",
-      "sort": 9176
+      "sort": 9180
     },
     {
       "slug": "hyperliquid",
       "name": "hyperliquid",
-      "sort": 9177
+      "sort": 9181
     },
     {
       "slug": "kaia",
       "name": "kaia",
-      "sort": 9178
+      "sort": 9182
     },
     {
       "slug": "kava",
       "name": "kava",
-      "sort": 9179
+      "sort": 9183
     },
     {
       "slug": "metis",
       "name": "metis",
-      "sort": 9180
+      "sort": 9184
     },
     {
       "slug": "boba",
       "name": "boba",
-      "sort": 9181
+      "sort": 9185
     },
     {
       "slug": "fuse",
       "name": "fuse",
-      "sort": 9182
+      "sort": 9186
     },
     {
       "slug": "harmony",
       "name": "harmony",
-      "sort": 9183
+      "sort": 9187
     },
     {
       "slug": "oasys",
       "name": "oasys",
-      "sort": 9184
+      "sort": 9188
     },
     {
       "slug": "ink",
       "name": "ink",
-      "sort": 9185
+      "sort": 9189
     },
     {
       "slug": "iotex",
       "name": "iotex",
-      "sort": 9186
+      "sort": 9190
     },
     {
       "slug": "taiko",
       "name": "taiko",
-      "sort": 9187
+      "sort": 9191
     },
     {
       "slug": "sonic",
       "name": "sonic",
-      "sort": 9188
+      "sort": 9192
     },
     {
       "slug": "fraxtal",
       "name": "fraxtal",
-      "sort": 9189
+      "sort": 9193
     },
     {
       "slug": "opbnb",
       "name": "opbnb",
-      "sort": 9190
+      "sort": 9194
     },
     {
       "slug": "unichain",
       "name": "unichain",
-      "sort": 9191
+      "sort": 9195
     },
     {
       "slug": "sei",
       "name": "sei",
-      "sort": 9192
+      "sort": 9196
     },
     {
       "slug": "osmosis",
       "name": "osmosis",
-      "sort": 9193
+      "sort": 9197
     },
     {
       "slug": "akash",
       "name": "akash",
-      "sort": 9194
+      "sort": 9198
     },
     {
       "slug": "juno",
       "name": "juno",
-      "sort": 9195
+      "sort": 9199
     },
     {
       "slug": "stargaze",
       "name": "stargaze",
-      "sort": 9196
+      "sort": 9200
     },
     {
       "slug": "pocket",
       "name": "pocket",
-      "sort": 9197
+      "sort": 9201
     },
     {
       "slug": "pokt",
       "name": "pokt",
-      "sort": 9198
+      "sort": 9202
     },
     {
       "slug": "cheqd",
       "name": "cheqd",
-      "sort": 9199
+      "sort": 9203
     },
     {
       "slug": "chihuahua",
       "name": "chihuahua",
-      "sort": 9200
+      "sort": 9204
     },
     {
       "slug": "fetch",
       "name": "fetch",
-      "sort": 9201
+      "sort": 9205
     },
     {
       "slug": "jackal",
       "name": "jackal",
-      "sort": 9202
+      "sort": 9206
     },
     {
       "slug": "persistence",
       "name": "persistence",
-      "sort": 9203
+      "sort": 9207
     },
     {
       "slug": "seda",
       "name": "seda",
-      "sort": 9204
+      "sort": 9208
     },
     {
       "slug": "shentu",
       "name": "shentu",
-      "sort": 9205
+      "sort": 9209
     },
     {
       "slug": "atomone",
       "name": "atomone",
-      "sort": 9206
+      "sort": 9210
     },
     {
       "slug": "router",
       "name": "router",
-      "sort": 9207
+      "sort": 9211
     },
     {
       "slug": "zklink",
       "name": "zklink",
-      "sort": 9208
+      "sort": 9212
     },
     {
       "slug": "sketch",
       "name": "sketch",
-      "sort": 9210
+      "sort": 9214
     },
     {
       "slug": "busycal",
       "name": "busycal",
-      "sort": 9211
+      "sort": 9215
     },
     {
       "slug": "task-management",
       "name": "task management",
-      "sort": 9213
+      "sort": 9217
     },
     {
       "slug": "scheduling",
       "name": "scheduling",
-      "sort": 9214
+      "sort": 9218
     },
     {
       "slug": "availability",
       "name": "availability",
-      "sort": 9215
+      "sort": 9219
     },
     {
       "slug": "data-science",
       "name": "data science",
-      "sort": 9216
+      "sort": 9220
     },
     {
       "slug": "pandas",
       "name": "pandas",
-      "sort": 9217
+      "sort": 9221
     },
     {
       "slug": "csv",
       "name": "csv",
-      "sort": 9218
+      "sort": 9222
     },
     {
       "slug": "visualization",
       "name": "visualization",
-      "sort": 9220
+      "sort": 9224
     },
     {
       "slug": "machine-learning",
       "name": "machine learning",
-      "sort": 9221
+      "sort": 9225
     },
     {
       "slug": "statistics",
       "name": "statistics",
-      "sort": 9222
+      "sort": 9226
     },
     {
       "slug": "cucumber",
       "name": "cucumber",
-      "sort": 9223
+      "sort": 9227
     },
     {
       "slug": "bdd",
       "name": "bdd",
-      "sort": 9227
+      "sort": 9231
     },
     {
       "slug": "cucumber-studio",
       "name": "cucumber studio",
-      "sort": 9228
+      "sort": 9232
     },
     {
       "slug": "scenarios",
       "name": "scenarios",
-      "sort": 9230
+      "sort": 9234
     },
     {
       "slug": "action-words",
       "name": "action words",
-      "sort": 9231
+      "sort": 9235
     },
     {
       "slug": "vendr",
       "name": "vendr",
-      "sort": 9234
+      "sort": 9238
     },
     {
       "slug": "software-pricing",
       "name": "software pricing",
-      "sort": 9235
+      "sort": 9239
     },
     {
       "slug": "pricing-tools",
       "name": "pricing tools",
-      "sort": 9236
+      "sort": 9240
     },
     {
       "slug": "saas",
       "name": "saas",
-      "sort": 9237
+      "sort": 9241
     },
     {
       "slug": "procurement",
       "name": "procurement",
-      "sort": 9238
+      "sort": 9242
     },
     {
       "slug": "threats",
       "name": "threats",
-      "sort": 9240
+      "sort": 9244
     },
     {
       "slug": "siem",
       "name": "siem",
-      "sort": 9241
+      "sort": 9245
     },
     {
       "slug": "cybersecurity",
       "name": "cybersecurity",
-      "sort": 9242
+      "sort": 9246
     },
     {
       "slug": "training",
       "name": "training",
-      "sort": 9243
+      "sort": 9247
     },
     {
       "slug": "remediation",
       "name": "remediation",
-      "sort": 9244
+      "sort": 9248
     },
     {
       "slug": "tomba",
       "name": "tomba",
-      "sort": 9248
+      "sort": 9252
     },
     {
       "slug": "email-finder",
       "name": "email finder",
-      "sort": 9249
+      "sort": 9253
     },
     {
       "slug": "email-verification",
       "name": "email verification",
-      "sort": 9250
+      "sort": 9254
     },
     {
       "slug": "email-enrichment",
       "name": "email enrichment",
-      "sort": 9251
+      "sort": 9255
     },
     {
       "slug": "lead-generation",
       "name": "lead generation",
-      "sort": 9252
+      "sort": 9256
     },
     {
       "slug": "contact-discovery",
       "name": "contact discovery",
-      "sort": 9253
+      "sort": 9257
     },
     {
       "slug": "phone-finder",
       "name": "phone finder",
-      "sort": 9254
+      "sort": 9258
     },
     {
       "slug": "phone-validator",
       "name": "phone validator",
-      "sort": 9255
+      "sort": 9259
     },
     {
       "slug": "dash",
       "name": "dash",
-      "sort": 9256
+      "sort": 9260
     },
     {
       "slug": "docsets",
       "name": "docsets",
-      "sort": 9258
+      "sort": 9262
     },
     {
       "slug": "reference",
       "name": "reference",
-      "sort": 9260
+      "sort": 9264
     },
     {
       "slug": "e-signature",
       "name": "e signature",
-      "sort": 9261
+      "sort": 9265
     },
     {
       "slug": "esignature",
       "name": "esignature",
-      "sort": 9262
+      "sort": 9266
     },
     {
       "slug": "rt",
       "name": "rt",
-      "sort": 9267
+      "sort": 9271
     },
     {
       "slug": "request-tracker",
       "name": "request tracker",
-      "sort": 9268
+      "sort": 9272
     },
     {
       "slug": "ticketing",
       "name": "ticketing",
-      "sort": 9269
+      "sort": 9273
     },
     {
       "slug": "helpdesk",
       "name": "helpdesk",
-      "sort": 9270
+      "sort": 9274
     },
     {
       "slug": "bestpractical",
       "name": "bestpractical",
-      "sort": 9271
+      "sort": 9275
     },
     {
       "slug": "conviso",
       "name": "conviso",
-      "sort": 9273
+      "sort": 9277
     },
     {
       "slug": "mcp-server",
       "name": "mcp server",
-      "sort": 9276
+      "sort": 9280
     },
     {
       "slug": "reddit",
       "name": "reddit",
-      "sort": 9277
+      "sort": 9281
     },
     {
       "slug": "social-media",
       "name": "social media",
-      "sort": 9278
+      "sort": 9282
     },
     {
       "slug": "community",
       "name": "community",
-      "sort": 9282
+      "sort": 9286
     },
     {
       "slug": "browsing",
       "name": "browsing",
-      "sort": 9284
+      "sort": 9288
     },
     {
       "slug": "no-auth",
       "name": "no auth",
-      "sort": 9285
+      "sort": 9289
     },
     {
       "slug": "agentic-commerce",
       "name": "agentic commerce",
-      "sort": 9287
+      "sort": 9291
     },
     {
       "slug": "commercelayer",
       "name": "commercelayer",
-      "sort": 9288
+      "sort": 9292
     },
     {
       "slug": "location",
       "name": "location",
-      "sort": 9369
+      "sort": 9373
     },
     {
       "slug": "maps",
       "name": "maps",
-      "sort": 9370
+      "sort": 9374
     },
     {
       "slug": "geocoding",
       "name": "geocoding",
-      "sort": 9372
+      "sort": 9376
     },
     {
       "slug": "places",
       "name": "places",
-      "sort": 9373
+      "sort": 9377
     },
     {
       "slug": "collaboration",
       "name": "collaboration",
-      "sort": 9413
+      "sort": 9417
     }
   ],
   "apps": [
@@ -92338,16 +92338,19 @@
       "iconUrl": "https://files.openai.com/content?id=file_00000000c284821198f3f83a07c79772&cdn=1&cp=pi&ma=30585600&ts=0&p=pi&cid=8&sig=6e2fbd77a8ab97965cc324743f57ffe1447df27ca6b9096060b2a0525d8e97b0&v=0",
       "mcpTransport": "http",
       "authType": "oauth",
-      "publisher": "Unknown",
+      "publisher": "Qode",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792527503521,
-      "updatedAt": 1793045007649,
+      "updatedAt": 1793995325975,
       "publishedAt": 1792527503521,
       "surfaces": [
         {
@@ -92368,6 +92371,28 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Tracy AI Interviewer",
+          "tagline": "Set up one-to-one video interviews run by Tracy, AI interviewer, as a two-way natural conversation: suggest questions, invite participants after a preview, and read each participant's result.",
+          "description": "Set up one-to-one video interviews run by Tracy, AI interviewer, as a two-way natural conversation: suggest questions, invite participants after a preview, and read each participant's result.",
+          "url": "https://claude.ai/directory/0726ba0e-c64b-41cf-89c5-dbcf7f3aaa47",
+          "externalId": "0726ba0e-c64b-41cf-89c5-dbcf7f3aaa47",
+          "mcpEndpoint": "https://tracyinterview.ai/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
@@ -92380,7 +92405,10 @@
         "recruiting"
       ],
       "tools": [],
-      "previews": []
+      "previews": [],
+      "mcpEndpoint": "https://tracyinterview.ai/mcp",
+      "publisherUrl": "https://tracyinterview.ai/",
+      "homepageUrl": "https://claude.com/marketplace/connectors/tracy-at-qode"
     },
     {
       "id": "voicescribe",
@@ -147047,16 +147075,19 @@
       "iconUrl": "https://files.openai.com/content?id=file_00000000e4ec8211a784fb1f572d4d68&cdn=1&cp=pi&ma=30499200&ts=0&p=pi&cid=8&sig=113982c01dd4d4f477d2b9d6a638997c01308ff79a4c9990fe83e52eef0f27be&v=0",
       "mcpTransport": "http",
       "authType": "oauth",
-      "publisher": "Unknown",
+      "publisher": "Graphify Labs Inc",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792509879120,
-      "updatedAt": 1792509879120,
+      "updatedAt": 1793995325975,
       "publishedAt": 1792509879120,
       "surfaces": [
         {
@@ -147077,6 +147108,28 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Graphify",
+          "tagline": "Explore your codebase's structure, trace dependencies, assess change impact, and recall repository knowledge from Graphify inside Claude.",
+          "description": "Explore your codebase's structure, trace dependencies, assess change impact, and recall repository knowledge from Graphify inside Claude.",
+          "url": "https://claude.ai/directory/d9baa043-a612-406e-a410-79498e857d85",
+          "externalId": "d9baa043-a612-406e-a410-79498e857d85",
+          "mcpEndpoint": "https://api.graphify.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
@@ -147084,7 +147137,10 @@
       ],
       "tags": [],
       "tools": [],
-      "previews": []
+      "previews": [],
+      "mcpEndpoint": "https://api.graphify.com/mcp",
+      "publisherUrl": "https://graphify.com/",
+      "homepageUrl": "https://claude.com/marketplace/connectors/graphify"
     },
     {
       "id": "branchdeploy",
@@ -270929,16 +270985,19 @@
       "iconUrl": "https://files.openai.com/content?id=file_00000000190882469f2e2d23e5a28ddd&cdn=1&cp=pi&ma=31536000&ts=0&p=pi&cid=8&sig=5f1ed7e32982a3d421459cf8bdfa1df588fa2bb3e82d90405c8a39d37cdca04a&v=0",
       "mcpTransport": "http",
       "authType": "oauth",
-      "publisher": "Unknown",
+      "publisher": "Triple Whale",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1789844349657,
-      "updatedAt": 1792527503521,
+      "updatedAt": 1793995325975,
       "publishedAt": 1789844349657,
       "surfaces": [
         {
@@ -270959,14 +271018,40 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Triple Whale",
+          "tagline": "Analyze your real-time data across every channel",
+          "description": "Analyze your real-time data across every channel",
+          "url": "https://claude.ai/directory/f73ecf42-9171-4f79-9bfa-47470e9d1740",
+          "externalId": "f73ecf42-9171-4f79-9bfa-47470e9d1740",
+          "mcpEndpoint": "https://mcp.triplewhale.com/sse",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "business-and-operations"
+        "business-and-operations",
+        "data-analytics"
       ],
       "tags": [],
       "tools": [],
-      "previews": []
+      "previews": [],
+      "mcpEndpoint": "https://mcp.triplewhale.com/sse",
+      "publisherUrl": "https://www.triplewhale.com/",
+      "homepageUrl": "https://claude.com/marketplace/connectors/triple-whale"
     },
     {
       "id": "ai-business-plan-by-prometai",
@@ -319199,16 +319284,19 @@
       "iconUrl": "https://files.openai.com/content?id=file_00000000b86081f6b630b754a6d5457d&cdn=1&cp=pi&ma=32572800&ts=0&p=pi&cid=8&sig=905c8c2fc1a99186e7e06eabcc2d3992ad8a524463fdd97e59e41163f359dde2&v=0",
       "mcpTransport": "http",
       "authType": "oauth",
-      "publisher": "Unknown",
+      "publisher": "GleanMark",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792527503521,
-      "updatedAt": 1792527503521,
+      "updatedAt": 1793995325975,
       "publishedAt": 1792527503521,
       "surfaces": [
         {
@@ -319229,14 +319317,43 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "interactive_connector",
+          "displayName": "GleanMark",
+          "tagline": "Live USPTO trademark search, conflict screening, and TTAB and office-action research across 14M records.",
+          "description": "Live USPTO trademark search, conflict screening, and TTAB and office-action research across 14M records.",
+          "url": "https://claude.ai/directory/598bb859-1e1a-435f-94e8-418996f6b45f",
+          "externalId": "598bb859-1e1a-435f-94e8-418996f6b45f",
+          "mcpEndpoint": "https://gleanmark.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Interactive",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "business-and-operations"
+        "business-and-operations",
+        "data-analytics",
+        "legal",
+        "productivity"
       ],
       "tags": [],
       "tools": [],
-      "previews": []
+      "previews": [],
+      "mcpEndpoint": "https://gleanmark.com/mcp",
+      "publisherUrl": "https://gleanmark.com/",
+      "homepageUrl": "https://claude.com/marketplace/connectors/gleanmark"
     },
     {
       "id": "moody-lenses",
@@ -699577,6 +699694,339 @@
         }
       ],
       "categories": [
+        "sales-and-marketing"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "stewdio",
+      "name": "Stewdio",
+      "tagline": "Create motion graphics, brand assets, and animations by describing them to Claude, then refine them in Stewdio's visual editor.",
+      "description": "Create motion graphics, brand assets, and animations by describing them to Claude, then refine them in Stewdio's visual editor.",
+      "homepageUrl": "https://www.stewdio.ai/",
+      "mcpEndpoint": "https://mcp.stewdio.ai/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Cekura, Inc.",
+      "publisherUrl": "https://www.stewdio.ai/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Interactive",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793995325975,
+      "updatedAt": 1793995325975,
+      "publishedAt": 1792281600000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "interactive_connector",
+          "displayName": "Stewdio",
+          "tagline": "Create motion graphics, brand assets, and animations by describing them to Claude, then refine them in Stewdio's visual editor.",
+          "description": "Create motion graphics, brand assets, and animations by describing them to Claude, then refine them in Stewdio's visual editor.",
+          "url": "https://claude.ai/directory/a6b5bfad-cb08-476e-bce8-f198f0c11de8",
+          "externalId": "a6b5bfad-cb08-476e-bce8-f198f0c11de8",
+          "mcpEndpoint": "https://mcp.stewdio.ai/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Interactive",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "creative"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "superlawyer",
+      "name": "Superlawyer",
+      "tagline": "Answer Korean law questions, analyze case documents, and browse your cases",
+      "description": "Answer Korean law questions, analyze case documents, and browse your cases",
+      "iconUrl": "https://superlawyer.co.kr/favicon.ico",
+      "homepageUrl": "https://superlawyer.co.kr/",
+      "mcpEndpoint": "https://mcp.superlawyer.co.kr/api/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Law&Company",
+      "publisherUrl": "https://superlawyer.co.kr/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793995325975,
+      "updatedAt": 1793995325975,
+      "publishedAt": 1789430400000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Superlawyer",
+          "tagline": "Answer Korean law questions, analyze case documents, and browse your cases",
+          "description": "Answer Korean law questions, analyze case documents, and browse your cases",
+          "url": "https://claude.ai/directory/44274871-2c29-42ea-a7e4-1994f2d59414",
+          "externalId": "44274871-2c29-42ea-a7e4-1994f2d59414",
+          "mcpEndpoint": "https://mcp.superlawyer.co.kr/api/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "legal",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "pursuit",
+      "name": "Pursuit",
+      "tagline": "Find & Win Public Sector Opportunities Early",
+      "description": "Find & Win Public Sector Opportunities Early",
+      "iconUrl": "https://45772676.fs1.hubspotusercontent-na1.net/hubfs/45772676/pursuit-mcp-icon.svg",
+      "homepageUrl": "https://pursuit.us/",
+      "mcpEndpoint": "https://api.pursuit.us/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Pursuit Markets Inc",
+      "publisherUrl": "https://pursuit.us/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793995325975,
+      "updatedAt": 1793995325975,
+      "publishedAt": 1787443200000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Pursuit",
+          "tagline": "Find & Win Public Sector Opportunities Early",
+          "description": "Find & Win Public Sector Opportunities Early",
+          "url": "https://claude.ai/directory/c91a48e3-847a-46ea-8a08-ce729db5df98",
+          "externalId": "c91a48e3-847a-46ea-8a08-ce729db5df98",
+          "mcpEndpoint": "https://api.pursuit.us/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "sales-and-marketing"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "anrok",
+      "name": "Anrok",
+      "tagline": "Read and update Anrok tax data",
+      "description": "Read and update Anrok tax data",
+      "homepageUrl": "https://anrok.com/",
+      "mcpEndpoint": "https://mcp.anrok.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Anrok",
+      "publisherUrl": "https://anrok.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793995325975,
+      "updatedAt": 1793995325975,
+      "publishedAt": 1791244800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Anrok",
+          "tagline": "Read and update Anrok tax data",
+          "description": "Read and update Anrok tax data",
+          "url": "https://claude.ai/directory/a7426a5d-ebeb-464a-8734-28ba60e4117f",
+          "externalId": "a7426a5d-ebeb-464a-8734-28ba60e4117f",
+          "mcpEndpoint": "https://mcp.anrok.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "financial-services"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "scriptivox",
+      "name": "Scriptivox",
+      "tagline": "Transcribe meetings, interviews, podcasts and videos into accurate text with speaker labels, then turn them into minutes, show notes or subtitles.",
+      "description": "Transcribe meetings, interviews, podcasts and videos into accurate text with speaker labels, then turn them into minutes, show notes or subtitles.",
+      "homepageUrl": "https://www.scriptivox.com/",
+      "mcpEndpoint": "https://platform.scriptivox.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Scriptivox",
+      "publisherUrl": "https://www.scriptivox.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793995325975,
+      "updatedAt": 1793995325975,
+      "publishedAt": 1792022400000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Scriptivox",
+          "tagline": "Transcribe meetings, interviews, podcasts and videos into accurate text with speaker labels, then turn them into minutes, show notes or subtitles.",
+          "description": "Transcribe meetings, interviews, podcasts and videos into accurate text with speaker labels, then turn them into minutes, show notes or subtitles.",
+          "url": "https://claude.ai/directory/d4d133ce-2238-4314-99a0-b175403970c4",
+          "externalId": "d4d133ce-2238-4314-99a0-b175403970c4",
+          "mcpEndpoint": "https://platform.scriptivox.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "communication",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "agentphone",
+      "name": "AgentPhone",
+      "tagline": "Phone numbers for AI Agents",
+      "description": "Phone numbers for AI Agents",
+      "homepageUrl": "https://agentphone.ai/",
+      "mcpEndpoint": "https://mcp.agentphone.ai/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "AgentPhone",
+      "publisherUrl": "https://agentphone.ai/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1793995325975,
+      "updatedAt": 1793995325975,
+      "publishedAt": 1787875200000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "AgentPhone",
+          "tagline": "Phone numbers for AI Agents",
+          "description": "Phone numbers for AI Agents",
+          "url": "https://claude.ai/directory/47ff5c5f-bac5-4940-ae53-5bea6acdd21d",
+          "externalId": "47ff5c5f-bac5-4940-ae53-5bea6acdd21d",
+          "mcpEndpoint": "https://mcp.agentphone.ai/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "communication",
+        "developer-tools",
+        "productivity",
         "sales-and-marketing"
       ],
       "tags": [],
