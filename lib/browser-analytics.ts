@@ -63,11 +63,6 @@ export function startGoogleAnalytics(measurementId: string): () => void {
 
   if (!window.googleAnalyticsInitialized) {
     window.gtag("js", new Date());
-    window.gtag("config", measurementId, {
-      send_page_view: false,
-      page_location: analyticsUrl(window.location.href),
-      page_referrer: analyticsUrl(document.referrer),
-    });
     window.googleAnalyticsInitialized = true;
   }
 
@@ -86,6 +81,14 @@ export function startGoogleAnalytics(measurementId: string): () => void {
     const pageReferrer = window.googleAnalyticsLastPageView ?? analyticsUrl(document.referrer);
     window.googleAnalyticsLastPageView = pageLocation;
     const url = new URL(pageLocation);
+    // Refresh the tag's context as well as the explicit view, so later automatic
+    // engagement events do not retain the previous route's URL or title.
+    window.gtag?.("config", measurementId, {
+      send_page_view: false,
+      page_location: pageLocation,
+      page_referrer: pageReferrer,
+      page_title: document.title,
+    });
     window.gtag?.("event", "page_view", {
       page_path: url.pathname + url.search,
       page_location: pageLocation,

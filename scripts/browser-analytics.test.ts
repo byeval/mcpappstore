@@ -73,6 +73,9 @@ test("one view per committed route including back; hash and same-route replaceme
   assert.equal(b.events("page_view").length, 2);
   assert.equal((b.events("page_view")[1][2] as Record<string, unknown>).page_title, "Example");
   assert.equal((b.events("page_view")[1][2] as Record<string, unknown>).page_referrer, "https://mcpapp.net/");
+  const configs = b.state.dataLayer.map(value => Array.from(value as ArrayLike<unknown>)).filter(value => value[0] === "config");
+  assert.equal(configs.length, 2);
+  assert.deepEqual(configs[1][2], { send_page_view: false, page_location: "https://mcpapp.net/app/example", page_referrer: "https://mcpapp.net/", page_title: "Example" });
   b.navigateBack("https://mcpapp.net/"); b.flush();
   assert.equal(b.events("page_view").length, 3);
   stop(); assert.equal(b.state.history.pushState, originalPush);
