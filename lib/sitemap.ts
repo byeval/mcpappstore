@@ -46,7 +46,7 @@ function maxUpdatedAt(entries: Array<{ updatedAt: number }>): number {
 }
 
 export function localizedSitemapChunkCount(sourceEntryCount: number): number {
-  return Math.max(1, Math.ceil((sourceEntryCount * supportedLocales.length) / maxSitemapUrls));
+  return Math.max(1, Math.ceil(sourceEntryCount / localizedSourceEntriesPerSitemap));
 }
 
 function chunkedSitemapPaths(kind: "apps" | "skills", sourceEntryCount: number): string[] {
@@ -156,18 +156,38 @@ export function sitemapXmlResponse(xml: string): Response {
 
 export async function sitemapIndexXml(): Promise<string> {
   const [apps, skills] = await Promise.all([listSitemapAppEntries(), listSitemapSkillEntries()]);
-  const sitemapPaths = [
-    ...baseSitemapPaths.slice(0, 1),
-    ...chunkedSitemapPaths("apps", apps.length),
-    ...chunkedSitemapPaths("skills", skills.length),
-    ...baseSitemapPaths.slice(1),
-  ];
+  return sitemapIndexDocument([
+    { url: absoluteUrl(baseSitemapPaths[0]) },
+    ...catalogSitemapIndexEntries("apps", apps),
+    ...catalogSitemapIndexEntries("skills", skills),
+    ...baseSitemapPaths.slice(1).map((path) => ({ url: absoluteUrl(path) })),
+  ]);
+}
 
+export function catalogSitemapIndexEntries(kind: "apps" | "skills", entries: Array<{ updatedAt: number }>): SitemapEntry[] {
+  return chunkedSitemapPaths(kind, entries.length).map((path, chunk) => {
+    // Skills have no per-record modification timestamp yet; do not substitute an app's date.
+    const updatedAt = kind === "apps" ? maxUpdatedAt(sitemapSourceChunk(entries, chunk)) : 0;
+    return { url: absoluteUrl(path), ...(updatedAt > 0 ? { lastModified: new Date(updatedAt) } : {}) };
+  });
+}
+
+export function sitemapIndexDocument(entries: SitemapEntry[]): string {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemapPaths.map((path) => `  <sitemap><loc>${escapeXml(absoluteUrl(path))}</loc></sitemap>`).join("\n")}
+${entries.map((entry) => `  <sitemap><loc>${escapeXml(entry.url)}</loc>${entry.lastModified ? `<lastmod>${xmlDate(entry.lastModified)}</lastmod>` : ""}</sitemap>`).join("\n")}
 </sitemapindex>
 `;
+}
+
+// Keep already-submitted URLs useful when the catalog grows beyond one sitemap.
+// Returning only the first 50,000 URLs here silently hides later shards from old submissions.
+export async function legacyCatalogSitemapXml(kind: "apps" | "skills"): Promise<string> {
+  const entries = kind === "apps" ? await listSitemapAppEntries() : await listSitemapSkillEntries();
+  if (localizedSitemapChunkCount(entries.length) > 1) {
+    return sitemapIndexDocument(catalogSitemapIndexEntries(kind, entries));
+  }
+  return urlsetXml(kind === "apps" ? await buildAppsSitemapEntries() : await buildSkillsSitemapEntries());
 }
 
 export function urlsetXml(entries: SitemapEntry[]): string {

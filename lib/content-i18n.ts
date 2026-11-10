@@ -1,3 +1,4 @@
+import { platformComparison } from "@/lib/platform-comparison";
 import {
   appCollections,
   featuredAppCollections,
@@ -2145,6 +2146,16 @@ function genericArticleFaqs(article: LearnArticle, patch: LocalizedArticle, loca
 }
 
 function mergeArticle(article: LearnArticle, patch: LocalizedArticle | undefined, locale: Locale): LearnArticle {
+  if (article.slug === "chatgpt-apps-vs-claude-connectors") {
+    return {
+      ...article, ...platformComparison[locale],
+      eyebrow: patch?.eyebrow ?? article.eyebrow,
+      readingTime: { en: "4 min read", es: "4 min de lectura", fr: "4 min de lecture", de: "4 Min. Lesezeit", ru: "4 мин чтения", "zh-hans": "阅读约 4 分钟", ja: "約4分", ko: "약 4분" }[locale],
+      primaryCta: article.primaryCta ? { ...article.primaryCta, ...patch?.primaryCta } : undefined,
+      secondaryCta: article.secondaryCta ? { ...article.secondaryCta, ...patch?.secondaryCta } : undefined,
+      relatedLinks: mergeLinks(article.relatedLinks, patch?.relatedLinks, locale),
+    };
+  }
   if (!patch) return article;
   return {
     ...article,

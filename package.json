@@ -34,7 +34,8 @@
     "skills:suggest": "node --import tsx scripts/suggest-skill-associations.ts",
     "dev:vinext": "SITE_URL=http://localhost:3001 vinext dev --port 3001",
     "build:vinext": "vinext build",
-    "start:vinext": "vinext start"
+    "start:vinext": "vinext start",
+    "audit:sitemaps": "python3 scripts/audit-sitemaps.py"
   },
   "dependencies": {
     "react": "19.2.5",

@@ -31,9 +31,9 @@ export async function generateMetadata({
   const listingText = totalCount.toLocaleString("en-US");
 
   return pageMetadata({
-    title: `Claude connectors directory: ${listingText} integrations and MCP apps${pageSuffix}`,
+    title: `${t.platformPages.claudeTitle}: ${listingText}${pageSuffix}`,
     description:
-      `Browse ${listingText} Claude connectors and MCP apps with category coverage, auth details, and workflow fit guidance for production teams.`,
+      formatMessage(t.platformPages.claudeCopy, { count: listingText }) + " " + t.platformPages.claudeGuideBody1,
     path: paginatedPath("/claude-connectors", page),
     locale,
     keywords: [

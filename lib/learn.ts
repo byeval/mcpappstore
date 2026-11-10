@@ -1,3 +1,5 @@
+import { platformComparison } from "@/lib/platform-comparison";
+
 export interface LearnSource {
   label: string;
   url: string;
@@ -677,13 +679,8 @@ export const learnArticles: LearnArticle[] = [
   {
     slug: "chatgpt-apps-vs-claude-connectors",
     eyebrow: "Comparison guide",
-    title: "ChatGPT apps vs Claude connectors",
-    description:
-      "A practical comparison of ChatGPT apps and Claude connectors for teams choosing where to build, publish, or connect MCP-backed workflows.",
-    summary:
-      "The right surface depends on where users work, what the MCP server can do, and how much UI or workflow control the experience needs.",
-    readingTime: "7 min read",
-    updatedAt: "2026-07-12",
+    readingTime: "4 min read",
+    updatedAt: "2026-11-10",
     intent: "guide",
     topics: ["ChatGPT apps", "Claude connectors", "MCP"],
     primaryCta: { label: "Browse ChatGPT apps", href: "/chatgpt-apps" },
@@ -694,67 +691,15 @@ export const learnArticles: LearnArticle[] = [
       { label: "Design ChatGPT apps", href: "/learn/chatgpt-apps-for-design" },
       { label: "Claude data connectors", href: "/learn/claude-connectors-for-databases" },
     ],
-    sections: [
-      {
-        id: "shared-layer",
-        title: "The shared layer is MCP",
-        body: [
-          "ChatGPT apps and Claude connectors can both be backed by MCP servers. The server exposes tools and data; the host decides how those capabilities appear to the user.",
-          "That means builders should separate the core server contract from the product surface. One product can support multiple hosts if the auth, tools, and user experience fit each host's rules.",
-        ],
-      },
-      {
-        id: "chatgpt-apps",
-        title: "When ChatGPT apps are a strong fit",
-        body: [
-          "ChatGPT apps are useful when the workflow benefits from a visible app experience inside ChatGPT. That can include previews, selection UI, editing surfaces, commerce flows, or structured outputs users need to inspect.",
-        ],
-        bullets: [
-          "Use ChatGPT apps for visual, consumer, productivity, design, shopping, and guided workflows.",
-          "Add UI when users need to compare options, edit results, or confirm a choice.",
-          "Optimize app metadata and examples so ChatGPT can call the app at the right moment.",
-        ],
-      },
-      {
-        id: "claude-connectors",
-        title: "When Claude connectors are a strong fit",
-        body: [
-          "Claude connectors are useful when users want Claude to reach external tools, data, or work systems while staying in a conversational or agentic workflow.",
-        ],
-        bullets: [
-          "Use Claude connectors for files, databases, project systems, internal tools, coding agents, and research workflows.",
-          "Make permissions clear, especially for write actions or sensitive data.",
-          "Check whether the workflow belongs in Claude chat, Claude Code, or an API-based assistant.",
-        ],
-      },
-      {
-        id: "decision",
-        title: "How to decide",
-        body: [
-          "Choose the host your users already trust for the job. If the workflow needs visual review or a consumer-facing app surface, start with ChatGPT. If it needs deep workspace context, code workflows, or internal data access, evaluate Claude connectors as well.",
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: "Can the same MCP server power both a ChatGPT app and a Claude connector?",
-        answer:
-          "Often yes. The MCP server contract can be shared, but each host may require different metadata, auth handling, UI, testing, and review steps.",
-      },
-      {
-        question: "Which surface is better for teams?",
-        answer:
-          "It depends on the workflow. Teams should choose the surface where users already do the work and where permissions can be managed clearly.",
-      },
-    ],
+    ...platformComparison.en,
     sources: [
       {
-        label: "OpenAI Apps SDK overview",
-        url: "https://developers.openai.com/apps-sdk",
+        label: "OpenAI plugin development",
+        url: "https://developers.openai.com/plugins",
       },
       {
-        label: "Anthropic MCP connector documentation",
-        url: "https://docs.anthropic.com/en/docs/agents-and-tools/mcp-connector",
+        label: "Claude remote connector setup",
+        url: "https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp",
       },
       {
         label: "Model Context Protocol introduction",

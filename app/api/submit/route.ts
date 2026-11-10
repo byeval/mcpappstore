@@ -1,7 +1,8 @@
 import { ZodError } from "zod";
+import { SUBMISSION_RECEIPT_COOKIE } from "@/lib/browser-analytics";
 
 import { createSubmission } from "@/lib/data";
-import { defaultLocale, localizedPath, normalizeLocale } from "@/lib/i18n";
+import { defaultLocale, localizedPath, normalizeLocale, type Locale } from "@/lib/i18n";
 import { enforceSubmissionRateLimit } from "@/lib/rate-limit";
 import { parseSubmissionForm } from "@/lib/submit";
 import { verifyTurnstile } from "@/lib/turnstile";
@@ -18,9 +19,10 @@ function clientIp(request: Request): string | undefined {
 }
 
 export async function POST(request: Request) {
+  let locale: Locale = defaultLocale;
   try {
     const formData = await request.formData();
-    const locale = normalizeLocale(String(formData.get("locale") ?? "")) ?? defaultLocale;
+    locale = normalizeLocale(String(formData.get("locale") ?? "")) ?? defaultLocale;
     const localizedSubmitPath = localizedPath("/submit", locale);
     const { data, assets, turnstileToken } = parseSubmissionForm(formData);
     const ip = clientIp(request);
@@ -42,7 +44,14 @@ export async function POST(request: Request) {
     }
 
     const { appId } = await createSubmission(data, assets, ip);
-    return Response.redirect(new URL(`${localizedPath("/submit/success", locale)}?id=${appId}`, request.url), 303);
+    return new Response(null, {
+      status: 303,
+      headers: {
+        Location: new URL(`${localizedPath("/submit/success", locale)}?id=${encodeURIComponent(appId)}`, request.url).href,
+        "Set-Cookie": `${SUBMISSION_RECEIPT_COOKIE}=1; Max-Age=120; Path=/; SameSite=Lax${new URL(request.url).protocol === "https:" ? "; Secure" : ""}`,
+        "Cache-Control": "no-store",
+      },
+    });
   } catch (error) {
     const message =
       error instanceof ZodError
@@ -51,6 +60,6 @@ export async function POST(request: Request) {
           ? error.message
           : "Submission failed.";
 
-    return Response.redirect(new URL(`/submit?error=${encodeURIComponent(message)}`, request.url), 303);
+    return Response.redirect(new URL(`${localizedPath("/submit", locale)}?error=${encodeURIComponent(message)}`, request.url), 303);
   }
 }

@@ -1731,6 +1731,30 @@ button.dot {
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 
+.catalog-copy-control {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 100%;
+}
+
+.prompts .catalog-copy-control {
+  display: flex;
+}
+
+.info-val .catalog-copy-control {
+  margin-inline-start: 12px;
+}
+
+.catalog-copy-control [role="status"] {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.prompt-row:focus-visible .prompt-copy {
+  opacity: 1;
+}
+
 .prompt-row:hover {
   border-color: rgba(10, 10, 10, 0.14);
   background: #fafafa;

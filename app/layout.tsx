@@ -76,14 +76,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-function delayedAnalyticsScript(token: string): string {
-  const beaconConfig = JSON.stringify({ token });
-
-  return `window.addEventListener("load",function(){window.setTimeout(function(){var script=document.createElement("script");script.defer=true;script.src="https://static.cloudflareinsights.com/beacon.min.js";script.dataset.cfBeacon=${JSON.stringify(
-    beaconConfig,
-  )};document.head.appendChild(script);},6000);});`;
-}
-
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const [{ locale, messages: t }, analyticsToken, pathname] = await Promise.all([
     getI18n(),
@@ -203,8 +195,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             </div>
           </footer>
         </div>
-        <GoogleAnalyticsPageTracker measurementId={googleAnalyticsId} />
-        {analyticsToken ? <script dangerouslySetInnerHTML={{ __html: delayedAnalyticsScript(analyticsToken) }} /> : null}
+        <GoogleAnalyticsPageTracker cloudflareToken={analyticsToken} measurementId={googleAnalyticsId} />
       </body>
     </html>
   );

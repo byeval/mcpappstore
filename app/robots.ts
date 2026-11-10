@@ -49,7 +49,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: apiDisallow,
       },
     ],
-    sitemap: absoluteUrl("/sitemap.xml"),
+    sitemap: ["/sitemap.xml", "/sitemaps/apps.xml", "/sitemaps/skills.xml"].map((path) => absoluteUrl(path)),
     host: siteUrl,
   };
 }

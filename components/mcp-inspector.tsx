@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
+import { trackCatalogEvent } from "@/lib/browser-analytics";
 
 import { formatMessage, type Locale } from "@/lib/i18n";
 import { staticPageCopy } from "@/lib/static-page-i18n";
@@ -511,6 +512,7 @@ export function McpInspector({ locale }: { locale: Locale }) {
 
       try {
         await writeClipboardText(text);
+        trackCatalogEvent("mcp_copy", { copy_type: "config" });
         setConfigPreview("");
         setConfigStatus(mode === "entry" ? "Server entry copied." : "mcp.json copied.");
       } catch (copyError) {

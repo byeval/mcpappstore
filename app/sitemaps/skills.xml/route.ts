@@ -1,5 +1,5 @@
-import { buildSkillsSitemapEntries, sitemapXmlResponse, urlsetXml } from "@/lib/sitemap";
+import { legacyCatalogSitemapXml, sitemapXmlResponse } from "@/lib/sitemap";
 
 export async function GET() {
-  return sitemapXmlResponse(urlsetXml(await buildSkillsSitemapEntries()));
+  return sitemapXmlResponse(await legacyCatalogSitemapXml("skills"));
 }

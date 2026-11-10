@@ -20,15 +20,15 @@ export async function generateMetadata({
 }: {
   searchParams: Promise<{ page?: string }>;
 }): Promise<Metadata> {
-  const [{ locale }, { page: pageParam }, totalCount] = await Promise.all([getI18n(), searchParams, countAppsByPlatform("chatgpt")]);
+  const [{ locale, messages: t }, { page: pageParam }, totalCount] = await Promise.all([getI18n(), searchParams, countAppsByPlatform("chatgpt")]);
   const page = pageFromSearchParam(pageParam);
   const pageSuffix = page > 1 ? (locale === "zh-hans" ? ` - 第 ${page} 页` : locale === "ru" ? ` - Страница ${page}` : ` - Page ${page}`) : "";
   const listingText = totalCount.toLocaleString("en-US");
 
   return pageMetadata({
-    title: `ChatGPT apps directory: ${listingText} MCP apps and connectors${pageSuffix}`,
+    title: `${t.platformPages.chatgptTitle}: ${listingText}${pageSuffix}`,
     description:
-      `Browse ${listingText} ChatGPT apps and MCP integrations with categories, tools, auth details, and workflow guidance for production teams.`,
+      formatMessage(t.platformPages.chatgptCopy, { count: listingText }) + " " + t.platformPages.chatgptGuideBody1,
     path: paginatedPath("/chatgpt-apps", page),
     locale,
     keywords: [

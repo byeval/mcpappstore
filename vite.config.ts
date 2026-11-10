@@ -1,4 +1,4 @@
-import { defineConfig, type ViteDevServer } from "vite";
+import { defineConfig, type Plugin, type ViteDevServer } from "vite";
 import { cloudflare } from "@cloudflare/vite-plugin";
 import rsc from "@vitejs/plugin-rsc";
 import vinext from "vinext";
@@ -52,6 +52,29 @@ function vinextErrorBoundaryShim() {
   };
 }
 
+function devSeedFiles(): Plugin {
+  const prefix = "\0mcpapp-seed:";
+  return {
+    name: "mcpapp-dev-seed-files",
+    enforce: "pre" as const,
+    apply: "serve" as const,
+    resolveId(id: string) {
+      const file = id.startsWith("@/seed/") ? path.join(rootDir, id.slice(2)) : id;
+      if (file.startsWith(path.join(rootDir, "seed") + path.sep) && file.endsWith(".json")) {
+        return prefix + file + ".js";
+      }
+      return null;
+    },
+    load(id: string) {
+      if (!id.startsWith(prefix)) return null;
+      const file = id.slice(prefix.length, -3);
+      this.addWatchFile(file);
+      // Server-only fallback data: avoid transforming 24 MB of catalog JSON through RSC.
+      return `import { readFileSync } from "node:fs"; export default JSON.parse(readFileSync(${JSON.stringify(file)}, "utf8"));`;
+    },
+  };
+}
+
 export default defineConfig(({ command }) => {
   const isDev = command === "serve";
 
@@ -68,7 +91,7 @@ export default defineConfig(({ command }) => {
       external: ["cloudflare:workers"],
     },
     plugins: isDev
-      ? [vinextErrorBoundaryShim(), vinext()]
+      ? [devSeedFiles(), vinextErrorBoundaryShim(), vinext()]
       : [
           vinext({
             rsc: false,

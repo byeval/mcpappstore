@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 import { AppCard } from "@/components/app-card";
+import { CatalogCopyButton } from "@/components/catalog-copy-button";
 import { PlatformBadge } from "@/components/platform-badge";
 import { PreviewBubbles } from "@/components/preview-bubbles";
 import { collectionMatchesApp, type AppCollection } from "@/lib/collections";
@@ -1012,9 +1013,8 @@ export default async function AppDetailPage({
           </div>
         </div>
         <div className="app-head-cta">
-          {primaryDetails.installCmd ? <button className="btn-ghost" type="button">{t.appDetail.save}</button> : null}
           {primaryListing?.url ?? app.homepageUrl ? (
-            <a className="btn-connect" href={primaryListing?.url ?? app.homepageUrl} rel="noreferrer" target="_blank">
+            <a className="btn-connect" data-analytics-app={app.id} data-analytics-platform={primaryListing?.platform ?? "website"} href={primaryListing?.url ?? app.homepageUrl} rel="noreferrer" target="_blank">
               {t.appDetail.connect}
             </a>
           ) : null}
@@ -1117,11 +1117,10 @@ export default async function AppDetailPage({
           <ul className="prompts">
             {primaryDetails.examplePrompts.map((prompt) => (
               <li key={prompt}>
-                <button className="prompt-row" type="button">
+                <CatalogCopyButton appId={app.id} className="prompt-row" kind="prompt" locale={locale} value={prompt}>
                   <span className="dot" />
                   {prompt}
-                  <span className="prompt-copy">{t.appDetail.copy}</span>
-                </button>
+                </CatalogCopyButton>
               </li>
             ))}
           </ul>
@@ -1169,7 +1168,7 @@ export default async function AppDetailPage({
             <div className="info-val surface-list">
               {app.surfaces.map((surface, index) =>
                 surface.url ? (
-                  <a href={surface.url} key={`${surface.platform}-${surface.type}-${index}`} rel="noreferrer" target="_blank">
+                  <a data-analytics-app={app.id} data-analytics-platform={surface.platform} href={surface.url} key={`${surface.platform}-${surface.type}-${index}`} rel="noreferrer" target="_blank">
                     {surfaceLabelFor(surface, t.surface)}
                   </a>
                 ) : (
@@ -1239,8 +1238,12 @@ export default async function AppDetailPage({
           </div>
           <div className="info-row">
             <div className="info-key">{t.appDetail.install}</div>
-            <div className="info-val"><code>{primaryDetails.installCmd ?? t.common.notProvided}</code></div>
+            <div className="info-val"><code>{primaryDetails.installCmd ?? t.common.notProvided}</code>{primaryDetails.installCmd ? <CatalogCopyButton appId={app.id} kind="install" locale={locale} value={primaryDetails.installCmd} /> : null}</div>
           </div>
+          {primaryDetails.mcpEndpoint ? <div className="info-row">
+            <div className="info-key">MCP URL</div>
+            <div className="info-val"><code>{primaryDetails.mcpEndpoint}</code><CatalogCopyButton appId={app.id} kind="endpoint" locale={locale} value={primaryDetails.mcpEndpoint} /></div>
+          </div> : null}
         </div>
       </section>
 
