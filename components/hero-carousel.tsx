@@ -82,7 +82,7 @@ export function HeroCarousel({
 
   return (
     <section
-      className="hero-carousel"
+      className={`hero-carousel${primaryPreview ? "" : " hero-compact"}`}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
           setIsPaused(false);

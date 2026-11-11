@@ -42,6 +42,8 @@ export interface LearnArticle {
   sections: LearnSection[];
   faqs?: LearnFaq[];
   sources: LearnSource[];
+  contentLanguage?: string;
+  translationStatus?: "complete" | "original";
 }
 
 export const learnArticles: LearnArticle[] = [
@@ -54,7 +56,7 @@ export const learnArticles: LearnArticle[] = [
     summary:
       "Understand the difference between the user-facing app, the MCP server behind it, and the host where the app runs.",
     readingTime: "5 min read",
-    updatedAt: "2026-07-12",
+    updatedAt: "2026-11-11",
     intent: "guide",
     topics: ["MCP", "ChatGPT apps", "Claude connectors"],
     primaryCta: { label: "Browse MCP apps", href: "/" },
@@ -74,7 +76,7 @@ export const learnArticles: LearnArticle[] = [
           "The server exposes capabilities through the Model Context Protocol, while a host such as ChatGPT, Claude, Claude Code, desktop clients, or another MCP-compatible client decides how those capabilities appear to the user.",
         ],
         callout:
-          "On this directory, we use app for the listing people browse, and server for the backend endpoint that exposes tools.",
+          "On this directory, app means a product listing. The MCP Apps extension specifically adds interactive interfaces to compatible hosts; not every listing implements that extension.",
       },
       {
         id: "parts",

@@ -1,0 +1,171 @@
+{
+  "startedAt": "2026-11-11",
+  "reviewDates": [
+    "2026-11-18",
+    "2026-11-25",
+    "2026-12-02",
+    "2026-12-09"
+  ],
+  "pages": [
+    {
+      "path": "/"
+    },
+    {
+      "path": "/chatgpt-apps"
+    },
+    {
+      "path": "/claude-connectors"
+    },
+    {
+      "path": "/app/github"
+    },
+    {
+      "path": "/zh-hans/app/github"
+    },
+    {
+      "path": "/collections/chatgpt-apps-for-design"
+    },
+    {
+      "path": "/zh-hans/collections/chatgpt-apps-for-design/markdown"
+    },
+    {
+      "path": "/zh-hans/learn/what-is-an-mcp-app"
+    },
+    {
+      "path": "/zh-hans/learn/what-is-an-mcp-app/markdown",
+      "contains": [
+        "- Content language: zh-Hans",
+        "- Translation: complete"
+      ]
+    },
+    {
+      "path": "/zh-hans/learn/build-your-first-mcp-app"
+    },
+    {
+      "path": "/zh-hans/learn/build-your-first-mcp-app/markdown",
+      "contains": [
+        "- Content language: zh-Hans",
+        "- Translation: complete"
+      ]
+    },
+    {
+      "path": "/zh-hans/learn/claude-connectors-for-databases"
+    },
+    {
+      "path": "/zh-hans/learn/claude-connectors-for-databases/markdown",
+      "contains": [
+        "- Content language: zh-Hans",
+        "- Translation: complete"
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "id": 1,
+      "query": "What is an MCP app?",
+      "target": "/learn/what-is-an-mcp-app"
+    },
+    {
+      "id": 2,
+      "query": "How do I build my first MCP app?",
+      "target": "/learn/build-your-first-mcp-app"
+    },
+    {
+      "id": 3,
+      "query": "ChatGPT apps vs Claude connectors",
+      "target": "/learn/chatgpt-apps-vs-claude-connectors"
+    },
+    {
+      "id": 4,
+      "query": "Find ChatGPT apps for design",
+      "target": "/collections/chatgpt-apps-for-design"
+    },
+    {
+      "id": 5,
+      "query": "Claude connectors for databases",
+      "target": "/learn/claude-connectors-for-databases"
+    },
+    {
+      "id": 6,
+      "query": "MCP tools for developers",
+      "target": "/collections/mcp-apps-for-developers"
+    },
+    {
+      "id": 7,
+      "query": "MCP apps for productivity",
+      "target": "/collections/mcp-apps-for-productivity"
+    },
+    {
+      "id": 8,
+      "query": "GitHub MCP pull request review",
+      "target": "/app/github"
+    },
+    {
+      "id": 9,
+      "query": "Notion MCP workspace search",
+      "target": "/app/notion"
+    },
+    {
+      "id": 10,
+      "query": "Supabase MCP database setup",
+      "target": "/app/supabase"
+    },
+    {
+      "id": 11,
+      "query": "什么是 MCP 应用？",
+      "target": "/zh-hans/learn/what-is-an-mcp-app"
+    },
+    {
+      "id": 12,
+      "query": "如何创建第一个 MCP 应用？",
+      "target": "/zh-hans/learn/build-your-first-mcp-app"
+    },
+    {
+      "id": 13,
+      "query": "ChatGPT 应用和 Claude 连接器有什么区别？",
+      "target": "/zh-hans/learn/chatgpt-apps-vs-claude-connectors"
+    },
+    {
+      "id": 14,
+      "query": "Claude 如何连接数据库？",
+      "target": "/zh-hans/learn/claude-connectors-for-databases"
+    },
+    {
+      "id": 15,
+      "query": "有哪些 ChatGPT 设计工具？",
+      "target": "/zh-hans/collections/chatgpt-apps-for-design"
+    },
+    {
+      "id": 16,
+      "query": "GitHub MCP 适合什么工作流？",
+      "target": "/zh-hans/app/github"
+    },
+    {
+      "id": 17,
+      "query": "如何使用 Figma MCP？",
+      "target": "/zh-hans/app/figma"
+    },
+    {
+      "id": 18,
+      "query": "Canva MCP 可以做什么？",
+      "target": "/zh-hans/app/canva"
+    },
+    {
+      "id": 19,
+      "query": "Neon MCP 使用前需要检查什么？",
+      "target": "/zh-hans/app/neon"
+    },
+    {
+      "id": 20,
+      "query": "Context7 如何查询库文档？",
+      "target": "/zh-hans/app/context7"
+    }
+  ],
+  "manualEvidenceRequired": [
+    "GSC same-window query/page clicks, impressions and selected URL indexing",
+    "GA4 engaged sessions, referrals and app_open/mcp_copy/generate_lead",
+    "Cloudflare HTML requests, status and verified bot breakdown separately from all requests",
+    "AI answers with provider/model/date/locale/exact prompt and cited URL; unknown is not zero"
+  ],
+  "aiCitationBaseline": null
+}

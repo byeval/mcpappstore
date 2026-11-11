@@ -1,3 +1,5 @@
+import { CatalogSearch } from "@/components/catalog-search";
+import { discoveryCopy } from "@/lib/discovery-copy";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -72,9 +74,10 @@ export default async function AppsIndexPage() {
           <p className="section-copy">
             {formatMessage(t.appsIndex.copy, { count: apps.length })}
           </p>
-          <p className="section-copy">{formatMessage(t.common.updated, { date: lastUpdatedDate })}</p>
+          <p className="section-copy">{`${discoveryCopy(locale).synced}: ${lastUpdatedDate}`}</p>
         </div>
 
+        <CatalogSearch locale={locale} messages={t} />
         <div className="app-index-metrics" aria-label={t.appsIndex.countsAria}>
           <div>
             <strong>{apps.length}</strong>

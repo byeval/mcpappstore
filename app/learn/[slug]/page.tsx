@@ -57,7 +57,7 @@ export default async function LearnArticlePage({
     articleJsonLd({
       title: article.title,
       description: article.description,
-      path: `/learn/${article.slug}`,
+      path: href(`/learn/${article.slug}`),
       dateModified: article.updatedAt,
     }),
     breadcrumbJsonLd([
@@ -118,7 +118,8 @@ export default async function LearnArticlePage({
             </div>
           </header>
 
-          <div className="article-body">
+          {article.translationStatus === "original" ? <p className="translation-note">{locale === "zh-hans" ? "本文完整正文暂为英文。以下显示原文，避免以简略摘要代替操作指南。" : "The full guide is currently available in English. The original text is shown below."} <Link href={`/learn/${article.slug}`}>English →</Link></p> : null}
+          <div className="article-body" lang={article.contentLanguage ?? locale}>
             {article.sections.map((section) => (
               <section className="article-section" id={section.id} key={section.id}>
                 <h2>{section.title}</h2>
@@ -160,7 +161,7 @@ export default async function LearnArticlePage({
           ) : null}
 
           {article.faqs ? (
-            <section className="article-faq" id="faq">
+            <section className="article-faq" id="faq" lang={article.contentLanguage ?? locale}>
               <div className="section-head compact">
                 <p className="eyebrow">{t.common.faq}</p>
                 <h2>{t.learnArticle.shortAnswers}</h2>

@@ -1,9 +1,11 @@
+import { canonicalAppId } from "@/lib/catalog-identity";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+import { AppEvidence } from "@/components/app-evidence";
 import { AppCard } from "@/components/app-card";
 import { CatalogCopyButton } from "@/components/catalog-copy-button";
 import { PlatformBadge } from "@/components/platform-badge";
@@ -33,7 +35,7 @@ import { primarySurface, surfaceDetails, type SurfaceResolvedDetails } from "@/l
 import type { AppSkill, CatalogApp, CategorySummary } from "@/lib/types";
 import { initials } from "@/lib/utils";
 
-const genericCategories = new Set(["featured"]);
+const genericCategories = new Set(["featured", "productivity", "other", "developer-tools", "new-and-noteworthy"]);
 const genericCapabilities = new Set(["claude", "claude code", "interactive", "reads", "remote mcp", "writes"]);
 
 export async function generateMetadata({
@@ -50,7 +52,7 @@ export async function generateMetadata({
   return pageMetadata({
     title: localizedAppSeoTitle(app, locale),
     description: localizedAppDescription(app, locale),
-    path: `/app/${app.id}`,
+    path: `/app/${canonicalAppId(app)}`,
     locale,
     imagePath: `/api/og/${app.id}.png`,
     openGraphType: "article",
@@ -952,22 +954,7 @@ export default async function AppDetailPage({
     .slice(0, 4)
     .map((candidate) => candidate.app);
   const appFaqs = appFaqItems(app, primaryDetails, primaryListing, categoryBySlug, locale, t.surface);
-  const appKind = localizedAppKind(app, locale);
-  const platformText = localizedPlatformText(app, locale);
   const aboutName = mcpSearchName(app.name);
-  const aboutTools = primaryDetails.tools.length > 0
-    ? locale === "ja"
-      ? `掲載されている MCP ツールには ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name), locale)} などがあります。`
-      : locale === "ko"
-        ? `등록된 MCP 도구에는 ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name), locale)} 등이 포함됩니다.`
-        : locale === "zh-hans"
-          ? `已列出的 MCP 工具包括 ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name), locale)} 等。`
-          : locale === "ru"
-            ? `В листинге указаны MCP tools: ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name), locale)}.`
-            : `Listed MCP tools include ${readableList(primaryDetails.tools.slice(0, 5).map((tool) => tool.name))}.`
-    : fallbackScope(app, primaryDetails, categoryBySlug, locale);
-  const useCaseItems = appUseCaseItems(app, primaryDetails, categoryBySlug, locale);
-  const connectionChecklist = appConnectionChecklist(app, primaryDetails, primaryListing, locale, t.surface);
   const capabilitiesText = primaryDetails.capabilities.join(", ");
   const relatedGuideLinks = appRelatedGuideLinks(app);
   const recommendedSkills = (app.skills ?? []).slice(0, 6);
@@ -1021,52 +1008,12 @@ export default async function AppDetailPage({
         </div>
       </header>
 
+      <AppEvidence app={app} locale={locale} messages={t} />
+
       <PreviewBubbles mockupLabel={t.appDetail.mockup} previews={primaryDetails.previews} />
 
       <section className="detail-section prose-grid">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{primaryDetails.description}</ReactMarkdown>
-      </section>
-
-      <section className="detail-section prose-grid" aria-labelledby="about-mcp">
-        <h2 className="section-title" id="about-mcp">{formatMessage(t.appDetail.about, { name: aboutName })}</h2>
-        <p>
-          {formatMessage(t.appDetail.aboutParagraph, {
-            appName: app.name,
-            article: locale === "en" ? kindArticle(appKind) : "",
-            kind: appKind,
-            platformText,
-          })}
-        </p>
-        <p>
-          {aboutTools} {formatMessage(t.appDetail.authTransport, {
-            auth: authLabel(primaryDetails.authType, locale),
-            transport: primaryDetails.mcpTransport,
-          })}
-        </p>
-      </section>
-
-      <section className="detail-section" aria-labelledby="app-use-cases">
-        <h2 className="section-title" id="app-use-cases">{formatMessage(t.appDetail.useCases, { name: aboutName })}</h2>
-        <ul className="tool-list tool-table">
-          {useCaseItems.map((item) => (
-            <li key={item.title}>
-              <strong>{item.title}</strong>
-              <span>{item.body}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="detail-section" aria-labelledby="connection-checklist">
-        <h2 className="section-title" id="connection-checklist">{t.appDetail.beforeConnect}</h2>
-        <ul className="tool-list tool-table">
-          {connectionChecklist.map((item) => (
-            <li key={item.title}>
-              <strong>{item.title}</strong>
-              <span>{item.body}</span>
-            </li>
-          ))}
-        </ul>
       </section>
 
       {recommendedSkills.length > 0 ? (
@@ -1200,7 +1147,7 @@ export default async function AppDetailPage({
           </div>
           <div className="info-row">
             <div className="info-key">{t.appDetail.developer}</div>
-            <div className="info-val">{app.publisher}</div>
+            <div className="info-val">{app.publisher && app.publisher !== "Unknown" ? app.publisher : t.common.notProvided}</div>
           </div>
           <div className="info-row">
             <div className="info-key">{t.appDetail.website}</div>
@@ -1318,7 +1265,7 @@ export default async function AppDetailPage({
       </section>
 
       <div className="report">
-        <Link className="report-btn" href={href("/")}>
+        <Link className="report-btn" href={href("/store")}>
           {t.appDetail.backToApps}
         </Link>
       </div>

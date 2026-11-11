@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { AppComparison } from "@/components/app-comparison";
 import { AppCard } from "@/components/app-card";
 import {
   COLLECTION_APP_LIMIT,
@@ -129,6 +130,8 @@ export default async function CollectionPage({
         </aside>
 
         <div className="collection-main">
+          <p className="evidence-note">{locale === "zh-hans" ? "按平台、分类和相关关键词筛选，优先展示编辑选择的条目；排序不代表使用量或测试评分。" : "Matched by platform, category and relevant terms, with editorial selections first. Order does not represent usage or a test score."}</p>
+          <AppComparison apps={visibleApps} locale={locale} messages={t} />
           <section className="collection-apps-section">
             <div className="collection-apps-head">
               <div>

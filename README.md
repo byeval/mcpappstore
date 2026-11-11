@@ -37,7 +37,17 @@ Mark these names as key events in GA4. Compare them alongside engaged sessions, 
 
 Local/preview hosts and browsers exposing `navigator.webdriver` do not initialize the application analytics loaders. For browser checks on production, set `window.__MCPAPP_DISABLE_ANALYTICS__ = true` before app scripts, or set `sessionStorage["mcpapp:analytics:disabled"] = "1"` before reloading. Also block `googletagmanager.com`, `google-analytics.com` (including regional endpoints), `static.cloudflareinsights.com` and `/cdn-cgi/rum` at the test browser's network layer: Cloudflare may inject its own beacon independently. These guards isolate tests; they do not classify all production bots. Never filter entire cities or countries solely because their engagement is low.
 
-Validation: `npm run check`, `node --import tsx --test scripts/browser-analytics.test.ts scripts/sitemap-discovery.test.ts`, `npm run audit:seo`, `npm run smoke:seo`, and `npm run build`. The analytics tests use an in-memory browser, and SEO smoke reads only a local server. Verify the live index and representative HTML after release; wait for Google's processing before judging search growth.
+Validation: `npm run check`, `node --import tsx --test scripts/discovery.test.ts scripts/browser-analytics.test.ts scripts/sitemap-discovery.test.ts`, `npm run audit:seo`, `npm run smoke:seo`, and `npm run build`. The analytics tests use an in-memory browser, and SEO smoke reads only a local server. Verify the live index and representative HTML after release; wait for Google's processing before judging search growth.
+
+## Content quality and four-week observation
+
+The accepted scope and content rules are maintained in [PLAN.md](./PLAN.md). App editorial evidence lives in `lib/app-editorial.ts`; reviewed canonical aliases live in `lib/catalog-identity.ts`. Add an alias only after comparing platform, surface type, and external ID. Do not delete historical records. Release checks reject missing evidence, identity drift, or placeholder guide bodies, while duplicate-title groups remain an explicit review queue.
+
+Run `npm run audit:seo -- --output=reports/seo-content-audit.json` for the full identity/metadata queue and translation coverage. Run `python3 scripts/seo-health.py --base-url http://localhost:3001 --output reports/seo-local-health.json` against a local server, or omit the base URL to check production. The latter performs read-only HTTP requests; it does not execute browser analytics or submit forms. Requests still count at the edge.
+
+[The observation cohort](./ops/seo-observation.json) fixes 20 English/Chinese questions, target pages, and review dates (November 18, November 25, December 2, December 9). The `SEO observation` GitHub workflow archives public checks weekly for that window; it remains manually runnable afterward. Its artifacts are technical availability/content evidence only. GA4/GSC exports and actual AI answers are not automatically collected by this workflow. Keep account exports in ignored `reports/` rather than publishing them with source code.
+
+For each review, compare equal complete seven-day windows with the same reporting timezone and hostname. Record GSC query/page clicks, impressions and selected-page indexing; GA4 engaged sessions, referrals and meaningful catalog events; and Cloudflare HTML/error/bot traffic separately from total requests. For each AI question, save provider, model, date, locale, exact prompt, answer and cited URL. Unmeasured citations stay unknown, not zero; mentions without a link are not citations. Evaluate the four-week trend rather than promising a ranking or citation increase.
 
 ## Stack
 

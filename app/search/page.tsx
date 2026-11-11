@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { CatalogSearch } from "@/components/catalog-search";
+import { discoveryCopy } from "@/lib/discovery-copy";
 import type { Metadata } from "next";
 
 import { AppCard } from "@/components/app-card";
@@ -9,7 +12,7 @@ import { pageMetadata, truncateMeta } from "@/lib/seo";
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{ q?: string; platform?: string }>;
 }): Promise<Metadata> {
   const [{ locale }, { q = "" }] = await Promise.all([getI18n(), searchParams]);
   const query = q.trim();
@@ -43,11 +46,13 @@ export async function generateMetadata({
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{ q?: string; platform?: string }>;
 }) {
   const { locale, messages: t } = await getI18n();
-  const { q = "" } = await searchParams;
-  const results = q ? await searchApps(q) : [];
+  const { q: rawQuery = "", platform: rawPlatform = "" } = await searchParams;
+  const q = rawQuery.trim().slice(0, 200);
+  const platform = rawPlatform === "chatgpt" || rawPlatform === "claude" ? rawPlatform : undefined;
+  const results = q || platform ? await searchApps(q, platform) : [];
   const href = (path: string) => localizedPath(path, locale);
 
   return (
@@ -57,13 +62,10 @@ export default async function SearchPage({
           <p className="eyebrow">{t.searchPage.eyebrow}</p>
           <h1>{t.searchPage.title}</h1>
         </div>
-        <form action={href("/search")} className="search-form">
-          <input defaultValue={q} name="q" placeholder={t.searchPage.placeholder} />
-          <button className="primary-link" type="submit">
-            {t.searchPage.submit}
-          </button>
-        </form>
-        {q ? <p className="section-copy">{formatMessage(t.searchPage.results, { count: results.length, query: q })}</p> : null}
+        <CatalogSearch locale={locale} messages={t} query={q} platform={platform} />
+        {q || platform ? <p className="section-copy">{formatMessage(t.searchPage.results, { count: results.length, query: q })}</p> : null}
+        {(q || platform) && results.length === 0 ? <div className="empty-collection"><h2>{discoveryCopy(locale).emptyTitle}</h2><p>{discoveryCopy(locale).emptyBody}</p><Link href={href("/store")}>{t.common.all} {t.common.apps}</Link></div> : null}
+        {results.length === 96 ? <p className="evidence-note">{locale === "zh-hans" ? "显示前 96 个匹配结果，请添加关键词缩小范围。" : "Showing the first 96 matches. Refine your search to narrow the results."}</p> : null}
         <div className="app-grid">
           {results.map((app) => (
             <AppCard app={app} key={app.id} locale={locale} messages={t} />

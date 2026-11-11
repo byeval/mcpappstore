@@ -1,0 +1,40 @@
+name: SEO observation
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 2 * * 3'
+permissions:
+  contents: read
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Four-week observation window
+        id: window
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" || "$(date -u +%F)" < "2026-12-10" ]]; then
+            echo 'active=true' >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v4
+        if: steps.window.outputs.active == 'true'
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        if: steps.window.outputs.active == 'true'
+        run: npm ci
+      - name: Public page and content checks
+        if: steps.window.outputs.active == 'true'
+        run: |
+          npm run audit:seo -- --output=reports/seo-content-audit.json
+          python3 scripts/seo-health.py
+          npm run audit:sitemaps
+      - name: Save observation evidence
+        if: always() && steps.window.outputs.active == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-observation-${{ github.run_id }}
+          path: reports/seo-*.json
+          retention-days: 45

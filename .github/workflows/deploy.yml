@@ -34,6 +34,12 @@ jobs:
       - name: Typecheck
         run: npm run check
 
+      - name: Discovery and analytics regression checks
+        run: node --import tsx --test scripts/discovery.test.ts scripts/browser-analytics.test.ts scripts/sitemap-discovery.test.ts
+
+      - name: Catalog evidence and localization audit
+        run: npm run audit:seo
+
       - name: Deploy
         run: npm run deploy
         env:

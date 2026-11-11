@@ -1,3 +1,4 @@
+import { zhCoreArticles } from "./learn-zh-core";
 import { platformComparison } from "@/lib/platform-comparison";
 import {
   appCollections,
@@ -2156,10 +2157,15 @@ function mergeArticle(article: LearnArticle, patch: LocalizedArticle | undefined
       relatedLinks: mergeLinks(article.relatedLinks, patch?.relatedLinks, locale),
     };
   }
-  if (!patch) return article;
+  const ctas = { primaryCta: article.primaryCta ? { ...article.primaryCta, ...patch?.primaryCta } : undefined, secondaryCta: article.secondaryCta ? { ...article.secondaryCta, ...patch?.secondaryCta } : undefined };
+  const core = locale === "zh-hans" ? zhCoreArticles[article.slug] : undefined;
+  if (core) return { ...article, ...patch, ...ctas, ...core, contentLanguage: "zh-Hans", translationStatus: "complete", relatedLinks: mergeLinks(article.relatedLinks, patch?.relatedLinks, locale) };
+  if (!patch || !patch.sections) return { ...article, ...patch, ...ctas, sections: article.sections, faqs: article.faqs, sources: article.sources, contentLanguage: "en", translationStatus: locale === "en" ? "complete" : "original", relatedLinks: mergeLinks(article.relatedLinks, patch?.relatedLinks, locale) };
   return {
     ...article,
     ...patch,
+    contentLanguage: locale,
+    translationStatus: "complete",
     primaryCta: article.primaryCta ? { ...article.primaryCta, ...patch.primaryCta } : undefined,
     secondaryCta: article.secondaryCta ? { ...article.secondaryCta, ...patch.secondaryCta } : undefined,
     relatedLinks: mergeLinks(article.relatedLinks, patch.relatedLinks, locale),

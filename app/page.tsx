@@ -63,53 +63,13 @@ export default async function HomePage() {
           <input autoComplete="off" id="home-search" name="q" placeholder={t.home.searchPlaceholder} type="search" />
         </form>
       </header>
-      <section className="home-quick-links" aria-label={t.home.quickLinksAria}>
-        <Link href={href("/awesome-mcp-apps")} prefetch={false}>
-          {t.home.quickAwesomeApps}
-        </Link>
-        <Link href={href("/mcp-clients")} prefetch={false}>
-          {t.home.quickMcpClients}
-        </Link>
-        <Link href={href("/mcp-inspector")} prefetch={false}>
-          {t.home.quickInspector}
-        </Link>
-        <Link href={href("/remote-mcp-servers")} prefetch={false}>
-          Remote MCP servers
-        </Link>
-        <Link href={href("/topics")} prefetch={false}>
-          MCP topics
-        </Link>
-        <details className="quick-links-more">
-          <summary>{t.common.all}</summary>
-          <div>
-            <Link href={href("/mcp-directory")} prefetch={false}>{t.home.quickDirectory}</Link>
-            <Link href={href("/mcp-servers")} prefetch={false}>{t.home.quickServers}</Link>
-            <Link href={href("/official-mcp-servers")} prefetch={false}>Official MCP servers</Link>
-            <Link href={href("/popular-searches")} prefetch={false}>Popular searches</Link>
-            <Link href={href("/chatgpt-connectors")} prefetch={false}>{t.home.quickChatgptConnectors}</Link>
-            <Link href={href("/chatgpt-apps")} prefetch={false}>{t.nav.chatgpt}</Link>
-            <Link href={href("/claude-connectors")} prefetch={false}>{t.nav.claude}</Link>
-            <Link href={href("/apps")} prefetch={false}>{t.nav.apps}</Link>
-          </div>
-        </details>
-      </section>
-      <HeroCarousel apps={featuredApps} locale={locale} messages={t} />
+      <nav className="home-quick-links" aria-label={t.common.availableSurfaces}>
+        <Link href={href("/chatgpt-apps")} prefetch={false}>{t.nav.chatgpt}</Link>
+        <Link href={href("/claude-connectors")} prefetch={false}>{t.nav.claude}</Link>
+        <Link href={href("/remote-mcp-servers")} prefetch={false}>Remote MCP</Link>
+        <Link href={href("/store")} prefetch={false}>{t.common.all} {t.common.apps}</Link>
+      </nav>
       <CategoryTabs activeSlug={undefined} categories={categories} locale={locale} messages={t} />
-      <section className="home-learn-band" aria-label={t.home.learnAria}>
-        <div>
-          <p className="eyebrow">{t.home.learnEyebrow}</p>
-          <h2>{t.home.learnTitle}</h2>
-          <p>{t.home.learnBody}</p>
-        </div>
-        <div className="home-learn-links">
-          {learning.slice(0, 3).map((article) => (
-            <Link href={href(`/learn/${article.slug}`)} key={article.slug} prefetch={false}>
-              <span>{article.title}</span>
-              <span aria-hidden="true" className="home-learn-arrow">→</span>
-            </Link>
-          ))}
-        </div>
-      </section>
       <section className="grid" aria-label={t.common.appListAria}>
         <div className="home-directory-head">
           <div>
@@ -139,6 +99,22 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+      <section className="home-learn-band" aria-label={t.home.learnAria}>
+        <div>
+          <p className="eyebrow">{t.home.learnEyebrow}</p>
+          <h2>{t.home.learnTitle}</h2>
+          <p>{t.home.learnBody}</p>
+        </div>
+        <div className="home-learn-links">
+          {learning.slice(0, 3).map((article) => (
+            <Link href={href(`/learn/${article.slug}`)} key={article.slug} prefetch={false}>
+              <span>{article.title}</span>
+              <span aria-hidden="true" className="home-learn-arrow">→</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+      <HeroCarousel apps={featuredApps} locale={locale} messages={t} />
       <script
         dangerouslySetInnerHTML={jsonLdScript([
           organizationJsonLd(),

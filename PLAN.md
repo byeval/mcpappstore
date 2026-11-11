@@ -4,6 +4,16 @@ A public directory of **MCP apps** — consumer-facing integrations with an avat
 
 **MCP app vs. MCP server.** An MCP app is the product-level experience — name, avatar, tagline, preview mockups, developer, category. An MCP server is the technical backend that powers it (transport, endpoint, tools). This directory surfaces *apps*; any technical connection metadata stays out of the public UI.
 
+## Accepted discovery and content direction — 2026-11-11
+
+The directory keeps its visual product focus while exposing the connection facts users need to choose an integration. This supersedes the original blanket rule above that technical connection metadata stays out of the public UI. Primary navigation is Discover tools, Use cases, Skills, Learn, and Developer tools; the homepage presents search and catalog entries before promotional and educational blocks.
+
+- Preserve historical entries and URLs. Treat name similarity as an identity-review lead, never sufficient grounds for a merge. Two reviewed aliases (Adobe and Data) share exact external identities and use a shared canonical while remaining accessible. CI must fail if that identity evidence changes.
+- Publish source-backed English and Chinese workflow notes for the first 20 selected apps. Separate catalog sync dates, documentation review dates, and connected-account tests. Unknown publishers and untested connections stay explicit. Never infer current pricing or cross-platform feature parity.
+- Complete the three Chinese core guides (MCP definition, first app, database connectors). Other incomplete translations retain the full English source with a visible language notice; generated generic sections are not substitutes for a tutorial. Remaining translation coverage is a tracked backlog, not completed localization.
+- Collections show their selection method and compact comparison tables. HTML, structured data, and Markdown use the same localized identity and content. Google-Extended remains blocked; no additional crawler access was authorized by this content change.
+- Measure the priority landing pages and the fixed 20 questions in `ops/seo-observation.json` over four weeks. Public HTTP/content/sitemap checks run weekly through December 9. Private GSC/GA4 reports and AI citation observations require separately captured evidence; a healthy page does not demonstrate indexing, traffic growth, or an AI citation.
+
 ---
 
 ## 1. Architecture at a Glance

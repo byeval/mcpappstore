@@ -286,7 +286,7 @@ const enMessages = {
     metaDescription: "Browse every MCP app, ChatGPT app, Claude connector, and MCP server in the mcpapp directory by name.",
     eyebrow: "App index",
     title: "All MCP apps A-Z",
-    copy: "Crawlable links to {count} published MCP apps, ChatGPT apps, Claude connectors, and MCP servers.",
+    copy: "Explore {count} listed MCP apps, ChatGPT apps, Claude connectors, and MCP servers.",
     totalListings: "Total listings",
     chatgptApps: "ChatGPT apps",
     claudeConnectors: "Claude connectors",
@@ -302,7 +302,7 @@ const enMessages = {
     compareFirst: "Compare first",
     faqEyebrow: "FAQ",
     chatgptTitle: "ChatGPT apps",
-    chatgptCopy: "{count} indexed ChatGPT apps with platform-specific tools and previews.",
+    chatgptCopy: "{count} listed ChatGPT apps with platform-specific tools and previews.",
     chatgptGuideEyebrow: "ChatGPT app guide",
     chatgptGuideTitle: "Find MCP apps built for ChatGPT workflows.",
     chatgptGuideBody1:
@@ -323,7 +323,7 @@ const enMessages = {
       "Compare the app's category, tools, preview examples, publisher, privacy links, auth type, and whether it can read, write, or show an interactive UI.",
     chatgptFaqTitle: "Short answers about ChatGPT MCP apps.",
     claudeTitle: "Claude connectors",
-    claudeCopy: "{count} indexed Claude connectors with platform-specific tools and previews.",
+    claudeCopy: "{count} listed Claude connectors with platform-specific tools and previews.",
     claudeGuideEyebrow: "Claude connector guide",
     claudeGuideTitle: "Find MCP connectors for Claude workflows.",
     claudeGuideBody1:

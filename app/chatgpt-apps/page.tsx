@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { CatalogSearch } from "@/components/catalog-search";
+import { discoveryCopy } from "@/lib/discovery-copy";
 import { PaginatedAppGrid } from "@/components/app-pagination";
 import {
   PLATFORM_APP_PAGE_SIZE,
@@ -81,8 +83,18 @@ export default async function ChatgptAppsPage({
           <p className="eyebrow">{t.platformPages.eyebrow}</p>
           <h1>{t.platformPages.chatgptTitle}</h1>
           <p className="section-copy">{formatMessage(t.platformPages.chatgptCopy, { count: totalCount })}</p>
-          <p className="section-copy">{formatMessage(t.common.updated, { date: lastUpdatedDate })}</p>
+          <p className="section-copy">{`${discoveryCopy(locale).synced}: ${lastUpdatedDate}`}</p>
         </div>
+        <CatalogSearch locale={locale} messages={t} platform="chatgpt" />
+        <PaginatedAppGrid
+          apps={apps}
+          basePath="/chatgpt-apps"
+          locale={locale}
+          messages={t}
+          page={page}
+          pageSize={PLATFORM_APP_PAGE_SIZE}
+          totalCount={totalCount}
+        />
         <section className="category-guide" aria-labelledby="chatgpt-apps-guide">
           <div className="category-guide-copy">
             <p className="eyebrow">{t.platformPages.chatgptGuideEyebrow}</p>
@@ -104,15 +116,7 @@ export default async function ChatgptAppsPage({
             </ul>
           </div>
         </section>
-        <PaginatedAppGrid
-          apps={apps}
-          basePath="/chatgpt-apps"
-          locale={locale}
-          messages={t}
-          page={page}
-          pageSize={PLATFORM_APP_PAGE_SIZE}
-          totalCount={totalCount}
-        />
+
         <section className="article-faq category-faq" id="faq">
           <div className="section-head compact">
             <p className="eyebrow">{t.platformPages.faqEyebrow}</p>

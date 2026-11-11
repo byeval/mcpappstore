@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 
 import { GoogleAnalyticsPageTracker } from "@/components/google-analytics";
-import { LanguageSwitcher } from "@/components/language-switcher";
+import { SiteNavigation } from "@/components/site-navigation";
 import { getEnvValue } from "@/lib/cloudflare";
 import { localeDetails, localizedPath } from "@/lib/i18n";
 import { getI18n, getRequestPathname } from "@/lib/i18n-server";
@@ -102,59 +102,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             <Link className="mobile-submit" href={href("/submit")} prefetch={false}>
               {t.common.submitYourMcp}
             </Link>
-            <details className="mobile-nav-menu">
-              <summary>{t.nav.browse}</summary>
-              <nav aria-label={t.nav.browse} className="mobile-nav-panel">
-                <Link href={href("/")} prefetch={false}>{t.nav.browse}</Link>
-                <Link href={href("/store")} prefetch={false}>{t.nav.apps}</Link>
-                <Link href={href("/mcp-clients")} prefetch={false}>{t.nav.clients}</Link>
-                <Link href={href("/mcp-inspector")} prefetch={false}>{t.nav.inspector}</Link>
-                <Link href={href("/remote-mcp-servers")} prefetch={false}>Remote</Link>
-                <Link href={href("/topics")} prefetch={false}>Topics</Link>
-                <Link href={href("/skills")} prefetch={false}>{t.nav.skills}</Link>
-                <Link href={href("/chatgpt-apps")} prefetch={false}>{t.nav.chatgpt}</Link>
-                <Link href={href("/claude-connectors")} prefetch={false}>{t.nav.claude}</Link>
-                <Link href={href("/learn")} prefetch={false}>{t.nav.learn}</Link>
-                <Link className="mobile-nav-submit" href={href("/submit")} prefetch={false}>{t.common.submitYourMcp}</Link>
-                <LanguageSwitcher locale={locale} messages={t} pathname={pathname} />
-              </nav>
-            </details>
-            <nav className="nav-right">
-              <Link className="nav-link" href={href("/")} prefetch={false}>
-                {t.nav.browse}
-              </Link>
-              <Link className="nav-link" href={href("/store")} prefetch={false}>
-                {t.nav.apps}
-              </Link>
-              <Link className="nav-link" href={href("/mcp-clients")} prefetch={false}>
-                {t.nav.clients}
-              </Link>
-              <Link className="nav-link" href={href("/mcp-inspector")} prefetch={false}>
-                {t.nav.inspector}
-              </Link>
-              <Link className="nav-link" href={href("/remote-mcp-servers")} prefetch={false}>
-                Remote
-              </Link>
-              <Link className="nav-link" href={href("/topics")} prefetch={false}>
-                Topics
-              </Link>
-              <Link className="nav-link" href={href("/skills")} prefetch={false}>
-                {t.nav.skills}
-              </Link>
-              <Link className="nav-link" href={href("/chatgpt-apps")} prefetch={false}>
-                {t.nav.chatgpt}
-              </Link>
-              <Link className="nav-link" href={href("/claude-connectors")} prefetch={false}>
-                {t.nav.claude}
-              </Link>
-              <Link className="nav-link" href={href("/learn")} prefetch={false}>
-                {t.nav.learn}
-              </Link>
-              <LanguageSwitcher locale={locale} messages={t} pathname={pathname} />
-              <Link className="btn-primary" href={href("/submit")} prefetch={false}>
-                {t.common.submitYourMcpLong}
-              </Link>
-            </nav>
+            <SiteNavigation locale={locale} messages={t} pathname={pathname} />
           </header>
           <main id="main-content">{children}</main>
           <footer className="footer">

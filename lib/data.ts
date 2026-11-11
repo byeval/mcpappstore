@@ -1263,9 +1263,9 @@ export async function listAppsByPlatformPage(
     .slice(safeOffset, safeOffset + safeLimit);
 }
 
-export async function searchApps(query: string): Promise<CatalogApp[]> {
+export async function searchApps(query: string, platform?: "chatgpt" | "claude"): Promise<CatalogApp[]> {
   const normalized = query.trim().toLowerCase();
-  if (!normalized) {
+  if (!normalized && !platform) {
     return [];
   }
 
@@ -1284,6 +1284,7 @@ export async function searchApps(query: string): Promise<CatalogApp[]> {
            LEFT JOIN app_skills ask ON ask.app_id = a.id
            LEFT JOIN skills skill ON skill.id = ask.skill_id
            WHERE a.status = 'published'
+             AND (? IS NULL OR EXISTS (SELECT 1 FROM app_surfaces ps WHERE ps.app_id = a.id AND ps.platform = ?))
              AND (
               LOWER(a.id) LIKE ?
               OR LOWER(a.name) LIKE ?
@@ -1308,7 +1309,7 @@ export async function searchApps(query: string): Promise<CatalogApp[]> {
            ORDER BY a.is_featured DESC, COALESCE(a.published_at, a.updated_at) DESC
            LIMIT 96`,
         )
-        .bind(...Array.from({ length: 19 }, () => likeQuery))
+        .bind(platform ?? null, platform ?? null, ...Array.from({ length: 19 }, () => likeQuery))
         .all<Record<string, unknown>>();
 
       return hydrateAppRows(rows.results, listHydration);
@@ -1319,6 +1320,7 @@ export async function searchApps(query: string): Promise<CatalogApp[]> {
 
   const apps = await listPublishedApps();
   return apps.filter((app) => {
+    if (platform && !app.surfaces.some(surface => surface.platform === platform)) return false;
     const appSkills = app.skills?.length ? app.skills : skillsForAppFromSeed(app.id);
     const haystack = [
       app.name,
@@ -1355,7 +1357,7 @@ export async function searchApps(query: string): Promise<CatalogApp[]> {
       .toLowerCase();
 
     return haystack.includes(normalized);
-  });
+  }).slice(0, 96);
 }
 
 export async function createSubmission(

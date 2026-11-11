@@ -1,3 +1,5 @@
+import { canonicalAppId } from "./catalog-identity";
+import { editorialFor } from "./app-editorial";
 import type { Metadata } from "next";
 
 import { defaultLocale, localeDetails, localizedPath, supportedLocales, type Locale } from "@/lib/i18n";
@@ -282,7 +284,7 @@ export function localizedAppSeoTitle(app: Pick<CatalogApp, "name" | "publisher" 
 }
 
 export function appDescription(app: CatalogApp): string {
-  const summary = normalizeSentence(app.tagline || app.description);
+  const summary = normalizeSentence(editorialFor(app.id, "en")?.useCase || app.tagline || app.description);
   return truncateMeta(
     `${appSeoTitle(app)}. ${summary}. Compare tools, prompts, auth, transport, and publisher details.`,
   );
@@ -294,6 +296,8 @@ export function localizedAppDescription(app: CatalogApp, locale: Locale): string
   }
 
   const title = localizedAppSeoTitle(app, locale);
+  const editorial = editorialFor(app.id, locale);
+  if (editorial && locale === "zh-hans") return truncateMeta(`${app.name}：${editorial.useCase} ${editorial.check}`);
   const publisher = app.publisher || app.name;
   const descriptions: Record<Exclude<Locale, "en">, string> = {
     es: `${title}. Compara herramientas, prompts, autenticación, transporte y detalles del editor ${publisher}.`,
@@ -337,7 +341,7 @@ export function appJsonLd(app: CatalogApp, locale: Locale = defaultLocale) {
       name: app.publisher,
       url: app.publisherUrl,
     },
-    url: absoluteUrl(localizedPath(`/app/${app.id}`, locale)),
+    url: absoluteUrl(localizedPath(`/app/${canonicalAppId(app)}`, locale)),
     sameAs: [app.homepageUrl, app.repoUrl].filter(Boolean),
   };
 }

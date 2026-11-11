@@ -1,4 +1,6 @@
-import { getLearnArticle, learnArticles } from "@/lib/learn";
+import { localizedGetLearnArticle } from "@/lib/content-i18n";
+import { getI18n } from "@/lib/i18n-server";
+import { learnArticles } from "@/lib/learn";
 import { serializeLearnArticleMarkdown } from "@/lib/llms";
 
 export function generateStaticParams() {
@@ -12,13 +14,14 @@ export async function GET(
   },
 ) {
   const { slug } = await context.params;
-  const article = getLearnArticle(slug);
+  const { locale } = await getI18n();
+  const article = localizedGetLearnArticle(slug, locale);
 
   if (!article) {
     return new Response("Not found", { status: 404 });
   }
 
-  return new Response(serializeLearnArticleMarkdown(article), {
+  return new Response(serializeLearnArticleMarkdown(article, locale), {
     headers: {
       "content-type": "text/markdown; charset=utf-8",
       "cache-control": "public, max-age=3600, s-maxage=86400",

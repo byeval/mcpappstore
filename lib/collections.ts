@@ -751,5 +751,7 @@ export function collectionMatchesApp(collection: AppCollection, app: CatalogApp)
 }
 
 export function listCollectionApps(collection: AppCollection, apps: CatalogApp[]): CatalogApp[] {
-  return apps.filter((app) => collectionMatchesApp(collection, app));
+  const explicit = new Map((collection.appIds ?? []).map((id,index)=>[id,index]));
+  return apps.filter((app) => collectionMatchesApp(collection, app)).sort((a,b) =>
+    (explicit.get(a.id) ?? Number.MAX_SAFE_INTEGER) - (explicit.get(b.id) ?? Number.MAX_SAFE_INTEGER) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id));
 }

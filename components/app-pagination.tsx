@@ -3,9 +3,7 @@ import { formatMessage, getMessages, localizedPath, type I18nMessages, type Loca
 import { paginatedPath } from "@/lib/pagination";
 import type { CatalogApp } from "@/lib/types";
 
-function pageRange(totalPages: number): number[] {
-  return Array.from({ length: totalPages }, (_, index) => index + 1);
-}
+import { paginationWindow } from "@/lib/pagination";
 
 export function PaginatedAppGrid({
   apps,
@@ -52,7 +50,7 @@ export function PaginatedAppGrid({
                 {t.pagination.previous}
               </a>
             ) : null}
-            {pageRange(totalPages).map((pageNumber) => (
+            {paginationWindow(safePage,totalPages).map((pageNumber,index) => pageNumber === null ? <span key={`gap-${index}`} aria-hidden="true">…</span> : (
               <a
                 aria-current={pageNumber === safePage ? "page" : undefined}
                 className={pageNumber === safePage ? "pagination-link active" : "pagination-link"}

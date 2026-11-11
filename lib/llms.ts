@@ -1,3 +1,6 @@
+import { canonicalAppId } from "./catalog-identity";
+import { editorialFor } from "./app-editorial";
+import { localizedPath, type Locale } from "./i18n";
 import { appCollections, listCollectionApps, type AppCollection } from "@/lib/collections";
 import { getCategorySummaries, listPublishedApps } from "@/lib/data";
 import { learnArticles, type LearnArticle, type LearnSection } from "@/lib/learn";
@@ -88,10 +91,10 @@ ${section.code ? `\n\n\`\`\`json\n${section.code}\n\`\`\`` : ""}
 ${section.callout ? `\n\n> ${section.callout}` : ""}`);
 }
 
-function appLine(app: CatalogApp) {
+function appLine(app: CatalogApp, locale: Locale = "en") {
   const platforms = appPlatformPhrase(app);
   const categories = app.categories.slice(0, 5).map((category) => category.replace(/-/g, " ")).join(", ");
-  return `- [${app.name}](${absoluteUrl(`/app/${app.id}`)}): ${appKindPhrase(app)}${platforms ? ` for ${platforms}` : ""}. ${app.tagline} Categories: ${categories || "not listed"}.`;
+  return `- [${app.name}](${absoluteUrl(localizedPath(`/app/${canonicalAppId(app)}`,locale))}): ${appKindPhrase(app)}${platforms ? ` for ${platforms}` : ""}. ${app.tagline} Categories: ${categories || "not listed"}.`;
 }
 
 function categoryLine(category: CategorySummary) {
@@ -126,7 +129,7 @@ function buildCollectionList(limit: number) {
     .join("\n");
 }
 
-export function serializeLearnArticleMarkdown(article: LearnArticle) {
+export function serializeLearnArticleMarkdown(article: LearnArticle, locale: Locale = "en") {
   const related = article.relatedLinks.map((link) => `- [${link.label}](${link.href.startsWith("http") ? link.href : absoluteUrl(link.href)})`).join("\n");
   const sources = article.sources.map((source) => `- [${source.label}](${source.url})`).join("\n");
   const faqs = article.faqs?.map((item) => `### ${item.question}\n\n${item.answer}`).join("\n\n") ?? "";
@@ -136,7 +139,9 @@ export function serializeLearnArticleMarkdown(article: LearnArticle) {
 > ${article.description}
 
 - Site: MCP App Store
-- Canonical: ${absoluteUrl(`/learn/${article.slug}`)}
+- Canonical: ${absoluteUrl(localizedPath(`/learn/${article.slug}`, locale))}
+- Content language: ${article.contentLanguage ?? locale}
+- Translation: ${article.translationStatus ?? "complete"}
 - Content type: ${article.intent}
 - Topics: ${article.topics.join(", ")}
 - Reading time: ${article.readingTime}
@@ -155,7 +160,7 @@ ${related}
 ${sources}`);
 }
 
-export function serializeCollectionMarkdown(collection: AppCollection, apps: CatalogApp[]) {
+export function serializeCollectionMarkdown(collection: AppCollection, apps: CatalogApp[], locale: Locale = "en") {
   const related = collection.relatedLinks.map((link) => `- [${link.label}](${link.href.startsWith("http") ? link.href : absoluteUrl(link.href)})`).join("\n");
   const faqs = collection.faqs.map((item) => `### ${item.question}\n\n${item.answer}`).join("\n\n");
 
@@ -164,7 +169,7 @@ export function serializeCollectionMarkdown(collection: AppCollection, apps: Cat
 > ${collection.description}
 
 - Site: MCP App Store
-- Canonical: ${absoluteUrl(`/collections/${collection.slug}`)}
+- Canonical: ${absoluteUrl(localizedPath(`/collections/${collection.slug}`,locale))}
 - Primary category: ${collection.primaryCategorySlug}
 - Platform focus: ${collection.platform ?? "all MCP hosts"}
 - Last updated: ${collection.updatedAt}
@@ -174,9 +179,17 @@ export function serializeCollectionMarkdown(collection: AppCollection, apps: Cat
 
 ${collection.checkpoints.map((checkpoint) => `- ${checkpoint}`).join("\n")}
 
+## Selection method
+
+Matches platform, categories or relevant terms, with editorial selections first. Order is not a usage ranking or test score.
+
 ## Matching Apps and Connectors
 
-${apps.slice(0, 36).map(appLine).join("\n") || "No matching listings yet."}
+${apps.slice(0, 24).map(app => appLine(app,locale)).join("\n") || "No matching listings yet."}
+
+## Source-backed workflow notes
+
+${apps.slice(0,8).map(app => { const e=editorialFor(app.id,locale); return e ? `### ${app.name}\n\n${e.useCase}\n\n${e.check}\n\nSource: ${e.sourceUrl} (documentation reviewed ${e.reviewedAt}; no connected-account test).` : ""; }).filter(Boolean).join("\n\n")}
 
 ## Related
 
@@ -231,7 +244,7 @@ ${topCategories.map(categoryLine).join("\n")}
 
 ## Representative listings
 
-${featuredApps.map(appLine).join("\n")}
+${featuredApps.map(app => appLine(app)).join("\n")}
 
 ## Topic areas
 
@@ -299,7 +312,7 @@ ${[...categories].sort((a, b) => b.count - a.count).map(categoryLine).join("\n")
 
 ## Representative app listings
 
-${apps.slice(0, 80).map(appLine).join("\n")}
+${apps.slice(0, 80).map(app => appLine(app)).join("\n")}
 
 ## Learn article inventory
 
