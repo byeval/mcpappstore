@@ -38,6 +38,20 @@ test("Claude structured data includes entries beyond the rendered first page", (
   assert.equal(extractPublicDirectoryItems("<html>Legacy directory</html>"), undefined);
 });
 
+test("Claude counts Duet promotions without importing them as connectors", () => {
+  const connector = {
+    title: "Real connector", slug: "real-connector", type: "remote",
+    directoryUrl: "https://claude.ai/directory/real-connector", hasMcpApp: null,
+  };
+  const promotion = {
+    title: "1Password", slug: "1password", type: "remote",
+    directoryUrl: "https://claude.com/product/claude-duet", hasMcpApp: null, serverUrl: null,
+  };
+  assert.deepEqual(extractPublicDirectoryItems(page([connector, promotion])), [connector]);
+  assert.throws(() => extractPublicDirectoryItems(page([connector, promotion], 3)), /coverage mismatch/);
+  assert.throws(() => extractPublicDirectoryItems(page([connector, { ...promotion, serverUrl: "https://example.com/mcp" }])));
+});
+
 test("Claude merge preserves rich metadata and protected submissions, deferring unverified local extensions", async () => {
   const dir = await mkdtemp(join(tmpdir(), "mcpapp-claude-test-"));
   const catalog = JSON.parse(await readFile("seed/chatgpt-apps.json", "utf8"));

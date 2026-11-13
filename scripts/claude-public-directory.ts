@@ -11,12 +11,17 @@ const itemSchema = z.object({
   type: z.enum(["remote", "local"]),
   categories: z.array(z.string()).nullable().optional(),
   worksWith: z.array(z.string()).nullable().optional(),
-  hasMcpApp: z.boolean().optional(),
+  hasMcpApp: z.boolean().nullish(),
   directoryUrl: z.string().url().refine((value) => new URL(value).hostname === "claude.ai"),
   addedAt: z.string().nullable().optional(),
 });
 
 export type PublicDirectoryItem = z.infer<typeof itemSchema>;
+
+const duetListingSchema = itemSchema.extend({
+  directoryUrl: z.literal("https://claude.com/product/claude-duet"),
+  serverUrl: z.null().optional(),
+});
 
 export function extractPublicDirectoryItems(html: string): PublicDirectoryItem[] | undefined {
   const chunks: string[] = [];
@@ -26,6 +31,7 @@ export function extractPublicDirectoryItems(html: string): PublicDirectoryItem[]
   }
 
   let items: PublicDirectoryItem[] | undefined;
+  let advertisedItems = 0;
   function visit(value: unknown): void {
     if (!value || typeof value !== "object") return;
     if (Array.isArray(value)) {
@@ -35,7 +41,9 @@ export function extractPublicDirectoryItems(html: string): PublicDirectoryItem[]
     const record = value as Record<string, unknown>;
     if (Array.isArray(record.items) && record.items.some((item) => item?.directoryUrl)) {
       if (items) throw new Error("Multiple Claude connector collections found");
-      items = z.array(itemSchema).parse(record.items);
+      const listings = z.array(z.union([itemSchema, duetListingSchema])).parse(record.items);
+      advertisedItems = listings.length;
+      items = listings.filter((item) => item.directoryUrl !== "https://claude.com/product/claude-duet");
       return;
     }
     Object.values(record).forEach(visit);
@@ -56,8 +64,8 @@ export function extractPublicDirectoryItems(html: string): PublicDirectoryItem[]
 
   const visibleText = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ");
   const advertisedCount = visibleText.match(/All connectors\s+([\d,]+)\s+connectors/i)?.[1];
-  if (advertisedCount && items?.length !== Number(advertisedCount.replaceAll(",", ""))) {
-    throw new Error(`Claude directory coverage mismatch: expected ${advertisedCount}, parsed ${items?.length ?? 0}`);
+  if (advertisedCount && advertisedItems !== Number(advertisedCount.replaceAll(",", ""))) {
+    throw new Error(`Claude directory coverage mismatch: expected ${advertisedCount}, parsed ${advertisedItems}`);
   }
   if (items && new Set(items.map((item) => item.directoryUrl)).size !== items.length) {
     throw new Error("Duplicate Claude directory IDs");
