@@ -8152,7 +8152,7 @@
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1789844349657,
-      "updatedAt": 1793736367598,
+      "updatedAt": 1794772770238,
       "publishedAt": 1789844349657,
       "surfaces": [
         {
@@ -8203,7 +8203,21 @@
         "featured",
         "creative"
       ],
-      "tags": [],
+      "tags": [
+        "floot",
+        "app builder",
+        "website builder",
+        "web app",
+        "mobile app",
+        "ios",
+        "android",
+        "full-stack",
+        "database",
+        "authentication",
+        "hosting",
+        "deploy",
+        "no-code"
+      ],
       "tools": [],
       "previews": [],
       "mcpEndpoint": "https://mcp.floot.com/mcp",
@@ -159229,7 +159243,7 @@
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792509879120,
-      "updatedAt": 1794763402123,
+      "updatedAt": 1794772770238,
       "publishedAt": 1792509879120,
       "surfaces": [
         {
@@ -159307,7 +159321,70 @@
         "pdf reader",
         "document reader",
         "story to video",
-        "text to 3d"
+        "text to 3d",
+        "images",
+        "pictures",
+        "picture generator",
+        "ai drawing",
+        "illustration",
+        "logo maker",
+        "poster maker",
+        "thumbnail maker",
+        "wallpaper",
+        "avatar maker",
+        "cartoon",
+        "anime art",
+        "portrait",
+        "product photos",
+        "character design",
+        "concept art",
+        "videos",
+        "ai animation",
+        "animate photo",
+        "video clips",
+        "short video",
+        "cinematic video",
+        "explainer video",
+        "storyboard",
+        "ai film maker",
+        "photo to video converter",
+        "voices",
+        "read aloud",
+        "audiobook",
+        "podcast generator",
+        "ai speech",
+        "songs",
+        "lyrics to song",
+        "ai singer",
+        "instrumental",
+        "background music",
+        "beat maker",
+        "soundtrack",
+        "sfx generator",
+        "3d models",
+        "3d asset",
+        "3d object",
+        "game assets",
+        "image to text",
+        "extract text",
+        "scan document",
+        "scanned pdf",
+        "summarize pdf",
+        "pdf to markdown",
+        "meeting transcript",
+        "speech recognition",
+        "describe image",
+        "ai vision",
+        "multimodal",
+        "ai research",
+        "answers with sources",
+        "generative ai",
+        "ai tools",
+        "content creation",
+        "ai content creator",
+        "social media content",
+        "ad creative",
+        "create"
       ],
       "tools": [],
       "previews": []
@@ -327390,7 +327467,7 @@
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792527503521,
-      "updatedAt": 1794599904939,
+      "updatedAt": 1794772770238,
       "publishedAt": 1792527503521,
       "surfaces": [
         {
@@ -327584,7 +327661,52 @@
         "jobnimbus crm",
         "roofing crm",
         "roofing ai",
-        "insurance claims"
+        "insurance claims",
+        "google sheets ai",
+        "google sheets ai agent",
+        "google sheets mcp",
+        "sheets mcp",
+        "spreadsheet ai",
+        "spreadsheet ai agent",
+        "spreadsheet mcp",
+        "follow up boss",
+        "followupboss",
+        "fub",
+        "follow up boss crm",
+        "follow up boss ai",
+        "follow up boss ai agent",
+        "follow up boss mcp",
+        "fub ai",
+        "real estate crm",
+        "real estate ai",
+        "real estate ai agent",
+        "real estate agents",
+        "real estate brokers",
+        "brokerage",
+        "bigin",
+        "zoho bigin",
+        "bigin crm",
+        "bigin by zoho",
+        "bigin ai",
+        "bigin ai agent",
+        "bigin mcp",
+        "zoho bigin ai",
+        "freshworks",
+        "freshworks ai",
+        "freshworks ai agent",
+        "freshworks mcp",
+        "freshdesk",
+        "freshdesk ai",
+        "freshdesk ai agent",
+        "freshdesk mcp",
+        "freshsales",
+        "freshsales crm",
+        "freshsales ai",
+        "freshsales ai agent",
+        "freshservice",
+        "freshservice ai",
+        "freshchat",
+        "freshcaller"
       ],
       "tools": [],
       "previews": []
@@ -829235,6 +829357,270 @@
         "other"
       ],
       "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "taktile",
+      "name": "Taktile",
+      "tagline": "Build, test, and explain automated decisions in Taktile",
+      "description": "Build, test, and explain automated decisions in Taktile",
+      "iconUrl": "https://25449300.fs1.hubspotusercontent-eu1.net/hubfs/25449300/logo.png",
+      "homepageUrl": "https://taktile.com/",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Taktile",
+      "publisherUrl": "https://taktile.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1794772593774,
+      "updatedAt": 1794772593774,
+      "publishedAt": 1789344000000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Taktile",
+          "tagline": "Build, test, and explain automated decisions in Taktile",
+          "description": "Build, test, and explain automated decisions in Taktile",
+          "url": "https://claude.ai/directory/674ce45f-9997-4167-bb04-fe7390af7335",
+          "externalId": "674ce45f-9997-4167-bb04-fe7390af7335",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "financial-services"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "kicnippo",
+      "name": "KICNIPPO",
+      "tagline": "Construction daily reports",
+      "description": "Construction daily reports",
+      "iconUrl": "https://files.openai.com/content?id=file_00000000dab482069b0ec55a922bbb3c&cdn=1&cp=pi&ma=31795200&ts=0&p=pi&cid=8&sig=3e484bf4d47ddd90fa4bc506aa3cb6d26a24a133617a27f1cb0a3887146fd84c&v=0",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Unknown",
+      "capabilities": [
+        "Interactive"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "chatgpt_seed",
+      "createdAt": 1794772770238,
+      "updatedAt": 1794772770238,
+      "publishedAt": 1794772770238,
+      "surfaces": [
+        {
+          "platform": "chatgpt",
+          "type": "app",
+          "displayName": "KICNIPPO",
+          "tagline": "Construction daily reports",
+          "description": "Construction daily reports",
+          "url": "https://chatgpt.com/plugins/plugin_asdk_app_6acb927d7e108191bf25439c8c85af8f",
+          "externalId": "plugin_asdk_app_6acb927d7e108191bf25439c8c85af8f",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Interactive"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "construction",
+        "daily report",
+        "nippo",
+        "invoice",
+        "attendance",
+        "Japan"
+      ],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "bizfetch",
+      "name": "BizFetch",
+      "tagline": "Judge Japanese companies",
+      "description": "Judge Japanese companies",
+      "iconUrl": "https://files.openai.com/content?id=file_00000000e0988206ab1454ed2b13c10a&cdn=1&cp=pi&ma=31622400&ts=0&p=pi&cid=8&sig=92ea25d09fc740109ffc70abee6448865a86e382df135df79b03eb853cd2f633&v=0",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Unknown",
+      "capabilities": [
+        "Interactive"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "chatgpt_seed",
+      "createdAt": 1794772770238,
+      "updatedAt": 1794772770238,
+      "publishedAt": 1794772770238,
+      "surfaces": [
+        {
+          "platform": "chatgpt",
+          "type": "app",
+          "displayName": "BizFetch",
+          "tagline": "Judge Japanese companies",
+          "description": "Judge Japanese companies",
+          "url": "https://chatgpt.com/plugins/plugin_asdk_app_6ae3ecc434c081919fd4a4faa311022a",
+          "externalId": "plugin_asdk_app_6ae3ecc434c081919fd4a4faa311022a",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Interactive"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "productivity"
+      ],
+      "tags": [
+        "japan",
+        "companies",
+        "public data",
+        "sales",
+        "suppliers",
+        "subsidies",
+        "tenders"
+      ],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "ai-ai-728e18573339",
+      "name": "AIスキルチェック｜AIスキル検定",
+      "tagline": "Learn AI with 3 questions",
+      "description": "Learn AI with 3 questions",
+      "iconUrl": "https://files.openai.com/content?id=file_00000000b9fc82079452bb433c832357&cdn=1&cp=pi&ma=32659200&ts=0&p=pi&cid=8&sig=5920616c59758c30fddff45182fef9b0c83ba555168bc02afbec2ee9c6ed2727&v=0",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Unknown",
+      "capabilities": [
+        "Interactive"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "chatgpt_seed",
+      "createdAt": 1794772770238,
+      "updatedAt": 1794772770238,
+      "publishedAt": 1794772770238,
+      "surfaces": [
+        {
+          "platform": "chatgpt",
+          "type": "app",
+          "displayName": "AIスキルチェック｜AIスキル検定",
+          "tagline": "Learn AI with 3 questions",
+          "description": "Learn AI with 3 questions",
+          "url": "https://chatgpt.com/plugins/plugin_asdk_app_6ac60c32d96c8191b3b2728e18573339",
+          "externalId": "plugin_asdk_app_6ac60c32d96c8191b3b2728e18573339",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Interactive"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "education-and-research"
+      ],
+      "tags": [
+        "AI学習",
+        "生成AI",
+        "AIスキル検定"
+      ],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "gymus",
+      "name": "Gymus",
+      "tagline": "Log and review your workouts",
+      "description": "Log and review your workouts",
+      "iconUrl": "https://files.openai.com/content?id=file_00000000e75881f9acc5ba9bdb14d0c0&cdn=1&cp=pi&ma=30844800&ts=0&p=pi&cid=8&sig=f92bd609c7fa0db6ca07a55e5fb7f8616cef0505f218d8e4cb26d3f46ed24154&v=0",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Unknown",
+      "capabilities": [
+        "Interactive"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "chatgpt_seed",
+      "createdAt": 1794772770238,
+      "updatedAt": 1794772770238,
+      "publishedAt": 1794772770238,
+      "surfaces": [
+        {
+          "platform": "chatgpt",
+          "type": "app",
+          "displayName": "Gymus",
+          "tagline": "Log and review your workouts",
+          "description": "Log and review your workouts",
+          "url": "https://chatgpt.com/plugins/plugin_asdk_app_6ae4873238b08191a8aeaa1104932e52",
+          "externalId": "plugin_asdk_app_6ae4873238b08191a8aeaa1104932e52",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Interactive"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "other"
+      ],
+      "tags": [
+        "fitness",
+        "workout",
+        "gym",
+        "strength training",
+        "workout log"
+      ],
       "tools": [],
       "previews": []
     }
