@@ -1,0 +1,51 @@
+name: Scoped Astro migration and private preview
+on:
+  push:
+    branches: [astro-migration-20261116]
+  workflow_dispatch:
+    inputs:
+      approved_private_preview:
+        description: Apply only reviewed 0007/0008/0009 and deploy private preview; never switch frontend
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: astro-private-preview
+  cancel-in-progress: false
+jobs:
+  private-preview:
+    if: (github.event_name == 'push' && contains(github.event.head_commit.message, '[astro-private-preview]')) || (github.event_name == 'workflow_dispatch' && inputs.approved_private_preview)
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node --test scripts/staged-migrations.test.mjs scripts/runtime-binding-guard.test.mjs
+      - name: Scoped migrations, immutable private services, temporary front preview
+        run: node scripts/staged-private-preview.mjs
+        env:
+          ASTRO_STAGED_PREVIEW_APPROVED: 'true'
+          ASTRO_PUBLICATION_CONFIG: ${{ github.workspace }}/scripts/publication.config.json
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+      - name: Preserve recovery evidence and reproducible public snapshot, not private records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astro-private-preview-${{ github.sha }}
+          retention-days: 30
+          path: |
+            reports/staged-preview-receipt.json
+            reports/staged-preview-backup.json
+            reports/staged-preview-public-snapshot.tgz
+            reports/private-preview-logs/*.log
