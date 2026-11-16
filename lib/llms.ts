@@ -1,8 +1,9 @@
+import {listCollectionCandidates,type CollectionCandidate} from "./discovery-data";
 import { canonicalAppId } from "./catalog-identity";
 import { editorialFor } from "./app-editorial";
 import { localizedPath, type Locale } from "./i18n";
 import { appCollections, listCollectionApps, type AppCollection } from "@/lib/collections";
-import { getCategorySummaries, listPublishedApps } from "@/lib/data";
+import { getCategorySummaries } from "@/lib/data";
 import { learnArticles, type LearnArticle, type LearnSection } from "@/lib/learn";
 import { appKindPhrase, appPlatformPhrase, formatCategoryName } from "@/lib/seo";
 import type { CatalogApp, CategorySummary } from "@/lib/types";
@@ -91,7 +92,7 @@ ${section.code ? `\n\n\`\`\`json\n${section.code}\n\`\`\`` : ""}
 ${section.callout ? `\n\n> ${section.callout}` : ""}`);
 }
 
-function appLine(app: CatalogApp, locale: Locale = "en") {
+function appLine(app: Pick<CatalogApp,"id"|"name"|"tagline"|"categories"|"surfaces">, locale: Locale = "en") {
   const platforms = appPlatformPhrase(app);
   const categories = app.categories.slice(0, 5).map((category) => category.replace(/-/g, " ")).join(", ");
   return `- [${app.name}](${absoluteUrl(localizedPath(`/app/${canonicalAppId(app)}`,locale))}): ${appKindPhrase(app)}${platforms ? ` for ${platforms}` : ""}. ${app.tagline} Categories: ${categories || "not listed"}.`;
@@ -160,7 +161,7 @@ ${related}
 ${sources}`);
 }
 
-export function serializeCollectionMarkdown(collection: AppCollection, apps: CatalogApp[], locale: Locale = "en") {
+export function serializeCollectionMarkdown(collection: AppCollection, apps: CollectionCandidate[], locale: Locale = "en") {
   const related = collection.relatedLinks.map((link) => `- [${link.label}](${link.href.startsWith("http") ? link.href : absoluteUrl(link.href)})`).join("\n");
   const faqs = collection.faqs.map((item) => `### ${item.question}\n\n${item.answer}`).join("\n\n");
 
@@ -201,7 +202,7 @@ ${faqs}`);
 }
 
 export async function buildLlmsTxt() {
-  const [categories, apps] = await Promise.all([getCategorySummaries(), listPublishedApps()]);
+  const [categories, apps] = await Promise.all([getCategorySummaries(), listCollectionCandidates(18)]);
   const topCategories = [...categories].sort((a, b) => b.count - a.count).slice(0, 18);
   const featuredApps = apps.slice(0, 18);
 
@@ -255,7 +256,7 @@ ${featuredApps.map(app => appLine(app)).join("\n")}
 }
 
 export async function buildLlmsFullTxt() {
-  const [categories, apps] = await Promise.all([getCategorySummaries(), listPublishedApps()]);
+  const [categories, apps] = await Promise.all([getCategorySummaries(), listCollectionCandidates()]);
   const learnSections = prioritizedLearnArticles()
     .map((article) => {
       return normalizeMarkdown(`## ${article.title}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { listPublishedApps } from "@/lib/data";
+import { listDiscoveryCandidates } from "@/lib/discovery-data";
 import { appMetadataSignal, appPlatformLabel, formatDirectoryNumber as formatNumber } from "@/lib/directory-content";
 import { localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
@@ -19,13 +19,13 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-function isRemoteApp(app: Awaited<ReturnType<typeof listPublishedApps>>[number]): boolean {
+function isRemoteApp(app: Awaited<ReturnType<typeof listDiscoveryCandidates>>[number]): boolean {
   const endpoint = app.mcpEndpoint?.toLowerCase() ?? "";
   return app.mcpTransport === "http" || app.mcpTransport === "sse" || endpoint.startsWith("https://");
 }
 
 export default async function RemoteMcpServersPage() {
-  const [{ locale }, apps] = await Promise.all([getI18n(), listPublishedApps()]);
+  const [{ locale }, apps] = await Promise.all([getI18n(), listDiscoveryCandidates()]);
   const href = (path: string) => localizedPath(path, locale);
   const remoteApps = apps.filter(isRemoteApp);
   const featured = remoteApps

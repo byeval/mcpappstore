@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { listCollectionApps } from "@/lib/collections";
 import { localizedAppCollections } from "@/lib/content-i18n";
-import { listPublishedApps } from "@/lib/data";
+import { listCollectionCandidates } from "@/lib/discovery-data";
 import { formatMessage, localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CollectionsPage() {
-  const [{ locale, messages: t }, apps] = await Promise.all([getI18n(), listPublishedApps()]);
+  const [{ locale, messages: t }, apps] = await Promise.all([getI18n(), listCollectionCandidates()]);
   const href = (path: string) => localizedPath(path, locale);
   const collections = localizedAppCollections(locale);
   const collectionCards = collections.map((collection) => ({

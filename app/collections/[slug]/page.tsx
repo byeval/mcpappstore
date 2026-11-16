@@ -12,7 +12,8 @@ import {
   listCollectionApps,
 } from "@/lib/collections";
 import { localizedCategoryName, localizedGetAppCollection } from "@/lib/content-i18n";
-import { listPublishedApps } from "@/lib/data";
+import { getPublishedListAppsByIds } from "@/lib/data";
+import {listCollectionCandidatesFor} from "@/lib/discovery-data";
 import { formatMessage, localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
@@ -53,9 +54,9 @@ export default async function CollectionPage({
     notFound();
   }
 
-  const allApps = await listPublishedApps();
+  const allApps = await listCollectionCandidatesFor(collection);
   const matchingApps = listCollectionApps(collection, allApps).filter((app) => !isRemovedContentPath(localizedPath(`/app/${app.id}`, locale)));
-  const visibleApps = matchingApps.slice(0, COLLECTION_APP_LIMIT);
+  const visibleApps = await getPublishedListAppsByIds(matchingApps.slice(0,COLLECTION_APP_LIMIT).map(app=>app.id));
 
   return (
     <div className="page-stack">

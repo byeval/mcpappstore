@@ -835,7 +835,7 @@ async function listAppsFromDb(
       // Keep sort/limit behavior for the bounded legacy callers; full catalogs
       // are fetched by stable ID keyset, then sorted once after hydration.
       if(limit){
-        const rows=await db.prepare("SELECT * FROM apps WHERE status=? AND (status!='published' OR lower(id)!='viator') ORDER BY is_featured DESC,COALESCE(published_at,updated_at) DESC LIMIT ?").bind(status,limit).all<Record<string,unknown>>();
+        const rows=await db.prepare("SELECT * FROM apps WHERE status=? AND (status!='published' OR lower(id)!='viator') ORDER BY CASE WHEN is_featured=1 THEN 1 ELSE 0 END DESC,COALESCE(NULLIF(published_at,0),updated_at) DESC,id LIMIT ?").bind(status,limit).all<Record<string,unknown>>();
         if(!rows.success)throw Error('Authoritative bounded catalog unavailable');
         return hydrateAppRows(rows.results,options);
       }
@@ -1137,11 +1137,8 @@ export async function listMetadataRichApps(limit = 8): Promise<CatalogApp[]> {
 }
 
 export async function listSitemapAppEntries(): Promise<Array<{ id: string; name: string; updatedAt: number }>> {
-  return (await listPublishedApps()).map((app) => ({
-    id: app.id,
-    name: app.name,
-    updatedAt: app.updatedAt,
-  }));
+  const db=await getDb();if(db){const rows=await db.prepare("SELECT id,name,updated_at FROM apps WHERE status='published' AND lower(id)!='viator' ORDER BY CASE WHEN is_featured=1 THEN 1 ELSE 0 END DESC,COALESCE(NULLIF(published_at,0),updated_at) DESC,id").all<{id:string;name:string;updated_at:number}>();if(!rows.success)throw Error('Authoritative sitemap unavailable');return rows.results.map(r=>({id:r.id,name:r.name,updatedAt:Number(r.updated_at)}));}
+  return (await listPublishedApps()).map(app=>({id:app.id,name:app.name,updatedAt:app.updatedAt}));
 }
 
 export async function listSitemapSkillEntries(): Promise<Array<{ id: string; name: string; updatedAt: number }>> {
@@ -1309,6 +1306,14 @@ export async function getAppById(id: string, options: {includeRemoved?: boolean}
   return fallbackApp;
 }
 
+/** Ordered, bounded list-card hydration with a final published/removal check. */
+export async function getPublishedListAppsByIds(ids:string[]):Promise<CatalogApp[]>{
+ if(ids.length>100)throw Error('Bounded card selection exceeds100');if(!ids.length)return [];
+ const db=await getDb();if(!db){const apps=await listPublishedApps();const map=new Map(apps.map(a=>[a.id,a]));return ids.flatMap(id=>map.has(id)?[map.get(id)!]:[]);}
+ const page=await readListBatch(db,"SELECT id FROM apps WHERE status='published' AND lower(id)!='viator' AND id IN (SELECT value FROM json_each(?))",[JSON.stringify(ids)]);
+ const apps=await hydrateAppRows(page.rows,listHydration,page.prefetched),map=new Map(apps.map(a=>[a.id,a]));return ids.flatMap(id=>map.has(id)?[map.get(id)!]:[]);
+}
+
 export async function listAppsByCategory(category: string): Promise<CatalogApp[]> {
   const apps = await listPublishedApps();
   return apps.filter((app) => app.categories.includes(category));
@@ -1321,7 +1326,7 @@ export async function listAppsByCategoryPage(
   const safeLimit = Math.max(1, Math.min(limit, 72));
   const safeOffset = Math.max(0, offset);
   const db=await getDb();
-  if(db){const rows=await db.prepare("SELECT a.* FROM apps a WHERE a.status='published' AND lower(a.id)!='viator' AND EXISTS(SELECT 1 FROM app_categories ac WHERE ac.app_id=a.id AND ac.category_slug=?) ORDER BY a.is_featured DESC,COALESCE(a.published_at,a.updated_at) DESC LIMIT ? OFFSET ?").bind(category,safeLimit,safeOffset).all<Record<string,unknown>>();if(!rows.success)throw Error('Authoritative category unavailable');return hydrateAppRows(rows.results,listHydration);}
+  if(db){const rows=await db.prepare("SELECT a.* FROM apps a WHERE a.status='published' AND lower(a.id)!='viator' AND EXISTS(SELECT 1 FROM app_categories ac WHERE ac.app_id=a.id AND ac.category_slug=?) ORDER BY CASE WHEN a.is_featured=1 THEN 1 ELSE 0 END DESC,COALESCE(NULLIF(a.published_at,0),a.updated_at) DESC,a.id LIMIT ? OFFSET ?").bind(category,safeLimit,safeOffset).all<Record<string,unknown>>();if(!rows.success)throw Error('Authoritative category unavailable');return hydrateAppRows(rows.results,listHydration);}
   const apps = await listPublishedApps();
   return apps.filter((app) => app.categories.includes(category)).slice(safeOffset, safeOffset + safeLimit);
 }
@@ -1350,7 +1355,7 @@ export async function listAppsByPlatformPage(
 ): Promise<CatalogApp[]> {
   const safeLimit = Math.max(1, Math.min(limit, 72));
   const safeOffset = Math.max(0, offset);
-  const db=await getDb();if(db){const rows=await db.prepare(`SELECT a.* FROM apps a WHERE a.status='published' AND lower(a.id)!='viator' AND ${platformPredicate} ORDER BY a.is_featured DESC,COALESCE(a.published_at,a.updated_at) DESC LIMIT ? OFFSET ?`).bind(platform,platform,safeLimit,safeOffset).all<Record<string,unknown>>();if(!rows.success)throw Error('Authoritative platform unavailable');return hydrateAppRows(rows.results,listHydration);}
+  const db=await getDb();if(db){const rows=await db.prepare(`SELECT a.* FROM apps a WHERE a.status='published' AND lower(a.id)!='viator' AND ${platformPredicate} ORDER BY CASE WHEN a.is_featured=1 THEN 1 ELSE 0 END DESC,COALESCE(NULLIF(a.published_at,0),a.updated_at) DESC,a.id LIMIT ? OFFSET ?`).bind(platform,platform,safeLimit,safeOffset).all<Record<string,unknown>>();if(!rows.success)throw Error('Authoritative platform unavailable');return hydrateAppRows(rows.results,listHydration);}
   const apps = await listPublishedApps();
   return apps
     .filter((app) => app.surfaces.some((surface) => surface.platform === platform))

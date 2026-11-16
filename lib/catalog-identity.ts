@@ -14,7 +14,7 @@ export const reviewedCanonicalAliases: Record<
     externalId: "Plugin_fc9843a6fb34819195d6c7802398a8a7",
   },
 };
-export function canonicalAppId(app: CatalogApp): string {
+export function canonicalAppId(app: Pick<CatalogApp,"id"|"surfaces">): string {
   const alias = reviewedCanonicalAliases[app.id];
   return alias &&
     app.surfaces.length === 1 &&

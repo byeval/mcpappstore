@@ -97,3 +97,21 @@ test('partial or failed batched pages fail closed without public cache writes',a
   }finally{f.sql.close();}
  }
 });
+
+
+test('bounded catalog pages preserve full-list stable ID ties regardless of insertion order and zero publish dates',async()=>{
+ const f=fixture('hidden');try{
+ f.sql.exec("INSERT INTO categories(slug,name) VALUES('ties','Ties')");
+ for(const id of ['tie-z','tie-b','tie-a','tie-y']){
+  f.sql.prepare("INSERT INTO apps(id,name,tagline,status,source,is_featured,published_at,created_at,updated_at) VALUES(?,?,'','published','chatgpt_seed',1,100,1,100)").run(id,id);
+  f.sql.prepare("INSERT INTO app_categories(app_id,category_slug) VALUES(?,'ties')").run(id);
+ }
+ f.sql.exec("UPDATE apps SET published_at=0,updated_at=200 WHERE id='tie-y'; UPDATE apps SET published_at=NULL WHERE id='tie-b'; UPDATE apps SET is_featured=2 WHERE id='tie-z'");
+ const all=await data.listPublishedApps();assert.deepEqual(all.map(a=>a.id),['tie-y','tie-a','tie-b','tie-z']);
+ assert.deepEqual((await data.listHomeApps()).map(a=>a.id),all.map(a=>a.id));
+ for(const offset of [0,1,2]){
+  assert.deepEqual((await data.listAppsByCategoryPage('ties',{offset,limit:2})).map(a=>a.id),all.slice(offset,offset+2).map(a=>a.id));
+  assert.deepEqual((await data.listAppsByPlatformPage('chatgpt',{offset,limit:2})).map(a=>a.id),all.slice(offset,offset+2).map(a=>a.id));
+ }
+ }finally{f.sql.close();}
+});

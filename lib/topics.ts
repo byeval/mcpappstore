@@ -1,3 +1,4 @@
+import type {DiscoveryCandidate} from "./discovery-data";
 import type { CatalogApp } from "@/lib/types";
 
 export interface McpTopic {
@@ -248,7 +249,7 @@ export function getMcpTopic(slug: string): McpTopic | undefined {
   return mcpTopics.find((topic) => topic.slug === slug);
 }
 
-function appSearchText(app: CatalogApp): string {
+function appSearchText(app: DiscoveryCandidate): string {
   return [
     app.id,
     app.name,
@@ -273,7 +274,7 @@ function appSearchText(app: CatalogApp): string {
   ].join(" ").toLowerCase();
 }
 
-export function listTopicApps(topic: McpTopic, apps: CatalogApp[], limit?: number): CatalogApp[] {
+export function listTopicApps<T extends DiscoveryCandidate>(topic: McpTopic, apps: T[], limit?: number): T[] {
   const scored = apps
     .map((app) => {
       const text = appSearchText(app);

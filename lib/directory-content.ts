@@ -4,11 +4,11 @@ export function formatDirectoryNumber(value: number): string {
   return value.toLocaleString("en-US");
 }
 
-export function hasAppPlatform(app: CatalogApp, platform: "chatgpt" | "claude"): boolean {
+export function hasAppPlatform(app: Pick<CatalogApp,"surfaces">, platform: "chatgpt" | "claude"): boolean {
   return app.surfaces.some((surface) => surface.platform === platform);
 }
 
-export function appPlatformLabel(app: CatalogApp): string {
+export function appPlatformLabel(app: Pick<CatalogApp,"surfaces">): string {
   const labels = [
     hasAppPlatform(app, "chatgpt") ? "ChatGPT" : "",
     hasAppPlatform(app, "claude") ? "Claude" : "",
@@ -17,7 +17,7 @@ export function appPlatformLabel(app: CatalogApp): string {
   return labels.join(" + ");
 }
 
-export function appMetadataSignal(app: CatalogApp): string {
+export function appMetadataSignal(app: Pick<CatalogApp,"tools"|"examplePrompts"|"previews"|"repoUrl"|"installCmd"|"mcpEndpoint">): string {
   if (app.tools.length > 0) return `${app.tools.length} tools`;
   if (app.examplePrompts.length > 0) return `${app.examplePrompts.length} prompts`;
   if (app.previews.length > 0) return `${app.previews.length} previews`;

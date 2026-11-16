@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { listPublishedApps } from "@/lib/data";
+import { listDiscoveryCandidates } from "@/lib/discovery-data";
 import { appMetadataSignal, appPlatformLabel, formatDirectoryNumber as formatNumber } from "@/lib/directory-content";
 import { localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function OfficialMcpServersPage() {
-  const [{ locale }, apps] = await Promise.all([getI18n(), listPublishedApps()]);
+  const [{ locale }, apps] = await Promise.all([getI18n(), listDiscoveryCandidates()]);
   const href = (path: string) => localizedPath(path, locale);
   const officialApps = apps
     .filter((app) => {

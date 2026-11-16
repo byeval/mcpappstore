@@ -1,7 +1,7 @@
 import { localizedGetAppCollection } from "@/lib/content-i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { listCollectionApps } from "@/lib/collections";
-import { listPublishedApps } from "@/lib/data";
+import { listCollectionCandidatesFor } from "@/lib/discovery-data";
 import { serializeCollectionMarkdown } from "@/lib/llms";
 
 export async function GET(
@@ -18,7 +18,7 @@ export async function GET(
     return new Response("Not found", { status: 404 });
   }
 
-  const apps = listCollectionApps(collection, await listPublishedApps());
+  const apps = listCollectionApps(collection, await listCollectionCandidatesFor(collection));
 
   return new Response(serializeCollectionMarkdown(collection, apps, locale), {
     headers: {

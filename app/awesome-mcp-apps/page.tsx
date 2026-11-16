@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { AppCard } from "@/components/app-card";
-import { countAppsByPlatform, listPublishedApps, listSitemapAppEntries } from "@/lib/data";
+import {getPublishedListAppsByIds} from "@/lib/data";
+import {listCollectionCandidates} from "@/lib/discovery-data";
+import {getDirectoryCount,getDirectoryStats} from "@/lib/directory-data";
 import { formatMessage, localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { breadcrumbJsonLd, faqJsonLd, itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
@@ -48,9 +50,9 @@ const builderResourceLinks = [
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [{ locale }, apps] = await Promise.all([getI18n(), listSitemapAppEntries()]);
+  const [{ locale }, apps] = await Promise.all([getI18n(), getDirectoryCount()]);
   const copy = staticPageCopy(locale).awesomeMcpApps;
-  const listingText = apps.length.toLocaleString("en-US");
+  const listingText = apps.toLocaleString("en-US");
 
   return pageMetadata({
     title: formatMessage(copy.metaTitle, { count: listingText }),
@@ -71,18 +73,18 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AwesomeMcpAppsPage() {
-  const [{ locale, messages: t }, apps, chatgptCount, claudeCount] = await Promise.all([
+  const [{ locale, messages: t }, apps, stats] = await Promise.all([
     getI18n(),
-    listPublishedApps(),
-    countAppsByPlatform("chatgpt"),
-    countAppsByPlatform("claude"),
+    listCollectionCandidates(24).then(apps=>getPublishedListAppsByIds(apps.map(app=>app.id))),
+    getDirectoryStats(),
   ]);
+  const chatgptCount=stats.chatgpt,claudeCount=stats.claude;
   const pageCopy = staticPageCopy(locale);
   const copy = pageCopy.awesomeMcpApps;
   const commonCopy = pageCopy.common;
   const href = (path: string) => localizedPath(path, locale);
-  const totalListings = apps.length;
-  const lastUpdated = apps.reduce((max, app) => Math.max(max, app.publishedAt ?? 0, app.updatedAt), 0);
+  const totalListings = stats.total;
+  const lastUpdated = stats.latestTimestamp;
   const lastUpdatedIso = new Date(lastUpdated || Date.now()).toISOString();
   const lastUpdatedDate = lastUpdatedIso.slice(0, 10);
   const featuredApps = apps.slice(0, 24);

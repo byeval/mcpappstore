@@ -1,4 +1,5 @@
 import type { CatalogApp } from "@/lib/types";
+import type {CollectionCandidate} from "./discovery-data";
 
 export interface AppCollection {
   slug: string;
@@ -707,7 +708,7 @@ export function featuredAppCollections(limit = 4): AppCollection[] {
   return appCollections.slice(0, limit);
 }
 
-function searchableAppText(app: CatalogApp): string {
+function searchableAppText(app: CollectionCandidate): string {
   return [
     app.name,
     app.tagline,
@@ -732,7 +733,7 @@ function includesSearchTerm(text: string, term: string): boolean {
   return new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`).test(text);
 }
 
-export function collectionMatchesApp(collection: AppCollection, app: CatalogApp): boolean {
+export function collectionMatchesApp(collection: AppCollection, app: CollectionCandidate): boolean {
   if (collection.platform && !app.surfaces.some((surface) => surface.platform === collection.platform)) {
     return false;
   }
@@ -750,8 +751,13 @@ export function collectionMatchesApp(collection: AppCollection, app: CatalogApp)
   return collection.matchTerms.some((term) => includesSearchTerm(text, term));
 }
 
-export function listCollectionApps(collection: AppCollection, apps: CatalogApp[]): CatalogApp[] {
+export function listCollectionApps<T extends CollectionCandidate>(collection: AppCollection, apps: T[]): T[] {
   const explicit = new Map((collection.appIds ?? []).map((id,index)=>[id,index]));
-  return apps.filter((app) => collectionMatchesApp(collection, app)).sort((a,b) =>
+  const matchers=collection.matchTerms.map(term=>new RegExp(`(^|[^a-z0-9])${term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}([^a-z0-9]|$)`));
+  return apps.filter(app=>{
+    if(collection.platform&&!app.surfaces.some(s=>s.platform===collection.platform))return false;
+    if(collection.appIds?.includes(app.id)||collection.categorySlugs.some(slug=>app.categories.includes(slug)))return true;
+    const text=searchableAppText(app);return matchers.some(pattern=>pattern.test(text));
+  }).sort((a,b) =>
     (explicit.get(a.id) ?? Number.MAX_SAFE_INTEGER) - (explicit.get(b.id) ?? Number.MAX_SAFE_INTEGER) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id));
 }

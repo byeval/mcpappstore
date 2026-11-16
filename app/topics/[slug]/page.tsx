@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { listPublishedApps } from "@/lib/data";
+import { listDiscoveryCandidates } from "@/lib/discovery-data";
 import { appMetadataSignal, appPlatformLabel, formatDirectoryNumber as formatNumber } from "@/lib/directory-content";
 import { localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function TopicDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const [{ locale }, apps, { slug }] = await Promise.all([getI18n(), listPublishedApps(), params]);
+  const [{ locale }, apps, { slug }] = await Promise.all([getI18n(), listDiscoveryCandidates(), params]);
   const topic = getMcpTopic(slug);
   if (!topic) notFound();
 

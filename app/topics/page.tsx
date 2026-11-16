@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { listPublishedApps } from "@/lib/data";
+import { listDiscoveryCandidates } from "@/lib/discovery-data";
 import { formatDirectoryNumber as formatNumber } from "@/lib/directory-content";
 import { localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function TopicsPage() {
-  const [{ locale }, apps] = await Promise.all([getI18n(), listPublishedApps()]);
+  const [{ locale }, apps] = await Promise.all([getI18n(), listDiscoveryCandidates()]);
   const href = (path: string) => localizedPath(path, locale);
   const cards = mcpTopics.map((topic) => ({ topic, count: listTopicApps(topic, apps).length }));
 
