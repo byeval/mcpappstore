@@ -10,7 +10,12 @@ function redirect(url){return new Response(null,{status:308,headers:{Location:ur
 async function legacy(request,env){if(!env.LEGACY?.fetch)return fail(503,'Compatibility backend unavailable');const headers=new Headers(request.headers);for(const key of [...headers.keys()])if(key.startsWith('x-mcp-')||['x-forwarded-proto','x-forwarded-host','x-forwarded-for','x-real-ip'].includes(key))headers.delete(key);try{return await env.LEGACY.fetch(new Request(request,{headers,redirect:'manual'}));}catch{return fail(502,'Compatibility backend unavailable');}}
 export default {async fetch(request,env){
  const url=new URL(request.url);let pathname;try{pathname=decodeURIComponent(url.pathname).replace(/\/+$/,'')||'/';}catch{return fail(400,'Malformed path');}
+ // Durable public identity removal also covers normalized locale/alias/RSC/OG variants.
+ const removedPath=pathname.replace(/\\/g,'/').replace(/\/+/g,'/');
+ if(/(?:^|\/)(?:apps?|api\/og)\/viator(?:\/|\.rsc$|$)/i.test(removedPath))return fail(410,'Gone');
  if(pathname.includes('\\')||pathname.includes('\0')||/%[0-9a-f]{2}/i.test(pathname)||pathname.includes('//')||pathname.split('/').some(p=>p==='.'||p==='..'))return fail(400,'Ambiguous path');
+ // Backend release attestation is private-service-only, never a new public front route.
+ if(/(?:^|\/)__mcpapp-release$/i.test(pathname))return fail(404,'Not found');
  if(configuredList(env.DENIED_PATHS).includes(pathname))return fail(410,'Gone');
  const preview=env.PREVIEW_MODE==='true';
  if(preview&&!['GET','HEAD'].includes(request.method))return fail(405,'Writes disabled in migration preview');

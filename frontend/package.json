@@ -5,7 +5,7 @@
   "scripts": {
     "build": "astro build",
     "check": "astro check",
-    "test:release": "node --test tests/browser-analytics.test.mjs tests/publication-v3.test.mjs tests/edge-d1-integration.test.mjs",
+    "test:release": "node --test tests/browser-analytics.test.mjs tests/publication-v3.test.mjs tests/edge-d1-integration.test.mjs tests/current-publication-policy.test.mjs",
     "test:built": "node --test tests/current-source-static-parity.test.mjs tests/audited-edge.test.mjs"
   },
   "dependencies": {

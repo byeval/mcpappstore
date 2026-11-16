@@ -1,3 +1,4 @@
+import { isRemovedContentPath } from "@/lib/content-removals";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -80,7 +81,7 @@ export default async function AppsLetterPage({ params }: { params: Promise<{ let
     notFound();
   }
 
-  const apps = await listPublishedApps();
+  const apps = (await listPublishedApps()).filter((app) => !isRemovedContentPath(href(`/app/${app.id}`)));
   const groups = groupAppsByIndexKey(apps);
   const activeKeys = activeAppIndexKeys(apps);
   const groupApps = groups[key];

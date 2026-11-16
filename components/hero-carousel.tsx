@@ -1,4 +1,6 @@
 "use client";
+import { isRemovedContentPath } from "@/lib/content-removals";
+
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -38,6 +40,7 @@ export function HeroCarousel({
   locale?: Locale;
   messages?: I18nMessages;
 }) {
+  apps = apps.filter((app) => !isRemovedContentPath(localizedPath(`/app/${app.id}`, locale)));
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 

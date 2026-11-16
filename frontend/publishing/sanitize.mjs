@@ -1,10 +1,11 @@
+export const PUBLIC_EXCLUDED_APP_IDS=Object.freeze(['viator']);
 export function sanitizeCatalog(input) {
  if (!Array.isArray(input?.apps) || !Array.isArray(input?.categories)) throw Error('Invalid public catalog input');
  const fields=['heroKey','mcpEndpoint','mcpTransport','installCmd','authType','isFeatured','source','createdAt','tags','id','name','tagline','description','publisher','homepageUrl','repoUrl','publisherUrl','privacyUrl','termsUrl','supportUrl','version','iconKey','capabilities','examplePrompts','categories','updatedAt','publishedAt','status'];
  const pick=(obj,keys)=>Object.fromEntries(keys.filter(k=>obj[k]!=null).map(k=>[k,obj[k]]));
  const inputById=new Map(input.apps.map(a=>[a.id,a]));
  const previewKeys=['sort','prompt','caption','imageKey','imageUrl','ctaLabel','ctaUrl'];
- const apps=input.apps.filter(a=>a.status==='published').map(a=>Object.fromEntries(fields.filter(k=>a[k]!=null).map(k=>[k,a[k]])));
+ const apps=input.apps.filter(a=>a.status==='published'&&!PUBLIC_EXCLUDED_APP_IDS.includes(String(a.id).toLowerCase())).map(a=>Object.fromEntries(fields.filter(k=>a[k]!=null).map(k=>[k,a[k]])));
  if(apps.some(a=>!a.id || !a.name || !Array.isArray(a.categories))) throw Error('Invalid published app');
  if(new Set(apps.map(a=>a.id)).size!==apps.length) throw Error('Duplicate public app id');
  for(const a of apps){const original=inputById.get(a.id);

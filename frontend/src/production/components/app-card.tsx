@@ -1,3 +1,4 @@
+import { isRemovedContentPath } from "../../lib/content-removals";
 import Link from "./link";
 
 import type { CatalogApp } from "../lib/types";
@@ -17,6 +18,7 @@ export function AppCard({
   locale?: Locale;
   messages?: I18nMessages;
 }) {
+  if (isRemovedContentPath(localizedPath(`/app/${app.id}`, locale))) return null;
   const t = messages ?? getMessages(locale);
   const primary = primarySurface(app.surfaces);
   const details = surfaceDetails(primary, {

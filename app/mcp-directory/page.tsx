@@ -1,3 +1,4 @@
+import { isRemovedContentPath } from "@/lib/content-removals";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -225,7 +226,7 @@ export default async function McpDirectoryPage() {
             <p>{copy.examplesBody}</p>
           </div>
           <div className="directory-example-list">
-            {representativeApps.map((app) => (
+            {representativeApps.filter((app) => !isRemovedContentPath(localizedPath(`/app/${app.id}`, locale))).map((app) => (
               <Link href={href(`/app/${app.id}`)} key={app.id} prefetch={false}>
                 <strong>{app.name}</strong>
                 <span>{app.tagline}</span>
@@ -283,7 +284,7 @@ export default async function McpDirectoryPage() {
             copy.categoryItemListName,
           ),
           itemListJsonLd(
-            representativeApps.map((app) => ({ name: app.name, path: `/app/${app.id}` })),
+            representativeApps.filter((app) => !isRemovedContentPath(localizedPath(`/app/${app.id}`, locale))).map((app) => ({ name: app.name, path: `/app/${app.id}` })),
             copy.examplesItemListName,
           ),
           faqJsonLd(directoryFaqs),

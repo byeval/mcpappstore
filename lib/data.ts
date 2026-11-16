@@ -1,3 +1,4 @@
+import { isRemovedPublicAppId, removedPublicAppIds } from "./content-removals";
 import { readyCacheRevision, readPublicationState, PublicationConflictError } from "./publication-marker";
 import seedCatalog from "@/seed/chatgpt-apps.json";
 import seedSkillAssociations from "@/seed/app-skill-associations.json";
@@ -33,7 +34,7 @@ const HOME_APP_LIMIT = 36;
 export const CATEGORY_APP_PAGE_SIZE = 36;
 export const PLATFORM_APP_PAGE_SIZE = 36;
 const publicCacheTtlSeconds = 60 * 60;
-const publicCacheVersion = "v11";
+const publicCacheVersion = "v12";
 const seedSources = new Set(["chatgpt_seed", "claude_seed"]);
 
 export interface CatalogQualityStats {
@@ -74,20 +75,21 @@ async function getPublicCacheRevision(): Promise<string | null> {
  return readyCacheRevision(await getDb());
 }
 async function blockedAppIds(): Promise<Set<string>> {
- const db=await getDb();if(!db)return new Set();
+ const db=await getDb();if(!db)return new Set(removedPublicAppIds);
  // Explicit moderation state wins over a newer bundled catalog. Read failure
  // must not quietly resurrect seed records while a DB binding is configured.
  const rows=await db.prepare("SELECT id FROM apps WHERE status != 'published'").all<{id:string}>();
  if(!rows.success)throw Error('Unable to read moderation state');
- return new Set(rows.results.map(row=>row.id));
+ return new Set([...removedPublicAppIds,...rows.results.map(row=>row.id)]);
 }
 async function readPublicCache<T>(key: string, revision:string|null): Promise<T | null> {
  if(revision===null)return null;const kv=await getKv();if(!kv)return null;
  let cached:T|null;
  try{cached=await kv.get<T>(`${publicCacheVersion}:${revision}:${key}`,"json");}catch{return null;}
+ if(Array.isArray(cached) && (key === 'published-apps' || key === 'home-apps' || key === 'featured-apps' || key.startsWith('skill-apps:') || cached.some(item=>item?.status==='published')))cached=cached.filter(item=>!isRemovedPublicAppId(String(item?.id??''))) as T;
  if(Array.isArray(cached)&&cached.some(item=>item?.status==='published')) {
   const db=await getDb();
-  if(db){const rows=await db.prepare("SELECT id FROM apps WHERE status = 'published'").all<{id:string}>();if(!rows.success)throw Error('Unable to read public catalog state');const allowed=new Set(rows.results.map(row=>row.id));return cached.filter(item=>allowed.has(item.id)) as T;}
+  if(db){const rows=await db.prepare("SELECT id FROM apps WHERE status = 'published' AND lower(id) != 'viator'").all<{id:string}>();if(!rows.success)throw Error('Unable to read public catalog state');const allowed=new Set(rows.results.map(row=>row.id));return cached.filter(item=>allowed.has(item.id)) as T;}
  }
  return cached;
 }
@@ -536,7 +538,7 @@ async function listAppsForSkillFromDb(skillId: string): Promise<SkillAppRef[] | 
         `SELECT a.*, ask.relation_type AS skill_relation_type, ask.reason AS skill_reason, ask.confidence AS skill_confidence
          FROM app_skills ask
          INNER JOIN apps a ON a.id = ask.app_id
-         WHERE ask.skill_id = ? AND a.status = 'published'
+         WHERE ask.skill_id = ? AND a.status = 'published' AND lower(a.id) != 'viator'
          ORDER BY
           CASE ask.relation_type WHEN 'required' THEN 0 WHEN 'recommended' THEN 1 ELSE 2 END,
           ask.confidence DESC,
@@ -799,7 +801,7 @@ async function listAppsFromDb(
 
   try {
     const query = `SELECT * FROM apps
-      WHERE status = ?
+      WHERE status = ? AND (status != 'published' OR lower(id) != 'viator')
       ORDER BY is_featured DESC, COALESCE(published_at, updated_at) DESC
       ${limit ? "LIMIT ?" : ""}`;
     const statement = db.prepare(query);
@@ -823,7 +825,7 @@ async function getFeaturedAppsFromDb(): Promise<CatalogApp[] | null> {
     const rows = await db
       .prepare(
         `SELECT * FROM apps
-         WHERE status = 'published' AND is_featured = 1
+         WHERE status = 'published' AND lower(id) != 'viator' AND is_featured = 1
          ORDER BY COALESCE(published_at, updated_at) DESC
          LIMIT ?`,
       )
@@ -872,7 +874,7 @@ async function listCategoriesFromDb(): Promise<CategorySummary[] | null> {
         `SELECT c.slug, c.name, c.sort, COUNT(a.id) AS count, MAX(COALESCE(a.published_at, a.updated_at)) AS latest_updated_at
          FROM categories c
          LEFT JOIN app_categories ac ON c.slug = ac.category_slug
-         LEFT JOIN apps a ON a.id = ac.app_id AND a.status = 'published'
+         LEFT JOIN apps a ON a.id = ac.app_id AND a.status = 'published' AND lower(a.id) != 'viator'
          GROUP BY c.slug, c.name, c.sort
          ORDER BY c.sort ASC, c.name ASC`,
       )
@@ -933,7 +935,7 @@ export async function getCatalogQualityStats(): Promise<CatalogQualityStats> {
              FROM apps a
              LEFT JOIN app_tools tool ON tool.app_id = a.id
              LEFT JOIN app_surfaces s ON s.app_id = a.id
-             WHERE a.status = 'published'
+             WHERE a.status = 'published' AND lower(a.id) != 'viator'
                AND (tool.app_id IS NOT NULL OR (s.tools IS NOT NULL AND s.tools != '[]'))`,
           )
           .first<{ count?: number }>(),
@@ -942,7 +944,7 @@ export async function getCatalogQualityStats(): Promise<CatalogQualityStats> {
             `SELECT COUNT(DISTINCT a.id) AS count
              FROM apps a
              LEFT JOIN app_surfaces s ON s.app_id = a.id
-             WHERE a.status = 'published'
+             WHERE a.status = 'published' AND lower(a.id) != 'viator'
                AND (
                  (a.example_prompts IS NOT NULL AND a.example_prompts != '[]')
                  OR (s.example_prompts IS NOT NULL AND s.example_prompts != '[]')
@@ -950,7 +952,7 @@ export async function getCatalogQualityStats(): Promise<CatalogQualityStats> {
           )
           .first<{ count?: number }>(),
         db
-          .prepare("SELECT COUNT(*) AS count FROM apps WHERE status = 'published' AND repo_url IS NOT NULL AND repo_url != ''")
+          .prepare("SELECT COUNT(*) AS count FROM apps WHERE status = 'published' AND lower(id) != 'viator' AND repo_url IS NOT NULL AND repo_url != ''")
           .first<{ count?: number }>(),
         db
           .prepare(
@@ -958,7 +960,7 @@ export async function getCatalogQualityStats(): Promise<CatalogQualityStats> {
              FROM apps a
              LEFT JOIN app_previews preview ON preview.app_id = a.id
              LEFT JOIN app_surfaces s ON s.app_id = a.id
-             WHERE a.status = 'published'
+             WHERE a.status = 'published' AND lower(a.id) != 'viator'
                AND (preview.app_id IS NOT NULL OR (s.previews IS NOT NULL AND s.previews != '[]'))`,
           )
           .first<{ count?: number }>(),
@@ -1009,7 +1011,7 @@ export async function listMetadataRichApps(limit = 8): Promise<CatalogApp[]> {
            LEFT JOIN app_tools tool ON tool.app_id = a.id
            LEFT JOIN app_previews preview ON preview.app_id = a.id
            LEFT JOIN app_surfaces s ON s.app_id = a.id
-           WHERE a.status = 'published'
+           WHERE a.status = 'published' AND lower(a.id) != 'viator'
              AND (
                tool.app_id IS NOT NULL
                OR preview.app_id IS NOT NULL
@@ -1199,7 +1201,8 @@ export async function listAppsForSkill(skillId: string): Promise<SkillAppRef[]> 
   return fallbackApps;
 }
 
-export async function getAppById(id: string): Promise<CatalogApp | null> {
+export async function getAppById(id: string, options: {includeRemoved?: boolean} = {}): Promise<CatalogApp | null> {
+  if(isRemovedPublicAppId(id))return options.includeRemoved ? getAppFromDb(id) : null;
   const db=await getDb();
   if(db){
     const state=await db.prepare("SELECT status FROM apps WHERE id = ? LIMIT 1").bind(id).first<{status:string}>();
@@ -1290,7 +1293,7 @@ export async function searchApps(query: string, platform?: "chatgpt" | "claude")
            LEFT JOIN app_tools tool ON tool.app_id = a.id
            LEFT JOIN app_skills ask ON ask.app_id = a.id
            LEFT JOIN skills skill ON skill.id = ask.skill_id
-           WHERE a.status = 'published'
+           WHERE a.status = 'published' AND lower(a.id) != 'viator'
              AND (? IS NULL OR EXISTS (SELECT 1 FROM app_surfaces ps WHERE ps.app_id = a.id AND ps.platform = ?))
              AND (
               LOWER(a.id) LIKE ?

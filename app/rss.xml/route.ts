@@ -1,3 +1,4 @@
+import { isRemovedContentPath } from "@/lib/content-removals";
 import { listHomeApps } from "@/lib/data";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -12,7 +13,7 @@ function escapeXml(value: string): string {
 
 export async function GET() {
   const apps = await listHomeApps();
-  const latest = apps.slice(0, 20);
+  const latest = apps.filter((app) => !isRemovedContentPath(`/app/${app.id}`)).slice(0, 20);
   const feedUrl = absoluteUrl("/rss.xml");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

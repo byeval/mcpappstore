@@ -1,3 +1,4 @@
+import { isRemovedContentPath } from "@/lib/content-removals";
 import Link from "next/link";
 import { CatalogSearch } from "@/components/catalog-search";
 import { discoveryCopy } from "@/lib/discovery-copy";
@@ -52,7 +53,7 @@ export default async function SearchPage({
   const { q: rawQuery = "", platform: rawPlatform = "" } = await searchParams;
   const q = rawQuery.trim().slice(0, 200);
   const platform = rawPlatform === "chatgpt" || rawPlatform === "claude" ? rawPlatform : undefined;
-  const results = q || platform ? await searchApps(q, platform) : [];
+  const results = (q || platform ? await searchApps(q, platform) : []).filter((app) => !isRemovedContentPath(localizedPath(`/app/${app.id}`, locale)));
   const href = (path: string) => localizedPath(path, locale);
 
   return (

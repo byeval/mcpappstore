@@ -42,7 +42,7 @@ jobs:
       - name: Publication and authoritative data regression checks
         run: |
           node --test scripts/*.test.mjs
-          node --import tsx --test tests/backend-data.test.ts tests/backend-marker.test.ts tests/backend-release.test.ts
+          node --import tsx --test tests/backend-data.test.ts tests/backend-marker.test.ts tests/backend-release.test.ts tests/backend-removals.test.ts
 
       - name: Catalog evidence and localization audit
         run: npm run audit:seo
@@ -53,3 +53,12 @@ jobs:
           ASTRO_PUBLICATION_CONFIG: ${{ github.workspace }}/scripts/publication.config.json
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Preserve exact-release browser verification ticket
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-verification-${{ github.sha }}
+          if-no-files-found: ignore
+          retention-days: 7
+          path: reports/browser-verification-ticket.json

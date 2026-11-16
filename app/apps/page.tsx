@@ -1,3 +1,4 @@
+import { isRemovedContentPath } from "@/lib/content-removals";
 import { CatalogSearch } from "@/components/catalog-search";
 import { discoveryCopy } from "@/lib/discovery-copy";
 import type { Metadata } from "next";
@@ -55,8 +56,9 @@ function appSummaryLine(app: CatalogApp, locale: Locale, t: I18nMessages): strin
 }
 
 export default async function AppsIndexPage() {
-  const [{ locale, messages: t }, apps] = await Promise.all([getI18n(), listPublishedApps()]);
+  const [{ locale, messages: t }, allApps] = await Promise.all([getI18n(), listPublishedApps()]);
   const href = (path: string) => localizedPath(path, locale);
+  const apps = allApps.filter((app) => !isRemovedContentPath(href(`/app/${app.id}`)));
   const groups = groupAppsByIndexKey(apps);
   const activeKeys = activeAppIndexKeys(apps);
   const chatgptCount = apps.filter((app) => app.surfaces.some((surface) => surface.platform === "chatgpt")).length;

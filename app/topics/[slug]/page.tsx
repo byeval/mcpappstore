@@ -1,3 +1,4 @@
+import { isRemovedContentPath } from "@/lib/content-removals";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -32,7 +33,7 @@ export default async function TopicDetailPage({ params }: { params: Promise<{ sl
   if (!topic) notFound();
 
   const href = (path: string) => localizedPath(path, locale);
-  const matchingApps = listTopicApps(topic, apps);
+  const matchingApps = listTopicApps(topic, apps).filter((app) => !isRemovedContentPath(localizedPath(`/app/${app.id}`, locale)));
   const featured = matchingApps.slice(0, 12);
   const latest = [...matchingApps].sort((left, right) => right.updatedAt - left.updatedAt).slice(0, 24);
   const remoteCount = matchingApps.filter((app) => app.mcpTransport === "http" || app.mcpTransport === "sse").length;

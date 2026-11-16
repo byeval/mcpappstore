@@ -1,3 +1,4 @@
+import { isRemovedContentPath } from "@/lib/content-removals";
 import { activeAppIndexKeys, appIndexPath } from "@/lib/app-index";
 import { appCollections } from "@/lib/collections";
 import {
@@ -114,7 +115,7 @@ function paginatedEntries({
 }
 
 function localizedEntries(path: string, entry: Omit<SitemapEntry, "url">): SitemapEntry[] {
-  return supportedLocales.map((locale) => ({
+  return supportedLocales.filter((locale) => !isRemovedContentPath(localizedPath(path, locale))).map((locale) => ({
     ...entry,
     url: absoluteUrl(localizedPath(path, locale)),
   }));

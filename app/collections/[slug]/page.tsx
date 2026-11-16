@@ -1,3 +1,4 @@
+import { isRemovedContentPath } from "@/lib/content-removals";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -53,7 +54,7 @@ export default async function CollectionPage({
   }
 
   const allApps = await listPublishedApps();
-  const matchingApps = listCollectionApps(collection, allApps);
+  const matchingApps = listCollectionApps(collection, allApps).filter((app) => !isRemovedContentPath(localizedPath(`/app/${app.id}`, locale)));
   const visibleApps = matchingApps.slice(0, COLLECTION_APP_LIMIT);
 
   return (

@@ -1,3 +1,4 @@
+import { isRemovedContentPath, removedContentResponse } from "../lib/content-removals";
 import { releaseHealth, type ReleaseHealthEnv } from "./release-health";
 import { POST as revalidatePublication } from "../app/_revalidate/route";
 /**
@@ -35,6 +36,7 @@ interface ExecutionContext {
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+    if (isRemovedContentPath(url.pathname)) return removedContentResponse();
     if (url.pathname === "/__mcpapp-release") return releaseHealth(request, env);
     // App-router underscore folders are private; mount authenticated invalidation explicitly.
     if(url.pathname === "/_revalidate") {

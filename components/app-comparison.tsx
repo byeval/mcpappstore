@@ -1,3 +1,4 @@
+import { isRemovedContentPath } from "@/lib/content-removals";
 import Link from "next/link";
 import { discoveryCopy } from "@/lib/discovery-copy";
 import { editorialFor } from "@/lib/app-editorial";
@@ -12,6 +13,7 @@ export function AppComparison({
   locale: Locale;
   messages: I18nMessages;
 }) {
+  apps = apps.filter((app) => !isRemovedContentPath(localizedPath(`/app/${app.id}`, locale)));
   if (!apps.length) return null;
   return (
     <section className="detail-section">

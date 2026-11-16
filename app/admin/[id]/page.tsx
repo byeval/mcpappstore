@@ -17,7 +17,7 @@ export default async function AdminDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const app = await getAppById(id);
+  const app = await getAppById(id, {includeRemoved: true});
 
   if (!app) {
     notFound();

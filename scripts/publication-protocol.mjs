@@ -31,6 +31,7 @@ export async function publishCatalog(steps,{target='astro',id=randomUUID()}={}){
   }
   return {id,target};
  }catch(error){
+  if(error?.code==='PUBLIC_BROWSER_VERIFICATION_REQUIRED')throw error; // Valid published data stays ready while operator verifies the deployed release.
   const cleanupErrors=[];
   if(mutationStarted){try{await steps.purge();}catch(e){cleanupErrors.push(`purge: ${e.message}`);}}
   // D1 transition is a real revision/phase CAS; never clobber another owner.

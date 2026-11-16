@@ -1,0 +1,7 @@
+import path from 'node:path';import {pathToFileURL} from 'node:url';
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+import {isRemovedContentPath} from '../src/lib/content-removals.ts';
+test('global Viator removal covers every locale and old route variant without affecting other apps',()=>{for(const locale of ['','en/','es/','ja/','fr/','de/','ru/','zh-hans/','ko/','zh/','jp/'])for(const family of ['app','apps'])assert.equal(isRemovedContentPath(`/${locale}${family}/viator`),true);assert.equal(isRemovedContentPath('/es/app/%76iator?x=1'),true);assert.equal(isRemovedContentPath('/app/canva'),false);});
+test('published catalog retains status and explicit manifest deny protections; hreflang filters removals',()=>{const code=fs.readFileSync(new URL('../src/lib/catalog.ts',import.meta.url),'utf8');assert.ok(code.includes("a.status==='published'"));assert.ok(code.includes('blockedPaths.includes'));const shell=fs.readFileSync(new URL('../src/layouts/Shell.astro',import.meta.url),'utf8');assert.ok(shell.includes('isRemovedContentPath'));assert.ok(shell.includes('supportedLocales.filter'));});
+
+test('frontend and backend removal guards match aliases, RSC and OG paths',async()=>{const backend=await import(pathToFileURL(path.join(process.env.CURRENT_SOURCE_REPO??path.resolve('..'),'lib/content-removals.ts')).href);for(const p of ['/app/viator','/fr/apps/viator.rsc','/api/og/viator','/ja/app/%76iator/','/app/canva','/app/viator-other'])assert.equal(isRemovedContentPath(p),backend.isRemovedContentPath(p),p);});

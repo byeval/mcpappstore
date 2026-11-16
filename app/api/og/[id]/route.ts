@@ -1,3 +1,4 @@
+import { isRemovedPublicAppId, removedContentResponse } from "@/lib/content-removals";
 import { getAppById } from "@/lib/data";
 import { ogImageResponse } from "@/lib/og-image";
 
@@ -71,6 +72,7 @@ export async function GET(
     });
   }
 
+  if (isRemovedPublicAppId(normalizedId)) return removedContentResponse();
   const app = await getAppById(normalizedId);
   if (!app || app.status !== "published") {
     return new Response("Not found", { status: 404 });

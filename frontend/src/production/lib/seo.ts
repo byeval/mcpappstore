@@ -1,3 +1,4 @@
+import { isRemovedContentPath } from "../../lib/content-removals";
 import { canonicalAppId } from "./catalog-identity";
 import { editorialFor } from "./app-editorial";
 type Metadata = Record<string, any>;
@@ -106,9 +107,9 @@ export function pageMetadata({
       canonical,
       languages: {
         ...Object.fromEntries(
-          supportedLocales.map((locale) => [localeDetails[locale].htmlLang, absoluteUrl(localizedPath(path, locale))]),
+          supportedLocales.filter((locale) => !isRemovedContentPath(localizedPath(path, locale))).map((locale) => [localeDetails[locale].htmlLang, absoluteUrl(localizedPath(path, locale))]),
         ),
-        "x-default": absoluteUrl(localizedPath(path, defaultLocale)),
+        ...(!isRemovedContentPath(localizedPath(path, defaultLocale)) ? {"x-default": absoluteUrl(localizedPath(path, defaultLocale))} : {}),
       },
     },
     openGraph: {
@@ -350,7 +351,7 @@ export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
+    itemListElement: items.filter((item) => !isRemovedContentPath(item.path)).map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
@@ -364,7 +365,7 @@ export function itemListJsonLd(items: Array<{ name: string; path: string }>, nam
     "@context": "https://schema.org",
     "@type": "ItemList",
     name,
-    itemListElement: items.map((item, index) => ({
+    itemListElement: items.filter((item) => !isRemovedContentPath(item.path)).map((item, index) => ({
       "@type": "ListItem",
       position: startPosition + index,
       name: item.name,

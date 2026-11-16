@@ -1,3 +1,4 @@
+import { isRemovedContentPath } from "@/lib/content-removals";
 import Link from "next/link";
 
 import { formatMessage, localeDetails, localizedPath, supportedLocales, type I18nMessages, type Locale } from "@/lib/i18n";
@@ -17,7 +18,7 @@ export function LanguageSwitcher({
         <span>{localeDetails[locale].shortLabel}</span>
       </summary>
       <div className="language-menu">
-        {supportedLocales.map((item) => {
+        {supportedLocales.filter((item) => !isRemovedContentPath(localizedPath(pathname, item))).map((item) => {
           const detail = localeDetails[item];
           const isCurrent = item === locale;
 

@@ -1,19 +1,11 @@
-// Approved Viator removals only. Catalog data and media remain recoverable.
-// JA: f60b0458b9ec025b; EN: 9e6e8735a45a32e1; ES: 69070d6d396b4441.
-// /app/viator is the default English canonical URL used by localizedPath().
-const removedContentPaths = new Set([
-  "/ja/app/viator",
-  "/en/app/viator",
-  "/app/viator",
-  "/es/app/viator",
-]);
-// Keep this policy in code so catalog imports and daily refreshes cannot restore it.
+// Owner instruction: remove Viator globally. Keep stored data recoverable.
+// This code-level ID guard survives future imports of published catalog records.
+export const removedPublicAppIds = new Set(['viator']);
 export function isRemovedContentPath(pathname: string): boolean {
-  try {
-    return removedContentPaths.has(decodeURIComponent(pathname.split(/[?#]/, 1)[0]!).replace(/\/+$/, ""));
-  } catch {
-    return false;
-  }
+ try {
+  const decoded=decodeURIComponent(pathname.split(/[?#]/,1)[0]!).replace(/\\/g,'/').replace(/\/+/g,'/').replace(/\/+$/,'').toLowerCase();
+  return /(?:^|\/)apps?\/viator(?:\/|\.rsc$|$)/.test(decoded)||/^\/api\/og\/viator(?:\/|\.rsc$|$)/.test(decoded);
+ } catch {return false;}
 }
 
 export function removedContentResponse(): Response {

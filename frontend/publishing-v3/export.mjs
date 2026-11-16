@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 import {EXPORT_SQL} from '../publishing/export.mjs';
-import {sanitizeCatalog} from '../publishing/sanitize.mjs';
+import {sanitizeCatalog,PUBLIC_EXCLUDED_APP_IDS} from '../publishing/sanitize.mjs';
 // Reuse only the existing public-table SELECT arms, not the experimental state arm.
 // CTE names the columns after removing the old state's aliases. Entire export is
 // ONE read statement, so apps/categories/skills/associations share one DB snapshot.
@@ -35,10 +35,10 @@ export function snapshotFromPublicRows(rows,{blockedPaths,now=Date.now(),allowEm
  data.skillAssociations.sort((a,b)=>`${a.appId}\0${a.skillId}`.localeCompare(`${b.appId}\0${b.skillId}`));
  const catalog=canonical(data);
  const content=JSON.stringify(catalog),sha256=digest(content);
- const policySha256=digest(JSON.stringify(policy));
+ const policySha256=digest(JSON.stringify({blockedPaths:policy,excludedAppIds:PUBLIC_EXCLUDED_APP_IDS}));
  // Includes policy as well as visible data. Timestamp deliberately excluded.
  const revision=`snapshot-${digest(JSON.stringify({version:3,sha256,policySha256}))}`;
- return {catalog,manifest:{mode:'authoritative-d1',schemaVersion:1,publicationProtocol:3,revision,blockedPaths:policy,createdAt:new Date(now).toISOString(),sha256,policySha256,apps:catalog.apps.length,categories:catalog.categories.length,skills:catalog.skills.length}};
+ return {catalog,manifest:{mode:'authoritative-d1',schemaVersion:1,publicationProtocol:3,revision,blockedPaths:policy,excludedAppIds:[...PUBLIC_EXCLUDED_APP_IDS],createdAt:new Date(now).toISOString(),sha256,policySha256,apps:catalog.apps.length,categories:catalog.categories.length,skills:catalog.skills.length}};
 }
 export async function exportPublicSnapshotV3(DB,options){
  // Validate explicit policy before touching DB. A caller cannot silently omit removals.
