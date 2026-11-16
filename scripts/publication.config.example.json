@@ -33,5 +33,7 @@
   },
   "activationEnabled": false,
   "remoteHealthEnabled": false,
-  "privateLegacyDeploymentEnabled": false
+  "privateLegacyDeploymentEnabled": false,
+  "capacityReservedNewWorkers": 9,
+  "capacityReservedServices": []
 }

@@ -16,6 +16,7 @@ jobs:
           node-version: 22.23.4
           cache: npm
       - run: npm ci
+      - run: node --test scripts/worker-capacity.test.mjs scripts/worker-capacity-policy.test.mjs scripts/initial-deployment-failure.test.mjs scripts/static-binding-readiness.test.mjs scripts/remote-public-health.test.mjs
       - name: Inspect only; never deploy or migrate
         run: node scripts/release-preflight.mjs
         env:

@@ -39,5 +39,7 @@
       "pattern": "cdn.mcpapp.net/",
       "zone_name": "mcpapp.net"
     }
-  ]
+  ],
+  "capacityReservedNewWorkers": 9,
+  "capacityReservedServices": []
 }

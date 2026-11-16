@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "mode": "manual-browser-paid-attestation",
+  "accountId": "fe512103826b26091f7c064de00ad83b",
+  "plan": "Workers Paid",
+  "projectCeiling": 450,
+  "reviewState": "approved",
+  "observedAt": "2026-11-16T21:14:33.316Z",
+  "expiresAt": "2026-11-23T21:14:33.316Z",
+  "evidenceSha256": "90938ebbae08cccb2f15d605bb7860ab6c1b2f6ae96feae02cfe36b387a0a9eb"
+}

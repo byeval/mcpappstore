@@ -1,0 +1,22 @@
+{
+  "kind": "browser-observed-account-workers-plan",
+  "observedAt": "2026-11-16T21:14:33.316Z",
+  "accountId": "fe512103826b26091f7c064de00ad83b",
+  "accountDisplayName": "byeval",
+  "zone": "mcpapp.net",
+  "url": "https://dash.cloudflare.com/fe512103826b26091f7c064de00ad83b/mcpapp.net",
+  "browser": "user Chrome on Mac mini",
+  "tabId": "631177376",
+  "visibleEvidence": [
+    "有效订阅",
+    "Workers 付费计划",
+    "帐户 ID fe512103826b26091f7c064de00ad83b"
+  ],
+  "separateZonePlanLabel": "免费套餐",
+  "underAttackObservedActive": true,
+  "settingsChanged": false,
+  "credentialPermissionsChanged": false,
+  "proofMethod": "Direct authenticated browser AX observation",
+  "isRuntimeSubscriptionApiProof": false,
+  "scope": "Observed current plan only; not a guarantee of future plan or permanent quota authorization"
+}
