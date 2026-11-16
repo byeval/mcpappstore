@@ -42,7 +42,7 @@ jobs:
       - name: Publication and authoritative data regression checks
         run: |
           node --test scripts/*.test.mjs
-          node --import tsx --test tests/backend-data.test.ts tests/backend-marker.test.ts tests/backend-release.test.ts tests/backend-removals.test.ts
+          node --import tsx --test tests/backend-data.test.ts tests/backend-marker.test.ts tests/backend-release.test.ts tests/backend-removals.test.ts tests/backend-security.test.ts
 
       - name: Catalog evidence and localization audit
         run: npm run audit:seo

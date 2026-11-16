@@ -30,6 +30,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node --test scripts/staged-migrations.test.mjs scripts/runtime-binding-guard.test.mjs
+      - run: node --import tsx --test tests/backend-security.test.ts
       - name: Scoped migrations, immutable private services, temporary front preview
         run: node scripts/staged-private-preview.mjs
         env:

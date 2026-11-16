@@ -8,13 +8,15 @@ export function createBrowserTicket({artifactId,buildCommit,markerId,contentRevi
 // Browser observations attest DOM/visual facts, not unavailable network headers.
 // Exact status/delivery/content type are independently rechecked by the
 // verification continuation through the exact live service/version bindings.
+export function browserObservableChecks(checks){return checks.filter(check=>!(check.path==='/admin'&&check.status===401&&(check.host===undefined||check.host==='mcpapp.net')));}
 export function validateBrowserObservations(ticket,proof,{now=Date.now()}={}){
  if(ticket?.state!=='awaiting-browser'||ticket.phase!=='after-deployment'||now>ticket.expiresAt||ticket.createdAt>now+60000)throw Error('Verification ticket expired or invalid');
  for(const key of ['nonce','artifactId','buildCommit','frontVersion','backendVersion','phase'])if(proof?.[key]!==ticket[key])throw Error('Browser proof identity mismatch: '+key);
  if(proof.method!=='normal-browser'||!Number.isFinite(proof.observedAt)||proof.observedAt<ticket.createdAt||proof.observedAt>now+60000||now-proof.observedAt>5*60*1000)throw Error('Fresh normal-browser observations required');
- if(proof.navigationVerified!==true||proof.stylesApplied!==true||!Array.isArray(proof.observations)||proof.observations.length!==ticket.checks.length)throw Error('Browser navigation/style and every required observation must be established');
+ const requiredChecks=browserObservableChecks(ticket.checks);
+ if(proof.navigationVerified!==true||proof.stylesApplied!==true||!Array.isArray(proof.observations)||proof.observations.length!==requiredChecks.length)throw Error('Browser navigation/style and every required observation must be established');
  const urls=new Set();for(const observed of proof.observations){
-  if(urls.has(observed.url))throw Error('Duplicate browser observation');urls.add(observed.url);const expected=ticket.checks.find(c=>c.url===observed.url);
+  if(urls.has(observed.url))throw Error('Duplicate browser observation');urls.add(observed.url);const expected=requiredChecks.find(c=>c.url===observed.url);
   if(!expected||observed.challengeVisible!==false||(expected.canonical&&observed.canonical!==expected.canonical))throw Error('Browser URL/canonical or unobstructed content not verified');
   if(['status','delivery','contentType'].some(key=>key in observed))throw Error('Browser DOM proof must not claim HTTP headers/status; service verification owns those');
   const text=observed.visibleText??'';
