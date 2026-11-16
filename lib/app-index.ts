@@ -62,13 +62,13 @@ export function appIndexKeyForName(name: string): AppIndexKey {
   return "0-9";
 }
 
-export function groupAppsByIndexKey(apps: CatalogApp[]): Record<AppIndexKey, CatalogApp[]> {
+export function groupAppsByIndexKey<T extends Pick<CatalogApp,"name">>(apps: T[]): Record<AppIndexKey, T[]> {
   const groups = appIndexKeys.reduce(
     (accumulator, key) => {
       accumulator[key] = [];
       return accumulator;
     },
-    {} as Record<AppIndexKey, CatalogApp[]>,
+    {} as Record<AppIndexKey, T[]>,
   );
 
   for (const app of apps) {

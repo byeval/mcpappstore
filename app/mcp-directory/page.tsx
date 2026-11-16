@@ -2,8 +2,9 @@ import { isRemovedContentPath } from "@/lib/content-removals";
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { countAppsByPlatform, getCatalogQualityStats, getCategorySummaries, listMetadataRichApps, listPublishedApps } from "@/lib/data";
-import { appMetadataSignal, appPlatformLabel, formatDirectoryNumber as formatNumber, hasAppPlatform } from "@/lib/directory-content";
+import { getCategorySummaries } from "@/lib/data";
+import {getDirectoryStats,getDirectoryCount,listDirectoryExamples} from "@/lib/directory-data";
+import { formatDirectoryNumber as formatNumber } from "@/lib/directory-content";
 import { formatMessage } from "@/lib/i18n";
 import { localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
@@ -13,10 +14,9 @@ import { staticPageCopy } from "@/lib/static-page-i18n";
 import { absoluteUrl } from "@/lib/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [{ locale }, apps] = await Promise.all([getI18n(), listPublishedApps()]);
+  const [{ locale }, totalListings] = await Promise.all([getI18n(), getDirectoryCount()]);
   const pageCopy = staticPageCopy(locale);
   const copy = pageCopy.mcpDirectory;
-  const totalListings = apps.length;
   const listingText = totalListings.toLocaleString("en-US");
 
   return pageMetadata({
@@ -37,26 +37,24 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function McpDirectoryPage() {
-  const [{ locale, messages: t }, apps, categories, qualityStats, representativeApps, chatgptCount, claudeCount, mcpClients] = await Promise.all([
+  const [{ locale, messages: t }, apps, categories, representativeApps, mcpClients] = await Promise.all([
     getI18n(),
-    listPublishedApps(),
+    getDirectoryStats(),
     getCategorySummaries(),
-    getCatalogQualityStats(),
-    listMetadataRichApps(8),
-    countAppsByPlatform("chatgpt"),
-    countAppsByPlatform("claude"),
+    listDirectoryExamples(8),
     listMcpClients(),
   ]);
+  const chatgptCount=apps.chatgpt,claudeCount=apps.claude,qualityStats=apps;
   const pageCopy = staticPageCopy(locale);
   const copy = pageCopy.mcpDirectory;
   const commonCopy = pageCopy.common;
   const href = (path: string) => localizedPath(path, locale);
-  const lastUpdated = apps.reduce((max, app) => Math.max(max, app.updatedAt), 0);
+  const lastUpdated = apps.latestUpdatedAt;
   const lastUpdatedDate = new Date(lastUpdated || Date.now()).toISOString().slice(0, 10);
-  const totalListings = apps.length;
-  const overlapCount = apps.filter((app) => hasAppPlatform(app, "chatgpt") && hasAppPlatform(app, "claude")).length;
-  const oauthCount = apps.filter((app) => app.authType === "oauth").length;
-  const noAuthCount = apps.filter((app) => app.authType === "none").length;
+  const totalListings = apps.total;
+  const overlapCount = apps.overlap;
+  const oauthCount = apps.oauth;
+  const noAuthCount = apps.noAuth;
   const withToolsCount = qualityStats.withToolsCount;
   const withPromptsCount = qualityStats.withExamplePromptsCount;
   const withRepoCount = qualityStats.withRepoCount;
@@ -231,7 +229,7 @@ export default async function McpDirectoryPage() {
                 <strong>{app.name}</strong>
                 <span>{app.tagline}</span>
                 <small>
-                  {appPlatformLabel(app)} · {appMetadataSignal(app)} · {app.authType === "oauth" ? "OAuth" : copy.noAuth}
+                  {app.platformLabel} · {app.metadataSignal} · {app.authType === "oauth" ? "OAuth" : copy.noAuth}
                 </small>
               </Link>
             ))}

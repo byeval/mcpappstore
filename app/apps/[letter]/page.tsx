@@ -10,11 +10,11 @@ import {
   groupAppsByIndexKey,
   normalizeAppIndexParam,
 } from "@/lib/app-index";
-import { listPublishedApps } from "@/lib/data";
+import { listDirectoryIndex, type DirectoryIndexApp } from "@/lib/directory-data";
 import { formatMessage, localizedPath, type I18nMessages, type Locale } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
-import type { CatalogApp } from "@/lib/types";
+
 import { absoluteUrl } from "@/lib/utils";
 
 export async function generateMetadata({ params }: { params: Promise<{ letter: string }> }): Promise<Metadata> {
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ letter: s
   });
 }
 
-function appKindLabel(app: CatalogApp, copy: I18nMessages["appKind"]): string {
+function appKindLabel(app: DirectoryIndexApp, copy: I18nMessages["appKind"]): string {
   const hasChatGpt = app.surfaces.some((surface) => surface.platform === "chatgpt");
   const hasClaude = app.surfaces.some((surface) => surface.platform === "claude");
 
@@ -50,7 +50,7 @@ function appKindLabel(app: CatalogApp, copy: I18nMessages["appKind"]): string {
   return hasClaude ? copy.connector : copy.app;
 }
 
-function appPlatformLabel(app: CatalogApp, locale: Locale): string {
+function appPlatformLabel(app: DirectoryIndexApp, locale: Locale): string {
   const platforms = Array.from(new Set(app.surfaces.map((surface) => (surface.platform === "claude" ? "Claude" : "ChatGPT"))));
 
   if (locale === "ja" || locale === "zh-hans") return platforms.join("、");
@@ -62,7 +62,7 @@ function appPlatformLabel(app: CatalogApp, locale: Locale): string {
   return platforms.join(" and ");
 }
 
-function appSummaryLine(app: CatalogApp, locale: Locale, t: I18nMessages): string {
+function appSummaryLine(app: DirectoryIndexApp, locale: Locale, t: I18nMessages): string {
   const kind = appKindLabel(app, t.appKind);
   const platform = appPlatformLabel(app, locale);
 
@@ -81,7 +81,7 @@ export default async function AppsLetterPage({ params }: { params: Promise<{ let
     notFound();
   }
 
-  const apps = (await listPublishedApps()).filter((app) => !isRemovedContentPath(href(`/app/${app.id}`)));
+  const apps = (await listDirectoryIndex()).filter((app) => !isRemovedContentPath(href(`/app/${app.id}`)));
   const groups = groupAppsByIndexKey(apps);
   const activeKeys = activeAppIndexKeys(apps);
   const groupApps = groups[key];

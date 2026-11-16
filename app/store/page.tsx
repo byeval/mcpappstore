@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 
-import { listSitemapAppEntries } from "@/lib/data";
+import { getDirectoryCount } from "@/lib/directory-data";
 import { getI18n } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [{ locale }, apps] = await Promise.all([getI18n(), listSitemapAppEntries()]);
-  const totalListings = apps.length;
+  const [{ locale }, apps] = await Promise.all([getI18n(), getDirectoryCount()]);
+  const totalListings = apps;
   const listingText = totalListings.toLocaleString("en-US");
 
   return pageMetadata({

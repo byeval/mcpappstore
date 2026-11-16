@@ -5,11 +5,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { activeAppIndexKeys, appIndexPath, appIndexTitle, groupAppsByIndexKey } from "@/lib/app-index";
-import { listPublishedApps } from "@/lib/data";
+import { listDirectoryIndex, type DirectoryIndexApp } from "@/lib/directory-data";
 import { formatMessage, localizedPath, type I18nMessages, type Locale } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
-import type { CatalogApp } from "@/lib/types";
+
 import { absoluteUrl } from "@/lib/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-function appKindLabel(app: CatalogApp, copy: I18nMessages["appKind"]): string {
+function appKindLabel(app: DirectoryIndexApp, copy: I18nMessages["appKind"]): string {
   const hasChatGpt = app.surfaces.some((surface) => surface.platform === "chatgpt");
   const hasClaude = app.surfaces.some((surface) => surface.platform === "claude");
 
@@ -32,7 +32,7 @@ function appKindLabel(app: CatalogApp, copy: I18nMessages["appKind"]): string {
   return hasClaude ? copy.connector : copy.app;
 }
 
-function appPlatformLabel(app: CatalogApp, locale: Locale): string {
+function appPlatformLabel(app: DirectoryIndexApp, locale: Locale): string {
   const platforms = Array.from(new Set(app.surfaces.map((surface) => (surface.platform === "claude" ? "Claude" : "ChatGPT"))));
 
   if (locale === "ja" || locale === "zh-hans") return platforms.join("、");
@@ -44,7 +44,7 @@ function appPlatformLabel(app: CatalogApp, locale: Locale): string {
   return platforms.join(" and ");
 }
 
-function appSummaryLine(app: CatalogApp, locale: Locale, t: I18nMessages): string {
+function appSummaryLine(app: DirectoryIndexApp, locale: Locale, t: I18nMessages): string {
   const kind = appKindLabel(app, t.appKind);
   const platform = appPlatformLabel(app, locale);
 
@@ -56,7 +56,7 @@ function appSummaryLine(app: CatalogApp, locale: Locale, t: I18nMessages): strin
 }
 
 export default async function AppsIndexPage() {
-  const [{ locale, messages: t }, allApps] = await Promise.all([getI18n(), listPublishedApps()]);
+  const [{ locale, messages: t }, allApps] = await Promise.all([getI18n(), listDirectoryIndex()]);
   const href = (path: string) => localizedPath(path, locale);
   const apps = allApps.filter((app) => !isRemovedContentPath(href(`/app/${app.id}`)));
   const groups = groupAppsByIndexKey(apps);

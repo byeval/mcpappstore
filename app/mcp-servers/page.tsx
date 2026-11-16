@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { countAppsByPlatform, getCatalogQualityStats, getCategorySummaries, listMetadataRichApps, listPublishedApps } from "@/lib/data";
-import { appMetadataSignal, appPlatformLabel, formatDirectoryNumber as formatNumber } from "@/lib/directory-content";
+import { getCategorySummaries } from "@/lib/data";
+import {getDirectoryStats,getDirectoryCount,listDirectoryExamples} from "@/lib/directory-data";
+import { formatDirectoryNumber as formatNumber } from "@/lib/directory-content";
 import { formatMessage, localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { faqJsonLd, formatCategoryName, itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
@@ -15,9 +16,8 @@ function categoryCount(categories: CategorySummary[], slug: string): number {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [{ locale }, apps] = await Promise.all([getI18n(), listPublishedApps()]);
+  const [{ locale }, totalListings] = await Promise.all([getI18n(), getDirectoryCount()]);
   const copy = staticPageCopy(locale).mcpServers;
-  const totalListings = apps.length;
   const listingText = totalListings.toLocaleString("en-US");
 
   return pageMetadata({
@@ -37,27 +37,25 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function McpServersPage() {
-  const [{ locale, messages: t }, apps, categories, qualityStats, serverExamples, chatgptCount, claudeCount] = await Promise.all([
+  const [{ locale, messages: t }, apps, categories, serverExamples] = await Promise.all([
     getI18n(),
-    listPublishedApps(),
+    getDirectoryStats(),
     getCategorySummaries(),
-    getCatalogQualityStats(),
-    listMetadataRichApps(10),
-    countAppsByPlatform("chatgpt"),
-    countAppsByPlatform("claude"),
+    listDirectoryExamples(10),
   ]);
+  const chatgptCount=apps.chatgpt,claudeCount=apps.claude,qualityStats=apps;
   const pageCopy = staticPageCopy(locale);
   const copy = pageCopy.mcpServers;
   const commonCopy = pageCopy.common;
   const href = (path: string) => localizedPath(path, locale);
-  const totalListings = apps.length;
-  const lastUpdated = apps.reduce((max, app) => Math.max(max, app.updatedAt), 0);
+  const totalListings = apps.total;
+  const lastUpdated = apps.latestUpdatedAt;
   const lastUpdatedIso = new Date(lastUpdated || Date.now()).toISOString();
   const lastUpdatedDate = lastUpdatedIso.slice(0, 10);
-  const httpCount = apps.filter((app) => app.mcpTransport === "http").length;
-  const sseCount = apps.filter((app) => app.mcpTransport === "sse").length;
-  const oauthCount = apps.filter((app) => app.authType === "oauth").length;
-  const noAuthCount = apps.filter((app) => app.authType === "none").length;
+  const httpCount = apps.http;
+  const sseCount = apps.sse;
+  const oauthCount = apps.oauth;
+  const noAuthCount = apps.noAuth;
   const withToolsCount = qualityStats.withToolsCount;
   const withPromptsCount = qualityStats.withExamplePromptsCount;
   const withRepoCount = qualityStats.withRepoCount;
@@ -90,7 +88,7 @@ export default async function McpServersPage() {
     {
       type: copy.rows.interactive.type,
       href: "/awesome-mcp-apps",
-      count: apps.filter((app) => app.previews.length > 0 || app.categories.includes("design")).length,
+      count: apps.interactive,
       use: copy.rows.interactive.use,
       check: copy.rows.interactive.check,
     },
@@ -244,7 +242,7 @@ export default async function McpServersPage() {
                 <strong>{app.name}</strong>
                 <span>{app.tagline}</span>
                 <small>
-                  {appPlatformLabel(app)} · {app.mcpTransport.toUpperCase()} · {appMetadataSignal(app)}
+                  {app.platformLabel} · {app.mcpTransport.toUpperCase()} · {app.metadataSignal}
                 </small>
               </Link>
             ))}
