@@ -14,7 +14,7 @@ This patch follows a focused audit of `0846ea1184c171fe4d28be9840433d32f62b1d03`
 
 Root: `react`, `react-dom`, `react-server-dom-webpack` **19.3.1**; `@vitejs/plugin-rsc` **0.5.39**; `zod` **4.6.6**. Frontend: React and React DOM **19.3.1**. These remain within Vinext `0.0.43`'s declared peer ranges; Vinext, Vite and Cloudflare tooling were not intentionally upgraded.
 
-Normal npm resolution also pruned **15 unused optional lock entries**, including the optional Next `16.2.4` tree and an optional nested TypeScript. Next was not upgraded or added as an application dependency. Root has 15 changed/new package-version entries including the requested runtime and necessary plugin dependencies; frontend has only React, React DOM and scheduler changes. Full details: `reports/security-lock-delta.json`.
+Normal npm resolution also pruned **14 unused optional lock entries**, including the optional Next `16.2.4` tree. The optional nested TypeScript `5.9.3` is retained for npm 10 compatibility. Next was not upgraded or added as an application dependency. Root has 15 changed/new package-version entries including the requested runtime and necessary plugin dependencies; frontend has only React, React DOM and scheduler changes. Full details: `reports/security-lock-delta.json`.
 
 ## Residual audit findings
 
@@ -28,3 +28,11 @@ After clean `npm ci`, root audit is **19, not zero**: 0 critical, 12 high, 5 mod
 - Full backend build and all three actual Worker integration suites (publication transactions, release endpoint, global Viator removal) passed. Results are recorded in `reports/security-backend-*.log`.
 - A new authoritative private CI snapshot/build/parity run is required. Old ignored frontend data and the pre-patch private preview are not evidence for this patched release.
 - No deployment, push, WAF changes or production data changes were made by this patch task.
+
+## CI package-manager compatibility follow-up
+
+CI at Node `22.23.4` / npm `10.9.9` rejected the npm-11-pruned lock because `vite-tsconfig-paths`' nested `tsconfck@3.1.6` has an optional `typescript@^5` peer, while root TypeScript is `6.0.3`. Resolving the lock with exact npm `10.9.9` adds only `node_modules/vite-tsconfig-paths/node_modules/typescript@5.9.3`; patched runtime versions and frontend lock are unchanged. Exact npm-10 clean install, root typecheck and all three security regressions pass.
+
+A local test initially selected Node `22.23.0`: install succeeds but Astro correctly rejects that unsupported version. Actual CI uses supported Node `22.23.4`, so this is not an additional CI blocker. Pinning CI to `22.23.4` makes that supported version reproducible. The confirmed CI blocker was only the missing nested TypeScript lock entry.
+
+Verified follow-up: normal npm `11.5.1` clean install also accepts the repaired root lock; its typecheck and three security tests pass. On exact Node `22.23.4` / npm `10.9.9`, frontend clean install, Astro check (zero errors), and all 15 release tests pass. Only the nested TypeScript lock entry and this note changed; no runtime rebuild is needed for that metadata-only repair. Linux/platform-specific packaging remains for CI to validate.
