@@ -1,3 +1,4 @@
+import './related-ranking-parity.test.mjs';
 import path from 'node:path';import {pathToFileURL} from 'node:url';
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
 import {isRemovedContentPath} from '../src/lib/content-removals.ts';

@@ -663,6 +663,7 @@ async function uploadRemoteImageToR2(key: string, imageUrl: string | undefined):
 async function hydrateAppRows(
   rows: Array<Record<string, unknown>>,
   options: HydrateAppRowsOptions = fullHydration,
+  prefetched?: {categories:D1Result<{app_id:string;category_slug:string}>;surfaces:D1Result<Record<string,unknown>>},
 ): Promise<CatalogApp[]> {
   const db = await getDb();
   if (!db) {
@@ -677,10 +678,10 @@ async function hydrateAppRows(
   const bulk = !hydration.includeTags && !hydration.includeTools && !hydration.includeSkills && !hydration.includeSubmission && !hydration.includePreviews;
   if (bulk && rows.length) {
     const ids=JSON.stringify(rows.map(row=>String(row.id)));
-    const categories=await db.prepare("SELECT app_id,category_slug FROM app_categories WHERE app_id IN (SELECT value FROM json_each(?)) ORDER BY category_slug ASC").bind(ids).all<{app_id:string;category_slug:string}>();
+    const categories=prefetched?.categories??await db.prepare("SELECT app_id,category_slug FROM app_categories WHERE app_id IN (SELECT value FROM json_each(?)) ORDER BY category_slug ASC").bind(ids).all<{app_id:string;category_slug:string}>();
     if(!categories.success)throw Error("Authoritative categories unavailable");
     for(const row of categories.results){const list=categoryMap.get(row.app_id)??[];list.push(row);categoryMap.set(row.app_id,list);}
-    const surfaces=await db.prepare(`SELECT app_id,platform,surface_type,display_name,surface_url,external_id,is_primary,status,tagline,description,mcp_endpoint,mcp_transport,install_cmd,auth_type,capabilities,example_prompts,tools ${hydration.includeSurfacePreviews?',previews':''} FROM app_surfaces WHERE app_id IN (SELECT value FROM json_each(?)) ORDER BY is_primary DESC,platform ASC,surface_type ASC,external_id ASC`).bind(ids).all<Record<string,unknown>>();
+    const surfaces=prefetched?.surfaces??await db.prepare(`SELECT app_id,platform,surface_type,display_name,surface_url,external_id,is_primary,status,tagline,description,mcp_endpoint,mcp_transport,install_cmd,auth_type,capabilities,example_prompts,tools ${hydration.includeSurfacePreviews?',previews':''} FROM app_surfaces WHERE app_id IN (SELECT value FROM json_each(?)) ORDER BY is_primary DESC,platform ASC,surface_type ASC,external_id ASC`).bind(ids).all<Record<string,unknown>>();
     if(!surfaces.success)throw Error("Authoritative surfaces unavailable");
     for(const row of surfaces.results){const id=String(row.app_id),list=surfaceMap.get(id)??[];list.push(row);surfaceMap.set(id,list);}
   }
@@ -804,6 +805,17 @@ async function hydrateAppRows(
   return sortApps(apps);
 }
 
+/** One D1 round trip and one consistent snapshot per bounded list page. */
+async function readListBatch(db:D1Database,idQuery:string,params:Array<string|number|null>){
+ const result=await db.batch<Record<string,unknown>>([
+  db.prepare(`SELECT * FROM apps WHERE id IN (${idQuery}) ORDER BY id`).bind(...params),
+  db.prepare(`SELECT app_id,category_slug FROM app_categories WHERE app_id IN (${idQuery}) ORDER BY category_slug`).bind(...params),
+  db.prepare(`SELECT app_id,platform,surface_type,display_name,surface_url,external_id,is_primary,status,tagline,description,mcp_endpoint,mcp_transport,install_cmd,auth_type,capabilities,example_prompts,tools FROM app_surfaces WHERE app_id IN (${idQuery}) ORDER BY is_primary DESC,platform,surface_type,external_id`).bind(...params),
+ ]);
+ if(result.length!==3||result.some(r=>!r.success||!Array.isArray(r.results)))throw Error('Authoritative list batch unavailable');
+ return {rows:result[0].results,prefetched:{categories:result[1] as unknown as D1Result<{app_id:string;category_slug:string}>,surfaces:result[2]}};
+}
+
 async function listAppsFromDb(
   status: CatalogApp["status"] = "published",
   options: HydrateAppRowsOptions = fullHydration,
@@ -818,7 +830,7 @@ async function listAppsFromDb(
     const apps:CatalogApp[]=[];
     let after="";
     while(true){
-      const remaining=limit ? Math.max(0,limit-apps.length) : 256;
+      const remaining=limit ? Math.max(0,limit-apps.length) : 1024;
       if(!remaining)break;
       // Keep sort/limit behavior for the bounded legacy callers; full catalogs
       // are fetched by stable ID keyset, then sorted once after hydration.
@@ -827,12 +839,12 @@ async function listAppsFromDb(
         if(!rows.success)throw Error('Authoritative bounded catalog unavailable');
         return hydrateAppRows(rows.results,options);
       }
-      const rows=await db.prepare("SELECT * FROM apps WHERE status=? AND (status!='published' OR lower(id)!='viator') AND id>? ORDER BY id LIMIT 256").bind(status,after).all<Record<string,unknown>>();
-      if(!rows.success)throw Error('Authoritative catalog page unavailable');
-      if(!rows.results.length)break;
-      apps.push(...await hydrateAppRows(rows.results,options));
-      after=String(rows.results.at(-1)!.id);
-      if(rows.results.length<256)break;
+      const idQuery="SELECT id FROM apps WHERE status=? AND (status!='published' OR lower(id)!='viator') AND id>? ORDER BY id LIMIT 1024";
+      const page=await readListBatch(db,idQuery,[status,after]);
+      if(!page.rows.length)break;
+      apps.push(...await hydrateAppRows(page.rows,options,page.prefetched));
+      after=String(page.rows.at(-1)!.id);
+      if(page.rows.length<1024)break;
     }
     return apps.sort((a,b)=>Number(b.isFeatured)-Number(a.isFeatured)||(b.publishedAt??b.updatedAt)-(a.publishedAt??a.updatedAt));
   } catch (error) {
@@ -927,25 +939,34 @@ export async function getRelatedApps(app:CatalogApp):Promise<CatalogApp[]> {
  if(!terms.categories.length&&!terms.capabilities.length)return [];
  let after="";
  while(true){
-  const rows=await db.prepare(`SELECT id,name,capabilities,source,is_featured,published_at,updated_at FROM apps WHERE status='published' AND lower(id)!='viator' AND id>? AND (
+  const rankingQuery=`SELECT id,name,capabilities,source,is_featured,published_at,updated_at FROM apps WHERE status='published' AND lower(id)!='viator' AND id>? AND (
    EXISTS(SELECT 1 FROM app_categories ac WHERE ac.app_id=apps.id AND (lower(ac.category_slug) IN (SELECT value FROM json_each(?)) OR ac.category_slug GLOB '*[^ -~]*')) OR
    EXISTS(SELECT 1 FROM json_each(CASE WHEN json_valid(apps.capabilities) THEN apps.capabilities ELSE '[]' END) cap WHERE (lower(cap.value) IN (SELECT value FROM json_each(?)) OR cap.value GLOB '*[^ -~]*'))
-  ) ORDER BY id LIMIT 256`).bind(after,JSON.stringify(terms.categories),JSON.stringify(terms.capabilities)).all<Record<string,unknown>>();
-  if(!rows.success)throw Error("Authoritative related catalog unavailable");
+  ) ORDER BY id LIMIT 1024`;
+  const idsQuery=rankingQuery.replace('SELECT id,name,capabilities,source,is_featured,published_at,updated_at','SELECT id');
+  const params=[after,JSON.stringify(terms.categories),JSON.stringify(terms.capabilities)];
+  const result=await db.batch<Record<string,unknown>>([
+   db.prepare(rankingQuery).bind(...params),
+   db.prepare(`SELECT app_id,category_slug FROM app_categories WHERE app_id IN (${idsQuery}) ORDER BY category_slug`).bind(...params),
+   db.prepare(`SELECT app_id,platform,surface_type FROM app_surfaces WHERE app_id IN (${idsQuery}) ORDER BY is_primary DESC,platform,surface_type,external_id`).bind(...params),
+  ]);
+  if(result.length!==3||result.some(r=>!r.success||!Array.isArray(r.results)))throw Error('Authoritative related associations unavailable');
+  const rows=result[0],cats=result[1] as unknown as D1Result<{app_id:string;category_slug:string}>,surfaces=result[2] as unknown as D1Result<{app_id:string;platform:AppSurface['platform'];surface_type:AppSurface['type']}>;
   if(!rows.results.length)break;
-  const ids=JSON.stringify(rows.results.map(row=>String(row.id)));
-  const cats=await db.prepare("SELECT app_id,category_slug FROM app_categories WHERE app_id IN (SELECT value FROM json_each(?)) ORDER BY category_slug").bind(ids).all<{app_id:string;category_slug:string}>();
-  const surfaces=await db.prepare("SELECT app_id,platform,surface_type FROM app_surfaces WHERE app_id IN (SELECT value FROM json_each(?)) ORDER BY is_primary DESC,platform,surface_type,external_id").bind(ids).all<{app_id:string;platform:AppSurface["platform"];surface_type:AppSurface["type"]}>();
-  if(!cats.success||!surfaces.success)throw Error("Authoritative related associations unavailable");
   const categoryMap=new Map<string,string[]>(),surfaceMap=new Map<string,AppSurface[]>();
   for(const row of cats.results){const list=categoryMap.get(row.app_id)??[];list.push(row.category_slug);categoryMap.set(row.app_id,list);}
   for(const row of surfaces.results){const list=surfaceMap.get(row.app_id)??[];list.push({platform:row.platform,type:row.surface_type,isPrimary:false,status:"available"});surfaceMap.set(row.app_id,list);}
   for(const row of rows.results){const id=String(row.id);const candidate={...app,id,name:String(row.name),source:String(row.source) as CatalogApp['source'],publishedAt:row.published_at?Number(row.published_at):null,updatedAt:Number(row.updated_at),isFeatured:Number(row.is_featured)===1,categories:categoryMap.get(id)??[],capabilities:safeJsonParse<string[]>(String(row.capabilities??"[]"),[])};candidate.surfaces=surfaceMap.get(id)??defaultAppSurfaces(candidate);accept(candidate);}
   after=String(rows.results.at(-1)!.id);
-  if(rows.results.length<256)break;
+  if(rows.results.length<1024)break;
  }
- const selected=await Promise.all(best.map(x=>getAppById(x.app.id)));
- return selected.filter((candidate):candidate is CatalogApp=>Boolean(candidate&&candidate.status==='published'&&!isRemovedPublicAppId(candidate.id)));
+ if(!best.length)return [];
+ // Cards previously used listHydration; do not fetch private submission/tool/skill
+ // detail for each winner. Recheck authoritative visibility in one final query.
+ const selected=await readListBatch(db,"SELECT id FROM apps WHERE status='published' AND lower(id)!='viator' AND id IN (SELECT value FROM json_each(?))",[JSON.stringify(best.map(x=>x.app.id))]);
+ const hydrated=await hydrateAppRows(selected.rows,listHydration,selected.prefetched);
+ const byId=new Map(hydrated.map(candidate=>[candidate.id,candidate]));
+ return best.flatMap(candidate=>{const app=byId.get(candidate.app.id);return app?[app]:[];});
 }
 
 export async function listPublishedApps(): Promise<CatalogApp[]> {
