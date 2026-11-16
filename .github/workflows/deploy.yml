@@ -16,9 +16,12 @@ jobs:
   deploy:
     name: Deploy Worker
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
 
     steps:
+      - name: Start bounded release clock
+        run: echo "MCPAPP_JOB_STARTED_AT=$(node -p 'Date.now()')" >> "$GITHUB_ENV"
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -48,7 +51,14 @@ jobs:
         run: npm run audit:seo
 
       - name: Deploy
-        run: npm run deploy
+        id: deploy
+        run: |
+          set +e
+          npm run deploy
+          code=$?
+          set -e
+          echo "release_exit=$code" >> "$GITHUB_OUTPUT"
+          if [ "$code" -ne 0 ] && [ "$code" -ne 78 ]; then exit "$code"; fi
         env:
           ASTRO_PUBLICATION_CONFIG: ${{ github.workspace }}/scripts/publication.config.json
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -62,3 +72,23 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
           path: reports/browser-verification-ticket.json
+
+      - name: Await exact browser verification or roll back expired release
+        if: always() && steps.deploy.outputs.release_exit == '78'
+        timeout-minutes: 45
+        run: node scripts/await-browser-release.mjs --ticket "${{ github.workspace }}/reports/browser-verification-ticket.json"
+        env:
+          ASTRO_PUBLICATION_CONFIG: ${{ github.workspace }}/scripts/publication.config.json
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Preserve browser-resolution or rollback evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-resolution-${{ github.sha }}
+          if-no-files-found: ignore
+          retention-days: 7
+          path: |
+            reports/browser-verification-ticket.json.resolution.json
+            reports/browser-verification-ticket.json.rolled-back.json

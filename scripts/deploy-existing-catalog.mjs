@@ -1,3 +1,4 @@
+import {releaseExitCode} from './pending-release.mjs';
 import {generatePrivateLegacy} from './private-legacy.mjs';
 import fs from 'node:fs/promises';import os from 'node:os';import path from 'node:path';import {spawn} from 'node:child_process';import {createWranglerD1} from './wrangler-d1.mjs';import {readPublicationState} from './publication-state.mjs';
 // Explicit bridge for already-deployed private legacy backend and authoritative D1 data.
@@ -9,5 +10,5 @@ for(const testFile of ['tests/backend-publication.integration.mjs','tests/backen
 await generatePrivateLegacy(process.cwd(),process.env.GITHUB_SHA??'');
 const current=await readPublicationState(createWranglerD1());if(current.phase!=='ready')throw Error('Current catalog is not ready; retry after writer completion');
 const directory=await fs.mkdtemp(path.join(os.tmpdir(),'mcpapp-release-receipt-'));const pointer=path.join(directory,'pointer.json');
-async function run(args){await new Promise((ok,no)=>{const p=spawn(process.execPath,['scripts/astro-publisher.mjs',...args],{stdio:'inherit'});p.once('error',no);p.once('exit',code=>code===0?ok():no(Error('Release stage failed')));});}
-try{await run(['prepare','--marker-id',current.id,'--receipt-out',pointer]);const prepared=JSON.parse(await fs.readFile(pointer));await run(['activate','--marker-id',current.id,'--receipt',prepared.receiptPath]);}finally{await fs.rm(directory,{recursive:true,force:true});}
+async function run(args){return await new Promise((ok,no)=>{const p=spawn(process.execPath,['scripts/astro-publisher.mjs',...args],{stdio:'inherit'});p.once('error',no);p.once('exit',code=>{try{ok(releaseExitCode(code));}catch(error){no(error);}});});}
+try{const preparedStatus=await run(['prepare','--marker-id',current.id,'--receipt-out',pointer]);if(preparedStatus!==0)throw Error('Preparation did not produce a deployable artifact');const prepared=JSON.parse(await fs.readFile(pointer));process.exitCode=await run(['activate','--marker-id',current.id,'--receipt',prepared.receiptPath]);}finally{await fs.rm(directory,{recursive:true,force:true});}

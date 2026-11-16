@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       approved_private_preview:
-        description: Apply only reviewed 0007/0008/0009 and deploy private preview; never switch frontend
+        description: Apply only reviewed 0007/0008/0009/0010 and deploy private preview; never switch frontend
         required: true
         type: boolean
         default: false

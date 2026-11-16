@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {releaseExitCode} from './pending-release.mjs';
 import {spawnSync} from 'node:child_process';import path from 'node:path';
 // Workers Builds is validation-only. GitHub is the single canonical deployment owner.
 if(process.env.WORKERS_CI==='1'){
@@ -11,4 +12,4 @@ if(process.env.GITHUB_ACTIONS!=='true'||process.env.GITHUB_REF!=='refs/heads/mai
 const config=process.env.ASTRO_PUBLICATION_CONFIG;if(!config||!path.isAbsolute(config))throw Error('Reviewed ASTRO_PUBLICATION_CONFIG required');
 // Full catalog synchronization belongs to daily ingestion, not a second CI writer.
 // CI builds the already-authoritative public snapshot. No seed/import is repeated here.
-const result=spawnSync(process.execPath,['scripts/deploy-existing-catalog.mjs'],{stdio:'inherit'});if(result.error||result.status!==0)throw Error('Canonical release failed; no deployment success claimed');
+const result=spawnSync(process.execPath,['scripts/deploy-existing-catalog.mjs'],{stdio:'inherit'});if(result.error)throw Error('Canonical release failed; no deployment success claimed');process.exitCode=releaseExitCode(result.status);

@@ -1,0 +1,11 @@
+import {validateVerifiedHybridRecord} from './verified-hybrid-registry.mjs';
+export function releaseExitCode(status){if(status===0||status===78)return status;throw Error('Release stage failed; not a verified pending outcome');}
+export async function awaitPendingRelease(ticket,{readCurrent,readRecord,rollback,frontMetadata,now=Date.now,sleep=ms=>new Promise(r=>setTimeout(r,ms)),pollMs=30000}){
+ if(ticket?.kind!=='astro-release'||ticket.state!=='awaiting-browser'||ticket.publicPolicy!=='viator-global-v1'||!Number.isFinite(ticket.createdAt)||!Number.isFinite(ticket.expiresAt)||ticket.expiresAt-ticket.createdAt>1800000||ticket.expiresAt<=ticket.createdAt||!ticket.previousPair?.front?.versionId)throw Error('Exact bounded pending Astro ticket required');
+ for(;;){
+  const live=await readCurrent();if(live.frontVersion!==ticket.frontVersion||live.backendVersion!==ticket.backendVersion){const error=Error('Pending release superseded; never revert newer versions');error.code='PENDING_RELEASE_SUPERSEDED';throw error;}
+  const record=await readRecord();if(record){validateVerifiedHybridRecord(record,frontMetadata,ticket.backendVersion);if(record.sourceCommit!==ticket.buildCommit)throw Error('Verification record source differs from pending ticket');const latest=await readCurrent();if(latest.frontVersion!==ticket.frontVersion||latest.backendVersion!==ticket.backendVersion)throw Error('Verified release superseded during registry read');return {verified:true,frontVersion:ticket.frontVersion,method:record.method};}
+  const remaining=ticket.expiresAt-now();if(remaining<0){try{await rollback();}catch(error){const latest=await readCurrent();if(latest.frontVersion===ticket.frontVersion&&latest.backendVersion===ticket.backendVersion){const raced=await readRecord();if(raced){validateVerifiedHybridRecord(raced,frontMetadata,ticket.backendVersion);if(raced.sourceCommit===ticket.buildCommit)return {verified:true,frontVersion:ticket.frontVersion,method:raced.method};}}if(error.code==='ROLLBACK_BUSY'&&now()<ticket.expiresAt+10*60000){await sleep(Math.min(pollMs,15000));continue;}throw error;}return {verified:false,rolledBack:true,reason:'browser-verification-expired',frontVersion:ticket.frontVersion};}
+  await sleep(Math.min(pollMs,Math.max(1,remaining+1)));
+ }
+}
