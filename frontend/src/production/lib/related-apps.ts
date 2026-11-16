@@ -1,0 +1,13 @@
+import type {CatalogApp} from './types';
+// Exact production scoring, indexed at build time. No data or index is shipped
+// to the browser. Original candidate order is retained for equal-score ties.
+const genericCategories=new Set(['featured','productivity','other','developer-tools','new-and-noteworthy']);
+const genericCapabilities=new Set(['claude','claude code','interactive','reads','remote mcp','writes']);
+const vectors=new WeakMap<CatalogApp,ReturnType<typeof makeVector>>();
+function makeVector(a:CatalogApp){const categories=a.categories.filter(c=>!genericCategories.has(c.toLowerCase()));const capabilities=a.capabilities.filter(c=>!genericCapabilities.has(c.toLowerCase()));const surfaces=a.surfaces.map(s=>`${s.platform}:${s.type}`),platforms=a.surfaces.map(s=>s.platform);return {categories,capabilities,surfaces,platforms,categorySet:new Set(categories.map(x=>x.toLowerCase())),capabilitySet:new Set(capabilities.map(x=>x.toLowerCase())),surfaceSet:new Set(surfaces.map(x=>x.toLowerCase())),platformSet:new Set(platforms.map(x=>x.toLowerCase()))};}
+function vector(a:CatalogApp){let v=vectors.get(a);if(!v){v=makeVector(a);vectors.set(a,v);}return v;}
+const overlap=(left:string[],right:Set<string>)=>left.reduce((n,v)=>n+Number(right.has(v.toLowerCase())),0);
+export function productionRelatedScore(a:CatalogApp,b:CatalogApp){const x=vector(a),y=vector(b),category=overlap(x.categories,y.categorySet),capability=overlap(x.capabilities,y.capabilitySet);if(!category&&!capability)return 0;return category*10+capability*4+overlap(x.surfaces,y.surfaceSet)*2+overlap(x.platforms,y.platformSet)+(x.categories[0]&&x.categories[0]===y.categories[0]?3:0)+(a.source===b.source?1:0);}
+type Index={terms:Map<string,number[]>};const indices=new WeakMap<CatalogApp[],Index>();
+function index(apps:CatalogApp[]){let result=indices.get(apps);if(result)return result;const terms=new Map<string,number[]>();apps.forEach((a,i)=>{const v=vector(a);for(const key of [...v.categorySet].map(s=>'c:'+s).concat([...v.capabilitySet].map(s=>'p:'+s))){const bucket=terms.get(key)??[];bucket.push(i);terms.set(key,bucket);}});result={terms};indices.set(apps,result);return result;}
+export function indexedRelatedApps(app:CatalogApp,apps:CatalogApp[],limit=4){const v=vector(app),idx=index(apps),possible=new Set<number>();for(const key of [...v.categorySet].map(s=>'c:'+s).concat([...v.capabilitySet].map(s=>'p:'+s)))for(const i of idx.terms.get(key)??[])possible.add(i);return [...possible].sort((a,b)=>a-b).filter(i=>apps[i]!.id!==app.id).map(i=>({app:apps[i]!,score:productionRelatedScore(app,apps[i]!)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score||Number(b.app.isFeatured)-Number(a.app.isFeatured)||a.app.name.localeCompare(b.app.name)).slice(0,limit).map(x=>x.app);}

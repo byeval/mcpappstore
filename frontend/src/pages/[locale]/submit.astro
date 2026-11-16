@@ -1,0 +1,7 @@
+---
+import SubmitPage from '../../components/SubmitPage.astro';
+import {supportedLocales,type Locale} from '../../lib/i18n';
+export function getStaticPaths(){return supportedLocales.filter(locale=>locale!=='en').map(locale=>({params:{locale},props:{locale}}));}
+const {locale}=Astro.props as {locale:Locale};
+---
+<SubmitPage locale={locale}/>

@@ -1,0 +1,56 @@
+---
+import {getMessages,localeDetails,type Locale,supportedLocales} from '../lib/i18n';
+import {blockedPaths,pathFor} from '../lib/catalog';
+import {discoveryCopy} from '../lib/discovery-copy';
+import {isRemovedContentPath} from '../lib/content-removals';
+interface Props{locale:Locale; title:string;description:string;path:string;schema?:unknown;robots?:string;image?:string;article?:boolean;modified?:string;}
+const {locale,title,description,path,schema,robots,image,article=false,modified}=Astro.props;const t=getMessages(locale);
+const copy=discoveryCopy(locale);
+const siteName=locale==='ru'?'Магазин MCP-приложений':locale==='zh-hans'?'MCP 应用商店':locale==='ja'?'MCP アプリストア':locale==='ko'?'MCP 앱 스토어':'MCP App Store';
+const ogImage=image??'https://mcpapp.net/api/og/default.png';
+function truncateMeta(value: string, maxLength = 160): string {
+  const normalized = value.replace(/\s+/g, " ").trim();
+  if (normalized.length <= maxLength) {
+    return normalized;
+  }
+
+  const candidate = normalized.slice(0, maxLength - 1).trimEnd();
+  const minimumBreak = Math.floor(maxLength * 0.65);
+  const sentenceBreak = Math.max(
+    candidate.lastIndexOf(". "),
+    candidate.lastIndexOf("! "),
+    candidate.lastIndexOf("? "),
+    candidate.lastIndexOf("。"),
+    candidate.lastIndexOf("！"),
+    candidate.lastIndexOf("？"),
+  );
+  if (sentenceBreak >= minimumBreak) {
+    return candidate.slice(0, sentenceBreak + 1).trimEnd();
+  }
+
+  const wordBreak = candidate.lastIndexOf(" ");
+  const clipped = wordBreak >= minimumBreak ? candidate.slice(0, wordBreak) : candidate;
+  return `${clipped.replace(/[,:;\-–—]+$/, "").trimEnd()}…`;
+}
+const finalDescription=truncateMeta(description);
+const canonical=`https://mcpapp.net${pathFor(locale,path)}`;
+const productionAnalytics=import.meta.env.PRODUCTION_BUILD==='true';
+const googleAnalyticsId=import.meta.env.GOOGLE_ANALYTICS_ID??'G-17PKWX92D6';
+const cloudflareAnalyticsToken=import.meta.env.CLOUDFLARE_ANALYTICS_TOKEN??'';
+const json=JSON.stringify(schema??{}).replace(/</g,'\\u003c');
+---
+<!doctype html><html lang={localeDetails[locale].htmlLang} dir="ltr"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width"/><title>{title} | {siteName}</title><meta name="description" content={finalDescription}/>
+<link rel="canonical" href={canonical}/><meta property="og:title" content={title}/><meta property="og:description" content={finalDescription}/><meta property="og:url" content={canonical}/><meta property="og:type" content={article?"article":"website"}/><meta property="og:site_name" content={siteName}/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content={title}/><meta name="twitter:description" content={finalDescription}/><meta property="og:image" content={ogImage}/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta name="twitter:image" content={ogImage}/>{robots&&<meta name="robots" content={robots}/>} {article&&modified&&<meta property="article:modified_time" content={modified}/>}
+{supportedLocales.filter(l=>!isRemovedContentPath(pathFor(l,path))&&!blockedPaths.includes(pathFor(l,path))).map(l=><link rel="alternate" hreflang={localeDetails[l].htmlLang} href={`https://mcpapp.net${pathFor(l,path)}`}/>)}
+{!isRemovedContentPath(pathFor('en',path))&&!blockedPaths.includes(pathFor('en',path))&&<link rel="alternate" hreflang="x-default" href={`https://mcpapp.net${pathFor('en',path)}`}/>}
+{schema&&<script type="application/ld+json" set:html={json}/>}
+</head><body><a class="skip-link" href="#main-content">{t.nav.browse}</a><header><a class="brand" href={pathFor(locale,'/')}>{t.common.brand}</a><nav aria-label={copy.discover}><details><summary>{copy.discover}</summary><div>{[['/store',t.common.apps],['/chatgpt-apps',t.nav.chatgpt],['/claude-connectors',t.nav.claude],['/remote-mcp-servers','Remote MCP']].map(([p,label])=><a href={pathFor(locale,p)}>{label}</a>)}</div></details><a href={pathFor(locale,'/collections')}>{copy.workflows}</a><a href={pathFor(locale,'/skills')}>{t.nav.skills}</a><a href={pathFor(locale,'/learn')}>{t.nav.learn}</a><details><summary>{copy.developers}</summary><div>{[['/mcp-clients',t.nav.clients],['/mcp-inspector',t.nav.inspector],['/docs',t.common.docs]].map(([p,label])=><a href={pathFor(locale,p)}>{label}</a>)}</div></details><a href={pathFor(locale,'/search')}>{t.common.search}</a><details><summary>{localeDetails[locale].nativeLabel}</summary><div>{supportedLocales.filter(l=>!isRemovedContentPath(pathFor(l,path))&&!blockedPaths.includes(pathFor(l,path))).map(l=><a hreflang={localeDetails[l].htmlLang} href={pathFor(l,path)}>{localeDetails[l].nativeLabel}</a>)}</div></details><a href={pathFor(locale,'/submit')}>{t.common.submitYourMcpLong}</a></nav></header><main id="main-content"><slot/></main><footer><nav aria-label="Footer">{[['/store',t.nav.apps],['/mcp-clients',t.nav.clients],['/docs',t.common.docs],['/faq',t.common.faq],['/privacy',t.privacy.title],['/terms',t.terms.title]].map(([p,label])=><a href={pathFor(locale,p)}>{label}</a>)}</nav><p>© {new Date().getUTCFullYear()} {t.common.brand}</p></footer>{productionAnalytics&&<span id="mcpapp-production-analytics" hidden data-measurement-id={googleAnalyticsId} data-cloudflare-token={cloudflareAnalyticsToken}/>}
+<script>
+ import {initializeProductionAnalytics} from '../lib/analytics-entry';
+ initializeProductionAnalytics();
+</script>
+</body></html>
+<style is:global>
+:root{font-family:Inter,system-ui,sans-serif;color:#172724;background:#f5f7f3}*{box-sizing:border-box}body{margin:0}a{color:#146851;text-decoration:none}a:hover{text-decoration:underline}header{max-width:1160px;margin:auto;padding:24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #d8e3dc}nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.skip-link{position:absolute;top:-100px}.skip-link:focus{top:0;background:white;padding:12px;z-index:10}.brand{font-size:22px;font-weight:800}main{max-width:1160px;margin:auto;padding:48px 24px}h1{font-size:clamp(32px,5vw,56px);line-height:1.08;letter-spacing:-1.5px;margin:16px 0}h2{margin-top:32px}p{line-height:1.7}.eyebrow{text-transform:uppercase;letter-spacing:2px;color:#497363;font-size:12px}.lead{font-size:20px;color:#50675c;max-width:800px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}.card{background:white;padding:24px;border:1px solid #dce5de;border-radius:14px}.card h2{margin:0;font-size:21px}.card p{font-size:14px}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{background:#e5eee6;padding:7px 12px;border-radius:30px;font-size:13px}.crumbs{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;margin-bottom:28px}.app-icon{border-radius:18px;width:80px;height:80px;object-fit:contain}.preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}.preview-grid figure{margin:0}.preview-grid img{width:100%;height:auto;max-height:440px;object-fit:contain;border-radius:12px;background:white}.source-links{display:flex;gap:16px;flex-wrap:wrap}.faq{padding:16px 0;border-bottom:1px solid #d8e3dc}.detail{max-width:820px;white-space:pre-line}.button{display:inline-block;background:#145d45;color:white;padding:12px 20px;border-radius:8px;margin:16px 0}footer{padding:24px;text-align:center;color:#698075;font-size:12px}details{position:relative}details div{position:absolute;z-index:2;background:white;padding:16px;right:0;min-width:160px;box-shadow:0 3px 20px #0001}details a{display:block;padding:5px}pre{overflow:auto;background:#e6ede8;padding:16px}.pager{display:flex;gap:24px;margin:24px 0}@media(max-width:600px){header{gap:18px;align-items:flex-start}nav{gap:12px;font-size:13px}main{padding-top:24px}}
+</style>

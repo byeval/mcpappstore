@@ -1,0 +1,21 @@
+---
+import AppDetail from './components/app-detail';
+import type {CatalogApp,CategorySummary} from './lib/types';
+import type {Locale} from '../lib/i18n';
+import './current.css';
+interface Props{app:CatalogApp;publishedApps:CatalogApp[];categories:CategorySummary[];locale:Locale}
+const {app,publishedApps,categories,locale}=Astro.props;
+---
+<AppDetail app={app} publishedApps={publishedApps} categories={categories} locale={locale}/>
+<script>
+import {copyValue} from './copy-interaction.mjs';
+// No hydration or catalog JSON in the browser. Only explicit button clicks copy.
+if(!document.documentElement.dataset.catalogCopyBound){
+ document.documentElement.dataset.catalogCopyBound='true';
+ document.addEventListener('click',async(event)=>{
+  const target=event.target;if(!(target instanceof Element))return;
+  const button=target.closest<HTMLButtonElement>('button[data-catalog-copy]');
+  if(button)await copyValue(button);
+ });
+}
+</script>

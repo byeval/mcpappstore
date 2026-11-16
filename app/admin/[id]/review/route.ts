@@ -1,7 +1,8 @@
+import { PublicationConflictError } from "@/lib/publication-marker";
 import { NextResponse } from "next/server";
 
 import { getReviewer } from "@/lib/auth";
-import { markRevalidated, reviewSubmission } from "@/lib/data";
+import { reviewSubmission } from "@/lib/data";
 
 export async function POST(
   request: Request,
@@ -15,13 +16,15 @@ export async function POST(
   const notes = String(formData.get("notes") ?? "");
   const reviewer = await getReviewer(request);
 
-  await reviewSubmission({
+  try { await reviewSubmission({
     appId: id,
     decision,
     notes,
     reviewer,
-  });
-  await markRevalidated(["/", `/app/${id}`]);
+  }); } catch(error) {
+    if(error instanceof PublicationConflictError)return Response.json({error:error.message},{status:409,headers:{"Cache-Control":"no-store"}});
+    throw error;
+  }
 
   return NextResponse.redirect(new URL("/admin", request.url), 303);
 }

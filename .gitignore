@@ -52,3 +52,6 @@ migrations/0002_seed.sql
 
 # OS / editor noise
 .DS_Store
+
+# Immutable local Astro release work copies
+.astro-releases/

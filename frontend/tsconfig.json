@@ -1,0 +1,1 @@
+{"extends":"astro/tsconfigs/strict","include":["src/**/*",".astro/types.d.ts"],"exclude":["node_modules","dist",".preview-worker","sharded-releases","fixture-snapshots","authoritative-snapshots"]}

@@ -113,9 +113,9 @@ for (const app of appsToSeed) {
     ) ON CONFLICT(id) DO UPDATE SET ${updateColumns([
       "name", "tagline", "description", "icon_key", "hero_key", "homepage_url", "repo_url",
       "mcp_endpoint", "mcp_transport", "install_cmd", "auth_type", "publisher", "publisher_url",
-      "capabilities", "version", "privacy_url", "terms_url", "support_url", "status", "is_featured",
+      "capabilities", "version", "privacy_url", "terms_url", "support_url", "is_featured",
       "example_prompts", "source", "updated_at", "published_at",
-    ])} WHERE apps.source IN ('chatgpt_seed', 'claude_seed');`,
+    ])}, status = CASE WHEN apps.status IN ('hidden','rejected') THEN apps.status ELSE excluded.status END WHERE apps.source IN ('chatgpt_seed', 'claude_seed');`,
   );
 
   for (const category of app.categories) {

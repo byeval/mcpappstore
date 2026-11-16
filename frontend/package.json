@@ -1,0 +1,26 @@
+{
+  "name": "mcpapp-astro-isolated-prototype",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "astro build",
+    "check": "astro check",
+    "test:release": "node --test tests/browser-analytics.test.mjs tests/publication-v3.test.mjs tests/edge-d1-integration.test.mjs",
+    "test:built": "node --test tests/current-source-static-parity.test.mjs tests/audited-edge.test.mjs"
+  },
+  "dependencies": {
+    "@astrojs/react": "7.1.9",
+    "astro": "7.4.12",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "react-markdown": "10.1.0",
+    "remark-gfm": "4.0.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "miniflare": "4.20260730.0",
+    "typescript": "latest"
+  }
+}

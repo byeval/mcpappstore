@@ -45,7 +45,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const [{ id }, { locale }] = await Promise.all([params, getI18n()]);
   const app = await getAppById(id);
-  if (!app) {
+  if (!app || app.status !== "published") {
     return {};
   }
 
@@ -895,7 +895,7 @@ export default async function AppDetailPage({
   const href = (path: string) => localizedPath(path, locale);
   const app = await getAppById(id);
 
-  if (!app) {
+  if (!app || app.status !== "published") {
     const redirectPath = redirectedAppPath(id);
     if (redirectPath) {
       permanentRedirect(redirectPath);

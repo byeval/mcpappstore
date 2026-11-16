@@ -1,0 +1,25 @@
+{
+  "astroProject": "../frontend",
+  "actualSourceRepo": "..",
+  "releaseRoot": "../.astro-releases",
+  "auditRoutesFile": "../frontend/evidence/current-source-audited-routes.json",
+  "sourceCommit": "948eb77",
+  "blockedPaths": [
+    "/ja/app/viator",
+    "/en/app/viator",
+    "/app/viator",
+    "/es/app/viator"
+  ],
+  "shardMode": "eight",
+  "zoneId": "f2048c1e4c3064bd411c360aa2660eb1",
+  "frontendName": "mcpapp",
+  "legacyService": "mcpapp-legacy",
+  "frontendD1": {
+    "binding": "DB",
+    "database_name": "mcpapp",
+    "database_id": "5274f5ec-43c2-435f-8867-66f72f1a10a6"
+  },
+  "activationEnabled": false,
+  "remoteHealthEnabled": false,
+  "privateLegacyDeploymentEnabled": false
+}

@@ -124,3 +124,23 @@ test("skills-only seed preserves all app data and associations", async () => {
   assert.equal(JSON.parse(query("SELECT count(*) AS total FROM skills"))[0].total, registry.skills.length + 1);
   assert.equal(query("PRAGMA foreign_key_check"), "");
 });
+
+test("migration seed preserves hidden/rejected moderation and all64submission records", async () => {
+  const dir=await mkdtemp(join(tmpdir(),"mcpapp-moderation-seed-"));const database=join(dir,"db.sqlite"),sqlPath=join(dir,"seed.sql");
+  const catalog=JSON.parse(await readFile("seed/chatgpt-apps.json","utf8"));
+  const seeded=catalog.apps.filter((a:{source:string})=>["chatgpt_seed","claude_seed"].includes(a.source)).slice(0,2);
+  const quote=(v:string)=>`'${v.replaceAll("'","''")}'`;
+  execFileSync("sqlite3",[database],{input:`PRAGMA foreign_keys=ON;${await readFile("migrations/0001_init.sql","utf8")}
+    INSERT INTO apps(id,name,tagline,source,status,created_at,updated_at) VALUES
+    (${quote(seeded[0].id)},'Hidden seed','Keep','chatgpt_seed','hidden',1,1),
+    (${quote(seeded[1].id)},'Rejected seed','Keep','claude_seed','rejected',1,1),
+    ('__protected-user','User protected','Keep','user','published',1,1);
+    ${Array.from({length:64},(_,i)=>`INSERT INTO submissions(app_id,raw_payload,created_at) VALUES('__protected-user','{\"n\":${i}}',1);`).join('\n')}`});
+  execFileSync(process.execPath,["--import","tsx","scripts/seed.ts",sqlPath],{stdio:"pipe"});
+  execFileSync("sqlite3",[database],{input:`PRAGMA foreign_keys=ON;BEGIN;${await readFile(sqlPath,"utf8")}COMMIT;`});
+  const scalar=(sql:string)=>execFileSync("sqlite3",[database,sql],{encoding:"utf8"}).trim();
+  assert.equal(scalar(`SELECT status FROM apps WHERE id=${quote(seeded[0].id)}`),'hidden');
+  assert.equal(scalar(`SELECT status FROM apps WHERE id=${quote(seeded[1].id)}`),'rejected');
+  assert.equal(scalar("SELECT name FROM apps WHERE id='__protected-user'"),'User protected');
+  assert.equal(scalar('SELECT count(*) FROM submissions'),'64');assert.equal(scalar('PRAGMA foreign_key_check'),'');
+});

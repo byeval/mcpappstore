@@ -1,3 +1,4 @@
+import { readyCacheRevision, readPublicationState, PublicationConflictError } from "./publication-marker";
 import seedCatalog from "@/seed/chatgpt-apps.json";
 import seedSkillAssociations from "@/seed/app-skill-associations.json";
 import seedSkills from "@/seed/skills.json";
@@ -69,32 +70,30 @@ const listHydration: Required<HydrateAppRowsOptions> = {
   includeSubmission: false,
 };
 
-async function readPublicCache<T>(key: string): Promise<T | null> {
-  const kv = await getKv();
-  if (!kv) {
-    return null;
-  }
-
-  try {
-    return await kv.get<T>(`${publicCacheVersion}:${key}`, "json");
-  } catch {
-    return null;
-  }
+async function getPublicCacheRevision(): Promise<string | null> {
+ return readyCacheRevision(await getDb());
 }
-
-async function writePublicCache(key: string, value: unknown): Promise<void> {
-  const kv = await getKv();
-  if (!kv) {
-    return;
-  }
-
-  try {
-    await kv.put(`${publicCacheVersion}:${key}`, JSON.stringify(value), {
-      expirationTtl: publicCacheTtlSeconds,
-    });
-  } catch {
-    // Cache writes are best effort; D1 remains the source of truth.
-  }
+async function blockedAppIds(): Promise<Set<string>> {
+ const db=await getDb();if(!db)return new Set();
+ // Explicit moderation state wins over a newer bundled catalog. Read failure
+ // must not quietly resurrect seed records while a DB binding is configured.
+ const rows=await db.prepare("SELECT id FROM apps WHERE status != 'published'").all<{id:string}>();
+ if(!rows.success)throw Error('Unable to read moderation state');
+ return new Set(rows.results.map(row=>row.id));
+}
+async function readPublicCache<T>(key: string, revision:string|null): Promise<T | null> {
+ if(revision===null)return null;const kv=await getKv();if(!kv)return null;
+ let cached:T|null;
+ try{cached=await kv.get<T>(`${publicCacheVersion}:${revision}:${key}`,"json");}catch{return null;}
+ if(Array.isArray(cached)&&cached.some(item=>item?.status==='published')) {
+  const db=await getDb();
+  if(db){const rows=await db.prepare("SELECT id FROM apps WHERE status = 'published'").all<{id:string}>();if(!rows.success)throw Error('Unable to read public catalog state');const allowed=new Set(rows.results.map(row=>row.id));return cached.filter(item=>allowed.has(item.id)) as T;}
+ }
+ return cached;
+}
+async function writePublicCache(key:string,value:unknown,revision:string|null):Promise<void>{
+ if(revision===null)return;const kv=await getKv();if(!kv)return;
+ try{await kv.put(`${publicCacheVersion}:${revision}:${key}`,JSON.stringify(value),{expirationTtl:publicCacheTtlSeconds});}catch{/* Best effort. */}
 }
 
 async function getAssetCdnUrl(): Promise<string | undefined> {
@@ -273,30 +272,17 @@ function cloneApp(app: CatalogApp): CatalogApp {
 }
 
 async function fallbackPublishedApps(payload: "list" | "full" = "list"): Promise<CatalogApp[]> {
+  if(await getDb())throw Error("Seed fallback is forbidden with a D1 binding");
   const assetCdnUrl = await getAssetCdnUrl();
+  const blocked = await blockedAppIds();
   const apps = FALLBACK_CATALOG.apps
-    .filter((app) => app.status === "published")
+    .filter((app) => app.status === "published" && !blocked.has(app.id))
     .map(cloneApp)
     .map((app) => withResolvedMediaUrls(app, assetCdnUrl));
 
   return sortApps(payload === "list" ? apps.map(listAppPayload) : apps);
 }
 
-function mergeFreshSeedApps(dbApps: CatalogApp[] | null | undefined, seedApps: CatalogApp[]): CatalogApp[] {
-  if (!dbApps) {
-    return seedApps;
-  }
-
-  const dbSeedCount = dbApps.filter((app) => seedSources.has(app.source)).length;
-  const seedCount = seedApps.filter((app) => seedSources.has(app.source)).length;
-  if (dbSeedCount >= seedCount) {
-    return dbApps;
-  }
-
-  const seedIds = new Set(seedApps.map((app) => app.id));
-  const userApps = dbApps.filter((app) => !seedSources.has(app.source) && !seedIds.has(app.id));
-  return sortApps([...seedApps, ...userApps]);
-}
 
 async function getAppSurfacesFromDb(
   appId: string,
@@ -413,9 +399,7 @@ async function getAppSkillsFromDb(appId: string): Promise<AppSkill[]> {
         confidence?: number;
       }>();
 
-    if (rows.results.length === 0) {
-      return skillsForAppFromSeed(appId);
-    }
+    if (rows.results.length === 0) return [];
 
     return rows.results.map((row): AppSkill => ({
       id: row.id,
@@ -434,9 +418,7 @@ async function getAppSkillsFromDb(appId: string): Promise<AppSkill[]> {
       reason: row.reason,
       confidence: row.confidence === undefined || row.confidence === null ? undefined : Number(row.confidence),
     }));
-  } catch {
-    return skillsForAppFromSeed(appId);
-  }
+  } catch(error) { throw error; }
 }
 
 function skillFromDbRow(row: {
@@ -500,8 +482,8 @@ async function listSkillsFromDb(): Promise<CatalogSkill[] | null> {
       }>();
 
     return sortSkills(rows.results.map(skillFromDbRow));
-  } catch {
-    return null;
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -537,8 +519,8 @@ async function getSkillFromDb(id: string): Promise<CatalogSkill | null> {
       }>();
 
     return row ? skillFromDbRow(row) : null;
-  } catch {
-    return null;
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -587,8 +569,8 @@ async function listAppsForSkillFromDb(skillId: string): Promise<SkillAppRef[] | 
         skillConfidence: relation?.confidence,
       };
     });
-  } catch {
-    return null;
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -745,7 +727,8 @@ async function hydrateAppRows(
         iconKey: row.icon_key ? String(row.icon_key) : undefined,
         iconUrl: row.icon_key
           ? assetUrlForKey(String(row.icon_key), assetCdnUrl)
-          : seedSources.has(String(row.source)) ? fallbackAppById.get(id)?.iconUrl : undefined,
+          : row.status === "published" && seedSources.has(String(row.source))
+            ? fallbackAppById.get(id)?.iconUrl : undefined,
         heroKey: row.hero_key ? String(row.hero_key) : undefined,
         homepageUrl: row.homepage_url ? String(row.homepage_url) : undefined,
         repoUrl: row.repo_url ? String(row.repo_url) : undefined,
@@ -825,8 +808,8 @@ async function listAppsFromDb(
       : await statement.bind(status).all<Record<string, unknown>>();
 
     return hydrateAppRows(rows.results, options);
-  } catch {
-    return null;
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -853,8 +836,8 @@ async function getFeaturedAppsFromDb(): Promise<CatalogApp[] | null> {
       includeTools: false,
       includeSubmission: false,
     });
-  } catch {
-    return null;
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -872,8 +855,8 @@ async function getAppFromDb(id: string): Promise<CatalogApp | null> {
 
     const apps = await hydrateAppRows([row]);
     return apps[0] ?? null;
-  } catch {
-    return null;
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -902,37 +885,40 @@ async function listCategoriesFromDb(): Promise<CategorySummary[] | null> {
       count: Number(row.count ?? 0),
       latestUpdatedAt: Number(row.latest_updated_at ?? 0) || undefined,
     }));
-  } catch {
-    return null;
+  } catch (error) {
+    throw error;
   }
 }
 
 export async function listPublishedApps(): Promise<CatalogApp[]> {
-  const cached = await readPublicCache<CatalogApp[]>("published-apps");
+  const revision = await getPublicCacheRevision();
+  const cached = await readPublicCache<CatalogApp[]>("published-apps", revision);
   if (cached) {
     return cached;
   }
 
-  const seedApps = await fallbackPublishedApps("list");
-  const dbApps = await listAppsFromDb("published", listHydration);
-  const apps = mergeFreshSeedApps(dbApps, seedApps);
-  await writePublicCache("published-apps", apps);
+  const db = await getDb();
+  const apps = db ? await listAppsFromDb("published", listHydration) : await fallbackPublishedApps("list");
+  if (!apps) throw Error("Authoritative public catalog unavailable");
+  await writePublicCache("published-apps", apps, revision);
   return apps;
 }
 
 export async function listHomeApps(): Promise<CatalogApp[]> {
-  const cached = await readPublicCache<CatalogApp[]>("home-apps");
+  const revision = await getPublicCacheRevision();
+  const cached = await readPublicCache<CatalogApp[]>("home-apps", revision);
   if (cached) {
     return cached;
   }
 
   const apps = (await listPublishedApps()).slice(0, HOME_APP_LIMIT);
-  await writePublicCache("home-apps", apps);
+  await writePublicCache("home-apps", apps, revision);
   return apps;
 }
 
 export async function getCatalogQualityStats(): Promise<CatalogQualityStats> {
-  const cached = await readPublicCache<CatalogQualityStats>("catalog-quality-stats");
+  const revision = await getPublicCacheRevision();
+  const cached = await readPublicCache<CatalogQualityStats>("catalog-quality-stats", revision);
   if (cached) {
     return cached;
   }
@@ -983,14 +969,15 @@ export async function getCatalogQualityStats(): Promise<CatalogQualityStats> {
         withRepoCount: Number(repoRow?.count ?? 0),
         withPreviewsCount: Number(previewsRow?.count ?? 0),
       };
-      await writePublicCache("catalog-quality-stats", stats);
+      await writePublicCache("catalog-quality-stats", stats, revision);
       return stats;
-    } catch {
-      // Fall through to the in-memory catalog.
+    } catch (error) {
+      throw error;
     }
   }
 
-  const fallbackApps = FALLBACK_CATALOG.apps.filter((app) => app.status === "published");
+  const blocked = await blockedAppIds();
+  const fallbackApps = FALLBACK_CATALOG.apps.filter((app) => app.status === "published" && !blocked.has(app.id));
   const stats = {
     withToolsCount: fallbackApps.filter((app) => app.tools.length > 0 || app.surfaces.some((surface) => surface.tools?.length)).length,
     withExamplePromptsCount: fallbackApps.filter(
@@ -999,14 +986,15 @@ export async function getCatalogQualityStats(): Promise<CatalogQualityStats> {
     withRepoCount: fallbackApps.filter((app) => app.repoUrl).length,
     withPreviewsCount: fallbackApps.filter((app) => app.previews.length > 0 || app.surfaces.some((surface) => surface.previews?.length)).length,
   };
-  await writePublicCache("catalog-quality-stats", stats);
+  await writePublicCache("catalog-quality-stats", stats, revision);
   return stats;
 }
 
 export async function listMetadataRichApps(limit = 8): Promise<CatalogApp[]> {
+  const revision = await getPublicCacheRevision();
   const safeLimit = Math.max(1, Math.min(limit, 24));
   const cacheKey = `metadata-rich-apps:${safeLimit}`;
-  const cached = await readPublicCache<CatalogApp[]>(cacheKey);
+  const cached = await readPublicCache<CatalogApp[]>(cacheKey, revision);
   if (cached) {
     return cached;
   }
@@ -1039,19 +1027,20 @@ export async function listMetadataRichApps(limit = 8): Promise<CatalogApp[]> {
         .all<Record<string, unknown>>();
 
       const apps = await hydrateAppRows(rows.results, fullHydration);
-      await writePublicCache(cacheKey, apps);
+      await writePublicCache(cacheKey, apps, revision);
       return apps;
-    } catch {
-      // Fall through to the in-memory catalog.
+    } catch (error) {
+      throw error;
     }
   }
 
   const assetCdnUrl = await getAssetCdnUrl();
+  const blocked = await blockedAppIds();
   const fallbackApps = sortApps(
     FALLBACK_CATALOG.apps
       .filter(
         (app) =>
-          app.status === "published" &&
+          app.status === "published" && !blocked.has(app.id) &&
           (app.tools.length > 0 ||
             app.examplePrompts.length > 0 ||
             app.previews.length > 0 ||
@@ -1063,7 +1052,7 @@ export async function listMetadataRichApps(limit = 8): Promise<CatalogApp[]> {
       .map(cloneApp)
       .map((app) => withResolvedMediaUrls(app, assetCdnUrl)),
   ).slice(0, safeLimit);
-  await writePublicCache(cacheKey, fallbackApps);
+  await writePublicCache(cacheKey, fallbackApps, revision);
   return fallbackApps;
 }
 
@@ -1091,18 +1080,22 @@ export async function listPendingApps(): Promise<CatalogApp[]> {
 }
 
 export async function getFeaturedApps(): Promise<CatalogApp[]> {
-  const cached = await readPublicCache<CatalogApp[]>("featured-apps");
+  const revision = await getPublicCacheRevision();
+  const cached = await readPublicCache<CatalogApp[]>("featured-apps", revision);
   if (cached) {
     return cached;
   }
 
-  const apps = (await fallbackPublishedApps("full")).filter((app) => app.isFeatured).slice(0, FEATURED_APP_LIMIT);
-  await writePublicCache("featured-apps", apps);
+  const apps = await getDb() ? await getFeaturedAppsFromDb() : (await fallbackPublishedApps("full")).filter((app) => app.isFeatured).slice(0, FEATURED_APP_LIMIT);
+  if (!apps) throw Error("Authoritative featured apps unavailable");
+  await writePublicCache("featured-apps", apps, revision);
   return apps;
 }
 
 export async function getCategorySummaries(): Promise<CategorySummary[]> {
-  const cached = await readPublicCache<CategorySummary[]>("category-summaries");
+  if(await getDb()){const categories=await listCategoriesFromDb();if(!categories)throw Error("Authoritative categories unavailable");return categories;}
+  const revision = await getPublicCacheRevision();
+  const cached = await readPublicCache<CategorySummary[]>("category-summaries", revision);
   if (cached) {
     return cached;
   }
@@ -1120,36 +1113,40 @@ export async function getCategorySummaries(): Promise<CategorySummary[]> {
       ) || undefined,
     }))
     .sort((left, right) => left.sort - right.sort);
-  await writePublicCache("category-summaries", fallbackCategories);
+  await writePublicCache("category-summaries", fallbackCategories, revision);
   return fallbackCategories;
 }
 
 export async function listSkills(): Promise<CatalogSkill[]> {
-  const cached = await readPublicCache<CatalogSkill[]>("skills");
+  const revision = await getPublicCacheRevision();
+  const cached = await readPublicCache<CatalogSkill[]>("skills", revision);
   if (cached) {
     return cached;
   }
 
   const dbSkills = await listSkillsFromDb();
   if (dbSkills) {
-    await writePublicCache("skills", dbSkills);
+    await writePublicCache("skills", dbSkills, revision);
     return dbSkills;
   }
 
+  if(await getDb())throw Error("Authoritative skill catalog unavailable");
   const fallbackSkills = sortSkills(FALLBACK_SKILL_REGISTRY.skills.map(cloneSkill));
   // A seed-only fallback omits database-only skills; retry D1 on the next request.
   return fallbackSkills;
 }
 
 export async function getSkillById(id: string): Promise<CatalogSkill | null> {
-  const cached = await readPublicCache<CatalogSkill>(`skill:${id}`);
+  if(await getDb())return getSkillFromDb(id);
+  const revision = await getPublicCacheRevision();
+  const cached = await readPublicCache<CatalogSkill>(`skill:${id}`, revision);
   if (cached) {
     return cached;
   }
 
   const dbSkill = await getSkillFromDb(id);
   if (dbSkill) {
-    await writePublicCache(`skill:${id}`, dbSkill);
+    await writePublicCache(`skill:${id}`, dbSkill, revision);
     return dbSkill;
   }
 
@@ -1159,31 +1156,34 @@ export async function getSkillById(id: string): Promise<CatalogSkill | null> {
   }
 
   const fallbackSkill = cloneSkill(fallback);
-  await writePublicCache(`skill:${id}`, fallbackSkill);
+  await writePublicCache(`skill:${id}`, fallbackSkill, revision);
   return fallbackSkill;
 }
 
 export async function listAppsForSkill(skillId: string): Promise<SkillAppRef[]> {
-  const cached = await readPublicCache<SkillAppRef[]>(`skill-apps:${skillId}`);
+  const revision = await getPublicCacheRevision();
+  const cached = await readPublicCache<SkillAppRef[]>(`skill-apps:${skillId}`, revision);
   if (cached) {
     return cached;
   }
 
   const dbApps = await listAppsForSkillFromDb(skillId);
   if (dbApps) {
-    await writePublicCache(`skill-apps:${skillId}`, dbApps);
+    await writePublicCache(`skill-apps:${skillId}`, dbApps, revision);
     return dbApps;
   }
 
+  if(await getDb())throw Error("Authoritative skill associations unavailable");
   const relationByAppId = new Map(
     FALLBACK_SKILL_ASSOCIATIONS
       .filter((association) => association.skillId === skillId)
       .map((association) => [association.appId, association]),
   );
   const assetCdnUrl = await getAssetCdnUrl();
+  const blocked = await blockedAppIds();
   const fallbackApps = sortApps(
     FALLBACK_CATALOG.apps
-      .filter((app) => app.status === "published" && relationByAppId.has(app.id))
+      .filter((app) => app.status === "published" && !blocked.has(app.id) && relationByAppId.has(app.id))
       .map(cloneApp)
       .map((app) => withResolvedMediaUrls(app, assetCdnUrl)),
   ).map((app): SkillAppRef => {
@@ -1195,29 +1195,36 @@ export async function listAppsForSkill(skillId: string): Promise<SkillAppRef[]> 
       skillConfidence: relation?.confidence,
     };
   });
-  await writePublicCache(`skill-apps:${skillId}`, fallbackApps);
+  await writePublicCache(`skill-apps:${skillId}`, fallbackApps, revision);
   return fallbackApps;
 }
 
 export async function getAppById(id: string): Promise<CatalogApp | null> {
-  const cached = await readPublicCache<CatalogApp>(`app:${id}`);
+  const db=await getDb();
+  if(db){
+    const state=await db.prepare("SELECT status FROM apps WHERE id = ? LIMIT 1").bind(id).first<{status:string}>();
+    if(!state)return null;
+    if(state.status!=="published")return getAppFromDb(id);
+  }
+  const revision = await getPublicCacheRevision();
+  const cached = await readPublicCache<CatalogApp>(`app:${id}`, revision);
   if (cached) {
     return cached;
   }
 
   const fallback = FALLBACK_CATALOG.apps.find((app) => app.id === id);
   const dbApp = await getAppFromDb(id);
-  if (dbApp && (!fallback || dbApp.updatedAt >= fallback.updatedAt)) {
-    await writePublicCache(`app:${id}`, dbApp);
+  if (dbApp) {
+    await writePublicCache(`app:${id}`, dbApp, revision);
     return dbApp;
   }
 
-  if (!fallback) {
+  if (db || !fallback) {
     return null;
   }
 
   const fallbackApp = withResolvedMediaUrls(cloneApp(fallback), await getAssetCdnUrl());
-  await writePublicCache(`app:${id}`, fallbackApp);
+  await writePublicCache(`app:${id}`, fallbackApp, revision);
   return fallbackApp;
 }
 
@@ -1313,8 +1320,8 @@ export async function searchApps(query: string, platform?: "chatgpt" | "claude")
         .all<Record<string, unknown>>();
 
       return hydrateAppRows(rows.results, listHydration);
-    } catch {
-      // Fall through to the in-memory catalog.
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -1514,30 +1521,25 @@ export async function reviewSubmission(input: ReviewInput): Promise<void> {
     input.decision === "approve" ? "published" : input.decision === "hide" ? "hidden" : "rejected";
   const now = Date.now();
 
-  await db
-    .prepare(
-      "UPDATE apps SET status = ?, updated_at = ?, published_at = CASE WHEN ? = 'published' THEN COALESCE(published_at, ?) ELSE published_at END WHERE id = ?",
-    )
-    .bind(status, now, status, now, input.appId)
-    .run();
-
-  await db
-    .prepare("UPDATE submissions SET reviewed_by = ?, review_notes = ? WHERE app_id = ?")
-    .bind(input.reviewer ?? "admin", input.notes ?? null, input.appId)
-    .run();
+  const state=await readPublicationState(db);
+  if(state.phase!=="ready")throw new PublicationConflictError();
+  const revision=crypto.randomUUID();
+  // D1 executes batch atomically. Every mutation checks the SAME ready revision;
+  // a concurrent bulk publisher therefore cannot leave partial review changes.
+  const guard="EXISTS(SELECT 1 FROM astro_publication_state WHERE id=1 AND revision=? AND phase='ready')";
+  const results=await db.batch([
+    db.prepare(`UPDATE apps SET status=?,updated_at=?,published_at=CASE WHEN ?='published' THEN COALESCE(published_at,?) ELSE published_at END WHERE id=? AND ${guard}`).bind(status,now,status,now,input.appId,state.revision),
+    db.prepare(`UPDATE submissions SET reviewed_by=?,review_notes=? WHERE app_id=? AND EXISTS(SELECT 1 FROM apps WHERE id=?) AND ${guard}`).bind(input.reviewer??'admin',input.notes??null,input.appId,input.appId,state.revision),
+    db.prepare("UPDATE astro_publication_state SET revision=?,phase='ready',updated_at=? WHERE id=1 AND revision=? AND phase='ready' AND EXISTS(SELECT 1 FROM apps WHERE id=?)").bind(revision,now,state.revision,input.appId),
+  ]);
+  // D1 meta.changes includes AFTER-trigger updates (unlike sqlite changes()).
+  // The app id is unique; one or more changes means the guarded app update ran.
+  if(!(Number(results[0]?.meta?.changes)>0)||results[2]?.meta?.changes!==1)throw new PublicationConflictError();
 }
 
-export async function markRevalidated(paths: string[]): Promise<void> {
-  const kv = await getKv();
-  if (!kv) {
-    return;
-  }
-
-  await kv.put(
-    "catalog:revalidated",
-    JSON.stringify({
-      paths,
-      at: Date.now(),
-    }),
-  );
+export async function markRevalidated(_paths:string[]):Promise<void>{
+ const db=await getDb();if(!db)throw Error('D1 required for authoritative invalidation');
+ const state=await readPublicationState(db);if(state.phase!=='ready')throw new PublicationConflictError();
+ const result=await db.prepare("UPDATE astro_publication_state SET revision=?,updated_at=? WHERE id=1 AND revision=? AND phase='ready'").bind(crypto.randomUUID(),Date.now(),state.revision).run();
+ if(result.meta.changes!==1)throw new PublicationConflictError();
 }

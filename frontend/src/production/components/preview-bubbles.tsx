@@ -1,0 +1,47 @@
+import type { AppPreview } from "../lib/types";
+import { optimizedImageUrl } from "../lib/image-urls";
+
+export function PreviewBubbles({ mockupLabel = "Mockup", previews }: { mockupLabel?: string; previews: AppPreview[] }) {
+  if (previews.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="preview-gallery">
+      <div className="preview-grid detail-preview-grid">
+        {previews.map((preview, index) => (
+          <article className="pv" key={`${preview.sort}-${preview.prompt}`}>
+            <span className="preview-position" aria-hidden="true">{index + 1} / {previews.length}</span>
+            <div className="pv-prompt">{preview.prompt}</div>
+            <div className="pv-card">
+              <div className="pv-mockup">
+                {preview.imageUrl ? (
+                  <img
+                    alt={preview.caption ?? preview.prompt}
+                    className="preview-image"
+                    decoding="async"
+                    height={540}
+                    loading="lazy"
+                    sizes="(max-width: 720px) 88vw, 360px"
+                    src={optimizedImageUrl(preview.imageUrl)}
+                    width={720}
+                  />
+                ) : (
+                  <div className="preview-art-inner">
+                    <span>{mockupLabel}</span>
+                  </div>
+                )}
+              </div>
+              {preview.caption ? <div className="pv-caption">{preview.caption}</div> : null}
+              {preview.ctaLabel && preview.ctaUrl ? (
+                <a className="pv-cta" href={preview.ctaUrl} rel="noreferrer" target="_blank">
+                  {preview.ctaLabel}
+                </a>
+              ) : null}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}

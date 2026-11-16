@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vinext dev",
-    "build": "vinext build",
+    "build": "node scripts/build-entry.mjs",
     "start": "vinext start",
-    "deploy": "vinext deploy",
+    "deploy": "node scripts/deploy-entry.mjs",
     "check": "tsc --noEmit",
     "audit:seo": "node --import tsx scripts/seo-audit.ts",
     "smoke:seo": "bash scripts/seo-smoke.sh",
@@ -33,7 +33,7 @@
     "skills:review": "node --import tsx scripts/review-skill-associations.ts",
     "skills:suggest": "node --import tsx scripts/suggest-skill-associations.ts",
     "dev:vinext": "SITE_URL=http://localhost:3001 vinext dev --port 3001",
-    "build:vinext": "vinext build",
+    "build:vinext": "node scripts/build-entry.mjs",
     "start:vinext": "vinext start",
     "audit:sitemaps": "python3 scripts/audit-sitemaps.py"
   },
@@ -51,6 +51,7 @@
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.1.4",
     "@vitejs/plugin-rsc": "^0.5.24",
+    "miniflare": "4.20260421.0",
     "react-server-dom-webpack": "19.2.5",
     "sharp": "^0.34.5",
     "tsx": "^4.20.6",

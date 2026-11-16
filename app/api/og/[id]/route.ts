@@ -72,7 +72,7 @@ export async function GET(
   }
 
   const app = await getAppById(normalizedId);
-  if (!app) {
+  if (!app || app.status !== "published") {
     return new Response("Not found", { status: 404 });
   }
 

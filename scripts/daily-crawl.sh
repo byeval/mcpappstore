@@ -97,17 +97,11 @@ if [[ "$remote_enabled" == true ]]; then
   log "Validating production build"
   run_step "build" npm run build
 
-  log "Applying skills schema to remote D1"
-  run_step "apply skills schema" npx wrangler d1 execute mcpapp --remote --yes --file migrations/0006_skills.sql
-
-  log "Applying seed SQL to remote D1"
-  run_step "apply seed sql" npx wrangler d1 execute mcpapp --remote --yes --file migrations/0002_seed.sql
-
-  log "Deploying site"
-  run_step "deploy" npm run deploy
-
-  log "Refreshing public catalog caches"
-  run_step "refresh caches" npx wrangler kv bulk delete reports/public-cache-keys.json --binding KV --remote --force
+  log "Publishing catalog through explicit target and freshness protocol"
+  # Default target is Astro. Missing publisher aborts BEFORE remote mutation.
+  # Legacy deployment remains possible only with PUBLICATION_TARGET=legacy.
+  run_step "publication preflight" node scripts/publish-catalog.mjs --preflight
+  run_step "publish catalog" node scripts/publish-catalog.mjs --remote
 
   log "Verifying live site"
   run_step "verify mcpapp.net" verify_live_url "https://mcpapp.net/"
