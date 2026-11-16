@@ -16,7 +16,7 @@ jobs:
   deploy:
     name: Deploy Worker
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 150
 
     steps:
       - name: Start bounded release clock

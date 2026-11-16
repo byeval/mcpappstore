@@ -1,3 +1,4 @@
+import {relatedAppScore,relatedCandidateTerms} from "./related-app-score";
 import { isRemovedPublicAppId, removedPublicAppIds } from "./content-removals";
 import { readyCacheRevision, readPublicationState, PublicationConflictError } from "./publication-marker";
 import seedCatalog from "@/seed/chatgpt-apps.json";
@@ -291,6 +292,7 @@ async function getAppSurfacesFromDb(
   app: Pick<CatalogApp, "source" | "name" | "homepageUrl">,
   assetCdnUrl: string | undefined,
   options: Pick<Required<HydrateAppRowsOptions>, "includeSurfacePreviews"> = fullHydration,
+  suppliedRows?: Array<Record<string, unknown>>,
 ): Promise<AppSurface[]> {
   const db = await getDb();
   if (!db) {
@@ -298,7 +300,7 @@ async function getAppSurfacesFromDb(
   }
 
   try {
-    const rows = await db
+    const rows = suppliedRows ? {results:suppliedRows as any[]} : await db
       .prepare(
         `SELECT platform, surface_type, display_name, surface_url, external_id, is_primary, status
               , tagline, description, mcp_endpoint, mcp_transport, install_cmd, auth_type, capabilities, example_prompts, tools
@@ -669,10 +671,23 @@ async function hydrateAppRows(
   const hydration = { ...fullHydration, ...options };
   const assetCdnUrl = await getAssetCdnUrl();
 
+  // Bulk associations per bounded page, rather than two D1 calls per app.
+  const categoryMap = new Map<string, Array<{category_slug:string}>>();
+  const surfaceMap = new Map<string, Array<Record<string, unknown>>>();
+  const bulk = !hydration.includeTags && !hydration.includeTools && !hydration.includeSkills && !hydration.includeSubmission && !hydration.includePreviews;
+  if (bulk && rows.length) {
+    const ids=JSON.stringify(rows.map(row=>String(row.id)));
+    const categories=await db.prepare("SELECT app_id,category_slug FROM app_categories WHERE app_id IN (SELECT value FROM json_each(?)) ORDER BY category_slug ASC").bind(ids).all<{app_id:string;category_slug:string}>();
+    if(!categories.success)throw Error("Authoritative categories unavailable");
+    for(const row of categories.results){const list=categoryMap.get(row.app_id)??[];list.push(row);categoryMap.set(row.app_id,list);}
+    const surfaces=await db.prepare(`SELECT app_id,platform,surface_type,display_name,surface_url,external_id,is_primary,status,tagline,description,mcp_endpoint,mcp_transport,install_cmd,auth_type,capabilities,example_prompts,tools ${hydration.includeSurfacePreviews?',previews':''} FROM app_surfaces WHERE app_id IN (SELECT value FROM json_each(?)) ORDER BY is_primary DESC,platform ASC,surface_type ASC,external_id ASC`).bind(ids).all<Record<string,unknown>>();
+    if(!surfaces.success)throw Error("Authoritative surfaces unavailable");
+    for(const row of surfaces.results){const id=String(row.app_id),list=surfaceMap.get(id)??[];list.push(row);surfaceMap.set(id,list);}
+  }
   const apps = await Promise.all(
     rows.map(async (row) => {
       const id = String(row.id);
-      const categories = await db
+      const categories = bulk ? {results:categoryMap.get(id)??[]} : await db
         .prepare(
           "SELECT category_slug FROM app_categories WHERE app_id = ? ORDER BY category_slug ASC",
         )
@@ -781,7 +796,7 @@ async function hydrateAppRows(
 
       return {
         ...baseApp,
-        surfaces: await getAppSurfacesFromDb(id, baseApp, assetCdnUrl, hydration),
+        surfaces: await getAppSurfacesFromDb(id, baseApp, assetCdnUrl, hydration, bulk ? surfaceMap.get(id)??[] : undefined),
       } satisfies CatalogApp;
     }),
   );
@@ -800,16 +815,26 @@ async function listAppsFromDb(
   }
 
   try {
-    const query = `SELECT * FROM apps
-      WHERE status = ? AND (status != 'published' OR lower(id) != 'viator')
-      ORDER BY is_featured DESC, COALESCE(published_at, updated_at) DESC
-      ${limit ? "LIMIT ?" : ""}`;
-    const statement = db.prepare(query);
-    const rows = limit
-      ? await statement.bind(status, limit).all<Record<string, unknown>>()
-      : await statement.bind(status).all<Record<string, unknown>>();
-
-    return hydrateAppRows(rows.results, options);
+    const apps:CatalogApp[]=[];
+    let after="";
+    while(true){
+      const remaining=limit ? Math.max(0,limit-apps.length) : 256;
+      if(!remaining)break;
+      // Keep sort/limit behavior for the bounded legacy callers; full catalogs
+      // are fetched by stable ID keyset, then sorted once after hydration.
+      if(limit){
+        const rows=await db.prepare("SELECT * FROM apps WHERE status=? AND (status!='published' OR lower(id)!='viator') ORDER BY is_featured DESC,COALESCE(published_at,updated_at) DESC LIMIT ?").bind(status,limit).all<Record<string,unknown>>();
+        if(!rows.success)throw Error('Authoritative bounded catalog unavailable');
+        return hydrateAppRows(rows.results,options);
+      }
+      const rows=await db.prepare("SELECT * FROM apps WHERE status=? AND (status!='published' OR lower(id)!='viator') AND id>? ORDER BY id LIMIT 256").bind(status,after).all<Record<string,unknown>>();
+      if(!rows.success)throw Error('Authoritative catalog page unavailable');
+      if(!rows.results.length)break;
+      apps.push(...await hydrateAppRows(rows.results,options));
+      after=String(rows.results.at(-1)!.id);
+      if(rows.results.length<256)break;
+    }
+    return apps.sort((a,b)=>Number(b.isFeatured)-Number(a.isFeatured)||(b.publishedAt??b.updatedAt)-(a.publishedAt??a.updatedAt));
   } catch (error) {
     throw error;
   }
@@ -892,6 +917,37 @@ async function listCategoriesFromDb(): Promise<CategorySummary[] | null> {
   }
 }
 
+/** Exact existing related-card ranking without retaining the entire hydrated catalog. */
+export async function getRelatedApps(app:CatalogApp):Promise<CatalogApp[]> {
+ const db=await getDb();
+ const best:Array<{app:CatalogApp;score:number}>=[];
+ const accept=(candidate:CatalogApp)=>{if(candidate.id===app.id)return;const value=relatedAppScore(app,candidate);if(value<=0)return;best.push({app:candidate,score:value});best.sort((a,b)=>b.score-a.score || Number(b.app.isFeatured)-Number(a.app.isFeatured) || a.app.name.localeCompare(b.app.name) || (b.app.publishedAt??b.app.updatedAt)-(a.app.publishedAt??a.app.updatedAt) || a.app.id.localeCompare(b.app.id));if(best.length>4)best.pop();};
+ if(!db){for(const candidate of await fallbackPublishedApps("list"))accept(candidate);return best.map(x=>x.app);}
+ const terms=relatedCandidateTerms(app);
+ if(!terms.categories.length&&!terms.capabilities.length)return [];
+ let after="";
+ while(true){
+  const rows=await db.prepare(`SELECT id,name,capabilities,source,is_featured,published_at,updated_at FROM apps WHERE status='published' AND lower(id)!='viator' AND id>? AND (
+   EXISTS(SELECT 1 FROM app_categories ac WHERE ac.app_id=apps.id AND (lower(ac.category_slug) IN (SELECT value FROM json_each(?)) OR ac.category_slug GLOB '*[^ -~]*')) OR
+   EXISTS(SELECT 1 FROM json_each(CASE WHEN json_valid(apps.capabilities) THEN apps.capabilities ELSE '[]' END) cap WHERE (lower(cap.value) IN (SELECT value FROM json_each(?)) OR cap.value GLOB '*[^ -~]*'))
+  ) ORDER BY id LIMIT 256`).bind(after,JSON.stringify(terms.categories),JSON.stringify(terms.capabilities)).all<Record<string,unknown>>();
+  if(!rows.success)throw Error("Authoritative related catalog unavailable");
+  if(!rows.results.length)break;
+  const ids=JSON.stringify(rows.results.map(row=>String(row.id)));
+  const cats=await db.prepare("SELECT app_id,category_slug FROM app_categories WHERE app_id IN (SELECT value FROM json_each(?)) ORDER BY category_slug").bind(ids).all<{app_id:string;category_slug:string}>();
+  const surfaces=await db.prepare("SELECT app_id,platform,surface_type FROM app_surfaces WHERE app_id IN (SELECT value FROM json_each(?)) ORDER BY is_primary DESC,platform,surface_type,external_id").bind(ids).all<{app_id:string;platform:AppSurface["platform"];surface_type:AppSurface["type"]}>();
+  if(!cats.success||!surfaces.success)throw Error("Authoritative related associations unavailable");
+  const categoryMap=new Map<string,string[]>(),surfaceMap=new Map<string,AppSurface[]>();
+  for(const row of cats.results){const list=categoryMap.get(row.app_id)??[];list.push(row.category_slug);categoryMap.set(row.app_id,list);}
+  for(const row of surfaces.results){const list=surfaceMap.get(row.app_id)??[];list.push({platform:row.platform,type:row.surface_type,isPrimary:false,status:"available"});surfaceMap.set(row.app_id,list);}
+  for(const row of rows.results){const id=String(row.id);const candidate={...app,id,name:String(row.name),source:String(row.source) as CatalogApp['source'],publishedAt:row.published_at?Number(row.published_at):null,updatedAt:Number(row.updated_at),isFeatured:Number(row.is_featured)===1,categories:categoryMap.get(id)??[],capabilities:safeJsonParse<string[]>(String(row.capabilities??"[]"),[])};candidate.surfaces=surfaceMap.get(id)??defaultAppSurfaces(candidate);accept(candidate);}
+  after=String(rows.results.at(-1)!.id);
+  if(rows.results.length<256)break;
+ }
+ const selected=await Promise.all(best.map(x=>getAppById(x.app.id)));
+ return selected.filter((candidate):candidate is CatalogApp=>Boolean(candidate&&candidate.status==='published'&&!isRemovedPublicAppId(candidate.id)));
+}
+
 export async function listPublishedApps(): Promise<CatalogApp[]> {
   const revision = await getPublicCacheRevision();
   const cached = await readPublicCache<CatalogApp[]>("published-apps", revision);
@@ -913,7 +969,8 @@ export async function listHomeApps(): Promise<CatalogApp[]> {
     return cached;
   }
 
-  const apps = (await listPublishedApps()).slice(0, HOME_APP_LIMIT);
+  const db=await getDb();
+  const apps = db ? (await listAppsFromDb("published",listHydration,HOME_APP_LIMIT))! : (await listPublishedApps()).slice(0,HOME_APP_LIMIT);
   await writePublicCache("home-apps", apps, revision);
   return apps;
 }
@@ -1242,6 +1299,8 @@ export async function listAppsByCategoryPage(
 ): Promise<CatalogApp[]> {
   const safeLimit = Math.max(1, Math.min(limit, 72));
   const safeOffset = Math.max(0, offset);
+  const db=await getDb();
+  if(db){const rows=await db.prepare("SELECT a.* FROM apps a WHERE a.status='published' AND lower(a.id)!='viator' AND EXISTS(SELECT 1 FROM app_categories ac WHERE ac.app_id=a.id AND ac.category_slug=?) ORDER BY a.is_featured DESC,COALESCE(a.published_at,a.updated_at) DESC LIMIT ? OFFSET ?").bind(category,safeLimit,safeOffset).all<Record<string,unknown>>();if(!rows.success)throw Error('Authoritative category unavailable');return hydrateAppRows(rows.results,listHydration);}
   const apps = await listPublishedApps();
   return apps.filter((app) => app.categories.includes(category)).slice(safeOffset, safeOffset + safeLimit);
 }
@@ -1251,12 +1310,15 @@ export async function listAppsByPlatform(platform: "chatgpt" | "claude"): Promis
   return apps.filter((app) => app.surfaces.some((surface) => surface.platform === platform));
 }
 
+const platformPredicate="(EXISTS(SELECT 1 FROM app_surfaces s WHERE s.app_id=a.id AND s.platform=?) OR (NOT EXISTS(SELECT 1 FROM app_surfaces s WHERE s.app_id=a.id) AND CASE WHEN a.source='claude_seed' THEN 'claude' ELSE 'chatgpt' END=?))";
 export async function countAppsByPlatform(platform: "chatgpt" | "claude"): Promise<number> {
+  const db=await getDb();if(db){const row=await db.prepare(`SELECT COUNT(*) AS n FROM apps a WHERE a.status='published' AND lower(a.id)!='viator' AND ${platformPredicate}`).bind(platform,platform).first<{n:number}>();if(!row)throw Error('Authoritative platform count unavailable');return row.n;}
   const apps = await listAppsByPlatform(platform);
   return apps.length;
 }
 
 export async function latestPlatformAppTimestamp(platform: "chatgpt" | "claude"): Promise<number> {
+  const db=await getDb();if(db){const row=await db.prepare(`SELECT MAX(MAX(COALESCE(a.published_at,0),a.updated_at)) AS latest FROM apps a WHERE a.status='published' AND lower(a.id)!='viator' AND ${platformPredicate}`).bind(platform,platform).first<{latest:number|null}>();if(!row)throw Error('Authoritative platform timestamp unavailable');return row.latest||Date.now();}
   const apps = await listAppsByPlatform(platform);
   return apps.reduce((max, app) => Math.max(max, app.publishedAt ?? 0, app.updatedAt), 0) || Date.now();
 }
@@ -1267,6 +1329,7 @@ export async function listAppsByPlatformPage(
 ): Promise<CatalogApp[]> {
   const safeLimit = Math.max(1, Math.min(limit, 72));
   const safeOffset = Math.max(0, offset);
+  const db=await getDb();if(db){const rows=await db.prepare(`SELECT a.* FROM apps a WHERE a.status='published' AND lower(a.id)!='viator' AND ${platformPredicate} ORDER BY a.is_featured DESC,COALESCE(a.published_at,a.updated_at) DESC LIMIT ? OFFSET ?`).bind(platform,platform,safeLimit,safeOffset).all<Record<string,unknown>>();if(!rows.success)throw Error('Authoritative platform unavailable');return hydrateAppRows(rows.results,listHydration);}
   const apps = await listPublishedApps();
   return apps
     .filter((app) => app.surfaces.some((surface) => surface.platform === platform))
@@ -1287,12 +1350,6 @@ export async function searchApps(query: string, platform?: "chatgpt" | "claude")
         .prepare(
           `SELECT DISTINCT a.*
            FROM apps a
-           LEFT JOIN app_surfaces s ON s.app_id = a.id
-           LEFT JOIN app_categories ac ON ac.app_id = a.id
-           LEFT JOIN app_tags tag ON tag.app_id = a.id
-           LEFT JOIN app_tools tool ON tool.app_id = a.id
-           LEFT JOIN app_skills ask ON ask.app_id = a.id
-           LEFT JOIN skills skill ON skill.id = ask.skill_id
            WHERE a.status = 'published' AND lower(a.id) != 'viator'
              AND (? IS NULL OR EXISTS (SELECT 1 FROM app_surfaces ps WHERE ps.app_id = a.id AND ps.platform = ?))
              AND (
@@ -1301,20 +1358,19 @@ export async function searchApps(query: string, platform?: "chatgpt" | "claude")
               OR LOWER(a.tagline) LIKE ?
               OR LOWER(a.description) LIKE ?
               OR LOWER(a.publisher) LIKE ?
-              OR LOWER(COALESCE(ac.category_slug, '')) LIKE ?
-              OR LOWER(COALESCE(tag.tag_slug, '')) LIKE ?
-              OR LOWER(COALESCE(tool.tool_name, '')) LIKE ?
-              OR LOWER(COALESCE(tool.description, '')) LIKE ?
-              OR LOWER(COALESCE(s.display_name, '')) LIKE ?
+              OR EXISTS(SELECT 1 FROM app_categories ac WHERE ac.app_id=a.id AND LOWER(COALESCE(ac.category_slug,'')) LIKE ?)
+              OR EXISTS(SELECT 1 FROM app_tags tag WHERE tag.app_id=a.id AND LOWER(COALESCE(tag.tag_slug,'')) LIKE ?)
+              OR EXISTS(SELECT 1 FROM app_tools tool WHERE tool.app_id=a.id AND (LOWER(COALESCE(tool.tool_name,'')) LIKE ? OR LOWER(COALESCE(tool.description,'')) LIKE ?))
+              OR EXISTS(SELECT 1 FROM app_surfaces s WHERE s.app_id=a.id AND (LOWER(COALESCE(s.display_name, '')) LIKE ?
               OR LOWER(COALESCE(s.tagline, '')) LIKE ?
               OR LOWER(COALESCE(s.description, '')) LIKE ?
-              OR LOWER(COALESCE(s.tools, '')) LIKE ?
-              OR LOWER(COALESCE(skill.id, '')) LIKE ?
+              OR LOWER(COALESCE(s.tools, '')) LIKE ?))
+              OR EXISTS(SELECT 1 FROM app_skills ask JOIN skills skill ON skill.id=ask.skill_id WHERE ask.app_id=a.id AND (LOWER(COALESCE(skill.id, '')) LIKE ?
               OR LOWER(COALESCE(skill.name, '')) LIKE ?
               OR LOWER(COALESCE(skill.display_name, '')) LIKE ?
               OR LOWER(COALESCE(skill.description, '')) LIKE ?
               OR LOWER(COALESCE(skill.categories, '')) LIKE ?
-              OR LOWER(COALESCE(skill.tags, '')) LIKE ?
+              OR LOWER(COALESCE(skill.tags, '')) LIKE ?))
              )
            ORDER BY a.is_featured DESC, COALESCE(a.published_at, a.updated_at) DESC
            LIMIT 96`,
@@ -1322,6 +1378,7 @@ export async function searchApps(query: string, platform?: "chatgpt" | "claude")
         .bind(platform ?? null, platform ?? null, ...Array.from({ length: 19 }, () => likeQuery))
         .all<Record<string, unknown>>();
 
+      if (!rows.success) throw Error("Authoritative search unavailable");
       return hydrateAppRows(rows.results, listHydration);
     } catch (error) {
       throw error;

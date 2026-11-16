@@ -12,7 +12,7 @@ import { PlatformBadge } from "@/components/platform-badge";
 import { PreviewBubbles } from "@/components/preview-bubbles";
 import { collectionMatchesApp, type AppCollection } from "@/lib/collections";
 import { localizedAppCollections, localizedCategoryName } from "@/lib/content-i18n";
-import { getAppById, getCategorySummaries, listPublishedApps } from "@/lib/data";
+import { getAppById, getCategorySummaries, getRelatedApps } from "@/lib/data";
 import { formatMessage, localizedPath, surfaceLabelFor, type I18nMessages, type Locale } from "@/lib/i18n";
 import { optimizedImageUrl } from "@/lib/image-urls";
 import { getI18n } from "@/lib/i18n-server";
@@ -76,33 +76,6 @@ function collectionMatchScore(collection: AppCollection, app: CatalogApp): numbe
   return explicitMatch + platformMatch + categoryMatch;
 }
 
-function relatedAppScore(app: CatalogApp, candidate: CatalogApp): number {
-  const appCategories = removeGenericTerms(app.categories, genericCategories);
-  const candidateCategories = removeGenericTerms(candidate.categories, genericCategories);
-  const categoryOverlap = overlapCount(appCategories, candidateCategories);
-  const appCapabilities = removeGenericTerms(app.capabilities, genericCapabilities);
-  const candidateCapabilities = removeGenericTerms(candidate.capabilities, genericCapabilities);
-  const capabilityOverlap = overlapCount(appCapabilities, candidateCapabilities);
-  const appSurfaceKeys = app.surfaces.map((surface) => `${surface.platform}:${surface.type}`);
-  const candidateSurfaceKeys = candidate.surfaces.map((surface) => `${surface.platform}:${surface.type}`);
-  const appPlatforms = app.surfaces.map((surface) => surface.platform);
-  const candidatePlatforms = candidate.surfaces.map((surface) => surface.platform);
-  const samePrimaryCategory = appCategories[0] && appCategories[0] === candidateCategories[0] ? 3 : 0;
-  const sameSource = app.source === candidate.source ? 1 : 0;
-
-  if (categoryOverlap === 0 && capabilityOverlap === 0) {
-    return 0;
-  }
-
-  return (
-    categoryOverlap * 10 +
-    capabilityOverlap * 4 +
-    overlapCount(appSurfaceKeys, candidateSurfaceKeys) * 2 +
-    overlapCount(appPlatforms, candidatePlatforms) +
-    samePrimaryCategory +
-    sameSource
-  );
-}
 
 function readableList(items: string[], locale: Locale = "en"): string {
   if (items.length <= 1) {
@@ -918,7 +891,7 @@ export default async function AppDetailPage({
     authType: app.authType,
   };
   const primaryDetails = surfaceDetails(primaryListing, fallbackDetails);
-  const [publishedApps, categories] = await Promise.all([listPublishedApps(), getCategorySummaries()]);
+  const [relatedApps, categories] = await Promise.all([getRelatedApps(app), getCategorySummaries()]);
   const categoryBySlug = new Map(categories.map((category) => [category.slug, category]));
   const primaryIndexableCategory = app.categories
     .map((category) => categoryBySlug.get(category))
@@ -933,26 +906,6 @@ export default async function AppDetailPage({
     .filter((collection) => collectionMatchesApp(collection, app))
     .sort((left, right) => collectionMatchScore(right, app) - collectionMatchScore(left, app))
     .slice(0, 3);
-  const relatedApps = publishedApps
-    .filter((candidate) => candidate.id !== app.id)
-    .map((candidate) => ({
-      app: candidate,
-      score: relatedAppScore(app, candidate),
-    }))
-    .filter((candidate) => candidate.score > 0)
-    .sort((left, right) => {
-      if (right.score !== left.score) {
-        return right.score - left.score;
-      }
-
-      if (Number(right.app.isFeatured) !== Number(left.app.isFeatured)) {
-        return Number(right.app.isFeatured) - Number(left.app.isFeatured);
-      }
-
-      return left.app.name.localeCompare(right.app.name);
-    })
-    .slice(0, 4)
-    .map((candidate) => candidate.app);
   const appFaqs = appFaqItems(app, primaryDetails, primaryListing, categoryBySlug, locale, t.surface);
   const aboutName = mcpSearchName(app.name);
   const capabilitiesText = primaryDetails.capabilities.join(", ");

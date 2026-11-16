@@ -38,6 +38,8 @@ export async function activatePlan(plan,effects){
  await effects.assertReady(plan.markerId,plan.contentRevision);
  for(const file of plan.shardConfigs){await effects.deployShard(file);await effects.verifyShard(file);}
  await effects.assertReady(plan.markerId,plan.contentRevision);
+ await effects.verifyCandidate(plan.frontConfig);
+ await effects.assertReady(plan.markerId,plan.contentRevision);
  const previous=await effects.capturePrevious();
  try{
   await effects.deployFront(plan.frontConfig); // Front switches last.
