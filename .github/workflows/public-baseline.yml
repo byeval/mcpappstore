@@ -1,0 +1,28 @@
+name: Public HTTPS deployment baseline
+on:
+  push:
+    branches: [astro-public-probe-20261116]
+permissions:
+  contents: read
+jobs:
+  public-read-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Read public routes only, no credentials or cookies
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const results=[];
+          for (const path of ['/docs','/app/canva','/zh-hans/app/canva','/admin','/app/viator']) {
+            try {
+              const r=await fetch('https://mcpapp.net'+path,{method:'GET',redirect:'manual',credentials:'omit',headers:{Accept:'text/html','Cache-Control':'no-cache'},signal:AbortSignal.timeout(15000)});
+              const s=await r.text();
+              results.push({path,status:r.status,challenge:r.headers.get('cf-mitigated'),type:r.headers.get('content-type'),delivery:r.headers.get('x-mcp-delivery'),title:s.match(/<title>(.*?)<\/title>/s)?.[1],bytes:Buffer.byteLength(s)});
+            } catch(e) { results.push({path,error:e.message}); }
+          }
+          console.log(JSON.stringify({readOnly:true,credentialsUsed:false,at:new Date().toISOString(),results},null,2));
+          NODE
