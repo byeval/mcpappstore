@@ -15,8 +15,8 @@ function fixture(status='hidden'){
 
 const discovery=await import('../lib/discovery-data');
 const {localizedAppCollections}=await import('../lib/content-i18n');const {supportedLocales}=await import('../lib/i18n');
-const {listCollectionApps,collectionMatchesApp}=await import('../lib/collections');
-const {listTopicApps,mcpTopics,popularSearches}=await import('../lib/topics');
+const {listCollectionApps,countAppsByCollection,collectionMatchesApp}=await import('../lib/collections');
+const {listTopicApps,countAppsByTopic,mcpTopics,popularSearches}=await import('../lib/topics');
 const {serializeCollectionMarkdown,buildLlmsTxt,buildLlmsFullTxt}=await import('../lib/llms');
 function baselineCollection(collection:any,apps:any[]){const explicit=new Map((collection.appIds??[]).map((id:string,index:number)=>[id,index]));return apps.filter(a=>collectionMatchesApp(collection,a)).sort((a,b)=>(Number(explicit.get(a.id)??Number.MAX_SAFE_INTEGER)-Number(explicit.get(b.id)??Number.MAX_SAFE_INTEGER))||a.name.localeCompare(b.name)||a.id.localeCompare(b.id));}
 function normalized(a:any){const keys=['id','name','tagline','publisher','categories','capabilities','description','homepageUrl','repoUrl','mcpEndpoint','installCmd','authType','mcpTransport','examplePrompts','source','isFeatured','publishedAt','updatedAt','tags','tools','previews'];const surfaces=a.surfaces.map((s:any)=>Object.fromEntries(['platform','type','displayName','tagline','description','externalId','isPrimary','status','capabilities','tools','examplePrompts'].map(k=>[k,s[k]])));return {...Object.fromEntries(keys.map(k=>[k,a[k]])),surfaces};}
@@ -33,6 +33,7 @@ test('actual catalog: all localized collection counts/order/cards/markdown and t
  f.sql.exec('COMMIT');
  const all=await data.listPublishedApps(),before=f.metrics();const candidates=await discovery.listCollectionCandidates(),rich=await discovery.listDiscoveryCandidates();
  assert.equal(f.metrics().rpcCount-before.rpcCount,2);assert.deepEqual(rich.map(normalized),all.map(normalized));
+ for(const locale of supportedLocales)assert.deepEqual(countAppsByCollection(localizedAppCollections(locale),candidates),localizedAppCollections(locale).map(collection=>listCollectionApps(collection,candidates).length),locale);
  for(const locale of supportedLocales)for(const collection of localizedAppCollections(locale)){
  const expected=baselineCollection(collection,all),actual=listCollectionApps(collection,await discovery.listCollectionCandidatesFor(collection));
  assert.deepEqual(listCollectionApps(collection,candidates).map(a=>a.id),expected.map(a=>a.id));
@@ -40,6 +41,7 @@ test('actual catalog: all localized collection counts/order/cards/markdown and t
  assert.equal(serializeCollectionMarkdown(collection,actual,locale),serializeCollectionMarkdown(collection,expected,locale));
  const cards=await data.getPublishedListAppsByIds(actual.slice(0,24).map(a=>a.id));assert.deepEqual(cards,expected.slice(0,24));
  }
+ assert.deepEqual(countAppsByTopic(mcpTopics,rich),mcpTopics.map(topic=>listTopicApps(topic,rich).length));
  for(const topic of mcpTopics)assert.deepEqual(listTopicApps(topic,rich).map(a=>a.id),listTopicApps(topic,all).map(a=>a.id),topic.slug);
  for(const term of popularSearches){const match=(a:any)=>[a.name,a.tagline,a.description,a.publisher,...a.categories,...a.tags].join(' ').toLowerCase().includes(term.toLowerCase());assert.deepEqual(rich.filter(match).map(a=>a.id),all.filter(match).map(a=>a.id));}
  assert.deepEqual(await data.listSitemapAppEntries(),all.map(a=>({id:a.id,name:a.name,updatedAt:a.updatedAt})));

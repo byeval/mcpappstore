@@ -274,6 +274,36 @@ function appSearchText(app: DiscoveryCandidate): string {
   ].join(" ").toLowerCase();
 }
 
+/** Count-only index path. Preserve score > 0 membership without ranking every topic.
+ * Search text is request-local and built at most once per app; no cross-request cache.
+ * A tool/endpoint/repo signal already makes the existing score positive for every topic.
+ */
+export function countAppsByTopic(topics: readonly McpTopic[], apps: readonly DiscoveryCandidate[]): number[] {
+  const counts = topics.map(() => 0);
+  const matchers = topics.map((topic) => {
+    if (topic.matchTerms.length === 0) return null;
+    // Escaped literal alternatives preserve substring matching, with no regex flags.
+    const alternatives = topic.matchTerms.map((term) => term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    return new RegExp(alternatives.join("|"));
+  });
+  for (const app of apps) {
+    if (app.tools.length > 0 || app.mcpEndpoint || app.repoUrl) {
+      for (let i = 0; i < counts.length; i++) counts[i]++;
+      continue;
+    }
+    let text: string | undefined;
+    for (let i = 0; i < topics.length; i++) {
+      if (topics[i].categorySlugs.some((slug) => app.categories.includes(slug))) {
+        counts[i]++;
+      } else if (matchers[i]) {
+        text ??= appSearchText(app);
+        if (matchers[i]!.test(text)) counts[i]++;
+      }
+    }
+  }
+  return counts;
+}
+
 export function listTopicApps<T extends DiscoveryCandidate>(topic: McpTopic, apps: T[], limit?: number): T[] {
   const scored = apps
     .map((app) => {

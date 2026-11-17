@@ -751,6 +751,32 @@ export function collectionMatchesApp(collection: AppCollection, app: CollectionC
   return collection.matchTerms.some((term) => includesSearchTerm(text, term));
 }
 
+/** Count-only collection index, preserving platform-first membership without sorting. */
+export function countAppsByCollection(collections: readonly AppCollection[], apps: readonly CollectionCandidate[]): number[] {
+  const counts = collections.map(() => 0);
+  const prepared = collections.map((collection) => {
+    const alternatives = collection.matchTerms.map((term) => term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    return {
+      explicit: new Set(collection.appIds ?? []),
+      matcher: alternatives.length ? new RegExp(`(^|[^a-z0-9])(?:${alternatives.join("|")})([^a-z0-9]|$)`) : null,
+    };
+  });
+  for (const app of apps) {
+    let text: string | undefined;
+    for (let i = 0; i < collections.length; i++) {
+      const collection = collections[i];
+      if (collection.platform && !app.surfaces.some((surface) => surface.platform === collection.platform)) continue;
+      if (prepared[i].explicit.has(app.id) || collection.categorySlugs.some((slug) => app.categories.includes(slug))) {
+        counts[i]++;
+      } else if (prepared[i].matcher) {
+        text ??= searchableAppText(app);
+        if (prepared[i].matcher!.test(text)) counts[i]++;
+      }
+    }
+  }
+  return counts;
+}
+
 export function listCollectionApps<T extends CollectionCandidate>(collection: AppCollection, apps: T[]): T[] {
   const explicit = new Map((collection.appIds ?? []).map((id,index)=>[id,index]));
   const matchers=collection.matchTerms.map(term=>new RegExp(`(^|[^a-z0-9])${term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}([^a-z0-9]|$)`));

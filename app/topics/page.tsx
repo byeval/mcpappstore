@@ -6,7 +6,7 @@ import { formatDirectoryNumber as formatNumber } from "@/lib/directory-content";
 import { localizedPath } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { itemListJsonLd, jsonLdScript, pageMetadata } from "@/lib/seo";
-import { listTopicApps, mcpTopics } from "@/lib/topics";
+import { countAppsByTopic, mcpTopics } from "@/lib/topics";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { locale } = await getI18n();
@@ -23,7 +23,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function TopicsPage() {
   const [{ locale }, apps] = await Promise.all([getI18n(), listDiscoveryCandidates()]);
   const href = (path: string) => localizedPath(path, locale);
-  const cards = mcpTopics.map((topic) => ({ topic, count: listTopicApps(topic, apps).length }));
+  const counts = countAppsByTopic(mcpTopics, apps);
+  const cards = mcpTopics.map((topic, index) => ({ topic, count: counts[index] }));
 
   return (
     <div className="page-stack">

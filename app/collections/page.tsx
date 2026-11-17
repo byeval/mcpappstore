@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { listCollectionApps } from "@/lib/collections";
+import { countAppsByCollection } from "@/lib/collections";
 import { localizedAppCollections } from "@/lib/content-i18n";
 import { listCollectionCandidates } from "@/lib/discovery-data";
 import { formatMessage, localizedPath } from "@/lib/i18n";
@@ -23,9 +23,10 @@ export default async function CollectionsPage() {
   const [{ locale, messages: t }, apps] = await Promise.all([getI18n(), listCollectionCandidates()]);
   const href = (path: string) => localizedPath(path, locale);
   const collections = localizedAppCollections(locale);
-  const collectionCards = collections.map((collection) => ({
+  const counts = countAppsByCollection(collections, apps);
+  const collectionCards = collections.map((collection, index) => ({
     collection,
-    count: listCollectionApps(collection, apps).length,
+    count: counts[index],
   }));
 
   return (
