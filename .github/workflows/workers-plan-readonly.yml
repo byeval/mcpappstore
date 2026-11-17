@@ -1,95 +1,31 @@
-name: Read-only failed topics invocation diagnosis
+name: Read-only private Workers durable evidence
 'on':
   push:
     branches: [astro-workers-plan-readonly-20261116]
 permissions:
   contents: read
 jobs:
-  plan:
+  durable:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Query existing private invocation logs (dry only)
+      - name: Read frozen private invocation evidence only
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        shell: bash
-        run: |
-          node --input-type=module <<'NODE'
-          const service = 'mcpapp-preview-legacy-e66d904a1950-01022c2d';
-          const version = 'b7ab4ace-30b9-48d0-8087-e21e12f02e92';
-          const query = {queryId:'private-e66-readonly-audit',dry:true,view:'events',limit:100,timeframe:{from:Date.parse('2026-11-17T01:05:06Z'),to:Date.parse('2026-11-17T01:06:06Z')},parameters:{filterCombination:'and',filters:[{key:'$metadata.service',operation:'eq',type:'string',value:service}]}};
-          const account = process.env.CLOUDFLARE_ACCOUNT_ID;
-          const token = process.env.CLOUDFLARE_API_TOKEN;
-          const result = {http:null,success:false,service,version,query,events:[]};
-          const id = x => typeof x === 'string' && /^(?:[0-9A-HJKMNP-TV-Z]{26}|[a-f0-9]{16,32}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$/i.test(x) ? x : null;
-          const probeId = h => {const entries=h&&typeof h==='object'&&!Array.isArray(h)?Object.entries(h).filter(([k])=>k.toLowerCase()==='x-mcpapp-probe-id'):[];return entries.length===1?id(entries[0][1]):null;};
-          const keys = (x,allowed) => x && typeof x==='object' && !Array.isArray(x) ? Object.keys(x).filter(k=>allowed.includes(k)) : [];
-          const choice = (x,allowed) => allowed.includes(x) ? x : null;
-          const num = x => typeof x === 'number' && Number.isFinite(x) ? x : null;
-          try {
-            if (!/^[a-f0-9]{32}$/.test(account ?? '') || !token) throw new Error();
-            const r = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/workers/observability/telemetry/query`, {method:'POST',headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify(query),redirect:'error',signal:AbortSignal.timeout(30000)});
-            result.http=r.status;result.receivedAt=new Date().toISOString();
-            const reader=r.body?.getReader();if(!reader)throw Error();const chunks=[];let size=0;try{for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>1048576)throw Error();chunks.push(value);}}finally{await reader.cancel().catch(()=>{});}
-            const body=JSON.parse(Buffer.concat(chunks).toString('utf8'));if(!body||typeof body!=='object'||Array.isArray(body))throw Error();
-            result.success=r.ok && body.success===true;
-            result.errorCodes=(Array.isArray(body.errors)?body.errors:[]).slice(0,20).map(e=>num(e?.code));
-            if(result.success){
-              const data=body.result;if(!data||typeof data!=='object'||Array.isArray(data)||!data.events||typeof data.events!=='object'||!Array.isArray(data.events.events))throw Error();
-              result.runKeys=keys(data.run,['id','status','created','createdAt','updated','updatedAt','timeframe','dry','queryId','started','finished','completed']);
-              result.statisticsKeys=keys(data.statistics,['abr_level','rows_read','bytes_read','elapsed','sampleInterval','sample_interval']);
-              result.status=choice(data.run?.status,['STARTED','COMPLETED']);
-              result.resultKeys=keys(data,['run','events','statistics','invocations','calculations','series']);
-              result.eventKeys=keys(data.events,['count','events','fields']);
-              result.count=num(data.events?.count);
-              result.abrLevel=num(data.statistics?.abr_level);result.runAbrLevel=num(data.run?.statistics?.abr_level);
-              result.sampleIntervals=(data.events.series??[]).flatMap(s=>(s.data??[]).map(d=>num(d.sampleInterval))).slice(0,100);
-              result.seriesPresent=Array.isArray(data.events.series);
-              result.fields=(data.events.fields??[]).filter(f=>typeof f==='string' && ['sampleInterval','$metadata.id','$metadata.requestId','$workers.event.request.url','$workers.event.request.headers.x-mcpapp-probe-id'].includes(f));
-              result.events=(data.events?.events??[]).slice(0,100).map(e=>{if(!e||typeof e!=='object'||e.$metadata?.service!==service)return null;const w=e.$workers??e.$cloudflare??{};return {keys:keys(e,['$metadata','$workers','$cloudflare','timestamp']),workerKeys:keys(w,['requestId','scriptVersion','outcome','cpuTimeMs','wallTimeMs','truncated','event','eventType','samplingRate','sampleInterval']),metadataKeys:keys(e.$metadata,['id','requestId','service','type','timestamp','message','trigger','level','origin','sampleInterval']),eventKeys:keys(w.event,['request','response','type']),responseStatus:num(w.event?.response?.status),method:choice(w.event?.request?.method,['GET']),probeId:probeId(w.event?.request?.headers),requestKeys:keys(w.event?.request,['url','method','path','headers']),metadataType:choice(e.$metadata?.type,['cf-worker-event','cf-worker','invocation','console']),metadataId:id(e.$metadata?.id),metadataRequestId:id(e.$metadata?.requestId),eventType:choice(w.eventType,['fetch','http','request']),sampleInterval:num(w.sampleInterval??e.$metadata?.sampleInterval),path:choice(w.event?.request?.url,['https://mcpapp.net/__mcpapp-release','https://mcpapp.net/llms-full.txt','https://mcpapp.net/topics']),service,timestamp:num(e.timestamp),requestId:id(w.requestId),versionMatches:w.scriptVersion?.id===version,outcome:choice(w.outcome,['ok','exception','exceededCpu','exceededMemory','canceled','unknown','cpuTimeExceeded','memoryLimitExceeded']),cpuTimeMs:num(w.cpuTimeMs),wallTimeMs:num(w.wallTimeMs),truncated:w.truncated===true||e.$cloudflare?.truncated===true};}).filter(Boolean);
-            }
-          } catch { result.success=false;result.events=[];result.failure='Request or schema failed; details suppressed'; }
-          console.log(JSON.stringify(result));
-          if(!result.success)process.exitCode=1;
-          NODE
-
-      - name: Inspect ingestion sample interval (dry only)
-        env:
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        shell: bash
-        run: |
-          node --input-type=module <<'NODE'
-          const service = 'mcpapp-preview-legacy-e66d904a1950-01022c2d';
-          const version = 'b7ab4ace-30b9-48d0-8087-e21e12f02e92';
-          const query = {queryId:'private-e66-readonly-audit',dry:true,view:'calculations',ignoreSeries:true,limit:100,timeframe:{from:Date.parse('2026-11-17T01:05:06Z'),to:Date.parse('2026-11-17T01:06:06Z')},parameters:{calculations:[{operator:'count',alias:'log_rows'}],filterCombination:'and',filters:[{key:'$metadata.service',operation:'eq',type:'string',value:service}]}};
-          const account = process.env.CLOUDFLARE_ACCOUNT_ID;
-          const token = process.env.CLOUDFLARE_API_TOKEN;
-          const result = {http:null,success:false,service,version,query,events:[]};
-          const id = x => typeof x === 'string' && /^(?:[0-9A-HJKMNP-TV-Z]{26}|[a-f0-9]{16,32}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$/i.test(x) ? x : null;
-          const probeId = h => {const entries=h&&typeof h==='object'&&!Array.isArray(h)?Object.entries(h).filter(([k])=>k.toLowerCase()==='x-mcpapp-probe-id'):[];return entries.length===1?id(entries[0][1]):null;};
-          const keys = (x,allowed) => x && typeof x==='object' && !Array.isArray(x) ? Object.keys(x).filter(k=>allowed.includes(k)) : [];
-          const choice = (x,allowed) => allowed.includes(x) ? x : null;
-          const num = x => typeof x === 'number' && Number.isFinite(x) ? x : null;
-          try {
-            if (!/^[a-f0-9]{32}$/.test(account ?? '') || !token) throw new Error();
-            const r = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/workers/observability/telemetry/query`, {method:'POST',headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify(query),redirect:'error',signal:AbortSignal.timeout(30000)});
-            result.http=r.status;result.receivedAt=new Date().toISOString();
-            const reader=r.body?.getReader();if(!reader)throw Error();const chunks=[];let size=0;try{for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>1048576)throw Error();chunks.push(value);}}finally{await reader.cancel().catch(()=>{});}
-            const body=JSON.parse(Buffer.concat(chunks).toString('utf8'));if(!body||typeof body!=='object'||Array.isArray(body))throw Error();
-            result.success=r.ok && body.success===true;
-            result.errorCodes=(Array.isArray(body.errors)?body.errors:[]).slice(0,20).map(e=>num(e?.code));
-            if(result.success){
-              const data=body.result;if(!data||typeof data!=='object'||!Array.isArray(data.calculations))throw Error();
-              result.status=choice(data.run?.status,['STARTED','COMPLETED']);
-              result.abrLevel=num(data.statistics?.abr_level);result.runAbrLevel=num(data.run?.statistics?.abr_level);
-              result.calculations=data.calculations.slice(0,10).map(c=>({aggregates:(c.aggregates??[]).slice(0,100).map(a=>({sampleInterval:num(a.sampleInterval),count:num(a.count),value:num(a.value)}))}));
-            }
-          } catch { result.success=false;result.events=[];result.failure='Request or schema failed; details suppressed'; }
-          console.log(JSON.stringify(result));
-          if(!result.success)process.exitCode=1;
-          NODE
+          EXPECTED_PLAN_SHA256: 4ac848f0fab051e18e0e188353a6c1e1de70abf632463d8dff7e56b1709dcd4d
+        run: node .github/durable/ci-reader-cli.mjs .github/durable/read-plan.json
+      - name: Preserve bounded sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: durable-private-evidence
+          path: report.json
+          if-no-files-found: error
+          retention-days: 7
