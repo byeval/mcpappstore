@@ -1,4 +1,4 @@
-name: Read-only private Workers telemetry check
+name: Read-only failed topics invocation diagnosis
 'on':
   push:
     branches: [astro-workers-plan-readonly-20261116]
@@ -21,7 +21,7 @@ jobs:
           node --input-type=module <<'NODE'
           const service = 'mcpapp-preview-legacy-e66d904a1950-01022c2d';
           const version = 'b7ab4ace-30b9-48d0-8087-e21e12f02e92';
-          const query = {queryId:'private-e66-readonly-audit',dry:true,view:'events',limit:100,timeframe:{from:Date.parse('2026-11-17T00:36:37Z'),to:Date.parse('2026-11-17T00:37:07Z')},parameters:{filterCombination:'and',filters:[{key:'$metadata.service',operation:'eq',type:'string',value:service}]}};
+          const query = {queryId:'private-e66-readonly-audit',dry:true,view:'events',limit:100,timeframe:{from:Date.parse('2026-11-17T01:05:06Z'),to:Date.parse('2026-11-17T01:06:06Z')},parameters:{filterCombination:'and',filters:[{key:'$metadata.service',operation:'eq',type:'string',value:service}]}};
           const account = process.env.CLOUDFLARE_ACCOUNT_ID;
           const token = process.env.CLOUDFLARE_API_TOKEN;
           const result = {http:null,success:false,service,version,query,events:[]};
@@ -50,7 +50,7 @@ jobs:
               result.sampleIntervals=(data.events.series??[]).flatMap(s=>(s.data??[]).map(d=>num(d.sampleInterval))).slice(0,100);
               result.seriesPresent=Array.isArray(data.events.series);
               result.fields=(data.events.fields??[]).filter(f=>typeof f==='string' && ['sampleInterval','$metadata.id','$metadata.requestId','$workers.event.request.url','$workers.event.request.headers.x-mcpapp-probe-id'].includes(f));
-              result.events=(data.events?.events??[]).slice(0,100).map(e=>{if(!e||typeof e!=='object'||e.$metadata?.service!==service)return null;const w=e.$workers??e.$cloudflare??{};return {keys:keys(e,['$metadata','$workers','$cloudflare','timestamp']),workerKeys:keys(w,['requestId','scriptVersion','outcome','cpuTimeMs','wallTimeMs','truncated','event','eventType','samplingRate','sampleInterval']),metadataKeys:keys(e.$metadata,['id','requestId','service','type','timestamp','message','trigger','level','origin','sampleInterval']),eventKeys:keys(w.event,['request','response','type']),responseStatus:num(w.event?.response?.status),method:choice(w.event?.request?.method,['GET']),probeId:probeId(w.event?.request?.headers),requestKeys:keys(w.event?.request,['url','method','path','headers']),metadataType:choice(e.$metadata?.type,['cf-worker-event','cf-worker','invocation','console']),metadataId:id(e.$metadata?.id),metadataRequestId:id(e.$metadata?.requestId),eventType:choice(w.eventType,['fetch','http','request']),sampleInterval:num(w.sampleInterval??e.$metadata?.sampleInterval),path:choice(w.event?.request?.url,['https://mcpapp.net/__mcpapp-release','https://mcpapp.net/llms-full.txt']),service,timestamp:num(e.timestamp),requestId:id(w.requestId),versionMatches:w.scriptVersion?.id===version,outcome:choice(w.outcome,['ok','exception','exceededCpu','exceededMemory','canceled','unknown','cpuTimeExceeded','memoryLimitExceeded']),cpuTimeMs:num(w.cpuTimeMs),wallTimeMs:num(w.wallTimeMs),truncated:w.truncated===true||e.$cloudflare?.truncated===true};}).filter(Boolean);
+              result.events=(data.events?.events??[]).slice(0,100).map(e=>{if(!e||typeof e!=='object'||e.$metadata?.service!==service)return null;const w=e.$workers??e.$cloudflare??{};return {keys:keys(e,['$metadata','$workers','$cloudflare','timestamp']),workerKeys:keys(w,['requestId','scriptVersion','outcome','cpuTimeMs','wallTimeMs','truncated','event','eventType','samplingRate','sampleInterval']),metadataKeys:keys(e.$metadata,['id','requestId','service','type','timestamp','message','trigger','level','origin','sampleInterval']),eventKeys:keys(w.event,['request','response','type']),responseStatus:num(w.event?.response?.status),method:choice(w.event?.request?.method,['GET']),probeId:probeId(w.event?.request?.headers),requestKeys:keys(w.event?.request,['url','method','path','headers']),metadataType:choice(e.$metadata?.type,['cf-worker-event','cf-worker','invocation','console']),metadataId:id(e.$metadata?.id),metadataRequestId:id(e.$metadata?.requestId),eventType:choice(w.eventType,['fetch','http','request']),sampleInterval:num(w.sampleInterval??e.$metadata?.sampleInterval),path:choice(w.event?.request?.url,['https://mcpapp.net/__mcpapp-release','https://mcpapp.net/llms-full.txt','https://mcpapp.net/topics']),service,timestamp:num(e.timestamp),requestId:id(w.requestId),versionMatches:w.scriptVersion?.id===version,outcome:choice(w.outcome,['ok','exception','exceededCpu','exceededMemory','canceled','unknown','cpuTimeExceeded','memoryLimitExceeded']),cpuTimeMs:num(w.cpuTimeMs),wallTimeMs:num(w.wallTimeMs),truncated:w.truncated===true||e.$cloudflare?.truncated===true};}).filter(Boolean);
             }
           } catch { result.success=false;result.events=[];result.failure='Request or schema failed; details suppressed'; }
           console.log(JSON.stringify(result));
@@ -66,7 +66,7 @@ jobs:
           node --input-type=module <<'NODE'
           const service = 'mcpapp-preview-legacy-e66d904a1950-01022c2d';
           const version = 'b7ab4ace-30b9-48d0-8087-e21e12f02e92';
-          const query = {queryId:'private-e66-readonly-audit',dry:true,view:'calculations',ignoreSeries:true,limit:100,timeframe:{from:Date.parse('2026-11-17T00:36:37Z'),to:Date.parse('2026-11-17T00:37:07Z')},parameters:{calculations:[{operator:'count',alias:'log_rows'}],filterCombination:'and',filters:[{key:'$metadata.service',operation:'eq',type:'string',value:service}]}};
+          const query = {queryId:'private-e66-readonly-audit',dry:true,view:'calculations',ignoreSeries:true,limit:100,timeframe:{from:Date.parse('2026-11-17T01:05:06Z'),to:Date.parse('2026-11-17T01:06:06Z')},parameters:{calculations:[{operator:'count',alias:'log_rows'}],filterCombination:'and',filters:[{key:'$metadata.service',operation:'eq',type:'string',value:service}]}};
           const account = process.env.CLOUDFLARE_ACCOUNT_ID;
           const token = process.env.CLOUDFLARE_API_TOKEN;
           const result = {http:null,success:false,service,version,query,events:[]};
