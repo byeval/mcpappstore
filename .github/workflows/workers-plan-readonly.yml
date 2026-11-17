@@ -21,11 +21,11 @@ jobs:
           node --input-type=module <<'NODE'
           const service = 'mcpapp-preview-legacy-e66d904a1950-01022c2d';
           const version = 'b7ab4ace-30b9-48d0-8087-e21e12f02e92';
-          const query = {queryId:'private-e66-readonly-audit',dry:true,view:'events',limit:100,timeframe:{from:Date.parse('2026-11-17T00:21:50Z'),to:Date.parse('2026-11-17T00:22:20Z')},parameters:{filterCombination:'and',filters:[{key:'$metadata.service',operation:'eq',type:'string',value:service}]}};
+          const query = {queryId:'private-e66-readonly-audit',dry:true,view:'events',limit:100,timeframe:{from:Date.parse('2026-11-17T00:24:50Z'),to:Date.parse('2026-11-17T00:25:20Z')},parameters:{filterCombination:'and',filters:[{key:'$metadata.service',operation:'eq',type:'string',value:service}]}};
           const account = process.env.CLOUDFLARE_ACCOUNT_ID;
           const token = process.env.CLOUDFLARE_API_TOKEN;
           const result = {http:null,success:false,service,version,query,events:[]};
-          const id = x => typeof x === 'string' && /^(?:[a-f0-9]{16,32}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$/i.test(x) ? x : null;
+          const id = x => typeof x === 'string' && /^(?:[0-9A-HJKMNP-TV-Z]{26}|[a-f0-9]{16,32}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$/i.test(x) ? x : null;
           const keys = (x,allowed) => x && typeof x==='object' && !Array.isArray(x) ? Object.keys(x).filter(k=>allowed.includes(k)) : [];
           const choice = (x,allowed) => allowed.includes(x) ? x : null;
           const num = x => typeof x === 'number' && Number.isFinite(x) ? x : null;
@@ -39,12 +39,14 @@ jobs:
             result.errorCodes=(Array.isArray(body.errors)?body.errors:[]).slice(0,20).map(e=>num(e?.code));
             if(result.success){
               const data=body.result;if(!data||typeof data!=='object'||Array.isArray(data)||!data.events||typeof data.events!=='object'||!Array.isArray(data.events.events))throw Error();
+              result.runKeys=keys(data.run,['id','status','created','createdAt','updated','updatedAt','timeframe','dry','queryId','started','finished','completed']);
+              result.statisticsKeys=keys(data.statistics,['abr_level','rows_read','bytes_read','elapsed','sampleInterval','sample_interval']);
               result.status=choice(data.run?.status,['running','completed','complete','finished','failed','queued']);
               result.resultKeys=keys(data,['run','events','statistics','invocations','calculations','series']);
               result.eventKeys=keys(data.events,['count','events','fields']);
               result.count=num(data.events?.count);
               result.abrLevel=num(data.statistics?.abr_level);
-              result.events=(data.events?.events??[]).slice(0,100).map(e=>{if(!e||typeof e!=='object'||e.$metadata?.service!==service)return null;const w=e.$workers??e.$cloudflare??{};return {keys:keys(e,['$metadata','$workers','$cloudflare','timestamp']),workerKeys:keys(w,['requestId','scriptVersion','outcome','cpuTimeMs','wallTimeMs','truncated']),id:id(e.$metadata?.id),service,timestamp:num(e.timestamp),requestId:id(w.requestId),versionMatches:w.scriptVersion?.id===version,outcome:choice(w.outcome,['ok','exception','exceededCpu','exceededMemory','canceled','unknown','cpuTimeExceeded','memoryLimitExceeded']),cpuTimeMs:num(w.cpuTimeMs),wallTimeMs:num(w.wallTimeMs),truncated:w.truncated===true};}).filter(Boolean);
+              result.events=(data.events?.events??[]).slice(0,100).map(e=>{if(!e||typeof e!=='object'||e.$metadata?.service!==service)return null;const w=e.$workers??e.$cloudflare??{};return {keys:keys(e,['$metadata','$workers','$cloudflare','timestamp']),workerKeys:keys(w,['requestId','scriptVersion','outcome','cpuTimeMs','wallTimeMs','truncated','event','eventType','samplingRate','sampleInterval']),metadataKeys:keys(e.$metadata,['id','requestId','service','type','timestamp','message','trigger','level','origin','sampleInterval']),eventKeys:keys(w.event,['request','response','type']),requestKeys:keys(w.event?.request,['url','method','path','headers']),metadataId:id(e.$metadata?.id),metadataRequestId:id(e.$metadata?.requestId),eventType:choice(w.eventType,['fetch','http','request']),sampleInterval:num(w.sampleInterval??e.$metadata?.sampleInterval),path:choice(w.event?.request?.url,['https://mcpapp.net/__mcpapp-release','https://mcpapp.net/llms-full.txt']),service,timestamp:num(e.timestamp),requestId:id(w.requestId),versionMatches:w.scriptVersion?.id===version,outcome:choice(w.outcome,['ok','exception','exceededCpu','exceededMemory','canceled','unknown','cpuTimeExceeded','memoryLimitExceeded']),cpuTimeMs:num(w.cpuTimeMs),wallTimeMs:num(w.wallTimeMs),truncated:w.truncated===true};}).filter(Boolean);
             }
           } catch { result.success=false;result.events=[];result.failure='Request or schema failed; details suppressed'; }
           console.log(JSON.stringify(result));
