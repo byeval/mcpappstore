@@ -1,8 +1,10 @@
+import {preflightExistingCatalog} from './preflight-existing-catalog.mjs';
 import {releaseExitCode} from './pending-release.mjs';
 import {generatePrivateLegacy} from './private-legacy.mjs';
 import fs from 'node:fs/promises';import os from 'node:os';import path from 'node:path';import {spawn} from 'node:child_process';import {createWranglerD1} from './wrangler-d1.mjs';import {readPublicationState} from './publication-state.mjs';
 // Explicit bridge for already-deployed private legacy backend and authoritative D1 data.
 // Does not silently build/deploy legacy under frontend name and does not apply migrations.
+await preflightExistingCatalog();
 await new Promise((ok,no)=>{const p=spawn('npm',['run','build'],{stdio:'inherit'});p.once('error',no);p.once('exit',code=>code===0?ok():no(Error('Private backend build failed')));});
 for(const testFile of ['tests/backend-publication.integration.mjs','tests/backend-release.integration.mjs','tests/backend-removals.integration.mjs']) {
  await new Promise((ok,no)=>{const p=spawn(process.execPath,[testFile],{stdio:'inherit'});p.once('error',no);p.once('exit',code=>code===0?ok():no(Error('Built backend integration failed: '+testFile)));});
