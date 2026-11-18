@@ -56,7 +56,7 @@ jobs:
             reports/watchdog-fixture/plan.json
           if-no-files-found: error
       - run: node scripts/rollback-watchdog-fixture.mjs candidate
-      - if: inputs.scenario == 'superseded'
+      - if: inputs.scenario == 'superseded' || contains(github.event.head_commit.message, '[watchdog-superseded]')
         run: |
           for i in $(seq 1 30); do
             if test -f reports/watchdog-fixture/owned.json; then break; fi
