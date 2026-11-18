@@ -6,7 +6,7 @@ import { SiteNavigation } from "@/components/site-navigation";
 import { getEnvValue } from "@/lib/cloudflare";
 import { localeDetails, localizedPath } from "@/lib/i18n";
 import { getI18n, getRequestPathname } from "@/lib/i18n-server";
-import { defaultOgImagePath } from "@/lib/og-image";
+import { defaultOgImagePath } from "@/lib/og-path";
 import { siteNameForLocale } from "@/lib/seo";
 import { siteOrigin } from "@/lib/utils";
 

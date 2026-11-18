@@ -40,7 +40,7 @@ jobs:
         run: npm run check
 
       - name: Discovery and analytics regression checks
-        run: node --import tsx --test scripts/discovery.test.ts scripts/browser-analytics.test.ts scripts/sitemap-discovery.test.ts
+        run: node --import tsx --test scripts/discovery.test.ts scripts/browser-analytics.test.ts scripts/sitemap-discovery.test.ts scripts/seo-metadata.test.ts
 
       - name: Publication and authoritative data regression checks
         run: |

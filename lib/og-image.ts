@@ -19,9 +19,7 @@ function cleanText(value: string | undefined, fallback: string, maxLength: numbe
   return normalized.length > maxLength ? `${normalized.slice(0, maxLength - 1).trimEnd()}...` : normalized;
 }
 
-export function defaultOgImagePath(): string {
-  return "/api/og/default.png";
-}
+export { defaultOgImagePath } from "./og-path";
 
 function splitMetric(metric: string): { label: string; value: string } {
   const [label, ...rest] = metric.split(":");

@@ -4,7 +4,7 @@ import { editorialFor } from "./app-editorial";
 import type { Metadata } from "next";
 
 import { defaultLocale, localeDetails, localizedPath, supportedLocales, type Locale } from "@/lib/i18n";
-import { defaultOgImagePath } from "@/lib/og-image";
+import { defaultOgImagePath } from "@/lib/og-path";
 import type { CatalogApp, CategoryRecord } from "@/lib/types";
 import { absoluteUrl } from "@/lib/utils";
 
