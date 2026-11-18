@@ -144,3 +144,12 @@ test("migration seed preserves hidden/rejected moderation and all64submission re
   assert.equal(scalar("SELECT name FROM apps WHERE id='__protected-user'"),'User protected');
   assert.equal(scalar('SELECT count(*) FROM submissions'),'64');assert.equal(scalar('PRAGMA foreign_key_check'),'');
 });
+
+test('seed refresh cannot republish Viator or regenerate its associations', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'mcpapp-removed-seed-'));
+  const sqlPath = join(dir, 'seed.sql');
+  execFileSync(process.execPath, ['--import', 'tsx', 'scripts/seed.ts', sqlPath]);
+  const sql = await readFile(sqlPath, 'utf8');
+  assert.ok(!/'viator'/i.test(sql), 'excluded ID must not be written, associated, or deleted by refresh');
+  assert.ok(sql.includes("'canva'"), 'unrelated seed apps remain');
+});

@@ -6,6 +6,8 @@ import catalog from "../seed/chatgpt-apps.json" with { type: "json" };
 import skillRegistry from "../seed/skills.json" with { type: "json" };
 import type { SeedCatalog, SeedSkillAssociation, SeedSkillRegistry } from "../lib/types";
 
+import { isRemovedPublicAppId } from "../lib/content-removals";
+
 const data = catalog as SeedCatalog;
 const skills = skillRegistry as SeedSkillRegistry;
 const associations = skillAssociations as SeedSkillAssociation[];
@@ -14,7 +16,8 @@ const skillsOnly = args.includes("--skills-only");
 const outputArg = args.find((arg) => arg !== "--skills-only");
 if (skillsOnly && !outputArg) throw new Error("--skills-only requires an explicit output path");
 const outputPath = resolve(process.cwd(), outputArg ?? "migrations/0002_seed.sql");
-const appsToSeed = skillsOnly ? [] : data.apps;
+// Preserve historical D1 rows, but never refresh or re-publish owner-excluded IDs.
+const appsToSeed = skillsOnly ? [] : data.apps.filter((app) => !isRemovedPublicAppId(app.id));
 const skillSeedTimestamp = Math.max(...data.apps.map((app) => app.updatedAt), 0);
 
 function escapeSql(value: string | null | undefined): string {

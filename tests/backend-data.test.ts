@@ -31,3 +31,12 @@ test('all public table events have triggers and content revision rolls back with
 
 test('global Viator removal survives direct reimport and cache while D1/admin remain recoverable',async()=>{const f=fixture('published');try{f.sql.exec("INSERT INTO apps(id,name,tagline,status,source,created_at,updated_at,is_featured) VALUES('viator','Viator','Travel','published','chatgpt_seed',1,1,1)");assert.equal(await data.getAppById('viator'),null);assert.equal((await data.getAppById('viator',{includeRemoved:true}))?.name,'Viator');for(const apps of [await data.listPublishedApps(),await data.getFeaturedApps(),await data.searchApps('viator')])assert.ok(!apps.some(app=>app.id==='viator'));assert.equal(f.sql.prepare("SELECT status FROM apps WHERE id='viator'").get()?.status,'published');f.sql.exec("UPDATE apps SET updated_at=9999999999999,status='published' WHERE id='viator'");assert.equal(await data.getAppById('viator'),null);assert.ok(!(await data.listSitemapAppEntries()).some(app=>app.id==='viator'));}finally{f.sql.close();}});
 test('public category and quality totals exclude global removal without deleting row',async()=>{const f=fixture('published');try{f.sql.exec("INSERT INTO apps(id,name,tagline,status,source,created_at,updated_at,repo_url) VALUES('viator','Viator','Travel','published','chatgpt_seed',1,1,'https://example.com/repo'); INSERT INTO categories(slug,name) VALUES('travel','Travel'); INSERT INTO app_categories(app_id,category_slug) VALUES('viator','travel');");assert.equal((await data.getCategorySummaries()).find(c=>c.slug==='travel')?.count,0);assert.equal((await data.getCatalogQualityStats()).withRepoCount,0);assert.equal(f.sql.prepare("SELECT COUNT(*) AS n FROM apps WHERE id='viator'").get()?.n,1);}finally{f.sql.close();}});
+
+test('no-D1 fallback rejects a mixed-case removed seed ID in public lists and search',async()=>{
+ const catalog=(await import('../seed/chatgpt-apps.json',{with:{type:'json'}})).default;
+ const removed=catalog.apps.find(a=>a.id==='viator');assert.ok(removed);
+ const saved={...env};for(const key of Object.keys(env))delete env[key];
+ const alias={...removed,id:'ViAtOr'};catalog.apps.push(alias);
+ try{assert.ok(!(await data.listPublishedApps()).some(a=>a.id.toLowerCase()==='viator'));assert.ok(!(await data.searchApps('viator')).some(a=>a.id.toLowerCase()==='viator'));}
+ finally{catalog.apps.splice(catalog.apps.indexOf(alias),1);Object.assign(env,saved);}
+});

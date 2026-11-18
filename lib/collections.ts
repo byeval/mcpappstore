@@ -596,7 +596,6 @@ export const appCollections: AppCollection[] = [
       "tripadvisor",
       "skyscanner",
       "getyourguide",
-      "viator",
       "klook",
       "omio",
       "priceline",

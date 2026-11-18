@@ -279,7 +279,7 @@ async function fallbackPublishedApps(payload: "list" | "full" = "list"): Promise
   const assetCdnUrl = await getAssetCdnUrl();
   const blocked = await blockedAppIds();
   const apps = FALLBACK_CATALOG.apps
-    .filter((app) => app.status === "published" && !blocked.has(app.id))
+    .filter((app) => app.status === "published" && !blocked.has(app.id) && !isRemovedPublicAppId(app.id))
     .map(cloneApp)
     .map((app) => withResolvedMediaUrls(app, assetCdnUrl));
 
@@ -1057,7 +1057,7 @@ export async function getCatalogQualityStats(): Promise<CatalogQualityStats> {
   }
 
   const blocked = await blockedAppIds();
-  const fallbackApps = FALLBACK_CATALOG.apps.filter((app) => app.status === "published" && !blocked.has(app.id));
+  const fallbackApps = FALLBACK_CATALOG.apps.filter((app) => app.status === "published" && !blocked.has(app.id) && !isRemovedPublicAppId(app.id));
   const stats = {
     withToolsCount: fallbackApps.filter((app) => app.tools.length > 0 || app.surfaces.some((surface) => surface.tools?.length)).length,
     withExamplePromptsCount: fallbackApps.filter(
@@ -1120,7 +1120,7 @@ export async function listMetadataRichApps(limit = 8): Promise<CatalogApp[]> {
     FALLBACK_CATALOG.apps
       .filter(
         (app) =>
-          app.status === "published" && !blocked.has(app.id) &&
+          app.status === "published" && !blocked.has(app.id) && !isRemovedPublicAppId(app.id) &&
           (app.tools.length > 0 ||
             app.examplePrompts.length > 0 ||
             app.previews.length > 0 ||
@@ -1260,7 +1260,7 @@ export async function listAppsForSkill(skillId: string): Promise<SkillAppRef[]> 
   const blocked = await blockedAppIds();
   const fallbackApps = sortApps(
     FALLBACK_CATALOG.apps
-      .filter((app) => app.status === "published" && !blocked.has(app.id) && relationByAppId.has(app.id))
+      .filter((app) => app.status === "published" && !blocked.has(app.id) && !isRemovedPublicAppId(app.id) && relationByAppId.has(app.id))
       .map(cloneApp)
       .map((app) => withResolvedMediaUrls(app, assetCdnUrl)),
   ).map((app): SkillAppRef => {
