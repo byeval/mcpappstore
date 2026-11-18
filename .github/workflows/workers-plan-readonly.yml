@@ -19,7 +19,7 @@ jobs:
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          EXPECTED_PLAN_SHA256: e0f2946ed25ac9279d0dea7be51b28227cf3f831f4782d23f7533205c0c4595d
+          EXPECTED_PLAN_SHA256: f24e7a97d0ba458f0c2c7da57ec9acf7ddfcf0aadb411ce14a964ce5d642c395
         run: node .github/durable/ci-reader-cli.mjs .github/durable/read-plan.json
       - name: Preserve bounded sanitized evidence
         if: always()
