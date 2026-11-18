@@ -4,3 +4,9 @@ test('disabled activation and revision drift cannot switch frontend',async()=>{a
 test('unreviewed service names and resource bindings rejected before file access',async()=>{await assert.rejects(generateActivationPlan({},{}),/reviewed/);await assert.rejects(generateActivationPlan({frontendName:'mcpapp',legacyService:'mcpapp-legacy'},{}),/resource/);});
 
 test('failed frontend smoke restores previous version before checking old health; failed rollback is surfaced',async()=>{for(const failRollback of [false,true]){const order=[];const effects={verifyCandidate:async()=>{},assertReady:async()=>{},deployShard:async()=>{},verifyShard:async()=>{},capturePrevious:async()=>({versionId:'old'}),deployFront:async()=>order.push('deploy'),verifyFront:async()=>{throw Error('bad new smoke');},rollbackFront:async p=>{assert.equal(p.versionId,'old');order.push('rollback');if(failRollback)throw Error('rollback unavailable');},verifyPrevious:async()=>order.push('verify-old')};await assert.rejects(activatePlan({activationEligible:true,shardConfigs:[]},effects),failRollback?/rollback verification failed/:/previous version restored/);assert.deepEqual(order,failRollback?['deploy','rollback']:['deploy','rollback','verify-old']);}});
+
+test('candidate timeout fails closed without frontend write or rollback',async()=>{
+ const timeout=new DOMException('Timed out','TimeoutError');let frontWrites=0,rollbacks=0;
+ await assert.rejects(activatePlan({activationEligible:true,markerId:'r',shardConfigs:[],frontConfig:'front'},{failurePolicy:'retain-unverified',assertReady:async()=>{},verifyCandidate:async()=>{throw timeout;},capturePrevious:async()=>({}),deployFront:async()=>{frontWrites++;},rollbackFront:async()=>{rollbacks++;}}),error=>error===timeout);
+ assert.equal(frontWrites,0);assert.equal(rollbacks,0);
+});
