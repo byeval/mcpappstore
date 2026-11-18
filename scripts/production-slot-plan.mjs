@@ -4,7 +4,7 @@ export const SLOT_LOCALES=Object.freeze(['en','es','fr','de','ru','zh-hans','ja'
 const bindingFor=key=>'STATIC_'+key.toUpperCase().replaceAll('-','_');
 export function selectProductionSlot(current){
  if(!current?.versionId||!Array.isArray(current.bindings))throw Error('Exact current frontend version/bindings required');
- const services=current.bindings.filter(b=>b.type==='service');if(services.some(b=>b.environment!==undefined&&b.environment!=='production'))throw Error('Unexpected external service environment');const statics=current.bindings.filter(b=>b.name?.startsWith('STATIC_'));
+ const services=current.bindings.filter(b=>b.type==='service');if(services.some(b=>b.environment!==undefined&&b.environment!=='production'))throw Error('Unexpected external service environment');const modes=current.bindings.filter(b=>b.name==='STATIC_SHARD_MODE');if(modes.length>1||modes.some(b=>b.type!=='plain_text'||b.text!=='eight'))throw Error('Unexpected static shard mode');const statics=current.bindings.filter(b=>b.name?.startsWith('STATIC_')&&b.name!=='STATIC_SHARD_MODE');
  if(!services.length&&!statics.length)return {activeSlot:null,targetSlot:'blue',protectedServices:[],previousFrontVersion:current.versionId};
  if(services.length!==9||statics.length!==8||services.filter(b=>b.name==='LEGACY'&&b.service==='mcpapp-legacy').length!==1)throw Error('Unexpected/mixed frontend service topology; refuse slot overwrite');
  let activeSlot;const protectedServices=[];
