@@ -46,6 +46,7 @@ export async function activatePlan(plan,effects){
   await effects.assertReady(plan.markerId,plan.contentRevision);
   await effects.verifyFront(plan.frontConfig);
  }catch(error){
+  if(effects.failurePolicy==='retain-unverified')throw error; // Explicit owner direction: fix forward, never restore automatically.
   if(error?.code==='EXTERNAL_FRONTEND_CHANGED')throw error; // Never revert an external writer.
   if(error?.code==='PUBLIC_BROWSER_VERIFICATION_PENDING'&&error.sameConfirmedBaseline===true&&error.browserTicketCreated===true)throw error; // Exempt only a persisted exact-release ticket for the same confirmed baseline.
   try{await effects.rollbackFront(previous);await effects.verifyPrevious(previous);}catch(rollbackError){throw new AggregateError([error,rollbackError],'Frontend activation failed AND rollback verification failed; urgent intervention required');}

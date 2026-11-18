@@ -81,7 +81,7 @@ jobs:
           name: legacy-anchor-browser-ticket-${{ github.sha }}
           if-no-files-found: ignore
           path: reports/browser-verification-ticket.json
-      - name: Await actual browser proof or recover expired anchor
+      - name: Await actual browser proof or record retained unverified anchor
         if: always()
         timeout-minutes: 45
         run: |

@@ -42,3 +42,11 @@ After the verified anchor, the separately authorized main Deploy run emits its o
 The main waiting job reads this bounded immutable commit using its read-only GitHub token, validates the observations, and invokes the existing verifier in that same CI job with its existing Cloudflare credentials. The verifier rechecks ticket freshness immediately before writing authoritative D1 verification. Delivery or a submitted `verified: true` flag cannot declare success: the waiting job only resolves after reading and validating the exact D1 registry record and current versions. No external operator Cloudflare credential or separate verification workflow is required.
 
 Both the ticket and final resolution artifacts preserve original observations, delivery commit identity, verified output and any rollback receipt. Missing/invalid delivery retains the original expiry and recovery path.
+
+## Owner-directed forward-only transition (2026-11-18)
+
+The owner explicitly requested no rollback and to fix forward. The pending run was cancelled before expiry, and the live legacy version was re-read unchanged. `publication.config.json` now selects `retain-unverified`: activation errors retain their original failure, pending expiry records `verified:false` and `rolledBack:false`, and automatic rollback entrypoints refuse writes. This is not a successful acceptance or rollback receipt.
+
+The initial Astro migration may advance from the exact unverified legacy predecessor in `release-evidence/forward-transition.json`. That record is distinctly **not** verified-anchor evidence; its live version/tag, source ancestry and saved failure-diagnostic digest are checked. Other initial versions cannot use it. Normal hybrid registry validation, candidate checks, source/D1 freshness, inactive-slot protection and fresh actual browser acceptance remain mandatory. New production builds run once through canonical main CI; no additional legacy-preview cycle is needed.
+
+The recorded new-tab RSC navigation failure remains unresolved at root-cause level. Astro public routes use document navigation rather than the legacy RSC navigation path; real production acceptance must establish the resulting behavior. A retained failed or expired release remains unverified and requires diagnosis, not an automatic revert or a forged success flag.

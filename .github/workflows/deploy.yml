@@ -74,7 +74,7 @@ jobs:
           retention-days: 7
           path: reports/browser-verification-ticket.json
 
-      - name: Await exact browser verification or roll back expired release
+      - name: Await exact browser verification or record retained unverified release
         if: always() && steps.deploy.outputs.release_exit == '78'
         timeout-minutes: 45
         run: node scripts/await-browser-release.mjs --ticket "${{ github.workspace }}/reports/browser-verification-ticket.json"
@@ -84,7 +84,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
-      - name: Preserve browser-resolution or rollback evidence
+      - name: Preserve browser-resolution and retained-failure evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -93,3 +93,4 @@ jobs:
           retention-days: 7
           path: |
             reports/browser-verification-ticket.json*
+            reports/retained-unverified-failure.json

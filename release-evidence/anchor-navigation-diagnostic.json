@@ -1,0 +1,39 @@
+{
+  "kind": "browser-diagnostic-not-acceptance",
+  "frontVersion": "ae5d5c5d-68f5-47a5-997b-0677e3821b24",
+  "observations": [
+    {
+      "url": "https://mcpapp.net/docs",
+      "result": "Automatic Cloudflare check passed without interaction. Document heading and guidance table visible and styled. Canonical exact match."
+    },
+    {
+      "action": "Click header M mcpapp from docs to home",
+      "url": "https://mcpapp.net/",
+      "result": "SOMETHING FAILED / The page could not be rendered. / Minified React error #441; visit https://react.dev/errors/441 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+      "screenshotObserved": true
+    },
+    {
+      "action": "Reload home",
+      "result": "Homepage restored and rendered normally."
+    },
+    {
+      "action": "Click Canva from home",
+      "url": "https://mcpapp.net/app/canva",
+      "result": "Canva details, Platform surfaces and Information visible; canonical exact match."
+    },
+    {
+      "action": "Click footer Docs then header M mcpapp",
+      "result": "Both navigation transitions rendered normally on retest."
+    },
+    {
+      "url": "https://mcpapp.net/app/viator",
+      "result": "Gone visible, no app details. No HTTP status claim."
+    }
+  ],
+  "acceptanceSubmitted": false,
+  "note": "First failure occurred during current ticket validation; exact event timestamp was not captured. Later retest does not erase first observed error. DOM evaluator exposed expected CSS link but did not establish loaded sheet object; visual screenshots established styling only.",
+  "savedAt": "2026-11-18T08:45:51.392422+00:00",
+  "firstFailureSession": "New tab 631177592 created after ticket; not a pre-deployment retained tab.",
+  "retestSession": "Second new tab 631177595: docs->home->Canva->docs succeeded, second docs->home also visibly succeeded. Heading exact-name locator timed out, but subsequent AX+Screenshot confirmed healthy homepage, not another React error.",
+  "decision": "Do not issue acceptance proof; first new-session React #441 remains unexplained. Await scoped rollback and fresh restoration check."
+}

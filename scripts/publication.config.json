@@ -41,5 +41,6 @@
     }
   ],
   "capacityReservedNewWorkers": 9,
-  "capacityReservedServices": []
+  "capacityReservedServices": [],
+  "failurePolicy": "retain-unverified"
 }

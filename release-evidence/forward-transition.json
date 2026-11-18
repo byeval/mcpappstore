@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "kind": "unverified-forward-transition",
+  "verified": false,
+  "failurePolicy": "retain-unverified",
+  "frontVersion": "ae5d5c5d-68f5-47a5-997b-0677e3821b24",
+  "sourceCommit": "7b91afb3caf7a349e5215c1872ed331b573be0a6",
+  "diagnosticSha256": "759d65f6c72b34c6b3738f3b543e20dfb4d8f430ae0942b6b1605ce6fa7d741e",
+  "instruction": "Owner explicitly requested no rollback; solve the issue and continue with Astro.",
+  "observedFailure": "New browser tab docs-to-home navigation returned React #441; later refresh and repeated navigation succeeded. Root cause not established."
+}

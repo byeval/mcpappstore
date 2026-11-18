@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
 import {validateVerifiedHybridRecord} from './verified-hybrid-registry.mjs';
 export function releaseExitCode(status){if(status===0||status===78)return status;throw Error('Release stage failed; not a verified pending outcome');}
-export async function awaitPendingRelease(ticket,{readCurrent,readRecord,rollback,frontMetadata,readFrontMetadata=async()=>frontMetadata,verifyBrowser=async()=>null,now=Date.now,sleep=ms=>new Promise(r=>setTimeout(r,ms)),pollMs=30000,onDiagnostic=()=>{}}){
+export async function awaitPendingRelease(ticket,{failurePolicy,readCurrent,readRecord,rollback,frontMetadata,readFrontMetadata=async()=>frontMetadata,verifyBrowser=async()=>null,now=Date.now,sleep=ms=>new Promise(r=>setTimeout(r,ms)),pollMs=30000,onDiagnostic=()=>{}}){
  if(ticket?.kind!=='astro-release'||ticket.state!=='awaiting-browser'||ticket.publicPolicy!=='viator-global-v1'||!Number.isFinite(ticket.createdAt)||!Number.isFinite(ticket.expiresAt)||ticket.expiresAt-ticket.createdAt>1800000||ticket.expiresAt<=ticket.createdAt||!ticket.previousPair?.front?.versionId)throw Error('Exact bounded pending Astro ticket required');
  const stopAt=ticket.expiresAt+10*60000;
  const pause=()=>sleep(Math.min(pollMs,15000,Math.max(1,stopAt-now())));
@@ -24,6 +24,7 @@ export async function awaitPendingRelease(ticket,{readCurrent,readRecord,rollbac
   }
   if(now()<=ticket.expiresAt){if(record?.unavailable)onDiagnostic('verification-read-unavailable');await sleep(Math.min(pollMs,Math.max(1,ticket.expiresAt-now()+1)));continue;}
   try{await current();}catch(e){if(e.code==='PENDING_RELEASE_SUPERSEDED')throw e;onDiagnostic('rollback-current-read-unavailable');await pause();continue;}
+  if(failurePolicy==='retain-unverified')return {verified:false,rolledBack:false,retained:true,reason:'browser-verification-expired',frontVersion:ticket.frontVersion,backendVersion:ticket.backendVersion};
   try{await rollback();}
   catch(error){
    try{await current();const raced=await verifiedRecord();if(raced?.verified)return raced;}catch(e){if(e.code==='PENDING_RELEASE_SUPERSEDED')throw e;}
@@ -35,7 +36,7 @@ export async function awaitPendingRelease(ticket,{readCurrent,readRecord,rollbac
 
 // Initial corrected legacy uses the same bounded ticket/rollback lifecycle, but
 // has a private preview backend and no hybrid slot/registry entry yet.
-export async function awaitPendingAnchor(ticket,{readCurrent,verifyBrowser,rollback,now=Date.now,sleep=ms=>new Promise(r=>setTimeout(r,ms)),pollMs=10000,onDiagnostic=()=>{}}){
+export async function awaitPendingAnchor(ticket,{failurePolicy,readCurrent,verifyBrowser,rollback,now=Date.now,sleep=ms=>new Promise(r=>setTimeout(r,ms)),pollMs=10000,onDiagnostic=()=>{}}){
  if(ticket?.kind!=='legacy-anchor'||ticket.state!=='awaiting-browser'||ticket.publicPolicy!=='viator-global-v1'||!/^[a-f0-9]{40}$/.test(ticket.buildCommit??'')||!ticket.privateBackendService?.startsWith('mcpapp-preview-legacy-')||!ticket.backendVersion||!ticket.frontVersion||!ticket.previousPair?.front?.versionId||ticket.previousPair.legacy!==null||!Number.isFinite(ticket.createdAt)||!Number.isFinite(ticket.expiresAt)||ticket.expiresAt<=ticket.createdAt||ticket.expiresAt-ticket.createdAt>1800000)throw Error('Exact bounded pending legacy ticket required');
  const stopAt=ticket.expiresAt+10*60000;
  const current=async()=>{const live=await readCurrent();if(live.frontVersion!==ticket.frontVersion||live.backendVersion!==ticket.backendVersion){const e=Error('Pending anchor superseded; never revert newer versions');e.code='PENDING_RELEASE_SUPERSEDED';throw e;}if(now()>stopAt)throw Error('Anchor resolution deadline exhausted; intervention required');};
@@ -49,6 +50,7 @@ export async function awaitPendingAnchor(ticket,{readCurrent,verifyBrowser,rollb
   }
   // Missing/invalid/unavailable browser evidence never extends the ticket.
   try{await current();}catch(e){if(e.code==='PENDING_RELEASE_SUPERSEDED')throw e;onDiagnostic('rollback-current-read-unavailable');await sleep(Math.min(pollMs,Math.max(1,stopAt-now())));continue;}
+  if(failurePolicy==='retain-unverified')return {verified:false,rolledBack:false,retained:true,reason:'browser-verification-expired',frontVersion:ticket.frontVersion,backendVersion:ticket.backendVersion};
   try{await rollback();return {verified:false,rolledBack:true,reason:'browser-verification-expired',frontVersion:ticket.frontVersion};}
   catch(e){if(e.code==='PENDING_RELEASE_SUPERSEDED')throw e;if(!['ROLLBACK_BUSY','ROLLBACK_PREFLIGHT_RETRY'].includes(e.code))throw e;onDiagnostic(e.code==='ROLLBACK_BUSY'?'rollback-lease-busy':'rollback-preflight-unavailable');await sleep(Math.min(pollMs,Math.max(1,stopAt-now())));}
  }

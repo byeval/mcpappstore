@@ -7,6 +7,7 @@ export function validatePublisherConfig(c){
  for(const key of ['astroProject','releaseRoot','auditRoutesFile','actualSourceRepo'])if(typeof c?.[key]!=='string'||!path.isAbsolute(c[key]))throw Error(`Absolute ${key} required`);
  if(c.releaseRoot===c.astroProject||c.releaseRoot.startsWith(c.astroProject+path.sep))throw Error('Release root must be outside Astro source');
  if(typeof c.sourceCommit!=='string'||!/^[a-f0-9]{7,40}$/.test(c.sourceCommit)||!Array.isArray(c.blockedPaths))throw Error('Reviewed sourceCommit and blockedPaths required');
+ if(![undefined,'retain-unverified'].includes(c.failurePolicy))throw Error('Unsupported explicit release failure policy');
  if(![undefined,'two','eight'].includes(c.shardMode))throw Error('Invalid shard mode');return c;
 }
 export async function fileDigest(root){const files=[];async function walk(dir){for(const e of await fs.readdir(dir,{withFileTypes:true})){const f=path.join(dir,e.name);if(e.isSymbolicLink())throw Error('Symlink in artifact');if(e.isDirectory())await walk(f);else if(e.isFile())files.push(f);}}await walk(root);const digest=crypto.createHash('sha256');for(const f of files.sort()){digest.update(path.relative(root,f).split(path.sep).join('/')+'\0');digest.update(hash(await fs.readFile(f)));}return {sha256:digest.digest('hex'),files:files.length};}
