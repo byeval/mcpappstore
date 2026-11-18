@@ -65,6 +65,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
       - name: Preserve exact-release browser verification ticket
+        timeout-minutes: 2
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -78,6 +79,7 @@ jobs:
         timeout-minutes: 45
         run: node scripts/await-browser-release.mjs --ticket "${{ github.workspace }}/reports/browser-verification-ticket.json"
         env:
+          GH_TOKEN: ${{ github.token }}
           ASTRO_PUBLICATION_CONFIG: ${{ github.workspace }}/scripts/publication.config.json
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -90,5 +92,4 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
           path: |
-            reports/browser-verification-ticket.json.resolution.json
-            reports/browser-verification-ticket.json.rolled-back.json
+            reports/browser-verification-ticket.json*

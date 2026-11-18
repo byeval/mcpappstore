@@ -1,30 +1,67 @@
 name: Establish corrected legacy rollback anchor
 on:
-  workflow_dispatch:
-    inputs:
-      private_preview_run_id:
-        description: Completed exact-HEAD private-preview run containing verified full preview receipt
-        required: true
-      approved_anchor:
-        description: Deploy corrected public legacy only; leave Astro frontend unactivated pending browser verification
-        required: true
-        type: boolean
-        default: false
+  push:
+    branches: [canonical-anchor-20261118]
 permissions:
   contents: read
   actions: read
 concurrency:
   group: deploy-main
   cancel-in-progress: false
+env:
+  ANCHOR_EXPECTED_MAIN: 56fbb80375358828abc4d0eeea149e586ffa3a05
 jobs:
-  anchor:
-    if: inputs.approved_anchor && github.ref == 'refs/heads/astro-migration-20261116'
+  preview:
+    if: github.event.head_commit.message == '[canonical-anchor-preview-only]' || github.event.head_commit.message == '[canonical-anchor-release]'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.4
+          cache: npm
+      - run: npm ci
+      - run: node --test scripts/pending-release.test.mjs scripts/pending-anchor.test.mjs scripts/anchor-browser-delivery.test.mjs scripts/canonical-anchor-workflow.test.mjs scripts/rollback-command.test.mjs scripts/staged-migrations.test.mjs scripts/runtime-binding-guard.test.mjs scripts/worker-capacity.test.mjs scripts/initial-deployment-failure.test.mjs scripts/static-binding-readiness.test.mjs scripts/remote-public-health.test.mjs
+      - run: node --import tsx --test tests/backend-security.test.ts
+      - name: Exact-HEAD private preview without public switch
+        run: node scripts/staged-private-preview.mjs
+        env:
+          ASTRO_STAGED_PREVIEW_APPROVED: 'true'
+          ASTRO_PUBLICATION_CONFIG: ${{ github.workspace }}/scripts/publication.config.json
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: astro-private-preview-${{ github.sha }}
+          retention-days: 30
+          path: |
+            reports/staged-preview-receipt.json
+            reports/staged-preview-backup.json
+            reports/staged-preview-public-snapshot.tgz
+            reports/private-preview-logs/*.log
+  anchor:
+    if: github.event.head_commit.message == '[canonical-anchor-release]'
+    needs: preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ASTRO_PUBLICATION_CONFIG: ${{ github.workspace }}/scripts/publication.config.json
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Start bounded anchor release clock
+        run: echo "MCPAPP_JOB_STARTED_AT=$(node -p 'Date.now()')" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 22.23.4
@@ -32,21 +69,35 @@ jobs:
       - run: npm ci
       - uses: actions/download-artifact@v4
         with:
-          github-token: ${{ github.token }}
-          run-id: ${{ inputs.private_preview_run_id }}
           name: astro-private-preview-${{ github.sha }}
           path: reports/anchor-input
-      - run: node scripts/establish-legacy-anchor.mjs --preview-report "${{ github.workspace }}/reports/anchor-input/staged-preview-receipt.json"
-        env:
-          GH_TOKEN: ${{ github.token }}
-          ASTRO_PUBLICATION_CONFIG: ${{ github.workspace }}/scripts/publication.config.json
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      - uses: actions/upload-artifact@v4
+      - name: Establish corrected legacy only
+        run: node scripts/establish-legacy-anchor.mjs --preview-report "${{ github.workspace }}/reports/anchor-input/staged-preview-receipt.json"
+      - name: Publish real browser ticket
+        timeout-minutes: 2
         if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: legacy-anchor-browser-ticket-${{ github.sha }}
           if-no-files-found: ignore
+          path: reports/browser-verification-ticket.json
+      - name: Await actual browser proof or recover expired anchor
+        if: always()
+        timeout-minutes: 45
+        run: |
+          if [ ! -f reports/browser-verification-ticket.json ]; then
+            echo 'No pending browser ticket; inspect preceding failure and recovery evidence.'
+            exit 0
+          fi
+          node scripts/await-browser-release.mjs --ticket "${{ github.workspace }}/reports/browser-verification-ticket.json"
+      - name: Preserve exact verification and recovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: legacy-anchor-resolution-${{ github.sha }}
+          if-no-files-found: ignore
+          retention-days: 30
           path: |
-            reports/browser-verification-ticket.json
+            reports/browser-verification-ticket.json*
+            reports/anchor-intents/*.json
             reports/private-preview-logs/*.log
