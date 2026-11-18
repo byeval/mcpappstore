@@ -9,7 +9,7 @@ export function validateProductionInput(raw,env){
  need(/^[a-f0-9]{64}$/.test(env.EXPECTED_PLAN_SHA256??'')&&sha(raw)===env.EXPECTED_PLAN_SHA256,'External production plan pin mismatch');
  const p=validateWatchdogPlan(JSON.parse(raw));need(p.sourceCommit===SOURCE&&p.repository==='byeval/mcpappstore'&&p.sourceMain==='56fbb80375358828abc4d0eeea149e586ffa3a05','Fixed candidate/main identity required');
  need(p.monitorCommit===env.WATCHDOG_MONITOR_COMMIT&&/^[a-f0-9]{40}$/.test(p.monitorCommit)&&/^[a-f0-9]{40}$/.test(env.GITHUB_SHA??'')&&env.GITHUB_SHA!==p.monitorCommit&&p.monitorCommit!==p.sourceCommit,'Separate reviewed monitor commit required');
- need(/^\d+$/.test(env.GITHUB_RUN_ID??'')&&/^\d+$/.test(env.GITHUB_RUN_ATTEMPT??''),'Actual run identity required');
+ need(/^\d+$/.test(env.GITHUB_RUN_ID??'')&&env.GITHUB_RUN_ATTEMPT==='1','Actual run identity required');
  need(/^refs\/heads\/anchor-watchdog-control-[a-f0-9]{32}$/.test(p.controlRef)&&/^[a-f0-9]{40}$/.test(p.controlBase),'Dedicated control ref/base required');
  need(Object.keys(p.runtimeEvidence??{}).sort().join()===Object.keys(RUNTIME).sort().join()&&Object.entries(RUNTIME).every(([k,v])=>p.runtimeEvidence[k]===v),'Candidate runtime provenance mismatch');
  need(p.stopAt-p.armFrom<=25*60000&&p.deployStartUntil+p.maxDeployMs+30000<=p.armUntil,'Runner and upload safety margins required');return p;

@@ -27,6 +27,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22.23.4'
+      - run: npm ci --ignore-scripts
       - run: node --test scripts/rollback-watchdog*.test.mjs
       - name: Start monitor and await genuine armed receipt
         run: |
