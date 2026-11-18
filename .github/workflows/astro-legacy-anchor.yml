@@ -25,7 +25,7 @@ jobs:
           node-version: 22.23.4
           cache: npm
       - run: npm ci
-      - run: node --test scripts/pending-release.test.mjs scripts/pending-anchor.test.mjs scripts/anchor-browser-delivery.test.mjs scripts/canonical-anchor-workflow.test.mjs scripts/rollback-command.test.mjs scripts/staged-migrations.test.mjs scripts/runtime-binding-guard.test.mjs scripts/worker-capacity.test.mjs scripts/initial-deployment-failure.test.mjs scripts/static-binding-readiness.test.mjs scripts/remote-public-health.test.mjs
+      - run: node --test scripts/pending-release.test.mjs scripts/pending-anchor.test.mjs scripts/anchor-browser-delivery.test.mjs scripts/canonical-anchor-workflow.test.mjs scripts/rollback-command.test.mjs scripts/deployment-lease.test.mjs scripts/wrangler-d1.test.mjs scripts/staged-migrations.test.mjs scripts/runtime-binding-guard.test.mjs scripts/worker-capacity.test.mjs scripts/initial-deployment-failure.test.mjs scripts/static-binding-readiness.test.mjs scripts/remote-public-health.test.mjs
       - run: node --import tsx --test tests/backend-security.test.ts
       - name: Exact-HEAD private preview without public switch
         run: node scripts/staged-private-preview.mjs
