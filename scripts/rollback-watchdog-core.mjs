@@ -34,8 +34,8 @@ export async function watchOwnedFrontend(raw,e,policy){
    let c;try{c=currentFact(await read(()=>e.readCurrent()));}catch{await e.saveObservation({at:t,state:'current-unknown'});await e.sleep(pollMs);continue;}
    if(!owned){
     if(c.versionId===p.baseline){if(await e.readCancel())return result('canceled-before-switch');await e.sleep(pollMs);continue;}
-    if(!match(c,p)||c.createdAt<p.armFrom||c.createdAt>=p.armUntil)return result('superseded-or-outside-window');
-    owned=c.versionId;await e.saveOwned({version:owned,tag:p.tag,message:p.message,nonce:p.nonce,observedAt:t,createdAt:c.createdAt});
+    if(!match(c,p)||c.createdAt<p.armFrom||c.createdAt>=p.stopAt)return result('superseded-or-outside-window');
+    if(c.createdAt>=p.armUntil)await e.saveObservation({at:t,state:'late-exact-owned-deployment',createdAt:c.createdAt});owned=c.versionId;await e.saveOwned({version:owned,tag:p.tag,message:p.message,nonce:p.nonce,observedAt:t,createdAt:c.createdAt});
    }
    try{assertOwnedRollback({ownedVersion:owned,ownedTag:p.tag,ownedMessage:p.message,currentVersion:c.versionId,currentTag:c.versionTag,currentMessage:c.versionMessage});}catch{return result('superseded');}
    if(await verified())return result('verified-disarmed');
