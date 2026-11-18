@@ -1,0 +1,27 @@
+{
+  "repository": "byeval/mcpappstore",
+  "service": "mcpapp",
+  "baseline": "5f756bc7-a86a-4a61-8b8e-8be868794696",
+  "sourceCommit": "044e3757926ec36daa22af34605daa034c45a078",
+  "sourceMain": "56fbb80375358828abc4d0eeea149e586ffa3a05",
+  "nonce": "d0f7551f-2c0e-4f6c-a2fb-42958c17ad6b",
+  "tag": "viator-global-044e375",
+  "message": "owned-anchor:044e3757926ec36daa22af34605daa034c45a078:d0f7551f-2c0e-4f6c-a2fb-42958c17ad6b",
+  "monitorCommit": "eb8d71d6bdeb8017450d7d38ccb1d028ef585e87",
+  "controlRef": "refs/heads/anchor-watchdog-control-5654e760f0386344888b71850f32ff8a",
+  "controlBase": "eb8d71d6bdeb8017450d7d38ccb1d028ef585e87",
+  "runtimeEvidence": {
+    "sourceCommit": "044e3757926ec36daa22af34605daa034c45a078",
+    "service": "mcpapp-preview-legacy-044e3757926e-bec4bf09",
+    "version": "7bc1cece-b1e1-4c1b-a1a5-ec65134a78c3",
+    "exactReviewSha256": "64bfd7b6b458096107328e219f318dbd00187f2a28f1dbccd6007769f9f9fa7d",
+    "nativeReceiptSha256": "0b33f37cd3b1454fa13c82aadebf9fb1703e83bffaf211260b3a254ae0732ef6"
+  },
+  "kind": "owned-front-watchdog-v1",
+  "armFrom": 1794975303000,
+  "deployStartUntil": 1794975423000,
+  "maxDeployMs": 240000,
+  "armUntil": 1794975693000,
+  "deadline": 1794975723000,
+  "stopAt": 1794975783000
+}
