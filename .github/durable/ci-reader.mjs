@@ -5,7 +5,7 @@ const uuid=x=>typeof x==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab]
 const id=x=>typeof x==='string'&&/^(?:[0-9A-HJKMNP-TV-Z]{26}|[a-f0-9]{16,64}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$/i.test(x);
 const num=x=>typeof x==='number'&&Number.isFinite(x)&&x>=0?x:null;
 const hash=x=>createHash('sha256').update(x).digest('hex');
-const SERVICE='mcpapp-preview-legacy-e14e3854b7fc-1c5f9591';
+const SERVICE='mcpapp-preview-legacy-044e3757926e-bec4bf09';
 export function validateReadPlan(p){
  need(p?.kind==='durable-log-read-plan-v2'&&p.service===SERVICE,'PLAN_SERVICE');
  need(/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(p.version??'')&&/^[a-f0-9]{40}$/.test(p.sourceCommit??''),'PLAN_IDENTITY');
@@ -60,7 +60,7 @@ export async function collectDurableScans(plan,{fetcher=fetch,sleep=ms=>new Prom
  const remaining=()=>{need(now()<end,'DEADLINE');return end-now();};
  const wait=async ms=>{need(remaining()>ms,'DEADLINE');await sleep(ms);remaining();};
  const query=async(view,offset)=>{
-  const q={queryId:'private-e14-durable-v2',dry:true,view,limit:pageLimit,timeframe:plan.timeframe,parameters:{filterCombination:'and',filters:[{key:'$metadata.service',operation:'eq',type:'string',value:plan.service}]}};
+  const q={queryId:'private-044-durable-v2',dry:true,view,limit:pageLimit,timeframe:plan.timeframe,parameters:{filterCombination:'and',filters:[{key:'$metadata.service',operation:'eq',type:'string',value:plan.service}]}};
   if(offset!==undefined){q.offset=offset;q.offsetDirection='next';}if(view==='calculations'){q.ignoreSeries=true;q.parameters.calculations=[{operator:'count',alias:'log_rows'}];}
   let response,body;try{
    response=await fetcher(`https://api.cloudflare.com/client/v4/accounts/${accountId}/workers/observability/telemetry/query`,{method:'POST',headers:{Authorization:`Bearer ${apiToken}`,'Content-Type':'application/json'},body:JSON.stringify(q),redirect:'error',signal:AbortSignal.timeout(Math.max(1,Math.min(30000,remaining())))});calls++;
