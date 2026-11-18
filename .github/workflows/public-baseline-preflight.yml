@@ -1,0 +1,27 @@
+name: Public baseline read-only preflight
+on:
+  push:
+    branches: [public-baseline-preflight]
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.4
+          cache: npm
+      - run: npm ci
+      - run: node --test scripts/public-baseline-preflight.test.mjs scripts/public-domain-smoke.test.mjs scripts/public-baseline-policy.test.mjs scripts/safe-release-diagnostic.test.mjs
+      - name: Observe exact existing public routes
+        run: node scripts/public-baseline-preflight.mjs
+      - name: Preserve safe observations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-baseline-${{ github.run_id }}-${{ github.run_attempt }}
+          path: reports/public-baseline-preflight.json
+          if-no-files-found: error

@@ -1,0 +1,9 @@
+import fs from 'node:fs/promises';import {pathToFileURL} from 'node:url';
+import {productionSmokeChecks} from './production-smoke-checks.mjs';import {extendHomeForwardChecks} from './home-forward-checks.mjs';import {samplePublicBaseline} from './public-baseline-policy.mjs';import {safeReleaseDiagnostic} from './safe-release-diagnostic.mjs';
+// Existing release probes, not claims about a future generated stylesheet.
+export function preflightChecks(){return extendHomeForwardChecks(productionSmokeChecks({appPath:'/app/0-100-wifi-internet-speed-test',appName:'0-100 WiFi Internet Speed Test',css:'_..BNw4dc6b.css',icon:'icons/10x-genomics-cloud.webp'})).baselineChecks;}
+export async function inspectPublicBaseline({checks=preflightChecks(),sample=samplePublicBaseline}={}){
+ const observations=[];for(const check of checks){try{const r=await sample([check]);if(r?.samples?.length!==1||r.samples[0].url!=='https://'+(check.host??'mcpapp.net')+check.path||!['http-verified','confirmed-challenge','asset-not-yet-published'].includes(r.samples[0].outcome))throw Error('Incomplete baseline observation');observations.push({check,samples:r.samples,passed:true});}catch(error){observations.push({check,passed:false,error:safeReleaseDiagnostic(error,{stage:'activate',releasePhase:'public-baseline'}).errors});}}
+ return {version:1,kind:'public-baseline-preflight',verified:false,advisory:true,allChecksAccepted:observations.every(x=>x.passed),futureAssetVerified:false,observedAt:new Date().toISOString(),observations};
+}
+if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){const result=await inspectPublicBaseline();await fs.mkdir('reports',{recursive:true});await fs.writeFile('reports/public-baseline-preflight.json',JSON.stringify(result,null,2),{flag:'wx'});console.log(JSON.stringify(result));if(!result.allChecksAccepted)process.exitCode=1;}

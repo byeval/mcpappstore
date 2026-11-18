@@ -6,7 +6,7 @@
   "expectedDigest": "ce8788debf8ece619981d26ca9fe8918d87f898d778e56c96a1f4496b9a8d576",
   "originDigest": "a6b6b4c59ade9493eb9b42427b5dc25d71677cb5fe52dd6f86d50228c6379ae5",
   "diagnosticSha256": "7db3baf650c56f9a5c473cdda9c604804a5e4b34b73049d75549656b2724e32a",
-  "targetTreeDigest": "168e74f4167c780453fd83fc138e0f4d3cc00a315aac50c2d92a914ef35e33b6",
+  "targetTreeDigest": "8b7d728ddec24fc446d626cac96cf06d7c0ea5b908124b53fe4a1e0e3f99f16a",
   "createdAt": 1795011279800,
   "expiresAt": 1795097679800,
   "instruction": "用户明确要求：不用回滚；有问题就解决问题；那你先上线吧。仅允许固定未验收前端向该审阅代码树前向发布；保留真实451和未验收状态，不绕过限制、不伪造410或全站通过。"
