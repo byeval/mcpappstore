@@ -11,6 +11,7 @@ concurrency:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   deploy:
@@ -40,7 +41,7 @@ jobs:
         run: npm run check
 
       - name: Discovery and analytics regression checks
-        run: node --import tsx --test scripts/discovery.test.ts scripts/browser-analytics.test.ts scripts/sitemap-discovery.test.ts scripts/seo-metadata.test.ts
+        run: node --import tsx --test scripts/discovery.test.ts scripts/browser-analytics.test.ts scripts/sitemap-discovery.test.ts scripts/seo-metadata.test.ts frontend/tests/home-migration.test.tsx
 
       - name: Publication and authoritative data regression checks
         run: |
@@ -60,6 +61,7 @@ jobs:
           echo "release_exit=$code" >> "$GITHUB_OUTPUT"
           if [ "$code" -ne 0 ] && [ "$code" -ne 78 ]; then exit "$code"; fi
         env:
+          GH_TOKEN: ${{ github.token }}
           ASTRO_PUBLICATION_CONFIG: ${{ github.workspace }}/scripts/publication.config.json
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

@@ -3,8 +3,8 @@ import {getMessages,localeDetails,type Locale,supportedLocales} from '../lib/i18
 import {blockedPaths,pathFor} from '../lib/catalog';
 import {discoveryCopy} from '../lib/discovery-copy';
 import {isRemovedContentPath} from '../lib/content-removals';
-interface Props{locale:Locale; title:string;description:string;path:string;schema?:unknown;robots?:string;image?:string;article?:boolean;modified?:string;}
-const {locale,title,description,path,schema,robots,image,article=false,modified}=Astro.props;const t=getMessages(locale);
+interface Props{locale:Locale; title:string;description:string;path:string;schema?:unknown;robots?:string;image?:string;article?:boolean;modified?:string;keywords?:string[];}
+const {locale,title,description,path,schema,robots,image,article=false,modified,keywords}=Astro.props;const t=getMessages(locale);
 const copy=discoveryCopy(locale);
 const siteName=locale==='ru'?'Магазин MCP-приложений':locale==='zh-hans'?'MCP 应用商店':locale==='ja'?'MCP アプリストア':locale==='ko'?'MCP 앱 스토어':'MCP App Store';
 const ogImage=image??'https://mcpapp.net/api/og/default.png';
@@ -41,7 +41,7 @@ const json=JSON.stringify(schema??{}).replace(/</g,'\\u003c');
 ---
 <!doctype html><html lang={localeDetails[locale].htmlLang} dir="ltr"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width"/><title>{title} | {siteName}</title><meta name="description" content={finalDescription}/>
-<link rel="canonical" href={canonical}/><meta property="og:title" content={title}/><meta property="og:description" content={finalDescription}/><meta property="og:url" content={canonical}/><meta property="og:type" content={article?"article":"website"}/><meta property="og:site_name" content={siteName}/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content={title}/><meta name="twitter:description" content={finalDescription}/><meta property="og:image" content={ogImage}/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta name="twitter:image" content={ogImage}/>{robots&&<meta name="robots" content={robots}/>} {article&&modified&&<meta property="article:modified_time" content={modified}/>}
+<link rel="canonical" href={canonical}/>{keywords?.length&&<meta name="keywords" content={keywords.join(", ")}/>}<meta property="og:title" content={title}/><meta property="og:description" content={finalDescription}/><meta property="og:url" content={canonical}/><meta property="og:type" content={article?"article":"website"}/><meta property="og:site_name" content={siteName}/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content={title}/><meta name="twitter:description" content={finalDescription}/><meta property="og:image" content={ogImage}/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta name="twitter:image" content={ogImage}/>{robots&&<meta name="robots" content={robots}/>} {article&&modified&&<meta property="article:modified_time" content={modified}/>}
 {supportedLocales.filter(l=>!isRemovedContentPath(pathFor(l,path))&&!blockedPaths.includes(pathFor(l,path))).map(l=><link rel="alternate" hreflang={localeDetails[l].htmlLang} href={`https://mcpapp.net${pathFor(l,path)}`}/>)}
 {!isRemovedContentPath(pathFor('en',path))&&!blockedPaths.includes(pathFor('en',path))&&<link rel="alternate" hreflang="x-default" href={`https://mcpapp.net${pathFor('en',path)}`}/>}
 {schema&&<script type="application/ld+json" set:html={json}/>}

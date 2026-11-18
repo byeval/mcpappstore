@@ -1,3 +1,4 @@
+import {inspectRenderedBody} from './rendered-body-health.mjs';
 import {parseEntities} from 'parse-entities';
 // A focused HTML tokenizer, not an href substring match. Attribute values use the
 // existing locked Markdown dependency's HTML character-reference parser.
@@ -37,10 +38,10 @@ export async function verifyPublicDomainSmoke(checks,{fetcher=fetch,timeoutMs=15
   const url='https://'+host+check.path;let response;try{response=await fetcher(url,{method:'GET',redirect:'manual',credentials:'omit',headers:{Accept:check.contentTypePrefix?.endsWith('/')?check.contentTypePrefix+'*':check.contentTypePrefix??'text/html','Cache-Control':'no-cache'},signal:AbortSignal.timeout(timeoutMs)});}catch{throw Error('Public domain HTTPS request failed: '+host+check.path);}
   const delivery=response.headers.get('x-mcp-delivery');
   if(response.status===403&&(response.headers.get('content-type')??'').toLowerCase().includes('text/html')){const body=await response.text();const challenge=response.headers.get('cf-mitigated')==='challenge'||/\/cdn-cgi\/challenge-platform\/|window\._cf_chl_opt/.test(body);throw new PublicBrowserVerificationRequiredError('Public HTTPS client received '+(challenge?'a confirmed challenge':'an unclassified HTML403')+' at '+host+check.path+'; browser verification required, not proof of a rollout regression',{challengeConfirmed:challenge,challengeEvidence:response.headers.get('cf-mitigated')==='challenge'?'cf-mitigated':challenge?'html-marker':null});}
-if(response.status!==check.status){const error=new Error('Public domain status mismatch: '+host+check.path+' expected '+check.status+' got '+response.status);error.actualStatus=response.status;throw error;}
+if(response.status!==check.status){const error=new Error('Public domain status mismatch: '+host+check.path+' expected '+check.status+' got '+response.status);error.actualStatus=response.status;error.checkPath=check.path;error.expectedStatus=check.status;throw error;}
   if(check.delivery&&delivery!==check.delivery)throw Error('Public domain delivery mismatch: '+host+check.path);
   if(check.contentTypePrefix&&!(response.headers.get('content-type')??'').toLowerCase().startsWith(check.contentTypePrefix))throw Error('Public domain content type mismatch: '+host+check.path);
-  if(check.canonical){const html=await response.text();if(!hasExactCanonicalLink(html,check.canonical))throw Error('Public domain canonical mismatch: '+host+check.path);}else await response.body?.cancel();
+  if(check.canonical||check.renderedBody){const html=await response.text();if(check.canonical&&!hasExactCanonicalLink(html,check.canonical))throw Error('Public domain canonical mismatch: '+host+check.path);if(check.renderedBody&&inspectRenderedBody(html,check.requiredText??[]).ok!==true)throw Error('Public domain rendered body mismatch: '+host+check.path);}else await response.body?.cancel();
   results.push({host,path:check.path,status:response.status,delivery});
  }return results;
 }

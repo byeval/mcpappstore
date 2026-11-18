@@ -9,7 +9,7 @@ export async function expandPublicAudit(base,snapshot,astroProject){
  const removalSource=await fs.readFile(path.join(astroProject,'src/lib/content-removals.ts'),'utf8');
  const removalOutput=ts.transpileModule(removalSource,{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;
  const {isRemovedContentPath}=await import('data:text/javascript;base64,'+Buffer.from(removalOutput).toString('base64'));
- const blocked=new Set(snapshot.manifest.blockedPaths??[]),urls=new Set(base.explicitUrls);let count=0;
+ const blocked=new Set(snapshot.manifest.blockedPaths??[]),urls=new Set([...base.explicitUrls,'/',...['es','fr','de','ru','zh-hans','ja','ko'].map(locale=>'/'+locale)]);let count=0;
  for(const app of snapshot.catalog.apps){if(app.status!=='published')throw Error('Nonpublic app in snapshot');if(canonicalAppId(app)!==app.id)continue;if(typeof app.id!=='string'||!app.id||/[?#%\\\0/]/.test(app.id)||app.id==='.'||app.id==='..')throw Error('Unsupported app path needs review');count++;for(const locale of ['en','es','fr','de','ru','zh-hans','ja','ko']){const p=(locale==='en'?'':'/'+locale)+'/app/'+app.id;if(!blocked.has(p)&&!isRemovedContentPath(p))urls.add(p);}}
- return {...base,families:[...new Set([...(base.families??[]),'canonical-public-app-detail'])],publicationContentRevision:snapshot.manifest.publicationContentRevision,snapshotSha256:snapshot.manifest.sha256,canonicalAppCount:count,explicitUrls:[...urls].filter(p=>!blocked.has(p)&&!isRemovedContentPath(p)).sort()};
+ return {...base,families:[...new Set([...(base.families??[]),'canonical-public-app-detail','homepage'])],publicationContentRevision:snapshot.manifest.publicationContentRevision,snapshotSha256:snapshot.manifest.sha256,canonicalAppCount:count,explicitUrls:[...urls].filter(p=>!blocked.has(p)&&!isRemovedContentPath(p)).sort()};
 }

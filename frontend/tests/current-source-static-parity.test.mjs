@@ -1,3 +1,5 @@
+import './homepage-built.test.mjs';
+
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import ts from 'typescript';
 const original=process.env.CURRENT_SOURCE_REPO??path.resolve(import.meta.dirname,'../..');
 const out=process.env.AUDITED_DIST??'dist-audited';

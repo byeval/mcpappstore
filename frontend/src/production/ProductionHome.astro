@@ -1,0 +1,15 @@
+---
+import HomeContent from './components/home-content';
+import {HeroCarousel} from './components/hero-carousel';
+import {homeData} from './lib/home-data';
+import {productionData} from './lib/build-data';
+import type {Locale} from '../lib/i18n';
+import './current.css';
+interface Props{locale:Locale}
+const {locale}=Astro.props;
+const data=productionData(locale);
+const home=homeData(data.apps,data.categories);
+---
+<HomeContent locale={locale} apps={home.apps} categories={home.categories}>
+ <HeroCarousel apps={home.featured} locale={locale} client:visible/>
+</HomeContent>

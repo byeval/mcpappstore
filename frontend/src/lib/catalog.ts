@@ -8,7 +8,7 @@ export const blockedPaths: string[] = (manifest as {blockedPaths?:string[]}).blo
 export const apps=catalog.apps;
 export const categories=catalog.categories;
 export const pageSize=36;
-export function pathFor(locale:Locale,path:string){return `${locale==='en'?'':`/${locale}`}${path}` || '/';}
+export function pathFor(locale:Locale,path:string){return locale!=='en'&&path==='/'?`/${locale}`:`${locale==='en'?'':`/${locale}`}${path}` || '/';}
 const visibleCache=new Map<Locale,App[]>();
 const categoryCache=new Map<Locale,Map<string,App[]>>();
 const rankCache=new Map<Locale,Map<string,number>>();

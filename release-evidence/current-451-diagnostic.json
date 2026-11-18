@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "kind": "observed-public-verification-failure",
+  "runId": "44318644070",
+  "verificationSourceCommit": "f3b33e7500c7b80edd2700ea228ddbb01a144817",
+  "deployedSourceCommit": "92bfd38ba773bb75d7d9bc71e70d867aad44d92e",
+  "frontVersion": "abab1039-1f37-420b-a728-69219c9a6176",
+  "url": "https://mcpapp.net/en/app/viator",
+  "expectedStatus": 410,
+  "actualStatus": 451,
+  "body": "error code: 1026",
+  "observedAt": "2026-11-18T14:01:53Z",
+  "responseServer": "cloudflare",
+  "cfRay": "a5c7827dabbe7a17-LAX",
+  "browserObservedAt": "2026-11-18T14:01:47Z",
+  "browserVisibleText": "Error 451 / Unavailable For Legal Reasons / This website is unavailable for legal reasons.",
+  "browserRay": "a5c78257a9bab75a",
+  "verified": false,
+  "rolledBack": false,
+  "restrictionModified": false,
+  "specificLegalMeritsDetermined": false
+}

@@ -2,13 +2,15 @@ import test from 'node:test';import assert from 'node:assert/strict';
 import {productionSmokeChecks} from './production-smoke-checks.mjs';
 import {verifyPublicDomainSmoke} from './public-domain-smoke.mjs';
 import {samplePublicBaseline,comparePublicAfterSwitch} from './public-baseline-policy.mjs';
+const html=c=>`<html><head>${c.canonical?`<link rel="canonical" href="${c.canonical}">`:''}</head><body><h1>Canva</h1><p>${'A fully rendered public application page with useful content. '.repeat(3)}</p></body></html>`;
 const input={appPath:'/app/canva',appName:'Canva',css:'_..BNw4dc6b.css',icon:'icons/canva.png'};
 test('publisher checks accept actual Astro dotted CSS name through baseline and cutover without weakening content/status gates',async()=>{
  const {publicChecks,baselineChecks}=productionSmokeChecks(input);assert.equal(publicChecks.length,6);
- const seen=[];const baseline=await samplePublicBaseline(baselineChecks,{fetcher:async url=>{seen.push(url);const c=baselineChecks.find(c=>'https://'+(c.host??'mcpapp.net')+c.path===url);return new Response('',{status:c.path.startsWith('/_astro/')?404:c.status,headers:{'content-type':c.contentTypePrefix?.startsWith('image/')?'image/png':c.contentTypePrefix??'text/html'}});}});
+ const seen=[];const baseline=await samplePublicBaseline(baselineChecks,{fetcher:async url=>{seen.push(url);const c=baselineChecks.find(c=>'https://'+(c.host??'mcpapp.net')+c.path===url);return new Response(c.renderedBody?html(c):'',{status:c.path.startsWith('/_astro/')?404:c.status,headers:{'content-type':c.contentTypePrefix?.startsWith('image/')?'image/png':c.contentTypePrefix??'text/html'}});}});
  assert.equal(seen.length,6);assert.equal(baseline.samples[2].outcome,'asset-not-yet-published');assert.equal(baseline.samples[2].httpVerified,false);
- const fetcher=async url=>{const c=publicChecks.find(c=>'https://'+(c.host??'mcpapp.net')+c.path===url);return new Response(c.canonical?`<link rel="canonical" href="${c.canonical}">`:'body',{status:c.status,headers:{'content-type':c.contentTypePrefix?.startsWith('image/')?'image/png':c.contentTypePrefix??'text/html','x-mcp-delivery':c.delivery??''}});};
+ const fetcher=async url=>{const c=publicChecks.find(c=>'https://'+(c.host??'mcpapp.net')+c.path===url);return new Response(c.canonical||c.renderedBody?html(c):'body',{status:c.status,headers:{'content-type':c.contentTypePrefix?.startsWith('image/')?'image/png':c.contentTypePrefix??'text/html','x-mcp-delivery':c.delivery??''}});};
  assert.equal((await comparePublicAfterSwitch(publicChecks,baseline,{fetcher})).httpVerified,true);
+ await assert.rejects(comparePublicAfterSwitch(publicChecks,baseline,{fetcher:async url=>url.endsWith('/app/canva')?new Response('<link rel="canonical" href="https://mcpapp.net/app/canva">',{headers:{'content-type':'text/html','x-mcp-delivery':'astro-static'}}):fetcher(url)}),e=>e.code==='PUBLIC_POSTDEPLOY_VERIFICATION_FAILED');
  await assert.rejects(comparePublicAfterSwitch(publicChecks,baseline,{fetcher:async url=>url.includes('/_astro/')?new Response('missing',{status:404}):fetcher(url)}),e=>e.code==='PUBLIC_POSTDEPLOY_VERIFICATION_FAILED');
 });
 test('normal filenames with consecutive dots are not traversal, while dot segments, encodings and host escapes remain rejected before any request',async()=>{
