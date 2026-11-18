@@ -17,7 +17,7 @@ export function createControlReader({plan,token,fetcher=fetch,timeoutMs=2000}){
    const ref=await request('git/ref/'+plan.controlRef.slice(5),{missing:true});if(!ref)return null;
    need(ref.ref===plan.controlRef&&ref.object?.type==='commit'&&/^[a-f0-9]{40}$/.test(ref.object.sha),'Control ref identity mismatch');const commit=ref.object.sha;
    if(cache?.commit===commit)return cache;
-   const compare=await request('compare/'+plan.controlBase+'...'+commit+'?per_page=1');need(['ahead','identical'].includes(compare.status)&&compare.head_commit?.sha===commit&&compare.base_commit?.sha===plan.controlBase&&compare.merge_base_commit?.sha===plan.controlBase,'Control ancestry rejected');
+   const compare=await request('compare/'+plan.controlBase+'...'+commit+'?per_page=1');need(['ahead','identical'].includes(compare.status)&&compare.base_commit?.sha===plan.controlBase&&compare.merge_base_commit?.sha===plan.controlBase,'Control ancestry rejected');
    const names=['manifest.json','ticket.json','observations.json','ticket.verified.json','anchor.json'];const entries=await Promise.all(names.map(async name=>{
     const pathname='watchdog-disarm/'+name,b=await request('contents/'+pathname+'?ref='+commit,{missing:true});if(!b)return [name,null];
     need(b.type==='file'&&b.path===pathname&&b.name===name&&b.encoding==='base64'&&Number.isInteger(b.size)&&b.size>=0&&b.size<=262144&&/^[a-f0-9]{40}$/.test(b.sha),'Control file metadata rejected');
