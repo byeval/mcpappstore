@@ -1,0 +1,57 @@
+{
+  "kind": "current-state-recovery",
+  "originalRunId": "44301051564",
+  "sourceCommit": "92bfd38ba773bb75d7d9bc71e70d867aad44d92e",
+  "frontVersion": "abab1039-1f37-420b-a728-69219c9a6176",
+  "backendVersion": "88443e01-a72e-496a-8cfa-3de6039cf552",
+  "markerId": "489b2054-8e13-40d8-bfd3-4e81005a111c",
+  "contentRevision": "c6cead14c135a788d6f95b4d5d9ca17b",
+  "shards": [
+    {
+      "binding": "STATIC_DE",
+      "service": "mcpapp-static-blue-de",
+      "versionId": "7c632c2d-db30-44bd-b153-4ef519063de4"
+    },
+    {
+      "binding": "STATIC_EN",
+      "service": "mcpapp-static-blue-en",
+      "versionId": "80367267-21f4-4e04-a498-1bcb2b337583"
+    },
+    {
+      "binding": "STATIC_ES",
+      "service": "mcpapp-static-blue-es",
+      "versionId": "163f4f85-c0dd-47c9-a416-538079200252"
+    },
+    {
+      "binding": "STATIC_FR",
+      "service": "mcpapp-static-blue-fr",
+      "versionId": "2a8b1b69-d151-4c30-b412-d923090bb18d"
+    },
+    {
+      "binding": "STATIC_JA",
+      "service": "mcpapp-static-blue-ja",
+      "versionId": "243244f7-3ffd-4cc8-a98d-2b1d06f6cafc"
+    },
+    {
+      "binding": "STATIC_KO",
+      "service": "mcpapp-static-blue-ko",
+      "versionId": "1dd6671f-0944-4b27-81b1-20477fbdc2cd"
+    },
+    {
+      "binding": "STATIC_RU",
+      "service": "mcpapp-static-blue-ru",
+      "versionId": "998e554f-0cd0-4477-81ff-cd34facb04c2"
+    },
+    {
+      "binding": "STATIC_ZH_HANS",
+      "service": "mcpapp-static-blue-zh-hans",
+      "versionId": "0956ba98-809a-4368-becc-9bd1e1de3857"
+    }
+  ],
+  "smoke": {
+    "appPath": "/app/canva",
+    "appName": "Canva",
+    "css": "_..BNw4dc6b.css",
+    "icon": "icons/canva.webp"
+  }
+}

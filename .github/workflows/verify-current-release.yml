@@ -1,0 +1,63 @@
+name: Verify current release only
+on:
+  push:
+    branches:
+      - recovery-verification-44301051564
+concurrency:
+  group: deploy-main
+  cancel-in-progress: false
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    if: contains(github.event.head_commit.message, '[verify-current-only]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.4
+          cache: npm
+      - run: npm ci
+      - name: Recovery regression tests
+        run: node --test scripts/*.test.mjs
+      - name: Fresh version-bound verification and ticket
+        id: prepare
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ASTRO_PUBLICATION_CONFIG: ${{ github.workspace }}/scripts/publication.config.json
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          mkdir -p reports
+          node scripts/verify-current-release.mjs --expected "$GITHUB_WORKSPACE/scripts/recovery-44301051564.expected.json" --output "$GITHUB_WORKSPACE/reports/recovery-prepared.json"
+          node --input-type=module -e "import fs from 'node:fs'; const r=JSON.parse(fs.readFileSync('reports/recovery-prepared.json'));fs.writeFileSync('reports/recovery-ticket.json',JSON.stringify(r.ticket,null,2),{flag:'wx'})"
+      - name: Deliver exact recovery ticket
+        if: always()
+        timeout-minutes: 2
+        uses: actions/upload-artifact@v4
+        with:
+          name: recovery-ticket-${{ github.run_id }}-${{ github.run_attempt }}
+          path: reports/recovery-ticket.json
+          if-no-files-found: ignore
+      - name: Wait for actual browser observations and verify
+        if: always() && steps.prepare.outcome == 'success'
+        timeout-minutes: 35
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ASTRO_PUBLICATION_CONFIG: ${{ github.workspace }}/scripts/publication.config.json
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/await-recovery-browser.mjs --expected "$GITHUB_WORKSPACE/scripts/recovery-44301051564.expected.json" --ticket "$GITHUB_WORKSPACE/reports/recovery-ticket.json" --output "$GITHUB_WORKSPACE/reports/recovery-verified.json"
+      - name: Preserve recovery evidence
+        if: always()
+        timeout-minutes: 2
+        uses: actions/upload-artifact@v4
+        with:
+          name: recovery-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            reports/recovery-*.json*
+            reports/private-preview-logs/*.log
+          if-no-files-found: ignore

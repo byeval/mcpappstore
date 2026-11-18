@@ -22,7 +22,7 @@ export function assertProbeResult(got,want,nonce){
  const typeMatches=!prefix||(validType&&(prefix.endsWith('/')?actualType.startsWith(prefix):actualType===prefix));
  if(want.renderedBody&&got.renderedBody?.ok!==true)throw Error(`Rendered body health failed: ${want.service} ${want.path} ${(got.renderedBody?.errors??['missing-proof']).join(',')}`);
  if(got.nonce!==nonce||got.status!==want.status||(want.sha256&&got.sha256!==want.sha256)||(want.delivery&&got.delivery!==want.delivery)||(want.commit&&got.commit!==want.commit)||(want.canonical&&got.canonical!==want.canonical)||!typeMatches)throw Error(`Remote health mismatch: ${want.service} ${want.path}`);
- return {service:want.service,path:want.path,host:want.host??'mcpapp.net',status:got.status,contentType:got.contentType??null,canonical:got.canonical??null,sha256:got.sha256??null,delivery:got.delivery??null};
+ return {service:want.service,path:want.path,host:want.host??'mcpapp.net',status:got.status,contentType:got.contentType??null,canonical:got.canonical??null,sha256:got.sha256??null,delivery:got.delivery??null,...(want.commit?{commit:got.commit}:{}),...(want.renderedBody?{renderedBody:got.renderedBody}:{})};
 }
 export async function fetchProbeWithRetry(url,check,index,nonce,{fetcher=fetch,sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)),onDiagnostic=()=>{},secrets=[],validateResult=assertProbeResult,maxAttempts:requestedAttempts}={}){
  const delays=[1000,2000,4000];
