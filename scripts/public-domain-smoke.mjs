@@ -27,9 +27,13 @@ export function hasExactCanonicalLink(html,expected){
 }
 export class PublicBrowserVerificationRequiredError extends Error {constructor(message,{challengeConfirmed=false,challengeEvidence=null}={}){super(message);this.code='PUBLIC_BROWSER_VERIFICATION_REQUIRED';this.challengeConfirmed=challengeConfirmed;this.challengeEvidence=challengeEvidence;}}
 // Real HTTPS/DNS smoke: no service binding, credentials, cookies or redirect following.
+export function assertPublicSmokeChecks(checks){
+ if(!Array.isArray(checks)||!checks.length)throw Error('Explicit public domain checks required');
+ for(const check of checks){const host=check?.host??'mcpapp.net';if(!['mcpapp.net','cdn.mcpapp.net'].includes(host)||typeof check?.path!=='string'||!/^\/[a-zA-Z0-9_.~/-]*$/.test(check.path)||check.path.split('/').some(segment=>segment==='.'||segment==='..')||check.path.includes('//')||!Number.isInteger(check.status))throw Error('Invalid public domain smoke target');}return checks;
+}
 export async function verifyPublicDomainSmoke(checks,{fetcher=fetch,timeoutMs=15000}={}){
- if(!Array.isArray(checks)||!checks.length)throw Error('Explicit public domain checks required');const results=[];
- for(const check of checks){const host=check.host??'mcpapp.net';if(!['mcpapp.net','cdn.mcpapp.net'].includes(host)||typeof check.path!=='string'||!/^\/[a-zA-Z0-9_.~/-]*$/.test(check.path)||check.path.includes('..')||check.path.includes('//')||!Number.isInteger(check.status))throw Error('Invalid public domain smoke target');
+ assertPublicSmokeChecks(checks);const results=[];
+ for(const check of checks){const host=check.host??'mcpapp.net';
   const url='https://'+host+check.path;let response;try{response=await fetcher(url,{method:'GET',redirect:'manual',credentials:'omit',headers:{Accept:check.contentTypePrefix?.endsWith('/')?check.contentTypePrefix+'*':check.contentTypePrefix??'text/html','Cache-Control':'no-cache'},signal:AbortSignal.timeout(timeoutMs)});}catch{throw Error('Public domain HTTPS request failed: '+host+check.path);}
   const delivery=response.headers.get('x-mcp-delivery');
   if(response.status===403&&(response.headers.get('content-type')??'').toLowerCase().includes('text/html')){const body=await response.text();const challenge=response.headers.get('cf-mitigated')==='challenge'||/\/cdn-cgi\/challenge-platform\/|window\._cf_chl_opt/.test(body);throw new PublicBrowserVerificationRequiredError('Public HTTPS client received '+(challenge?'a confirmed challenge':'an unclassified HTML403')+' at '+host+check.path+'; browser verification required, not proof of a rollout regression',{challengeConfirmed:challenge,challengeEvidence:response.headers.get('cf-mitigated')==='challenge'?'cf-mitigated':challenge?'html-marker':null});}

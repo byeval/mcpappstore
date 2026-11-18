@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import {productionSmokeChecks} from './production-smoke-checks.mjs';
+import {writeSafeReleaseDiagnostic} from './safe-release-diagnostic.mjs';
 import {runBackendMemoryGate} from './backend-memory-gate.mjs';
 import {verifyCandidateFront} from './candidate-front-gate.mjs';
 import {workerOriginChecks,verifyCdnR2Media,verifyCdnMapping} from './cdn-r2-proof.mjs';
@@ -29,7 +31,7 @@ import {prepareRelease,resolvePublisherConfig,fileDigest} from './astro-publishe
 const [action,...args]=process.argv.slice(2);const markerId=args[args.indexOf('--marker-id')+1];
 const configFile=process.env.ASTRO_PUBLICATION_CONFIG;if(!configFile||!path.isAbsolute(configFile))throw Error('Explicit absolute ASTRO_PUBLICATION_CONFIG required');
 const config=resolvePublisherConfig(JSON.parse(await fs.readFile(configFile,'utf8')),path.dirname(configFile));
-function run(command,args,cwd,{capture=false,env={}}={}){const r=spawnSync(command,args,{cwd,env:{...process.env,...env},encoding:'utf8',stdio:capture?'pipe':'inherit',maxBuffer:64*1024*1024,timeout:capture?60000:undefined});if(r.error||r.status!==0)throw Error(`${command} ${args.slice(0,2).join(' ')} failed`);return r.stdout;}
+function run(command,args,cwd,{capture=false,env={}}={}){const started=Date.now();const r=spawnSync(command,args,{cwd,env:{...process.env,...env},encoding:'utf8',stdio:capture?'pipe':'inherit',maxBuffer:64*1024*1024,timeout:capture?60000:undefined});if(r.error||r.status!==0){const error=Error(`${command} ${args.slice(0,2).join(' ')} failed`);error.releaseExitCode=Number.isInteger(r.status)?r.status:null;error.releaseElapsedMs=Date.now()-started;throw error;}return r.stdout;}
 const publication=await import(pathToFileURL(path.join(config.astroProject,'publishing-v3/publication.mjs')));
 const DB=createWranglerD1();
 const assertReady=(id,contentRevision)=>publication.assertCurrentPublication(DB,id,contentRevision);
@@ -85,9 +87,7 @@ if(action==='prepare'){
    const cssFiles=await fs.readdir(path.join(receipt.assets,'_astro'));const css=cssFiles.find(p=>p.endsWith('.css'));if(!css)throw Error('Production CSS probe missing');
    const catalog=JSON.parse(await fs.readFile(path.join(receipt.releaseDir,'work/src/data/catalog.json')));const icon=catalog.apps.find(a=>typeof a.iconKey==='string'&&/^(icons|previews)\/[a-zA-Z0-9_./-]+$/.test(a.iconKey))?.iconKey;if(!icon)throw Error('Production media probe missing');
    const appName=catalog.apps.find(a=>'/app/'+a.id===appPath)?.name;if(typeof appName!=='string'||!appName)throw Error('Exact app body identity required');
-   const fallbackChecks=[{path:appPath,status:200,contentTypePrefix:'text/html',canonical:'https://mcpapp.net'+appPath,renderedBody:true,requiredText:[appName]}];
-   const publicChecks=[{path:'/docs',status:200,delivery:'astro-static',contentTypePrefix:'text/html',canonical:'https://mcpapp.net/docs'},{path:appPath,status:200,renderedBody:true,requiredText:[appName],delivery:'astro-static',contentTypePrefix:'text/html',canonical:'https://mcpapp.net'+appPath},{path:'/_astro/'+css,status:200,contentTypePrefix:'text/css'},{host:'cdn.mcpapp.net',path:'/'+icon,status:200,contentTypePrefix:'image/'},{path:'/admin',status:401},{path:'/app/viator',status:410}];
-   const baselineChecks=publicChecks.map(c=>({...c,delivery:undefined,canonical:undefined,...(c.path.startsWith('/_astro/')?{baselineMayBeMissing:true}:{})}));
+   const {fallbackChecks,publicChecks,baselineChecks}=productionSmokeChecks({appPath,appName,css,icon});
    let baseline;
    const verifyOld=async()=>{await verifyRemotePublic([{service:'mcpapp',path:'/docs',status:200},{service:'mcpapp',path:'/admin',status:401},{service:'mcpapp',path:'/app/viator',status:410}],{cwd:config.actualSourceRepo});assertUnchangedRouting(await readLiveRouting({accountId:process.env.CLOUDFLARE_ACCOUNT_ID,zoneId:config.zoneId,token:process.env.CLOUDFLARE_API_TOKEN}),config);const checks=baselineChecks.filter(c=>!c.path.startsWith('/_astro/'));const result=await comparePublicAfterSwitch(checks,baseline);await fs.writeFile(path.join(receipt.releaseDir,'rollback-public-observations.json'),JSON.stringify({...result,restoredPriorVersions:true},null,2));};
    const plannedServices=['mcpapp-legacy',...plan.productionServices,'mcpapp'];capacityPlannedServices=plannedServices;
@@ -114,4 +114,4 @@ if(action==='prepare'){
  }
 }else throw Error('Usage: astro-publisher.mjs prepare|plan|activate --marker-id UUID [--receipt PATH | --receipt-out PATH]');
 
-}catch(error){if(error?.code==='PUBLIC_BROWSER_VERIFICATION_REQUIRED'||(error?.code==='PUBLIC_BROWSER_VERIFICATION_PENDING'&&error.sameConfirmedBaseline&&error.browserTicketCreated)){console.log(JSON.stringify({state:'awaiting-browser',verified:false,reason:error.message,deployed:frontWasDeployed,deployRetryRequired:!frontWasDeployed}));process.exitCode=78;}else throw error;}
+}catch(error){try{await writeSafeReleaseDiagnostic(config.actualSourceRepo,error,{stage:action,sourceCommit:config.buildCommit??process.env.GITHUB_SHA,frontWasDeployed});}catch(diagnosticError){throw new AggregateError([error,diagnosticError],'Release failed and safe diagnostic could not be saved',{cause:error});}if(error?.code==='PUBLIC_BROWSER_VERIFICATION_REQUIRED'||(error?.code==='PUBLIC_BROWSER_VERIFICATION_PENDING'&&error.sameConfirmedBaseline&&error.browserTicketCreated)){console.log(JSON.stringify({state:'awaiting-browser',verified:false,reason:error.message,deployed:frontWasDeployed,deployRetryRequired:!frontWasDeployed}));process.exitCode=78;}else throw error;}

@@ -16,7 +16,7 @@ jobs:
   deploy:
     name: Deploy Worker
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 210
 
     steps:
       - name: Start bounded release clock
@@ -94,3 +94,4 @@ jobs:
           path: |
             reports/browser-verification-ticket.json*
             reports/retained-unverified-failure.json
+            reports/release-failure-diagnostic.json
