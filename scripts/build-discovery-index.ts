@@ -63,6 +63,7 @@ interface DiscoveryIndex {
     sourcePath: string;
     totalCount?: number;
     importedCount: number;
+    retainedOutsideCurrentWindow?: number;
   }>;
   stats: {
     totalCandidates: number;
@@ -426,11 +427,45 @@ async function main() {
   const catalog = JSON.parse(catalogRaw) as SeedCatalog;
   const github = JSON.parse(githubRaw) as GithubDiscoveryReport;
   const npm = npmRaw ? JSON.parse(npmRaw) as NpmDiscoveryReport : undefined;
+  let previous: DiscoveryIndex | undefined;
+  try {
+    previous = JSON.parse(await readFile(resolve(process.cwd(), outputPath), "utf8")) as DiscoveryIndex;
+    if (!Array.isArray(previous.candidates)) throw new Error("Invalid previous candidate index");
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+  }
   const generatedAt = new Date().toISOString();
-  const candidates = [
+  const incoming = [
     ...github.repos.map((repo) => githubCandidate(repo, catalog, generatedAt)),
     ...(npm?.packages ?? []).map((item) => npmCandidate(item, catalog, generatedAt)),
-  ]
+  ];
+  // Keep exact source spellings, including legacy case variants, without renaming history.
+  const identity = (candidate: DiscoveryCandidate) => JSON.stringify([candidate.source, candidate.sourceId]);
+  const byIdentity = new Map<string, DiscoveryCandidate>();
+  const knownIds = new Set<string>();
+  for (const candidate of previous?.candidates ?? []) {
+    const key = identity(candidate);
+    if (byIdentity.has(key)) throw new Error(`Duplicate previous candidate identity: ${candidate.sourceId}`);
+    byIdentity.set(key, candidate);
+    knownIds.add(candidate.id);
+  }
+  const incomingIdentities = new Set<string>();
+  for (const candidate of incoming) {
+    const key = identity(candidate);
+    if (incomingIdentities.has(key)) throw new Error(`Duplicate incoming candidate identity: ${candidate.sourceId}`);
+    incomingIdentities.add(key);
+    const prior = byIdentity.get(key);
+    if (prior) {
+      byIdentity.set(key, { ...candidate, id: prior.id, discoveredAt: prior.discoveredAt });
+      continue;
+    }
+    if (knownIds.has(candidate.id)) throw new Error(`Duplicate incoming candidate ID: ${candidate.id}`);
+    knownIds.add(candidate.id);
+    byIdentity.set(key, candidate);
+  }
+  // Search windows change over time; absence is not a reason to discard a lead.
+  const retained = (previous?.candidates ?? []).filter((candidate) => !incomingIdentities.has(identity(candidate)));
+  const candidates = [...byIdentity.values()]
     .sort((left, right) => {
       const statusRank: Record<DiscoveryCandidateStatus, number> = {
         verified: 0,
@@ -460,6 +495,7 @@ async function main() {
         sourcePath: githubDiscoveryPath,
         totalCount: github.totalCount,
         importedCount: github.repos.length,
+        retainedOutsideCurrentWindow: retained.filter((candidate) => candidate.source === "github").length,
       },
       ...(npm ? [{
         id: "npm-mcp-discovery",
@@ -467,6 +503,7 @@ async function main() {
         sourcePath: npmDiscoveryPath,
         totalCount: npm.totalCount,
         importedCount: npm.packages.length,
+        retainedOutsideCurrentWindow: retained.filter((candidate) => candidate.source === "npm").length,
       }] : []),
     ],
     stats,
