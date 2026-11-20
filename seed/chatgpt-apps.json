@@ -141065,14 +141065,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1789844349657,
-      "updatedAt": 1793045007649,
+      "updatedAt": 1795140665851,
       "publishedAt": 1789844349657,
       "surfaces": [
         {
@@ -141093,10 +141096,35 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Hostinger Connector",
+          "tagline": "Manage your Hostinger services via Claude — deploy websites, launch eCommerce stores, configure domains and DNS, control VPS servers, run email marketing campaigns, and manage your subscriptions.",
+          "description": "Manage your Hostinger services via Claude — deploy websites, launch eCommerce stores, configure domains and DNS, control VPS servers, run email marketing campaigns, and manage your subscriptions.",
+          "url": "https://claude.ai/directory/d7ae695c-a7df-4444-88be-680c8b2b09c6",
+          "externalId": "d7ae695c-a7df-4444-88be-680c8b2b09c6",
+          "mcpEndpoint": "https://mcp.hostinger.com/",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "developer-tools"
+        "developer-tools",
+        "commerce-shopping",
+        "other",
+        "productivity"
       ],
       "tags": [
         "hosting",
@@ -174294,14 +174322,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1789844349657,
-      "updatedAt": 1789844349657,
+      "updatedAt": 1795140665851,
       "publishedAt": 1789844349657,
       "surfaces": [
         {
@@ -174322,10 +174353,34 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "DrugBank",
+          "tagline": "Decision-ready biopharma intelligence for drug, target, and pipeline evaluation.",
+          "description": "Decision-ready biopharma intelligence for drug, target, and pipeline evaluation.",
+          "url": "https://claude.ai/directory/85477c81-ac0b-4556-9cc1-0e5579c3436d",
+          "externalId": "85477c81-ac0b-4556-9cc1-0e5579c3436d",
+          "mcpEndpoint": "https://mcp.drugbank.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "healthcare"
+        "healthcare",
+        "data-analytics",
+        "health-life-sciences"
       ],
       "tags": [],
       "tools": [],
@@ -219807,14 +219862,16 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792509879120,
-      "updatedAt": 1792509879120,
+      "updatedAt": 1795140665851,
       "publishedAt": 1792509879120,
       "surfaces": [
         {
@@ -219834,6 +219891,26 @@
           "tools": [],
           "previews": [],
           "isPrimary": true,
+          "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Hertz Car Rental",
+          "tagline": "Book Hertz rental cars",
+          "description": "Book Hertz rental cars",
+          "url": "https://claude.ai/directory/19467784-672d-41c1-96ed-fe5b43f6e431",
+          "externalId": "19467784-672d-41c1-96ed-fe5b43f6e431",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
           "status": "available"
         }
       ],
@@ -271275,14 +271352,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1789844349657,
-      "updatedAt": 1789844349657,
+      "updatedAt": 1795140665851,
       "publishedAt": 1789844349657,
       "surfaces": [
         {
@@ -271303,10 +271383,35 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "FullEnrich",
+          "tagline": "Find B2B prospects and companies, enrich work emails and phone numbers, and export results.",
+          "description": "Find B2B prospects and companies, enrich work emails and phone numbers, and export results.",
+          "url": "https://claude.ai/directory/255de707-a50c-4788-b8d4-2e78ced354f3",
+          "externalId": "255de707-a50c-4788-b8d4-2e78ced354f3",
+          "mcpEndpoint": "https://mcp.fullenrich.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "business-and-operations"
+        "business-and-operations",
+        "data-analytics",
+        "productivity",
+        "sales-and-marketing"
       ],
       "tags": [],
       "tools": [],
@@ -300663,14 +300768,16 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1789844349657,
-      "updatedAt": 1793423152108,
+      "updatedAt": 1795140665851,
       "publishedAt": 1789844349657,
       "surfaces": [
         {
@@ -300691,10 +300798,35 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "interactive_connector",
+          "displayName": "Litera",
+          "tagline": "Compare documents with a legal-grade redline and search your firm’s clients, matters, relationships, finances, and experience, all inside Claude.",
+          "description": "Compare documents with a legal-grade redline and search your firm’s clients, matters, relationships, finances, and experience, all inside Claude.",
+          "url": "https://claude.ai/directory/4247ea6d-e187-4212-aae7-c983e24e999b",
+          "externalId": "4247ea6d-e187-4212-aae7-c983e24e999b",
+          "mcpEndpoint": "https://one.litera.com/lito-mcp/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Interactive",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "business-and-operations"
+        "business-and-operations",
+        "legal",
+        "other",
+        "productivity"
       ],
       "tags": [],
       "tools": [],
@@ -324726,14 +324858,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792527503521,
-      "updatedAt": 1792527503521,
+      "updatedAt": 1795140665851,
       "publishedAt": 1792527503521,
       "surfaces": [
         {
@@ -324754,10 +324889,36 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "LogMeIn Resolve",
+          "tagline": "RMM and unified endpoint management (UEM) for IT teams and MSPs — manage devices, tickets, and alerts, start remote support, and connect Resolve with your other tools, right from Claude.",
+          "description": "RMM and unified endpoint management (UEM) for IT teams and MSPs — manage devices, tickets, and alerts, start remote support, and connect Resolve with your other tools, right from Claude.",
+          "url": "https://claude.ai/directory/42a3e73b-80b4-4104-b44c-3214c53ac49b",
+          "externalId": "42a3e73b-80b4-4104-b44c-3214c53ac49b",
+          "mcpEndpoint": "https://mcp.console.gotoresolve.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "business-and-operations"
+        "business-and-operations",
+        "data-analytics",
+        "developer-tools",
+        "other",
+        "productivity"
       ],
       "tags": [
         "Remote Monitoring and Management (RMM)",
@@ -334051,14 +334212,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792527503521,
-      "updatedAt": 1792527503521,
+      "updatedAt": 1795140665851,
       "publishedAt": 1792527503521,
       "surfaces": [
         {
@@ -334079,10 +334243,36 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "LeanData MCP",
+          "tagline": "Connect Claude to LeanData to manage your pools, availability, and meetings. Admins run operations across the team, and reps handle their own links and meetings.",
+          "description": "Connect Claude to LeanData to manage your pools, availability, and meetings. Admins run operations across the team, and reps handle their own links and meetings.",
+          "url": "https://claude.ai/directory/e9198402-bfed-4d3d-8b56-92d9d3534675",
+          "externalId": "e9198402-bfed-4d3d-8b56-92d9d3534675",
+          "mcpEndpoint": "https://mcp.leandata.com/",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "business-and-operations"
+        "business-and-operations",
+        "communication",
+        "data-analytics",
+        "productivity",
+        "sales-and-marketing"
       ],
       "tags": [],
       "tools": [],
@@ -477453,14 +477643,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792613171556,
-      "updatedAt": 1792872672851,
+      "updatedAt": 1795140665851,
       "publishedAt": 1792613171556,
       "surfaces": [
         {
@@ -477481,10 +477674,34 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Ploy",
+          "tagline": "Make your website self-optimizing. Grow revenue.",
+          "description": "Make your website self-optimizing. Grow revenue.",
+          "url": "https://claude.ai/directory/5da1c97f-9d9d-40c3-b90b-7d4fff228a3d",
+          "externalId": "5da1c97f-9d9d-40c3-b90b-7d4fff228a3d",
+          "mcpEndpoint": "https://ploy.ai/api/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "business-and-operations"
+        "business-and-operations",
+        "productivity",
+        "sales-and-marketing"
       ],
       "tags": [
         "marketing",
@@ -524171,14 +524388,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792786008925,
-      "updatedAt": 1793423152108,
+      "updatedAt": 1795140665851,
       "publishedAt": 1792786008925,
       "surfaces": [
         {
@@ -524199,10 +524419,35 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "interactive_connector",
+          "displayName": "Cardboard",
+          "tagline": "Edit videos in minutes: upload clips, cut, add titles, preview and export in chat",
+          "description": "Edit videos in minutes: upload clips, cut, add titles, preview and export in chat",
+          "url": "https://claude.ai/directory/a09e1c92-62ea-45d4-afa4-30aaaaba2413",
+          "externalId": "a09e1c92-62ea-45d4-afa4-30aaaaba2413",
+          "mcpEndpoint": "https://mcp.cardboard.ai/claude",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Interactive",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "creativity"
+        "creativity",
+        "creative",
+        "productivity"
       ],
       "tags": [],
       "tools": [],
@@ -558307,14 +558552,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1793045007649,
-      "updatedAt": 1793045007649,
+      "updatedAt": 1795140665851,
       "publishedAt": 1793045007649,
       "surfaces": [
         {
@@ -558335,10 +558583,33 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Fundraise Up for Donors",
+          "tagline": "Give to a nonprofit without leaving the conversation",
+          "description": "Give to a nonprofit without leaving the conversation",
+          "url": "https://claude.ai/directory/dd8775af-b3eb-4dd8-99cc-2402f816f3d9",
+          "externalId": "dd8775af-b3eb-4dd8-99cc-2402f816f3d9",
+          "mcpEndpoint": "https://mcp.fundraiseup.com/mcp/claude",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "business-and-operations"
+        "business-and-operations",
+        "nonprofit"
       ],
       "tags": [
         "donations",
@@ -693846,14 +694117,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1793822597081,
-      "updatedAt": 1793822597081,
+      "updatedAt": 1795140665851,
       "publishedAt": 1793822597081,
       "surfaces": [
         {
@@ -693873,6 +694147,28 @@
           "tools": [],
           "previews": [],
           "isPrimary": true,
+          "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Qualia Connect",
+          "tagline": "Your closings, in conversation",
+          "description": "Your closings, in conversation",
+          "url": "https://claude.ai/directory/b15b88e9-021b-4893-995d-3ca61f76287b",
+          "externalId": "b15b88e9-021b-4893-995d-3ca61f76287b",
+          "mcpEndpoint": "https://connect.qualia.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
           "status": "available"
         }
       ],
@@ -847413,14 +847709,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1794859512690,
-      "updatedAt": 1794859512690,
+      "updatedAt": 1795140665851,
       "publishedAt": 1794859512690,
       "surfaces": [
         {
@@ -847441,10 +847740,35 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zip",
+          "tagline": "Look up purchase requests, approvals, vendors, purchase orders and invoices in Zip, the AI for Procurement platform, directly from Claude.",
+          "description": "Look up purchase requests, approvals, vendors, purchase orders and invoices in Zip, the AI for Procurement platform, directly from Claude.",
+          "url": "https://claude.ai/directory/7b60a13f-935b-41a0-b891-cf184529f081",
+          "externalId": "7b60a13f-935b-41a0-b891-cf184529f081",
+          "mcpEndpoint": "https://mcp.zip.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "business-and-operations"
+        "business-and-operations",
+        "communication",
+        "financial-services",
+        "productivity"
       ],
       "tags": [],
       "tools": [],
@@ -884402,8 +884726,6 @@
         "charts",
         "reports",
         "forecasts",
-        "statistics",
-        "research",
         "market insights",
         "consumer insights"
       ],
@@ -886414,6 +886736,627 @@
         "personal trainer",
         "workout log"
       ],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "pennylane-mcp",
+      "name": "Pennylane",
+      "tagline": "Ask Claude about your Pennylane data: invoices, bank transactions, ledger, financial statements and VAT, read-only.",
+      "description": "Ask Claude about your Pennylane data: invoices, bank transactions, ledger, financial statements and VAT, read-only.",
+      "iconUrl": "https://mcp.pennylane.com/mcp-icon.png",
+      "homepageUrl": "https://www.pennylane.com/",
+      "mcpEndpoint": "https://mcp.pennylane.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Pennylane",
+      "publisherUrl": "https://www.pennylane.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795140665851,
+      "updatedAt": 1795140665851,
+      "publishedAt": 1792022400000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Pennylane",
+          "tagline": "Ask Claude about your Pennylane data: invoices, bank transactions, ledger, financial statements and VAT, read-only.",
+          "description": "Ask Claude about your Pennylane data: invoices, bank transactions, ledger, financial statements and VAT, read-only.",
+          "url": "https://claude.ai/directory/b84251fc-ae21-4851-b50e-674e3380dc40",
+          "externalId": "b84251fc-ae21-4851-b50e-674e3380dc40",
+          "mcpEndpoint": "https://mcp.pennylane.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "financial-services"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "openalex",
+      "name": "OpenAlex",
+      "tagline": "Search 250M+ research papers, citations and authors",
+      "description": "Search 250M+ research papers, citations and authors",
+      "iconUrl": "https://mcp.openalex.org/icon-512.png",
+      "homepageUrl": "https://ourresearch.org/",
+      "mcpEndpoint": "https://mcp.openalex.org/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "OurResearch",
+      "publisherUrl": "https://ourresearch.org/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795140665851,
+      "updatedAt": 1795140665851,
+      "publishedAt": 1789948800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "OpenAlex",
+          "tagline": "Search 250M+ research papers, citations and authors",
+          "description": "Search 250M+ research papers, citations and authors",
+          "url": "https://claude.ai/directory/2667ef24-9792-42a8-82c4-d7169b2bdd96",
+          "externalId": "2667ef24-9792-42a8-82c4-d7169b2bdd96",
+          "mcpEndpoint": "https://mcp.openalex.org/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "education",
+        "health-life-sciences",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "abacum-ai",
+      "name": "Abacum.ai",
+      "tagline": "Your business data, one question away. Get live actuals, plans and forecasts from Abacum without leaving Claude.",
+      "description": "Your business data, one question away. Get live actuals, plans and forecasts from Abacum without leaving Claude.",
+      "iconUrl": "https://framerusercontent.com/images/iqEm7ZRoZDFODBSqJVZqwBOutY.png",
+      "homepageUrl": "https://www.abacum.ai/",
+      "mcpEndpoint": "https://mcp.abacum.ai/",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Abacum",
+      "publisherUrl": "https://www.abacum.ai/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795140665851,
+      "updatedAt": 1795140665851,
+      "publishedAt": 1783641600000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Abacum.ai",
+          "tagline": "Your business data, one question away. Get live actuals, plans and forecasts from Abacum without leaving Claude.",
+          "description": "Your business data, one question away. Get live actuals, plans and forecasts from Abacum without leaving Claude.",
+          "url": "https://claude.ai/directory/9b0c5624-35f6-4d83-b359-aad603f8d610",
+          "externalId": "9b0c5624-35f6-4d83-b359-aad603f8d610",
+          "mcpEndpoint": "https://mcp.abacum.ai/",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "financial-services",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "levels",
+      "name": "Levels",
+      "tagline": "Use your Levels glucose, meals and lab data in Claude, and log from the chat.",
+      "description": "Use your Levels glucose, meals and lab data in Claude, and log from the chat.",
+      "iconUrl": "https://www.levels.com/assets/levels-icon.svg",
+      "homepageUrl": "https://levels.com/",
+      "mcpEndpoint": "https://app.levels.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Levels",
+      "publisherUrl": "https://levels.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795140665851,
+      "updatedAt": 1795140665851,
+      "publishedAt": 1792540800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Levels",
+          "tagline": "Use your Levels glucose, meals and lab data in Claude, and log from the chat.",
+          "description": "Use your Levels glucose, meals and lab data in Claude, and log from the chat.",
+          "url": "https://claude.ai/directory/e371f946-f37e-4952-be12-15f00d72b4ee",
+          "externalId": "e371f946-f37e-4952-be12-15f00d72b4ee",
+          "mcpEndpoint": "https://app.levels.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "consumer-health",
+        "data-analytics",
+        "health-life-sciences"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "yardi-deal-manager",
+      "name": "Yardi Deal Manager",
+      "tagline": "Surface commercial leasing pipeline insights from Yardi Deal Manager",
+      "description": "Surface commercial leasing pipeline insights from Yardi Deal Manager",
+      "iconUrl": "https://dmmcp.virtuoso.ai/favicon.png",
+      "homepageUrl": "https://www.yardi.com/",
+      "mcpEndpoint": "https://dmmcp.virtuoso.ai/",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Yardi",
+      "publisherUrl": "https://www.yardi.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795140665851,
+      "updatedAt": 1795140665851,
+      "publishedAt": 1785801600000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Yardi Deal Manager",
+          "tagline": "Surface commercial leasing pipeline insights from Yardi Deal Manager",
+          "description": "Surface commercial leasing pipeline insights from Yardi Deal Manager",
+          "url": "https://claude.ai/directory/9ba40b92-6013-4232-b5cb-b6aae4f0b4cd",
+          "externalId": "9ba40b92-6013-4232-b5cb-b6aae4f0b4cd",
+          "mcpEndpoint": "https://dmmcp.virtuoso.ai/",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "productivity",
+        "sales-and-marketing"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "samsara-mcp",
+      "name": "Samsara",
+      "tagline": "Run your fleet operations from Claude using Samsara: Pull weekly reports and review safety, compliance, dispatch and maintenance with live Samsara data.",
+      "description": "Run your fleet operations from Claude using Samsara: Pull weekly reports and review safety, compliance, dispatch and maintenance with live Samsara data.",
+      "homepageUrl": "https://www.samsara.com/",
+      "mcpEndpoint": "https://mcp.samsara.com/v2/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Samsara",
+      "publisherUrl": "https://www.samsara.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795140665851,
+      "updatedAt": 1795140665851,
+      "publishedAt": 1793750400000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Samsara",
+          "tagline": "Run your fleet operations from Claude using Samsara: Pull weekly reports and review safety, compliance, dispatch and maintenance with live Samsara data.",
+          "description": "Run your fleet operations from Claude using Samsara: Pull weekly reports and review safety, compliance, dispatch and maintenance with live Samsara data.",
+          "url": "https://claude.ai/directory/aec2fc68-effc-48c1-9648-ea22c87a8313",
+          "externalId": "aec2fc68-effc-48c1-9648-ea22c87a8313",
+          "mcpEndpoint": "https://mcp.samsara.com/v2/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "other",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "ravio-mcp",
+      "name": "Ravio",
+      "tagline": "Compensation data you can trust, directly in Claude",
+      "description": "Compensation data you can trust, directly in Claude",
+      "iconUrl": "https://app.ravio.com/icons/default/apple-touch-icon.png",
+      "homepageUrl": "https://ravio.com/",
+      "mcpEndpoint": "https://app.ravio.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Ravio",
+      "publisherUrl": "https://ravio.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795140665851,
+      "updatedAt": 1795140665851,
+      "publishedAt": 1793232000000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Ravio",
+          "tagline": "Compensation data you can trust, directly in Claude",
+          "description": "Compensation data you can trust, directly in Claude",
+          "url": "https://claude.ai/directory/0b76add9-7220-4220-baa8-f7bfb5d8c3f5",
+          "externalId": "0b76add9-7220-4220-baa8-f7bfb5d8c3f5",
+          "mcpEndpoint": "https://app.ravio.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "other",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "adspirer-marketing-analytics-attribution",
+      "name": "Adspirer Marketing Analytics & Attribution",
+      "tagline": "Read-only marketing analytics across Google, Meta, TikTok, LinkedIn, Amazon, Microsoft, ChatGPT and Walmart Ads plus GA4 and Search Console — blended ROAS, attribution and conversion-tracking audits.",
+      "description": "Read-only marketing analytics across Google, Meta, TikTok, LinkedIn, Amazon, Microsoft, ChatGPT and Walmart Ads plus GA4 and Search Console — blended ROAS, attribution and conversion-tracking audits.",
+      "iconUrl": "https://storage.googleapis.com/adspirer-images-v1/Brand%20%26%20Assets/icons/Adspirer.png",
+      "homepageUrl": "https://www.adspirer.com/",
+      "mcpEndpoint": "https://mcp.adspirer.com/analytics",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Adspirer",
+      "publisherUrl": "https://www.adspirer.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795140665851,
+      "updatedAt": 1795140665851,
+      "publishedAt": 1794096000000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Adspirer Marketing Analytics & Attribution",
+          "tagline": "Read-only marketing analytics across Google, Meta, TikTok, LinkedIn, Amazon, Microsoft, ChatGPT and Walmart Ads plus GA4 and Search Console — blended ROAS, attribution and conversion-tracking audits.",
+          "description": "Read-only marketing analytics across Google, Meta, TikTok, LinkedIn, Amazon, Microsoft, ChatGPT and Walmart Ads plus GA4 and Search Console — blended ROAS, attribution and conversion-tracking audits.",
+          "url": "https://claude.ai/directory/30c41d15-eabf-4af3-830b-b76fba204e01",
+          "externalId": "30c41d15-eabf-4af3-830b-b76fba204e01",
+          "mcpEndpoint": "https://mcp.adspirer.com/analytics",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "productivity",
+        "sales-and-marketing"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "flexpa",
+      "name": "Flexpa",
+      "tagline": "All your health records, from your doctor's office to your health insurance, in one place",
+      "description": "All your health records, from your doctor's office to your health insurance, in one place",
+      "homepageUrl": "https://www.flexpa.com/",
+      "mcpEndpoint": "https://api.flexpa.com/mcp/consent",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Flexpa",
+      "publisherUrl": "https://www.flexpa.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795140665851,
+      "updatedAt": 1795140665851,
+      "publishedAt": 1792972800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Flexpa",
+          "tagline": "All your health records, from your doctor's office to your health insurance, in one place",
+          "description": "All your health records, from your doctor's office to your health insurance, in one place",
+          "url": "https://claude.ai/directory/68b61b55-7bc5-416e-882b-73341b0cb282",
+          "externalId": "68b61b55-7bc5-416e-882b-73341b0cb282",
+          "mcpEndpoint": "https://api.flexpa.com/mcp/consent",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "consumer-health",
+        "health-life-sciences"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "orla",
+      "name": "Orla",
+      "tagline": "Your books, open to Claude: accounts and balances, transactions, budgets, net worth, who owes whom. It records and sorts. It cannot move money.",
+      "description": "Your books, open to Claude: accounts and balances, transactions, budgets, net worth, who owes whom. It records and sorts. It cannot move money.",
+      "homepageUrl": "https://orla.finance/",
+      "mcpEndpoint": "https://app.orla.finance/api/mcp/personal",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Digital Flow PTE Ltd.",
+      "publisherUrl": "https://orla.finance/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795140665851,
+      "updatedAt": 1795140665851,
+      "publishedAt": 1788825600000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Orla",
+          "tagline": "Your books, open to Claude: accounts and balances, transactions, budgets, net worth, who owes whom. It records and sorts. It cannot move money.",
+          "description": "Your books, open to Claude: accounts and balances, transactions, budgets, net worth, who owes whom. It records and sorts. It cannot move money.",
+          "url": "https://claude.ai/directory/549ba9ff-5387-4240-8248-8a4f8c358d22",
+          "externalId": "549ba9ff-5387-4240-8248-8a4f8c358d22",
+          "mcpEndpoint": "https://app.orla.finance/api/mcp/personal",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "financial-services",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "type",
+      "name": "Type",
+      "tagline": "Bring your team's context, tools, and work to Claude",
+      "description": "Bring your team's context, tools, and work to Claude",
+      "homepageUrl": "https://type.com/",
+      "mcpEndpoint": "https://api.type.com/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Type",
+      "publisherUrl": "https://type.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795140665851,
+      "updatedAt": 1795140665851,
+      "publishedAt": 1789948800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Type",
+          "tagline": "Bring your team's context, tools, and work to Claude",
+          "description": "Bring your team's context, tools, and work to Claude",
+          "url": "https://claude.ai/directory/15809601-9e75-4900-afaf-74b066667893",
+          "externalId": "15809601-9e75-4900-afaf-74b066667893",
+          "mcpEndpoint": "https://api.type.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "productivity",
+        "sales-and-marketing"
+      ],
+      "tags": [],
       "tools": [],
       "previews": []
     }
