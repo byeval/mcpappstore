@@ -267434,7 +267434,7 @@
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1780891433050,
-      "updatedAt": 1794763402123,
+      "updatedAt": 1795205308085,
       "publishedAt": 1789844349657,
       "surfaces": [
         {
@@ -267604,12 +267604,36 @@
           "isPrimary": true,
           "status": "available",
           "mcpEndpoint": "https://claude-zohocrm.zohomcp.com/mcp/message"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zoho CRM",
+          "tagline": "Zoho CRM MCP Server lets AI assistants access and manage CRM data using natural language.",
+          "description": "Zoho CRM MCP Server lets AI assistants access and manage CRM data using natural language.",
+          "url": "https://claude.ai/directory/6931befd-bf61-4bf3-92e1-f96c8d2904ac",
+          "externalId": "6931befd-bf61-4bf3-92e1-f96c8d2904ac",
+          "mcpEndpoint": "https://crm.zohomcp.com/mcp/message",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
         "featured",
         "business-and-operations",
-        "sales"
+        "sales",
+        "productivity",
+        "sales-and-marketing"
       ],
       "tags": [],
       "tools": [],
@@ -327244,14 +327268,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792527503521,
-      "updatedAt": 1792527503521,
+      "updatedAt": 1795205308085,
       "publishedAt": 1792527503521,
       "surfaces": [
         {
@@ -327272,10 +327299,35 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Voyado Customer Engagement",
+          "tagline": "Access, analyze and build with your Voyado Customer Engagement data",
+          "description": "Access, analyze and build with your Voyado Customer Engagement data",
+          "url": "https://claude.ai/directory/2d2a2e5b-a52c-4ae9-bfbf-c6f562304ea2",
+          "externalId": "2d2a2e5b-a52c-4ae9-bfbf-c6f562304ea2",
+          "mcpEndpoint": "https://engage.voyado.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "business-and-operations"
+        "business-and-operations",
+        "communication",
+        "data-analytics",
+        "sales-and-marketing"
       ],
       "tags": [],
       "tools": [],
@@ -448889,7 +448941,7 @@
       "examplePrompts": [],
       "source": "claude_seed",
       "createdAt": 1780891433050,
-      "updatedAt": 1792527279641,
+      "updatedAt": 1795205308085,
       "publishedAt": 1780891433050,
       "surfaces": [
         {
@@ -449064,10 +449116,33 @@
           "isPrimary": true,
           "status": "available",
           "mcpEndpoint": "https://claude-zohobooks.zohomcp.com/mcp/message"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zoho Books",
+          "tagline": "Zoho Books MCP Server lets AI assistants access and manage accounting data using natural language.",
+          "description": "Zoho Books MCP Server lets AI assistants access and manage accounting data using natural language.",
+          "url": "https://claude.ai/directory/16592923-f07f-4870-9544-9d3f24b306d6",
+          "externalId": "16592923-f07f-4870-9544-9d3f24b306d6",
+          "mcpEndpoint": "https://books.zohomcp.com/mcp/message",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "financial-services"
+        "financial-services",
+        "productivity"
       ],
       "tags": [],
       "tools": [
@@ -449249,7 +449324,7 @@
       "examplePrompts": [],
       "source": "claude_seed",
       "createdAt": 1780891433050,
-      "updatedAt": 1792527279641,
+      "updatedAt": 1795205308085,
       "publishedAt": 1780891433050,
       "surfaces": [
         {
@@ -449337,6 +449412,28 @@
           "isPrimary": true,
           "status": "available",
           "mcpEndpoint": "https://claude-zohodesk.zohomcp.com/mcp/message"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zoho Desk",
+          "tagline": "Zoho Desk MCP Server lets AI assistants access and manage customer support data using natural language.",
+          "description": "Zoho Desk MCP Server lets AI assistants access and manage customer support data using natural language.",
+          "url": "https://claude.ai/directory/f95cb702-657e-4ff1-8773-c72746294310",
+          "externalId": "f95cb702-657e-4ff1-8773-c72746294310",
+          "mcpEndpoint": "https://desk.zohomcp.com/mcp/message",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
@@ -449436,7 +449533,7 @@
       "examplePrompts": [],
       "source": "claude_seed",
       "createdAt": 1780891433050,
-      "updatedAt": 1792527279641,
+      "updatedAt": 1795205308085,
       "publishedAt": 1780891433050,
       "surfaces": [
         {
@@ -449554,6 +449651,28 @@
           "isPrimary": true,
           "status": "available",
           "mcpEndpoint": "https://claude-zohoprojects.zohomcp.com/mcp/message"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zoho Projects",
+          "tagline": "Control Zoho Projects data and task operations through MCP tools.",
+          "description": "Control Zoho Projects data and task operations through MCP tools.",
+          "url": "https://claude.ai/directory/97a04d2f-4f35-42d1-9bb1-f823fdfa76d4",
+          "externalId": "97a04d2f-4f35-42d1-9bb1-f823fdfa76d4",
+          "mcpEndpoint": "https://projects.zohomcp.com/mcp/message",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
@@ -522228,14 +522347,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792786008925,
-      "updatedAt": 1792786008925,
+      "updatedAt": 1795205308085,
       "publishedAt": 1792786008925,
       "surfaces": [
         {
@@ -522255,6 +522377,28 @@
           "tools": [],
           "previews": [],
           "isPrimary": true,
+          "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Harvest",
+          "tagline": "Track time and review projects, budgets and invoices in Harvest without leaving Claude.",
+          "description": "Track time and review projects, budgets and invoices in Harvest without leaving Claude.",
+          "url": "https://claude.ai/directory/a913fcb9-e63d-4667-a677-c9bb0fc236cb",
+          "externalId": "a913fcb9-e63d-4667-a677-c9bb0fc236cb",
+          "mcpEndpoint": "https://api.harvestapp.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
           "status": "available"
         }
       ],
@@ -795556,14 +795700,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1794513816236,
-      "updatedAt": 1794513816236,
+      "updatedAt": 1795205308085,
       "publishedAt": 1794513816236,
       "surfaces": [
         {
@@ -795584,10 +795731,34 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "interactive_connector",
+          "displayName": "Zoom Canvas",
+          "tagline": "Create, organize, and share files effortlessly",
+          "description": "Create, organize, and share files effortlessly",
+          "url": "https://claude.ai/directory/4a1a7f77-a88d-451e-b148-c75e886c2a97",
+          "externalId": "4a1a7f77-a88d-451e-b148-c75e886c2a97",
+          "mcpEndpoint": "https://mcp.zoom.us/mcp/canvas/streamable",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Interactive",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "communication"
+        "communication",
+        "productivity"
       ],
       "tags": [],
       "tools": [],
@@ -887355,6 +887526,626 @@
         "data-analytics",
         "productivity",
         "sales-and-marketing"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "beautiful-ai-v2",
+      "name": "Beautiful.ai MCP",
+      "tagline": "Build and edit presentations",
+      "description": "Build and edit presentations",
+      "homepageUrl": "https://www.beautiful.ai/",
+      "mcpEndpoint": "https://agent-mcp-696419881849.us-central1.run.app/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Beautiful.ai",
+      "publisherUrl": "https://www.beautiful.ai/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Interactive",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795205308085,
+      "updatedAt": 1795205308085,
+      "publishedAt": 1793577600000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "interactive_connector",
+          "displayName": "Beautiful.ai MCP",
+          "tagline": "Build and edit presentations",
+          "description": "Build and edit presentations",
+          "url": "https://claude.ai/directory/7719b602-ef14-4ce4-b0c5-ac0f432858c1",
+          "externalId": "7719b602-ef14-4ce4-b0c5-ac0f432858c1",
+          "mcpEndpoint": "https://agent-mcp-696419881849.us-central1.run.app/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Interactive",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "communication",
+        "creative",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "plus-ai-mcp",
+      "name": "Plus AI MCP",
+      "tagline": "Highest-rated MCP for professional presentation makers",
+      "description": "Highest-rated MCP for professional presentation makers",
+      "iconUrl": "https://plusai.com/images/logos/plus-mark.svg",
+      "homepageUrl": "https://plusai.com/",
+      "mcpEndpoint": "https://mcp.plusai.com/",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Plus Docs, Inc.",
+      "publisherUrl": "https://plusai.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Interactive",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795205308085,
+      "updatedAt": 1795205308085,
+      "publishedAt": 1790553600000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "interactive_connector",
+          "displayName": "Plus AI MCP",
+          "tagline": "Highest-rated MCP for professional presentation makers",
+          "description": "Highest-rated MCP for professional presentation makers",
+          "url": "https://claude.ai/directory/5a02e563-c33c-4972-92c5-25a9f8e51204",
+          "externalId": "5a02e563-c33c-4972-92c5-25a9f8e51204",
+          "mcpEndpoint": "https://mcp.plusai.com/",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Interactive",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "pinelabs-one",
+      "name": "Pinelabs one",
+      "tagline": "View transactions, settlements, stores, POS support, and PineAI workflows from your Pine Labs One merchant account.",
+      "description": "View transactions, settlements, stores, POS support, and PineAI workflows from your Pine Labs One merchant account.",
+      "iconUrl": "https://cdn.pinelabs.com/india/pineone/pineone-logo.png",
+      "homepageUrl": "https://www.pinelabs.com/",
+      "mcpEndpoint": "https://onemcp.pinelabs.com/sse",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "PineLabs",
+      "publisherUrl": "https://www.pinelabs.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795205308085,
+      "updatedAt": 1795205308085,
+      "publishedAt": 1789516800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Pinelabs one",
+          "tagline": "View transactions, settlements, stores, POS support, and PineAI workflows from your Pine Labs One merchant account.",
+          "description": "View transactions, settlements, stores, POS support, and PineAI workflows from your Pine Labs One merchant account.",
+          "url": "https://claude.ai/directory/f4d4665e-58f3-4612-a268-74aa29fba1d0",
+          "externalId": "f4d4665e-58f3-4612-a268-74aa29fba1d0",
+          "mcpEndpoint": "https://onemcp.pinelabs.com/sse",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "communication",
+        "data-analytics",
+        "financial-services",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "zohoanalytics",
+      "name": "Zoho Analytics Cloud",
+      "tagline": "Zoho Analytics MCP Server lets AI assistants query and analyze business data using natural language.",
+      "description": "Zoho Analytics MCP Server lets AI assistants query and analyze business data using natural language.",
+      "iconUrl": "https://zohomcp-development.zohostratus.com/logo/Analytics.svg",
+      "homepageUrl": "https://www.zoho.com/",
+      "mcpEndpoint": "https://analytics.zohomcp.com/mcp/message",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Zoho Corporation",
+      "publisherUrl": "https://www.zoho.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795205308085,
+      "updatedAt": 1795205308085,
+      "publishedAt": 1790035200000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zoho Analytics Cloud",
+          "tagline": "Zoho Analytics MCP Server lets AI assistants query and analyze business data using natural language.",
+          "description": "Zoho Analytics MCP Server lets AI assistants query and analyze business data using natural language.",
+          "url": "https://claude.ai/directory/7299a93f-f191-4a49-b08f-c6eb35299da7",
+          "externalId": "7299a93f-f191-4a49-b08f-c6eb35299da7",
+          "mcpEndpoint": "https://analytics.zohomcp.com/mcp/message",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "zohobilling",
+      "name": "Zoho Billing",
+      "tagline": "Zoho Billing MCP Server lets AI assistants access and manage billing and subscription data using natural language.",
+      "description": "Zoho Billing MCP Server lets AI assistants access and manage billing and subscription data using natural language.",
+      "iconUrl": "https://zohomcp-development.zohostratus.com/logo/Billing.svg",
+      "homepageUrl": "https://www.zoho.com/",
+      "mcpEndpoint": "https://billing.zohomcp.com/mcp/message",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Zoho Corporation",
+      "publisherUrl": "https://www.zoho.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795205308085,
+      "updatedAt": 1795205308085,
+      "publishedAt": 1790035200000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zoho Billing",
+          "tagline": "Zoho Billing MCP Server lets AI assistants access and manage billing and subscription data using natural language.",
+          "description": "Zoho Billing MCP Server lets AI assistants access and manage billing and subscription data using natural language.",
+          "url": "https://claude.ai/directory/c617abf8-93a0-4be0-acd9-d48ec00305c2",
+          "externalId": "c617abf8-93a0-4be0-acd9-d48ec00305c2",
+          "mcpEndpoint": "https://billing.zohomcp.com/mcp/message",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "commerce-shopping",
+        "financial-services",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "zohoinvoice",
+      "name": "Zoho Invoice",
+      "tagline": "Zoho Invoice MCP Server lets AI assistants manage invoices, payments, and billing data using natural language.",
+      "description": "Zoho Invoice MCP Server lets AI assistants manage invoices, payments, and billing data using natural language.",
+      "iconUrl": "https://zohomcp-development.zohostratus.com/logo/Invoice.svg",
+      "homepageUrl": "https://www.zoho.com/",
+      "mcpEndpoint": "https://invoice.zohomcp.com/mcp/message",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Zoho Corporation",
+      "publisherUrl": "https://www.zoho.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795205308085,
+      "updatedAt": 1795205308085,
+      "publishedAt": 1790035200000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zoho Invoice",
+          "tagline": "Zoho Invoice MCP Server lets AI assistants manage invoices, payments, and billing data using natural language.",
+          "description": "Zoho Invoice MCP Server lets AI assistants manage invoices, payments, and billing data using natural language.",
+          "url": "https://claude.ai/directory/57840a63-efd0-432e-96ee-2bba72b447f1",
+          "externalId": "57840a63-efd0-432e-96ee-2bba72b447f1",
+          "mcpEndpoint": "https://invoice.zohomcp.com/mcp/message",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "financial-services",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "zohomail",
+      "name": "Zoho Mail",
+      "tagline": "Zoho Mail MCP Server lets AI assistants access and manage emails using natural language.",
+      "description": "Zoho Mail MCP Server lets AI assistants access and manage emails using natural language.",
+      "iconUrl": "https://zohomcp-development.zohostratus.com/logo/Mail.svg",
+      "homepageUrl": "https://www.zoho.com/",
+      "mcpEndpoint": "https://mail.zohomcp.com/mcp/message",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Zoho Corporation",
+      "publisherUrl": "https://www.zoho.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795205308085,
+      "updatedAt": 1795205308085,
+      "publishedAt": 1790035200000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zoho Mail",
+          "tagline": "Zoho Mail MCP Server lets AI assistants access and manage emails using natural language.",
+          "description": "Zoho Mail MCP Server lets AI assistants access and manage emails using natural language.",
+          "url": "https://claude.ai/directory/f3f24d15-89d5-4d10-a2cb-b4bcf9c75768",
+          "externalId": "f3f24d15-89d5-4d10-a2cb-b4bcf9c75768",
+          "mcpEndpoint": "https://mail.zohomcp.com/mcp/message",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "communication",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "zohopagesense",
+      "name": "Zoho PageSense",
+      "tagline": "Zoho PageSense MCP Server lets AI assistants analyze and optimize website experiences using natural language.",
+      "description": "Zoho PageSense MCP Server lets AI assistants analyze and optimize website experiences using natural language.",
+      "iconUrl": "https://zohomcp-development.zohostratus.com/logo/PageSense.svg",
+      "homepageUrl": "https://www.zoho.com/",
+      "mcpEndpoint": "https://pagesense.zohomcp.com/mcp/message",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Zoho Corporation",
+      "publisherUrl": "https://www.zoho.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795205308085,
+      "updatedAt": 1795205308085,
+      "publishedAt": 1790035200000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zoho PageSense",
+          "tagline": "Zoho PageSense MCP Server lets AI assistants analyze and optimize website experiences using natural language.",
+          "description": "Zoho PageSense MCP Server lets AI assistants analyze and optimize website experiences using natural language.",
+          "url": "https://claude.ai/directory/20d67178-bef6-409d-8993-6af050b80da2",
+          "externalId": "20d67178-bef6-409d-8993-6af050b80da2",
+          "mcpEndpoint": "https://pagesense.zohomcp.com/mcp/message",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "zohosign",
+      "name": "Zoho Sign",
+      "tagline": "Zoho Sign MCP Server lets AI assistants manage document signing workflows using natural language.",
+      "description": "Zoho Sign MCP Server lets AI assistants manage document signing workflows using natural language.",
+      "iconUrl": "https://zohomcp-development.zohostratus.com/logo/Sign.svg",
+      "homepageUrl": "https://www.zoho.com/",
+      "mcpEndpoint": "https://sign.zohomcp.com/mcp/message",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Zoho Corporation",
+      "publisherUrl": "https://www.zoho.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795205308085,
+      "updatedAt": 1795205308085,
+      "publishedAt": 1790035200000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zoho Sign",
+          "tagline": "Zoho Sign MCP Server lets AI assistants manage document signing workflows using natural language.",
+          "description": "Zoho Sign MCP Server lets AI assistants manage document signing workflows using natural language.",
+          "url": "https://claude.ai/directory/4ae04b66-52d9-46f6-8cb4-5e100aabab3c",
+          "externalId": "4ae04b66-52d9-46f6-8cb4-5e100aabab3c",
+          "mcpEndpoint": "https://sign.zohomcp.com/mcp/message",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "zohosprints",
+      "name": "Zoho Sprints",
+      "tagline": "Zoho Sprints MCP Server lets AI assistants manage agile projects, sprints, and work items using natural language.",
+      "description": "Zoho Sprints MCP Server lets AI assistants manage agile projects, sprints, and work items using natural language.",
+      "iconUrl": "https://zohomcp-development.zohostratus.com/logo/ZSprints.svg",
+      "homepageUrl": "https://www.zoho.com/",
+      "mcpEndpoint": "https://sprints.zohomcp.com/mcp/message",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Zoho Corporation",
+      "publisherUrl": "https://www.zoho.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795205308085,
+      "updatedAt": 1795205308085,
+      "publishedAt": 1790035200000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zoho Sprints",
+          "tagline": "Zoho Sprints MCP Server lets AI assistants manage agile projects, sprints, and work items using natural language.",
+          "description": "Zoho Sprints MCP Server lets AI assistants manage agile projects, sprints, and work items using natural language.",
+          "url": "https://claude.ai/directory/a6662136-ae3d-45e7-b120-a8661c4a3e80",
+          "externalId": "a6662136-ae3d-45e7-b120-a8661c4a3e80",
+          "mcpEndpoint": "https://sprints.zohomcp.com/mcp/message",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "developer-tools",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "zohoworkdrive",
+      "name": "Zoho Workdrive",
+      "tagline": "Zoho WorkDrive MCP Server lets AI assistants manage files and folders using natural language.",
+      "description": "Zoho WorkDrive MCP Server lets AI assistants manage files and folders using natural language.",
+      "iconUrl": "https://zohomcp-development.zohostratus.com/logo/workdrive.svg",
+      "homepageUrl": "https://www.zoho.com/",
+      "mcpEndpoint": "https://workdrive.zohomcp.com/mcp/message",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Zoho Corporation",
+      "publisherUrl": "https://www.zoho.com/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795205308085,
+      "updatedAt": 1795205308085,
+      "publishedAt": 1790812800000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Zoho Workdrive",
+          "tagline": "Zoho WorkDrive MCP Server lets AI assistants manage files and folders using natural language.",
+          "description": "Zoho WorkDrive MCP Server lets AI assistants manage files and folders using natural language.",
+          "url": "https://claude.ai/directory/8271fada-e5d3-461f-9d50-3d85562fc6a3",
+          "externalId": "8271fada-e5d3-461f-9d50-3d85562fc6a3",
+          "mcpEndpoint": "https://workdrive.zohomcp.com/mcp/message",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "productivity"
       ],
       "tags": [],
       "tools": [],
