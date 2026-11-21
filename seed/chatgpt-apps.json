@@ -533132,14 +533132,17 @@
       "authType": "oauth",
       "publisher": "Unknown",
       "capabilities": [
-        "Interactive"
+        "Interactive",
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
       ],
       "status": "published",
       "isFeatured": false,
       "examplePrompts": [],
       "source": "chatgpt_seed",
       "createdAt": 1792786008925,
-      "updatedAt": 1792786008925,
+      "updatedAt": 1795291383235,
       "publishedAt": 1792786008925,
       "surfaces": [
         {
@@ -533160,10 +533163,37 @@
           "previews": [],
           "isPrimary": true,
           "status": "available"
+        },
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Kolena",
+          "tagline": "Codify document workflows. Run them on everything. Act on what they find",
+          "description": "Codify document workflows. Run them on everything. Act on what they find",
+          "url": "https://claude.ai/directory/1055a607-17e9-49c8-b0df-610d53b139d0",
+          "externalId": "1055a607-17e9-49c8-b0df-610d53b139d0",
+          "mcpEndpoint": "https://agents-api.kolena.com/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": false,
+          "status": "available"
         }
       ],
       "categories": [
-        "data-and-analytics"
+        "data-and-analytics",
+        "data-analytics",
+        "developer-tools",
+        "financial-services",
+        "legal",
+        "productivity"
       ],
       "tags": [],
       "tools": [],
@@ -888145,6 +888175,117 @@
         }
       ],
       "categories": [
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "caffeine",
+      "name": "Caffeine",
+      "tagline": "Describe an app and Caffeine builds, deploys, and hosts it — no servers, no setup.",
+      "description": "Describe an app and Caffeine builds, deploys, and hosts it — no servers, no setup.",
+      "homepageUrl": "https://caffeine.ai/",
+      "mcpEndpoint": "https://mcp.caffeine.ai/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Caffeine Labs AG",
+      "publisherUrl": "https://caffeine.ai/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795291383235,
+      "updatedAt": 1795291383235,
+      "publishedAt": 1781481600000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Caffeine",
+          "tagline": "Describe an app and Caffeine builds, deploys, and hosts it — no servers, no setup.",
+          "description": "Describe an app and Caffeine builds, deploys, and hosts it — no servers, no setup.",
+          "url": "https://claude.ai/directory/eac205b9-72a3-490c-97be-8bab1dd513f2",
+          "externalId": "eac205b9-72a3-490c-97be-8bab1dd513f2",
+          "mcpEndpoint": "https://mcp.caffeine.ai/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "developer-tools",
+        "productivity"
+      ],
+      "tags": [],
+      "tools": [],
+      "previews": []
+    },
+    {
+      "id": "dragonboat",
+      "name": "Dragonboat",
+      "tagline": "Give Claude headless access to Dragonboat's live operating context to create, update, and analyze all aspects of the operating model: strategy, insights, investment, product, roadmap, execution.",
+      "description": "Give Claude headless access to Dragonboat's live operating context to create, update, and analyze all aspects of the operating model: strategy, insights, investment, product, roadmap, execution.",
+      "homepageUrl": "https://dragonboat.io/",
+      "mcpEndpoint": "https://demo.dragonboat.io/mcp",
+      "mcpTransport": "http",
+      "authType": "oauth",
+      "publisher": "Dragonboat",
+      "publisherUrl": "https://dragonboat.io/",
+      "capabilities": [
+        "Claude",
+        "Claude Code",
+        "Remote MCP"
+      ],
+      "status": "published",
+      "isFeatured": false,
+      "examplePrompts": [],
+      "source": "claude_seed",
+      "createdAt": 1795291383235,
+      "updatedAt": 1795291383235,
+      "publishedAt": 1784246400000,
+      "surfaces": [
+        {
+          "platform": "claude",
+          "type": "connector",
+          "displayName": "Dragonboat",
+          "tagline": "Give Claude headless access to Dragonboat's live operating context to create, update, and analyze all aspects of the operating model: strategy, insights, investment, product, roadmap, execution.",
+          "description": "Give Claude headless access to Dragonboat's live operating context to create, update, and analyze all aspects of the operating model: strategy, insights, investment, product, roadmap, execution.",
+          "url": "https://claude.ai/directory/abafe2a9-a358-4d5a-af3d-c8048cdcfacf",
+          "externalId": "abafe2a9-a358-4d5a-af3d-c8048cdcfacf",
+          "mcpEndpoint": "https://demo.dragonboat.io/mcp",
+          "mcpTransport": "http",
+          "authType": "oauth",
+          "capabilities": [
+            "Claude",
+            "Claude Code",
+            "Remote MCP"
+          ],
+          "examplePrompts": [],
+          "tools": [],
+          "previews": [],
+          "isPrimary": true,
+          "status": "available"
+        }
+      ],
+      "categories": [
+        "data-analytics",
+        "other",
         "productivity"
       ],
       "tags": [],
