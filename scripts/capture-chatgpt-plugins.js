@@ -31,6 +31,7 @@
         }
         if (token) seenTokens.add(token);
       } while (token);
+      if (!plugins.size) throw new Error('Empty public category requires verification');
       capture.categories[slug] = { status: 200, pages, complete: true, data: { plugins: [...plugins.values()], pagination: { next_page_token: null } } };
     } catch (error) {
       capture.categories[slug] = { status: 0, pages, complete: false, error: String(error), data: { plugins: [...plugins.values()] } };

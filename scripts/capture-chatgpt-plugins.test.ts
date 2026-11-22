@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { runInNewContext } from "node:vm";
 import test from "node:test";
 
-async function capture(repeat = false) {
+async function capture(repeat = false, empty = false) {
   const requests: URL[] = [];
   let download: Blob | undefined;
   class DownloadURL extends URL {
@@ -26,8 +26,8 @@ async function capture(repeat = false) {
       assert.equal(url.searchParams.has("page_token"), false);
       const secondPage = url.searchParams.get("pageToken") === "next-public-page";
       return { ok: true, json: async () => ({
-        plugins: [{ id: secondPage && !repeat ? "second" : "first" }],
-        pagination: { next_page_token: secondPage && !repeat ? null : "next-public-page" },
+        plugins: empty ? [] : [{ id: secondPage && !repeat ? "second" : "first" }],
+        pagination: { next_page_token: empty || (secondPage && !repeat) ? null : "next-public-page" },
       }) };
     },
   });
@@ -49,4 +49,15 @@ test("ChatGPT repeated pagination remains incomplete", async () => {
   assert.equal(requests.length, 2);
   assert.equal(data.categories.productivity.complete, false);
   assert.match(data.categories.productivity.error, /Pagination did not advance/);
+});
+
+test("ChatGPT empty public category requires verification rather than full success", async () => {
+  const { requests, data } = await capture(false, true);
+  assert.equal(requests.length, 1);
+  const category = data.categories.productivity;
+  assert.equal(category.status, 0);
+  assert.equal(category.complete, false);
+  assert.equal(category.pages, 1);
+  assert.deepEqual(category.data.plugins, []);
+  assert.match(category.error, /Empty public category requires verification/);
 });

@@ -7,6 +7,23 @@ The old `daily-mcp-app-catalog-crawl` task is no longer installed on this Mac.
 
 ## Current Workflow
 
+### Publication Status (2026-11-23)
+
+The user has paused Astro migration and activation. Continue fresh source
+collection, additive validation, and scoped candidate-branch commits. Do not
+trigger the Astro deployment path while this pause is in effect.
+
+Dynamic Worker pages backed by D1 and caching are a proposed replacement
+publication path, not an implemented or verified production cutover. D1 remains
+the authoritative database; changing the rendering path is a separate release.
+Before resuming production ingestion, obtain authorization for that cutover,
+validate bounded queries and backend memory, configure the release entry, and
+verify the active production path. Preserve existing moderation, legal
+restrictions, submission records, and concurrent edits. Do not bypass publication
+ownership checks or replay old SQL directly. Until that path is ready, steps 4
+and 5 below stop after local seed generation, checks, and candidate-branch push;
+remote D1 writes, deployments, and cache mutations remain deferred.
+
 1. Open the signed-in public `https://chatgpt.com/plugins` home page in Chrome.
    Run `scripts/capture-chatgpt-plugins.js` through the browser console. Save the
    downloaded JSON as `seed/raw-chatgpt-apps.json`. The capture derives current
@@ -18,6 +35,8 @@ The old `daily-mcp-app-catalog-crawl` task is no longer installed on this Mac.
    and is not imported. Complete categories from a partial capture can be merged;
    unfinished categories are excluded, historical data stays, and the source is
    reported as partial without advancing its full-success timestamp.
+   An empty public category also requires verification and remains incomplete;
+   a zero-item response is not evidence that the visible directory is empty.
    A capture from before the last complete ChatGPT sync is also rejected, even
    within 24 hours, so replaying yesterday's snapshot cannot advance freshness.
    Partial imports record `lastImportedCaptureAt` independently of the last full
