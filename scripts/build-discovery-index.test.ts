@@ -60,11 +60,51 @@ test("invalid previous candidate index is not overwritten", async () => {
   assert.equal(await readFile(join(f.dir, "index.json"), "utf8"), "{invalid");
 });
 
-test("incoming slug collisions stop instead of dropping a candidate", async () => {
+test("incoming slug collisions retain both candidates with distinct IDs", async () => {
   const f = await fixture([repo("example/a-current"), repo("example-a/current")]);
   const result = f.run();
+  assert.equal(result.status, 0, result.stderr);
+  const after = await f.index();
+  assert.equal(after.stats.totalCandidates, 2);
+  assert.equal(new Set(after.candidates.map((c: { id: string }) => c.id)).size, 2);
+  assert.deepEqual(after.candidates.map((c: { sourceId: string }) => c.sourceId).sort(), ["example-a/current", "example/a-current"]);
+});
+
+test("npm scope collisions preserve existing IDs and discovery times across reordered refreshes", async () => {
+  const f = await fixture([]);
+  const packages = ["orpc-mcp", "@orpc/mcp"].map((name) => ({
+    package: { name, version: "1.0.0", description: "Model Context Protocol MCP server", keywords: ["mcp"], date: firstSeen },
+  }));
+  const input = (items: typeof packages) => JSON.stringify({ generatedAt: firstSeen, queries: [], totalCount: items.length, packages: items });
+  await writeFile(join(f.dir, "npm.json"), input(packages.slice(0, 1)));
+  assert.equal(f.run().status, 0);
+  const original = await f.index();
+  original.candidates[0].discoveredAt = firstSeen;
+  await writeFile(join(f.dir, "index.json"), JSON.stringify(original));
+  await writeFile(join(f.dir, "npm.json"), input([...packages].reverse()));
+  const refresh = f.run();
+  assert.equal(refresh.status, 0, refresh.stderr);
+  const after = await f.index();
+  assert.equal(after.stats.totalCandidates, 2);
+  const old = after.candidates.find((c: { sourceId: string }) => c.sourceId === "orpc-mcp");
+  assert.equal(old.id, original.candidates[0].id);
+  assert.equal(old.discoveredAt, firstSeen);
+  assert.equal(new Set(after.candidates.map((c: { id: string }) => c.id)).size, 2);
+  await writeFile(join(f.dir, "npm.json"), input(packages));
+  assert.equal(f.run().status, 0);
+  const again = await f.index();
+  for (const candidate of after.candidates) {
+    const next = again.candidates.find((c: { sourceId: string }) => c.sourceId === candidate.sourceId);
+    assert.equal(next.id, candidate.id);
+    assert.equal(next.discoveredAt, candidate.discoveredAt);
+  }
+});
+
+test("duplicate incoming source identities still stop the index build", async () => {
+  const f = await fixture([repo("example/current"), repo("example/current")]);
+  const result = f.run();
   assert.notEqual(result.status, 0);
-  assert.match(result.stderr, /Duplicate incoming candidate ID/);
+  assert.match(result.stderr, /Duplicate incoming candidate identity/);
 });
 
 test("legacy ID collisions retain source spellings without renaming", async () => {

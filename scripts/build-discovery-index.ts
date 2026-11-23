@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 
@@ -459,7 +460,12 @@ async function main() {
       byIdentity.set(key, { ...candidate, id: prior.id, discoveredAt: prior.discoveredAt });
       continue;
     }
-    if (knownIds.has(candidate.id)) throw new Error(`Duplicate incoming candidate ID: ${candidate.id}`);
+    // Slug normalization can collapse distinct package names and repository paths.
+    const baseId = candidate.id;
+    for (let attempt = 0; knownIds.has(candidate.id); attempt += 1) {
+      const suffix = createHash("sha256").update(JSON.stringify([key, attempt])).digest("hex").slice(0, 12);
+      candidate.id = `${baseId}-${suffix}`;
+    }
     knownIds.add(candidate.id);
     byIdentity.set(key, candidate);
   }
